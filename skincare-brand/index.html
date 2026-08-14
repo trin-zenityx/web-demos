@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAURA — เฮาร่า | Clean Beauty Skincare จากประเทศไทย</title>
+<meta name="description" content="HAURA เฮาร่า สกินแคร์คลีนบิวตี้จากประเทศไทย เซรั่มวิตามินซี ไฮยาลูรอน และเรตินัล สูตรอ่อนโยน ผิวสุขภาพดีเริ่มจากความเข้าใจ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Mitr:wght@300;400;500&family=Noto+Sans+Thai:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#fbf6f1;
+  --blush:#f3dcd7;
+  --lav:#e3daef;
+  --ink:#42303a;
+  --muted:#8a6f78;
+  --rose:#b76e79;
+  --line:rgba(66,48,58,.12);
+  --white:#fffdfb;
+  --radius-lg:28px;
+  --radius-md:20px;
+  --shadow-soft:0 18px 50px -18px rgba(66,48,58,.22);
+  --shadow-card:0 10px 34px -12px rgba(66,48,58,.18);
+  --font-th-head:'Mitr',sans-serif;
+  --font-th-body:'Noto Sans Thai',sans-serif;
+  --font-en:'Outfit',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-th-body);
+  font-size:16px;
+  line-height:1.75;
+  color:var(--ink);
+  background:var(--cream);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3{font-family:var(--font-th-head);font-weight:400;line-height:1.3}
+.en{font-family:var(--font-en)}
+:focus-visible{outline:3px solid var(--rose);outline-offset:3px;border-radius:6px}
+::selection{background:var(--blush);color:var(--ink)}
+
+/* ---------- Utility ---------- */
+.wrap{width:min(1160px,92%);margin-inline:auto}
+.kicker{
+  font-family:var(--font-en);
+  font-size:12px;font-weight:600;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--rose);
+  display:inline-flex;align-items:center;gap:12px;
+}
+.kicker::before{content:"";width:34px;height:1px;background:var(--rose);display:inline-block}
+.section{padding:96px 0}
+.section-head{text-align:center;max-width:620px;margin:0 auto 56px}
+.section-head .kicker{justify-content:center}
+.section-head .kicker::after{content:"";width:34px;height:1px;background:var(--rose);display:inline-block}
+.section-head h2{font-size:clamp(28px,4vw,42px);margin:14px 0 10px}
+.section-head p{color:var(--muted);font-size:15.5px}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:60;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(251,246,241,.82);
+  border-bottom:1px solid var(--line);
+  transition:box-shadow .3s ease;
+}
+.nav.scrolled{box-shadow:0 8px 30px -14px rgba(66,48,58,.18)}
+.nav-inner{
+  width:min(1160px,92%);margin-inline:auto;
+  display:flex;align-items:center;justify-content:space-between;
+  height:72px;
+}
+.logo{
+  font-family:var(--font-en);font-weight:600;
+  font-size:21px;letter-spacing:.42em;color:var(--ink);
+  padding:10px 0;min-height:44px;display:inline-flex;align-items:center;
+}
+.logo span{color:var(--rose)}
+.nav-links{display:flex;gap:34px;list-style:none}
+.nav-links a{
+  font-size:14.5px;color:var(--muted);
+  padding:10px 2px;min-height:44px;display:inline-flex;align-items:center;
+  position:relative;transition:color .25s;
+}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:6px;width:0;height:1.5px;
+  background:var(--rose);transition:width .3s ease;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+.cart-btn{
+  position:relative;background:var(--ink);color:var(--cream);
+  border:none;border-radius:999px;
+  width:46px;height:46px;display:grid;place-items:center;
+  transition:transform .25s ease,background .25s;
+}
+.cart-btn:hover{background:var(--rose);transform:translateY(-2px)}
+.cart-badge{
+  position:absolute;top:-5px;right:-6px;
+  min-width:21px;height:21px;padding:0 5px;
+  background:var(--rose);color:#fff;
+  font-family:var(--font-en);font-size:11px;font-weight:600;
+  border-radius:999px;display:grid;place-items:center;
+  border:2px solid var(--cream);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.cart-badge.pop{transform:scale(1.45)}
+.nav-toggle{display:none;background:none;border:none;width:44px;height:44px;place-items:center}
+.nav-toggle svg{width:24px;height:24px}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;align-items:center;
+  padding:150px 0 90px;overflow:hidden;
+}
+#metaballs{
+  position:absolute;inset:0;width:100%;height:100%;
+  filter:blur(60px);opacity:.55;
+  pointer-events:none;
+}
+.hero-grid{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1.05fr .95fr;
+  gap:64px;align-items:center;
+}
+.hero h1{
+  font-size:clamp(38px,5.6vw,64px);
+  font-weight:400;margin:20px 0 22px;
+  letter-spacing:.01em;
+}
+.hero h1 em{
+  font-style:normal;color:var(--rose);
+  position:relative;display:inline-block;
+}
+.hero h1 em::after{
+  content:"";position:absolute;left:0;right:0;bottom:6px;height:12px;
+  background:var(--blush);z-index:-1;border-radius:6px;
+}
+.hero p.lede{color:var(--muted);font-size:17px;max-width:480px;margin-bottom:36px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  min-height:52px;padding:14px 32px;
+  border-radius:999px;border:none;
+  font-family:var(--font-th-body);font-size:15.5px;font-weight:500;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,background .3s;
+}
+.btn-primary{background:var(--ink);color:var(--cream)}
+.btn-primary:hover{background:var(--rose);transform:translateY(-3px);box-shadow:0 14px 30px -10px rgba(183,110,121,.5)}
+.btn svg{width:17px;height:17px;transition:transform .3s}
+.btn-primary:hover svg{transform:translateX(4px)}
+.hero-stats{display:flex;gap:40px;margin-top:52px}
+.hero-stats .stat b{
+  font-family:var(--font-en);font-size:26px;font-weight:600;display:block;color:var(--ink);
+}
+.hero-stats .stat span{font-size:13px;color:var(--muted)}
+.hero-visual{position:relative;display:flex;justify-content:center}
+.arch-frame{
+  width:min(400px,88%);
+  aspect-ratio:4/5.1;
+  border-radius:50% 50% 0 0 / 38% 38% 0 0;
+  overflow:hidden;position:relative;
+  box-shadow:var(--shadow-soft);
+  border:8px solid var(--white);
+}
+.arch-frame img{width:100%;height:100%;object-fit:cover}
+.hero-visual::before{
+  content:"";position:absolute;
+  width:min(400px,88%);aspect-ratio:4/5.1;
+  border-radius:50% 50% 0 0 / 38% 38% 0 0;
+  border:1.5px dashed var(--rose);
+  transform:translate(-20px,20px);
+  opacity:.5;
+}
+.hero-chip{
+  position:absolute;bottom:34px;left:6%;
+  background:rgba(255,253,251,.9);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:14px 20px;box-shadow:var(--shadow-card);
+  display:flex;align-items:center;gap:12px;
+  animation:floaty 5s ease-in-out infinite;
+}
+.hero-chip .dot{width:38px;height:38px;border-radius:50%;background:var(--blush);display:grid;place-items:center;flex:none}
+.hero-chip .dot svg{width:18px;height:18px;color:var(--rose)}
+.hero-chip b{font-size:14px;font-weight:500;display:block}
+.hero-chip span{font-size:12px;color:var(--muted)}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ---------- Products ---------- */
+.products{background:linear-gradient(180deg,var(--cream),#fdf9f6 40%,var(--cream))}
+.product-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:34px;
+  perspective:1400px;
+}
+.p-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--radius-lg);overflow:hidden;
+  transform-style:preserve-3d;
+  transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s;
+  box-shadow:var(--shadow-card);
+  will-change:transform;
+}
+.p-card.tilting{transition:transform .08s linear,box-shadow .3s}
+.p-media{
+  position:relative;aspect-ratio:1/.92;overflow:hidden;
+  border-radius:0 0 50% 50% / 0 0 9% 9%;
+}
+.p-media img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.p-card:hover .p-media img{transform:scale(1.06)}
+.p-tag{
+  position:absolute;top:16px;left:16px;
+  background:rgba(255,253,251,.92);backdrop-filter:blur(6px);
+  font-family:var(--font-en);font-size:11px;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--rose);
+  padding:7px 14px;border-radius:999px;
+}
+.p-body{padding:26px 28px 30px}
+.p-body h3{font-size:21px;margin-bottom:6px}
+.p-body .p-desc{font-size:14px;color:var(--muted);margin-bottom:18px;min-height:49px}
+.p-foot{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.p-price{font-family:var(--font-en);font-size:23px;font-weight:600;color:var(--ink)}
+.p-price small{font-size:13px;color:var(--muted);font-weight:400}
+.add-btn{
+  min-height:46px;padding:11px 22px;border-radius:999px;
+  border:1.5px solid var(--ink);background:transparent;color:var(--ink);
+  font-size:14px;font-weight:500;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:background .3s,color .3s,transform .2s,border-color .3s;
+}
+.add-btn svg{width:15px;height:15px}
+.add-btn:hover{background:var(--ink);color:var(--cream)}
+.add-btn:active{transform:scale(.94)}
+.add-btn.added{background:var(--rose);border-color:var(--rose);color:#fff}
+
+/* fly dot */
+.fly-dot{
+  position:fixed;z-index:120;width:16px;height:16px;border-radius:50%;
+  background:var(--rose);pointer-events:none;
+  box-shadow:0 3px 10px rgba(183,110,121,.55);
+}
+
+/* toast */
+.toast{
+  position:fixed;left:50%;bottom:28px;z-index:130;
+  transform:translate(-50%,90px);
+  background:var(--ink);color:var(--cream);
+  padding:14px 26px;border-radius:999px;
+  font-size:14.5px;display:flex;align-items:center;gap:10px;
+  box-shadow:0 16px 40px -12px rgba(66,48,58,.5);
+  transition:transform .45s cubic-bezier(.34,1.56,.64,1);
+  pointer-events:none;white-space:nowrap;
+}
+.toast.show{transform:translate(-50%,0)}
+.toast svg{width:17px;height:17px;color:#a8e6c9}
+
+/* ---------- Before / After ---------- */
+.ba-section{background:var(--lav);background:linear-gradient(160deg,#efeaf6 0%,var(--cream) 65%)}
+.ba-frame{
+  position:relative;max-width:820px;margin:0 auto;
+  aspect-ratio:16/11;border-radius:var(--radius-lg);overflow:hidden;
+  box-shadow:var(--shadow-soft);border:8px solid var(--white);
+  touch-action:none;user-select:none;-webkit-user-select:none;
+  cursor:ew-resize;
+}
+.ba-frame img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;pointer-events:none}
+.ba-before{filter:saturate(.7) contrast(.92) brightness(.96)}
+.ba-after-wrap{
+  position:absolute;inset:0;
+  clip-path:inset(0 0 0 50%);
+  pointer-events:none;
+}
+.ba-handle{
+  position:absolute;top:0;bottom:0;left:50%;width:2px;
+  background:rgba(255,255,255,.95);
+  box-shadow:0 0 14px rgba(66,48,58,.35);
+  transform:translateX(-1px);pointer-events:none;
+}
+.ba-knob{
+  position:absolute;top:50%;left:50%;
+  width:54px;height:54px;transform:translate(-50%,-50%);
+  background:var(--white);border-radius:50%;
+  box-shadow:0 6px 22px rgba(66,48,58,.3);
+  display:grid;place-items:center;
+  border:1px solid var(--line);
+}
+.ba-knob svg{width:24px;height:24px;color:var(--rose)}
+.ba-label{
+  position:absolute;top:20px;z-index:5;
+  font-size:13px;font-weight:500;letter-spacing:.06em;
+  padding:8px 18px;border-radius:999px;
+  backdrop-filter:blur(6px);
+  pointer-events:none;
+}
+.ba-label.before{left:20px;background:rgba(66,48,58,.55);color:#fff}
+.ba-label.after{right:20px;background:rgba(255,253,251,.85);color:var(--rose)}
+.ba-caption{text-align:center;font-size:12.5px;color:var(--muted);margin-top:18px}
+
+/* ---------- Ingredients accordion ---------- */
+.acc-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.acc-item{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--radius-md);overflow:hidden;
+  transition:box-shadow .3s,border-color .3s;
+}
+.acc-item.open{border-color:rgba(183,110,121,.4);box-shadow:var(--shadow-card)}
+.acc-head{
+  width:100%;background:none;border:none;
+  display:flex;align-items:center;gap:18px;
+  padding:22px 26px;min-height:44px;text-align:left;
+}
+.acc-icon{
+  width:46px;height:46px;flex:none;border-radius:14px;
+  display:grid;place-items:center;
+  background:var(--blush);color:var(--rose);
+  transition:background .3s,transform .3s;
+}
+.acc-item:nth-child(even) .acc-icon{background:var(--lav);color:#7a68a6}
+.acc-icon svg{width:21px;height:21px}
+.acc-head h3{font-size:17.5px;font-weight:400;flex:1}
+.acc-head .acc-en{font-family:var(--font-en);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-top:2px}
+.acc-chev{
+  width:34px;height:34px;flex:none;border-radius:50%;
+  border:1.5px solid var(--line);display:grid;place-items:center;
+  transition:transform .4s cubic-bezier(.22,1,.36,1),background .3s,border-color .3s;
+}
+.acc-chev svg{width:15px;height:15px;color:var(--muted)}
+.acc-item.open .acc-chev{transform:rotate(180deg);background:var(--rose);border-color:var(--rose)}
+.acc-item.open .acc-chev svg{color:#fff}
+.acc-body{
+  display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .45s cubic-bezier(.22,1,.36,1);
+}
+.acc-item.open .acc-body{grid-template-rows:1fr}
+.acc-body-inner{overflow:hidden}
+.acc-body p{
+  padding:0 26px 24px 90px;
+  font-size:14.5px;color:var(--muted);
+}
+
+/* ---------- Reviews ---------- */
+.reviews{background:linear-gradient(180deg,var(--cream),#f9f0ec)}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.r-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--radius-lg);padding:32px 30px;
+  box-shadow:var(--shadow-card);
+  display:flex;flex-direction:column;gap:16px;
+  transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s;
+}
+.r-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-soft)}
+.stars{display:flex;gap:4px}
+.stars svg{width:17px;height:17px;color:var(--rose)}
+.r-card p{font-size:14.5px;color:var(--ink);flex:1}
+.r-person{display:flex;align-items:center;gap:14px;padding-top:14px;border-top:1px solid var(--line)}
+.r-avatar{
+  width:46px;height:46px;border-radius:50%;flex:none;
+  display:grid;place-items:center;
+  font-family:var(--font-th-head);font-size:18px;color:var(--ink);
+  background:var(--blush);
+}
+.r-card:nth-child(2) .r-avatar{background:var(--lav)}
+.r-card:nth-child(3) .r-avatar{background:#f7e3d4}
+.r-person b{font-size:14.5px;font-weight:500;display:block}
+.r-person span{font-size:12.5px;color:var(--muted)}
+
+/* ---------- Footer ---------- */
+footer{background:var(--ink);color:#d9c9cf;padding:70px 0 34px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;margin-bottom:52px}
+.foot-logo{font-family:var(--font-en);font-weight:600;font-size:24px;letter-spacing:.42em;color:var(--cream);margin-bottom:16px}
+.foot-grid p{font-size:14px;color:#a78f99;max-width:320px}
+footer h4{font-family:var(--font-th-head);font-weight:400;font-size:16px;color:var(--cream);margin-bottom:18px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:4px}
+.foot-links a{
+  font-size:14px;color:#a78f99;display:inline-flex;align-items:center;gap:10px;
+  padding:8px 0;min-height:44px;transition:color .25s;
+}
+.foot-links a:hover{color:var(--cream)}
+.foot-links svg{width:17px;height:17px;color:var(--blush);flex:none}
+.foot-bottom{
+  border-top:1px solid rgba(251,246,241,.12);
+  padding-top:26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:13px;color:#8a6f78;
+}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Responsive ---------- */
+@media (max-width:960px){
+  .hero-grid{grid-template-columns:1fr;gap:52px;text-align:center}
+  .hero p.lede{margin-inline:auto}
+  .kicker{justify-content:center}
+  .kicker::after{content:"";width:34px;height:1px;background:var(--rose);display:inline-block}
+  .hero-stats{justify-content:center}
+  .hero-chip{left:50%;transform:translateX(-50%)}
+  @keyframes floaty{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-10px)}}
+  .product-grid{grid-template-columns:1fr;max-width:440px;margin-inline:auto}
+  .review-grid{grid-template-columns:1fr;max-width:480px;margin-inline:auto}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:680px){
+  .nav-links{
+    position:fixed;top:72px;left:0;right:0;
+    background:var(--cream);border-bottom:1px solid var(--line);
+    flex-direction:column;gap:0;padding:8px 5%;
+    transform:translateY(-130%);transition:transform .4s cubic-bezier(.22,1,.36,1);
+    box-shadow:0 20px 30px -14px rgba(66,48,58,.2);
+  }
+  .nav-links.open{transform:translateY(0)}
+  .nav-links a{display:flex;padding:13px 8px;border-bottom:1px solid var(--line)}
+  .nav-links li:last-child a{border-bottom:none}
+  .nav-toggle{display:grid}
+  .section{padding:72px 0}
+  .hero{padding-top:120px}
+  .hero-stats{gap:26px}
+  .foot-grid{grid-template-columns:1fr}
+  .ba-frame{aspect-ratio:4/3.4}
+  .acc-body p{padding-left:26px}
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important}
+  html{scroll-behavior:auto}
+  #metaballs{display:none}
+  .hero{background:linear-gradient(135deg,var(--blush) 0%,var(--cream) 45%,var(--lav) 100%)}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo" aria-label="HAURA กลับขึ้นด้านบน">HAU<span>R</span>A</a>
+    <nav aria-label="เมนูหลัก">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#products">ผลิตภัณฑ์</a></li>
+        <li><a href="#proof">ผลลัพธ์</a></li>
+        <li><a href="#ingredients">ส่วนผสม</a></li>
+        <li><a href="#reviews">รีวิว</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="cart-btn" id="cartBtn" aria-label="ตะกร้าสินค้า">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l1.2 12.2a1.5 1.5 0 0 1-1.5 1.8H6.3a1.5 1.5 0 0 1-1.5-1.8L6 7Z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>
+        <span class="cart-badge" id="cartBadge" aria-live="polite">0</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="navLinks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <canvas id="metaballs" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker">Clean Beauty from Thailand</span>
+      <h1>ผิวสุขภาพดี<br>เริ่มจาก<em>ความเข้าใจ</em></h1>
+      <p class="lede">เฮาร่าเชื่อว่าผิวที่ดีไม่ได้มาจากส่วนผสมที่เยอะที่สุด แต่มาจากส่วนผสมที่ใช่ที่สุด สูตรคลีนบิวตี้ที่คิดค้นและผลิตในประเทศไทย อ่อนโยนต่อทุกสภาพผิว</p>
+      <a href="#products" class="btn btn-primary">
+        เลือกเซรั่มของคุณ
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <div class="hero-stats">
+        <div class="stat"><b>98<span style="font-size:16px">%</span></b><span>ส่วนผสมจากธรรมชาติ</span></div>
+        <div class="stat"><b>4.9</b><span>คะแนนรีวิวเฉลี่ย</span></div>
+        <div class="stat"><b>12k+</b><span>ลูกค้าที่ไว้ใจ</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="arch-frame">
+        <img src="../assets/skin-hero.jpg" alt="ขวดเซรั่มเฮาร่าบนพื้นหลังโทนพาสเทลอ่อนนุ่ม" width="800" height="1020" fetchpriority="high">
+      </div>
+      <div class="hero-chip">
+        <div class="dot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c-3 4-6 6.6-6 10a6 6 0 0 0 12 0c0-3.4-3-6-6-10Z"/></svg>
+        </div>
+        <div><b>สูตรไร้น้ำหอม</b><span>ผิวแพ้ง่ายใช้ได้</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCTS ============ -->
+<section class="section products" id="products">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">The Essentials</span>
+      <h2>สามขั้นตอน เพื่อผิวที่ใช่</h2>
+      <p>เลือกเซรั่มที่ตอบโจทย์ผิวของคุณ ทั้งสามสูตรทำงานร่วมกันได้อย่างลงตัว</p>
+    </div>
+    <div class="product-grid">
+
+      <article class="p-card reveal" data-name="เซรั่มวิตามินซี ไบรท์เทนนิ่ง">
+        <div class="p-media">
+          <span class="p-tag">Best Seller</span>
+          <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1000&auto=format&fit=crop" alt="ขวดเซรั่มวิตามินซีเฮาร่าสีอำพัน" loading="lazy" width="1000" height="920">
+        </div>
+        <div class="p-body">
+          <h3>เซรั่มวิตามินซี ไบรท์เทนนิ่ง</h3>
+          <p class="p-desc">วิตามินซีเข้มข้น 10% เสริมเกาะป้องกันผิวหมองคล้ำ ให้ผิวกระจ่างใสอย่างเป็นธรรมชาติ</p>
+          <div class="p-foot">
+            <div class="p-price">฿890 <small>/ 30 มล.</small></div>
+            <button class="add-btn" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              เพิ่มลงตะกร้า
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="p-card reveal" data-name="เซรั่มไฮยาลูรอน ดีพไฮเดรท">
+        <div class="p-media">
+          <span class="p-tag">Hydrating</span>
+          <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1000&auto=format&fit=crop" alt="ขวดเซรั่มไฮยาลูรอนเฮาร่าโทนสีฟ้าอ่อน" loading="lazy" width="1000" height="920">
+        </div>
+        <div class="p-body">
+          <h3>เซรั่มไฮยาลูรอน ดีพไฮเดรท</h3>
+          <p class="p-desc">ไฮยาลูรอนิค 3 ขนาดโมเลกุล เติมน้ำให้ผิวล้ำลึก อิ่มฟูตลอดวันโดยไม่เหนียวเหนอะหนะ</p>
+          <div class="p-foot">
+            <div class="p-price">฿790 <small>/ 30 มล.</small></div>
+            <button class="add-btn" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              เพิ่มลงตะกร้า
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="p-card reveal" data-name="เซรั่มเรตินัล ไนท์รีนิว">
+        <div class="p-media">
+          <span class="p-tag">Night Care</span>
+          <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?q=80&w=1000&auto=format&fit=crop" alt="ขวดเซรั่มเรตินัลเฮาร่าสำหรับกลางคืน" loading="lazy" width="1000" height="920">
+        </div>
+        <div class="p-body">
+          <h3>เซรั่มเรตินัล ไนท์รีนิว</h3>
+          <p class="p-desc">เรตินัลเดไฮด์ 0.1% สูตรกลางคืน ฟื้นบำรุงผิวขณะนอนหลับ ลดเลือนริ้วรอยอย่างอ่อนโยน</p>
+          <div class="p-foot">
+            <div class="p-price">฿990 <small>/ 30 มล.</small></div>
+            <button class="add-btn" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              เพิ่มลงตะกร้า
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEFORE / AFTER ============ -->
+<section class="section ba-section" id="proof">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Real Results</span>
+      <h2>เห็นความต่างด้วยตาของคุณ</h2>
+      <p>ลากแฮนดิลเพื่อเปรียบเทียบผิวก่อนและหลังใช้เซรั่มเฮาร่าอย่างต่อเนื่อง</p>
+    </div>
+    <div class="ba-frame reveal" id="baFrame" role="slider" aria-label="แถบเลื่อนเปรียบเทียบภาพก่อนและหลังใช้ผลิตภัณฑ์" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+      <img class="ba-before" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop" alt="ภาพใบหน้าผู้หญิงก่อนใช้ผลิตภัณฑ์ ปรับโทนสีจำลอง" loading="lazy" width="1200" height="825">
+      <div class="ba-after-wrap" id="baAfterWrap">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop" alt="ภาพใบหน้าผู้หญิงหลังใช้ผลิตภัณฑ์ ผิวดูสดใส" loading="lazy" width="1200" height="825">
+      </div>
+      <span class="ba-label before">ก่อน</span>
+      <span class="ba-label after">หลัง</span>
+      <div class="ba-handle" id="baHandle">
+        <div class="ba-knob">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>
+        </div>
+      </div>
+    </div>
+    <p class="ba-caption">ภาพจำลองเพื่อการสาธิต — ผลลัพธ์จริงขึ้นอยู่กับสภาพผิวของแต่ละบุคคล</p>
+  </div>
+</section>
+
+<!-- ============ INGREDIENTS ============ -->
+<section class="section" id="ingredients">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Inside the Formula</span>
+      <h2>ส่วนผสมที่เราภูมิใจ</h2>
+      <p>ทุกสูตรเปิดเผยส่วนผสมอย่างโปร่งใส ปราศจากน้ำหอม แอลกอฮอล์ และสีสังเคราะห์</p>
+    </div>
+    <div class="acc-list" id="accList">
+
+      <div class="acc-item reveal">
+        <button class="acc-head" type="button" aria-expanded="false">
+          <span class="acc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg>
+          </span>
+          <span>
+            <h3>วิตามินซี 10%</h3>
+            <span class="acc-en">Ethyl Ascorbic Acid</span>
+          </span>
+          <span class="acc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner">
+          <p>วิตามินซีเสถียรรูปแบบ Ethyl Ascorbic Acid เข้มข้น 10% ช่วยยับยั้งการสร้างเม็ดสีเมลานิน ลดจุดด่างดำและความหมองคล้ำ พร้อมกระตุ้นการสร้างคอลลาเจน ให้ผิวกระจ่างใสอย่างเป็นธรรมชาติโดยไม่ระคายเคือง เหมาะสำหรับใช้ในตอนเช้าคู่กับกันแดด</p>
+        </div></div>
+      </div>
+
+      <div class="acc-item reveal">
+        <button class="acc-head" type="button" aria-expanded="false">
+          <span class="acc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c-3 4-6 6.6-6 10a6 6 0 0 0 12 0c0-3.4-3-6-6-10Z"/><path d="M9.5 14a2.5 2.5 0 0 0 2.5 2.5"/></svg>
+          </span>
+          <span>
+            <h3>ไฮยาลูรอนิค 3 โมเลกุล</h3>
+            <span class="acc-en">Multi-weight Hyaluronic</span>
+          </span>
+          <span class="acc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner">
+          <p>กรดไฮยาลูรอนิค 3 ขนาดโมเลกุลทำงานในผิวแตกต่างชั้นกัน — โมเลกุลเล็กซึมลึกเติมน้ำจากภายใน โมเลกุลกลางคงความชุ่มชื้น และโมเลกุลใหญ่เกาะผิวล็อกน้ำไว้ยาวนาน ผิวจึงอิ่มฟู นุ่มเด้ง ตลอดวันแม้ในห้องแอร์</p>
+        </div></div>
+      </div>
+
+      <div class="acc-item reveal">
+        <button class="acc-head" type="button" aria-expanded="false">
+          <span class="acc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c5-2.5 8-6.6 8-11V5.5L12 2 4 5.5V11c0 4.4 3 8.5 8 11Z"/><path d="m9 11.5 2 2 4-4.5"/></svg>
+          </span>
+          <span>
+            <h3>ไนอะซินาไมด์</h3>
+            <span class="acc-en">Niacinamide 5%</span>
+          </span>
+          <span class="acc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner">
+          <p>วิตามินบี 3 ความเข้มข้น 5% ที่คัดสรรมาเพื่อเสริมเกราะป้องกันผิว ลดการระคายเคือง กระชับรูขุมขน และปรับสมดุลความมันบนใบหน้า ช่วยให้ผิวเรียบเนียนและสีผิวสม่ำเสมอขึ้นเมื่อใช้อย่างต่อเนื่อง</p>
+        </div></div>
+      </div>
+
+      <div class="acc-item reveal">
+        <button class="acc-head" type="button" aria-expanded="false">
+          <span class="acc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21c-4.5-1.5-7-5-7-9V7c2.5 0 4.5-1 7-3 2.5 2 4.5 3 7 3v5c0 4-2.5 7.5-7 9Z"/><path d="M12 8v8M8.5 10.5c1 1 2.2 1.5 3.5 1.5s2.5-.5 3.5-1.5"/></svg>
+          </span>
+          <span>
+            <h3>เซนเทลล่า</h3>
+            <span class="acc-en">Centella Asiatica</span>
+          </span>
+          <span class="acc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="acc-body"><div class="acc-body-inner">
+          <p>สารสกัดใบบัวบกเกรดเครื่องสำอางจากฟาร์มในประเทศไทย อุดมด้วยมาดิคาสโซไซด์ ช่วยปลอบประโลมผิวที่อักเสบ ลดรอยแดงจากสิว และเร่งการซ่อมแซมผิว เป็นส่วนผสมคู่บุญของสาวผิวแพ้ง่ายโดยเฉพาะ</p>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="section reviews" id="reviews">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Loved by Many</span>
+      <h2>เสียงจากลูกค้าเฮาร่า</h2>
+      <p>รีวิวจริงจากผู้ใช้ทั่วประเทศ ที่เปลี่ยนกิจวัตรดูแลผิวให้เป็นเรื่องง่าย</p>
+    </div>
+    <div class="review-grid">
+
+      <article class="r-card reveal">
+        <div class="stars" aria-label="คะแนน 5 จาก 5 ดาว">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+        </div>
+        <p>ใช้เซรั่มวิตามินซีมาสองขวดแล้ว รอยดำจากสิวจางลงชัดมาก ที่สำคัญคือไม่แพ้เลย ทั้งที่ผิวเราแพ้ง่ายสุด ๆ เนื้อซึมไว ไม่เหนอะหนะตอนอากาศร้อน</p>
+        <div class="r-person">
+          <div class="r-avatar" aria-hidden="true">พ</div>
+          <div><b>พิมพ์ชนก ว.</b><span>กรุงเทพมหานคร — ใช้มา 4 เดือน</span></div>
+        </div>
+      </article>
+
+      <article class="r-card reveal">
+        <div class="stars" aria-label="คะแนน 5 จาก 5 ดาว">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+        </div>
+        <p>ทำงานห้องแอร์ทั้งวันผิวแห้งลอกมาก พอได้ลองไฮยาตัวนี้คือต่างจากที่เคยใช้จริง ๆ ตื่นมาผิวยังนุ่มอยู่เลย ราคานี้คุณภาพนี้ถือว่าคุ้มมาก</p>
+        <div class="r-person">
+          <div class="r-avatar" aria-hidden="true">น</div>
+          <div><b>ณัฐริกา พ.</b><span>เชียงใหม่ — ใช้มา 2 เดือน</span></div>
+        </div>
+      </article>
+
+      <article class="r-card reveal">
+        <div class="stars" aria-label="คะแนน 5 จาก 5 ดาว">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 14.9 8.6l6.6.8-4.9 4.5 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.4l6.6-.8L12 2.5Z"/></svg>
+        </div>
+        <p>กลัวเรตินอลมาตลอดเพราะเคยลอกจนต้องพัก แต่สูตรไนท์รีนิวของเฮาร่าอ่อนโยนจริง เริ่มจากสัปดาห์ละสองครั้ง ตอนนี้ใช้ทุกคืนได้แล้ว ริ้วรอยหางตาดูตื้นขึ้นเยอะ</p>
+        <div class="r-person">
+          <div class="r-avatar" aria-hidden="true">ม</div>
+          <div><b>มัทนา ส.</b><span>ขอนแก่น — ใช้มา 6 เดือน</span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">HAURA</div>
+        <p>สกินแคร์คลีนบิวตี้สัญชาติไทย คิดค้นสูตรโดยเภสัชกรผู้เชี่ยวชาญ ผลิตในโรงงานมาตรฐาน GMP อย. ไทย พร้อมส่งมอบผิวสุขภาพดีให้ทุกคน</p>
+      </div>
+      <div>
+        <h4>ช่องทางการขาย</h4>
+        <ul class="foot-links">
+          <li><a href="#" aria-label="ร้านเฮาร่าบนช้อปปี้">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l1.2 12.2a1.5 1.5 0 0 1-1.5 1.8H6.3a1.5 1.5 0 0 1-1.5-1.8L6 7Z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>
+            Shopee — HAURA Official</a></li>
+          <li><a href="#" aria-label="ร้านเฮาร่าบนลาซาด้า">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8.5 15.5c1 .8 2.2 1.2 3.5 1.2s2.5-.4 3.5-1.2"/></svg>
+            Lazada — HAURA Mall</a></li>
+          <li><a href="#" aria-label="ไลน์ official ของเฮาร่า">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-8.5 8.5c-1.2 0-2.4-.25-3.4-.7L4 21l1.3-3.6A8.5 8.5 0 1 1 21 12Z"/></svg>
+            LINE — @haura.skin</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>สตูดิโอของเรา</h4>
+        <ul class="foot-links">
+          <li><a href="#" aria-label="ที่ตั้งสตูดิโอเฮาร่า">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            88/2 ซอยสุขุมวิท 26 คลองตัน<br>กรุงเทพมหานคร 10110</a></li>
+          <li><a href="#" aria-label="เวลาทำการ">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+            จันทร์–เสาร์ 10:00–19:00 น.</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 HAURA Skin Co., Ltd. สงวนลิขสิทธิ์</span>
+      <span class="en" style="letter-spacing:.14em;font-size:11.5px">MINDFUL SKINCARE, MADE IN THAILAND</span>
+    </div>
+  </div>
+</footer>
+
+<!-- toast -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+  เพิ่มลงตะกร้าแล้ว
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Nav scroll shadow + mobile menu ---------- */
+  var nav = document.getElementById("nav");
+  var onScroll = function(){ nav.classList.toggle("scrolled", window.scrollY > 12); };
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  var navToggle = document.getElementById("navToggle");
+  var navLinks = document.getElementById("navLinks");
+  navToggle.addEventListener("click", function(){
+    var open = navLinks.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", String(open));
+    navToggle.setAttribute("aria-label", open ? "ปิดเมนู" : "เปิดเมนู");
+  });
+  navLinks.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click", function(){
+      navLinks.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  /* ---------- Metaball canvas ---------- */
+  var canvas = document.getElementById("metaballs");
+  if (!reduced && canvas) {
+    var ctx = canvas.getContext("2d");
+    var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var colors = ["#f3dcd7", "#e3daef", "#f0d9d4", "#e9ddf2", "#f6e3da"];
+    var balls = [];
+    function resize(){
+      var hero = canvas.parentElement;
+      W = hero.offsetWidth; H = hero.offsetHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      canvas.style.width = W + "px"; canvas.style.height = H + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function init(){
+      balls = [];
+      for (var i = 0; i < 5; i++) {
+        balls.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: Math.min(W, H) * (0.16 + Math.random() * 0.12),
+          dx: (Math.random() - .5) * 0.28,
+          dy: (Math.random() - .5) * 0.22,
+          c: colors[i % colors.length],
+          ph: Math.random() * Math.PI * 2,
+          ps: 0.002 + Math.random() * 0.003
+        });
+      }
+    }
+    function tick(){
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < balls.length; i++) {
+        var b = balls[i];
+        b.ph += b.ps;
+        b.x += b.dx + Math.cos(b.ph) * 0.35;
+        b.y += b.dy + Math.sin(b.ph * 0.8) * 0.3;
+        if (b.x < -b.r) b.x = W + b.r; if (b.x > W + b.r) b.x = -b.r;
+        if (b.y < -b.r) b.y = H + b.r; if (b.y > H + b.r) b.y = -b.r;
+        var g = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
+        g.addColorStop(0, b.c);
+        g.addColorStop(1, "rgba(251,246,241,0)");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    }
+    resize(); init(); tick();
+    var rto;
+    window.addEventListener("resize", function(){
+      clearTimeout(rto);
+      rto = setTimeout(function(){ resize(); init(); }, 180);
+    });
+    document.addEventListener("visibilitychange", function(){ /* rAF auto-pauses when hidden */ });
+  }
+
+  /* ---------- Tilt cards ---------- */
+  var fine = window.matchMedia("(pointer: fine)").matches;
+  if (!reduced && fine) {
+    document.querySelectorAll(".p-card").forEach(function(card){
+      var raf = null;
+      card.addEventListener("pointerenter", function(){ card.classList.add("tilting"); });
+      card.addEventListener("pointermove", function(e){
+        if (raf) return;
+        raf = requestAnimationFrame(function(){
+          var r = card.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width - 0.5;
+          var py = (e.clientY - r.top) / r.height - 0.5;
+          var rx = (-py * 9).toFixed(2);
+          var ry = (px * 11).toFixed(2);
+          card.style.transform = "rotateX(" + rx + "deg) rotateY(" + ry + "deg) translateY(-6px)";
+          card.style.boxShadow = (-ry * 2) + "px " + (18 + rx) + "px 46px -14px rgba(66,48,58,.28)";
+          raf = null;
+        });
+      });
+      card.addEventListener("pointerleave", function(){
+        card.classList.remove("tilting");
+        card.style.transform = "";
+        card.style.boxShadow = "";
+      });
+    });
+  }
+
+  /* ---------- Cart: fly dot + badge + toast ---------- */
+  var cartCount = 0;
+  var badge = document.getElementById("cartBadge");
+  var cartBtn = document.getElementById("cartBtn");
+  var toast = document.getElementById("toast");
+  var toastTimer = null;
+
+  function showToast(){
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.classList.remove("show"); }, 2000);
+  }
+  function bumpBadge(){
+    cartCount++;
+    badge.textContent = cartCount;
+    badge.classList.remove("pop");
+    void badge.offsetWidth;
+    badge.classList.add("pop");
+  }
+  function flyDot(fromEl){
+    if (reduced) return;
+    var s = fromEl.getBoundingClientRect();
+    var t = cartBtn.getBoundingClientRect();
+    var dot = document.createElement("div");
+    dot.className = "fly-dot";
+    var sx = s.left + s.width / 2 - 8, sy = s.top + s.height / 2 - 8;
+    var tx = t.left + t.width / 2 - 8, ty = t.top + t.height / 2 - 8;
+    dot.style.left = sx + "px"; dot.style.top = sy + "px";
+    document.body.appendChild(dot);
+    var midX = (sx + tx) / 2, midY = Math.min(sy, ty) - 90;
+    var start = null, dur = 650;
+    function step(ts){
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var ease = 1 - Math.pow(1 - p, 2.2);
+      var ix = (1 - ease) * (1 - ease) * sx + 2 * (1 - ease) * ease * midX + ease * ease * tx;
+      var iy = (1 - ease) * (1 - ease) * sy + 2 * (1 - ease) * ease * midY + ease * ease * ty;
+      dot.style.left = ix + "px"; dot.style.top = iy + "px";
+      dot.style.transform = "scale(" + (1 - ease * 0.55) + ")";
+      dot.style.opacity = String(1 - ease * 0.25);
+      if (p < 1) requestAnimationFrame(step);
+      else { dot.remove(); bumpBadge(); }
+    }
+    requestAnimationFrame(step);
+  }
+
+  document.querySelectorAll(".add-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      flyDot(btn);
+      if (reduced) bumpBadge();
+      showToast();
+      btn.classList.add("added");
+      var label = btn.innerHTML;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg> อยู่ในตะกร้าแล้ว';
+      setTimeout(function(){ btn.classList.remove("added"); btn.innerHTML = label; }, 1600);
+    });
+  });
+
+  /* ---------- Before/After slider ---------- */
+  var frame = document.getElementById("baFrame");
+  var afterWrap = document.getElementById("baAfterWrap");
+  var handle = document.getElementById("baHandle");
+  var dragging = false;
+
+  function setBA(pct){
+    pct = Math.max(2, Math.min(98, pct));
+    afterWrap.style.clipPath = "inset(0 0 0 " + pct + "%)";
+    handle.style.left = pct + "%";
+    frame.setAttribute("aria-valuenow", String(Math.round(pct)));
+  }
+  function pctFromEvent(e){
+    var r = frame.getBoundingClientRect();
+    var x = (e.touches && e.touches[0] ? e.touches[0].clientX : e.clientX) - r.left;
+    return (x / r.width) * 100;
+  }
+  frame.addEventListener("pointerdown", function(e){
+    dragging = true;
+    frame.setPointerCapture(e.pointerId);
+    setBA(pctFromEvent(e));
+  });
+  frame.addEventListener("pointermove", function(e){
+    if (dragging) setBA(pctFromEvent(e));
+  });
+  ["pointerup", "pointercancel"].forEach(function(ev){
+    frame.addEventListener(ev, function(){ dragging = false; });
+  });
+  frame.addEventListener("keydown", function(e){
+    var cur = parseFloat(frame.getAttribute("aria-valuenow")) || 50;
+    if (e.key === "ArrowLeft") { setBA(cur - 4); e.preventDefault(); }
+    if (e.key === "ArrowRight") { setBA(cur + 4); e.preventDefault(); }
+    if (e.key === "Home") { setBA(2); e.preventDefault(); }
+    if (e.key === "End") { setBA(98); e.preventDefault(); }
+  });
+  setBA(50);
+
+  /* ---------- Accordion ---------- */
+  document.querySelectorAll(".acc-item").forEach(function(item){
+    var head = item.querySelector(".acc-head");
+    head.addEventListener("click", function(){
+      var isOpen = item.classList.contains("open");
+      document.querySelectorAll(".acc-item.open").forEach(function(o){
+        o.classList.remove("open");
+        o.querySelector(".acc-head").setAttribute("aria-expanded", "false");
+      });
+      if (!isOpen) {
+        item.classList.add("open");
+        head.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  /* ---------- Reveal on scroll ---------- */
+  var revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !reduced) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, {threshold: 0.14});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+  }
+})();
+</script>
+</body>
+</html>

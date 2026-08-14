@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE COMMON ลาดพร้าว — ทาวน์โฮมใหม่ เริ่ม ฿3.99 ล้าน</title>
+<meta name="description" content="THE COMMON ลาดพร้าว ทาวน์โฮม 2 ชั้น 3 ห้องนอน 2 ห้องน้ำ พื้นที่ใช้สอย 185 ตร.ม. เริ่มต้น ฿3.99 ล้าน พร้อมเข้าอยู่ ธันวาคม 2569">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fafaf8; --card:#ffffff; --ink:#16273f; --muted:#5b6b80;
+  --accent:#2f5fe0; --line:#e3e5ea;
+  --accent-soft:#e4ecfe; --accent-softer:#f1f5fd;
+  --err:#b3261e;
+  --sans:'IBM Plex Sans Thai',system-ui,sans-serif;
+  --mono:'IBM Plex Mono','IBM Plex Sans Thai',monospace;
+  --sbw:280px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: no-preference){
+  html{scroll-behavior:smooth}
+}
+body{
+  font-family:var(--sans); font-size:16px; line-height:1.65;
+  background:var(--bg); color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit}
+.mono{font-family:var(--mono)}
+::selection{background:var(--accent-soft)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+/* ---------- SIDEBAR ---------- */
+.sidebar{
+  position:fixed; inset:0 auto 0 0; width:var(--sbw); height:100dvh;
+  background:var(--card); border-right:1px solid var(--line);
+  display:flex; flex-direction:column; padding:36px 28px 28px;
+  z-index:70;
+}
+.brand{display:block;text-decoration:none;margin-bottom:44px}
+.brand .b1{font-family:var(--mono);font-weight:500;font-size:15px;letter-spacing:.14em}
+.brand .b2{display:block;color:var(--muted);font-size:13px;margin-top:2px;letter-spacing:.04em}
+.nav{display:flex;flex-direction:column;gap:2px}
+.navi{
+  position:relative;display:flex;align-items:center;gap:12px;
+  min-height:44px;padding:8px 12px 8px 16px;text-decoration:none;
+  color:var(--muted);font-size:15px;
+}
+.navi::before{
+  content:"";position:absolute;left:-28px;top:0;bottom:0;width:3px;
+  background:var(--accent);opacity:0;transition:opacity .2s;
+}
+.navi .nnum{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:#93a1b5}
+.navi:hover{color:var(--ink)}
+.navi.on{color:var(--ink);font-weight:600}
+.navi.on::before{opacity:1}
+.navi.on .nnum{color:var(--accent)}
+.sb-foot{margin-top:auto;padding-top:24px;border-top:1px solid var(--line)}
+.cta{
+  display:flex;align-items:center;justify-content:center;
+  min-height:48px;width:100%;background:var(--accent);color:#fff;
+  text-decoration:none;font-weight:500;font-size:15px;
+}
+.cta:hover{background:#2650c4}
+.sb-note{margin-top:12px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+
+/* topbar + drawer (mobile) */
+.topbar{
+  display:none;position:fixed;top:0;left:0;right:0;height:60px;z-index:60;
+  background:var(--card);border-bottom:1px solid var(--line);
+  align-items:center;justify-content:space-between;padding:0 16px 0 20px;
+}
+.topbar .tb-brand{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-decoration:none}
+.topbar .tb-brand span{color:var(--muted)}
+.burger{
+  width:44px;height:44px;border:1px solid var(--line);background:var(--card);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.overlay{
+  display:none;position:fixed;inset:0;background:rgba(22,39,63,.4);
+  z-index:65;opacity:0;transition:opacity .25s;
+}
+
+/* ---------- CONTENT ---------- */
+.content{margin-left:var(--sbw)}
+.wrap{max-width:940px;margin:0 auto;padding:0 48px}
+section[id]{scroll-margin-top:32px}
+.sec{padding:72px 0}
+.sec + .sec{border-top:1px solid var(--line)}
+.sechead{display:flex;align-items:baseline;gap:16px;margin-bottom:36px}
+.secnum{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.12em}
+.sechead h2{font-size:26px;font-weight:600;letter-spacing:-.01em;white-space:nowrap}
+.secrule{flex:1;height:1px;background:var(--line);align-self:center}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--accent);margin-bottom:18px}
+h1{font-size:clamp(30px,4.2vw,48px);font-weight:600;line-height:1.18;letter-spacing:-.015em;margin-bottom:20px}
+.lead{color:var(--muted);font-size:17px;max-width:58ch;margin-bottom:14px}
+.hero{margin:36px 0 0}
+.hero img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.hero figcaption{margin-top:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.05em}
+.facts{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);margin-top:40px;
+}
+.fact{background:var(--card);padding:20px 22px 18px}
+.fact .fl{font-size:12.5px;color:var(--muted);margin-bottom:8px}
+.fact .fv{font-family:var(--mono);font-size:clamp(20px,2.2vw,28px);font-weight:500;letter-spacing:-.02em}
+.fact .fv small{font-size:13px;color:var(--muted);font-family:var(--sans);font-weight:400;margin-left:4px}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.gal figure{position:relative;overflow:hidden;background:#eef0f3}
+.gal img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.gal figcaption{
+  position:absolute;left:0;bottom:0;max-width:85%;
+  background:var(--card);border-top:1px solid var(--line);border-right:1px solid var(--line);
+  padding:10px 14px;font-size:13.5px;
+  transform:translateY(101%);transition:transform .3s ease;
+}
+.gal figcaption .mono{display:block;font-size:10.5px;color:var(--muted);letter-spacing:.08em;margin-top:2px}
+@media (hover:hover){
+  .gal figure:hover figcaption,.gal figure:focus-within figcaption{transform:none}
+}
+@media (hover:none){
+  .gal figcaption{position:static;transform:none;max-width:none;border:1px solid var(--line);border-top:none}
+}
+
+/* ---------- FLOOR PLAN ---------- */
+.plantoggle{display:inline-flex;border:1px solid var(--line);background:var(--card);margin-bottom:28px}
+.plantoggle button{
+  min-height:44px;padding:10px 26px;border:0;background:transparent;
+  font-family:var(--sans);font-size:15px;color:var(--muted);cursor:pointer;
+}
+.plantoggle button + button{border-left:1px solid var(--line)}
+.plantoggle button.on{background:var(--ink);color:#fff;font-weight:500}
+.plancols{display:grid;grid-template-columns:minmax(0,400px) 1fr;gap:40px;align-items:start}
+.plansvg{background:var(--card);border:1px solid var(--line);padding:20px 12px}
+.plansvg svg{width:100%;height:auto;max-height:76vh;display:block;margin:0 auto}
+.plansvg [hidden]{display:none}
+.room{cursor:pointer}
+.room rect{fill:#f5f7fa;stroke:none;transition:fill .25s}
+@media (hover:hover){.room:hover rect{fill:#e9effd}}
+.room.on rect{fill:var(--accent-soft)}
+.room:focus-visible{outline:none}
+.room:focus-visible rect{stroke:var(--accent);stroke-width:2}
+.wall{stroke:var(--ink);stroke-width:3;fill:none}
+.iwall{stroke:var(--ink);stroke-width:1.5;fill:none}
+.thinline{stroke:#c3c9d4;stroke-width:1;fill:none}
+.zone{fill:#eff1f4}
+.plan-name{font-family:var(--sans);font-size:11px;font-weight:500;fill:var(--ink)}
+.plan-size{font-family:var(--mono);font-size:9.5px;fill:var(--muted)}
+.plan-tiny{font-family:var(--sans);font-size:9px;fill:#97a2b2}
+.plan-dim{font-family:var(--mono);font-size:9px;fill:var(--muted)}
+.planpanel{position:sticky;top:32px;background:var(--card);border:1px solid var(--line);padding:28px}
+.pp-floor{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--accent);margin-bottom:14px}
+.pp-name{font-size:22px;font-weight:600;margin-bottom:4px}
+.pp-size{font-family:var(--mono);font-size:26px;font-weight:500;margin-bottom:10px}
+.pp-size small{font-size:13px;color:var(--muted)}
+.pp-desc{color:var(--muted);font-size:15px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.roombtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.roombtn{
+  min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:8px 12px;background:var(--card);border:1px solid var(--line);
+  font-family:var(--sans);font-size:13.5px;color:var(--ink);cursor:pointer;text-align:left;
+}
+.roombtn .rsz{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+.roombtn:hover{border-color:#c9d2e8}
+.roombtn.on{border-color:var(--accent);background:var(--accent-softer);box-shadow:inset 3px 0 0 var(--accent)}
+.planspec{margin-top:24px;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.03em}
+
+/* ---------- CALCULATOR ---------- */
+.calc{background:var(--card);border:1px solid var(--line);padding:40px}
+.calcgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px}
+.ctl{margin-bottom:26px}
+.ctl:last-child{margin-bottom:0}
+.ctl-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px}
+.ctl-head label{font-size:15px;font-weight:500}
+.ctl-head .val{font-family:var(--mono);font-size:15px;color:var(--ink)}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:44px;
+  background:transparent;cursor:pointer;display:block;
+}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--line)}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:20px;height:20px;border-radius:50%;
+  background:var(--accent);border:3px solid #fff;
+  box-shadow:0 0 0 1px #c8cfdb;margin-top:-9px;
+}
+input[type=range]::-moz-range-track{height:2px;background:var(--line)}
+input[type=range]::-moz-range-thumb{
+  width:14px;height:14px;border-radius:50%;background:var(--accent);
+  border:3px solid #fff;box-shadow:0 0 0 1px #c8cfdb;
+}
+input[type=range]:focus-visible{outline:none}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px rgba(47,95,224,.3)}
+input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 4px rgba(47,95,224,.3)}
+.res{border-left:1px solid var(--line);padding-left:44px}
+.res-label{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--muted);margin-bottom:10px}
+.res-num{font-family:var(--mono);font-size:clamp(34px,3.6vw,46px);font-weight:500;letter-spacing:-.03em;line-height:1.1;margin-bottom:24px}
+.res-num small{font-family:var(--sans);font-size:15px;font-weight:400;color:var(--muted);letter-spacing:0}
+.resrow{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:11px 0;border-top:1px solid var(--line);font-size:14px}
+.resrow dt{color:var(--muted)}
+.resrow dd{font-family:var(--mono);font-size:14.5px}
+.res-disc{margin-top:20px;font-size:12.5px;color:var(--muted)}
+
+/* ---------- LOCATION ---------- */
+.loc{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+.dist{list-style:none}
+.dist li{
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding:16px 0;border-bottom:1px solid var(--line);
+}
+.dist li:first-child{border-top:1px solid var(--line)}
+.dist .dn{font-size:15.5px}
+.dist .dv{font-family:var(--mono);font-size:14px;color:var(--ink);white-space:nowrap}
+.loc figure img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.loc figcaption{margin-top:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.05em}
+
+/* ---------- FORM ---------- */
+.formwrap{max-width:600px}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:14px;font-weight:500;margin-bottom:6px}
+.field input,.field select{
+  width:100%;min-height:48px;padding:10px 14px;
+  border:1px solid var(--line);background:var(--card);
+  font-family:var(--sans);font-size:15.5px;color:var(--ink);border-radius:0;
+}
+.field input:focus,.field select:focus{border-color:var(--accent);outline:none}
+.field input:focus-visible,.field select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.field [aria-invalid=true]{border-color:var(--err)}
+.errmsg{display:none;font-size:13px;color:var(--err);margin-top:6px}
+.errmsg.show{display:block}
+.submit{
+  min-height:52px;padding:12px 40px;border:0;background:var(--ink);color:#fff;
+  font-family:var(--sans);font-size:16px;font-weight:500;cursor:pointer;
+}
+.submit:hover{background:var(--accent)}
+.done{border:1px solid var(--line);background:var(--card);padding:36px}
+.done .dico{margin-bottom:16px}
+.done h3{font-size:20px;font-weight:600;margin-bottom:8px}
+.done p{color:var(--muted);font-size:15px}
+.done .ref{margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--line)}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;padding:44px 0 36px}
+.foot .fb{font-family:var(--mono);font-size:13px;letter-spacing:.1em;margin-bottom:6px}
+.foot p{color:var(--muted);font-size:13.5px;line-height:1.8}
+.foot .mono{font-size:13px;color:var(--ink)}
+.copy{padding:16px 0 28px;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  *{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:1099px){
+  .sidebar{transform:translateX(-102%);transition:transform .3s ease;width:min(320px,85vw);box-shadow:0 0 40px rgba(22,39,63,.15)}
+  body.drawer-open .sidebar{transform:none}
+  body.drawer-open{overflow:hidden}
+  .overlay{display:block;pointer-events:none}
+  body.drawer-open .overlay{opacity:1;pointer-events:auto}
+  .topbar{display:flex}
+  .content{margin-left:0;padding-top:60px}
+  section[id]{scroll-margin-top:76px}
+  .wrap{padding:0 28px}
+  .sec{padding:56px 0}
+  .plancols{grid-template-columns:1fr;gap:28px}
+  .planpanel{position:static}
+  .calc{padding:28px 24px}
+  .calcgrid{grid-template-columns:1fr;gap:32px}
+  .res{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:32px}
+  .loc{grid-template-columns:1fr;gap:32px}
+  .foot{grid-template-columns:1fr;gap:24px}
+}
+@media (max-width:620px){
+  .wrap{padding:0 20px}
+  .facts{grid-template-columns:1fr 1fr}
+  .gal{grid-template-columns:1fr}
+  .sechead h2{font-size:22px;white-space:normal}
+  .roombtns{grid-template-columns:1fr}
+  .resrow{font-size:13.5px}
+}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- topbar (mobile) -->
+<header class="topbar">
+  <a class="tb-brand" href="#s1">THE COMMON <span>· ลาดพร้าว</span></a>
+  <button class="burger" id="burger" aria-label="เปิดเมนูสารบัญ" aria-expanded="false" aria-controls="sidebar">
+    <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20" stroke="#16273f" stroke-width="1.6"/></svg>
+  </button>
+</header>
+<div class="overlay" id="overlay" aria-hidden="true"></div>
+
+<!-- fixed sidebar -->
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="#s1">
+    <span class="b1">THE COMMON</span>
+    <span class="b2">ลาดพร้าว — ทาวน์โฮมใหม่</span>
+  </a>
+  <nav class="nav" aria-label="สารบัญโครงการ">
+    <a class="navi on" href="#s1" aria-current="true"><span class="nnum">01</span><span>ภาพรวม</span></a>
+    <a class="navi" href="#s2"><span class="nnum">02</span><span>แกลเลอรี</span></a>
+    <a class="navi" href="#s3"><span class="nnum">03</span><span>แบบบ้าน</span></a>
+    <a class="navi" href="#s4"><span class="nnum">04</span><span>คำนวณสินเชื่อ</span></a>
+    <a class="navi" href="#s5"><span class="nnum">05</span><span>ทำเลที่ตั้ง</span></a>
+    <a class="navi" href="#s6"><span class="nnum">06</span><span>นัดชมบ้าน</span></a>
+  </nav>
+  <div class="sb-foot">
+    <a class="cta" href="#s6">นัดชมบ้าน</a>
+    <p class="sb-note">OPEN DAILY 9:00–18:00</p>
+  </div>
+</aside>
+
+<main class="content">
+<div class="wrap">
+
+  <!-- 01 OVERVIEW -->
+  <section class="sec" id="s1" aria-labelledby="h1">
+    <p class="kicker rv">NEW LAUNCH — ลาดพร้าว</p>
+    <h1 id="h1" class="rv">บ้านที่โตไปพร้อมครอบครัว</h1>
+    <p class="lead rv">THE COMMON ลาดพร้าว ทาวน์โฮม 2 ชั้นดีไซน์ใหม่บนทำเลเมือง ผังบ้าน 3 ห้องนอนที่รองรับทุกช่วงของชีวิต — จากห้องทำงานของคุณวันนี้ ถึงห้องนอนของลูกในวันข้างหน้า</p>
+    <p class="lead rv">โครงการแล้วเสร็จพร้อมเข้าอยู่จริง ตรวจสอบหน้างานได้ทุกยูนิต ด้วยมาตรฐานงานก่อสร้างที่เปิดเผยตรวจสอบได้ทุกขั้นตอน</p>
+    <figure class="hero rv">
+      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1600&auto=format&fit=crop" alt="บ้านตัวอย่างโครงการ THE COMMON ลาดพร้าว ด้านหน้าตอนเย็น" fetchpriority="high">
+      <figcaption>FIG. 01 — บ้านตัวอย่าง TYPE A, ถ่ายจากหน้าโครงการจริง</figcaption>
+    </figure>
+    <div class="facts rv" role="list" aria-label="ข้อมูลสำคัญของโครงการ">
+      <div class="fact" role="listitem"><p class="fl">ที่ดินโครงการ</p><p class="fv">12-3-45<small>ไร่</small></p></div>
+      <div class="fact" role="listitem"><p class="fl">จำนวนยูนิต</p><p class="fv">68<small>ยูนิต</small></p></div>
+      <div class="fact" role="listitem"><p class="fl">ราคาเริ่มต้น</p><p class="fv">฿3.99<small>ล้านบาท</small></p></div>
+      <div class="fact" role="listitem"><p class="fl">พร้อมเข้าอยู่</p><p class="fv">ธ.ค. 2569</p></div>
+    </div>
+  </section>
+
+  <!-- 02 GALLERY -->
+  <section class="sec" id="s2" aria-labelledby="t2">
+    <div class="sechead rv"><span class="secnum">02</span><h2 id="t2">แกลเลอรี</h2><span class="secrule"></span></div>
+    <div class="gal">
+      <figure class="rv">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop" alt="ห้องรับแขกบ้านตัวอย่าง โถงสูงรับแสงธรรมชาติ" loading="lazy">
+        <figcaption>ห้องรับแขก — เพดานสูง 2.7 เมตร<span class="mono">FIG. 02 / TYPE A</span></figcaption>
+      </figure>
+      <figure class="rv">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop" alt="ด้านหน้าบ้านในโครงการ สถาปัตยกรรมโมเดิร์นโทนขาว" loading="lazy">
+        <figcaption>ด้านหน้าโครงการ — หน้ากว้าง 5.6 เมตร<span class="mono">FIG. 03 / ELEVATION</span></figcaption>
+      </figure>
+      <figure class="rv">
+        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200&auto=format&fit=crop" alt="ครัวและมุมรับประทานอาหาร เคาน์เตอร์หินควอตซ์" loading="lazy">
+        <figcaption>ครัว — เคาน์เตอร์หินควอตซ์<span class="mono">FIG. 04 / INTERIOR</span></figcaption>
+      </figure>
+      <figure class="rv">
+        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=1200&auto=format&fit=crop" alt="ซุ้มประตูและลานจอดรถหน้าบ้าน" loading="lazy">
+        <figcaption>ซุ้มประตูและลานจอดรถ 2 คัน<span class="mono">FIG. 05 / CARPORT</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 03 FLOOR PLAN -->
+  <section class="sec" id="s3" aria-labelledby="t3">
+    <div class="sechead rv"><span class="secnum">03</span><h2 id="t3">แบบบ้าน — TYPE A</h2><span class="secrule"></span></div>
+    <div class="plantoggle rv" role="group" aria-label="เลือกชั้นของผังบ้าน">
+      <button type="button" class="on" data-floor="f1" aria-pressed="true">ชั้น 1</button>
+      <button type="button" data-floor="f2" aria-pressed="false">ชั้น 2</button>
+    </div>
+    <div class="plancols">
+      <div class="plansvg rv">
+        <div data-floor="f1" id="svg-f1">
+          <svg viewBox="0 0 320 720" role="group" aria-label="ผังบ้านชั้น 1">
+            <line x1="28" y1="16" x2="252" y2="16" class="thinline"/><line x1="28" y1="12" x2="28" y2="20" class="thinline"/><line x1="252" y1="12" x2="252" y2="20" class="thinline"/>
+            <text x="140" y="11" text-anchor="middle" class="plan-dim">5.60 ม.</text>
+            <line x1="266" y1="24" x2="266" y2="684" class="thinline"/><line x1="262" y1="24" x2="270" y2="24" class="thinline"/><line x1="262" y1="684" x2="270" y2="684" class="thinline"/>
+            <text transform="rotate(90 278 354)" x="278" y="354" text-anchor="middle" class="plan-dim">16.50 ม.</text>
+            <g class="room" data-room="kitchen" tabindex="0" role="button" aria-label="ครัว 12.8 ตารางเมตร">
+              <rect x="28" y="24" width="224" height="120"/>
+              <text x="100" y="79" text-anchor="middle" class="plan-name">ครัว</text>
+              <text x="100" y="95" text-anchor="middle" class="plan-size">12.8 ตร.ม.</text>
+            </g>
+            <g class="room" data-room="bath1" tabindex="0" role="button" aria-label="ห้องน้ำ 1 ขนาด 4.0 ตารางเมตร">
+              <rect x="172" y="24" width="80" height="80"/>
+              <text x="212" y="59" text-anchor="middle" class="plan-name" font-size="9.5">ห้องน้ำ 1</text>
+              <text x="212" y="74" text-anchor="middle" class="plan-size">4.0 ตร.ม.</text>
+            </g>
+            <g class="room" data-room="dining" tabindex="0" role="button" aria-label="ห้องอาหาร 14.6 ตารางเมตร">
+              <rect x="28" y="144" width="224" height="140"/>
+              <text x="100" y="209" text-anchor="middle" class="plan-name">ห้องอาหาร</text>
+              <text x="100" y="225" text-anchor="middle" class="plan-size">14.6 ตร.ม.</text>
+            </g>
+            <g aria-hidden="true">
+              <rect x="172" y="144" width="80" height="100" class="zone"/>
+              <line x1="172" y1="154" x2="252" y2="154" class="thinline"/><line x1="172" y1="164" x2="252" y2="164" class="thinline"/>
+              <line x1="172" y1="174" x2="252" y2="174" class="thinline"/><line x1="172" y1="184" x2="252" y2="184" class="thinline"/>
+              <line x1="172" y1="194" x2="252" y2="194" class="thinline"/><line x1="172" y1="204" x2="252" y2="204" class="thinline"/>
+              <line x1="172" y1="214" x2="252" y2="214" class="thinline"/><line x1="172" y1="224" x2="252" y2="224" class="thinline"/>
+              <line x1="172" y1="234" x2="252" y2="234" class="thinline"/>
+              <text x="212" y="199" text-anchor="middle" class="plan-tiny" fill="#fff">บันได</text>
+            </g>
+            <g class="room" data-room="living" tabindex="0" role="button" aria-label="ห้องรับแขก 19.6 ตารางเมตร">
+              <rect x="28" y="284" width="224" height="140"/>
+              <text x="140" y="349" text-anchor="middle" class="plan-name">ห้องรับแขก</text>
+              <text x="140" y="365" text-anchor="middle" class="plan-size">19.6 ตร.ม.</text>
+            </g>
+            <g aria-hidden="true">
+              <rect x="28" y="424" width="128" height="60" class="zone"/>
+              <text x="92" y="459" text-anchor="middle" class="plan-tiny">สวนหน้า</text>
+              <rect x="156" y="424" width="96" height="260" class="zone"/>
+              <text x="204" y="549" text-anchor="middle" class="plan-tiny">ทางเข้า</text>
+            </g>
+            <g class="room" data-room="carport" tabindex="0" role="button" aria-label="ที่จอดรถ 16.0 ตารางเมตร">
+              <rect x="28" y="484" width="128" height="200"/>
+              <text x="92" y="579" text-anchor="middle" class="plan-name">ที่จอดรถ</text>
+              <text x="92" y="595" text-anchor="middle" class="plan-size">16.0 ตร.ม.</text>
+            </g>
+            <rect x="172" y="24" width="80" height="80" class="iwall"/>
+            <rect x="172" y="144" width="80" height="100" class="iwall"/>
+            <line x1="28" y1="144" x2="120" y2="144" class="iwall"/><line x1="160" y1="144" x2="252" y2="144" class="iwall"/>
+            <line x1="28" y1="284" x2="150" y2="284" class="iwall"/><line x1="190" y1="284" x2="252" y2="284" class="iwall"/>
+            <line x1="28" y1="424" x2="160" y2="424" class="iwall"/><line x1="200" y1="424" x2="252" y2="424" class="iwall"/>
+            <line x1="156" y1="424" x2="156" y2="684" class="iwall"/>
+            <line x1="28" y1="484" x2="156" y2="484" class="iwall"/>
+            <rect x="28" y="24" width="224" height="660" class="wall"/>
+            <line x1="30" y1="684" x2="154" y2="684" stroke="#ffffff" stroke-width="6"/>
+            <line x1="170" y1="684" x2="206" y2="684" stroke="#ffffff" stroke-width="6"/>
+          </svg>
+        </div>
+        <div data-floor="f2" id="svg-f2" hidden>
+          <svg viewBox="0 0 320 720" role="group" aria-label="ผังบ้านชั้น 2">
+            <line x1="28" y1="16" x2="252" y2="16" class="thinline"/><line x1="28" y1="12" x2="28" y2="20" class="thinline"/><line x1="252" y1="12" x2="252" y2="20" class="thinline"/>
+            <text x="140" y="11" text-anchor="middle" class="plan-dim">5.60 ม.</text>
+            <line x1="266" y1="24" x2="266" y2="684" class="thinline"/><line x1="262" y1="24" x2="270" y2="24" class="thinline"/><line x1="262" y1="684" x2="270" y2="684" class="thinline"/>
+            <text transform="rotate(90 278 354)" x="278" y="354" text-anchor="middle" class="plan-dim">16.50 ม.</text>
+            <g class="room" data-room="bed1" tabindex="0" role="button" aria-label="ห้องนอน 1 ขนาด 18.4 ตารางเมตร">
+              <rect x="28" y="24" width="224" height="160"/>
+              <text x="100" y="99" text-anchor="middle" class="plan-name">ห้องนอน 1</text>
+              <text x="100" y="115" text-anchor="middle" class="plan-size">18.4 ตร.ม.</text>
+            </g>
+            <g class="room" data-room="bath2" tabindex="0" role="button" aria-label="ห้องน้ำ 2 ขนาด 4.0 ตารางเมตร">
+              <rect x="172" y="24" width="80" height="80"/>
+              <text x="212" y="59" text-anchor="middle" class="plan-name" font-size="9.5">ห้องน้ำ 2</text>
+              <text x="212" y="74" text-anchor="middle" class="plan-size">4.0 ตร.ม.</text>
+            </g>
+            <g class="room" data-room="bed2" tabindex="0" role="button" aria-label="ห้องนอน 2 ขนาด 14.6 ตารางเมตร">
+              <rect x="28" y="184" width="224" height="140"/>
+              <text x="100" y="249" text-anchor="middle" class="plan-name">ห้องนอน 2</text>
+              <text x="100" y="265" text-anchor="middle" class="plan-size">14.6 ตร.ม.</text>
+            </g>
+            <g aria-hidden="true">
+              <rect x="172" y="184" width="80" height="100" class="zone"/>
+              <line x1="172" y1="194" x2="252" y2="194" class="thinline"/><line x1="172" y1="204" x2="252" y2="204" class="thinline"/>
+              <line x1="172" y1="214" x2="252" y2="214" class="thinline"/><line x1="172" y1="224" x2="252" y2="224" class="thinline"/>
+              <line x1="172" y1="234" x2="252" y2="234" class="thinline"/><line x1="172" y1="244" x2="252" y2="244" class="thinline"/>
+              <line x1="172" y1="254" x2="252" y2="254" class="thinline"/><line x1="172" y1="264" x2="252" y2="264" class="thinline"/>
+              <line x1="172" y1="274" x2="252" y2="274" class="thinline"/>
+              <text x="212" y="239" text-anchor="middle" class="plan-tiny">บันได</text>
+            </g>
+            <g class="room" data-room="bed3" tabindex="0" role="button" aria-label="ห้องนอน 3 ขนาด 14.0 ตารางเมตร">
+              <rect x="28" y="324" width="224" height="100"/>
+              <text x="140" y="369" text-anchor="middle" class="plan-name">ห้องนอน 3</text>
+              <text x="140" y="385" text-anchor="middle" class="plan-size">14.0 ตร.ม.</text>
+            </g>
+            <g aria-hidden="true">
+              <rect x="28" y="424" width="224" height="80" class="zone"/>
+              <text x="140" y="469" text-anchor="middle" class="plan-tiny">โถงทางเดิน</text>
+              <rect x="156" y="504" width="96" height="180" class="zone"/>
+              <text x="204" y="599" text-anchor="middle" class="plan-tiny">ท้องว่าง</text>
+            </g>
+            <g class="room" data-room="balcony" tabindex="0" role="button" aria-label="ระเบียง 14.4 ตารางเมตร">
+              <rect x="28" y="504" width="128" height="180"/>
+              <text x="92" y="589" text-anchor="middle" class="plan-name">ระเบียง</text>
+              <text x="92" y="605" text-anchor="middle" class="plan-size">14.4 ตร.ม.</text>
+            </g>
+            <rect x="172" y="24" width="80" height="80" class="iwall"/>
+            <rect x="172" y="184" width="80" height="100" class="iwall"/>
+            <line x1="28" y1="184" x2="120" y2="184" class="iwall"/><line x1="160" y1="184" x2="252" y2="184" class="iwall"/>
+            <line x1="28" y1="324" x2="150" y2="324" class="iwall"/><line x1="190" y1="324" x2="252" y2="324" class="iwall"/>
+            <line x1="28" y1="424" x2="150" y2="424" class="iwall"/><line x1="190" y1="424" x2="252" y2="424" class="iwall"/>
+            <line x1="28" y1="504" x2="60" y2="504" class="iwall"/><line x1="110" y1="504" x2="156" y2="504" class="iwall"/>
+            <line x1="156" y1="504" x2="156" y2="684" class="iwall"/>
+            <rect x="28" y="24" width="224" height="660" class="wall"/>
+            <line x1="30" y1="684" x2="154" y2="684" stroke="#ffffff" stroke-width="6"/>
+            <line x1="158" y1="684" x2="252" y2="684" stroke="#ffffff" stroke-width="6"/>
+          </svg>
+        </div>
+      </div>
+      <aside class="planpanel rv" aria-label="รายละเอียดห้อง">
+        <p class="pp-floor" id="pp-floor">ผังชั้น 1 — แตะที่ห้องเพื่อดูรายละเอียด</p>
+        <div aria-live="polite">
+          <h3 class="pp-name" id="pp-name">ห้องรับแขก</h3>
+          <p class="pp-size"><span id="pp-size">19.6</span> <small>ตร.ม.</small></p>
+          <p class="pp-desc" id="pp-desc">เพดานสูง 2.7 เมตร รับแสงธรรมชาติเต็มบานหน้าต่าง</p>
+        </div>
+        <div class="roombtns" id="roombtns" role="group" aria-label="รายชื่อห้องทั้งหมดในชั้นนี้"></div>
+      </aside>
+    </div>
+    <p class="planspec rv">พื้นที่ใช้สอยรวม 185 ตร.ม. · 3 ห้องนอน · 2 ห้องน้ำ · ที่จอดรถ 2 คัน · หน้ากว้าง 5.60 ม.</p>
+  </section>
+
+  <!-- 04 CALCULATOR -->
+  <section class="sec" id="s4" aria-labelledby="t4">
+    <div class="sechead rv"><span class="secnum">04</span><h2 id="t4">คำนวณสินเชื่อ</h2><span class="secrule"></span></div>
+    <div class="calc rv">
+      <div class="calcgrid">
+        <div>
+          <div class="ctl">
+            <div class="ctl-head"><label for="c-price">ราคาบ้าน</label><span class="val" id="v-price">฿3,990,000</span></div>
+            <input type="range" id="c-price" min="2000000" max="8000000" step="10000" value="3990000" aria-label="ราคาบ้าน หน่วยบาท">
+          </div>
+          <div class="ctl">
+            <div class="ctl-head"><label for="c-down">เงินดาวน์</label><span class="val" id="v-down">15%</span></div>
+            <input type="range" id="c-down" min="0" max="50" step="1" value="15" aria-label="เงินดาวน์ หน่วยเปอร์เซ็นต์">
+          </div>
+          <div class="ctl">
+            <div class="ctl-head"><label for="c-rate">อัตราดอกเบี้ยต่อปี</label><span class="val" id="v-rate">4.9%</span></div>
+            <input type="range" id="c-rate" min="2" max="8" step="0.1" value="4.9" aria-label="อัตราดอกเบี้ยต่อปี หน่วยเปอร์เซ็นต์">
+          </div>
+          <div class="ctl">
+            <div class="ctl-head"><label for="c-years">ระยะเวลากู้</label><span class="val" id="v-years">30 ปี</span></div>
+            <input type="range" id="c-years" min="10" max="35" step="1" value="30" aria-label="ระยะเวลากู้ หน่วยปี">
+          </div>
+        </div>
+        <div class="res">
+          <p class="res-label">ผ่อนต่อเดือน (โดยประมาณ)</p>
+          <p class="res-num" id="r-monthly" aria-live="polite">฿18,003<small> /เดือน</small></p>
+          <dl>
+            <div class="resrow"><dt>เงินดาวน์</dt><dd id="r-down">฿598,500</dd></div>
+            <div class="resrow"><dt>ยอดกู้</dt><dd id="r-loan">฿3,391,500</dd></div>
+            <div class="resrow"><dt>ดอกเบี้ยรวมตลอดสัญญา</dt><dd id="r-int">฿3,089,600</dd></div>
+            <div class="resrow"><dt>ยอดผ่อนรวมทั้งหมด</dt><dd id="r-total">฿6,481,100</dd></div>
+          </dl>
+          <p class="res-disc">ตัวเลขโดยประมาณเพื่อการวางแผนเบื้องต้น เงื่อนไขสินเชื่อจริงขึ้นอยู่กับการพิจารณาของธนาคารผู้ปล่อยกู้</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 LOCATION -->
+  <section class="sec" id="s5" aria-labelledby="t5">
+    <div class="sechead rv"><span class="secnum">05</span><h2 id="t5">ทำเลที่ตั้ง</h2><span class="secrule"></span></div>
+    <div class="loc">
+      <ul class="dist rv">
+        <li><span class="dn">BTS สถานีลาดพร้าว</span><span class="dv">1.2 กม.</span></li>
+        <li><span class="dn">เซ็นทรัล ลาดพร้าว</span><span class="dv">2.5 กม.</span></li>
+        <li><span class="dn">โรงพยาบาลเปาโล โชคชัย 4</span><span class="dv">3.0 กม.</span></li>
+        <li><span class="dn">จุดขึ้นทางด่วนพิเศษฉลองรัช</span><span class="dv">800 ม.</span></li>
+      </ul>
+      <figure class="rv">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop" alt="บรรยากาศถนนในย่านลาดพร้าวใกล้โครงการ" loading="lazy">
+        <figcaption>FIG. 06 — บรรยากาศย่านลาดพร้าว เดินทางสะดวกทั้งรถยนต์และรถไฟฟ้า</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 06 BOOKING -->
+  <section class="sec" id="s6" aria-labelledby="t6">
+    <div class="sechead rv"><span class="secnum">06</span><h2 id="t6">นัดชมบ้าน</h2><span class="secrule"></span></div>
+    <div class="formwrap rv">
+      <form id="bookform" novalidate>
+        <div class="field">
+          <label for="f-name">ชื่อ-นามสกุล</label>
+          <input type="text" id="f-name" name="name" autocomplete="name" aria-describedby="e-name">
+          <p class="errmsg" id="e-name">กรุณากรอกชื่อ-นามสกุล</p>
+        </div>
+        <div class="field">
+          <label for="f-phone">เบอร์โทรศัพท์</label>
+          <input type="tel" id="f-phone" name="phone" inputmode="tel" autocomplete="tel" placeholder="08x-xxx-xxxx" aria-describedby="e-phone">
+          <p class="errmsg" id="e-phone">กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง เช่น 0812345678</p>
+        </div>
+        <div class="field">
+          <label for="f-date">วันที่สะดวกชมโครงการ</label>
+          <input type="date" id="f-date" name="date" aria-describedby="e-date">
+          <p class="errmsg" id="e-date">กรุณาเลือกวันที่สะดวก (ตั้งแต่วันนี้เป็นต้นไป)</p>
+        </div>
+        <div class="field">
+          <label for="f-slot">ช่วงเวลา</label>
+          <select id="f-slot" name="slot" aria-describedby="e-slot">
+            <option value="">— เลือกช่วงเวลา —</option>
+            <option value="morning">9:00 – 12:00 น.</option>
+            <option value="noon">12:00 – 15:00 น.</option>
+            <option value="evening">15:00 – 18:00 น.</option>
+          </select>
+          <p class="errmsg" id="e-slot">กรุณาเลือกช่วงเวลาที่สะดวก</p>
+        </div>
+        <button type="submit" class="submit">ยืนยันการนัดหมาย</button>
+      </form>
+      <div class="done" id="formdone" hidden role="status">
+        <svg class="dico" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="18.5" fill="none" stroke="#2f5fe0" stroke-width="2"/>
+          <path d="M12.5 20.5l5.2 5.2 10-10.5" fill="none" stroke="#2f5fe0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3 id="done-title">ได้รับข้อมูลการนัดหมายแล้ว</h3>
+        <p>ทีมขายจะติดต่อกลับเพื่อยืนยันนัดหมายภายในวันเดียว ขอบคุณที่สนใจโครงการ THE COMMON ลาดพร้าว</p>
+        <p class="ref" id="done-ref">REF: TC-0000</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot">
+      <div>
+        <p class="fb">THE COMMON ลาดพร้าว</p>
+        <p>พัฒนาโดย บริษัท คอมมอน ดีเวลลอปเมนท์ จำกัด<br>โครงการทาวน์โฮม 68 ยูนิต บนที่ดิน 12-3-45 ไร่</p>
+      </div>
+      <div>
+        <p class="fb">สำนักงานขาย</p>
+        <p>เปิดทุกวัน 9:00 – 18:00 น.<br>ถนนลาดพร้าว แขวงจอมพล เขตจตุจักร กรุงเทพฯ</p>
+      </div>
+      <div>
+        <p class="fb">ติดต่อ</p>
+        <p>โทร <span class="mono">02-123-4567</span><br>ทีมขายประจำโครงการตอบกลับภายในวันเดียว</p>
+      </div>
+    </div>
+    <p class="copy">© 2569 บริษัท คอมมอน ดีเวลลอปเมนท์ จำกัด — เอกสารนำเสนอเพื่อการตัดสินใจเบื้องต้น รายละเอียดอาจเปลี่ยนแปลงโดยไม่ต้องแจ้งล่วงหน้า</p>
+  </footer>
+
+</div>
+</main>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,c){return (c||document).querySelector(s)};
+var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+
+/* ---------- drawer (mobile) ---------- */
+var body=document.body, burger=$('#burger'), overlay=$('#overlay'), sidebar=$('#sidebar');
+function setDrawer(open){
+  body.classList.toggle('drawer-open',open);
+  burger.setAttribute('aria-expanded',String(open));
+  burger.setAttribute('aria-label',open?'ปิดเมนูสารบัญ':'เปิดเมนูสารบัญ');
+}
+burger.addEventListener('click',function(){setDrawer(!body.classList.contains('drawer-open'))});
+overlay.addEventListener('click',function(){setDrawer(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')setDrawer(false)});
+$$('.navi,.cta',sidebar).forEach(function(a){a.addEventListener('click',function(){setDrawer(false)})});
+
+/* ---------- scrollspy ---------- */
+var links=$$('.navi');
+var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+function setOn(id){
+  links.forEach(function(a){
+    var on=a.getAttribute('href')==='#'+id;
+    a.classList.toggle('on',on);
+    if(on)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');
+  });
+}
+var spy=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)setOn(e.target.id)});
+},{rootMargin:'-40% 0px -55% 0px',threshold:0});
+secs.forEach(function(s){spy.observe(s)});
+
+/* ---------- reveal on scroll ---------- */
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+  });
+},{threshold:.12});
+$$('.rv').forEach(function(el){io.observe(el)});
+
+/* ---------- floor plan ---------- */
+var PLANS={
+  f1:{label:'ผังชั้น 1',rooms:[
+    {id:'living',name:'ห้องรับแขก',size:'19.6',desc:'เพดานสูง 2.7 เมตร รับแสงธรรมชาติเต็มบานหน้าต่าง'},
+    {id:'dining',name:'ห้องอาหาร',size:'14.6',desc:'วางโต๊ะได้ 6 ที่นั่ง เชื่อมต่อครัวแบบเปิด'},
+    {id:'kitchen',name:'ครัว',size:'12.8',desc:'ครัวไทยแบบปิดกันควัน พร้อมเคาน์เตอร์หินควอตซ์'},
+    {id:'bath1',name:'ห้องน้ำ 1',size:'4.0',desc:'สุขภัณฑ์คุณภาพ แยกโซนเปียก–โซนแห้ง'},
+    {id:'carport',name:'ที่จอดรถ',size:'16.0',desc:'จอดรถได้ 2 คัน พร้อมจุดติดตั้ง EV Charger'}
+  ]},
+  f2:{label:'ผังชั้น 2',rooms:[
+    {id:'bed1',name:'ห้องนอน 1',size:'18.4',desc:'หน้าต่างสองด้าน พร้อม Walk-in Closet'},
+    {id:'bed2',name:'ห้องนอน 2',size:'14.6',desc:'รองรับเตียง 5 ฟุต เหมาะเป็นห้องเด็กหรือห้องทำงาน'},
+    {id:'bed3',name:'ห้องนอน 3',size:'14.0',desc:'ห้องอเนกประสงค์ ต่อเติมเป็นห้องรับแขกได้'},
+    {id:'bath2',name:'ห้องน้ำ 2',size:'4.0',desc:'ฝักบัวฝน ผนังกระเบื้องเต็มความสูง'},
+    {id:'balcony',name:'ระเบียง',size:'14.4',desc:'รับลมทิศเหนือ ต่อเติมมุมพักผ่อนกลางแจ้งได้'}
+  ]}
+};
+var curFloor='f1';
+var ppFloor=$('#pp-floor'),ppName=$('#pp-name'),ppSize=$('#pp-size'),ppDesc=$('#pp-desc'),roomBtns=$('#roombtns');
+function roomOf(id){return PLANS[curFloor].rooms.filter(function(r){return r.id===id})[0]}
+function activateRoom(id){
+  var r=roomOf(id); if(!r)return;
+  ppFloor.textContent=PLANS[curFloor].label+' — แตะที่ห้องเพื่อดูรายละเอียด';
+  ppName.textContent=r.name;
+  ppSize.textContent=r.size;
+  ppDesc.textContent=r.desc;
+  $$('#svg-'+curFloor+' .room').forEach(function(g){g.classList.toggle('on',g.dataset.room===id)});
+  $$('.roombtn',roomBtns).forEach(function(b){b.classList.toggle('on',b.dataset.room===id)});
+}
+function renderBtns(){
+  roomBtns.innerHTML='';
+  PLANS[curFloor].rooms.forEach(function(r){
+    var b=document.createElement('button');
+    b.type='button';b.className='roombtn';b.dataset.room=r.id;
+    b.setAttribute('aria-label',r.name+' '+r.size+' ตารางเมตร');
+    var n=document.createElement('span');n.textContent=r.name;
+    var s=document.createElement('span');s.className='rsz';s.textContent=r.size;
+    b.appendChild(n);b.appendChild(s);
+    b.addEventListener('click',function(){activateRoom(r.id)});
+    roomBtns.appendChild(b);
+  });
+}
+function switchFloor(f){
+  curFloor=f;
+  $$('.plantoggle button').forEach(function(b){
+    var on=b.dataset.floor===f;
+    b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));
+  });
+  $('#svg-f1').hidden=(f!=='f1');
+  $('#svg-f2').hidden=(f!=='f2');
+  renderBtns();
+  activateRoom(PLANS[f].rooms[0].id);
+}
+$$('.plantoggle button').forEach(function(b){
+  b.addEventListener('click',function(){switchFloor(b.dataset.floor)});
+});
+$$('.room').forEach(function(g){
+  var floorWrap=g.closest('[data-floor]');
+  var act=function(){
+    var f=floorWrap?floorWrap.dataset.floor:(g.closest('#svg-f2')?'f2':'f1');
+    if(f!==curFloor){switchFloor(f)}
+    activateRoom(g.dataset.room);
+  };
+  g.addEventListener('click',act);
+  g.addEventListener('focus',act);
+  g.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();act()}
+  });
+  if(window.matchMedia('(hover:hover)').matches){g.addEventListener('mouseenter',act)}
+});
+switchFloor('f1');
+
+/* ---------- loan calculator ---------- */
+var cPrice=$('#c-price'),cDown=$('#c-down'),cRate=$('#c-rate'),cYears=$('#c-years');
+var vPrice=$('#v-price'),vDown=$('#v-down'),vRate=$('#v-rate'),vYears=$('#v-years');
+var rMonthly=$('#r-monthly'),rDown=$('#r-down'),rLoan=$('#r-loan'),rInt=$('#r-int'),rTotal=$('#r-total');
+function fmt(n){return Math.round(n).toLocaleString('en-US')}
+function calc(){
+  var price=+cPrice.value, downPct=+cDown.value, rate=+cRate.value, years=+cYears.value;
+  vPrice.textContent='฿'+fmt(price);
+  vDown.textContent=downPct+'%';
+  vRate.textContent=rate.toFixed(1)+'%';
+  vYears.textContent=years+' ปี';
+  var down=price*downPct/100, loan=price-down;
+  var r=rate/100/12, n=years*12, m;
+  if(r===0){m=loan/n}else{
+    var p=Math.pow(1+r,n);
+    m=loan*r*p/(p-1);
+  }
+  var total=m*n, interest=total-loan;
+  rMonthly.innerHTML='฿'+fmt(m)+'<small> /เดือน</small>';
+  rDown.textContent='฿'+fmt(down);
+  rLoan.textContent='฿'+fmt(loan);
+  rInt.textContent='฿'+fmt(interest);
+  rTotal.textContent='฿'+fmt(total);
+}
+[cPrice,cDown,cRate,cYears].forEach(function(el){el.addEventListener('input',calc)});
+calc();
+
+/* ---------- booking form ---------- */
+var form=$('#bookform'), done=$('#formdone');
+var fName=$('#f-name'),fPhone=$('#f-phone'),fDate=$('#f-date'),fSlot=$('#f-slot');
+var today=new Date();today.setMinutes(today.getMinutes()-today.getTimezoneOffset());
+fDate.min=today.toISOString().slice(0,10);
+function setErr(input,msgId,bad){
+  input.setAttribute('aria-invalid',String(bad));
+  document.getElementById(msgId).classList.toggle('show',bad);
+  return !bad;
+}
+function vName(){return setErr(fName,'e-name',fName.value.trim().length<2)}
+function vPhone(){
+  var digits=fPhone.value.replace(/\D/g,'');
+  return setErr(fPhone,'e-phone',!/^0\d{8,9}$/.test(digits));
+}
+function vDate(){return setErr(fDate,'e-date',!(fDate.value&&fDate.value>=fDate.min))}
+function vSlot(){return setErr(fSlot,'e-slot',!fSlot.value)}
+fName.addEventListener('input',vName);
+fPhone.addEventListener('input',vPhone);
+fDate.addEventListener('change',vDate);
+fSlot.addEventListener('change',vSlot);
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  var checks=[vName(),vPhone(),vDate(),vSlot()];
+  if(checks.indexOf(false)>-1){
+    var firstBad=$('[aria-invalid="true"]',form);
+    if(firstBad)firstBad.focus();
+    return;
+  }
+  var ref='TC-'+today.toISOString().slice(0,10).replace(/-/g,'')+'-'+String(Math.floor(1000+Math.random()*9000));
+  $('#done-ref').textContent='REF: '+ref;
+  $('#done-title').textContent='ขอบคุณ คุณ'+fName.value.trim();
+  form.hidden=true;
+  done.hidden=false;
+  done.setAttribute('tabindex','-1');
+  done.focus();
+});
+})();
+</script>
+</body>
+</html>

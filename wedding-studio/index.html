@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>วันของเรา — Wedding Planner &amp; Floral Studio</title>
+<meta name="description" content="วันของเรา สตูดิโอวางแผนงานแต่งงานและดอกไม้สด ดูแลงานสำคัญของคุณเหมือนงานของคนในครอบครัว รับจำกัด 24 งานต่อปี">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Prompt:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#faf6ee;
+  --paper2:#f1e8d8;
+  --blush:#e7c1bd;
+  --sage:#9db097;
+  --ink:#4c3f36;
+  --kraft:#d9c7a7;
+  --line:rgba(76,63,54,.16);
+  --font-hand:'Charmonman',cursive;
+  --font-body:'Prompt',sans-serif;
+  --font-en:'EB Garamond',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{
+  font-family:var(--font-body);
+  font-weight:300;
+  font-size:16.5px;
+  line-height:1.8;
+  color:var(--ink);
+  background-color:var(--ivory);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--blush);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+a,button{min-height:44px;min-width:44px}
+:focus-visible{outline:2.5px solid var(--sage);outline-offset:3px;border-radius:3px}
+img{max-width:100%;display:block}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
+.en{font-family:var(--font-en)}
+.hand{font-family:var(--font-hand)}
+
+/* ---------- REVEAL ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:color-mix(in srgb,var(--ivory) 90%,transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px dashed var(--line);
+}
+.nav-inner{
+  max-width:1240px;margin:0 auto;height:76px;
+  padding:0 clamp(20px,4vw,56px);
+  display:flex;align-items:center;gap:32px;
+}
+.brand{display:flex;align-items:baseline;gap:12px;flex-shrink:0;padding:8px 0}
+.brand .logo{font-family:var(--font-hand);font-weight:700;font-size:34px;line-height:1;color:var(--ink)}
+.brand .logo-sub{font-family:var(--font-en);font-style:italic;font-size:13.5px;color:color-mix(in srgb,var(--ink) 62%,transparent);letter-spacing:.04em}
+.nav-links{display:flex;align-items:center;gap:4px;margin-left:auto}
+.nav-links a{
+  display:inline-flex;align-items:center;padding:10px 14px;font-size:15.5px;border-radius:999px;
+  color:color-mix(in srgb,var(--ink) 82%,transparent);
+}
+.nav-links a:hover{background:var(--paper2);color:var(--ink)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:12px 26px;border-radius:999px;border:1.5px solid var(--ink);
+  font-family:var(--font-body);font-weight:400;font-size:16px;cursor:pointer;
+  background:var(--ink);color:var(--ivory);transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease,background .3s ease,color .3s ease;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(76,63,54,.22)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--paper2);box-shadow:none}
+.btn.nav-cta{padding:10px 22px;font-size:15.5px;flex-shrink:0}
+@media (max-width:840px){.nav-links{display:none}}
+
+/* ---------- SECTION HEADERS ---------- */
+section{padding:clamp(72px,9vw,120px) 0}
+.sec-head{text-align:center;max-width:640px;margin:0 auto clamp(40px,5vw,64px)}
+.kicker{font-family:var(--font-en);font-style:italic;font-size:19px;letter-spacing:.06em;color:color-mix(in srgb,var(--ink) 60%,transparent)}
+.sec-head h2{font-family:var(--font-hand);font-weight:700;font-size:clamp(38px,4.6vw,56px);line-height:1.25;margin:6px 0 10px}
+.sec-head p{color:color-mix(in srgb,var(--ink) 72%,transparent);font-size:16.5px}
+
+/* ---------- HERO ---------- */
+.hero{padding:clamp(48px,6vw,88px) 0 clamp(64px,8vw,104px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,5vw,72px);align-items:center}
+.hero-copy .kicker{font-size:clamp(18px,1.6vw,21px)}
+.hero-copy h1{
+  font-family:var(--font-hand);font-weight:700;
+  font-size:clamp(46px,6.4vw,86px);line-height:1.18;margin:10px 0 18px;
+}
+.hero-copy h1 em{font-style:normal;color:color-mix(in srgb,var(--ink) 78%,var(--blush));position:relative;white-space:nowrap}
+.hero-copy h1 em::after{
+  content:"";position:absolute;left:2%;right:2%;bottom:.06em;height:.28em;z-index:-1;
+  background:color-mix(in srgb,var(--blush) 55%,transparent);border-radius:999px;transform:rotate(-1.2deg);
+}
+.hero-copy .lede{max-width:520px;color:color-mix(in srgb,var(--ink) 75%,transparent);font-size:17px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.hero-note{
+  margin-top:38px;display:inline-block;max-width:300px;
+  background:var(--paper2);padding:16px 22px 14px;border-radius:3px;
+  transform:rotate(-3deg);box-shadow:0 8px 18px rgba(76,63,54,.14);
+  position:relative;
+}
+.hero-note::before{
+  content:"";position:absolute;top:-12px;left:26px;width:78px;height:24px;
+  background:color-mix(in srgb,var(--kraft) 78%,transparent);
+  transform:rotate(4deg);box-shadow:0 1px 2px rgba(76,63,54,.12);
+  clip-path:polygon(0 10%,4% 0,96% 0,100% 10%,100% 90%,96% 100%,4% 100%,0 90%);
+}
+.hero-note .big{font-family:var(--font-hand);font-weight:700;font-size:26px;line-height:1.3}
+.hero-note .small{font-size:14px;color:color-mix(in srgb,var(--ink) 68%,transparent)}
+.hero-figure{position:relative;justify-self:end;width:min(100%,480px)}
+.hero-frame{
+  background:#fff;padding:16px 16px 18px;border-radius:4px;
+  transform:rotate(1.6deg);
+  box-shadow:0 30px 60px rgba(76,63,54,.20),0 4px 12px rgba(76,63,54,.10);
+}
+.hero-frame img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:2px}
+.hero-frame figcaption{
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  padding-top:14px;
+}
+.hero-frame figcaption .hand{font-size:24px;font-weight:700}
+.hero-frame figcaption .en{font-style:italic;font-size:14.5px;color:color-mix(in srgb,var(--ink) 58%,transparent)}
+.hero-doodle{position:absolute;pointer-events:none;color:color-mix(in srgb,var(--ink) 55%,transparent)}
+.hero-doodle.heart{top:-26px;right:-18px;transform:rotate(10deg)}
+.hero-doodle.sprig{bottom:-30px;left:-30px;transform:rotate(-8deg)}
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-figure{justify-self:center;order:2}
+}
+
+/* ---------- SCRAPBOOK BOARD ---------- */
+.board-section{background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--paper2) 45%,transparent) 18%,color-mix(in srgb,var(--paper2) 45%,transparent) 82%,transparent)}
+.board-frame{
+  background:#fff;padding:14px;border-radius:8px;position:relative;
+  box-shadow:0 26px 56px rgba(76,63,54,.18),0 3px 10px rgba(76,63,54,.10);
+  transform:rotate(-.4deg);
+}
+.board-frame::before,.board-frame::after{
+  content:"";position:absolute;width:104px;height:30px;z-index:5;
+  background:color-mix(in srgb,var(--blush) 62%,transparent);
+  box-shadow:0 1px 3px rgba(76,63,54,.14);
+  clip-path:polygon(0 10%,4% 0,96% 0,100% 10%,100% 90%,96% 100%,4% 100%,0 90%);
+}
+.board-frame::before{top:-14px;left:36px;transform:rotate(-5deg)}
+.board-frame::after{bottom:-14px;right:40px;transform:rotate(4deg);background:color-mix(in srgb,var(--sage) 55%,transparent)}
+.board{
+  position:relative;border-radius:4px;overflow:hidden;
+  height:clamp(600px,54vw,720px);
+  background-color:var(--kraft);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(0deg,rgba(76,63,54,.03) 0 1px,transparent 1px 5px),
+    repeating-linear-gradient(90deg,rgba(76,63,54,.03) 0 1px,transparent 1px 5px);
+  box-shadow:inset 0 2px 18px rgba(76,63,54,.18);
+}
+.board-hint{
+  position:absolute;top:22px;right:26px;z-index:40;
+  font-family:var(--font-hand);font-weight:700;font-size:clamp(20px,2vw,25px);
+  transform:rotate(3deg);color:color-mix(in srgb,var(--ink) 82%,transparent);
+  background:color-mix(in srgb,var(--ivory) 88%,transparent);
+  padding:8px 18px 6px;border-radius:3px;box-shadow:0 4px 10px rgba(76,63,54,.12);
+  pointer-events:none;
+}
+.board-caption-note{
+  text-align:center;margin-top:26px;font-size:15px;
+  color:color-mix(in srgb,var(--ink) 60%,transparent);
+}
+/* polaroids */
+.pol{
+  position:absolute;width:clamp(152px,17vw,214px);
+  background:#fff;padding:10px 10px 8px;border-radius:3px;
+  box-shadow:0 10px 24px rgba(76,63,54,.18),0 2px 6px rgba(76,63,54,.10);
+  transform:rotate(var(--r,0deg));
+  touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;
+}
+.pol img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:1px;pointer-events:none}
+.pol figcaption{
+  font-family:var(--font-hand);text-align:center;line-height:1.35;
+  font-size:clamp(18px,1.5vw,21px);padding:9px 2px 5px;color:var(--ink);
+}
+.pol::before{
+  content:"";position:absolute;top:-13px;left:50%;width:96px;height:27px;z-index:2;
+  transform:translateX(-50%) rotate(var(--tr,-2deg));
+  background:var(--tc,color-mix(in srgb,var(--kraft) 74%,transparent));
+  box-shadow:0 1px 2px rgba(76,63,54,.13);
+  clip-path:polygon(0 10%,4% 0,96% 0,100% 10%,100% 90%,96% 100%,4% 100%,0 90%);
+}
+.pol.grabbed{cursor:grabbing;box-shadow:0 24px 48px rgba(76,63,54,.30),0 5px 12px rgba(76,63,54,.16)}
+.pol:nth-of-type(1){--r:-5deg;--tr:-3deg;left:2.5%;top:7%;z-index:3}
+.pol:nth-of-type(2){--r:4deg;--tr:2deg;--tc:color-mix(in srgb,var(--blush) 60%,transparent);left:22.5%;top:33%;z-index:5}
+.pol:nth-of-type(3){--r:-3deg;--tr:3deg;left:40%;top:3.5%;z-index:2}
+.pol:nth-of-type(4){--r:5deg;--tr:-2deg;--tc:color-mix(in srgb,var(--sage) 55%,transparent);left:58.5%;top:37%;z-index:6}
+.pol:nth-of-type(5){--r:-4deg;--tr:4deg;left:77%;top:8%;z-index:4}
+.pol:nth-of-type(6){--r:3deg;--tr:-4deg;--tc:color-mix(in srgb,var(--blush) 60%,transparent);left:9%;top:59%;z-index:7}
+.pol:nth-of-type(7){--r:-5.5deg;--tr:2deg;--tc:color-mix(in srgb,var(--sage) 55%,transparent);left:45%;top:57%;z-index:8}
+@media (max-width:780px){
+  .board{height:clamp(900px,268vw,1080px)}
+  .pol{width:clamp(136px,42vw,168px)}
+  .pol:nth-of-type(1){left:3%;top:2.5%}
+  .pol:nth-of-type(2){left:50%;top:9.5%}
+  .pol:nth-of-type(3){left:5%;top:24.5%}
+  .pol:nth-of-type(4){left:49%;top:34%}
+  .pol:nth-of-type(5){left:3%;top:47%}
+  .pol:nth-of-type(6){left:50%;top:57.5%}
+  .pol:nth-of-type(7){left:14%;top:72.5%}
+  .board-hint{top:14px;right:14px}
+}
+
+/* ---------- PACKAGES ---------- */
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.6vw,32px);align-items:stretch}
+.pkg{
+  position:relative;border-radius:16px;padding:clamp(28px,3vw,38px) clamp(22px,2.4vw,30px);
+  display:flex;flex-direction:column;
+  box-shadow:0 12px 28px rgba(76,63,54,.10);
+  transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s ease;
+}
+.pkg:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(76,63,54,.16)}
+.pkg::before{
+  content:"";position:absolute;inset:11px;border-radius:10px;pointer-events:none;
+  border:1.5px dashed color-mix(in srgb,var(--ink) 42%,transparent);
+}
+.pkg.p1{background:color-mix(in srgb,var(--paper2) 72%,#fff)}
+.pkg.p2{background:color-mix(in srgb,var(--blush) 42%,var(--ivory))}
+.pkg.p3{background:color-mix(in srgb,var(--sage) 30%,var(--ivory))}
+.pkg .tag{
+  position:absolute;top:-15px;left:50%;transform:translateX(-50%) rotate(-2deg);
+  font-family:var(--font-hand);font-weight:700;font-size:21px;line-height:1;
+  background:var(--ink);color:var(--ivory);padding:11px 22px 8px;border-radius:3px;
+  box-shadow:0 6px 14px rgba(76,63,54,.22);white-space:nowrap;
+}
+.pkg h3{font-family:var(--font-hand);font-weight:700;font-size:34px;line-height:1.25;text-align:center}
+.pkg .for{text-align:center;font-family:var(--font-en);font-style:italic;font-size:15px;color:color-mix(in srgb,var(--ink) 60%,transparent);margin-top:2px}
+.pkg .price{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:16px 0 4px}
+.pkg .price .num{font-family:var(--font-en);font-weight:500;font-size:clamp(38px,3.4vw,46px);line-height:1;letter-spacing:.01em}
+.pkg .price .unit{font-size:15px;color:color-mix(in srgb,var(--ink) 65%,transparent)}
+.pkg ul{list-style:none;margin:18px 0 26px;display:grid;gap:11px}
+.pkg li{display:flex;gap:11px;align-items:flex-start;font-size:15.5px;line-height:1.65;color:color-mix(in srgb,var(--ink) 86%,transparent)}
+.pkg li svg{flex-shrink:0;margin-top:5px;color:color-mix(in srgb,var(--ink) 70%,transparent)}
+.pkg .btn{margin-top:auto;width:100%}
+@media (min-width:901px){.pkg.hot{transform:translateY(-12px) rotate(.4deg)}.pkg.hot:hover{transform:translateY(-18px) rotate(.4deg)}}
+@media (max-width:900px){.pkg-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}.pkg.hot{margin-top:10px}}
+
+/* ---------- TIMELINE ---------- */
+.tl{position:relative;max-width:900px;margin:0 auto;padding:10px 0}
+.tl::before{
+  content:"";position:absolute;top:0;bottom:0;left:50%;width:1.5px;
+  background:linear-gradient(180deg,transparent,var(--line) 6%,var(--line) 94%,transparent);
+}
+.tl-item{position:relative;width:50%;padding:6px 52px 44px 0}
+.tl-item:nth-child(even){margin-left:50%;padding:6px 0 44px 52px}
+.tl-item .dot{
+  position:absolute;top:16px;right:-8px;width:15px;height:15px;border-radius:50%;
+  background:var(--blush);border:3px solid #fff;box-shadow:0 0 0 1.5px var(--line),0 2px 5px rgba(76,63,54,.18);
+}
+.tl-item:nth-child(even) .dot{right:auto;left:-8px;background:var(--sage)}
+.tl-card{
+  background:#fff;border-radius:12px;padding:20px 24px 18px;
+  box-shadow:0 8px 20px rgba(76,63,54,.10);
+  position:relative;
+}
+.tl-card::before{content:"";position:absolute;inset:0;border-radius:12px;border:1.5px dashed color-mix(in srgb,var(--ink) 20%,transparent);pointer-events:none}
+.tl-item:nth-child(odd) .tl-card{text-align:right}
+.tl-time{font-family:var(--font-en);font-style:italic;font-weight:500;font-size:21px;letter-spacing:.03em;color:color-mix(in srgb,var(--ink) 78%,transparent)}
+.tl-card h3{font-family:var(--font-hand);font-weight:700;font-size:26px;line-height:1.3;margin:2px 0 4px}
+.tl-card p{font-size:15px;color:color-mix(in srgb,var(--ink) 70%,transparent)}
+@media (max-width:760px){
+  .tl::before{left:14px}
+  .tl-item,.tl-item:nth-child(even){width:100%;margin-left:0;padding:6px 0 34px 46px}
+  .tl-item .dot,.tl-item:nth-child(even) .dot{left:7px;right:auto}
+  .tl-item:nth-child(odd) .tl-card{text-align:left}
+}
+
+/* ---------- VOICES ---------- */
+.voices-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px);max-width:1020px;margin:0 auto}
+.voice{
+  background:var(--paper2);padding:34px 32px 26px;border-radius:3px;position:relative;
+  box-shadow:0 14px 30px rgba(76,63,54,.14);
+}
+.voice:nth-child(1){transform:rotate(-1.8deg)}
+.voice:nth-child(2){transform:rotate(1.4deg);background:color-mix(in srgb,var(--blush) 30%,var(--ivory))}
+.voice::before{
+  content:"";position:absolute;top:-13px;left:50%;width:110px;height:28px;
+  transform:translateX(-50%) rotate(2deg);
+  background:color-mix(in srgb,var(--kraft) 76%,transparent);
+  box-shadow:0 1px 3px rgba(76,63,54,.14);
+  clip-path:polygon(0 10%,4% 0,96% 0,100% 10%,100% 90%,96% 100%,4% 100%,0 90%);
+}
+.voice blockquote{font-family:var(--font-hand);font-weight:400;font-size:clamp(23px,2.1vw,28px);line-height:1.6}
+.voice .who{margin-top:16px;display:flex;align-items:center;gap:12px;font-size:15px;color:color-mix(in srgb,var(--ink) 72%,transparent)}
+.voice .who .dash{width:30px;height:1.5px;background:color-mix(in srgb,var(--ink) 40%,transparent)}
+@media (max-width:760px){.voices-grid{grid-template-columns:1fr}}
+
+/* ---------- CTA / FOOTER ---------- */
+.cta{
+  text-align:center;max-width:720px;margin:0 auto;
+}
+.cta h2{font-family:var(--font-hand);font-weight:700;font-size:clamp(40px,5vw,60px);line-height:1.3;margin:6px 0 14px}
+.cta p{color:color-mix(in srgb,var(--ink) 72%,transparent);max-width:520px;margin:0 auto}
+.cta .cta-row{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:32px}
+.cta .note{margin-top:20px;font-size:14.5px;color:color-mix(in srgb,var(--ink) 58%,transparent)}
+footer{border-top:1.5px dashed var(--line);padding:34px 0 42px}
+.foot{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+.foot .fbrand{font-family:var(--font-hand);font-weight:700;font-size:26px}
+.foot .fmeta{font-size:14px;color:color-mix(in srgb,var(--ink) 62%,transparent)}
+.foot .fmeta .en{font-style:italic}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="วันของเรา — กลับขึ้นด้านบน">
+      <span class="logo">วันของเรา</span>
+      <span class="logo-sub">Wedding Planner &amp; Floral Studio</span>
+    </a>
+    <nav class="nav-links" aria-label="เมนูหลัก">
+      <a href="#board">สมุดภาพ</a>
+      <a href="#packages">แพ็กเกจ</a>
+      <a href="#timeline">วันแต่งของคุณ</a>
+      <a href="#voices">เสียงจากคู่บ่าวสาว</a>
+    </nav>
+    <a class="btn nav-cta" href="#contact">ปรึกษาฟรี</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy rv">
+        <p class="kicker en">Wedding Planner &amp; Floral Studio</p>
+        <h1>วันสำคัญ<br><em>ของเราสองคน</em></h1>
+        <p class="lede">เราเป็นทีมวางแผนงานแต่งงานและดอกไม้สดที่เชื่อว่า งานแต่งที่ดีไม่ใช่งานที่ยิ่งใหญ่ที่สุด แต่คืองานที่ “เป็นคุณ” ที่สุด — ดูแลทุกรายละเอียดตั้งแต่ซุ้มดอกไม้จนถึงนาทีสุดท้ายของค่ำคืน เพื่อให้คุณได้เก็บวันสำคัญไว้เต็มหัวใจ</p>
+        <div class="hero-ctas">
+          <a class="btn" href="#contact">ปรึกษาฟรี ไม่มีค่าใช้จ่าย</a>
+          <a class="btn ghost" href="#board">เปิดสมุดภาพของเรา</a>
+        </div>
+        <aside class="hero-note" aria-label="หมายเหตุ">
+          <div class="big">รับจำกัด 24 งาน/ปี</div>
+          <div class="small">ตอนนี้คิวปี 2569 เหลือเพียง 7 งานสุดท้าย</div>
+        </aside>
+      </div>
+      <figure class="hero-figure rv">
+        <div class="hero-frame">
+          <img src="../assets/wed-hero.jpg" alt="ซุ้มดอกไม้งานแต่งงานโทนสีชมพูครีมที่จัดโดยสตูดิโอวันของเรา" fetchpriority="high">
+          <figcaption>
+            <span class="hand">ซุ้มดอกไม้ล่าสุดของเรา</span>
+            <span class="en">est. 2019 · Chiang Mai</span>
+          </figcaption>
+        </div>
+        <svg class="hero-doodle heart" width="42" height="38" viewBox="0 0 42 38" fill="none" aria-hidden="true">
+          <path d="M21 34C10 26 3 19 3 11.5 3 6 7 3 11.5 3c4 0 7.5 2.5 9.5 6 2-3.5 5.5-6 9.5-6C35 3 39 6 39 11.5 39 19 32 26 21 34Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        <svg class="hero-doodle sprig" width="60" height="60" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+          <path d="M30 54V22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M30 40c-8 0-14-5-15-13 8 0 14 5 15 13Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M30 30c8 0 14-5 15-13-8 0-14 5-15 13Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="30" cy="16" r="5" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= SCRAPBOOK BOARD ================= -->
+  <section class="board-section" id="board">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="kicker en">Our Scrapbook</p>
+        <h2>สมุดภาพงานจริงของเรา</h2>
+        <p>ทุกใบคือความทรงจำจริงจากงานที่เราได้ดูแล — ลองจับลากดูเล่นๆ เหมือนกำลังพลิกสมุดภาพบนโต๊ะ</p>
+      </div>
+      <div class="board-frame rv">
+        <p class="board-hint">ลองลากรูปเล่นดูสิ ✎</p>
+        <div class="board" id="boardEl">
+          <figure class="pol" data-r="-5" tabindex="0" aria-label="รูปโพลารอยด์ ซุ้มดอกไม้ที่เชียงใหม่ — ลากหรือใช้ปุ่มลูกศรเพื่อย้ายตำแหน่ง">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop" alt="บ่าวสาวยืนเคียงกันในพิธีแต่งงานกลางแจ้ง" loading="lazy" draggable="false">
+            <figcaption>ซุ้มดอกไม้ที่เชียงใหม่</figcaption>
+          </figure>
+          <figure class="pol" data-r="4" tabindex="0" aria-label="รูปโพลารอยด์ เดินเล่นแสงเย็นที่เขาใหญ่ — ลากหรือใช้ปุ่มลูกศรเพื่อย้ายตำแหน่ง">
+            <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=800&auto=format&fit=crop" alt="บ่าวสาวเดินจูงมือกันในทุ่งหญ้ายามแสงเย็น" loading="lazy" draggable="false">
+            <figcaption>เดินเล่นแสงเย็นที่เขาใหญ่</figcaption>
+          </figure>
+          <figure class="pol" data-r="-3" tabindex="0" aria-label="รูปโพลารอยด์ ส่งท้ายค่ำคืนด้วยแสงพลุ — ลากหรือใช้ปุ่มลูกศรเพื่อย้ายตำแหน่ง">
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop" alt="แขกถือพลุแสงสีทองเรียงแถวส่งบ่าวสาวในช่วงกลางคืน" loading="lazy" draggable="false">
+            <figcaption>ส่งท้ายค่ำคืนด้วยแสงพลุ</figcaption>
+          </figure>
+          <figure class="pol" data-r="5" tabindex="0" aria-label="รูปโพลารอยด์ รอยยิ้มเจ้าสาวยามเช้า — ลากหรือใช้ปุ่มลูกศรเพื่อย้ายตำแหน่ง">
+            <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=800&auto=format&fit=crop" alt="เจ้าสาวในชุดสีขาวยิ้มถือช่อดอกไม้โทนครีม" loading="lazy" draggable="false">
+            <figcaption>รอยยิ้มเจ้าสาวยามเช้า</figcaption>
+          </figure>
+          <figure class="pol" data-r="-4" tabindex="0" aria-label="รูปโพลารอยด์ จัดโต๊ะ 200 ที่นั่ง — ลากหรือใช้ปุ่มลูกศรเพื่อย้ายตำแหน่ง">
+            <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?q=80&w=800&auto=format&fit=crop" alt="โต๊ะจัดเลี้ยงงานแต่งงานตกแต่งดอกไม้สีขาวและแก้วไวน์" loading="lazy" draggable="false">
+            <figcaption>จัดโต๊ะ 200 ที่นั่ง</figcaption>
+          </figure>
+          <figure class="pol" data-r="3" tabindex="0" aria-label="รูปโพลารอยด์ จับมือกันไว้ให้แน่น — ลากหรือใช้ปุ่มลูกศรเพื่อย้ายตำแหน่ง">
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=800&auto=format&fit=crop" alt="บ่าวสาวจับมือกันระหว่างพิธีแต่งงาน" loading="lazy" draggable="false">
+            <figcaption>จับมือกันไว้ให้แน่น</figcaption>
+          </figure>
+          <figure class="pol" data-r="-5.5" tabindex="0" aria-label="รูปโพลารอยด์ ซุ้มดอกไม้ล่าสุดของสตูดิโอ — ลากหรือใช้ปุ่มลูกศรเพื่อย้ายตำแหน่ง">
+            <img src="../assets/wed-hero.jpg" alt="ซุ้มดอกไม้โทนสีชมพูครีมผลงานล่าสุดของสตูดิโอ" loading="lazy" draggable="false">
+            <figcaption>ซุ้มดอกไม้ล่าสุดของสตูดิโอ</figcaption>
+          </figure>
+        </div>
+      </div>
+      <p class="board-caption-note rv">ภาพทั้งหมดจากงานจริงที่ทีมวันของเราดูแลตั้งแต่ปี 2562 – 2569</p>
+    </div>
+  </section>
+
+  <!-- ================= PACKAGES ================= -->
+  <section id="packages">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="kicker en">Packages</p>
+        <h2>เลือกแบบที่ใช่สำหรับวันของคุณ</h2>
+        <p>ทุกแพ็กเกจปรับแต่งได้เต็มที่ ราคารวมค่าออกแบบ ดอกไม้สด และทีมงานดูแลหน้างานตลอดวัน</p>
+      </div>
+      <div class="pkg-grid">
+        <article class="pkg p1 rv">
+          <h3>อบอุ่น</h3>
+          <p class="for en">Intimate Ceremony · 30–80 guests</p>
+          <div class="price"><span class="num en">59,000</span><span class="unit">บาท</span></div>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>วางแผนพิธีครบวงจร เช้า–เย็น พร้อมไทม์ไลน์งาน</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ดอกไม้สดซุ้มพิธี ทางเดิน และ backdrop ถ่ายรูป</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ช่อเจ้าสาว ป้ายอกเพื่อนเจ้า และของชำร่วย 50 ชิ้น</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ทีมงานดูแลหน้างาน 4 ท่าน ตลอดวันงาน</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ประสานงานสถานที่และร้านค้าทั้งหมดให้ครบ</li>
+          </ul>
+          <a class="btn ghost" href="#contact">คุยรายละเอียดแพ็กเกจนี้</a>
+        </article>
+        <article class="pkg p2 hot rv">
+          <span class="tag">แนะนำ</span>
+          <h3>ในสวน</h3>
+          <p class="for en">Garden Wedding · 100–200 guests</p>
+          <div class="price"><span class="num en">129,000</span><span class="unit">บาท</span></div>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ทุกอย่างในแพ็กเกจอบอุ่น</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ตกแต่งสวนครบวงจร backdrop + โต๊ะ 150 ที่นั่ง</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ไฟประดับแสงอุ่นทั้งงาน พร้อมทีมติดตั้ง</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>เครื่องเสียงและวงดนตรีอะคูสติก 2 ชุด</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ช่างภาพ 2 ท่าน ตลอด 8 ชั่วโมง พร้อมอัลบั้ม</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ของชำร่วย 150 ชิ้น พร้อมการ์ดขอบคุณลายมือ</li>
+          </ul>
+          <a class="btn" href="#contact">จองคิวแพ็กเกจนี้</a>
+        </article>
+        <article class="pkg p3 rv">
+          <h3>เดสติเนชัน</h3>
+          <p class="for en">Destination Wedding · anywhere</p>
+          <div class="price"><span class="num en">289,000</span><span class="unit">บาท</span></div>
+          <ul>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ทุกอย่างในแพ็กเกจในสวน</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>จัดงานต่างจังหวัดหรือต่างประเทศ เช่น เชียงใหม่ เขาใหญ่ ภูเก็ต เกียวโต</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ค่าเดินทางและที่พักทีมงานรวมแล้ว</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ประสานงานวิลล่า/รีสอร์ตแบบเหมาจัดเต็ม</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ช่างภาพ + วิดีโอไฮไลต์เต็มวัน</li>
+            <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 8 6 11.5 12.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>after party จัดเต็มถึงเที่ยงคืน</li>
+          </ul>
+          <a class="btn ghost" href="#contact">วางแผนทริปของคุณ</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TIMELINE ================= -->
+  <section id="timeline" class="board-section">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="kicker en">The Wedding Day</p>
+        <h2>หนึ่งวันที่เราดูแลให้ทุกนาที</h2>
+        <p>ตัวอย่างไทม์ไลน์จริงจากงานในสวนของคุณมินท์และคุณเฟิร์ส — ทุกงานได้รับการวางแผนละเอียดแบบนี้เสมอ</p>
+      </div>
+      <div class="tl">
+        <div class="tl-item rv">
+          <span class="dot" aria-hidden="true"></span>
+          <div class="tl-card">
+            <span class="tl-time en">13:30</span>
+            <h3>แขกลงทะเบียน</h3>
+            <p>ต้อนรับด้วยน้ำสมุนไพรเย็นๆ ของที่ระลึก และมุมถ่ายรูปก่อนเข้าพิธี</p>
+          </div>
+        </div>
+        <div class="tl-item rv">
+          <span class="dot" aria-hidden="true"></span>
+          <div class="tl-card">
+            <span class="tl-time en">14:09</span>
+            <h3>พิธีสงฆ์</h3>
+            <p>รับพรจากพระสงฆ์ 9 รูป พิธีหลั่งน้ำพระพุทธมนต์ท่ามกลางครอบครัว</p>
+          </div>
+        </div>
+        <div class="tl-item rv">
+          <span class="dot" aria-hidden="true"></span>
+          <div class="tl-card">
+            <span class="tl-time en">16:00</span>
+            <h3>ถ่ายภาพครอบครัว</h3>
+            <p>เก็บภาพกับครอบครัวและเพื่อนสนิทช่วง golden hour แสงสวยที่สุดของวัน</p>
+          </div>
+        </div>
+        <div class="tl-item rv">
+          <span class="dot" aria-hidden="true"></span>
+          <div class="tl-card">
+            <span class="tl-time en">18:00</span>
+            <h3>เปิดตัวบ่าวสาว</h3>
+            <p>first dance กลางสวนใต้แสงไฟประดับ พร้อมเพลงโปรดของทั้งคู่</p>
+          </div>
+        </div>
+        <div class="tl-item rv">
+          <span class="dot" aria-hidden="true"></span>
+          <div class="tl-card">
+            <span class="tl-time en">19:30</span>
+            <h3>after party</h3>
+            <p>ดนตรีสด เครื่องดื่ม และความทรงจำดีๆ ไปจนค่ำคืน</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VOICES ================= -->
+  <section id="voices">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="kicker en">Kind Words</p>
+        <h2>เสียงจากคู่บ่าวสาว</h2>
+      </div>
+      <div class="voices-grid">
+        <blockquote class="voice rv">
+          <p>“ทีมงานดูแลทุกอย่างเหมือนงานของตัวเอง เราแทบไม่ต้องทำอะไรเลย ได้แค่มีความสุขในวันของเราจริงๆ”</p>
+          <div class="who"><span class="dash" aria-hidden="true"></span>คุณมินท์ &amp; คุณเฟิร์ส · งานในสวนที่เชียงใหม่</div>
+        </blockquote>
+        <blockquote class="voice rv">
+          <p>“ซุ้มดอกไม้สวยกว่าที่ฝันไว้มาก แขกทุกคนชมไม่หยุด รูปทุกใบเหมือนหลุดมาจากนิตยสาร”</p>
+          <div class="who"><span class="dash" aria-hidden="true"></span>คุณพลอย &amp; คุณต้นน้ำ · เดสติเนชันที่เขาใหญ่</div>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section id="contact" class="board-section">
+    <div class="wrap">
+      <div class="cta rv">
+        <p class="kicker en">Say Hello</p>
+        <h2>เล่าวิสัยทัศน์ของคุณให้เราฟัง</h2>
+        <p>เล่าสไตล์งานในฝัน งบประมาณ และวันที่อยากแต่ง — เราจะร่างแนวทางพร้อมประเมินราคาให้ฟรีภายใน 24 ชั่วโมง</p>
+        <div class="cta-row">
+          <a class="btn" href="tel:+66865428897">
+            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true"><path d="M3.5 2h3l1.2 3.2-1.9 1.5a11 11 0 0 0 4.5 4.5l1.5-1.9L15 10.5v3a1.6 1.6 0 0 1-1.8 1.6C7 14.5 2.5 10 1.9 3.8A1.6 1.6 0 0 1 3.5 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            086-542-8897
+          </a>
+          <a class="btn ghost" href="#contact">
+            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true"><path d="M8.5 1.8c-4 0-7.2 2.6-7.2 5.9 0 2.9 2.6 5.3 6 5.8l.8 1.7c.1.3.5.3.6 0l1-1.8c3.3-.6 6-3 6-5.7 0-3.3-3.2-5.9-7.2-5.9Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            LINE: @wandaystudio
+          </a>
+        </div>
+        <p class="note">สตูดิโออยู่ที่นิมมานเหมินท์ เชียงใหม่ — นัดคุยหน้าร้านได้ทุกวันพุธ–อาทิตย์ 10:00–18:00</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="fbrand">วันของเรา</span>
+    <p class="fmeta">© 2569 วันของเรา <span class="en">Wedding Planner &amp; Floral Studio</span> · เชียงใหม่ ประเทศไทย · เก็บทุกวันสำคัญไว้ในสมุดภาพเดียวกัน</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- reveal on scroll ---------- */
+  var rvs = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) {
+    rvs.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: .14 });
+    rvs.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- draggable polaroids ---------- */
+  var pols = Array.prototype.slice.call(document.querySelectorAll('.pol'));
+  var zTop = 30;
+
+  pols.forEach(function(el, i){
+    var st = {
+      base: parseFloat(el.getAttribute('data-r') || '0'),
+      x: 0, y: 0,
+      tilt: 0,
+      floatY: 0, floatR: 0,
+      touched: false,
+      dragging: false,
+      phase: i * 1.7,
+      speed: .45 + (i % 3) * .14,
+      sx: 0, sy: 0, lastX: 0, lastT: 0,
+      settleTimer: null
+    };
+    el.__st = st;
+
+    function compose(){
+      el.style.transform =
+        'translate(' + st.x + 'px,' + (st.y + st.floatY) + 'px) ' +
+        'rotate(' + (st.base + st.tilt + st.floatR) + 'deg)';
+    }
+    st.compose = compose;
+    compose();
+
+    el.addEventListener('pointerdown', function(e){
+      if (e.button !== undefined && e.button > 0) return;
+      st.touched = true;
+      st.dragging = true;
+      st.floatY = 0; st.floatR = 0; st.tilt = 0;
+      st.sx = e.clientX - st.x;
+      st.sy = e.clientY - st.y;
+      st.lastX = e.clientX;
+      st.lastT = performance.now();
+      el.style.zIndex = String(++zTop);
+      el.classList.add('grabbed');
+      el.style.transition = 'none';
+      if (st.settleTimer) { clearTimeout(st.settleTimer); st.settleTimer = null; }
+      try { el.setPointerCapture(e.pointerId); } catch (err) {}
+      e.preventDefault();
+    });
+
+    el.addEventListener('pointermove', function(e){
+      if (!st.dragging) return;
+      st.x = e.clientX - st.sx;
+      st.y = e.clientY - st.sy;
+      if (!reduce) {
+        var now = performance.now();
+        var dt = Math.max(now - st.lastT, 1);
+        var vx = (e.clientX - st.lastX) / dt; /* px per ms */
+        var target = Math.max(-8, Math.min(8, vx * 7));
+        st.tilt += (target - st.tilt) * .25;
+        st.lastX = e.clientX;
+        st.lastT = now;
+      }
+      st.compose();
+    });
+
+    function endDrag(e){
+      if (!st.dragging) return;
+      st.dragging = false;
+      el.classList.remove('grabbed');
+      st.tilt = 0;
+      if (!reduce) {
+        el.style.transition = 'transform .35s cubic-bezier(.22,1,.36,1)';
+        st.compose();
+        st.settleTimer = setTimeout(function(){
+          el.style.transition = 'none';
+          st.settleTimer = null;
+        }, 380);
+      } else {
+        st.compose();
+      }
+      try { el.releasePointerCapture(e.pointerId); } catch (err) {}
+    }
+    el.addEventListener('pointerup', endDrag);
+    el.addEventListener('pointercancel', endDrag);
+
+    /* keyboard: arrows nudge, shift = bigger step */
+    el.addEventListener('keydown', function(e){
+      var step = e.shiftKey ? 24 : 8;
+      var used = true;
+      if (e.key === 'ArrowLeft') st.x -= step;
+      else if (e.key === 'ArrowRight') st.x += step;
+      else if (e.key === 'ArrowUp') st.y -= step;
+      else if (e.key === 'ArrowDown') st.y += step;
+      else used = false;
+      if (used) {
+        st.touched = true;
+        st.floatY = 0; st.floatR = 0;
+        el.style.zIndex = String(++zTop);
+        el.style.transition = 'none';
+        st.compose();
+        e.preventDefault();
+      }
+    });
+  });
+
+  /* ---------- idle float (sin wave, per-card phase) ---------- */
+  if (!reduce && pols.length) {
+    var t0 = performance.now();
+    var loop = function(now){
+      var t = (now - t0) / 1000;
+      pols.forEach(function(el){
+        var st = el.__st;
+        if (!st || st.touched || st.dragging) return;
+        st.floatY = Math.sin(t * st.speed + st.phase) * 5;
+        st.floatR = Math.sin(t * st.speed * .8 + st.phase * 1.3) * .9;
+        st.compose();
+      });
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+  }
+})();
+</script>
+</body>
+</html>

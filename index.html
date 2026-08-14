@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เว็บตัวอย่าง 9 ธุรกิจ · 9 ดีไซน์ | Web Design Showcase</title>
+<meta name="description" content="แกลเลอรีเว็บไซต์ตัวอย่าง 9 ธุรกิจ 9 สไตล์ดีไซน์ที่แตกต่างกันโดยสิ้นเชิง — สำหรับนำเสนอผู้ประกอบการ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#101014; --card:#17171d; --ink:#f0eee8; --muted:rgba(240,238,232,.55);
+  --line:rgba(240,238,232,.1); --accent:#d7ff3e;
+  --sans:'IBM Plex Sans Thai',sans-serif; --mono:'Space Grotesk',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#101014}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
+
+/* header */
+header{padding:clamp(3.5rem,8vh,6rem) 0 clamp(2rem,5vh,3.5rem);border-bottom:1px solid var(--line)}
+.kicker{font-family:var(--mono);font-size:.78rem;letter-spacing:.34em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.9rem}
+.kicker::before{content:'';width:36px;height:1px;background:var(--accent)}
+h1{font-size:clamp(2.2rem,6vw,4.6rem);font-weight:500;line-height:1.15;margin:1.2rem 0 1rem;letter-spacing:-.01em}
+h1 .thin{font-weight:300;color:var(--muted)}
+.sub{color:var(--muted);max-width:56ch;font-size:clamp(.95rem,1.4vw,1.05rem)}
+.meta-row{display:flex;flex-wrap:wrap;gap:1rem 2.5rem;margin-top:2rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.meta-row b{color:var(--ink);font-weight:500}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,2.4vw,2rem);padding:clamp(2.5rem,6vh,4rem) 0}
+@media(max-width:1020px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.card{
+  display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .45s ease,box-shadow .45s ease;
+  opacity:0;transform:translateY(26px);
+}
+.card.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1),border-color .45s ease,box-shadow .45s ease}
+.card:hover{transform:translateY(-6px);border-color:rgba(215,255,62,.45);box-shadow:0 24px 60px -30px rgba(0,0,0,.8)}
+.thumb{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0a0a0e}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .8s cubic-bezier(.2,.8,.2,1);filter:saturate(.95)}
+.card:hover .thumb img{transform:scale(1.045)}
+.thumb .num{
+  position:absolute;top:.85rem;left:.85rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;
+  background:rgba(16,16,20,.75);backdrop-filter:blur(6px);padding:.35rem .7rem;border-radius:99px;color:var(--accent);
+  border:1px solid rgba(215,255,62,.3);
+}
+.body{padding:1.3rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.biz{font-family:var(--mono);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
+.name{font-size:1.35rem;font-weight:500}
+.style{font-size:.88rem;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.5rem}
+.tag{font-size:.72rem;border:1px solid var(--line);border-radius:99px;padding:.28rem .75rem;color:var(--muted);letter-spacing:.04em}
+.open{
+  margin-top:auto;padding-top:1.1rem;display:inline-flex;align-items:center;gap:.55rem;
+  font-size:.85rem;font-weight:400;color:var(--ink);letter-spacing:.06em;transition:gap .35s ease,color .35s ease;
+}
+.card:hover .open{gap:1rem;color:var(--accent)}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:2.5rem 0 3rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;color:var(--muted);font-size:.85rem}
+footer b{color:var(--ink);font-weight:500}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.001s!important;animation-duration:.001s!important}
+  .card{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<div class="wrap">
+  <header>
+    <p class="kicker">Web Design Showcase — 9 Projects</p>
+    <h1>เว็บตัวอย่าง 9 ธุรกิจ<br><span class="thin">9 ดีไซน์ที่ไม่เหมือนกันเลย</span></h1>
+    <p class="sub">ทุกเว็บออกแบบใหม่จากศูนย์ ให้เข้ากับตัวธุรกิจ — ต่างกันทั้งสไตล์ภาพ เลย์เอาต์ ตัวอักษร และ interaction เพื่อให้เห็นว่าเว็บของธุรกิจคุณสามารถเป็นได้ทุกรูปแบบที่เหมาะกับแบรนด์</p>
+    <div class="meta-row">
+      <span>โปรเจกต์ <b>9</b></span>
+      <span>สไตล์ดีไซน์ <b>9 แบบ</b></span>
+      <span>Signature interactions <b>30+</b></span>
+      <span>ตอบสนอง <b>Mobile-first</b></span>
+    </div>
+  </header>
+
+  <main class="grid" id="grid">
+
+    <a class="card" href="./akara-resort/">
+      <div class="thumb"><span class="num">01</span><img src="./shots/akara-resort.jpg" alt="เว็บรีสอร์ทหรู อัครา ภูเก็ต" loading="lazy"></div>
+      <div class="body">
+        <span class="biz">รีสอร์ท & ที่พักหรู</span>
+        <span class="name">อัครา ภูเก็ต</span>
+        <span class="style">Dark Luxury — ดำ/ทอง แบบภาพยนตร์</span>
+        <div class="tags"><span class="tag">Smooth scroll</span><span class="tag">Preloader</span><span class="tag">แกลเลอรีแนวนอน</span></div>
+        <span class="open">เปิดเว็บ →</span>
+      </div>
+    </a>
+
+    <a class="card" href="./coffee-roastery/">
+      <div class="thumb"><span class="num">02</span><img src="./shots/coffee-roastery.jpg" alt="เว็บโรงคั่วกาแฟ คั่วสาทร" loading="lazy"></div>
+      <div class="body">
+        <span class="biz">คาเฟ่ & โรงคั่วกาแฟ</span>
+        <span class="name">คั่วสาทร</span>
+        <span class="style">Editorial Magazine — กระดาษอบอุ่น</span>
+        <div class="tags"><span class="tag">Typewriter</span><span class="tag">ไอร้อน Canvas</span><span class="tag">แถบลากการคั่ว</span></div>
+        <span class="open">เปิดเว็บ →</span>
+      </div>
+    </a>
+
+    <a class="card" href="./thai-restaurant/">
+      <div class="thumb"><span class="num">03</span><img src="./shots/thai-restaurant.jpg" alt="เว็บร้านอาหารไทย รสนิยม" loading="lazy"></div>
+      <div class="body">
+        <span class="biz">ร้านอาหาร Fine Dining</span>
+        <span class="name">รสนิยม</span>
+        <span class="style">Emerald & Brass — หนังสือเมนูมีชีวิต</span>
+        <div class="tags"><span class="tag">พลิกหน้า 3D</span><span class="tag">ภาพ Crossfade</span><span class="tag">ฟอร์มจองโต๊ะ</span></div>
+        <span class="open">เปิดเว็บ →</span>
+      </div>
+    </a>
+
+    <a class="card" href="./skincare-brand/">
+      <div class="thumb"><span class="num">04</span><img src="./shots/skincare-brand.jpg" alt="เว็บสกินแคร์ HAURA" loading="lazy"></div>
+      <div class="body">
+        <span class="biz">แบรนด์สกินแคร์</span>
+        <span class="name">HAURA</span>
+        <span class="style">Clean Pastel — นุ่มนวล สะอาด</span>
+        <div class="tags"><span class="tag">Before/After</span><span class="tag">Metaballs</span><span class="tag">การ์ด Tilt 3D</span></div>
+        <span class="open">เปิดเว็บ →</span>
+      </div>
+    </a>
+
+    <a class="card" href="./property/">
+      <div class="thumb"><span class="num">05</span><img src="./shots/property.jpg" alt="เว็บอสังหาริมทรัพย์ THE COMMON" loading="lazy"></div>
+      <div class="body">
+        <span class="biz">อสังหาริมทรัพย์</span>
+        <span class="name">THE COMMON ลาดพร้าว</span>
+        <span class="style">Corporate Prospectus — ขาว น่าเชื่อถือ</span>
+        <div class="tags"><span class="tag">ผังบ้าน SVG</span><span class="tag">คำนวณสินเชื่อ</span><span class="tag">Scrollspy</span></div>
+        <span class="open">เปิดเว็บ →</span>
+      </div>
+    </a>
+
+    <a class="card" href="./muaythai-gym/">
+      <div class="thumb"><span class="num">06</span><img src="./shots/muaythai-gym.jpg" alt="เว็บยิมมวยไทย สิงห์ดำ" loading="lazy"></div>
+      <div class="body">
+        <span class="biz">ยิม & ฟิตเนส</span>
+        <span class="name">สิงห์ดำ มวยไทย</span>
+        <span class="style">Brutalist Poster — ดิบ แรง ตะโกน</span>
+        <div class="tags"><span class="tag">Glitch hover</span><span class="tag">ตารางคลาสกรองวัน</span><span class="tag">ตั๋วราคา</span></div>
+        <span class="open">เปิดเว็บ →</span>
+      </div>
+    </a>
+
+    <a class="card" href="./wedding-studio/">
+      <div class="thumb"><span class="num">07</span><img src="./shots/wedding-studio.jpg" alt="เว็บสตูดิโอแต่งงาน วันของเรา" loading="lazy"></div>
+      <div class="body">
+        <span class="biz">ออแกไนซ์งานแต่ง</span>
+        <span class="name">วันของเรา</span>
+        <span class="style">Romantic Scrapbook — สมุดภาพลายมือ</span>
+        <div class="tags"><span class="tag">โพลารอยด์ลากได้</span><span class="tag">การ์ดตะเข็บ</span><span class="tag">ไทม์ไลน์</span></div>
+        <span class="open">เปิดเว็บ →</span>
+      </div>
+    </a>
+
+    <a class="card" href="./saas-accounting/">
+      <div class="thumb"><span class="num">08</span><img src="./shots/saas-accounting.jpg" alt="เว็บ SaaS บัญชี เป๋าตังค์" loading="lazy"></div>
+      <div class="body">
+        <span class="biz">SaaS & เทคโนโลยี</span>
+        <span class="name">เป๋าตังค์</span>
+        <span class="style">Bento Grid — ซอฟต์แวร์สมัยใหม่</span>
+        <div class="tags"><span class="tag">Terminal พิมพ์เอง</span><span class="tag">Spotlight</span><span class="tag">กราฟเคลื่อนไหว</span></div>
+        <span class="open">เปิดเว็บ →</span>
+      </div>
+    </a>
+
+    <a class="card" href="./cat-hotel/">
+      <div class="thumb"><span class="num">09</span><img src="./shots/cat-hotel.jpg" alt="เว็บโรงแรมแมว เหมียวเฮาส์" loading="lazy"></div>
+      <div class="body">
+        <span class="biz">ธุรกิจสัตว์เลี้ยง</span>
+        <span class="name">เหมียวเฮาส์</span>
+        <span class="style">Playful Storybook — กลมมน น่ากอด</span>
+        <div class="tags"><span class="tag">รอยอุ้งเท้า</span><span class="tag">คารูเซลแมว</span><span class="tag">Wobble</span></div>
+        <span class="open">เปิดเว็บ →</span>
+      </div>
+    </a>
+
+  </main>
+
+  <footer>
+    <span><b>หมายเหตุ:</b> ทุกเว็บเป็นตัวอย่างสาธิต — ชื่อ ราคา และเนื้อหาปรับเปลี่ยนเป็นธุรกิจจริงของคุณได้ทั้งหมด</span>
+    <span>ออกแบบและพัฒนา © 2569</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var cards = document.querySelectorAll('.card');
+  if (!('IntersectionObserver' in window)) { cards.forEach(function(c){ c.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e, i){
+      if (e.isIntersecting) {
+        setTimeout(function(){ e.target.classList.add('in'); }, (Array.prototype.indexOf.call(cards, e.target) % 3) * 90);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  cards.forEach(function(c){ io.observe(c); });
+})();
+</script>
+</body>
+</html>

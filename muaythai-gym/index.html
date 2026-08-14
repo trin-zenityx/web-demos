@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สิงห์ดำ มวยไทย | SINGDAM MUAY THAI — ค่ายมวยอารีย์ ทดลองฟรี 1 ครั้ง</title>
+<meta name="description" content="สิงห์ดำ มวยไทย ค่ายมวยสายดิบใจกลางอารีย์ เทรนเนอร์อดีตแชมป์ลุมพินี คลาสครบทุกระดับ ทดลองฟรี 1 ครั้ง เปิดจันทร์–เสาร์ 6:00–22:00">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Kanit:wght@300;600;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0e0e0e;
+  --paper:#f4f2ec;
+  --red:#e0241f;
+  --gray:#1a1a1a;
+  --line:2px solid var(--paper);
+  --font-th:'Kanit',sans-serif;
+  --font-en:'Anton',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--paper);
+  font-family:var(--font-th);
+  font-weight:300;
+  font-size:16px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3{font-family:var(--font-th);font-weight:900;line-height:1.15}
+.en{font-family:var(--font-en);font-weight:400}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+::selection{background:var(--red);color:#fff}
+
+.wrap{width:min(1180px,92%);margin-inline:auto}
+.pad{padding:clamp(64px,9vw,110px) 0}
+
+/* ============ TOP BAR ============ */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:10px 4%;
+  background:var(--bg);
+  border-bottom:var(--line);
+}
+.brand{display:flex;align-items:baseline;gap:14px;min-height:44px}
+.brand-th{font-family:var(--font-th);font-weight:900;font-size:26px;line-height:1}
+.brand-en{font-family:var(--font-en);font-size:14px;letter-spacing:.18em;color:var(--red)}
+.top-right{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.open{display:flex;align-items:center;font-weight:600;font-size:14.5px;letter-spacing:.02em;min-height:44px}
+.dot{flex:0 0 auto;width:12px;height:12px;background:var(--red);margin-right:10px;animation:blink 1.1s steps(2,end) infinite}
+@keyframes blink{0%{opacity:1}50%{opacity:.12}100%{opacity:1}}
+.open.closed .dot{background:#5a5a5a;animation:none}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:52px;padding:13px 30px;
+  border:3px solid var(--paper);
+  font-family:var(--font-th);font-weight:800;font-size:18px;letter-spacing:.02em;line-height:1.2;
+  transition:background .18s ease,color .18s ease;
+}
+.btn-small{min-height:44px;padding:9px 22px;font-size:15px;border-width:2px;background:var(--red);border-color:var(--red);color:#fff}
+.btn-small:hover{background:var(--paper);border-color:var(--paper);color:var(--red)}
+.btn-cta{background:var(--red);color:#fff}
+.btn-cta:hover{background:var(--paper);color:var(--red)}
+.btn-ghost{background:transparent;color:var(--paper)}
+.btn-ghost:hover{background:var(--paper);color:var(--bg)}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;align-items:center;
+  border-bottom:var(--line);
+  overflow:hidden;
+}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.06)}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,14,.6) 0%,rgba(14,14,14,.72) 55%,rgba(14,14,14,.94) 100%)}
+.hero-inner{position:relative;z-index:2;padding:120px 0 150px}
+.hero-kicker{
+  font-family:var(--font-en);font-size:clamp(12px,1.4vw,15px);letter-spacing:.22em;color:var(--paper);
+  display:inline-flex;align-items:center;gap:12px;
+  border:var(--line);padding:9px 16px;margin-bottom:34px;background:rgba(14,14,14,.55);
+}
+.hero-kicker::before{content:"";width:11px;height:11px;background:var(--red)}
+.hero-title{font-size:clamp(48px,12vw,148px);line-height:1.02;letter-spacing:-.01em;text-transform:uppercase}
+.hero-title .glitch{display:block}
+.g2{margin-left:clamp(26px,6vw,96px);color:var(--red)}
+.g3{margin-left:clamp(52px,12vw,192px)}
+.hero-sub{max-width:560px;margin-top:34px;font-size:clamp(15.5px,1.6vw,18px);color:rgba(244,242,236,.92)}
+.hero-cta{display:flex;gap:18px;flex-wrap:wrap;margin-top:36px}
+
+/* --- GLITCH ON HOVER (signature, CSS-only) --- */
+.glitch{position:relative}
+.glitch::before,.glitch::after{
+  content:attr(data-text);
+  position:absolute;left:0;top:0;width:100%;height:100%;
+  overflow:hidden;opacity:0;pointer-events:none;
+}
+.glitch::before{color:var(--red)}
+.glitch::after{color:var(--paper)}
+.glitch:hover::before,.glitch:hover::after{opacity:1}
+.glitch:hover::before{animation:glitchA .3s steps(2,end) infinite}
+.glitch:hover::after{animation:glitchB .3s steps(2,end) infinite}
+@keyframes glitchA{
+  0%{clip-path:inset(15% 0 68% 0);transform:translate(-6px,-3px)}
+  25%{clip-path:inset(58% 0 12% 0);transform:translate(5px,2px)}
+  50%{clip-path:inset(30% 0 45% 0);transform:translate(-4px,3px)}
+  75%{clip-path:inset(72% 0 6% 0);transform:translate(6px,-2px)}
+  100%{clip-path:inset(8% 0 78% 0);transform:translate(-5px,1px)}
+}
+@keyframes glitchB{
+  0%{clip-path:inset(62% 0 10% 0);transform:translate(5px,3px)}
+  25%{clip-path:inset(12% 0 70% 0);transform:translate(-6px,-2px)}
+  50%{clip-path:inset(45% 0 30% 0);transform:translate(4px,-3px)}
+  75%{clip-path:inset(20% 0 55% 0);transform:translate(-5px,2px)}
+  100%{clip-path:inset(80% 0 4% 0);transform:translate(6px,-1px)}
+}
+
+/* --- ROTATING BADGE --- */
+.badge{
+  position:absolute;z-index:3;right:clamp(14px,4vw,48px);bottom:clamp(18px,4vw,44px);
+  width:clamp(112px,15vw,168px);aspect-ratio:1;
+}
+.badge svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.badge-ring{animation:spin 20s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.badge-text{fill:var(--paper);font-family:var(--font-th);font-weight:800;font-size:14px;letter-spacing:2px}
+
+/* ============ STATS STRIP ============ */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:var(--line)}
+.stat{padding:clamp(28px,4vw,44px) clamp(18px,3vw,32px);border-right:var(--line)}
+.stat:last-child{border-right:none}
+.stat .num{display:block;font-family:var(--font-en);font-size:clamp(44px,6vw,80px);line-height:1;letter-spacing:.01em}
+.stat:nth-child(even) .num{color:var(--red)}
+.stat .lab{display:block;margin-top:10px;font-size:15px;font-weight:600;letter-spacing:.02em;color:rgba(244,242,236,.85)}
+
+/* ============ SECTION HEAD ============ */
+.sec-head{border-bottom:var(--line);padding-bottom:26px;margin-bottom:44px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.kicker{font-family:var(--font-en);font-size:14px;letter-spacing:.24em;color:var(--red);display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.kicker::before{content:"";width:12px;height:12px;background:var(--red)}
+.sec-head h2{font-size:clamp(34px,6vw,64px);line-height:1.05}
+.sec-note{font-size:15px;color:rgba(244,242,236,.7);max-width:380px;text-align:right}
+
+/* ============ SCHEDULE ============ */
+.schedule{border-bottom:var(--line)}
+.tabs{display:grid;grid-template-columns:repeat(7,1fr);border:var(--line)}
+.tab{
+  position:relative;min-height:64px;padding:8px 4px;
+  background:var(--bg);color:var(--paper);
+  border:none;border-right:var(--line);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+  transition:background .15s ease,color .15s ease;
+}
+.tab:last-child{border-right:none}
+.tab .t-th{font-weight:800;font-size:clamp(17px,2vw,21px);line-height:1.1}
+.tab .t-en{font-family:var(--font-en);font-size:10.5px;letter-spacing:.16em;opacity:.55}
+.tab:not(.active):hover{background:var(--gray)}
+.tab.active{background:var(--red);color:#fff}
+.tab.active .t-en{opacity:.85}
+.tab.today::after{content:"";position:absolute;top:7px;right:7px;width:8px;height:8px;background:var(--red)}
+.tab.active.today::after{background:var(--paper)}
+.sched-bar{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  border:var(--line);border-top:none;background:var(--gray);
+  padding:12px 18px;font-weight:600;font-size:15.5px;
+}
+.sched-bar .en{font-family:var(--font-en);letter-spacing:.12em;font-size:13px;color:var(--red)}
+.table-wrap{overflow-x:auto;border:var(--line);border-top:none}
+table.sched{width:100%;min-width:680px;border-collapse:collapse}
+.sched th{
+  background:var(--paper);color:var(--bg);
+  font-family:var(--font-th);font-weight:800;font-size:15.5px;letter-spacing:.04em;text-align:left;
+  padding:13px 18px;white-space:nowrap;
+}
+.sched td{padding:15px 18px;border-top:var(--line);font-size:16px;vertical-align:middle}
+.sched td.time{font-family:var(--font-en);font-size:19px;letter-spacing:.06em;white-space:nowrap;color:var(--red)}
+.sched td.cls{font-weight:800;font-size:18.5px;line-height:1.3}
+.sched td.trn{color:rgba(244,242,236,.85);font-size:15.5px}
+.sched tbody tr{transition:background .15s ease}
+.sched tbody tr:hover{background:var(--gray)}
+.row-in{animation:rowIn .28s cubic-bezier(.2,.7,.3,1) both}
+@keyframes rowIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.pill{display:inline-block;padding:5px 14px;font-size:14px;font-weight:600;line-height:1.35;white-space:nowrap;border:2px solid transparent}
+.pill-w{background:var(--paper);color:var(--bg)}
+.pill-r{background:var(--red);color:#fff}
+.pill-b{background:#000;color:var(--paper);border-color:var(--paper)}
+.pill-o{background:transparent;color:var(--paper);border-color:var(--paper)}
+.pill-k{background:transparent;color:var(--red);border-color:var(--red);border-style:dashed}
+.sched-foot{margin-top:22px;font-size:14.5px;color:rgba(244,242,236,.68);display:flex;gap:14px;flex-wrap:wrap}
+.sched-foot span{display:inline-flex;align-items:center;gap:10px}
+.sched-foot span::before{content:"";width:8px;height:8px;background:var(--red)}
+
+/* ============ TRAINERS ============ */
+.trainers{border-bottom:var(--line)}
+.trainer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+.tcard{background:var(--gray);border:var(--line);transition:transform .35s cubic-bezier(.2,.7,.3,1)}
+.tcard:hover{transform:translateY(-10px)}
+.tphoto{aspect-ratio:4/5;overflow:hidden;border-bottom:var(--line)}
+.tphoto img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08);transition:filter .45s ease,transform .45s ease}
+.tcard:hover .tphoto img{filter:grayscale(0) contrast(1);transform:scale(1.04)}
+.tmeta{background:var(--red);color:var(--paper);padding:18px 20px 20px}
+.tmeta h3{font-size:24px;font-weight:800;line-height:1.2}
+.tmeta .role{font-size:15px;font-weight:600;opacity:.92;margin-top:2px}
+.tmeta .stat{margin-top:12px;padding-top:11px;border-top:2px solid rgba(244,242,236,.45);font-size:14.5px;opacity:.95}
+
+/* ============ TICKETS ============ */
+.tickets{border-bottom:var(--line)}
+.ticket-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:30px;align-items:stretch}
+.ticket{
+  --n:9px;
+  position:relative;display:flex;flex-direction:column;
+  background:var(--paper);color:var(--bg);
+  -webkit-mask-image:
+    radial-gradient(circle var(--n) at 0 16px,transparent calc(var(--n) - .8px),#000 var(--n)),
+    radial-gradient(circle var(--n) at 100% 16px,transparent calc(var(--n) - .8px),#000 var(--n));
+  -webkit-mask-size:51% 32px,51% 32px;
+  -webkit-mask-position:left top,right top;
+  -webkit-mask-repeat:repeat-y,repeat-y;
+  mask-image:
+    radial-gradient(circle var(--n) at 0 16px,transparent calc(var(--n) - .8px),#000 var(--n)),
+    radial-gradient(circle var(--n) at 100% 16px,transparent calc(var(--n) - .8px),#000 var(--n));
+  mask-size:51% 32px,51% 32px;
+  mask-position:left top,right top;
+  mask-repeat:repeat-y,repeat-y;
+  transition:background .22s ease,color .22s ease,transform .22s ease;
+}
+.ticket:hover{background:var(--red);color:var(--paper);transform:translateY(-8px)}
+.t-main{padding:34px 32px 24px;flex:1}
+.t-code{font-family:var(--font-en);font-size:13px;letter-spacing:.22em;color:var(--red);display:flex;align-items:center;gap:10px}
+.t-code::before{content:"";width:10px;height:10px;background:currentColor}
+.ticket:hover .t-code{color:var(--paper)}
+.t-main h3{font-size:32px;font-weight:900;margin-top:12px}
+.price{display:flex;align-items:baseline;gap:8px;margin:12px 0 18px}
+.cur{font-family:var(--font-th);font-weight:800;font-size:28px}
+.amt{font-family:var(--font-en);font-size:clamp(58px,6vw,76px);line-height:.95;letter-spacing:.01em}
+.per{font-size:15px;font-weight:600;opacity:.65}
+.feat{list-style:none}
+.feat li{display:flex;align-items:flex-start;gap:12px;padding:7px 0;font-size:15.5px;font-weight:300}
+.feat li::before{content:"";flex:0 0 auto;width:9px;height:9px;background:currentColor;margin-top:7px}
+.t-stub{border-top:3px dashed currentColor;padding:18px 32px 28px;display:flex;align-items:center;gap:18px;justify-content:space-between}
+.barcode{
+  height:46px;flex:1;max-width:210px;
+  background:repeating-linear-gradient(90deg,
+    currentColor 0 3px,transparent 3px 6px,
+    currentColor 6px 8px,transparent 8px 14px,
+    currentColor 14px 18px,transparent 18px 21px);
+}
+.t-no{font-family:var(--font-en);font-size:12.5px;letter-spacing:.14em;white-space:nowrap}
+.best{
+  position:absolute;top:22px;right:22px;z-index:3;
+  background:var(--red);color:#fff;border:2px solid var(--bg);
+  font-weight:800;font-size:14px;padding:7px 16px;transform:rotate(5deg);
+  transition:background .22s ease,color .22s ease,border-color .22s ease;
+}
+.ticket:hover .best{background:var(--paper);color:var(--red)}
+
+/* ============ FOOTER ============ */
+.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:36px;padding:clamp(56px,7vw,84px) 0 0}
+.f-head{font-size:19px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.f-head::before{content:"";width:10px;height:10px;background:var(--red)}
+.f-col p{font-size:15.5px;color:rgba(244,242,236,.85)}
+.f-col .en{letter-spacing:.05em}
+.giant-wrap{overflow:hidden;margin-top:clamp(48px,6vw,72px)}
+.giant{
+  display:block;text-align:center;white-space:nowrap;user-select:none;
+  font-family:var(--font-th);font-weight:900;
+  font-size:clamp(84px,19vw,300px);line-height:.92;
+  color:transparent;-webkit-text-stroke:2px #2c2c2c;
+  transform:translateY(14%);
+}
+.f-base{
+  display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  border-top:var(--line);padding:20px 0 26px;font-size:14px;color:rgba(244,242,236,.7);
+}
+.f-base a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:var(--paper)}
+.f-base a:hover{color:var(--red)}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:900px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(1),.stat:nth-child(2){border-bottom:var(--line)}
+  .sec-note{text-align:left}
+}
+@media (max-width:560px){
+  .brand-th{font-size:22px}
+  .brand-en{font-size:11.5px;letter-spacing:.14em}
+  .open{font-size:13px}
+  .hero-inner{padding:96px 0 130px}
+  .hero-cta .btn{flex:1 1 100%}
+  .tab{min-height:56px}
+  .tab .t-en{display:none}
+  .t-stub{flex-direction:column;align-items:flex-start}
+  .barcode{width:100%;max-width:none}
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms !important}
+  .badge-ring{animation:none}
+  .dot{animation:none}
+  .row-in{animation:none !important}
+  .glitch:hover::before,.glitch:hover::after{animation:none;opacity:0}
+  .tcard:hover{transform:none}
+  .ticket:hover{transform:none}
+  .giant{transform:none}
+}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ============ 1. TOP BAR ============ -->
+<header class="topbar">
+  <a class="brand" href="#top" aria-label="สิงห์ดำ มวยไทย — กลับขึ้นด้านบน">
+    <span class="brand-th">สิงห์ดำ</span>
+    <span class="brand-en en">SINGDAM MUAY THAI</span>
+  </a>
+  <div class="top-right">
+    <span class="open" id="openState"><span class="dot" aria-hidden="true"></span><span id="openText">เปิดอยู่ตอนนี้</span></span>
+    <a class="btn btn-small" href="#tickets">ทดลองฟรี</a>
+  </div>
+</header>
+
+<!-- ============ 2. HERO POSTER ============ -->
+<section class="hero" id="top">
+  <img class="hero-img" src="../assets/gym-hero.jpg" alt="นักมวยในค่ายสิงห์ดำกำลังซ้อมชกกระสอบทรายท่ามกลางแสงสลัว" fetchpriority="high">
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="hero-inner wrap">
+    <p class="hero-kicker en">MUAY THAI CAMP — ARI, BANGKOK — EST. 2015</p>
+    <h1 class="hero-title">
+      <span class="glitch" data-text="เหงื่อวันนี้">เหงื่อวันนี้</span>
+      <span class="glitch g2" data-text="คือแชมป์">คือแชมป์</span>
+      <span class="glitch g3" data-text="วันหน้า">วันหน้า</span>
+    </h1>
+    <p class="hero-sub">ค่ายมวยสายดิบใจกลางอารีย์ — ไม่ต้องมีพื้นฐาน ไม่ต้องฟิตมาก่อน แค่กล้าเดินเข้ามา เดี๋ยวพวกเราดูแลที่เหลือเอง</p>
+    <div class="hero-cta">
+      <a class="btn btn-cta" href="#tickets">ทดลองฟรี 1 ครั้ง</a>
+      <a class="btn btn-ghost" href="#schedule">ดูตารางคลาส</a>
+    </div>
+  </div>
+  <div class="badge" aria-hidden="true">
+    <svg class="badge-ring" viewBox="0 0 200 200">
+      <defs>
+        <path id="ringpath" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0" fill="none"></path>
+      </defs>
+      <text class="badge-text">
+        <textPath href="#ringpath" textLength="500" lengthAdjust="spacing">สิงห์ดำ มวยไทย • EST. 2015 • ARI • BANGKOK •</textPath>
+      </text>
+    </svg>
+    <svg class="badge-star" viewBox="0 0 200 200">
+      <polygon fill="#e0241f" points="134,100 118.5,107.7 124,124 107.7,118.5 100,134 92.3,118.5 76,124 81.5,107.7 66,100 81.5,92.3 76,76 92.3,81.5 100,66 107.7,81.5 124,76 118.5,92.3"></polygon>
+      <circle cx="100" cy="100" r="9" fill="#0e0e0e"></circle>
+      <circle cx="100" cy="100" r="4" fill="#f4f2ec"></circle>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ 3. STATS STRIP ============ -->
+<section class="stats" aria-label="สถิติของยิม">
+  <div class="stat"><span class="num en">12</span><span class="lab">เทรนเนอร์มืออาชีพ</span></div>
+  <div class="stat"><span class="num en">6</span><span class="lab">สนามชก + กระสอบทราย 20 ใบ</span></div>
+  <div class="stat"><span class="num en">1,200+</span><span class="lab">สมาชิกที่เคยเหงื่อตกด้วยกัน</span></div>
+  <div class="stat"><span class="num en">9</span><span class="lab">ปีแห่งประสบการณ์</span></div>
+</section>
+
+<!-- ============ 4. SCHEDULE (DAY TAB FILTER) ============ -->
+<section class="schedule pad" id="schedule">
+  <div class="wrap">
+    <header class="sec-head">
+      <div>
+        <p class="kicker en">WEEKLY SCHEDULE</p>
+        <h2>ตารางคลาสประจำสัปดาห์</h2>
+      </div>
+      <p class="sec-note">เลือกวันที่จะซ้อม แล้วโผล่มาให้ตรงเวลา แค่นั้น — คลาสละ 60 นาทีเต็ม</p>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="เลือกวันเพื่อดูตารางคลาส">
+      <button class="tab" role="tab" data-day="1" aria-selected="false" aria-label="วันจันทร์"><span class="t-th">จ</span><span class="t-en en">MON</span></button>
+      <button class="tab" role="tab" data-day="2" aria-selected="false" aria-label="วันอังคาร"><span class="t-th">อ</span><span class="t-en en">TUE</span></button>
+      <button class="tab" role="tab" data-day="3" aria-selected="false" aria-label="วันพุธ"><span class="t-th">พ</span><span class="t-en en">WED</span></button>
+      <button class="tab" role="tab" data-day="4" aria-selected="false" aria-label="วันพฤหัสบดี"><span class="t-th">พฤ</span><span class="t-en en">THU</span></button>
+      <button class="tab" role="tab" data-day="5" aria-selected="false" aria-label="วันศุกร์"><span class="t-th">ศ</span><span class="t-en en">FRI</span></button>
+      <button class="tab" role="tab" data-day="6" aria-selected="false" aria-label="วันเสาร์"><span class="t-th">ส</span><span class="t-en en">SAT</span></button>
+      <button class="tab" role="tab" data-day="0" aria-selected="false" aria-label="วันอาทิตย์"><span class="t-th">อา</span><span class="t-en en">SUN</span></button>
+    </div>
+    <div class="sched-bar">
+      <span id="schedDayLabel">วันจันทร์</span>
+      <span class="en" id="schedCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table class="sched">
+        <thead>
+          <tr><th scope="col">เวลา</th><th scope="col">คลาส</th><th scope="col">เทรนเนอร์</th><th scope="col">ระดับ</th></tr>
+        </thead>
+        <tbody id="schedBody"></tbody>
+      </table>
+    </div>
+    <div class="sched-foot">
+      <span>คลาสละ 60 นาที เช็กอินก่อนเริ่ม 15 นาที</span>
+      <span>จองคลาสล่วงหน้าผ่าน LINE @singdam</span>
+      <span>sparring ต้องมีประสบการณ์ 6 เดือนขึ้นไป</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. TRAINERS ============ -->
+<section class="trainers pad" id="trainers">
+  <div class="wrap">
+    <header class="sec-head">
+      <div>
+        <p class="kicker en">THE TRAINERS</p>
+        <h2>เทรนเนอร์ตัวจริง</h2>
+      </div>
+      <p class="sec-note">ไม่ใช่ครูสอนเพื่อนสมัครเล่น — ทุกคนผ่านเวทีจริง เลือดจริง แผลจริง</p>
+    </header>
+    <div class="trainer-grid">
+      <article class="tcard">
+        <div class="tphoto">
+          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1000&auto=format&fit=crop" alt="ครูใหญ่กำลังจับเป้าให้ลูกศิษย์ซ้อมชกในค่าย" loading="lazy" decoding="async">
+        </div>
+        <div class="tmeta">
+          <h3>ครูใหญ่</h3>
+          <p class="role">เฮดโค้ช · อดีตแชมป์ลุมพินี</p>
+          <p class="stat">ชกมาแล้ว 280 ไฟต์ · แชมป์ลุมพินี รุ่น 112 ปอนด์ · สอนมา 15 ปี ลูกศิษย์ติดทีมชาติ 3 คน</p>
+        </div>
+      </article>
+      <article class="tcard">
+        <div class="tphoto">
+          <img src="https://images.unsplash.com/photo-1571731956672-f2b94d7dd0cb?q=80&w=1000&auto=format&fit=crop" alt="เสือเล็กกำลังพันผ้าพันมือเตรียมขึ้นซ้อมบนเวที" loading="lazy" decoding="async">
+        </div>
+        <div class="tmeta">
+          <h3>เสือเล็ก</h3>
+          <p class="role">เทรนเนอร์สายเกม · แชมป์ วิก 7</p>
+          <p class="stat">แชมป์เวทีมวยวิก 7 สนามนันท์ · ไฟต์ล่าสุดชนะน็อกยก 2 · ถนัดเกมคลินช์ เข่าใน และการอ่านจังหวะ</p>
+        </div>
+      </article>
+      <article class="tcard">
+        <div class="tphoto">
+          <img src="https://images.unsplash.com/photo-1595078475328-1ab05d0a6a0e?q=80&w=1000&auto=format&fit=crop" alt="โค้ชแม็กซ์กำลังคุมคลาสคาร์ดิโอมวยในยิม" loading="lazy" decoding="async">
+        </div>
+        <div class="tmeta">
+          <h3>โค้ชแม็กซ์</h3>
+          <p class="role">สายฟิตเนส · Strength &amp; Conditioning</p>
+          <p class="stat">ดูแลร่างกายนักกีฬามืออาชีพ 40+ คน · เจ้าของคลาสคาร์ดิโอมวยยอดฮิต · เชี่ยวชาญลดน้ำหนักก่อนชั่งตัว</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. TICKETS ============ -->
+<section class="tickets pad" id="tickets">
+  <div class="wrap">
+    <header class="sec-head">
+      <div>
+        <p class="kicker en">PASSES &amp; PRICING</p>
+        <h2>ตั๋วเข้าซ้อม</h2>
+      </div>
+      <p class="sec-note">ไม่มีค่าแรกเข้า ไม่มีสัญญาผูกมัด — จ่ายแล้วซ้อม ไม่ซ้อมก็ไม่ต้องจ่าย</p>
+    </header>
+    <div class="ticket-grid">
+
+      <article class="ticket">
+        <div class="t-main">
+          <p class="t-code en">DAY PASS</p>
+          <h3>รายครั้ง</h3>
+          <p class="price"><span class="cur">฿</span><span class="amt en">350</span><span class="per">/ ครั้ง</span></p>
+          <ul class="feat">
+            <li>เข้าได้ทุกคลาส 1 วันเต็ม</li>
+            <li>ยืมนวมและผ้าพันมือฟรี</li>
+            <li>ห้องล็อกเกอร์ + ฝักบัวน้ำอุ่น</li>
+          </ul>
+        </div>
+        <div class="t-stub">
+          <div class="barcode" aria-hidden="true"></div>
+          <span class="t-no en">SDMT-0350-ARI</span>
+        </div>
+      </article>
+
+      <article class="ticket">
+        <span class="best">คุ้มสุด</span>
+        <div class="t-main">
+          <p class="t-code en">MONTHLY PASS</p>
+          <h3>รายเดือน</h3>
+          <p class="price"><span class="cur">฿</span><span class="amt en">2,800</span><span class="per">/ เดือน</span></p>
+          <ul class="feat">
+            <li>เข้าได้ไม่จำกัดทุกคลาส</li>
+            <li>แจ้งพักสมาชิกได้ 7 วัน</li>
+            <li>ประเมินร่างกายกับโค้ชฟรี 1 ครั้ง</li>
+          </ul>
+        </div>
+        <div class="t-stub">
+          <div class="barcode" aria-hidden="true"></div>
+          <span class="t-no en">SDMT-2800-ARI</span>
+        </div>
+      </article>
+
+      <article class="ticket">
+        <div class="t-main">
+          <p class="t-code en">YEARLY PASS</p>
+          <h3>รายปี</h3>
+          <p class="price"><span class="cur">฿</span><span class="amt en">28,000</span><span class="per">/ ปี</span></p>
+          <ul class="feat">
+            <li>เข้าได้ไม่จำกัด 12 เดือนเต็ม</li>
+            <li>แจ้งพักสมาชิกได้ 30 วัน</li>
+            <li>เสื้อยิม + ผ้าประเจียดสิงห์ดำ ชุดแรกเข้า</li>
+            <li>เทรนเนอร์ส่วนตัว 2 ครั้งต่อปี</li>
+          </ul>
+        </div>
+        <div class="t-stub">
+          <div class="barcode" aria-hidden="true"></div>
+          <span class="t-no en">SDMT-28000-ARI</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. FOOTER ============ -->
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="f-col">
+        <h3 class="f-head">ค่ายสิงห์ดำ มวยไทย</h3>
+        <p>325 อารีย์ซอย 2 ถนนพหลโยธิน<br>แขวงสามเสนใน เขตพญาไทย<br>กรุงเทพฯ 10400<br>BTS อารีย์ ทางออก 3 เดิน 5 นาที</p>
+      </div>
+      <div class="f-col">
+        <h3 class="f-head">ติดต่อ</h3>
+        <p>LINE: <span class="en">@singdam</span><br>โทร: <span class="en">02-105-8899</span><br>จองทดลองฟรีล่วงหน้า 1 วัน</p>
+      </div>
+      <div class="f-col">
+        <h3 class="f-head">เวลาเปิด</h3>
+        <p>จันทร์–เสาร์ <span class="en">6:00–22:00</span><br>อาทิตย์ <span class="en">8:00–17:00</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="giant-wrap" aria-hidden="true">
+    <span class="giant">สิงห์ดำ</span>
+  </div>
+  <div class="wrap">
+    <div class="f-base">
+      <span>© <span id="yr">2568</span> สิงห์ดำ มวยไทย — เหงื่อวันนี้ คือแชมป์วันหน้า</span>
+      <a href="#top">กลับขึ้นด้านบน ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- ข้อมูลตารางคลาส ---------- */
+var LV={
+  basic:['เริ่มต้น','pill-w'],
+  all:['ทุกระดับ','pill-o'],
+  mid:['กลาง','pill-r'],
+  adv:['ขั้นสูง','pill-b'],
+  kid:['เด็ก 6–12 ปี','pill-k']
+};
+var DAYNAME={0:'วันอาทิตย์',1:'วันจันทร์',2:'วันอังคาร',3:'วันพุธ',4:'วันพฤหัสบดี',5:'วันศุกร์',6:'วันเสาร์'};
+var CLASSES=[
+  /* จันทร์ */
+  {d:1,t:'06:30',c:'คาร์ดิโอมวย',tr:'โค้ชแม็กซ์',lv:'all'},
+  {d:1,t:'12:00',c:'มวยเบสิก',tr:'ครูใหญ่',lv:'basic'},
+  {d:1,t:'17:00',c:'เด็กน้อยสิงห์ดำ',tr:'เสือเล็ก',lv:'kid'},
+  {d:1,t:'18:30',c:'สายมวยเข่า',tr:'ครูใหญ่',lv:'mid'},
+  {d:1,t:'20:00',c:'sparring เบา',tr:'เสือเล็ก',lv:'adv'},
+  /* อังคาร */
+  {d:2,t:'06:30',c:'คาร์ดิโอมวย',tr:'โค้ชแม็กซ์',lv:'all'},
+  {d:2,t:'12:00',c:'ต่อยมวยสากล',tr:'เสือเล็ก',lv:'mid'},
+  {d:2,t:'17:00',c:'เด็กน้อยสิงห์ดำ',tr:'ครูใหญ่',lv:'kid'},
+  {d:2,t:'18:30',c:'คลินช์ & ศอก',tr:'ครูใหญ่',lv:'adv'},
+  {d:2,t:'20:00',c:'มวยเบสิก',tr:'โค้ชแม็กซ์',lv:'basic'},
+  /* พุธ */
+  {d:3,t:'06:30',c:'คาร์ดิโอมวย',tr:'โค้ชแม็กซ์',lv:'all'},
+  {d:3,t:'12:00',c:'มวยเบสิก',tr:'ครูใหญ่',lv:'basic'},
+  {d:3,t:'17:00',c:'เด็กน้อยสิงห์ดำ',tr:'เสือเล็ก',lv:'kid'},
+  {d:3,t:'18:30',c:'เชิงมวยขั้นสูง',tr:'เสือเล็ก',lv:'adv'},
+  {d:3,t:'20:00',c:'sparring เบา',tr:'ครูใหญ่',lv:'mid'},
+  /* พฤหัสบดี */
+  {d:4,t:'06:30',c:'คาร์ดิโอมวย',tr:'โค้ชแม็กซ์',lv:'all'},
+  {d:4,t:'12:00',c:'สายมวยเข่า',tr:'ครูใหญ่',lv:'mid'},
+  {d:4,t:'17:00',c:'เด็กน้อยสิงห์ดำ',tr:'ครูใหญ่',lv:'kid'},
+  {d:4,t:'18:30',c:'ต่อยมวยสากล',tr:'เสือเล็ก',lv:'mid'},
+  {d:4,t:'20:00',c:'คลินช์ & ศอก',tr:'ครูใหญ่',lv:'adv'},
+  /* ศุกร์ */
+  {d:5,t:'06:30',c:'คาร์ดิโอมวย',tr:'โค้ชแม็กซ์',lv:'all'},
+  {d:5,t:'12:00',c:'มวยเบสิก',tr:'โค้ชแม็กซ์',lv:'basic'},
+  {d:5,t:'17:00',c:'เด็กน้อยสิงห์ดำ',tr:'เสือเล็ก',lv:'kid'},
+  {d:5,t:'18:30',c:'sparring เบา',tr:'เสือเล็ก',lv:'adv'},
+  {d:5,t:'20:00',c:'สายมวยเข่า',tr:'ครูใหญ่',lv:'mid'},
+  /* เสาร์ */
+  {d:6,t:'08:00',c:'มวยเบสิก',tr:'ครูใหญ่',lv:'basic'},
+  {d:6,t:'09:30',c:'คาร์ดิโอมวย',tr:'โค้ชแม็กซ์',lv:'all'},
+  {d:6,t:'11:00',c:'เด็กน้อยสิงห์ดำ',tr:'เสือเล็ก',lv:'kid'},
+  {d:6,t:'14:00',c:'คลินช์ & ศอก',tr:'ครูใหญ่',lv:'adv'},
+  {d:6,t:'16:00',c:'sparring เบา',tr:'เสือเล็ก',lv:'adv'},
+  /* อาทิตย์ */
+  {d:0,t:'08:00',c:'ฟิตสายมวย',tr:'โค้ชแม็กซ์',lv:'all'},
+  {d:0,t:'09:30',c:'มวยเบสิก',tr:'ครูใหญ่',lv:'basic'},
+  {d:0,t:'11:00',c:'เด็กน้อยสิงห์ดำ',tr:'ครูใหญ่',lv:'kid'},
+  {d:0,t:'14:00',c:'ต่อยมวยสากล',tr:'เสือเล็ก',lv:'mid'}
+];
+
+var tbody=document.getElementById('schedBody');
+var countEl=document.getElementById('schedCount');
+var dayLabel=document.getElementById('schedDayLabel');
+var tabs=Array.prototype.slice.call(document.querySelectorAll('.tab'));
+
+function render(day){
+  var rows=CLASSES.filter(function(r){return r.d===day;});
+  tbody.innerHTML=rows.map(function(r,i){
+    var lv=LV[r.lv];
+    return '<tr class="row-in" style="animation-delay:'+(i*45)+'ms">'+
+      '<td class="time en">'+r.t+'</td>'+
+      '<td class="cls">'+r.c+'</td>'+
+      '<td class="trn">'+r.tr+'</td>'+
+      '<td><span class="pill '+lv[1]+'">'+lv[0]+'</span></td>'+
+    '</tr>';
+  }).join('');
+  countEl.textContent=rows.length+' CLASSES';
+  dayLabel.textContent=DAYNAME[day];
+}
+function selectDay(day){
+  tabs.forEach(function(b){
+    var on=parseInt(b.getAttribute('data-day'),10)===day;
+    b.classList.toggle('active',on);
+    b.setAttribute('aria-selected',on?'true':'false');
+  });
+  render(day);
+}
+tabs.forEach(function(b){
+  b.addEventListener('click',function(){selectDay(parseInt(b.getAttribute('data-day'),10));});
+});
+
+var today=new Date().getDay();
+tabs.forEach(function(b){
+  if(parseInt(b.getAttribute('data-day'),10)===today){b.classList.add('today');}
+});
+selectDay(today);
+
+/* ---------- สถานะเปิด/ปิดบน top bar ---------- */
+var openWrap=document.getElementById('openState');
+var openText=document.getElementById('openText');
+var now=new Date();
+var h=now.getHours()+now.getMinutes()/60;
+var isOpen=(now.getDay()===0)?(h>=8&&h<17):(h>=6&&h<22);
+if(!isOpen){
+  openWrap.classList.add('closed');
+  openText.textContent=(now.getDay()===0&&h>=17)?'ปิดแล้ว — พรุ่งนี้เปิด 6:00':'ปิดอยู่ตอนนี้ — เปิด 6:00';
+}
+
+/* ---------- ปี พ.ศ. ท้ายเว็บ ---------- */
+document.getElementById('yr').textContent=String(new Date().getFullYear()+543);
+})();
+</script>
+</body>
+</html>
