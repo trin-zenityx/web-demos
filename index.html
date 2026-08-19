@@ -7,73 +7,93 @@
 <meta name="description" content="เว็บตัวอย่างที่สร้างด้วย AI จากคลาส First Vibe : Coding for Beginners — เรียนสร้างเว็บด้วย AI แบบจับมือทำจริง ไม่ต้องเขียนโค้ด ที่ ZenityX ศูนย์ AI อันดับ 1 เมืองไทย">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#101014; --card:#17171d; --ink:#f0eee8; --muted:rgba(240,238,232,.55);
-  --line:rgba(240,238,232,.1); --accent:#d7ff3e;
-  --sans:'IBM Plex Sans Thai',sans-serif; --mono:'Space Grotesk',monospace;
+  --red:#FF0000; --red-mid:#CC0000; --red-deep:#990000;
+  --ink:#1d1d1f; --black:#0a0a0a; --white:#ffffff;
+  --gray-bg:#f5f5f7; --gray-card:#f5f5f5; --gray-text:#666666; --gray-med:#9e9e9e;
+  --hairline:#e8e8ed;
+  --display:'IBM Plex Sans Thai',sans-serif; --body:'Sarabun',sans-serif; --mono:'JetBrains Mono',monospace;
+  --radius:20px; --radius-sm:14px;
+  --shadow-card:0 4px 24px rgba(0,0,0,.06); --shadow-lift:0 18px 44px rgba(0,0,0,.12);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+body{background:var(--gray-bg);color:var(--ink);font-family:var(--body);font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-::selection{background:var(--accent);color:#101014}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.wrap{max-width:1280px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
+::selection{background:var(--red);color:var(--white)}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.wrap{max-width:1320px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
 
 /* header */
-header{padding:clamp(3.5rem,8vh,6rem) 0 clamp(2rem,5vh,3.5rem);border-bottom:1px solid var(--line)}
-.kicker{font-family:var(--mono);font-size:.78rem;letter-spacing:.34em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.9rem}
-.kicker::before{content:'';width:36px;height:1px;background:var(--accent)}
-h1{font-size:clamp(2.2rem,6vw,4.6rem);font-weight:500;line-height:1.15;margin:1.2rem 0 1rem;letter-spacing:-.01em}
-h1 .thin{font-weight:300;color:var(--muted)}
-.sub{color:var(--muted);max-width:56ch;font-size:clamp(.95rem,1.4vw,1.05rem)}
-.meta-row{display:flex;flex-wrap:wrap;gap:1rem 2.5rem;margin-top:2.2rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.meta-row b{color:var(--ink);font-weight:500}
+header{background:var(--white);border-bottom:1px solid var(--hairline);padding:clamp(3.5rem,8vh,6rem) 0 clamp(2.5rem,5vh,3.5rem)}
+header .wrap-inner{max-width:1320px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
+.kicker{font-family:var(--mono);font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:var(--red-mid);display:flex;align-items:center;gap:.9rem;font-weight:500}
+.kicker::before{content:'';width:36px;height:2px;background:var(--red)}
+h1{font-family:var(--display);font-size:clamp(2.2rem,6vw,4.4rem);font-weight:600;line-height:1.18;margin:1.3rem 0 1.1rem;letter-spacing:-.01em}
+h1 .thin{font-weight:300;color:var(--gray-text)}
+.sub{color:var(--gray-text);max-width:58ch;font-size:clamp(.95rem,1.4vw,1.08rem)}
+.sub b{color:var(--ink);font-weight:500}
 .cta-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.2rem}
-.btn-primary{display:inline-flex;align-items:center;gap:.6rem;background:var(--accent);color:#101014;font-weight:500;padding:1rem 1.9rem;border-radius:99px;letter-spacing:.03em;transition:transform .35s ease,box-shadow .35s ease}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 36px -12px rgba(215,255,62,.55)}
-.btn-ghost{display:inline-flex;align-items:center;border:1px solid var(--line);color:var(--muted);padding:1rem 1.7rem;border-radius:99px;letter-spacing:.03em;transition:border-color .35s ease,color .35s ease}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-.enroll{margin:0 0 clamp(2.5rem,6vh,4rem);border:1px solid rgba(215,255,62,.35);border-radius:18px;padding:clamp(1.8rem,4vw,3rem);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;background:linear-gradient(135deg,rgba(215,255,62,.07),transparent 60%)}
-.enroll h2{font-size:clamp(1.5rem,3.4vw,2.3rem);font-weight:500;line-height:1.4}
-.enroll h2 em{color:var(--accent);font-style:normal}
-.enroll p{color:var(--muted);margin-top:.6rem;max-width:56ch}
+.btn-primary{display:inline-flex;align-items:center;gap:.6rem;background:var(--red);color:var(--white);font-weight:500;font-family:var(--display);padding:1rem 1.9rem;border-radius:99px;letter-spacing:.02em;transition:background .3s ease,transform .3s ease,box-shadow .3s ease;box-shadow:0 8px 24px -8px rgba(255,0,0,.4)}
+.btn-primary:hover{background:var(--red-mid);transform:translateY(-2px);box-shadow:0 14px 32px -8px rgba(204,0,0,.45)}
+.btn-ghost{display:inline-flex;align-items:center;border:1px solid var(--hairline);color:var(--gray-text);font-family:var(--display);padding:1rem 1.7rem;border-radius:99px;letter-spacing:.02em;background:var(--white);transition:border-color .3s ease,color .3s ease}
+.btn-ghost:hover{border-color:var(--red);color:var(--red)}
+.meta-row{display:flex;flex-wrap:wrap;gap:.9rem 2.4rem;margin-top:2.4rem;font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-med)}
+.meta-row b{color:var(--ink);font-weight:500}
 
 /* grid */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,2.4vw,2rem);padding:clamp(2.5rem,6vh,4rem) 0}
 @media(max-width:1020px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.grid{grid-template-columns:1fr}}
 .card{
-  display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);
-  border-radius:14px;overflow:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .45s ease,box-shadow .45s ease;
+  display:flex;flex-direction:column;background:var(--white);border:1px solid var(--hairline);
+  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-card);
   opacity:0;transform:translateY(26px);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease,border-color .45s ease;
 }
-.card.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1),border-color .45s ease,box-shadow .45s ease}
-.card:hover{transform:translateY(-6px);border-color:rgba(215,255,62,.45);box-shadow:0 24px 60px -30px rgba(0,0,0,.8)}
-.thumb{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0a0a0e}
-.thumb img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .8s cubic-bezier(.2,.8,.2,1);filter:saturate(.95)}
+.card.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease,border-color .45s ease}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lift);border-color:rgba(255,0,0,.35)}
+.thumb{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--gray-card)}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
 .card:hover .thumb img{transform:scale(1.045)}
 .thumb .num{
-  position:absolute;top:.85rem;left:.85rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;
-  background:rgba(16,16,20,.75);backdrop-filter:blur(6px);padding:.35rem .7rem;border-radius:99px;color:var(--accent);
-  border:1px solid rgba(215,255,62,.3);
+  position:absolute;top:.85rem;left:.85rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;font-weight:500;
+  background:rgba(255,255,255,.9);backdrop-filter:blur(6px);padding:.35rem .7rem;border-radius:99px;color:var(--red-mid);
+  border:1px solid rgba(204,0,0,.25);
 }
 .body{padding:1.3rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
-.biz{font-family:var(--mono);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
-.name{font-size:1.35rem;font-weight:500}
-.style{font-size:.88rem;color:var(--muted)}
+.biz{font-family:var(--mono);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gray-med)}
+.name{font-family:var(--display);font-size:1.32rem;font-weight:600}
+.style{font-size:.88rem;color:var(--gray-text)}
 .tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.5rem}
-.tag{font-size:.72rem;border:1px solid var(--line);border-radius:99px;padding:.28rem .75rem;color:var(--muted);letter-spacing:.04em}
+.tag{font-size:.72rem;border:1px solid var(--hairline);border-radius:99px;padding:.28rem .75rem;color:var(--gray-text);letter-spacing:.04em;background:var(--gray-card)}
 .open{
   margin-top:auto;padding-top:1.1rem;display:inline-flex;align-items:center;gap:.55rem;
-  font-size:.85rem;font-weight:400;color:var(--ink);letter-spacing:.06em;transition:gap .35s ease,color .35s ease;
+  font-size:.86rem;font-weight:500;font-family:var(--display);color:var(--ink);letter-spacing:.03em;transition:gap .35s ease,color .35s ease;
 }
-.card:hover .open{gap:1rem;color:var(--accent)}
+.card:hover .open{gap:1rem;color:var(--red)}
+
+/* enroll banner */
+.enroll{
+  margin:0 0 clamp(2.5rem,6vh,4rem);border-radius:var(--radius);
+  padding:clamp(2rem,4vw,3.2rem);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;
+  background:var(--white);border:1px solid var(--hairline);box-shadow:var(--shadow-card);
+  position:relative;overflow:hidden;
+}
+.enroll::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,0,0,.06),transparent 55%);pointer-events:none}
+.enroll::after{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(var(--red),var(--red-deep))}
+.enroll > *{position:relative}
+.enroll h2{font-family:var(--display);font-size:clamp(1.5rem,3.4vw,2.3rem);font-weight:600;line-height:1.4}
+.enroll h2 em{color:var(--red);font-style:normal}
+.enroll p{color:var(--gray-text);margin-top:.6rem;max-width:56ch}
 
 /* footer */
-footer{border-top:1px solid var(--line);padding:2.5rem 0 3rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;color:var(--muted);font-size:.85rem}
+footer{border-top:1px solid var(--hairline);background:var(--white);padding:2.2rem 0 2.6rem}
+footer .wrap-inner{max-width:1320px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;color:var(--gray-text);font-size:.85rem}
 footer b{color:var(--ink);font-weight:500}
+footer a{color:var(--red-mid);font-weight:500;text-decoration:underline;text-underline-offset:3px}
+footer a:hover{color:var(--red)}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:.001s!important;animation-duration:.001s!important}
   .card{opacity:1;transform:none}
@@ -83,23 +103,25 @@ footer b{color:var(--ink);font-weight:500}
 <body>
 <script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
 
-<div class="wrap">
-  <header>
+<header>
+  <div class="wrap-inner">
     <p class="kicker">ผลงานจากคลาส First Vibe : Coding — ZenityX</p>
     <h1>เว็บทุกเว็บในหน้านี้<br><span class="thin">สร้างด้วย AI — โดยไม่ต้องเขียนโค้ดเอง</span></h1>
-    <p class="sub">นี่คือผลงานตัวอย่างที่สร้างด้วยเทคนิค <b style="color:var(--ink);font-weight:500">Vibe Coding</b> — ให้ AI ช่วยคิด ออกแบบ และพัฒนาเว็บจริงตั้งแต่ศูนย์ ครอบคลุมหลากธุรกิจและสไตล์ ไม่ซ้ำกันแม้แต่เว็บเดียว ในคลาส <b style="color:var(--ink);font-weight:500">First Vibe : Coding for Beginners</b> คุณจะได้ลงมือสร้างเว็บแบบนี้ด้วยตัวเอง แม้ไม่เคยเขียนโค้ดมาก่อน</p>
+    <p class="sub">นี่คือผลงานตัวอย่างที่สร้างด้วยเทคนิค <b>Vibe Coding</b> — ให้ AI ช่วยคิด ออกแบบ และพัฒนาเว็บจริงตั้งแต่ศูนย์ ครอบคลุมหลากธุรกิจและสไตล์ ไม่ซ้ำกันแม้แต่เว็บเดียว ในคลาส <b>First Vibe : Coding for Beginners</b> คุณจะได้ลงมือสร้างเว็บแบบนี้ด้วยตัวเอง แม้ไม่เคยเขียนโค้ดมาก่อน</p>
     <div class="cta-row">
       <a class="btn-primary" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=hub-cta&utm_campaign=demos" target="_blank" rel="noopener">ดูรายละเอียดคอร์ส →</a>
       <a class="btn-ghost" href="tel:0622629644">โทรสอบถาม 062-262-9644</a>
     </div>
     <div class="meta-row">
       <span>เรียน <b>1 วันเต็ม</b> · 10:00–17:00</span>
-      <span><b>ไม่ต้องมีพื้นฐาน</b>โค้ด</span>
+      <span><b>ไม่ต้องมีพื้นฐาน</b> โค้ด</span>
       <span>เวิร์กช็อป <b>จับมือทำจริง</b></span>
       <span>รับ <b>Certificate</b> หลังจบคอร์ส</span>
     </div>
-  </header>
+  </div>
+</header>
 
+<div class="wrap">
   <main class="grid" id="grid">
 
     <a class="card" href="./akara-resort/">
@@ -243,19 +265,21 @@ footer b{color:var(--ink);font-weight:500}
     </div>
     <a class="btn-primary" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=hub-banner&utm_campaign=demos" target="_blank" rel="noopener">สมัครเรียน / ดูรอบเรียน →</a>
   </section>
-
-  <footer>
-    <span><b>หมายเหตุ:</b> ทุกเว็บเป็นตัวอย่างสาธิตจากการเรียน — ชื่อ ราคา และเนื้อหาเป็นการสมมติ</span>
-    <span>ออกแบบและพัฒนาโดย <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=hub&utm_campaign=demos" target="_blank" rel="noopener" style="color:var(--ink);font-weight:500;text-decoration:underline;text-underline-offset:3px">ZenityX — ศูนย์ AI อันดับ 1 เมืองไทย</a> · สอนสร้างเว็บด้วย AI แบบจับมือทำจริง © 2569</span>
-  </footer>
 </div>
+
+<footer>
+  <div class="wrap-inner">
+    <span><b>หมายเหตุ:</b> ทุกเว็บเป็นตัวอย่างสาธิตจากการเรียน — ชื่อ ราคา และเนื้อหาเป็นการสมมติ</span>
+    <span>ออกแบบและพัฒนาโดย <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=hub&utm_campaign=demos" target="_blank" rel="noopener">ZenityX — ศูนย์ AI อันดับ 1 เมืองไทย</a> · สอนสร้างเว็บด้วย AI แบบจับมือทำจริง © 2569</span>
+  </div>
+</footer>
 
 <script>
 (function(){
   var cards = document.querySelectorAll('.card');
   if (!('IntersectionObserver' in window)) { cards.forEach(function(c){ c.classList.add('in'); }); return; }
   var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e, i){
+    entries.forEach(function(e){
       if (e.isIntersecting) {
         setTimeout(function(){ e.target.classList.add('in'); }, (Array.prototype.indexOf.call(cards, e.target) % 3) * 90);
         io.unobserve(e.target);
