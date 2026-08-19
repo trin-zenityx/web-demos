@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-th="รัตนากร & พันธมิตร — สำนักงานกฎหมาย" data-en="Rattanakorn & Partners — Law Firm">รัตนากร &amp; พันธมิตร — สำนักงานกฎหมาย</title>
+<meta name="description" content="รัตนากร & พันธมิตร สำนักงานกฎหมายในกรุงเทพมหานคร ให้คำปรึกษาด้านกฎหมายธุรกิจ อสังหาริมทรัพย์ ครอบครัวและมรดก และแรงงาน ตั้งแต่ พ.ศ. 2538">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500&family=Spectral:ital,wght@0,300;0,400;1,300&family=Taviraj:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14213d;
+    --navy-deep:#0d1526;
+    --gold:#b08d57;
+    --gold-soft:#c9ac7e;
+    --ivory:#f7f4ec;
+    --ink:#1a2233;
+    --muted:#5c6577;
+    --line:rgba(26,34,51,.14);
+    --line-light:rgba(247,244,236,.16);
+    --serif:'Taviraj','Spectral',serif;
+    --sans:'Noto Sans Thai',system-ui,-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.75;
+    color:var(--ink);
+    background:var(--ivory);
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1180px;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,2.5rem)}
+  section{scroll-margin-top:84px}
+
+  h1,h2,h3,.serif{font-family:var(--serif);font-weight:400;line-height:1.3}
+  html[lang="en"] h1,html[lang="en"] h2,html[lang="en"] h3,html[lang="en"] .serif{font-family:'Spectral','Taviraj',serif}
+
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+
+  /* language fade */
+  .nav,.page,footer{transition:opacity .18s ease}
+  body.is-switching .nav,body.is-switching .page,body.is-switching footer{opacity:0}
+
+  /* skip link */
+  .skip{position:fixed;top:-60px;left:1rem;z-index:100;background:var(--navy);color:var(--ivory);padding:.7rem 1.2rem;border-radius:4px;transition:top .2s ease;font-size:.95rem}
+  .skip:focus-visible{top:.8rem}
+
+  /* ---------- nav ---------- */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(247,244,236,.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;gap:clamp(.6rem,1.6vw,1.5rem);min-height:72px}
+  .brand{display:inline-flex;align-items:center;gap:.7rem;min-height:44px;flex-shrink:0}
+  .monogram{width:42px;height:42px;border:1.5px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-family:var(--serif);color:var(--gold);font-size:1rem;letter-spacing:.02em}
+  .brand-name{font-family:var(--serif);font-size:1.08rem;color:var(--navy);white-space:nowrap}
+  .nav-links{display:flex;align-items:center;gap:.15rem;margin-left:auto}
+  .nav-links a{display:inline-flex;align-items:center;min-height:44px;padding:.5rem .75rem;font-size:.95rem;color:var(--muted);transition:color .2s ease}
+  .nav-links a:hover{color:var(--navy)}
+  .lang-switch{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:#fff;flex-shrink:0}
+  .lang-btn{min-width:48px;min-height:44px;padding:.5rem .8rem;border:0;background:transparent;font-family:var(--sans);font-size:.85rem;letter-spacing:.1em;color:var(--muted);cursor:pointer;transition:background .2s ease,color .2s ease}
+  .lang-btn.is-active{background:var(--navy);color:var(--ivory)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:48px;padding:.7rem 1.5rem;font-family:var(--sans);font-size:.95rem;line-height:1.4;cursor:pointer;border:1px solid transparent;transition:background .25s ease,color .25s ease,border-color .25s ease}
+  .btn-navy{background:var(--navy);color:var(--ivory)}
+  .btn-navy:hover{background:#1d2f57}
+  .btn-gold{background:var(--gold);color:var(--navy-deep)}
+  .btn-gold:hover{background:#c39e68}
+  .btn-outline{border-color:rgba(247,244,236,.45);color:var(--ivory)}
+  .btn-outline:hover{background:rgba(247,244,236,.1)}
+  .nav-cta-mobile{display:none}
+  .nav-toggle{display:none;min-width:44px;min-height:44px;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--navy);cursor:pointer;place-items:center}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:max(620px,96svh);display:flex;align-items:flex-end;color:var(--ivory);overflow:hidden;background:var(--navy-deep)}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,21,38,.62) 0%,rgba(13,21,38,.34) 42%,rgba(13,21,38,.9) 100%)}
+  .hero-inner{position:relative;width:100%;padding:clamp(7rem,16vh,10rem) 0 clamp(2.2rem,6vh,4rem)}
+  .kicker{display:flex;align-items:center;gap:.9rem;font-size:.8rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+  .kicker::before{content:"";width:2.6rem;height:1px;background:var(--gold);flex-shrink:0}
+  .hero h1{font-size:clamp(2.3rem,5.6vw,4.3rem);line-height:1.18;font-weight:400;max-width:17ch;margin-top:1.4rem}
+  .hero-sub{max-width:56ch;margin-top:1.3rem;color:rgba(247,244,236,.85);font-size:1.02rem}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.1rem}
+  .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;border-top:1px solid rgba(247,244,236,.25);margin-top:clamp(2.2rem,6vh,3.6rem);padding-top:1.7rem}
+  .stat-num{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:500;color:var(--ivory);display:block;line-height:1.2}
+  .stat-label{font-size:.92rem;color:rgba(247,244,236,.72)}
+
+  /* ---------- section headers ---------- */
+  .sec{padding:clamp(4.5rem,11vh,7.5rem) 0}
+  .sec-head{max-width:46rem;margin-bottom:clamp(2.4rem,6vh,4rem)}
+  .sec-head h2{font-size:clamp(1.8rem,3.8vw,2.8rem);line-height:1.28;color:var(--navy);margin-top:1.1rem}
+  .sec-head .lead{color:var(--muted);margin-top:1rem;max-width:60ch}
+  .sec-dark .sec-head h2{color:var(--ivory)}
+  .sec-dark .sec-head .lead{color:rgba(247,244,236,.72)}
+
+  /* ---------- practice ---------- */
+  .p-list{border-bottom:1px solid var(--line)}
+  .p-item{display:grid;grid-template-columns:4.2rem 1fr auto;align-items:center;gap:clamp(1rem,3vw,2.4rem);padding:clamp(1.4rem,3.4vh,2.1rem) .4rem;border-top:1px solid var(--line);transition:transform .35s ease,background .35s ease}
+  .p-item:hover{transform:translateX(14px);background:rgba(176,141,87,.07)}
+  .p-num{font-family:var(--serif);font-size:clamp(1.25rem,2.4vw,1.75rem);color:var(--gold)}
+  html[lang="en"] .p-num{font-family:'Spectral','Taviraj',serif}
+  .p-body h3{font-size:clamp(1.2rem,2.3vw,1.55rem);color:var(--navy);font-weight:500}
+  .p-body p{color:var(--muted);font-size:.95rem;max-width:62ch;margin-top:.3rem}
+  .p-arrow{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--gold);opacity:0;transform:translateX(-8px);transition:opacity .3s ease,transform .3s ease}
+  .p-item:hover .p-arrow{opacity:1;transform:none}
+  @media (hover:none){
+    .p-arrow{opacity:.45;transform:none}
+    .p-item:hover{transform:none}
+  }
+
+  /* ---------- history / sticky timeline ---------- */
+  .history{background:var(--navy-deep);color:var(--ivory)}
+  .tl{display:grid;grid-template-columns:minmax(300px,.85fr) 1.15fr;gap:clamp(2rem,6vw,6rem);align-items:start}
+  .tl-sticky{position:sticky;top:110px}
+  .tl-year{font-size:clamp(5.5rem,11vw,10.5rem);line-height:.95;font-weight:500;color:var(--gold);transition:opacity .2s ease,transform .2s ease;font-variant-numeric:tabular-nums}
+  .tl-year.is-out{opacity:0;transform:translateY(12px)}
+  .tl-cap{letter-spacing:.32em;font-size:.8rem;text-transform:uppercase;color:rgba(247,244,236,.55);margin-top:.8rem}
+  .tl-hint{display:flex;align-items:center;gap:.6rem;margin-top:2rem;font-size:.85rem;color:rgba(247,244,236,.5)}
+  .tl-hint svg{flex-shrink:0}
+  .t-event{border-top:1px solid var(--line-light);padding:clamp(1.7rem,4vh,2.6rem) 0}
+  .t-event:last-child{border-bottom:1px solid var(--line-light)}
+  .t-tag{font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .t-event h3{font-size:clamp(1.25rem,2.4vw,1.7rem);font-weight:500;color:var(--ivory);margin:.7rem 0 .5rem}
+  .t-event p{color:rgba(247,244,236,.72);max-width:58ch;font-size:.98rem}
+
+  /* ---------- team ---------- */
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.25rem,3vw,2.25rem)}
+  .tcard{background:#fff;border:1px solid var(--line)}
+  .tcard-img{aspect-ratio:4/4.4;overflow:hidden}
+  .tcard-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.03);transition:transform .6s ease}
+  .tcard:hover .tcard-img img{transform:scale(1.04)}
+  .tcard-body{padding:1.4rem 1.5rem 1.7rem}
+  .tcard-role{color:var(--gold);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase}
+  .tcard h3{font-size:1.32rem;color:var(--navy);font-weight:500;margin:.5rem 0 .35rem}
+  .tcard-deg{font-size:.92rem;color:var(--muted)}
+  .tcard-spec{margin-top:1rem;padding-top:.95rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--ink)}
+  .tcard-spec .spec-label{display:block;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem}
+
+  /* ---------- cases ---------- */
+  .cases{background:#fff}
+  .c-row{display:grid;grid-template-columns:minmax(150px,.75fr) 1.35fr 1.15fr;gap:clamp(1rem,3vw,2.5rem);padding:1.9rem 0;border-top:1px solid var(--line);align-items:start}
+  .c-row:last-child{border-bottom:1px solid var(--line)}
+  .c-tag{font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);line-height:1.6}
+  .c-matter{color:var(--ink);font-size:1rem}
+  .c-out{border-left:2px solid var(--gold);padding-left:1.1rem}
+  .c-out .out-label{display:block;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem}
+  .c-out p{color:var(--navy);font-size:.98rem}
+  .cases-note{margin-top:1.6rem;font-size:.92rem;color:var(--muted)}
+
+  /* ---------- fees ---------- */
+  .fee-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .fee{background:var(--ivory);padding:clamp(1.5rem,3.4vw,2.3rem)}
+  .fee h3{color:var(--navy);font-size:1.18rem;font-weight:500}
+  .fee-num{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:500;color:var(--gold);margin:.55rem 0 .3rem;line-height:1.15}
+  .fee-num small{font-family:var(--sans);font-size:.9rem;color:var(--muted);font-weight:400}
+  .fee p{color:var(--muted);font-size:.95rem}
+  .fees-note{margin-top:1.6rem;font-size:.92rem;color:var(--muted);max-width:70ch}
+
+  /* ---------- cta ---------- */
+  .cta{background:var(--navy-deep);color:var(--ivory)}
+  .cta-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+  .cta h2{font-size:clamp(1.9rem,4vw,3rem);line-height:1.25;margin-top:1.1rem}
+  .cta p{color:rgba(247,244,236,.75);margin-top:1.1rem;max-width:52ch}
+  .cta-actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.1rem}
+  .cta-img{border:1px solid rgba(176,141,87,.5);padding:.65rem}
+  .cta-img img{width:100%;aspect-ratio:4/3.1;object-fit:cover;filter:saturate(.85)}
+
+  /* ---------- footer ---------- */
+  footer{background:#0a1120;color:rgba(247,244,236,.72);padding:clamp(3rem,7vh,4.5rem) 0 1.6rem;border-top:1px solid rgba(176,141,87,.3)}
+  .f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(1.8rem,4vw,3rem)}
+  .f-brand{display:flex;align-items:center;gap:.7rem;color:var(--ivory);font-family:var(--serif);font-size:1.1rem;margin-bottom:1rem}
+  .f-label{display:block;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+  .f-grid p,.f-grid a{font-size:.95rem;line-height:1.9}
+  .f-grid a{display:inline-flex;align-items:center;min-height:44px;transition:color .2s ease}
+  .f-grid a:hover{color:var(--ivory)}
+  .f-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem;margin-top:2.8rem;padding-top:1.4rem;border-top:1px solid rgba(247,244,236,.12);font-size:.85rem;color:rgba(247,244,236,.45)}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:940px){
+    .nav-cta{display:none}
+    .nav-toggle{display:grid;margin-left:auto}
+    .nav-links{position:fixed;top:72px;left:0;right:0;background:var(--ivory);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:.6rem clamp(1.25rem,4vw,2.5rem) 1.3rem;display:none;gap:0;box-shadow:0 18px 30px rgba(13,21,38,.12)}
+    .nav-links.is-open{display:flex}
+    .nav-links a{min-height:52px;padding:.6rem .2rem;border-top:1px solid var(--line);font-size:1.02rem}
+    .nav-cta-mobile{display:inline-flex;margin-top:1rem}
+  }
+  @media (max-width:880px){
+    .team-grid{grid-template-columns:1fr 1fr}
+    .tl{grid-template-columns:1fr;gap:.5rem}
+    .tl-sticky{top:72px;z-index:5;background:var(--navy-deep);border-bottom:1px solid var(--line-light);padding:.7rem 0 .9rem;display:flex;align-items:baseline;gap:1rem}
+    .tl-year{font-size:clamp(2.8rem,13vw,4.2rem)}
+    .tl-cap{margin-top:0}
+    .tl-hint{display:none}
+    .c-row{grid-template-columns:1fr;gap:.7rem;padding:1.6rem 0}
+    .cta-grid{grid-template-columns:1fr;gap:2.2rem}
+    .f-grid{grid-template-columns:1fr;gap:2rem}
+  }
+  @media (max-width:560px){
+    .brand-name{display:none}
+    .hero-stats{grid-template-columns:1fr 1fr;gap:1.2rem}
+    .team-grid{grid-template-columns:1fr}
+    .fee-grid{grid-template-columns:1fr}
+    .p-item{grid-template-columns:3rem 1fr auto}
+    .hero-actions .btn{width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body id="top">
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+<a class="skip" href="#main" data-th="ข้ามไปยังเนื้อหาหลัก" data-en="Skip to main content">ข้ามไปยังเนื้อหาหลัก</a>
+
+<nav class="nav" aria-label="เมนูหลัก / Main navigation">
+  <div class="container nav-inner">
+    <a class="brand" href="#top">
+      <span class="monogram" aria-hidden="true">ร&amp;พ</span>
+      <span class="brand-name" data-th="รัตนากร & พันธมิตร" data-en="Rattanakorn &amp; Partners">รัตนากร &amp; พันธมิตร</span>
+    </a>
+    <div class="nav-links" id="navPanel">
+      <a href="#practice" data-th="สาขาความเชี่ยวชาญ" data-en="Practice">สาขาความเชี่ยวชาญ</a>
+      <a href="#history" data-th="ประวัติ" data-en="History">ประวัติ</a>
+      <a href="#team" data-th="ทีมทนายความ" data-en="Team">ทีมทนายความ</a>
+      <a href="#cases" data-th="ผลงาน" data-en="Results">ผลงาน</a>
+      <a href="#contact" data-th="ติดต่อ" data-en="Contact">ติดต่อ</a>
+      <a class="btn btn-navy nav-cta-mobile" href="#contact" data-th="นัดปรึกษา" data-en="Book a Consultation">นัดปรึกษา</a>
+    </div>
+    <div class="lang-switch" role="group" aria-label="เลือกภาษา / Choose language">
+      <button type="button" class="lang-btn is-active" data-lang="th" aria-pressed="true">TH</button>
+      <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn btn-navy nav-cta" href="#contact" data-th="นัดปรึกษา" data-en="Book a Consultation">นัดปรึกษา</a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="navPanel" data-aria-th="เปิดเมนูนำทาง" data-aria-en="Open navigation menu" aria-label="เปิดเมนูนำทาง">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="page">
+<main id="main">
+
+  <!-- HERO -->
+  <header class="hero">
+    <img class="hero-img" src="../assets/law-hero.jpg" alt="บรรยากาศภายในสำนักงานกฎหมายรัตนากรและพันธมิตร" loading="lazy" decoding="async">
+    <div class="hero-veil" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <p class="kicker" data-th="ตั้งแต่ พ.ศ. 2538 · กรุงเทพมหานคร" data-en="Since 1995 · Bangkok">ตั้งแต่ พ.ศ. 2538 · กรุงเทพมหานคร</p>
+      <h1 data-th="ความยุติธรรม เริ่มที่คำปรึกษาแรก" data-en="Justice begins with the first consultation">ความยุติธรรม เริ่มที่คำปรึกษาแรก</h1>
+      <p class="hero-sub" data-th="สำนักงานกฎหมายที่ธุรกิจและครอบครัวไทยไว้วางใจมากว่าสามทศวรรษ — ให้คำปรึกษาตรงไปตรงมา รอบคอบ และยึดมั่นในข้อเท็จจริงของทุกคดี" data-en="The counsel Thai businesses and families have trusted for over three decades — straightforward advice, meticulous work, and respect for the facts of every case.">สำนักงานกฎหมายที่ธุรกิจและครอบครัวไทยไว้วางใจมากว่าสามทศวรรษ — ให้คำปรึกษาตรงไปตรงมา รอบคอบ และยึดมั่นในข้อเท็จจริงของทุกคดี</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#contact" data-th="นัดปรึกษา — 30 นาทีแรกไม่มีค่าใช้จ่าย" data-en="Book a Consultation — First 30 Minutes Free">นัดปรึกษา — 30 นาทีแรกไม่มีค่าใช้จ่าย</a>
+        <a class="btn btn-outline" href="#practice" data-th="ดูสาขาความเชี่ยวชาญ" data-en="Explore Our Practice">ดูสาขาความเชี่ยวชาญ</a>
+      </div>
+      <div class="hero-stats">
+        <div><span class="stat-num serif">31</span><span class="stat-label" data-th="ปีแห่งประสบการณ์" data-en="Years of practice">ปีแห่งประสบการณ์</span></div>
+        <div><span class="stat-num serif">2,000+</span><span class="stat-label" data-th="คดีที่ให้คำปรึกษา" data-en="Matters handled">คดีที่ให้คำปรึกษา</span></div>
+        <div><span class="stat-num serif">300+</span><span class="stat-label" data-th="ลูกค้าองค์กรทั่วประเทศ" data-en="Corporate clients nationwide">ลูกค้าองค์กรทั่วประเทศ</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PRACTICE -->
+  <section class="sec" id="practice">
+    <div class="container">
+      <div class="sec-head reveal">
+        <p class="kicker" data-th="สาขาความเชี่ยวชาญ" data-en="Practice Areas">สาขาความเชี่ยวชาญ</p>
+        <h2 data-th="สี่สาขาหลัก หนึ่งมาตรฐานเดียว" data-en="Four practices, one standard">สี่สาขาหลัก หนึ่งมาตรฐานเดียว</h2>
+        <p class="lead" data-th="ตั้งแต่การก่อตั้งบริษัทจนถึงการวางแผนมรดก ทีมของเราดูแลทุกเรื่องกฎหมายตลอดวงจรของธุรกิจและชีวิตครอบครัว" data-en="From incorporation to estate planning, our team looks after the legal matters across the full life cycle of your business and family.">ตั้งแต่การก่อตั้งบริษัทจนถึงการวางแผนมรดก ทีมของเราดูแลทุกเรื่องกฎหมายตลอดวงจรของธุรกิจและชีวิตครอบครัว</p>
+      </div>
+      <div class="p-list">
+        <article class="p-item reveal">
+          <span class="p-num" aria-hidden="true">I</span>
+          <div class="p-body">
+            <h3 data-th="กฎหมายธุรกิจ" data-en="Business &amp; Corporate">กฎหมายธุรกิจ</h3>
+            <p data-th="จัดตั้งและปรับโครงสร้างบริษัท สัญญาพาณิชย์ การควบรวมและเข้าซื้อกิจการ และการกำกับดูแลกิจการ" data-en="Company formation and restructuring, commercial contracts, mergers &amp; acquisitions, and corporate governance.">จัดตั้งและปรับโครงสร้างบริษัท สัญญาพาณิชย์ การควบรวมและเข้าซื้อกิจการ และการกำกับดูแลกิจการ</p>
+          </div>
+          <span class="p-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span>
+        </article>
+        <article class="p-item reveal">
+          <span class="p-num" aria-hidden="true">II</span>
+          <div class="p-body">
+            <h3 data-th="อสังหาริมทรัพย์" data-en="Real Estate">อสังหาริมทรัพย์</h3>
+            <p data-th="ซื้อขายและโอนกรรมสิทธิ์ สัญญาเช่าระยะยาว การพัฒนาโครงการ และข้อพิพาทเรื่องที่ดิน" data-en="Sales and title transfers, long-term leases, project development, and land disputes.">ซื้อขายและโอนกรรมสิทธิ์ สัญญาเช่าระยะยาว การพัฒนาโครงการ และข้อพิพาทเรื่องที่ดิน</p>
+          </div>
+          <span class="p-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span>
+        </article>
+        <article class="p-item reveal">
+          <span class="p-num" aria-hidden="true">III</span>
+          <div class="p-body">
+            <h3 data-th="ครอบครัวและมรดก" data-en="Family &amp; Inheritance">ครอบครัวและมรดก</h3>
+            <p data-th="พินัยกรรมและการวางแผนสืบทอด การจัดการมรดก การหย่าร้าง และการแบ่งทรัพย์สิน" data-en="Wills and succession planning, estate administration, divorce, and division of marital assets.">พินัยกรรมและการวางแผนสืบทอด การจัดการมรดก การหย่าร้าง และการแบ่งทรัพย์สิน</p>
+          </div>
+          <span class="p-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span>
+        </article>
+        <article class="p-item reveal">
+          <span class="p-num" aria-hidden="true">IV</span>
+          <div class="p-body">
+            <h3 data-th="แรงงาน" data-en="Labour &amp; Employment">แรงงาน</h3>
+            <p data-th="สัญญาจ้างและข้อบังคับการทำงาน ข้อพิพาทระหว่างนายจ้างและลูกจ้าง และการเลิกจ้างอย่างเป็นธรรม" data-en="Employment contracts and work rules, employer–employee disputes, and fair termination.">สัญญาจ้างและข้อบังคับการทำงาน ข้อพิพาทระหว่างนายจ้างและลูกจ้าง และการเลิกจ้างอย่างเป็นธรรม</p>
+          </div>
+          <span class="p-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY / STICKY TIMELINE -->
+  <section class="sec sec-dark history" id="history">
+    <div class="container">
+      <div class="sec-head reveal">
+        <p class="kicker" data-th="ประวัติสำนักงาน" data-en="Our History">ประวัติสำนักงาน</p>
+        <h2 data-th="สามทศวรรษแห่งความไว้วางใจ" data-en="Three decades of trust">สามทศวรรษแห่งความไว้วางใจ</h2>
+      </div>
+      <div class="tl">
+        <div class="tl-sticky">
+          <div class="tl-year serif" id="tlYear">2538</div>
+          <div class="tl-cap" id="tlCap" data-th="พ.ศ." data-en="B.E.">พ.ศ.</div>
+          <div class="tl-hint">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15M5 13l7 7 7-7"/></svg>
+            <span data-th="เลื่อนอ่านเหตุการณ์สำคัญ" data-en="Scroll through the milestones">เลื่อนอ่านเหตุการณ์สำคัญ</span>
+          </div>
+        </div>
+        <div class="tl-events">
+          <article class="t-event reveal" data-year="2538">
+            <span class="t-tag" data-th="พ.ศ. 2538" data-en="B.E. 2538 · 1995">พ.ศ. 2538</span>
+            <h3 data-th="ก่อตั้งสำนักงาน" data-en="The firm is founded">ก่อตั้งสำนักงาน</h3>
+            <p data-th="ทนายรัตนากร วงศ์สุวรรณ เปิดสำนักงานแห่งแรกที่อาคารสาทร ด้วยทีมเพียงสามท่าน และความตั้งใจเดียว — ทำเรื่องกฎหมายให้เข้าใจได้" data-en="Rattanakorn Wongsuwan opens the first office on Sathorn with a team of three and a single conviction — the law should be understandable.">ทนายรัตนากร วงศ์สุวรรณ เปิดสำนักงานแห่งแรกที่อาคารสาทร ด้วยทีมเพียงสามท่าน และความตั้งใจเดียว — ทำเรื่องกฎหมายให้เข้าใจได้</p>
+          </article>
+          <article class="t-event reveal" data-year="2544">
+            <span class="t-tag" data-th="พ.ศ. 2544" data-en="B.E. 2544 · 2001">พ.ศ. 2544</span>
+            <h3 data-th="คดีพาณิชย์ฎีกาครั้งแรก" data-en="First Supreme Court victory">คดีพาณิชย์ฎีกาครั้งแรก</h3>
+            <p data-th="ชนะคดีละเมิดสัญญาซื้อขายในศาลฎีกา วางมาตรฐานการเตรียมคดีที่สำนักงานยึดถือมาจนถึงทุกวันนี้" data-en="A Supreme Court win in a breach-of-contract case sets the standard of preparation the firm still follows today.">ชนะคดีละเมิดสัญญาซื้อขายในศาลฎีกา วางมาตรฐานการเตรียมคดีที่สำนักงานยึดถือมาจนถึงทุกวันนี้</p>
+          </article>
+          <article class="t-event reveal" data-year="2551">
+            <span class="t-tag" data-th="พ.ศ. 2551" data-en="B.E. 2551 · 2008">พ.ศ. 2551</span>
+            <h3 data-th="ขยายสาขาความเชี่ยวชาญ" data-en="New practice areas">ขยายสาขาความเชี่ยวชาญ</h3>
+            <p data-th="เปิดแผนกกฎหมายอสังหาริมทรัพย์ และแผนกครอบครัวและมรดก ทีมเติบโตเป็นสิบแปดท่าน" data-en="The real estate and family &amp; inheritance practices open; the team grows to eighteen.">เปิดแผนกกฎหมายอสังหาริมทรัพย์ และแผนกครอบครัวและมรดก ทีมเติบโตเป็นสิบแปดท่าน</p>
+          </article>
+          <article class="t-event reveal" data-year="2558">
+            <span class="t-tag" data-th="พ.ศ. 2558" data-en="B.E. 2558 · 2015">พ.ศ. 2558</span>
+            <h3 data-th="ครบรอบยี่สิบปี" data-en="Twenty years on">ครบรอบยี่สิบปี</h3>
+            <p data-th="เปิดสำนักงานสาขาเชียงใหม่เพื่อรองรับลูกค้าภาคเหนือ และเริ่มงานกฎหมายแรงงานอย่างเต็มรูปแบบ" data-en="A Chiang Mai branch opens for northern clients, and the labour practice launches in full.">เปิดสำนักงานสาขาเชียงใหม่เพื่อรองรับลูกค้าภาคเหนือ และเริ่มงานกฎหมายแรงงานอย่างเต็มรูปแบบ</p>
+          </article>
+          <article class="t-event reveal" data-year="2563">
+            <span class="t-tag" data-th="พ.ศ. 2563" data-en="B.E. 2563 · 2020">พ.ศ. 2563</span>
+            <h3 data-th="ก้าวสู่ยุคดิจิทัล" data-en="Into the digital era">ก้าวสู่ยุคดิจิทัล</h3>
+            <p data-th="เปิดบริการให้คำปรึกษาออนไลน์และระบบติดตามความคืบหน้าของคดี ดูแลลูกค้าได้ไม่สะดุดตลอดช่วงการแพร่ระบาด" data-en="Online consultations and a case-tracking portal launch, keeping counsel uninterrupted through the pandemic.">เปิดบริการให้คำปรึกษาออนไลน์และระบบติดตามความคืบหน้าของคดี ดูแลลูกค้าได้ไม่สะดุดตลอดช่วงการแพร่ระบาด</p>
+          </article>
+          <article class="t-event reveal" data-year="2566">
+            <span class="t-tag" data-th="พ.ศ. 2566" data-en="B.E. 2566 · 2023">พ.ศ. 2566</span>
+            <h3 data-th="คดีสะสมสองพันคดี" data-en="Two thousand matters">คดีสะสมสองพันคดี</h3>
+            <p data-th="ทีมทนายความและผู้เชี่ยวชาญสี่สิบสองท่าน ได้รับความไว้วางใจจากลูกค้าองค์กรกว่าสามร้อยรายทั่วประเทศ" data-en="Forty-two lawyers and specialists, trusted by over three hundred corporate clients nationwide.">ทีมทนายความและผู้เชี่ยวชาญสี่สิบสองท่าน ได้รับความไว้วางใจจากลูกค้าองค์กรกว่าสามร้อยรายทั่วประเทศ</p>
+          </article>
+          <article class="t-event reveal" data-year="2569">
+            <span class="t-tag" data-th="พ.ศ. 2569" data-en="B.E. 2569 · 2026">พ.ศ. 2569</span>
+            <h3 data-th="วันนี้" data-en="Today">วันนี้</h3>
+            <p data-th="สามสิบเอ็ดปีแห่งการยืนเคียงข้างลูกค้า ด้วยมาตรฐานเดิมที่ไม่เคยเปลี่ยน — ซื่อสัตย์ รอบคอบ และเคารพข้อเท็จจริง" data-en="Thirty-one years beside our clients, on principles that have never changed — honest, meticulous, and true to the facts.">สามสิบเอ็ดปีแห่งการยืนเคียงข้างลูกค้า ด้วยมาตรฐานเดิมที่ไม่เคยเปลี่ยน — ซื่อสัตย์ รอบคอบ และเคารพข้อเท็จจริง</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="sec" id="team">
+    <div class="container">
+      <div class="sec-head reveal">
+        <p class="kicker" data-th="ทีมทนายความ" data-en="Our Counsel">ทีมทนายความ</p>
+        <h2 data-th="ผู้เชี่ยวชาญที่ลูกค้าไว้วางใจ" data-en="Specialists our clients trust">ผู้เชี่ยวชาญที่ลูกค้าไว้วางใจ</h2>
+      </div>
+      <div class="team-grid">
+        <article class="tcard reveal">
+          <div class="tcard-img"><img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="ห้องสมุดตำรากฎหมายของสำนักงาน" loading="lazy" decoding="async"></div>
+          <div class="tcard-body">
+            <span class="tcard-role" data-th="หุ้นส่วนผู้ก่อตั้ง" data-en="Founding Partner">หุ้นส่วนผู้ก่อตั้ง</span>
+            <h3 data-th="รัตนากร วงศ์สุวรรณ" data-en="Rattanakorn Wongsuwan">รัตนากร วงศ์สุวรรณ</h3>
+            <p class="tcard-deg" data-th="นิติศาสตร์บัณฑิต (เกียรตินิยม) จุฬาลงกรณ์มหาวิทยาลัย · เนติบัณฑิตไทย" data-en="LL.B. (Hons), Chulalongkorn University · Thai Barrister-at-Law">นิติศาสตร์บัณฑิต (เกียรตินิยม) จุฬาลงกรณ์มหาวิทยาลัย · เนติบัณฑิตไทย</p>
+            <p class="tcard-spec"><span class="spec-label" data-th="ความเชี่ยวชาญ" data-en="Expertise">ความเชี่ยวชาญ</span><span data-th="กฎหมายธุรกิจ · คดีพาณิชย์" data-en="Business law · Commercial litigation">กฎหมายธุรกิจ · คดีพาณิชย์</span></p>
+          </div>
+        </article>
+        <article class="tcard reveal">
+          <div class="tcard-img"><img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="ชั้นหนังสือกฎหมายในห้องสมุดสำนักงาน" loading="lazy" decoding="async"></div>
+          <div class="tcard-body">
+            <span class="tcard-role" data-th="หุ้นส่วน" data-en="Partner">หุ้นส่วน</span>
+            <h3 data-th="อริสรา เพ็ญจันทร์" data-en="Arisara Penchan">อริสรา เพ็ญจันทร์</h3>
+            <p class="tcard-deg" data-th="นิติศาสตร์มหาบัณฑิต มหาวิทยาลัยธรรมศาสตร์ · เนติบัณฑิตไทย" data-en="LL.M., Thammasat University · Thai Barrister-at-Law">นิติศาสตร์มหาบัณฑิต มหาวิทยาลัยธรรมศาสตร์ · เนติบัณฑิตไทย</p>
+            <p class="tcard-spec"><span class="spec-label" data-th="ความเชี่ยวชาญ" data-en="Expertise">ความเชี่ยวชาญ</span><span data-th="ครอบครัวและมรดก" data-en="Family &amp; inheritance">ครอบครัวและมรดก</span></p>
+          </div>
+        </article>
+        <article class="tcard reveal">
+          <div class="tcard-img"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="การลงนามในเอกสารสัญญา" loading="lazy" decoding="async"></div>
+          <div class="tcard-body">
+            <span class="tcard-role" data-th="ทนายความอาวุโส" data-en="Senior Associate">ทนายความอาวุโส</span>
+            <h3 data-th="ภาคิน ทองแท้" data-en="Pakin Thongthae">ภาคิน ทองแท้</h3>
+            <p class="tcard-deg" data-th="นิติศาสตร์บัณฑิต มหาวิทยาลัยเชียงใหม่ · เนติบัณฑิตไทย" data-en="LL.B., Chiang Mai University · Thai Barrister-at-Law">นิติศาสตร์บัณฑิต มหาวิทยาลัยเชียงใหม่ · เนติบัณฑิตไทย</p>
+            <p class="tcard-spec"><span class="spec-label" data-th="ความเชี่ยวชาญ" data-en="Expertise">ความเชี่ยวชาญ</span><span data-th="แรงงาน · อสังหาริมทรัพย์" data-en="Labour · Real estate">แรงงาน · อสังหาริมทรัพย์</span></p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASES -->
+  <section class="sec cases" id="cases">
+    <div class="container">
+      <div class="sec-head reveal">
+        <p class="kicker" data-th="เคสความสำเร็จ" data-en="Selected Results">เคสความสำเร็จ</p>
+        <h2 data-th="ผลลัพธ์ที่พิสูจน์ได้" data-en="Proven outcomes">ผลลัพธ์ที่พิสูจน์ได้</h2>
+        <p class="lead" data-th="ตามจรรยาบรรณของวิชาชีพ เราไม่เปิดเผยชื่อและรายละเอียดที่ระบุตัวตนของลูกค้า" data-en="Under professional ethics, we never disclose client names or identifying details.">ตามจรรยาบรรณของวิชาชีพ เราไม่เปิดเผยชื่อและรายละเอียดที่ระบุตัวตนของลูกค้า</p>
+      </div>
+      <div class="c-list">
+        <article class="c-row reveal">
+          <span class="c-tag" data-th="ลูกค้าองค์กร ก. — ผู้ผลิตและส่งออก" data-en="Corporate Client A — Manufacturer &amp; Exporter">ลูกค้าองค์กร ก. — ผู้ผลิตและส่งออก</span>
+          <p class="c-matter" data-th="คดีละเมิดสัญญาซื้อขายระหว่างประเทศ มูลค่าขัดแย้ง ฿240 ล้าน" data-en="Cross-border breach of a sale contract — ฿240 million in dispute.">คดีละเมิดสัญญาซื้อขายระหว่างประเทศ มูลค่าขัดแย้ง ฿240 ล้าน</p>
+          <div class="c-out">
+            <span class="out-label" data-th="ผลลัพธ์" data-en="Outcome">ผลลัพธ์</span>
+            <p data-th="ไกล่เกลี่ยสำเร็จ ลูกค้าได้รับชำระคืน 92% ของมูลค่าขัดแย้ง โดยไม่ต้องขึ้นศาล" data-en="Settled — 92% of the disputed sum recovered without going to trial.">ไกล่เกลี่ยสำเร็จ ลูกค้าได้รับชำระคืน 92% ของมูลค่าขัดแย้ง โดยไม่ต้องขึ้นศาล</p>
+          </div>
+        </article>
+        <article class="c-row reveal">
+          <span class="c-tag" data-th="ลูกค้ารายย่อย ข. — ทายาทโดยธรรม" data-en="Private Client B — Lawful Heir">ลูกค้ารายย่อย ข. — ทายาทโดยธรรม</span>
+          <p class="c-matter" data-th="ข้อพิพาทการแบ่งมรดกระหว่างทายาท มูลค่าทรัพย์มรดก ฿180 ล้าน" data-en="Inheritance dispute among heirs — an estate worth ฿180 million.">ข้อพิพาทการแบ่งมรดกระหว่างทายาท มูลค่าทรัพย์มรดก ฿180 ล้าน</p>
+          <div class="c-out">
+            <span class="out-label" data-th="ผลลัพธ์" data-en="Outcome">ผลลัพธ์</span>
+            <p data-th="ศาลพิพากษาแบ่งมรดกตามเจตนาของผู้ตาย ลูกค้าได้รับส่วนแบ่งครบถ้วนตามสิทธิ" data-en="The court divided the estate per the testator's will — the client received their rightful share in full.">ศาลพิพากษาแบ่งมรดกตามเจตนาของผู้ตาย ลูกค้าได้รับส่วนแบ่งครบถ้วนตามสิทธิ</p>
+          </div>
+        </article>
+        <article class="c-row reveal">
+          <span class="c-tag" data-th="ลูกค้าองค์กร ค. — ผู้พัฒนาอสังหาริมทรัพย์" data-en="Corporate Client C — Property Developer">ลูกค้าองค์กร ค. — ผู้พัฒนาอสังหาริมทรัพย์</span>
+          <p class="c-matter" data-th="ข้อพิพาทสิทธิการเช่าที่ดินระยะยาวกับเจ้าของที่ดิน" data-en="A long-term land lease dispute with the landowner.">ข้อพิพาทสิทธิการเช่าที่ดินระยะยาวกับเจ้าของที่ดิน</p>
+          <div class="c-out">
+            <span class="out-label" data-th="ผลลัพธ์" data-en="Outcome">ผลลัพธ์</span>
+            <p data-th="ชนะคดีในศาลฎีกา ยืนยันสิทธิการเช่าตลอดอายุสัญญา 30 ปี" data-en="Won at the Supreme Court — lease rights upheld for the full 30-year term.">ชนะคดีในศาลฎีกา ยืนยันสิทธิการเช่าตลอดอายุสัญญา 30 ปี</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEES -->
+  <section class="sec" id="fees">
+    <div class="container">
+      <div class="sec-head reveal">
+        <p class="kicker" data-th="ค่าบริการแนวทาง" data-en="Fee Guidelines">ค่าบริการแนวทาง</p>
+        <h2 data-th="โปร่งใส ประเมินได้ล่วงหน้า" data-en="Transparent, estimated in advance">โปร่งใส ประเมินได้ล่วงหน้า</h2>
+      </div>
+      <div class="fee-grid reveal">
+        <div class="fee">
+          <h3 data-th="ให้คำปรึกษา" data-en="Consultation">ให้คำปรึกษา</h3>
+          <p class="fee-num serif">฿3,000 <small data-th="ต่อชั่วโมง" data-en="per hour">ต่อชั่วโมง</small></p>
+          <p data-th="30 นาทีแรกไม่มีค่าใช้จ่าย" data-en="The first 30 minutes are free of charge.">30 นาทีแรกไม่มีค่าใช้จ่าย</p>
+        </div>
+        <div class="fee">
+          <h3 data-th="ร่างและทบทวนสัญญา" data-en="Contract Drafting &amp; Review">ร่างและทบทวนสัญญา</h3>
+          <p class="fee-num serif"><span data-th="เริ่มต้น" data-en="from">เริ่มต้น</span> ฿15,000 <small data-th="ต่อฉบับ" data-en="per document">ต่อฉบับ</small></p>
+          <p data-th="รวมการปรับแก้สองรอบพร้อมความเห็นทางกฎหมาย" data-en="Including two revision rounds with legal opinions.">รวมการปรับแก้สองรอบพร้อมความเห็นทางกฎหมาย</p>
+        </div>
+        <div class="fee">
+          <h3 data-th="จดทะเบียนจัดตั้งบริษัท" data-en="Company Incorporation">จดทะเบียนจัดตั้งบริษัท</h3>
+          <p class="fee-num serif">฿25,000</p>
+          <p data-th="รวมค่าธรรมเนียมราชการเบื้องต้นและเอกสารจัดตั้ง" data-en="Including basic government fees and incorporation documents.">รวมค่าธรรมเนียมราชการเบื้องต้นและเอกสารจัดตั้ง</p>
+        </div>
+        <div class="fee">
+          <h3 data-th="ว่าความคดีพาณิชย์" data-en="Commercial Litigation">ว่าความคดีพาณิชย์</h3>
+          <p class="fee-num serif"><span data-th="เริ่มต้น" data-en="from">เริ่มต้น</span> ฿80,000 <small data-th="ต่อคดี" data-en="per case">ต่อคดี</small></p>
+          <p data-th="ขึ้นกับความซับซ้อนของข้อเท็จจริงและประเด็นกฎหมาย" data-en="Depending on the complexity of the facts and legal issues.">ขึ้นกับความซับซ้อนของข้อเท็จจริงและประเด็นกฎหมาย</p>
+        </div>
+      </div>
+      <p class="fees-note reveal" data-th="ตัวเลขข้างต้นเป็นแนวทางเบื้องต้น สำนักงานจะแจ้งประมาณการค่าบริการเป็นลายลักษณ์อักษรก่อนเริ่มงานทุกครั้ง" data-en="Figures above are indicative; a written fee estimate is always provided before any work begins.">ตัวเลขข้างต้นเป็นแนวทางเบื้องต้น สำนักงานจะแจ้งประมาณการค่าบริการเป็นลายลักษณ์อักษรก่อนเริ่มงานทุกครั้ง</p>
+    </div>
+  </section>
+
+  <!-- CTA / CONTACT -->
+  <section class="sec sec-dark cta" id="contact">
+    <div class="container cta-grid">
+      <div class="reveal">
+        <p class="kicker" data-th="ติดต่อสำนักงาน" data-en="Contact the Firm">ติดต่อสำนักงาน</p>
+        <h2 data-th="เริ่มจากคำปรึกษาแรก — ไม่มีค่าใช้จ่าย" data-en="Start with a first consultation — free of charge">เริ่มจากคำปรึกษาแรก — ไม่มีค่าใช้จ่าย</h2>
+        <p data-th="โทรหรือนัดหมายล่วงหน้า ทีมของเราตอบกลับภายในหนึ่งวันทำการ และเก็บรายละเอียดของคุณเป็นความลับตามจรรยาบรรณวิชาชีพ" data-en="Call or book ahead — our team replies within one business day, and your details remain confidential under professional ethics.">โทรหรือนัดหมายล่วงหน้า ทีมของเราตอบกลับภายในหนึ่งวันทำการ และเก็บรายละเอียดของคุณเป็นความลับตามจรรยาบรรณวิชาชีพ</p>
+        <div class="cta-actions">
+          <a class="btn btn-gold" href="tel:+6626764595" data-th="โทร 02-676-4595" data-en="Call 02-676-4595">โทร 02-676-4595</a>
+          <a class="btn btn-outline" href="mailto:counsel@rattanakorn.co.th" data-th="นัดปรึกษาทางอีเมล" data-en="Book by Email">นัดปรึกษาทางอีเมล</a>
+        </div>
+      </div>
+      <div class="cta-img reveal">
+        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="ค้อนผู้พิพากษาและหนังสือกฎหมาย" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="f-grid">
+      <div>
+        <div class="f-brand">
+          <span class="monogram" aria-hidden="true">ร&amp;พ</span>
+          <span data-th="รัตนากร & พันธมิตร" data-en="Rattanakorn &amp; Partners">รัตนากร &amp; พันธมิตร</span>
+        </div>
+        <p data-th="สำนักงานกฎหมายที่ให้คำปรึกษาแก่ธุรกิจและบุคคลทั่วประเทศ ตั้งแต่ พ.ศ. 2538" data-en="A law firm counselling businesses and individuals nationwide since 1995.">สำนักงานกฎหมายที่ให้คำปรึกษาแก่ธุรกิจและบุคคลทั่วประเทศ ตั้งแต่ พ.ศ. 2538</p>
+      </div>
+      <div>
+        <span class="f-label" data-th="ที่ตั้งสำนักงาน" data-en="Office">ที่ตั้งสำนักงาน</span>
+        <p data-th="อาคารสาทรสแควร์ ชั้น 21 ถนนสาทรเหนือ แขวงสีลม เขตบางรัก กรุงเทพมหานคร 10500" data-en="21st Floor, Sathorn Square, North Sathorn Road, Silom, Bang Rak, Bangkok 10500">อาคารสาทรสแควร์ ชั้น 21 ถนนสาทรเหนือ แขวงสีลม เขตบางรัก กรุงเทพมหานคร 10500</p>
+      </div>
+      <div>
+        <span class="f-label" data-th="ติดต่อ" data-en="Contact">ติดต่อ</span>
+        <p>
+          <a href="tel:+6626764595">02-676-4595</a><br>
+          <a href="mailto:counsel@rattanakorn.co.th">counsel@rattanakorn.co.th</a>
+        </p>
+        <span class="f-label" style="margin-top:1.2rem" data-th="เวลาทำการ" data-en="Hours">เวลาทำการ</span>
+        <p data-th="จันทร์–ศุกร์ 8:30–17:30 น. (นัดหมายล่วงหน้า)" data-en="Monday–Friday, 8:30 a.m.–5:30 p.m. (by appointment)">จันทร์–ศุกร์ 8:30–17:30 น. (นัดหมายล่วงหน้า)</p>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span data-th="© 2569 รัตนากร & พันธมิตร สำนักงานกฎหมาย สงวนลิขสิทธิ์" data-en="© 2026 Rattanakorn &amp; Partners Law Office. All rights reserved.">© 2569 รัตนากร &amp; พันธมิตร สำนักงานกฎหมาย สงวนลิขสิทธิ์</span>
+      <span data-th="กรุงเทพมหานคร · เชียงใหม่" data-en="Bangkok · Chiang Mai">กรุงเทพมหานคร · เชียงใหม่</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- TH/EN toggle ---------- */
+  var LANG_KEY = 'rkp-lang';
+  var langBtns = document.querySelectorAll('.lang-btn');
+  function doSwap(lang){
+    document.documentElement.setAttribute('lang', lang);
+    var nodes = document.querySelectorAll('[data-th]');
+    for (var i = 0; i < nodes.length; i++){
+      var el = nodes[i];
+      var v = (lang === 'en') ? el.getAttribute('data-en') : el.getAttribute('data-th');
+      if (v !== null) el.textContent = v;
+    }
+    var aria = document.querySelectorAll('[data-aria-th]');
+    for (var j = 0; j < aria.length; j++){
+      var a = aria[j];
+      var av = (lang === 'en') ? a.getAttribute('data-aria-en') : a.getAttribute('data-aria-th');
+      if (av !== null) a.setAttribute('aria-label', av);
+    }
+    for (var k = 0; k < langBtns.length; k++){
+      var on = langBtns[k].getAttribute('data-lang') === lang;
+      langBtns[k].classList.toggle('is-active', on);
+      langBtns[k].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    try { localStorage.setItem(LANG_KEY, lang); } catch(e){}
+  }
+  function setLang(lang, instant){
+    if (instant || reduced){ doSwap(lang); return; }
+    document.body.classList.add('is-switching');
+    window.setTimeout(function(){
+      doSwap(lang);
+      document.body.classList.remove('is-switching');
+    }, 180);
+  }
+  for (var b = 0; b < langBtns.length; b++){
+    (function(btn){
+      btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang'), false); });
+    })(langBtns[b]);
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(LANG_KEY); } catch(e){}
+  setLang(saved === 'en' ? 'en' : 'th', true);
+
+  /* ---------- mobile menu ---------- */
+  var navToggle = document.querySelector('.nav-toggle');
+  var navPanel = document.getElementById('navPanel');
+  function closeMenu(){
+    navPanel.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }
+  navToggle.addEventListener('click', function(){
+    var open = navPanel.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  var panelLinks = navPanel.querySelectorAll('a');
+  for (var m = 0; m < panelLinks.length; m++){
+    panelLinks[m].addEventListener('click', closeMenu);
+  }
+
+  /* ---------- sticky year timeline ---------- */
+  var yearEl = document.getElementById('tlYear');
+  var events = document.querySelectorAll('.t-event');
+  var currentYear = '2538';
+  function showYear(y){
+    if (y === currentYear) return;
+    currentYear = y;
+    if (reduced){ yearEl.textContent = y; return; }
+    yearEl.classList.add('is-out');
+    window.setTimeout(function(){
+      yearEl.textContent = y;
+      yearEl.classList.remove('is-out');
+    }, 200);
+  }
+  if ('IntersectionObserver' in window && events.length){
+    var yearIO = new IntersectionObserver(function(entries){
+      for (var i = 0; i < entries.length; i++){
+        if (entries[i].isIntersecting) showYear(entries[i].target.getAttribute('data-year'));
+      }
+    }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+    for (var t = 0; t < events.length; t++) yearIO.observe(events[t]);
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if (reduced || !('IntersectionObserver' in window)){
+    for (var r = 0; r < revealEls.length; r++) revealEls[r].classList.add('in');
+  } else {
+    var revealIO = new IntersectionObserver(function(entries){
+      for (var i = 0; i < entries.length; i++){
+        if (entries[i].isIntersecting){
+          entries[i].target.classList.add('in');
+          revealIO.unobserve(entries[i].target);
+        }
+      }
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    for (var s = 0; s < revealEls.length; s++) revealIO.observe(revealEls[s]);
+  }
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEAP Language — พูดอังกฤษได้จริงใน 90 วัน | สถาบันสอนภาษา 3 สาขา</title>
+<meta name="description" content="สถาบันสอนภาษา LEAP Language — คอร์สอังกฤษ จีน และภาษาสำหรับเด็ก ครูเจ้าของภาษา ทดลองเรียนฟรี">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=KoHo:wght@300;400;500;600&family=Sarabun:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --soft:#f2f7fd; --blue:#1f6feb; --blue-deep:#1558c4;
+  --navy:#12305e; --yellow:#ffc531; --ink:#17243a; --muted:#5a6b85; --line:#e3eaf3;
+  --disp:'KoHo',sans-serif; --body:'Sarabun',sans-serif; --en:'DM Sans',sans-serif;
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:300;line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+::selection{background:var(--yellow);color:var(--ink)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+section{padding:clamp(3.5rem,8vh,6rem) 0}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1180px;margin:0 auto;padding:.9rem clamp(1.25rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{font-family:var(--en);font-weight:700;font-size:1.6rem;letter-spacing:-.02em;color:var(--navy);display:flex;align-items:center;gap:.15rem}
+.logo i{width:.5rem;height:.5rem;border-radius:50%;background:var(--yellow);display:inline-block}
+.nav-links{display:flex;gap:1.8rem;font-family:var(--disp);font-size:.95rem;font-weight:500}
+.nav-links a{color:var(--muted);transition:color .3s}
+.nav-links a:hover{color:var(--blue)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-family:var(--disp);font-weight:500;border-radius:99px;padding:.85rem 1.7rem;transition:transform .3s ease,box-shadow .3s ease,background .3s ease;min-height:44px}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 8px 20px -8px rgba(31,111,235,.5)}
+.btn-blue:hover{background:var(--blue-deep);transform:translateY(-2px)}
+.btn-ghost{border:1.5px solid var(--line);color:var(--ink);background:#fff}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+@media(max-width:820px){.nav-links{display:none}}
+
+/* hero */
+.hero{padding:clamp(3rem,7vh,5.5rem) 0}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,4vw,4rem);align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.kicker{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--en);font-weight:500;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);background:var(--soft);border:1px solid var(--line);padding:.45rem 1rem;border-radius:99px}
+.kicker::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--yellow)}
+h1{font-family:var(--disp);font-weight:600;font-size:clamp(2.2rem,5.4vw,3.8rem);line-height:1.22;margin:1.3rem 0 1rem;letter-spacing:-.01em}
+h1 .hl{position:relative;white-space:nowrap;color:var(--blue)}
+h1 .hl::after{content:'';position:absolute;left:0;right:0;bottom:.08em;height:.32em;background:var(--yellow);z-index:-1;border-radius:99px;opacity:.75}
+.lead{color:var(--muted);max-width:46ch;font-size:1.05rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:1.8rem}
+.hero-stats{display:flex;gap:2.2rem;margin-top:2.4rem;flex-wrap:wrap}
+.stat b{font-family:var(--en);font-size:1.7rem;font-weight:700;color:var(--navy);display:block;line-height:1.1}
+.stat span{font-size:.82rem;color:var(--muted)}
+.hero-media{position:relative}
+.hero-media img{border-radius:28px;box-shadow:0 30px 60px -30px rgba(18,48,94,.35)}
+.float-card{position:absolute;left:-1.4rem;bottom:2rem;background:#fff;border:1px solid var(--line);border-radius:16px;padding:.9rem 1.2rem;box-shadow:0 16px 40px -16px rgba(18,48,94,.28);display:flex;align-items:center;gap:.8rem;animation:bob 4s ease-in-out infinite}
+.float-card .dotset{display:flex;gap:4px}.float-card .dotset i{width:8px;height:8px;border-radius:50%;background:var(--blue)}
+.float-card b{font-family:var(--disp);font-size:.92rem;font-weight:500}
+.float-card small{display:block;color:var(--muted);font-size:.75rem}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media(max-width:900px){.float-card{left:1rem}}
+
+/* quiz */
+.quiz-sec{background:var(--soft);border-block:1px solid var(--line)}
+.quiz-card{max-width:760px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:0 24px 60px -30px rgba(18,48,94,.22);padding:clamp(1.6rem,4vw,3rem);position:relative;overflow:hidden}
+.quiz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--blue),var(--yellow))}
+.sec-head{text-align:center;margin-bottom:2.4rem}
+.sec-head .kicker{margin-bottom:.9rem}
+h2{font-family:var(--disp);font-weight:600;font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.3}
+.sec-head p{color:var(--muted);margin-top:.6rem}
+.q-dots{display:flex;gap:.5rem;justify-content:center;margin-bottom:1.6rem}
+.q-dots i{width:10px;height:10px;border-radius:99px;background:var(--line);transition:all .35s ease}
+.q-dots i.on{background:var(--blue);width:26px}
+.q-step{display:none;animation:qin .45s ease both}
+.q-step.on{display:block}
+@keyframes qin{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+.q-title{font-family:var(--disp);font-size:1.3rem;font-weight:600;text-align:center;margin-bottom:1.4rem}
+.q-opts{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+@media(max-width:560px){.q-opts{grid-template-columns:1fr}}
+.q-opt{border:1.5px solid var(--line);border-radius:16px;padding:1.1rem 1.2rem;text-align:left;font-family:var(--disp);font-weight:500;font-size:1rem;transition:all .25s ease;background:#fff;display:flex;align-items:center;gap:.8rem;min-height:56px}
+.q-opt:hover{border-color:var(--blue);background:var(--soft);transform:translateY(-2px)}
+.q-opt.sel{border-color:var(--blue);background:var(--soft);box-shadow:0 0 0 3px rgba(31,111,235,.15)}
+.q-opt .k{width:30px;height:30px;flex:0 0 30px;border-radius:10px;background:var(--soft);color:var(--blue);display:grid;place-items:center;font-family:var(--en);font-weight:700;font-size:.85rem}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.6rem}
+.q-back{color:var(--muted);font-size:.9rem;padding:.6rem 1rem;border-radius:10px;min-height:44px}
+.q-back:hover{color:var(--blue)}
+.q-back:disabled{opacity:.35;cursor:default}
+.q-hint{font-size:.8rem;color:var(--muted);text-align:center;margin-top:.4rem}
+.q-result{text-align:center;animation:qin .5s ease both}
+.q-badge{display:inline-block;background:var(--yellow);color:var(--ink);font-family:var(--disp);font-weight:600;font-size:.8rem;padding:.4rem 1rem;border-radius:99px;margin-bottom:1rem}
+.q-course{font-family:var(--disp);font-size:clamp(1.5rem,3vw,2rem);font-weight:600;color:var(--blue)}
+.q-price{font-family:var(--en);font-weight:700;font-size:1.3rem;color:var(--navy);margin:.4rem 0 .8rem}
+.q-points{list-style:none;text-align:left;max-width:400px;margin:0 auto 1.4rem;display:grid;gap:.5rem;color:var(--muted);font-size:.95rem}
+.q-points li{display:flex;gap:.6rem;align-items:flex-start}
+.q-points li::before{content:'✓';color:var(--blue);font-weight:700}
+.q-again{display:inline-block;margin-top:.9rem;font-size:.85rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.q-again:hover{color:var(--blue)}
+
+/* courses */
+.course-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+@media(max-width:1020px){.course-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.course-grid{grid-template-columns:1fr}}
+.course{border:1px solid var(--line);border-radius:var(--r);padding:1.6rem 1.4rem;background:#fff;display:flex;flex-direction:column;gap:.7rem;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}
+.course:hover{transform:translateY(-6px);box-shadow:0 22px 44px -22px rgba(18,48,94,.25);border-color:rgba(31,111,235,.4)}
+.course .lvl{align-self:flex-start;font-family:var(--en);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--soft);color:var(--blue);padding:.35rem .8rem;border-radius:99px}
+.course h3{font-family:var(--disp);font-weight:600;font-size:1.25rem}
+.course p{color:var(--muted);font-size:.9rem;flex:1}
+.course .meta{display:flex;gap:1rem;font-size:.8rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:.8rem}
+.course .price{font-family:var(--en);font-weight:700;font-size:1.35rem;color:var(--navy)}
+.course .price small{font-family:var(--body);font-weight:300;font-size:.75rem;color:var(--muted)}
+
+/* countdown */
+.count-sec{background:var(--navy);color:#fff;text-align:center;position:relative;overflow:hidden}
+.count-sec::before{content:'';position:absolute;width:420px;height:420px;border-radius:50%;background:rgba(255,197,49,.12);top:-210px;right:-120px}
+.count-sec h2{color:#fff}
+.count-sec .sub{color:rgba(255,255,255,.65);margin-top:.5rem}
+.count-boxes{display:flex;justify-content:center;gap:clamp(.6rem,2vw,1.2rem);margin:2.2rem 0}
+.cbox{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:1rem .6rem;min-width:clamp(74px,14vw,110px)}
+.cbox b{font-family:var(--en);font-weight:700;font-size:clamp(1.9rem,5vw,3rem);display:block;line-height:1;font-variant-numeric:tabular-nums}
+.cbox span{font-size:.72rem;color:rgba(255,255,255,.55);letter-spacing:.14em;text-transform:uppercase;font-family:var(--en)}
+.count-sec .btn-blue{background:var(--yellow);color:var(--ink);box-shadow:0 10px 26px -10px rgba(255,197,49,.5)}
+.count-sec .btn-blue:hover{background:#ffd35c}
+
+/* teachers & reviews */
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+@media(max-width:900px){.t-grid{grid-template-columns:1fr}}
+.t-card{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#fff}
+.t-card img{height:240px;width:100%;object-fit:cover}
+.t-card .t-body{padding:1.1rem 1.2rem}
+.t-card b{font-family:var(--disp);font-weight:600;font-size:1.05rem}
+.t-card span{display:block;color:var(--muted);font-size:.85rem}
+.r-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem}
+@media(max-width:800px){.r-grid{grid-template-columns:1fr}}
+.review{background:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:1.6rem}
+.review .stars{color:var(--yellow);letter-spacing:.2em;font-size:1rem}
+.review p{margin:.7rem 0 1rem;font-size:.98rem}
+.review b{font-family:var(--disp);font-weight:500}
+.review span{color:var(--muted);font-size:.82rem;display:block}
+
+/* cta + footer */
+.final{background:linear-gradient(135deg,var(--blue),var(--blue-deep));color:#fff;text-align:center;border-radius:32px;margin:0 clamp(1.25rem,4vw,2.5rem) clamp(3rem,6vh,4rem);padding:clamp(2.5rem,6vh,4rem) clamp(1.5rem,4vw,3rem)}
+.final h2{color:#fff}
+.final p{color:rgba(255,255,255,.75);margin:.7rem auto 1.6rem;max-width:48ch}
+.final .btn-blue{background:#fff;color:var(--blue)}
+footer{border-top:1px solid var(--line);padding:2.5rem 0;color:var(--muted);font-size:.88rem}
+.foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5rem}
+.foot-grid b{color:var(--ink);font-family:var(--disp);font-weight:600}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top">LEAP<i></i></a>
+    <div class="nav-links">
+      <a href="#quiz">หาคอร์สที่ใช่</a><a href="#courses">คอร์สเรียน</a><a href="#teachers">ครูผู้สอน</a><a href="#contact">ติดต่อ</a>
+    </div>
+    <a class="btn btn-blue" href="#quiz">ทดลองเรียนฟรี</a>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">สถาบันภาษา · 3 สาขาทั่วกรุงเทพฯ</span>
+        <h1>พูดอังกฤษได้จริง<br><span class="hl">ใน 90 วัน</span> — การันตี</h1>
+        <p class="lead">เรียนสดกับครูเจ้าของภาษาในคลาสเล็กไม่เกิน 8 คน ฝึกพูดทุกครั้งที่เรียน ไม่ใช่ท่องแกรมม่าอย่างเดียว — พูดไม่ได้ยินดีคืนเงิน</p>
+        <div class="hero-cta">
+          <a class="btn btn-blue" href="#quiz">หาคอร์สที่ใช่ใน 30 วินาที</a>
+          <a class="btn btn-ghost" href="#courses">ดูคอร์สทั้งหมด</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><b>4,500+</b><span>นักเรียนเก่า</span></div>
+          <div class="stat"><b>12</b><span>ครูเจ้าของภาษา</span></div>
+          <div class="stat"><b>4.9★</b><span>รีวิวเฉลี่ย</span></div>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="../assets/school-hero.jpg" alt="ห้องเรียนภาษาสดใส นักเรียนกำลังคุยกันอย่างสนุก" fetchpriority="high">
+        <div class="float-card">
+          <span class="dotset"><i></i><i></i><i></i></span>
+          <div><b>คลาสถัดไปเริ่มจันทร์นี้</b><small>เหลือ 3 ที่สุดท้าย</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Course Finder</span>
+        <h2>ไม่รู้จะเรียนคอร์สไหนดี?<br>ตอบ 3 คำถาม เดี๋ยวเราแนะนำให้</h2>
+      </div>
+      <div class="quiz-card" id="quizCard">
+        <div class="q-dots" id="qDots"><i class="on"></i><i></i><i></i></div>
+
+        <div class="q-step on" data-step="0">
+          <p class="q-title">เป้าหมายหลักของคุณคืออะไร?</p>
+          <div class="q-opts">
+            <button class="q-opt" data-v="work"><span class="k">A</span>ใช้ทำงาน / คุยกับลูกค้า</button>
+            <button class="q-opt" data-v="study"><span class="k">B</span>สอบเข้ามหาวิทยาลัม / TOEIC</button>
+            <button class="q-opt" data-v="travel"><span class="k">C</span>ท่องเที่ยว / ใช้ชีวิตต่างประเทศ</button>
+            <button class="q-opt" data-v="kids"><span class="k">D</span>หาคอร์สให้ลูกหลาน</button>
+          </div>
+        </div>
+
+        <div class="q-step" data-step="1">
+          <p class="q-title">คุณสะดวกเรียนเวลาไหน?</p>
+          <div class="q-opts">
+            <button class="q-opt" data-v="evening"><span class="k">A</span>เย็นหลังเลิกงาน</button>
+            <button class="q-opt" data-v="weekend"><span class="k">B</span>เสาร์–อาทิตย์</button>
+            <button class="q-opt" data-v="online"><span class="k">C</span>ออนไลน์ เรียนที่ไหนก็ได้</button>
+            <button class="q-opt" data-v="any"><span class="k">D</span>เวลาไหนก็ได้</button>
+          </div>
+        </div>
+
+        <div class="q-step" data-step="2">
+          <p class="q-title">ระดับภาษาปัจจุบันของคุณ?</p>
+          <div class="q-opts">
+            <button class="q-opt" data-v="zero"><span class="k">A</span>เริ่มจากศูนย์เลย</button>
+            <button class="q-opt" data-v="some"><span class="k">B</span>พอสื่อสารได้บ้าง</button>
+            <button class="q-opt" data-v="good"><span class="k">C</span>มั่นใจ อยากขัดเกลา</button>
+          </div>
+        </div>
+
+        <div class="q-result" id="qResult" hidden>
+          <span class="q-badge">คอร์สที่ใช่สำหรับคุณ</span>
+          <div class="q-course" id="rCourse">—</div>
+          <div class="q-price" id="rPrice">—</div>
+          <ul class="q-points" id="rPoints"></ul>
+          <a class="btn btn-blue" href="#contact" id="rBtn">จองที่นั่งทดลองฟรี</a>
+          <br><button class="q-again" id="qAgain">↺ ตอบคำถามใหม่</button>
+        </div>
+
+        <div class="q-nav" id="qNav">
+          <button class="q-back" id="qBack" disabled>← ย้อนกลับ</button>
+          <span class="q-hint">เลือก 1 คำตอบเพื่อไปต่อ</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="courses">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Courses</span>
+        <h2>คอร์สยอดนิยม</h2>
+      </div>
+      <div class="course-grid">
+        <article class="course">
+          <span class="lvl">Intermediate</span>
+          <h3>English for Work</h3>
+          <p>อีเมล ประชุม พรีเซนต์ และเจรจา — ฝึกจากสถานการณ์งานจริงทุกคลาส</p>
+          <div class="meta"><span>48 ชม.</span><span>เย็น/เสาร์</span></div>
+          <div class="price">฿4,900 <small>/ เดือน</small></div>
+        </article>
+        <article class="course">
+          <span class="lvl">All levels</span>
+          <h3>TOEIC Crash</h3>
+          <p>คอร์สเร่ง 6 สัปดาห์ เจาะเทคนิคทำข้อสอบ การันตีคะแนนเพิ่ม 150+</p>
+          <div class="meta"><span>36 ชม.</span><span>เสาร์–อาทิตย์</span></div>
+          <div class="price">฿3,900 <small>/ คอร์ส</small></div>
+        </article>
+        <article class="course">
+          <span class="lvl">Beginner</span>
+          <h3>Everyday English</h3>
+          <p>พูดคุยท่องเที่ยวและชีวิตประจำวัน ไม่เน้นแกรมม่า เน้นกล้าพูด</p>
+          <div class="meta"><span>40 ชม.</span><span>ออนไลน์/ออนไซต์</span></div>
+          <div class="price">฿3,600 <small>/ เดือน</small></div>
+        </article>
+        <article class="course">
+          <span class="lvl">Kids 6–12 ปี</span>
+          <h3>Kids Club</h3>
+          <p>เรียนผ่านเกมและเพลง ครูเจ้าของภาษาที่รักเด็ก รายงานผลทุกสัปดาห์</p>
+          <div class="meta"><span>32 ชม.</span><span>เสาร์–อาทิตย์</span></div>
+          <div class="price">฿3,200 <small>/ เดือน</small></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="count-sec">
+    <div class="wrap">
+      <h2>รอบเรียนถัดไปเปิดรับแล้ว</h2>
+      <p class="sub">เริ่มเรียนวันที่ 1 ของเดือนหน้า — ปิดรับเมื่อเต็ม 8 ที่ต่อคลาส</p>
+      <div class="count-boxes" role="timer" aria-live="off">
+        <div class="cbox"><b id="cdD">--</b><span>วัน</span></div>
+        <div class="cbox"><b id="cdH">--</b><span>ชั่วโมง</span></div>
+        <div class="cbox"><b id="cdM">--</b><span>นาที</span></div>
+        <div class="cbox"><b id="cdS">--</b><span>วินาที</span></div>
+      </div>
+      <a class="btn btn-blue" href="#contact">สำรองที่นั่งรอบนี้</a>
+    </div>
+  </section>
+
+  <section id="teachers">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Teachers</span>
+        <h2>เรียนกับครูเจ้าของภาษาตัวจริง</h2>
+      </div>
+      <div class="t-grid">
+        <article class="t-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?q=80&w=1000&auto=format&fit=crop" alt="ครูผู้สอนกำลังอธิบายบนกระดาน">
+          <div class="t-body"><b>Teacher Sarah</b><span>สหราชอาณาจักร · CELTA · สอน 9 ปี</span></div>
+        </article>
+        <article class="t-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop" alt="กลุ่มนักเรียนกำลังเรียนร่วมกันด้วยแล็ปท็อป">
+          <div class="t-body"><b>Teacher Mike</b><span>ออสเตรเลีย · ถนัดสอนธุรกิจ</span></div>
+        </article>
+        <article class="t-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop" alt="นักศึกษากำลังอ่านหนังสือด้วยกัน">
+          <div class="t-body"><b>ครูมิ้นท์</b><span>ไทย · เกียรตินิยม อังกฤษ จุฬาฯ · TOEIC 990</span></div>
+        </article>
+      </div>
+
+      <div class="r-grid">
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <p>"เรียนมา 3 เดือน จากแทบไม่กล้าพูดเลย ตอนนี้พรีเซนต์งานเป็นภาษาอังกฤษได้แล้วค่ะ ครูดูแลใกล้ชิดมาก"</p>
+          <b>คุณแพรว</b><span>English for Work · สาขาสยาม</span>
+        </div>
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <p>"สอบ TOEIC ครั้งแรกได้ 785 จากเดิม 520 — คอร์ส Crash คุ้มจริงครับ เทคนิคทำข้อสอบใช้ได้ทันที"</p>
+          <b>คุณบอส</b><span>TOEIC Crash · ออนไลน์</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final" id="contact">
+    <h2>พร้อมก้าวแรกแล้วหรือยัง?</h2>
+    <p>ทดลองเรียนฟรี 1 คลาส ไม่มีค่าใช้จ่าย — เลือกสาขาที่ใกล้คุณ: สยาม · ลาดพร้าว · บางนา</p>
+    <a class="btn btn-blue" href="tel:021234567">โทร 02-123-4567</a>
+    <span style="display:inline-block;width:1rem"></span>
+    <a class="btn btn-ghost" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.4)" href="#quiz">ทำแบบทดสอบก่อน</a>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span><b>LEAP Language</b> · สยาม / ลาดพร้าว / บางนา</span>
+    <span>เปิดทุกวัน 9:00–21:00 · LINE @leaplang</span>
+    <span>© 2569 LEAP Language Institute</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- Quiz ---------- */
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.q-step'));
+  var dots = Array.prototype.slice.call(document.querySelectorAll('#qDots i'));
+  var back = document.getElementById('qBack');
+  var nav = document.getElementById('qNav');
+  var result = document.getElementById('qResult');
+  var answers = {};
+  var cur = 0;
+
+  var COURSES = {
+    work:   { name: 'English for Work', price: '฿4,900 / เดือน',
+              points: ['ฝึกอีเมล ประชุม และเจรจางานจริง', 'คลาสเล็กไม่เกิน 8 คน', 'ครูสายธุรกิจโดยเฉพาะ'] },
+    study:  { name: 'TOEIC Crash', price: '฿3,900 / คอร์ส',
+              points: ['เร่ง 6 สัปดาห์ เจาะเทคนิคข้อสอบ', 'การันตีคะแนนเพิ่ม 150+', 'ข้อสอบจำลองทุกสัปดาห์'] },
+    travel: { name: 'Everyday English', price: '฿3,600 / เดือน',
+              points: ['เน้นพูดคุย ไม่ท่องแกรมม่า', 'สถานการณ์เที่ยวต่างประเทศจริง', 'มีสายออนไลน์เต็มรูปแบบ'] },
+    kids:   { name: 'Kids Club (6–12 ปี)', price: '฿3,200 / เดือน',
+              points: ['เรียนผ่านเกมและเพลง', 'ครูเจ้าของภาษาที่รักเด็ก', 'รายงานพัฒนาการทุกสัปดาห์'] }
+  };
+  var TIME_TXT = { evening: 'รอบเย็นหลังเลิกงาน', weekend: 'รอบเสาร์–อาทิตย์', online: 'แบบออนไลน์สด', any: 'รอบที่สะดวกคุณ' };
+  var LVL_TXT = { zero: 'เริ่มจากพื้นฐานได้เลย ไม่ต้องมีพื้นมาก่อน', some: 'ต่อยอดจากที่มีอยู่ให้คล่องขึ้น', good: 'ขัดเกลาสู่ระดับ native-like' };
+
+  function showStep(n){
+    steps.forEach(function(s){ s.classList.toggle('on', +s.dataset.step === n); });
+    dots.forEach(function(d, i){ d.classList.toggle('on', i <= n); });
+    back.disabled = (n === 0);
+    cur = n;
+  }
+  function finish(){
+    var c = COURSES[answers.goal] || COURSES.work;
+    document.getElementById('rCourse').textContent = c.name;
+    document.getElementById('rPrice').textContent = c.price;
+    var pts = c.points.slice();
+    if (answers.time) pts.push('แนะนำ: ' + (TIME_TXT[answers.time] || ''));
+    if (answers.level) pts.push(LVL_TXT[answers.level] || '');
+    document.getElementById('rPoints').innerHTML = pts.map(function(p){ return '<li>' + p + '</li>'; }).join('');
+    steps.forEach(function(s){ s.classList.remove('on'); });
+    nav.style.display = 'none';
+    result.hidden = false;
+  }
+  document.querySelectorAll('.q-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.parentElement.querySelectorAll('.q-opt').forEach(function(b){ b.classList.remove('sel'); });
+      btn.classList.add('sel');
+      var key = ['goal','time','level'][cur];
+      answers[key] = btn.dataset.v;
+      setTimeout(function(){ cur < 2 ? showStep(cur + 1) : finish(); }, 260);
+    });
+  });
+  back.addEventListener('click', function(){ if (cur > 0) showStep(cur - 1); });
+  document.getElementById('qAgain').addEventListener('click', function(){
+    answers = {}; result.hidden = true; nav.style.display = '';
+    document.querySelectorAll('.q-opt.sel').forEach(function(b){ b.classList.remove('sel'); });
+    showStep(0);
+  });
+
+  /* ---------- Countdown to next month 1st 00:00 ---------- */
+  var D = document.getElementById('cdD'), H = document.getElementById('cdH'),
+      M = document.getElementById('cdM'), S = document.getElementById('cdS');
+  function target(){
+    var n = new Date();
+    return new Date(n.getFullYear(), n.getMonth() + 1, 1, 0, 0, 0);
+  }
+  var T = target();
+  function pad(x){ return String(x).padStart(2, '0'); }
+  function tick(){
+    var diff = T - new Date();
+    if (diff <= 0) { T = target(); diff = T - new Date(); }
+    var s = Math.floor(diff / 1000);
+    D.textContent = pad(Math.floor(s / 86400));
+    H.textContent = pad(Math.floor(s % 86400 / 3600));
+    M.textContent = pad(Math.floor(s % 3600 / 60));
+    S.textContent = pad(s % 60);
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ---------- smooth anchors (native) ---------- */
+  document.documentElement.style.scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+</body>
+</html>

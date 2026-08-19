@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เที่ยวกัน TIAO KAN — ทัวร์ในประเทศ ออกแบบทริปของคุณเอง</title>
+<meta name="description" content="เที่ยวกัน — ทัวร์ในประเทศแบบเลือกเองได้ทุกอย่าง ภูเก็ต กระบี่ เชียงใหม่ สมุย ไกด์ใบอนุญาต ยกเลิกได้ 7 วัน">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500&family=Caveat:wght@400;600&family=Itim&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sand:#f6efe4; --cream:#fffbf3; --orange:#f26b3a; --orange-deep:#d95426;
+  --teal:#14706b; --teal-deep:#0d504c; --ink:#33261c; --muted:#7a6a58; --line:rgba(51,38,28,.14);
+  --disp:'Itim',cursive; --hand:'Caveat',cursive; --body:'Anuphan',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--sand);color:var(--ink);font-family:var(--body);font-weight:300;font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+::selection{background:var(--orange);color:#fff}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+section{padding:clamp(3.5rem,8vh,6rem) 0}
+
+/* nav */
+.nav{position:absolute;top:0;left:0;right:0;z-index:100;padding:1.1rem 0}
+.nav-in{max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{font-family:var(--disp);font-size:1.7rem;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+.logo small{display:block;font-size:.62rem;letter-spacing:.3em;font-family:var(--body);font-weight:500;opacity:.9}
+.nav-right{display:flex;align-items:center;gap:1.4rem}
+.nav-links{display:flex;gap:1.6rem;font-size:.95rem;font-weight:400;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.35)}
+.nav-links a:hover{color:var(--yellow,#ffd9a0)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-family:var(--disp);font-size:1rem;border-radius:99px;padding:.85rem 1.7rem;transition:transform .3s ease,box-shadow .3s ease,background .3s ease;min-height:44px}
+.btn-o{background:var(--orange);color:#fff;box-shadow:0 10px 24px -10px rgba(242,107,58,.6)}
+.btn-o:hover{background:var(--orange-deep);transform:translateY(-2px)}
+.btn-g{border:1.5px solid rgba(51,38,28,.25);color:var(--ink);background:var(--cream)}
+.btn-g:hover{border-color:var(--orange);color:var(--orange)}
+@media(max-width:760px){.nav-links{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:96svh;display:flex;align-items:flex-end;overflow:hidden;padding:0}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;animation:heroZoom 16s ease-out forwards}
+@keyframes heroZoom{from{transform:scale(1.1)}to{transform:scale(1)}}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(51,38,28,.18) 0%,rgba(51,38,28,.05) 45%,rgba(246,239,228,.92) 88%,var(--sand) 100%)}
+.hero-in{position:relative;width:100%;padding:0 clamp(1.25rem,4vw,2.5rem) clamp(3rem,8vh,5rem);max-width:1180px;margin:0 auto}
+.hero h1{font-family:var(--disp);font-weight:400;font-size:clamp(3.2rem,10vw,7.5rem);line-height:1.05;color:#fff;text-shadow:0 4px 30px rgba(0,0,0,.4)}
+.hero .hand{display:inline-block;font-family:var(--hand);font-size:clamp(1.4rem,3.4vw,2.3rem);color:#ffd9a0;transform:rotate(-3deg);text-shadow:0 2px 12px rgba(0,0,0,.4);margin-left:1rem}
+.hero p{color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.45);max-width:44ch;margin:1rem 0 1.6rem;font-size:1.05rem}
+.stamp{position:absolute;right:clamp(1.5rem,6vw,5rem);top:16vh;width:clamp(110px,14vw,160px);animation:spin 24s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:760px){.stamp{display:none}}
+
+/* builder */
+.b-card{background:var(--cream);border:1px solid var(--line);border-radius:26px;box-shadow:0 24px 60px -32px rgba(51,38,28,.3);padding:clamp(1.5rem,3.5vw,2.6rem);display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(1.5rem,3vw,2.5rem)}
+@media(max-width:920px){.b-card{grid-template-columns:1fr}}
+.b-title{font-family:var(--disp);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;margin-bottom:.3rem}
+.b-sub{color:var(--muted);font-size:.92rem;margin-bottom:1.6rem}
+.b-label{font-family:var(--disp);font-size:1.05rem;margin:1.3rem 0 .6rem}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.chip{border:1.5px solid var(--line);border-radius:99px;padding:.6rem 1.15rem;font-size:.95rem;font-weight:400;background:#fff;transition:all .25s ease;min-height:44px;display:inline-flex;align-items:center;gap:.4rem}
+.chip:hover{border-color:var(--orange)}
+.chip.sel{background:var(--orange);border-color:var(--orange);color:#fff}
+.chip .pr{font-size:.8rem;opacity:.75}
+.stepper{display:inline-flex;align-items:center;gap:0;border:1.5px solid var(--line);border-radius:99px;overflow:hidden;background:#fff}
+.stepper button{width:46px;height:46px;font-size:1.3rem;font-family:var(--disp);color:var(--orange);transition:background .2s}
+.stepper button:hover{background:var(--sand)}
+.stepper .val{min-width:120px;text-align:center;font-weight:400;font-size:.95rem}
+.stepper .val b{font-family:var(--disp);font-size:1.15rem}
+.checks{display:grid;gap:.55rem}
+.check{display:flex;align-items:center;gap:.7rem;border:1.5px solid var(--line);border-radius:14px;padding:.7rem 1rem;background:#fff;cursor:pointer;transition:all .25s ease;font-size:.94rem;min-height:52px}
+.check:hover{border-color:var(--orange)}
+.check.sel{border-color:var(--orange);background:#fff3ec}
+.check .box{width:22px;height:22px;flex:0 0 22px;border:2px solid var(--line);border-radius:7px;display:grid;place-items:center;color:#fff;font-size:.8rem;transition:all .2s}
+.check.sel .box{background:var(--orange);border-color:var(--orange)}
+.check .pr{margin-left:auto;color:var(--muted);font-size:.85rem}
+.sum{background:var(--teal);color:#fff;border-radius:20px;padding:1.6rem 1.5rem;display:flex;flex-direction:column;position:sticky;top:1rem;align-self:start}
+.sum h3{font-family:var(--disp);font-weight:400;font-size:1.3rem;margin-bottom:1rem}
+.sum-row{display:flex;justify-content:space-between;font-size:.9rem;padding:.4rem 0;border-bottom:1px dashed rgba(255,255,255,.2)}
+.sum-row span:last-child{font-weight:500}
+.sum-total{margin-top:1rem;text-align:center}
+.sum-total small{display:block;opacity:.75;font-size:.78rem;letter-spacing:.1em}
+.sum-total .big{font-family:var(--disp);font-size:clamp(2.2rem,4vw,2.9rem);line-height:1.1;transition:transform .2s}
+.sum-total .big.bump{transform:scale(1.06)}
+.sum-per{text-align:center;font-size:.85rem;opacity:.8;margin-bottom:1.2rem}
+.sum .btn-o{width:100%;font-size:1.1rem;box-shadow:0 10px 26px -8px rgba(0,0,0,.4)}
+.sum-done{text-align:center;padding:1rem 0}
+.sum-done .tick{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.15);display:grid;place-items:center;font-size:1.7rem;margin:0 auto 1rem;color:#ffd9a0}
+.sum-done b{font-family:var(--disp);font-size:1.25rem;display:block;margin-bottom:.4rem}
+.sum-done p{font-size:.88rem;opacity:.8}
+
+/* route map */
+.route-sec{background:var(--teal-deep);color:#fff}
+.route-sec .sec-h{font-family:var(--disp);font-weight:400;font-size:clamp(1.8rem,3.6vw,2.6rem);text-align:center;margin-bottom:.4rem}
+.route-sec .hand{display:block;text-align:center;font-family:var(--hand);font-size:1.4rem;color:#ffd9a0;margin-bottom:2.5rem;transform:rotate(-2deg)}
+.map-wrap{max-width:820px;margin:0 auto}
+.map-wrap svg{width:100%;height:auto;display:block}
+.rpath{fill:none;stroke:#ffd9a0;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:6 9}
+.rpin{fill:var(--orange);stroke:#fff;stroke-width:2;transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.rlabel{font-family:var(--disp);font-size:17px;fill:#fff;opacity:0;transition:opacity .5s ease .2s}
+.map-wrap.drawn .rpin{transform:scale(1)}
+.map-wrap.drawn .rlabel{opacity:1}
+.route-stops{display:flex;justify-content:center;flex-wrap:wrap;gap:1rem 2.4rem;margin-top:2rem;font-size:.92rem;color:rgba(255,255,255,.8)}
+.route-stops b{color:#ffd9a0;font-family:var(--disp);font-weight:400}
+
+/* packages */
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+@media(max-width:960px){.pkg-grid{grid-template-columns:1fr}}
+.pkg{background:var(--cream);border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative;transition:transform .35s ease,box-shadow .35s ease;display:flex;flex-direction:column}
+.pkg:hover{transform:translateY(-6px) rotate(-.4deg);box-shadow:0 26px 50px -26px rgba(51,38,28,.35)}
+.pkg img{height:210px;width:100%;object-fit:cover}
+.pkg .p-stamp{position:absolute;top:.9rem;right:.9rem;width:64px;height:64px;border:2px dashed rgba(255,255,255,.9);border-radius:50%;display:grid;place-items:center;color:#fff;font-family:var(--hand);font-size:.9rem;background:rgba(242,107,58,.85);transform:rotate(8deg);text-shadow:none}
+.pkg .p-body{padding:1.3rem 1.3rem 1.4rem;display:flex;flex-direction:column;gap:.55rem;flex:1}
+.pkg h3{font-family:var(--disp);font-weight:400;font-size:1.4rem}
+.pkg .days{font-size:.82rem;color:var(--teal);font-weight:500;letter-spacing:.08em}
+.pkg ul{list-style:none;color:var(--muted);font-size:.9rem;display:grid;gap:.3rem;flex:1}
+.pkg ul li::before{content:'· ';color:var(--orange);font-weight:700}
+.pkg .p-foot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px dashed var(--line);padding-top:.9rem;margin-top:.4rem}
+.pkg .price{font-family:var(--disp);font-size:1.5rem;color:var(--orange-deep)}
+.pkg .price small{font-family:var(--body);font-size:.75rem;color:var(--muted)}
+
+/* misc sections */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center}
+@media(max-width:760px){.trust{grid-template-columns:1fr}}
+.trust>div{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:1.5rem 1.2rem}
+.trust b{font-family:var(--disp);font-weight:400;font-size:1.15rem;display:block;margin-bottom:.3rem}
+.trust p{color:var(--muted);font-size:.88rem}
+.rv-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+@media(max-width:800px){.rv-grid{grid-template-columns:1fr}}
+.rv{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:1.5rem;position:relative}
+.rv::before{content:'”';font-family:var(--hand);position:absolute;top:.4rem;right:1.2rem;font-size:3.5rem;color:var(--orange);opacity:.35;line-height:1}
+.rv p{font-size:.96rem;margin-bottom:.9rem}
+.rv .who{font-family:var(--hand);font-size:1.25rem;color:var(--teal)}
+.rv .trip{font-size:.8rem;color:var(--muted);display:block}
+.sec-h2{font-family:var(--disp);font-weight:400;font-size:clamp(1.8rem,3.6vw,2.6rem);text-align:center;margin-bottom:2.2rem}
+.sec-hand{display:block;text-align:center;font-family:var(--hand);font-size:1.35rem;color:var(--orange);margin-top:-1.8rem;margin-bottom:2.2rem;transform:rotate(-2deg)}
+footer{background:var(--ink);color:rgba(255,255,255,.75);padding:2.5rem 0;font-size:.88rem}
+.foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.2rem}
+.foot-grid b{color:#fff;font-family:var(--disp);font-weight:400}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top">เที่ยวกัน<small>TIAO KAN TOURS</small></a>
+    <div class="nav-right">
+      <div class="nav-links"><a href="#builder">ออกแบบทริป</a><a href="#packages">แพ็กเกจ</a><a href="#reviews">รีวิว</a></div>
+      <a class="btn btn-o" href="#builder">จองทริป</a>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-bg"><img src="../assets/tour-hero.jpg" alt="เรือหางยาวลอยอยู่บนน้ำทะเลสีมรกต หน้าภูเขาหินปูนยามพระอาทิตย์ตก" fetchpriority="high"></div>
+    <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true">
+      <defs><path id="cir" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+      <circle cx="60" cy="60" r="56" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="4 5" opacity=".85"/>
+      <circle cx="60" cy="60" r="34" fill="none" stroke="#fff" stroke-width="1" opacity=".6"/>
+      <text fill="#fff" font-size="13.5" font-family="Itim" letter-spacing="2"><textPath href="#cir">เที่ยวกัน · TIAO KAN · ทัวร์ในประเทศ · </textPath></text>
+    </svg>
+    <div class="hero-in">
+      <h1>เที่ยวกันเถอะ!<span class="hand">adventure awaits…</span></h1>
+      <p>ทัวร์ในประเทศที่คุณออกแบบเอง — เลือกจุดหมาย วัน และกิจกรรมได้อิสระ ไกด์ใบอนุญาตดูแลตลอดทริป ยกเลิกได้ถึง 7 วันก่อนเดินทาง</p>
+      <a class="btn btn-o" href="#builder">ออกแบบทริปของฉัน →</a>
+    </div>
+  </section>
+
+  <section id="builder">
+    <div class="wrap">
+      <div class="b-card">
+        <div>
+          <h2 class="b-title">ออกแบบทริปของคุณ</h2>
+          <p class="b-sub">เลือกเองทุกอย่าง ราคาคำนวณให้ทันที ไม่มีบวกเพิ่มภายหลัง</p>
+
+          <p class="b-label">1 · อยากไปไหน?</p>
+          <div class="chips" id="dChips">
+            <button class="chip sel" data-name="ภูเก็ต" data-price="3900">ภูเก็ต <span class="pr">฿3,900</span></button>
+            <button class="chip" data-name="กระบี่" data-price="4200">กระบี่ <span class="pr">฿4,200</span></button>
+            <button class="chip" data-name="เชียงใหม่" data-price="3500">เชียงใหม่ <span class="pr">฿3,500</span></button>
+            <button class="chip" data-name="เกาะสมุย" data-price="4500">เกาะสมุย <span class="pr">฿4,500</span></button>
+          </div>
+
+          <p class="b-label">2 · ไปกี่วัน?</p>
+          <div class="stepper" data-key="nights">
+            <button data-d="-1" aria-label="ลดจำนวนวัน">−</button>
+            <span class="val"><b id="nVal">3 วัน 2 คืน</b></span>
+            <button data-d="1" aria-label="เพิ่มจำนวนวัน">+</button>
+          </div>
+
+          <p class="b-label">3 · ไปกันกี่คน?</p>
+          <div class="stepper" data-key="pax">
+            <button data-d="-1" aria-label="ลดจำนวนคน">−</button>
+            <span class="val"><b id="pVal">2 ท่าน</b></span>
+            <button data-d="1" aria-label="เพิ่มจำนวนคน">+</button>
+          </div>
+          <p class="b-sub" style="margin:.5rem 0 0" id="paxNote">ไป 4 ท่านขึ้นไป ลดทันที 10%</p>
+
+          <p class="b-label">4 · กิจกรรมเสริม (ถ้าอยากได้)</p>
+          <div class="checks" id="addons">
+            <button class="check" data-name="ดำน้ำตื่นหมู่เกาะ" data-price="800"><span class="box">✓</span>ดำน้ำตื่นหมู่เกาะ<span class="pr">+฿800/ท่าน</span></button>
+            <button class="check" data-name="มื้อซีฟู้ดริมทะเล" data-price="500"><span class="box">✓</span>มื้อซีฟู้ดริมทะเล<span class="pr">+฿500/ท่าน</span></button>
+            <button class="check" data-name="รถเช่าพร้อมคนขับ 1 วัน" data-price="1200"><span class="box">✓</span>รถเช่าพร้อมคนขับ 1 วัน<span class="pr">+฿1,200/ทริป</span></button>
+          </div>
+        </div>
+
+        <div class="sum" id="sumBox">
+          <h3>สรุปทริปของคุณ</h3>
+          <div class="sum-row"><span>จุดหมาย</span><span id="sDest">ภูเก็ต</span></div>
+          <div class="sum-row"><span>ระยะเวลา</span><span id="sNights">3 วัน 2 คืน</span></div>
+          <div class="sum-row"><span>ผู้เดินทาง</span><span id="sPax">2 ท่าน</span></div>
+          <div class="sum-row"><span>กิจกรรมเสริม</span><span id="sAddons">—</span></div>
+          <div class="sum-row" id="sDiscRow" style="display:none;color:#ffd9a0"><span>ส่วนลดกลุ่ม</span><span>−10%</span></div>
+          <div class="sum-total"><small>ราคารวมทั้งทริป</small><div class="big" id="sTotal">฿0</div></div>
+          <div class="sum-per" id="sPer">—</div>
+          <button class="btn btn-o" id="bookBtn">ขอใบเสนอทริปนี้ →</button>
+          <div class="sum-done" id="sumDone" hidden>
+            <div class="tick">✓</div>
+            <b>ส่งคำขอแล้ว!</b>
+            <p>เลขอ้างอิง <span id="refCode">TK-0000</span><br>ทีมงานติดต่อกลับภายใน 2 ชม.ทำการ</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="route-sec">
+    <div class="wrap">
+      <h2 class="sec-h">เส้นทางยอดฮิต: เหนือจรดใต้</h2>
+      <span class="hand">bangkok → ayutthaya → chiang mai</span>
+      <div class="map-wrap" id="mapWrap">
+        <svg viewBox="0 0 800 380" role="img" aria-label="แผนที่เส้นทางท่องเที่ยวจากกรุงเทพฯ ถึงเชียงใหม่">
+          <path class="rpath" id="rpath" d="M180,320 C240,290 260,250 330,240 C420,228 430,180 500,160 C560,142 600,110 620,80"/>
+          <circle class="rpin" cx="180" cy="320" r="9" style="transition-delay:.1s"/>
+          <circle class="rpin" cx="330" cy="240" r="9" style="transition-delay:.9s"/>
+          <circle class="rpin" cx="500" cy="160" r="9" style="transition-delay:1.6s"/>
+          <circle class="rpin" cx="620" cy="80" r="11" style="transition-delay:2.2s"/>
+          <text class="rlabel" x="150" y="352" style="transition-delay:.2s">กรุงเทพฯ</text>
+          <text class="rlabel" x="300" y="218" style="transition-delay:1s">อยุธยา</text>
+          <text class="rlabel" x="472" y="140" style="transition-delay:1.7s">สุโขทัย</text>
+          <text class="rlabel" x="596" y="58" style="transition-delay:2.3s">เชียงใหม่ ★</text>
+        </svg>
+      </div>
+      <div class="route-stops">
+        <span><b>วันที่ 1</b> กรุงเทพฯ → อยุธยา ชมวัดมเหยงคณ์</span>
+        <span><b>วันที่ 2</b> สุโขทัย ปั่นจักรยานอุทยานประวัติศาสตร์</span>
+        <span><b>วันที่ 3–4</b> เชียงใหม่ ดอยสุเทพ + คาเฟ่นิมมาน</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="packages">
+    <div class="wrap">
+      <h2 class="sec-h2">แพ็กเกจพร้อมไป ยอดนิยม</h2>
+      <span class="sec-hand">handpicked for you</span>
+      <div class="pkg-grid">
+        <article class="pkg">
+          <span class="p-stamp">HOT!</span>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1537956965359-7573183d1f57?q=80&w=1000&auto=format&fit=crop" alt="เรือหางยาวที่เกาะพีพี">
+          <div class="p-body">
+            <span class="days">3 วัน 2 คืน</span>
+            <h3>ภูเก็ต เกาะสวย</h3>
+            <ul><li>พีพี + อ่าวมาหยา เต็มวัน</li><li>โรงแรมติดทะเลพร้อมอาหารเช้า</li><li>รถรับส่งสนามบิน</li></ul>
+            <div class="p-foot"><span class="price">฿5,900 <small>/ ท่าน</small></span><a href="#builder" class="btn btn-g" style="padding:.5rem 1.1rem;font-size:.9rem">ปรับทริปนี้</a></div>
+          </div>
+        </article>
+        <article class="pkg">
+          <span class="p-stamp">NEW</span>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1493787039806-2edcbe808750?q=80&w=1000&auto=format&fit=crop" alt="โคมลอยลอยฟ้างานเทศกาลเชียงใหม่">
+          <div class="p-body">
+            <span class="days">4 วัน 3 คืน</span>
+            <h3>เชียงใหม่ – ปาย</h3>
+            <ul><li>ดอยอินทนนท์ + สะพานบุญ</li><li>โฮมสเตย์ปาย 1 คืน</li><li>คาเฟ่และตลาดถนนคนเดิน</li></ul>
+            <div class="p-foot"><span class="price">฿7,400 <small>/ ท่าน</small></span><a href="#builder" class="btn btn-g" style="padding:.5rem 1.1rem;font-size:.9rem">ปรับทริปนี้</a></div>
+          </div>
+        </article>
+        <article class="pkg">
+          <span class="p-stamp">VALUE</span>
+          <img loading="lazy" src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=1000&auto=format&fit=crop" alt="มุมสูงเรือหางยาวหน้าชายหาด">
+          <div class="p-body">
+            <span class="days">2 วัน 1 คืน</span>
+            <h3>กระบี่ เร่งด่วน</h3>
+            <ul><li>ทะเลแหวก + เกาะปอดะ</li><li>ชมพระอาทิตย์ตกอ่าวนาง</li><li>เหมาะกับวันหยุดสั้น</li></ul>
+            <div class="p-foot"><span class="price">฿3,900 <small>/ ท่าน</small></span><a href="#builder" class="btn btn-g" style="padding:.5rem 1.1rem;font-size:.9rem">ปรับทริปนี้</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" style="padding-top:0">
+    <div class="wrap">
+      <div class="rv-grid">
+        <div class="rv">
+          <p>"ไปภูเก็ตกับเที่ยวกัน 6 คน ได้ส่วนลดกลุ่มด้วย ไกด์พี่บอลน่ารักมาก พาไปจุดลับที่คนไม่เยอะ ประทับใจสุดๆ"</p>
+          <span class="who">— แก้งแฟมิลี่</span>
+          <span class="trip">ทริปภูเก็ต 3 วัน 2 คืน</span>
+        </div>
+        <div class="rv">
+          <p>"ขอใบเสนอตอนบ่าย เย็นได้รับตอบแล้ว งบตรงเป๊ะไม่มีบวกเพิ่ม ปีหน้าจองเชียงใหม่ต่อแน่นอนค่ะ"</p>
+          <span class="who">— คุณนิดา</span>
+          <span class="trip">ทริปกระบี่ 2 วัน 1 คืน</span>
+        </div>
+      </div>
+      <div class="trust" style="margin-top:2.5rem">
+        <div><b>ประกันการเดินทางทุกทริป</b><p>คุ้มครองอุบัติเหตุตลอดการเดินทาง ไม่ต้องจ่ายเพิ่ม</p></div>
+        <div><b>ไกด์ใบอนุญาต ทก.</b><p>ไกด์ท้องถิ่นมืออาชีพทุกคน รู้จุดลับที่รีวิวไม่บอก</p></div>
+        <div><b>ยกเลิกได้ถึง 7 วัน</b><p>เปลี่ยนใจก่อนเดินทาง คืนเงินเต็มจำนวน ไม่มีเงื่อนไขซ่อน</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span><b>เที่ยวกัน TIAO KAN TOURS</b> · ใบอนุญาตท่องเที่ยว 11/0xxxxx</span>
+    <span>โทร 02-456-7890 · LINE @tiaokan · จ–ส 9:00–19:00</span>
+    <span>© 2569 บริษัท เที่ยวกัน จำกัด</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var state = { dest: { name: 'ภูเก็ต', price: 3900 }, nightsIdx: 1, pax: 2, addons: [] };
+  var NIGHTS = [
+    { label: '2 วัน 1 คืน', mult: 1 },
+    { label: '3 วัน 2 คืน', mult: 1.6 },
+    { label: '4 วัน 3 คืน', mult: 2.2 }
+  ];
+  var fmt = function(n){ return '฿' + Math.round(n).toLocaleString('th-TH'); };
+
+  /* --- destination chips --- */
+  document.querySelectorAll('#dChips .chip').forEach(function(c){
+    c.addEventListener('click', function(){
+      document.querySelectorAll('#dChips .chip').forEach(function(x){ x.classList.remove('sel'); });
+      c.classList.add('sel');
+      state.dest = { name: c.dataset.name, price: +c.dataset.price };
+      calc();
+    });
+  });
+
+  /* --- steppers --- */
+  document.querySelectorAll('.stepper').forEach(function(st){
+    st.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        var d = +b.dataset.d;
+        if (st.dataset.key === 'nights') state.nightsIdx = Math.min(2, Math.max(0, state.nightsIdx + d));
+        if (st.dataset.key === 'pax') state.pax = Math.min(8, Math.max(1, state.pax + d));
+        calc();
+      });
+    });
+  });
+
+  /* --- addons --- */
+  document.querySelectorAll('#addons .check').forEach(function(c){
+    c.addEventListener('click', function(){
+      c.classList.toggle('sel');
+      var name = c.dataset.name, price = +c.dataset.price;
+      if (c.classList.contains('sel')) state.addons.push({ name: name, price: price, per: name.indexOf('รถเช่า') === 0 ? 'trip' : 'pax' });
+      else state.addons = state.addons.filter(function(a){ return a.name !== name; });
+      calc();
+    });
+  });
+
+  function calc(){
+    var n = NIGHTS[state.nightsIdx];
+    var base = state.dest.price * n.mult * state.pax;
+    var addonTotal = state.addons.reduce(function(s, a){ return s + (a.per === 'trip' ? a.price : a.price * state.pax); }, 0);
+    var disc = state.pax >= 4 ? (base + addonTotal) * 0.10 : 0;
+    var total = base + addonTotal - disc;
+    var per = total / state.pax;
+
+    document.getElementById('nVal').textContent = n.label;
+    document.getElementById('pVal').textContent = state.pax + ' ท่าน';
+    document.getElementById('sDest').textContent = state.dest.name;
+    document.getElementById('sNights').textContent = n.label;
+    document.getElementById('sPax').textContent = state.pax + ' ท่าน';
+    document.getElementById('sAddons').textContent = state.addons.length ? state.addons.map(function(a){ return a.name; }).join(', ') : '—';
+    document.getElementById('sDiscRow').style.display = disc > 0 ? '' : 'none';
+    var big = document.getElementById('sTotal');
+    big.textContent = fmt(total);
+    big.classList.add('bump');
+    setTimeout(function(){ big.classList.remove('bump'); }, 220);
+    document.getElementById('sPer').textContent = 'เฉลี่ย ' + fmt(per) + ' ต่อท่าน';
+    document.getElementById('paxNote').style.color = state.pax >= 4 ? '#d95426' : '';
+    document.getElementById('paxNote').style.fontWeight = state.pax >= 4 ? '500' : '';
+  }
+  calc();
+
+  /* --- book --- */
+  document.getElementById('bookBtn').addEventListener('click', function(){
+    document.getElementById('refCode').textContent = 'TK-' + Math.floor(1000 + Math.random() * 9000);
+    document.getElementById('bookBtn').hidden = true;
+    document.getElementById('sumDone').hidden = false;
+  });
+
+  /* --- route map draw on view --- */
+  var path = document.getElementById('rpath');
+  var wrap = document.getElementById('mapWrap');
+  var len = path.getTotalLength();
+  path.style.strokeDasharray = len;
+  path.style.strokeDashoffset = len;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function draw(){
+    if (reduced) { path.style.strokeDashoffset = 0; wrap.classList.add('drawn'); return; }
+    path.style.transition = 'stroke-dashoffset 2.4s ease-in-out';
+    requestAnimationFrame(function(){ path.style.strokeDashoffset = 0; });
+    wrap.classList.add('drawn');
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { draw(); io.disconnect(); } });
+    }, { threshold: 0.4 });
+    io.observe(wrap);
+  } else draw();
+
+  document.documentElement.style.scrollBehavior = reduced ? 'auto' : 'smooth';
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+</body>
+</html>
