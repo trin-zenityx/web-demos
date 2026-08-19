@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ธนภูมิ วัสดุก่อสร้าง — ค้าส่งวัสดุก่อสร้างครบวงจร ส่งไวถึงไซต์</title>
+<meta name="description" content="ธนภูมิ วัสดุก่อสร้าง ตัวแทนจำหน่ายค้าส่งปูน เหล็ก ไม้ สี และเคมีภัณฑ์ก่อสร้าง ราคาโครงการ ส่งฟรีรัศมี 30 กม. โกดังบางบัวทอง">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@400;600;800&family=Chonburi&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#edeeea;
+  --card:#f7f8f5;
+  --ink:#23272a;
+  --steel:#5b6670;
+  --yellow:#f5b301;
+  --line:#d4d6d0;
+  --red:#c0392b;
+  --green:#2e7d32;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Sarabun',sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+.en,.sku,.num{font-family:'Big Shoulders',sans-serif}
+h1,h2,h3{font-family:'Chonburi',serif;font-weight:400;line-height:1.3}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+::selection{background:var(--yellow);color:var(--ink)}
+
+.blueprint{
+  background-image:
+    repeating-linear-gradient(0deg,rgba(35,39,42,.05) 0 1px,transparent 1px 32px),
+    repeating-linear-gradient(90deg,rgba(35,39,42,.05) 0 1px,transparent 1px 32px);
+}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* ---------- ANNOUNCEMENT BAR ---------- */
+.announce{
+  background:var(--yellow);
+  color:var(--ink);
+  border-bottom:2px solid var(--ink);
+  text-align:center;
+  font-weight:600;
+  font-size:15px;
+  padding:10px 16px;
+  min-height:42px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.announce .dot{width:9px;height:9px;background:var(--ink);flex:none}
+#annText{transition:opacity .45s ease}
+#annText.fade{opacity:0}
+
+/* ---------- NAV ---------- */
+header.nav{
+  background:var(--card);
+  border-bottom:2px solid var(--ink);
+  position:sticky;top:0;z-index:60;
+}
+.nav-in{display:flex;align-items:center;gap:20px;min-height:72px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
+.logo-mark{
+  width:46px;height:46px;background:var(--ink);color:var(--yellow);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Chonburi',serif;font-size:24px;flex:none;
+  border:2px solid var(--ink);
+}
+.logo-txt{line-height:1.15}
+.logo-txt .th{font-family:'Chonburi',serif;font-size:22px;display:block}
+.logo-txt .en{font-family:'Big Shoulders',sans-serif;font-weight:600;font-size:13px;letter-spacing:.18em;color:var(--steel);text-transform:uppercase}
+nav.menu{margin-left:auto}
+nav.menu ul{list-style:none;display:flex;gap:4px}
+nav.menu a{
+  text-decoration:none;font-weight:600;font-size:16px;
+  padding:12px 16px;display:inline-block;min-height:44px;
+  border:2px solid transparent;
+}
+nav.menu a:hover{border-color:var(--ink);background:var(--bg)}
+.call-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--ink);color:#fff;text-decoration:none;
+  font-family:'Big Shoulders',sans-serif;font-weight:600;font-size:19px;letter-spacing:.04em;
+  padding:10px 18px;min-height:44px;border:2px solid var(--ink);flex:none;
+}
+.call-btn:hover{background:var(--yellow);color:var(--ink)}
+.call-btn svg{flex:none}
+.burger{
+  display:none;margin-left:auto;background:none;border:2px solid var(--ink);
+  width:48px;height:48px;cursor:pointer;align-items:center;justify-content:center;
+}
+@media(max-width:900px){
+  .burger{display:inline-flex}
+  nav.menu{
+    position:absolute;top:100%;left:0;right:0;margin:0;
+    background:var(--card);border-bottom:2px solid var(--ink);
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+  }
+  nav.menu.open{max-height:320px}
+  nav.menu ul{flex-direction:column;padding:8px 0}
+  nav.menu a{display:block;padding:14px 24px}
+  .call-btn{margin-left:auto}
+}
+@media(max-width:560px){.call-btn span.tel{display:none}.call-btn{padding:10px 12px}}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;color:#fff;overflow:hidden;border-bottom:2px solid var(--ink)}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover}
+.hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(20,23,25,.88) 25%,rgba(20,23,25,.55) 65%,rgba(20,23,25,.35));
+}
+.hero-in{position:relative;padding:84px 0 0}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Big Shoulders',sans-serif;font-weight:600;letter-spacing:.22em;font-size:15px;text-transform:uppercase;
+  color:var(--yellow);border:1px solid rgba(245,179,1,.5);padding:6px 14px;margin-bottom:22px;
+}
+.hero h1{font-size:clamp(34px,5.4vw,64px);line-height:1.22;max-width:16em}
+.hero h1 .hl{color:var(--yellow)}
+.hero p.sub{margin:18px 0 26px;max-width:34em;font-size:18px;color:#e6e8e4}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.chip{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(255,255,255,.45);padding:8px 14px;
+  font-size:14.5px;font-weight:500;background:rgba(20,23,25,.35);
+}
+.chip svg{flex:none;color:var(--yellow)}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:56px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'Sarabun',sans-serif;font-weight:600;font-size:17px;
+  padding:14px 30px;min-height:52px;cursor:pointer;text-decoration:none;
+  border:2px solid var(--ink);background:var(--yellow);color:var(--ink);
+  transition:background .15s ease,transform .15s ease;
+}
+.btn:hover{background:#ffc819;transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:#fff;border-color:#fff}
+.btn.ghost:hover{background:rgba(255,255,255,.12)}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.dark:hover{background:#3a4045}
+.hero-stats{
+  position:relative;display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:2px solid rgba(255,255,255,.25);
+}
+.hero-stats .st{
+  padding:22px 24px;border-right:1px solid rgba(255,255,255,.18);
+  background:rgba(20,23,25,.45);
+}
+.hero-stats .st:last-child{border-right:none}
+.hero-stats .n{font-family:'Big Shoulders',sans-serif;font-weight:800;font-size:clamp(26px,3vw,40px);color:var(--yellow);line-height:1.1}
+.hero-stats .l{font-size:14.5px;color:#d9dcd6}
+@media(max-width:820px){
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .hero-stats .st:nth-child(2){border-right:none}
+  .hero-stats .st{border-bottom:1px solid rgba(255,255,255,.18)}
+}
+
+/* ---------- SECTION HEADERS ---------- */
+section{padding:72px 0}
+.kick{
+  display:flex;align-items:center;gap:12px;margin-bottom:10px;
+  font-family:'Big Shoulders',sans-serif;font-weight:600;font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--steel);
+}
+.kick::before{content:"";width:14px;height:14px;background:var(--yellow);border:2px solid var(--ink)}
+h2.sec{font-size:clamp(26px,3.4vw,40px);margin-bottom:8px}
+.sec-sub{color:var(--steel);max-width:44em;margin-bottom:34px}
+
+/* ---------- CATALOG ---------- */
+#catalog{background:var(--bg)}
+.cat-jump{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px}
+.cat-jump a{
+  text-decoration:none;font-weight:600;font-size:15.5px;
+  border:2px solid var(--ink);background:var(--card);padding:9px 18px;min-height:44px;display:inline-flex;align-items:center;gap:8px;
+}
+.cat-jump a:hover{background:var(--yellow)}
+.cat-jump .en{font-size:14px;color:var(--steel);letter-spacing:.1em}
+.cat-block{margin-bottom:48px;scroll-margin-top:96px}
+.cat-head{
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  border-bottom:3px solid var(--ink);padding-bottom:10px;margin-bottom:0;
+}
+.cat-head h3{font-size:24px}
+.cat-head .code{font-family:'Big Shoulders',sans-serif;font-weight:600;letter-spacing:.2em;color:var(--steel);font-size:15px}
+.cat-head .cnt{margin-left:auto;font-size:14.5px;color:var(--steel)}
+.tbl{border:2px solid var(--ink);border-top:none;background:var(--card)}
+.tbl-head,.row{
+  display:grid;
+  grid-template-columns:130px 1fr 90px 130px 170px;
+  align-items:center;gap:12px;
+}
+.tbl-head{
+  background:var(--ink);color:#fff;
+  font-family:'Big Shoulders',sans-serif;font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:14px;
+  padding:10px 18px;
+}
+.row{padding:12px 18px;border-top:1px solid var(--line)}
+.row:hover{background:#fff}
+.row .sku{font-weight:800;font-size:19px;letter-spacing:.06em}
+.row .nm{font-weight:500}
+.row .nm small{display:block;color:var(--steel);font-size:13.5px;font-weight:400}
+.row .unit{color:var(--steel);font-size:15px}
+.row .price{font-family:'Big Shoulders',sans-serif;font-weight:800;font-size:23px;white-space:nowrap}
+.row .price small{font-family:'Sarabun',sans-serif;font-weight:400;font-size:13px;color:var(--steel)}
+.add-btn{
+  justify-self:end;display:inline-flex;align-items:center;gap:7px;
+  background:var(--card);border:2px solid var(--ink);cursor:pointer;
+  font-family:'Sarabun',sans-serif;font-weight:600;font-size:15px;
+  padding:9px 16px;min-height:44px;transition:background .15s;
+  white-space:nowrap;
+}
+.add-btn:hover{background:var(--yellow)}
+.add-btn.added{background:var(--ink);color:var(--yellow)}
+.add-btn svg{flex:none}
+@media(max-width:820px){
+  .tbl-head{display:none}
+  .row{grid-template-columns:1fr auto;grid-template-areas:"sku price" "nm nm" "unit unit" "btn btn";row-gap:4px;padding:16px 18px}
+  .row .sku{grid-area:sku}
+  .row .price{grid-area:price;justify-self:end}
+  .row .nm{grid-area:nm}
+  .row .unit{grid-area:unit}
+  .add-btn{grid-area:btn;justify-self:stretch;justify-content:center;margin-top:8px}
+}
+
+/* ---------- QUICK SKU PAD ---------- */
+#quick{background:var(--ink);color:#fff;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+#quick .kick{color:#b9c0c6}
+#quick .sec-sub{color:#c7ccc0}
+.qpad{
+  border:2px solid var(--yellow);
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.045) 0 1px,transparent 1px 28px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px 28px),
+    #2b3034;
+  padding:34px;max-width:860px;
+}
+.qpad-title{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.qpad-title h3{font-size:23px;color:var(--yellow)}
+.qpad p.hint{color:#c7ccc0;font-size:15px;margin-bottom:22px}
+.qpad p.hint .en{color:var(--yellow);font-weight:600;letter-spacing:.08em}
+.qform{display:grid;grid-template-columns:1fr 150px auto;gap:14px}
+.qform label{display:block;font-size:14px;font-weight:600;margin-bottom:6px;color:#d9dcd6}
+.qform input{
+  width:100%;border:2px solid #4a525a;background:var(--ink);color:#fff;
+  font-family:'Big Shoulders',sans-serif;font-weight:600;font-size:19px;letter-spacing:.08em;
+  padding:12px 14px;min-height:52px;
+}
+.qform input::placeholder{color:#79828b}
+.qform input:focus-visible{outline:3px solid var(--yellow);outline-offset:0;border-color:var(--yellow)}
+.qmsg{min-height:26px;margin-top:12px;font-weight:600;font-size:15.5px}
+.qmsg.err{color:#ff8a7a}
+.qmsg.ok{color:#8fd694}
+@media(max-width:680px){.qform{grid-template-columns:1fr}.qpad{padding:24px 18px}}
+
+/* ---------- DELIVERY ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.svc{border:2px solid var(--ink);background:var(--card);display:flex;flex-direction:column}
+.svc .img{height:190px;overflow:hidden;border-bottom:2px solid var(--ink)}
+.svc .img img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05)}
+.svc .bd{padding:22px 22px 26px}
+.svc .tag{
+  display:inline-block;font-family:'Big Shoulders',sans-serif;font-weight:600;letter-spacing:.16em;font-size:13px;text-transform:uppercase;
+  background:var(--yellow);border:2px solid var(--ink);padding:2px 10px;margin-bottom:12px;
+}
+.svc h3{font-size:21px;margin-bottom:8px}
+.svc p{color:var(--steel);font-size:15.5px}
+@media(max-width:860px){.svc-grid{grid-template-columns:1fr}.svc .img{height:210px}}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--ink);color:#e6e8e4;border-top:4px solid var(--yellow)}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px;padding:60px 0 40px}
+.foot-grid h4{font-family:'Chonburi',serif;font-weight:400;font-size:19px;color:#fff;margin-bottom:14px}
+.foot-grid p,.foot-grid li{font-size:15.5px;color:#c2c7bd}
+.foot-grid ul{list-style:none}
+.foot-grid li{padding:4px 0}
+.foot-grid .en{color:var(--yellow);font-weight:600;letter-spacing:.06em}
+.f-brand{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.f-brand .logo-mark{width:42px;height:42px;font-size:20px;border-color:var(--yellow)}
+.f-brand .th{font-family:'Chonburi',serif;font-size:20px;color:#fff;display:block;line-height:1.2}
+.f-brand .en2{font-family:'Big Shoulders',sans-serif;letter-spacing:.18em;font-size:12px;color:#8b939a;text-transform:uppercase}
+.dealer{margin-top:18px;border:1px dashed #5b6670;padding:12px 16px;font-size:14.5px;color:#d9dcd6}
+.dealer b{color:var(--yellow);font-weight:600}
+.foot-bot{border-top:1px solid #3a4045;padding:18px 0;font-size:14px;color:#8b939a;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:820px){.foot-grid{grid-template-columns:1fr}}
+
+/* ---------- FLOATING RFQ BUTTON ---------- */
+#rfqFab{
+  position:fixed;right:20px;bottom:20px;z-index:80;
+  display:none;align-items:center;gap:10px;
+  background:var(--yellow);border:2px solid var(--ink);cursor:pointer;
+  font-family:'Sarabun',sans-serif;font-weight:600;font-size:16.5px;color:var(--ink);
+  padding:14px 22px;min-height:56px;
+  box-shadow:6px 6px 0 rgba(35,39,42,.85);
+  transition:transform .15s ease;
+}
+#rfqFab.show{display:inline-flex}
+#rfqFab:hover{transform:translate(-2px,-2px)}
+#rfqFab .cnt{
+  font-family:'Big Shoulders',sans-serif;font-weight:800;font-size:19px;
+  background:var(--ink);color:var(--yellow);min-width:30px;height:30px;
+  display:inline-flex;align-items:center;justify-content:center;padding:0 6px;
+}
+
+/* ---------- DRAWER ---------- */
+#backdrop{
+  position:fixed;inset:0;background:rgba(20,23,25,.55);z-index:90;
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+}
+#backdrop.open{opacity:1;pointer-events:auto}
+#drawer{
+  position:fixed;top:0;right:0;height:100dvh;width:min(440px,100vw);z-index:100;
+  background:var(--card);border-left:3px solid var(--ink);
+  box-shadow:-14px 0 40px rgba(20,23,25,.35);
+  transform:translateX(105%);transition:transform .35s ease;
+  display:flex;flex-direction:column;
+}
+#drawer.open{transform:translateX(0)}
+.dr-head{
+  display:flex;align-items:center;gap:12px;
+  background:var(--ink);color:#fff;padding:18px 20px;flex:none;
+}
+.dr-head h3{font-family:'Chonburi',serif;font-weight:400;font-size:20px}
+.dr-head .sub{font-size:13px;color:#b9c0c6;display:block}
+.dr-close{
+  margin-left:auto;background:none;border:2px solid #5b6670;color:#fff;
+  width:44px;height:44px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
+}
+.dr-close:hover{border-color:var(--yellow);color:var(--yellow)}
+.dr-body{flex:1;overflow-y:auto;padding:16px 20px}
+.dr-empty{
+  text-align:center;color:var(--steel);padding:60px 10px;font-size:15.5px;
+}
+.dr-empty svg{margin:0 auto 14px;color:var(--line)}
+.dr-item{border:2px solid var(--line);background:#fff;padding:14px;margin-bottom:12px}
+.dr-item .top{display:flex;gap:10px;align-items:flex-start}
+.dr-item .nm{font-weight:600;font-size:15.5px;line-height:1.45}
+.dr-item .sk{font-family:'Big Shoulders',sans-serif;font-weight:600;font-size:13.5px;letter-spacing:.1em;color:var(--steel)}
+.dr-item .rm{
+  margin-left:auto;background:none;border:none;cursor:pointer;color:var(--steel);
+  width:44px;height:44px;flex:none;display:inline-flex;align-items:center;justify-content:center;
+}
+.dr-item .rm:hover{color:var(--red)}
+.dr-item .ctl{display:flex;align-items:center;gap:12px;margin-top:10px}
+.stepper{display:inline-flex;border:2px solid var(--ink)}
+.stepper button{
+  width:44px;height:44px;background:var(--card);border:none;cursor:pointer;
+  font-family:'Big Shoulders',sans-serif;font-weight:800;font-size:22px;color:var(--ink);
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.stepper button:hover{background:var(--yellow)}
+.stepper .qv{
+  min-width:52px;display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Big Shoulders',sans-serif;font-weight:800;font-size:20px;
+  border-left:2px solid var(--ink);border-right:2px solid var(--ink);background:#fff;
+}
+.dr-item .line-total{
+  margin-left:auto;font-family:'Big Shoulders',sans-serif;font-weight:800;font-size:21px;white-space:nowrap;
+}
+.dr-item .line-total small{font-family:'Sarabun',sans-serif;font-weight:400;font-size:12.5px;color:var(--steel);display:block;text-align:right}
+.dr-foot{
+  flex:none;border-top:2px solid var(--ink);background:var(--card);padding:18px 20px 20px;
+}
+.sum-row{display:flex;justify-content:space-between;font-size:15.5px;padding:3px 0}
+.sum-row .num{font-weight:600;font-size:19px}
+.sum-row.vat{color:var(--steel)}
+.sum-row.total{border-top:2px solid var(--ink);margin-top:10px;padding-top:12px;font-weight:600;font-size:17px}
+.sum-row.total .num{font-weight:800;font-size:27px;color:var(--ink)}
+.vat-note{font-size:13px;color:var(--steel);margin:8px 0 14px}
+.dr-submit{width:100%;font-size:18px}
+.dr-success{display:none;text-align:center;padding:44px 12px}
+.dr-success.show{display:block}
+.dr-success .ok-badge{
+  width:78px;height:78px;margin:0 auto 20px;background:var(--yellow);border:3px solid var(--ink);
+  display:flex;align-items:center;justify-content:center;
+}
+.dr-success h4{font-family:'Chonburi',serif;font-weight:400;font-size:24px;margin-bottom:8px}
+.dr-success .ref{
+  font-family:'Big Shoulders',sans-serif;font-weight:800;font-size:30px;letter-spacing:.1em;
+  border:2px dashed var(--ink);display:inline-block;padding:8px 22px;margin:14px 0;
+}
+.dr-success p{color:var(--steel);font-size:15.5px}
+.dr-success .btn{margin-top:20px}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce" role="status" aria-live="polite">
+  <span class="dot" aria-hidden="true"></span>
+  <span id="annText">ปูนถุง ราคาโครงการ ฿118/ถุง เมื่อสั่งขั้นต่ำ 100 ถุง</span>
+  <span class="dot" aria-hidden="true"></span>
+</div>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#top" aria-label="ธนภูมิ วัสดุก่อสร้าง กลับขึ้นด้านบน">
+      <span class="logo-mark" aria-hidden="true">ธ</span>
+      <span class="logo-txt">
+        <span class="th">ธนภูมิ</span>
+        <span class="en">Thanaphum Supply</span>
+      </span>
+    </a>
+    <button class="burger" id="burger" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="mainMenu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="menu" id="mainMenu" aria-label="เมนูหลัก">
+      <ul>
+        <li><a href="#catalog">แคตตาล็อก</a></li>
+        <li><a href="#quick">สั่งด่วนด้วยรหัส</a></li>
+        <li><a href="#delivery">บริการจัดส่ง</a></li>
+        <li><a href="#contact">ติดต่อ</a></li>
+      </ul>
+    </nav>
+    <a class="call-btn" href="tel:024158899">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.9z"/></svg>
+      <span class="tel">02-415-8899</span>
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top" style="padding:0">
+  <div class="hero-bg">
+    <img src="../assets/wholesale-hero.jpg" alt="โกดังคลังวัสดุก่อสร้างของธนภูมิ จัดเก็บปูนถุงและเหล็กเส้นเป็นค้อยเรียงระเบียบ" fetchpriority="high">
+  </div>
+  <div class="wrap hero-in">
+    <span class="hero-kicker">Wholesale Construction Supply — นนทบุรี</span>
+    <h1>วัสดุก่อสร้าง <span class="hl">ครบ ถูก ส่งไว</span> ถึงหน้างานของคุณ</h1>
+    <p class="sub">ตัวแทนจำหน่ายค้าส่งปูน เหล็ก ไม้ และเคมีภัณฑ์ก่อสร้าง ราคาโครงการโดยตรงจากโกดังบางบัวทอง พร้อมทีมขนส่งและเครนของตัวเอง</p>
+    <div class="chips">
+      <span class="chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>SCG ตราช้าง</span>
+      <span class="chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>TPI ตราเพชร</span>
+      <span class="chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>เหล็ก มอก.</span>
+      <span class="chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>ใบกำกับภาษีเต็มรูป</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn" href="#catalog">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>
+        ขอใบเสนอราคา
+      </a>
+      <a class="btn ghost" href="#quick">สั่งด่วนด้วยรหัส SKU</a>
+    </div>
+    <div class="hero-stats">
+      <div class="st"><div class="n en">24 ชม.</div><div class="l">ส่งถึงไซต์งานเร็วสุด</div></div>
+      <div class="st"><div class="n en">2,400 ตร.ม.</div><div class="l">พื้นที่โกดังสต็อกสินค้า</div></div>
+      <div class="st"><div class="n en">300+</div><div class="l">โครงการลูกค้าประจำ</div></div>
+      <div class="st"><div class="n en">32 ปี</div><div class="l">ประสบการณ์ค้าวัสดุ</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section id="catalog" class="blueprint">
+  <div class="wrap">
+    <div class="kick">Catalog — 01</div>
+    <h2 class="sec">แคตตาล็อกราคาค้าส่ง</h2>
+    <p class="sec-sub">ราคาต่อหน่วยสำหรับผู้รับเหมาและโครงการ กด “+ ใบเสนอราคา” เพื่อรวบรวมรายการ ระบบคิด VAT 7% ให้อัตโนมัติในใบขอเสนอราคา</p>
+    <div class="cat-jump" aria-label="ไปยังหมวดสินค้า">
+      <a href="#cat-cement">ปูนซิเมนต์ <span class="en">Cement</span></a>
+      <a href="#cat-steel">เหล็ก <span class="en">Steel</span></a>
+      <a href="#cat-wood">ไม้และแผ่นไม้อัด <span class="en">Wood</span></a>
+      <a href="#cat-paint">สีและเคมีภัณฑ์ <span class="en">Paint</span></a>
+    </div>
+    <div id="catalogRoot"></div>
+  </div>
+</section>
+
+<!-- QUICK SKU PAD -->
+<section id="quick">
+  <div class="wrap">
+    <div class="kick">Quick Order — 02</div>
+    <h2 class="sec">สั่งด่วนด้วยรหัส SKU</h2>
+    <p class="sec-sub">ลูกค้าประจำที่รู้รหัสสินค้าอยู่แล้ว พิมพ์รหัสและจำนวน ระบบจะเพิ่มเข้าใบขอเสนอราคาใบเดียวกันทันที</p>
+    <div class="qpad">
+      <div class="qpad-title">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f5b301" stroke-width="2" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>
+        <h3>กล่องสั่งด่วน</h3>
+      </div>
+      <p class="hint">ตัวอย่างรหัสที่ใช้ได้: <span class="en">SCG-501</span>, <span class="en">STL-DB12</span>, <span class="en">TOA-SHLD</span> — ดูรหัสทั้งหมดได้ในตารางแคตตาล็อก</p>
+      <form class="qform" id="qform" novalidate>
+        <div>
+          <label for="qsku">รหัส SKU</label>
+          <input id="qsku" name="qsku" type="text" placeholder="เช่น SCG-501" autocomplete="off" list="skuList" style="text-transform:uppercase">
+          <datalist id="skuList"></datalist>
+        </div>
+        <div>
+          <label for="qqty">จำนวน</label>
+          <input id="qqty" name="qqty" type="number" min="1" max="9999" value="1" inputmode="numeric">
+        </div>
+        <div style="align-self:end">
+          <button type="submit" class="btn" style="width:100%">เพิ่มลงใบเสนอราคา</button>
+        </div>
+      </form>
+      <div class="qmsg" id="qmsg" role="alert" aria-live="assertive"></div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY -->
+<section id="delivery">
+  <div class="wrap">
+    <div class="kick">Logistics — 03</div>
+    <h2 class="sec">บริการจัดส่งถึงหน้างาน</h2>
+    <p class="sec-sub">รถขนส่งและเครื่องจักรของเราเอง ควบคุมเวลาได้จริง ส่งฟรีรัศมี 30 กิโลเมตรจากโกดังบางบัวทอง</p>
+    <div class="svc-grid">
+      <article class="svc">
+        <div class="img"><img src="https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=1000&auto=format&fit=crop" alt="คลังสินค้าพร้อมรถบรรทุก 6 ล้อสำหรับขนปูนและวัสดุหนัก" loading="lazy"></div>
+        <div class="bd">
+          <span class="tag">Truck Fleet</span>
+          <h3>รถ 6 ล้อขนส่ง</h3>
+          <p>รถ 6 ล้อเพลาเดียวและสองเพลา 8 คัน รับน้ำหนักได้เต็มพิกัด เหมาะกับปูนถุง เหล็กเส้น และงานสต็อกประจำไซต์ นัดรอบส่งเช้า–บ่ายได้</p>
+        </div>
+      </article>
+      <article class="svc">
+        <div class="img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1000&auto=format&fit=crop" alt="เครนและรถแบคโฮทำงานในไซต์ก่อสร้างยามเย็น" loading="lazy"></div>
+        <div class="bd">
+          <span class="tag">Crane &amp; Backhoe</span>
+          <h3>เครน + รถแบคโฮ</h3>
+          <p>บริการเครนติดรถยกเหล็ก ไม้อัด และวัสดุยกยากขึ้นชั้นสอง พร้อมรถแบคโฮรายวันสำหรับงานถมที่และขุดฐานราก มีคนขับประจำ</p>
+        </div>
+      </article>
+      <article class="svc">
+        <div class="img"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1000&auto=format&fit=crop" alt="คนงานก่อสร้างเร่งส่งมอบงานตามกำหนดเวลา" loading="lazy"></div>
+        <div class="bd">
+          <span class="tag">Express 4H</span>
+          <h3>ส่งด่วน 4 ชั่วโมง</h3>
+          <p>สั่งก่อน 14:00 น. รับของภายใน 4 ชั่วโมงในเขตนนทบุรี ปทุมธานี และกรุงเทพฯ ฝั่งตะวันตก เหมาะกับงานเร่งด่วนที่สต็อกหน้างานขาด</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="f-brand">
+          <span class="logo-mark" aria-hidden="true">ธ</span>
+          <span>
+            <span class="th">ธนภูมิ วัสดุก่อสร้าง</span>
+            <span class="en2">Thanaphum Construction Supply Co., Ltd.</span>
+          </span>
+        </div>
+        <p>โกดังใหญ่ 56/8 หมู่ 4 ถนนบางกรวย–ไทรน้อย ตำบลบางบัวทอง อำเภอบางบัวทอง จังหวัดนนทบุรี 11110</p>
+        <div class="dealer"><b>ตัวแทนจำหน่ายอย่างเป็นทางการ</b> SCG, TPI ตราเพชร, เหล็กเต็มรูปแบบ มอก., TOA และเบเยอร์ — ออกใบกำกับภาษีเต็มรูปทุกใบ</div>
+      </div>
+      <div>
+        <h4>เวลาทำการ</h4>
+        <ul>
+          <li>จันทร์–เสาร์ 06:30–17:30 น.</li>
+          <li>อาทิตย์ ปิดทำการ (รับออเดอร์ล่วงหน้า)</li>
+          <li>รอบรถส่ง: เช้า 08:00 น. / บ่าย 13:00 น.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>ติดต่อฝ่ายขาย</h4>
+        <ul>
+          <li>โทร <span class="en">02-415-8899</span> (ฝ่ายขายโครงการ)</li>
+          <li>มือถือ <span class="en">081-772-4455</span> (คุณเป๊ะ)</li>
+          <li>LINE <span class="en">@thanaphum</span></li>
+          <li>อีเมล <span class="en">sales@thanaphum.co.th</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2568 ธนภูมิ วัสดุก่อสร้าง จำกัด — เว็บไซต์ตัวอย่างสำหรับนำเสนอ</span>
+      <span class="en">WHOLESALE · B2B · SINCE 1992</span>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING RFQ BUTTON -->
+<button id="rfqFab" aria-label="เปิดใบขอเสนอราคา">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>
+  ใบเสนอราคา <span class="cnt" id="fabCount">0</span>
+</button>
+
+<!-- BACKDROP + DRAWER -->
+<div id="backdrop" aria-hidden="true"></div>
+<aside id="drawer" role="dialog" aria-modal="true" aria-labelledby="drTitle" aria-hidden="true">
+  <div class="dr-head">
+    <div>
+      <h3 id="drTitle">ใบขอเสนอราคา (RFQ)</h3>
+      <span class="sub">Request for Quotation — คิด VAT อัตโนมัติ</span>
+    </div>
+    <button class="dr-close" id="drClose" aria-label="ปิดใบขอเสนอราคา">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="dr-body" id="drBody">
+    <div class="dr-empty" id="drEmpty">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>
+      ยังไม่มีรายการสินค้า<br>เลือกจากแคตตาล็อก หรือสั่งด่วนด้วยรหัส SKU
+    </div>
+    <div id="drItems"></div>
+    <div class="dr-success" id="drSuccess">
+      <div class="ok-badge">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#23272a" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <h4>ส่งคำขอเรียบร้อย</h4>
+      <p>เลขอ้างอิงคำขอของคุณ</p>
+      <div class="ref en" id="refCode">Q-0000</div>
+      <p>ฝ่ายขายจะติดต่อกลับพร้อมใบเสนอราคาอย่างเป็นทางการ<br><strong style="color:var(--ink)">ภายใน 2 ชั่วโมงทำการ</strong></p>
+      <button class="btn dark" id="drAgain">กลับไปเลือกสินค้าต่อ</button>
+    </div>
+  </div>
+  <div class="dr-foot" id="drFoot">
+    <div class="sum-row"><span>ยอดก่อน VAT</span><span class="num en" id="sumSub">฿0</span></div>
+    <div class="sum-row vat"><span>VAT 7%</span><span class="num en" id="sumVat">฿0</span></div>
+    <div class="sum-row total"><span>ยอดสุทธิ</span><span class="num en" id="sumTotal">฿0</span></div>
+    <p class="vat-note">ยอดประเมินเบื้องต้น ราคาจริงยืนยันในใบเสนอราคาตามปริมาณและระยะทางจัดส่ง</p>
+    <button class="btn dr-submit" id="drSubmit">ส่งคำขอใบเสนอราคา</button>
+  </div>
+</aside>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- DATA ---------- */
+var CATS=[
+  {id:"cat-cement",th:"ปูนซิเมนต์",en:"CEMENT"},
+  {id:"cat-steel",th:"เหล็ก",en:"STEEL"},
+  {id:"cat-wood",th:"ไม้และแผ่นไม้อัด",en:"WOOD & BOARD"},
+  {id:"cat-paint",th:"สีและเคมีภัณฑ์",en:"PAINT & CHEMICAL"}
+];
+var PRODUCTS=[
+  {sku:"SCG-501",cat:"cat-cement",name:"ปูนซิเมนต์ปอร์ตแลนด์ ตราช้าง",spec:"ถุง 50 กก. มอก. 15 เล่ม 1",unit:"ถุง",price:128},
+  {sku:"TPI-319",cat:"cat-cement",name:"ปูนซิเมนต์ผสม ตราเพชร (เขียว)",spec:"ถุง 50 กก. งานโครงสร้างทั่วไป",unit:"ถุง",price:118},
+  {sku:"SCG-111",cat:"cat-cement",name:"ปูนก่ออิฐมวลเบา ตราช้าง",spec:"ถุง 50 กก. สูตรพิเศษสีเทา",unit:"ถุง",price:78},
+  {sku:"INN-401",cat:"cat-cement",name:"ปูนซิเมนต์ปอร์ตแลนด์ อินทรีแดง",spec:"ถุง 50 กก. กำลังอัดสูง",unit:"ถุง",price:126},
+  {sku:"STL-DB12",cat:"cat-steel",name:"เหล็กข้ออ้อย SD40",spec:"12 มม. × 10 ม. มอก. 24",unit:"เส้น",price:215},
+  {sku:"STL-RB09",cat:"cat-steel",name:"เหล็กเส้นกลม SR24",spec:"9 มม. × 10 ม. มอก. 20",unit:"เส้น",price:128},
+  {sku:"STL-BX15",cat:"cat-steel",name:"เหล็กกล่องเหลี่ยม",spec:"1½\" × 1½\" หนา 2.3 มม. ยาว 6 ม.",unit:"ท่อน",price:175},
+  {sku:"STL-WM20",cat:"cat-steel",name:"ตะแกรงเหล็กไวร์เมช",spec:"ลวด 4 มม. ช่อง 20×20 ซม. แผ่น 2×5 ม.",unit:"แผ่น",price:415},
+  {sku:"WOD-PB18",cat:"cat-wood",name:"ไม้อัดเคลือบฟิล์มดำ (แบบหล่อคอนกรีต)",spec:"18 มม. 4×8 ฟุต เกรด A",unit:"แผ่น",price:865},
+  {sku:"WOD-PLY9",cat:"cat-wood",name:"ไม้อัดเบอร์ 2",spec:"9 มม. 4×8 ฟุต งานภายใน",unit:"แผ่น",price:425},
+  {sku:"WOD-BAT",cat:"cat-wood",name:"ไม้ระแนงเหลี่ยมแห้งเตาอบ",spec:"1\" × 2\" ยาว 4 ม.",unit:"ท่อน",price:58},
+  {sku:"GYP-STD9",cat:"cat-wood",name:"แผ่นยิปซัมมาตรฐาน ตราช้าง",spec:"9 มม. ขอบลาด 120×240 ซม.",unit:"แผ่น",price:235},
+  {sku:"TOA-SHLD",cat:"cat-paint",name:"สีน้ำอะคริลิก TOA Shield ภายนอก",spec:"ถัง 18.925 ล. ฟิล์มยืดหยุ่น",unit:"ถัง",price:2950},
+  {sku:"BGR-AP99",cat:"cat-paint",name:"สีรองพื้นปูนใหม่ เบเยอร์",spec:"ถัง 18.925 ล. กันด่าง 100%",unit:"ถัง",price:1690},
+  {sku:"THN-AAA",cat:"cat-paint",name:"ทินเนอร์เกรด AAA",spec:"แกลลอน 3.785 ล. สำหรับสีน้ำมัน",unit:"แกลลอน",price:285},
+  {sku:"WPR-K10",cat:"cat-paint",name:"น้ำยากันซึมอะคริลิก",spec:"ถัง 20 กก. งานดาดฟ้า/ผนัง",unit:"ถัง",price:1150}
+];
+var bySku={};
+PRODUCTS.forEach(function(p){bySku[p.sku]=p;});
+
+var cart=new Map(); /* sku -> qty */
+var reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function money(n){return "฿"+n.toLocaleString("en-US");}
+
+/* ---------- ANNOUNCEMENT FADE-SWAP ---------- */
+var annMsgs=[
+  "ปูนถุง ราคาโครงการ ฿118/ถุง เมื่อสั่งขั้นต่ำ 100 ถุง",
+  "ส่งฟรีรัศมี 30 กม. จากโกดังบางบัวทอง รอบเช้า–บ่าย",
+  "เปิดบัญชีเครดิตเชิงพาณิชย์ 30–45 วัน สำหรับผู้รับเหมา"
+];
+var annEl=document.getElementById("annText"),annIdx=0;
+setInterval(function(){
+  if(reduced){
+    annIdx=(annIdx+1)%annMsgs.length;
+    annEl.textContent=annMsgs[annIdx];
+    return;
+  }
+  annEl.classList.add("fade");
+  setTimeout(function(){
+    annIdx=(annIdx+1)%annMsgs.length;
+    annEl.textContent=annMsgs[annIdx];
+    annEl.classList.remove("fade");
+  },460);
+},4000);
+
+/* ---------- CATALOG RENDER ---------- */
+var root=document.getElementById("catalogRoot");
+var html="";
+CATS.forEach(function(c){
+  var items=PRODUCTS.filter(function(p){return p.cat===c.id;});
+  html+='<div class="cat-block" id="'+c.id+'">'
+    +'<div class="cat-head"><h3>'+c.th+'</h3><span class="code">'+c.en+'</span>'
+    +'<span class="cnt">'+items.length+' รายการ</span></div>'
+    +'<div class="tbl"><div class="tbl-head"><span>SKU</span><span>สินค้า</span><span>หน่วย</span><span>ราคา/หน่วย</span><span style="text-align:right">ใบเสนอราคา</span></div>';
+  items.forEach(function(p){
+    html+='<div class="row">'
+      +'<span class="sku en">'+p.sku+'</span>'
+      +'<span class="nm">'+p.name+'<small>'+p.spec+'</small></span>'
+      +'<span class="unit">'+p.unit+'</span>'
+      +'<span class="price">'+money(p.price)+' <small>/ '+p.unit+'</small></span>'
+      +'<button class="add-btn" data-sku="'+p.sku+'" aria-label="เพิ่ม '+p.name+' ลงใบเสนอราคา">'
+      +'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>'
+      +'ใบเสนอราคา</button></div>';
+  });
+  html+='</div></div>';
+});
+root.innerHTML=html;
+
+/* datalist for quick pad */
+var dl=document.getElementById("skuList");
+PRODUCTS.forEach(function(p){
+  var o=document.createElement("option");
+  o.value=p.sku;o.label=p.name;
+  dl.appendChild(o);
+});
+
+/* ---------- DRAWER ---------- */
+var drawer=document.getElementById("drawer"),
+    backdrop=document.getElementById("backdrop"),
+    fab=document.getElementById("rfqFab"),
+    fabCount=document.getElementById("fabCount"),
+    drItems=document.getElementById("drItems"),
+    drEmpty=document.getElementById("drEmpty"),
+    drFoot=document.getElementById("drFoot"),
+    drSuccess=document.getElementById("drSuccess"),
+    lastFocus=null;
+
+function cartCount(){var n=0;cart.forEach(function(q){n+=q;});return n;}
+
+function renderCart(){
+  var n=cartCount();
+  fabCount.textContent=n;
+  fab.classList.toggle("show",n>0&&!drawer.classList.contains("open"));
+  if(n===0){
+    drEmpty.style.display="block";
+    drItems.innerHTML="";
+    drFoot.style.display="none";
+  }else{
+    drEmpty.style.display="none";
+    drFoot.style.display="block";
+    var h="",sub=0;
+    cart.forEach(function(qty,sku){
+      var p=bySku[sku];if(!p)return;
+      var lt=p.price*qty;sub+=lt;
+      h+='<div class="dr-item" data-sku="'+sku+'">'
+        +'<div class="top"><div><div class="sk">'+sku+'</div><div class="nm">'+p.name+'</div></div>'
+        +'<button class="rm" data-act="rm" aria-label="ลบ '+p.name+' ออกจากใบเสนอราคา">'
+        +'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>'
+        +'</button></div>'
+        +'<div class="ctl"><span class="stepper">'
+        +'<button data-act="dec" aria-label="ลดจำนวน '+p.name+'">−</button>'
+        +'<span class="qv" aria-live="polite">'+qty+'</span>'
+        +'<button data-act="inc" aria-label="เพิ่มจำนวน '+p.name+'">+</button>'
+        +'</span>'
+        +'<span class="line-total">'+money(lt)+'<small>'+money(p.price)+' × '+qty+' '+p.unit+'</small></span>'
+        +'</div></div>';
+    });
+    drItems.innerHTML=h;
+    var vat=Math.round(sub*0.07);
+    document.getElementById("sumSub").textContent=money(sub);
+    document.getElementById("sumVat").textContent=money(vat);
+    document.getElementById("sumTotal").textContent=money(sub+vat);
+  }
+}
+
+function openDrawer(){
+  lastFocus=document.activeElement;
+  drawer.classList.add("open");
+  backdrop.classList.add("open");
+  drawer.setAttribute("aria-hidden","false");
+  fab.classList.remove("show");
+  document.getElementById("drClose").focus();
+}
+function closeDrawer(){
+  drawer.classList.remove("open");
+  backdrop.classList.remove("open");
+  drawer.setAttribute("aria-hidden","true");
+  renderCart();
+  if(lastFocus&&lastFocus.focus)lastFocus.focus();
+}
+
+function addToCart(sku,qty){
+  if(!bySku[sku])return false;
+  cart.set(sku,Math.min(9999,(cart.get(sku)||0)+qty));
+  drSuccess.classList.remove("show");
+  renderCart();
+  return true;
+}
+
+/* catalog add buttons */
+root.addEventListener("click",function(e){
+  var btn=e.target.closest(".add-btn");
+  if(!btn)return;
+  var sku=btn.getAttribute("data-sku");
+  addToCart(sku,1);
+  openDrawer();
+  btn.classList.add("added");
+  setTimeout(function(){btn.classList.remove("added");},1200);
+});
+
+/* drawer item controls (event delegation) */
+drItems.addEventListener("click",function(e){
+  var btn=e.target.closest("button");
+  if(!btn)return;
+  var row=e.target.closest(".dr-item");
+  if(!row)return;
+  var sku=row.getAttribute("data-sku");
+  var act=btn.getAttribute("data-act");
+  var q=cart.get(sku)||0;
+  if(act==="inc")cart.set(sku,Math.min(9999,q+1));
+  else if(act==="dec"){q-1>0?cart.set(sku,q-1):cart.delete(sku);}
+  else if(act==="rm")cart.delete(sku);
+  renderCart();
+});
+
+fab.addEventListener("click",function(){drSuccess.classList.remove("show");renderCart();openDrawer();});
+document.getElementById("drClose").addEventListener("click",closeDrawer);
+backdrop.addEventListener("click",closeDrawer);
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"&&drawer.classList.contains("open"))closeDrawer();
+});
+
+/* submit RFQ */
+document.getElementById("drSubmit").addEventListener("click",function(){
+  if(cartCount()===0)return;
+  var ref="Q-"+(1000+Math.floor(Math.random()*9000));
+  document.getElementById("refCode").textContent=ref;
+  drItems.innerHTML="";
+  drEmpty.style.display="none";
+  drFoot.style.display="none";
+  drSuccess.classList.add("show");
+  cart.clear();
+  fabCount.textContent="0";
+});
+document.getElementById("drAgain").addEventListener("click",function(){
+  drSuccess.classList.remove("show");
+  renderCart();
+  closeDrawer();
+});
+
+/* ---------- QUICK SKU PAD ---------- */
+var qform=document.getElementById("qform"),
+    qsku=document.getElementById("qsku"),
+    qqty=document.getElementById("qqty"),
+    qmsg=document.getElementById("qmsg");
+qform.addEventListener("submit",function(e){
+  e.preventDefault();
+  var sku=qsku.value.trim().toUpperCase();
+  var qty=parseInt(qqty.value,10);
+  if(isNaN(qty)||qty<1)qty=1;
+  if(!sku||!bySku[sku]){
+    qmsg.className="qmsg err";
+    qmsg.textContent=sku?("ไม่พบรหัส “"+sku+"” ในระบบ — ลอง SCG-501"):"กรุณากรอกรหัส SKU — ลอง SCG-501";
+    qsku.focus();
+    return;
+  }
+  addToCart(sku,qty);
+  var p=bySku[sku];
+  qmsg.className="qmsg ok";
+  qmsg.textContent="เพิ่ม "+p.sku+" · "+p.name+" จำนวน "+qty+" "+p.unit+" ลงใบเสนอราคาแล้ว";
+  qsku.value="";qqty.value="1";
+  qsku.focus();
+});
+
+/* ---------- MOBILE MENU ---------- */
+var burger=document.getElementById("burger"),menu=document.getElementById("mainMenu");
+burger.addEventListener("click",function(){
+  var open=menu.classList.toggle("open");
+  burger.setAttribute("aria-expanded",open?"true":"false");
+  burger.setAttribute("aria-label",open?"ปิดเมนู":"เปิดเมนู");
+});
+menu.addEventListener("click",function(e){
+  if(e.target.tagName==="A"&&menu.classList.contains("open")){
+    menu.classList.remove("open");
+    burger.setAttribute("aria-expanded","false");
+  }
+});
+
+renderCart();
+})();
+</script>
+</body>
+</html>
