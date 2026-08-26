@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPEEDHAUL — ขนส่งและโลจิสติกส์ B2B ทั่วประเทศ</title>
+<meta name="description" content="SPEEDHAUL บริษัทขนส่งและโลจิสติกส์ B2B — ขนส่งทั่วไป เหมาคันรถ คลังสินค้าและ Fulfillment ครอบคลุม 77 จังหวัด ติดตามพัสดุและเช็คพื้นที่จัดส่งได้ทันที">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=K2D:wght@300;400;500;600&family=Sarabun:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0f2a4a; --blue:#1668b0; --orange:#ff7a1a; --bg:#f6f8fa;
+  --ink:#16222e; --muted:#5b6b7a; --line:#e2e8ee;
+  --orange-dark:#e5640a; --green:#178a50; --red:#c92f2f;
+  --radius:14px; --shadow:0 12px 32px rgba(15,42,74,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Sarabun',sans-serif; font-weight:400; font-size:16px;
+  line-height:1.7; color:var(--ink); background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:'K2D',sans-serif;font-weight:600;line-height:1.3;color:var(--navy)}
+img{max-width:100%;display:block}
+a{color:var(--blue)}
+[hidden]{display:none!important}
+::selection{background:var(--orange);color:#fff}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+section{scroll-margin-top:84px}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:50px;padding:12px 28px;border:0;border-radius:10px;cursor:pointer;
+  font-family:'K2D',sans-serif;font-weight:500;font-size:16px;text-decoration:none;
+  transition:background .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+.btn svg{flex:none}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 6px 18px rgba(255,122,26,.35)}
+.btn-primary:hover{background:var(--orange-dark)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.75)}
+.btn-ghost:hover{background:rgba(255,255,255,.14)}
+.btn-block{width:100%}
+.chip{
+  display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;
+  background:#fff;border:1.5px solid var(--line);border-radius:999px;cursor:pointer;
+  font-family:'K2D',sans-serif;font-weight:500;font-size:15px;color:var(--navy);
+  transition:border-color .2s ease,background .2s ease;
+}
+.chip:hover{border-color:var(--orange);background:#fff6ef}
+
+/* ---------- nav ---------- */
+.skip{
+  position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;
+  padding:12px 20px;z-index:200;text-decoration:none;border-radius:0 0 10px 0;
+}
+.skip:focus{left:0}
+.nav{
+  position:sticky;top:0;z-index:100;background:rgba(255,255,255,.93);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{max-width:1240px;margin:0 auto;height:74px;padding:0 24px;display:flex;align-items:center;gap:28px}
+.logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;color:var(--navy);
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;letter-spacing:.05em}
+.logo-mark{width:36px;height:36px;border-radius:9px;background:var(--orange);display:grid;place-items:center;flex:none}
+.nav-links{display:flex;gap:2px;margin-left:auto}
+.nav-links a{
+  display:inline-flex;align-items:center;min-height:46px;padding:10px 15px;border-radius:9px;
+  color:var(--ink);text-decoration:none;font-family:'K2D',sans-serif;font-weight:500;font-size:16px;
+  transition:background .2s ease,color .2s ease;
+}
+.nav-links a:hover{background:#eef3f8;color:var(--navy)}
+.nav-cta{margin-left:6px}
+.m-toggle{
+  display:none;margin-left:auto;width:46px;height:46px;border:1.5px solid var(--line);
+  border-radius:10px;background:#fff;cursor:pointer;place-items:center;color:var(--navy);
+}
+.mobile-menu{
+  position:absolute;top:74px;left:0;right:0;background:#fff;display:none;
+  flex-direction:column;padding:8px 20px 16px;border-bottom:1px solid var(--line);box-shadow:var(--shadow);
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  display:flex;align-items:center;min-height:50px;padding:10px 6px;
+  color:var(--ink);text-decoration:none;font-family:'K2D',sans-serif;font-weight:500;font-size:17px;
+  border-bottom:1px solid var(--line);
+}
+.mobile-menu .btn{margin-top:12px}
+@media (max-width:919px){
+  .nav-links,.nav-cta{display:none}
+  .m-toggle{display:grid}
+}
+
+/* ---------- hero ---------- */
+.hero{position:relative;isolation:isolate;color:#fff;display:flex;flex-direction:column;justify-content:center;min-height:640px}
+.hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;background:var(--navy)}
+.hero-bg img{width:100%;height:100%;object-fit:cover}
+.hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(15,42,74,.97) 0%,rgba(15,42,74,.85) 46%,rgba(15,42,74,.38) 100%);
+}
+.hero-content{padding:88px 0 56px}
+.eyebrow{
+  font-family:'K2D',sans-serif;font-weight:500;font-size:16px;letter-spacing:.04em;
+  color:var(--orange);margin-bottom:10px;display:flex;align-items:center;gap:10px;
+}
+.eyebrow .no{font-family:'Archivo',sans-serif;font-weight:800;font-size:14px;letter-spacing:.12em}
+.hero h1{color:#fff;font-size:clamp(34px,5.4vw,58px);font-weight:600;max-width:16ch;margin-bottom:18px}
+.hero .lead{font-size:clamp(16px,2vw,19px);font-weight:300;color:rgba(255,255,255,.88);max-width:56ch;margin-bottom:32px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid rgba(255,255,255,.22);margin-top:56px;
+}
+.hstat{padding:26px 28px 30px;border-left:1px solid rgba(255,255,255,.22)}
+.hstat:first-child{border-left:0;padding-left:0}
+.hstat b{
+  display:block;font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:clamp(28px,3.4vw,40px);line-height:1.1;color:#fff;
+}
+.hstat b em{font-style:normal;color:var(--orange)}
+.hstat span{font-size:15px;color:rgba(255,255,255,.78)}
+@media (max-width:640px){
+  .hero-stats{grid-template-columns:1fr}
+  .hstat{border-left:0;border-top:1px solid rgba(255,255,255,.22);padding:18px 0}
+  .hstat:first-child{border-top:0}
+}
+
+/* ---------- sections ---------- */
+.sec{padding:92px 0}
+.sec-head{max-width:640px;margin:0 auto 44px;text-align:center}
+.sec-head.left{margin:0 0 36px;text-align:left}
+.sec-title{font-size:clamp(27px,3.4vw,38px);margin-bottom:12px}
+.sec-sub{color:var(--muted);font-weight:300;font-size:17px}
+
+/* ---------- tracking ---------- */
+.track-card{
+  max-width:920px;margin:0 auto;background:#fff;border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(22px,4vw,42px);
+}
+.track-card-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}
+.track-card-head h3{font-size:22px}
+.barcode{
+  width:150px;height:26px;flex:none;opacity:.85;border-radius:3px;
+  background:repeating-linear-gradient(90deg,var(--navy) 0 2px,transparent 2px 5px,var(--navy) 5px 6px,transparent 6px 11px,var(--navy) 11px 14px,transparent 14px 17px);
+}
+.track-form{display:flex;gap:12px}
+.field{flex:1}
+label{display:block;font-family:'K2D',sans-serif;font-weight:500;font-size:16px;color:var(--navy);margin-bottom:8px}
+.input{
+  width:100%;min-height:54px;padding:12px 16px;border:1.5px solid var(--line);border-radius:10px;
+  font-family:'Archivo','Sarabun',sans-serif;font-size:17px;letter-spacing:.05em;color:var(--ink);
+  background:#fff;transition:border-color .2s ease,box-shadow .2s ease;
+}
+.input::placeholder{color:#9fb0bf;letter-spacing:.03em}
+.input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(22,104,176,.14);outline:none}
+.input[aria-invalid="true"]{border-color:var(--red);box-shadow:0 0 0 4px rgba(201,47,47,.12)}
+.hint{font-size:15px;color:var(--muted);margin-top:8px}
+.track-form .btn{align-self:flex-end;min-height:54px}
+.form-error{color:var(--red);font-size:15px;margin-top:10px;display:flex;gap:8px;align-items:flex-start}
+.form-error svg{flex:none;margin-top:4px}
+.sample-row{margin-top:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:15px;color:var(--muted)}
+@media (max-width:640px){.track-form{flex-direction:column}.track-form .btn{align-self:stretch}}
+
+/* result */
+.track-result{margin-top:30px;border-top:1px dashed var(--line);padding-top:24px}
+.tr-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.tr-code{font-family:'Archivo',sans-serif;font-weight:800;font-size:22px;letter-spacing:.08em;color:var(--navy)}
+.badge{
+  display:inline-flex;align-items:center;gap:7px;min-height:34px;padding:5px 15px;border-radius:999px;
+  font-family:'K2D',sans-serif;font-weight:500;font-size:15px;
+}
+.badge::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.badge.blue{background:#e7f1fb;color:var(--blue)}
+.badge.orange{background:#ffeee0;color:#d95c06}
+.badge.green{background:#e3f5ec;color:var(--green)}
+.tr-eta{font-size:15px;color:var(--muted)}
+.stepper{list-style:none;display:flex;margin:30px 0 6px}
+.step{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;padding:0 4px}
+.step::before{content:"";position:absolute;top:21px;left:-50%;width:100%;height:3px;background:var(--line)}
+.step:first-child::before{display:none}
+.step .dot{
+  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;position:relative;z-index:2;
+  background:#fff;border:2px solid var(--line);color:var(--muted);
+  font-family:'Archivo',sans-serif;font-weight:600;font-size:16px;
+}
+.step.done::before{background:var(--navy)}
+.step.done .dot{background:var(--navy);border-color:var(--navy);color:#fff}
+.step.active::before{background:var(--orange)}
+.step.active .dot{background:var(--orange);border-color:var(--orange);color:#fff}
+.step.active .dot::after{
+  content:"";position:absolute;inset:-7px;border-radius:50%;
+  border:2px solid rgba(255,122,26,.6);animation:pulse 1.6s ease-out infinite;
+}
+@keyframes pulse{0%{transform:scale(.78);opacity:1}100%{transform:scale(1.35);opacity:0}}
+.s-label{margin-top:10px;font-family:'K2D',sans-serif;font-weight:500;font-size:15px;color:var(--muted);text-align:center;line-height:1.4}
+.step.active .s-label{color:var(--navy);font-weight:600}
+.step-caption{display:none;text-align:center;font-family:'K2D',sans-serif;font-weight:500;font-size:15px;color:var(--navy);margin:14px 0 4px}
+@media (max-width:639px){
+  .step{padding:0 2px}
+  .step .dot{width:38px;height:38px;font-size:14px}
+  .step::before{top:18px}
+  .s-label{display:none}
+  .step-caption{display:block}
+}
+.timeline{margin-top:24px;border-top:1px dashed var(--line);padding-top:20px;display:grid;gap:16px}
+.t-item{display:grid;grid-template-columns:190px 1fr;gap:16px;align-items:start}
+.t-time{font-family:'Archivo','Sarabun',sans-serif;font-weight:600;font-size:15px;color:var(--muted);line-height:1.5}
+.t-title{font-family:'K2D',sans-serif;font-weight:500;font-size:17px;color:var(--navy)}
+.t-loc{font-size:15px;color:var(--muted)}
+.t-item.latest .t-title{color:var(--orange)}
+.t-item.latest .t-time{color:var(--orange)}
+.t-item.pending{opacity:.5}
+.demo-note{margin-top:22px;font-size:15px;color:var(--muted);text-align:center}
+@media (max-width:560px){.t-item{grid-template-columns:1fr;gap:2px}}
+
+/* ---------- zone ---------- */
+.zone-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:52px;align-items:start}
+@media (max-width:900px){.zone-grid{grid-template-columns:1fr}}
+.zone-rows{margin-top:26px;border-top:1px solid var(--line)}
+.zone-row{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.zone-chip{
+  width:40px;height:40px;flex:none;border-radius:11px;display:grid;place-items:center;
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:#fff;
+}
+.z1{background:var(--blue)} .z2{background:var(--orange)} .z3{background:var(--navy)}
+.zone-row b{display:block;font-family:'K2D',sans-serif;font-weight:500;font-size:17px;color:var(--navy)}
+.zone-row span{font-size:15px;color:var(--muted)}
+.zone-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:clamp(22px,3.4vw,36px);
+}
+.zone-card h3{font-size:22px;margin-bottom:20px}
+.zone-result{margin-top:24px;border-top:1px dashed var(--line);padding-top:22px}
+.zr-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.zr-name{font-family:'K2D',sans-serif;font-weight:600;font-size:23px;color:var(--navy)}
+.z-chip{
+  display:inline-flex;align-items:center;min-height:36px;padding:6px 16px;border-radius:999px;
+  color:#fff;font-family:'Archivo','Sarabun',sans-serif;font-weight:600;font-size:15px;
+}
+.zr-zone{color:var(--muted);font-size:16px;margin:4px 0 16px}
+.zr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.zr-cell{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:14px 10px;text-align:center}
+.zr-cell span{display:block;font-size:15px;color:var(--muted);margin-bottom:4px}
+.zr-cell b{font-family:'Archivo','Sarabun',sans-serif;font-weight:800;font-size:22px;color:var(--navy)}
+.zr-note{font-size:15px;color:var(--muted);margin:14px 0 18px}
+@media (max-width:480px){.zr-grid{grid-template-columns:1fr}}
+
+/* ---------- services ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px}
+.svc{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+.svc:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#ccd9e5}
+.svc img{width:100%;height:190px;object-fit:cover}
+.svc-body{padding:26px;display:flex;flex-direction:column;gap:12px;flex:1}
+.svc-tag{font-family:'Archivo',sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;color:var(--blue);text-transform:uppercase}
+.svc h3{font-size:21px}
+.svc p{color:var(--muted);font-size:16px}
+.svc ul{list-style:none;display:grid;gap:9px;margin-top:2px}
+.svc li{display:flex;gap:10px;align-items:flex-start;color:var(--ink);font-size:16px}
+.svc li svg{flex:none;margin-top:5px;color:var(--green)}
+.svc .price{
+  margin-top:auto;padding-top:16px;border-top:1px dashed var(--line);
+  font-family:'K2D',sans-serif;font-size:15px;color:var(--muted);
+}
+.svc .price b{font-family:'Archivo','Sarabun',sans-serif;font-weight:800;font-size:21px;color:var(--orange)}
+
+/* ---------- clients ---------- */
+.clients-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:52px;align-items:center}
+@media (max-width:900px){.clients-grid{grid-template-columns:1fr}}
+.c-list{list-style:none;display:grid;gap:12px;margin:24px 0 30px}
+.c-list li{display:flex;gap:12px;align-items:flex-start;font-size:17px}
+.c-list svg{flex:none;margin-top:5px;color:var(--orange)}
+.quote{
+  background:#fff;border:1px solid var(--line);border-left:4px solid var(--orange);
+  border-radius:0 12px 12px 0;padding:20px 24px;
+}
+.quote p{font-family:'K2D',sans-serif;font-weight:400;font-size:17px;color:var(--navy);margin-bottom:10px}
+.quote footer{font-size:15px;color:var(--muted)}
+.clients-img{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.clients-img img{width:100%;height:100%;min-height:320px;object-fit:cover}
+.c-badges{display:flex;flex-wrap:wrap;gap:12px;margin-top:44px}
+.c-badge{
+  border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px 20px;
+  font-family:'K2D',sans-serif;font-weight:500;font-size:16px;color:var(--navy);
+}
+
+/* ---------- cta ---------- */
+.cta{position:relative;isolation:isolate;color:#fff;text-align:center;padding:100px 24px}
+.cta-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;background:var(--navy)}
+.cta-bg img{width:100%;height:100%;object-fit:cover}
+.cta-bg::after{content:"";position:absolute;inset:0;background:rgba(15,42,74,.93)}
+.cta h2{color:#fff;font-size:clamp(27px,3.6vw,40px);margin-bottom:14px}
+.cta p{color:rgba(255,255,255,.85);font-weight:300;font-size:18px;max-width:52ch;margin:0 auto 34px}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ---------- footer ---------- */
+.footer{background:#0b1f38;color:rgba(255,255,255,.75)}
+.footer-grid{
+  max-width:1140px;margin:0 auto;padding:72px 24px 48px;
+  display:grid;grid-template-columns:1.4fr 1fr 1.1fr 1fr;gap:44px;
+}
+.footer .logo{color:#fff;margin-bottom:16px}
+.footer h4{font-family:'K2D',sans-serif;font-weight:500;font-size:17px;color:#fff;margin-bottom:16px}
+.footer p,.footer li{font-size:15px;line-height:1.8}
+.footer ul{list-style:none}
+.footer a{color:rgba(255,255,255,.75);text-decoration:none}
+.footer a:hover{color:var(--orange)}
+.f-links a{display:inline-flex;align-items:center;min-height:44px;padding:8px 0}
+.f-contact li{display:flex;gap:11px;align-items:flex-start;padding:8px 0}
+.f-contact svg{flex:none;margin-top:5px;color:var(--orange)}
+.f-contact a{color:#fff}
+.f-bottom{
+  border-top:1px solid rgba(255,255,255,.14);
+  padding:22px 24px;text-align:center;font-size:15px;color:rgba(255,255,255,.55);
+}
+@media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.footer-grid{grid-template-columns:1fr}}
+
+/* ---------- motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+<a class="skip" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#top" aria-label="SPEEDHAUL กลับขึ้นด้านบน">
+      <span class="logo-mark" aria-hidden="true">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M4 6l6 6-6 6M12.5 6l6 6-6 6" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      SPEEDHAUL
+    </a>
+    <nav class="nav-links" aria-label="เมนูหลัก">
+      <a href="#services">บริการ</a>
+      <a href="#tracking">ติดตามพัสดุ</a>
+      <a href="#zone">เช็คพื้นที่ส่ง</a>
+      <a href="#clients">ลูกค้าองค์กร</a>
+      <a href="#contact">ติดต่อเรา</a>
+    </nav>
+    <a class="btn btn-primary nav-cta" href="#contact" style="min-height:46px;padding:10px 22px">ขอราคา</a>
+    <button class="m-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="เปิดเมนู">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services">บริการ</a>
+    <a href="#tracking">ติดตามพัสดุ</a>
+    <a href="#zone">เช็คพื้นที่ส่ง</a>
+    <a href="#clients">ลูกค้าองค์กร</a>
+    <a href="#contact">ติดต่อเรา</a>
+    <a class="btn btn-primary" href="#contact">ขอราคา</a>
+  </div>
+</header>
+
+<main id="main">
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="../assets/logistics-hero.jpg" alt="ศูนย์กระจายสินค้าของ SPEEDHAUL ยามค่ำคืน พร้อมรถบรรทุกจอดเรียงกัน" fetchpriority="high" decoding="async" width="1600" height="900">
+  </div>
+  <div class="wrap hero-content">
+    <p class="eyebrow">ขนส่งและโลจิสติกส์ B2B ครบวงจร</p>
+    <h1>ของถึงไว ทุกจังหวัด</h1>
+    <p class="lead">รับสินค้าถึงหน้างาน ส่งตรงทุกเส้นทางหลักทั่วไทย ติดตามสถานะได้ทุกขั้นตอน พร้อมทีมงานดูแลตลอด 24 ชั่วโมง</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#tracking">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        ติดตามพัสดุเลย
+      </a>
+      <a class="btn btn-ghost" href="#services">ดูบริการทั้งหมด</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><b><em>24</em></b><span>จังหวัดที่มีรอบรถส่งตรงทุกวัน</span></div>
+      <div class="hstat"><b>99.2<em>%</em></b><span>อัตราการจัดส่งตรงเวลา (ออนไทม์)</span></div>
+      <div class="hstat"><b>120</b><span>รถบรรทุกและหัวลากในฝลีท (คัน)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRACKING ================= -->
+<section class="sec" id="tracking" style="background:#fff">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" style="justify-content:center"><span class="no">01</span> ติดตามพัสดุ</p>
+      <h2 class="sec-title">รู้ทุกขั้นตอน ตั้งแต่รับของถึงมือผู้รับ</h2>
+      <p class="sec-sub">กรอกเลขติดตามเพื่อดูสถานะล่าสุดของพัสดุ อัปเดตตามเวลาจริงจากทุกฮับและสาขาทั่วประเทศ</p>
+    </div>
+    <div class="track-card">
+      <div class="track-card-head">
+        <h3>ติดตามพัสดุ</h3>
+        <span class="barcode" aria-hidden="true"></span>
+      </div>
+      <form class="track-form" id="trackForm" novalidate>
+        <div class="field">
+          <label for="trackInput">เลขติดตามพัสดุ</label>
+          <input class="input" id="trackInput" type="text" placeholder="เช่น SH-88012345" autocomplete="off" spellcheck="false" style="text-transform:uppercase" aria-describedby="trackHint">
+          <p class="hint" id="trackHint">รูปแบบ: SH- ตามด้วยตัวเลข 8 หลัก</p>
+        </div>
+        <button class="btn btn-primary" type="submit">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          ติดตาม
+        </button>
+      </form>
+      <p class="form-error" id="trackError" role="alert" hidden>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8v5M12 16.5v.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <span id="trackErrorText"></span>
+      </p>
+      <div class="sample-row">
+        <span>ทดลองด้วยเลขตัวอย่าง:</span>
+        <button class="chip" type="button" data-track="SH-88012345">SH-88012345</button>
+      </div>
+
+      <div class="track-result" id="trackResult" aria-live="polite">
+        <div class="tr-meta">
+          <span class="tr-code" id="trackCode"></span>
+          <span class="badge orange" id="trackBadge"></span>
+        </div>
+        <p class="tr-eta" id="trackEta"></p>
+        <ol class="stepper" id="stepper"></ol>
+        <p class="step-caption" id="stepCaption"></p>
+        <div class="timeline" id="timeline"></div>
+      </div>
+      <p class="demo-note">ข้อมูลตัวอย่างสำหรับการสาธิตระบบติดตาม</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ZONE CHECKER ================= -->
+<section class="sec" id="zone">
+  <div class="wrap zone-grid">
+    <div>
+      <div class="sec-head left">
+        <p class="eyebrow"><span class="no">02</span> เช็คพื้นที่จัดส่ง</p>
+        <h2 class="sec-title">เช็คโซนและเรทค่าส่ง ก่อนตัดสินใจ</h2>
+        <p class="sec-sub">เราแบ่งพื้นที่บริการเป็น 3 โซน เพื่อให้คุณวางแผนต้นทุนและกำหนดส่งมอบได้แม่นยำ ทุกเส้นทางมีรอบรถออกทุกวัน</p>
+      </div>
+      <div class="zone-rows">
+        <div class="zone-row">
+          <span class="zone-chip z1">1</span>
+          <div><b>กรุงเทพฯ และปริมณฑล</b><span>ส่งภายใน 1 วัน · เริ่มต้น ฿40/กก.แรก</span></div>
+        </div>
+        <div class="zone-row">
+          <span class="zone-chip z2">2</span>
+          <div><b>ภาคกลางและตะวันออก</b><span>1–2 วัน · เริ่มต้น ฿60/กก.แรก</span></div>
+        </div>
+        <div class="zone-row">
+          <span class="zone-chip z3">3</span>
+          <div><b>ต่างภาค (เหนือ อีสาน ใต้)</b><span>2–3 วัน · เริ่มต้น ฿85/กก.แรก</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="zone-card">
+      <h3>เช็คพื้นที่ส่ง</h3>
+      <form id="zoneForm" novalidate>
+        <div class="field">
+          <label for="zoneInput">จังหวัดปลายทาง</label>
+          <input class="input" id="zoneInput" type="text" list="provList" placeholder="พิมพ์ชื่อจังหวัด เช่น เชียงใหม่" autocomplete="off" spellcheck="false">
+          <datalist id="provList">
+            <option value="กรุงเทพมหานคร"></option><option value="กระบี่"></option><option value="กาญจนบุรี"></option><option value="กาฬสินธุ์"></option><option value="กำแพงเพชร"></option><option value="ขอนแก่น"></option><option value="จันทบุรี"></option><option value="ฉะเชิงเทรา"></option><option value="ชลบุรี"></option><option value="ชัยนาท"></option><option value="ชัยภูมิ"></option><option value="ชุมพร"></option><option value="เชียงราย"></option><option value="เชียงใหม่"></option><option value="ตรัง"></option><option value="ตราด"></option><option value="ตาก"></option><option value="นครนายก"></option><option value="นครปฐม"></option><option value="นครพนม"></option><option value="นครราชสีมา"></option><option value="นครศรีธรรมราช"></option><option value="นครสวรรค์"></option><option value="นนทบุรี"></option><option value="นราธิวาส"></option><option value="น่าน"></option><option value="บึงกาฬ"></option><option value="บุรีรัมย์"></option><option value="ปทุมธานี"></option><option value="ประจวบคีรีขันธ์"></option><option value="ปราจีนบุรี"></option><option value="ปัตตานี"></option><option value="พระนครศรีอยุธยา"></option><option value="พะเยา"></option><option value="พังงา"></option><option value="พัทลุง"></option><option value="พิจิตร"></option><option value="พิษณุโลก"></option><option value="เพชรบุรี"></option><option value="เพชรบูรณ์"></option><option value="แพร่"></option><option value="ภูเก็ต"></option><option value="มหาสารคาม"></option><option value="มุกดาหาร"></option><option value="แม่ฮ่องสอน"></option><option value="ยโสธร"></option><option value="ยะลา"></option><option value="ร้อยเอ็ด"></option><option value="ระนอง"></option><option value="ระยอง"></option><option value="ราชบุรี"></option><option value="ลพบุรี"></option><option value="ลำปาง"></option><option value="ลำพูน"></option><option value="เลย"></option><option value="ศรีสะเกษ"></option><option value="สกลนคร"></option><option value="สงขลา"></option><option value="สตูล"></option><option value="สมุทรปราการ"></option><option value="สมุทรสงคราม"></option><option value="สมุทรสาคร"></option><option value="สระแก้ว"></option><option value="สระบุรี"></option><option value="สิงห์บุรี"></option><option value="สุโขทัย"></option><option value="สุพรรณบุรี"></option><option value="สุราษฎร์ธานี"></option><option value="สุรินทร์"></option><option value="หนองคาย"></option><option value="หนองบัวลำภู"></option><option value="อ่างทอง"></option><option value="อำนาจเจริญ"></option><option value="อุดรธานี"></option><option value="อุตรดิตถ์"></option><option value="อุทัยธานี"></option><option value="อุบลราชธานี"></option>
+          </datalist>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit" style="margin-top:16px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-7-5.1-7-11a7 7 0 1 1 14 0c0 5.9-7 11-7 11z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="2"/></svg>
+          เช็คพื้นที่
+        </button>
+      </form>
+      <p class="form-error" id="zoneError" role="alert" hidden>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8v5M12 16.5v.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <span id="zoneErrorText"></span>
+      </p>
+      <div class="sample-row">
+        <span>จังหวัดยอดนิยม:</span>
+        <button class="chip" type="button" data-prov="เชียงใหม่">เชียงใหม่</button>
+        <button class="chip" type="button" data-prov="ขอนแก่น">ขอนแก่น</button>
+        <button class="chip" type="button" data-prov="ภูเก็ต">ภูเก็ต</button>
+      </div>
+
+      <div class="zone-result" id="zoneResult" aria-live="polite" hidden>
+        <div class="zr-head">
+          <span class="zr-name" id="zrName"></span>
+          <span class="z-chip z3" id="zrChip"></span>
+        </div>
+        <p class="zr-zone" id="zrZone"></p>
+        <div class="zr-grid">
+          <div class="zr-cell"><span>ระยะเวลาจัดส่ง</span><b id="zrTime"></b></div>
+          <div class="zr-cell"><span>เรทตั้งต้น (กก.แรก)</span><b id="zrRate"></b></div>
+          <div class="zr-cell"><span>กก.ถัดไป</span><b id="zrNext"></b></div>
+        </div>
+        <p class="zr-note">เรทสำหรับพัสดุทั่วไปน้ำหนักไม่เกิน 30 กก. สินค้าพิเศษหรือควบคุมอุณหภูมิ โปรดติดต่อทีมขาย</p>
+        <a class="btn btn-primary btn-block" href="#contact">ขอใบเสนอราคาสำหรับเส้นทางนี้</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="sec" id="services" style="background:#fff">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" style="justify-content:center"><span class="no">03</span> บริการของเรา</p>
+      <h2 class="sec-title">บริการขนส่งครบวงจรสำหรับธุรกิจ</h2>
+      <p class="sec-sub">เลือกรูปแบบการขนส่งที่ตรงกับปริมาณสินค้าและงบประมาณของคุณ</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc">
+        <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="รถบรรทุก SPEEDHAUL วิ่งบนทางหลวงสายหลัก" loading="lazy" decoding="async" width="1000" height="667">
+        <div class="svc-body">
+          <span class="svc-tag">General Freight</span>
+          <h3>ขนส่งทั่วไป</h3>
+          <p>สำหรับพัสดุ พาเลท และสินค้าไม่เต็มคันรถ รับถึงหน้างาน ส่งถึงปลายทางทั่วประเทศ</p>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>รับ–ส่งถึงหน้างาน (Door to Door)</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>ครอบคลุม 77 จังหวัดทั่วไทย</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>ติดตามสถานะได้ทุกขั้นตอน</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>ประกันความเสียหายสูงสุด ฿50,000</li>
+          </ul>
+          <p class="price">เริ่มต้น <b>฿40</b> / กก.แรก</p>
+        </div>
+      </article>
+      <article class="svc">
+        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="ตู้คอนเทนเนอร์สินค้าบนรถเทรลเลอร์ที่ลานจอด" loading="lazy" decoding="async" width="1000" height="667">
+        <div class="svc-body">
+          <span class="svc-tag">Full Truckload</span>
+          <h3>เหมาคันรถ</h3>
+          <p>เหมารถทั้งคันสำหรับสินค้าล็อตใหญ่ วิ่งตรงไม่แวะพักฮับ ควบคุมเวลาส่งมอบได้แม่นยำ</p>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>รถ 4 / 6 / 10 ล้อ และเทรลเลอร์</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>วิ่งตรงถึงปลายทาง ไม่ผ่านฮับคัดแยก</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>GPS ติดตามทุกคันแบบเรียลไทม์</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>พนักงานขับและยกสินค้าครบทีม</li>
+          </ul>
+          <p class="price">เริ่มต้น <b>฿3,500</b> / ทริป</p>
+        </div>
+      </article>
+      <article class="svc">
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="ภายในคลังสินค้า SPEEDHAUL ที่บางนา พร้อมชั้นเก็บสินค้าสูง" loading="lazy" decoding="async" width="1000" height="667">
+        <div class="svc-body">
+          <span class="svc-tag">Warehousing</span>
+          <h3>คลังสินค้า &amp; Fulfillment</h3>
+          <p>พื้นที่ฝากเก็บมาตรฐาน 12,000 ตร.ม. ที่บางนา พร้อมทีมหยิบ–แพ็ก–ส่งครบวงจร</p>
+          <ul>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>เก็บ หยิบ แพ็ก และจัดส่งในที่เดียว</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>เชื่อมต่อระบบร้านค้าออนไลน์โดยตรง</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>รายงานสต็อกและสถานะเรียลไทม์</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>สั่งก่อนเที่ยง ส่งออกภายในวันเดียวกัน</li>
+          </ul>
+          <p class="price">เริ่มต้น <b>฿150</b> / ตร.ม. / เดือน</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLIENTS ================= -->
+<section class="sec" id="clients">
+  <div class="wrap">
+    <div class="clients-grid">
+      <div>
+        <p class="eyebrow"><span class="no">04</span> ลูกค้าองค์กร</p>
+        <h2 class="sec-title">ธุรกิจที่ไว้วางใจ SPEEDHAUL</h2>
+        <p class="sec-sub">เราดูแลสายการจัดส่งให้องค์กรกว่า 300 รายทั่วประเทศ ตั้งแต่โรงงานขนาดกลางจนถึงแบรนด์อีคอมเมิร์ซชั้นนำ</p>
+        <ul class="c-list">
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>โรงงานและผู้ผลิตอุตสาหกรรม</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>อีคอมเมิร์ซและร้านค้าออนไลน์</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>เกษตรแปรรูปและสินค้าควบคุมอุณหภูมิ</li>
+          <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>ค้าปลีก–ค้าส่งและผู้จัดจำหน่าย</li>
+        </ul>
+        <blockquote class="quote">
+          <p>“เปลี่ยนมาใช้ SPEEDHAUL แล้วของถึงสาขาตรงเวลาทุกรอบ ทีมประสานงานตอบไวมาก หลายครั้งแจ้งเรื่องให้เราทราบก่อนที่ปัญหาจะเกิดเสียอีก”</p>
+          <footer>คุณวิภาดา ศรีสุข — ผู้จัดการฝ่ายซัพพลายเชน บริษัท ไทยแพ็คเกจจิ้ง จำกัด</footer>
+        </blockquote>
+      </div>
+      <div class="clients-img">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="ทีมวางแผนการขนส่งกำลังตรวจสอบเอกสารและแผนการจัดส่ง" loading="lazy" decoding="async" width="1000" height="667">
+      </div>
+    </div>
+    <div class="c-badges">
+      <span class="c-badge">ไทยแพ็คเกจจิ้ง</span>
+      <span class="c-badge">สยามฟู้ดส์</span>
+      <span class="c-badge">นครเซรามิก</span>
+      <span class="c-badge">บ้านและสวนมาร์ท</span>
+      <span class="c-badge">อีซี่บาย</span>
+      <span class="c-badge">กรีนแคร์เภสัช</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta">
+  <div class="cta-bg">
+    <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="ตู้คอนเทนเนอร์เรียงซ้อนกันในลานคอนเทนเนอร์" loading="lazy" decoding="async" width="1000" height="667">
+  </div>
+  <h2>พร้อมส่งสินค้าล็อตแรกของคุณแล้วหรือยัง</h2>
+  <p>ทีมที่ปรึกษาประเมินเส้นทางและออกใบเสนอราคาให้ฟรี ภายใน 30 นาทีในชั่วโมงทำการ</p>
+  <div class="cta-actions">
+    <a class="btn btn-primary" href="tel:+6627458800">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      โทร 02-745-8800 (24 ชม.)
+    </a>
+    <a class="btn btn-ghost" href="mailto:sales@speedhaul.co.th">ขอใบเสนอราคาทางอีเมล</a>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <a class="logo" href="#top" aria-label="SPEEDHAUL กลับขึ้นด้านบน">
+        <span class="logo-mark" aria-hidden="true">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M4 6l6 6-6 6M12.5 6l6 6-6 6" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        SPEEDHAUL
+      </a>
+      <p>ผู้ให้บริการขนส่งและโลจิสติกส์ B2B ครบวงจร ด้วยฝลีทรถกว่า 120 คัน และศูนย์คัดแยกกลางที่บางนา เราส่งสินค้าของคุณให้ถึงไว ทุกจังหวัด</p>
+      <p style="margin-top:12px">789 ถนนบางนา-ตราด กม.12<br>แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260</p>
+    </div>
+    <nav aria-label="เมนูท้ายเว็บ">
+      <h4>บริการ</h4>
+      <ul class="f-links">
+        <li><a href="#services">ขนส่งทั่วไป</a></li>
+        <li><a href="#services">เหมาคันรถ</a></li>
+        <li><a href="#services">คลังสินค้า &amp; Fulfillment</a></li>
+        <li><a href="#tracking">ติดตามพัสดุ</a></li>
+        <li><a href="#zone">เช็คพื้นที่ส่ง</a></li>
+      </ul>
+    </nav>
+    <div id="contact">
+      <h4>ติดต่อเรา</h4>
+      <ul class="f-contact">
+        <li>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          <span>สายด่วน 24 ชม. <a href="tel:+6627458800">02-745-8800</a><br>มือถือ <a href="tel:+66818894567">081-889-4567</a></span>
+        </li>
+        <li>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span><a href="mailto:sales@speedhaul.co.th">sales@speedhaul.co.th</a><br>LINE OA: @speedhaul</span>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h4>เวลาทำการ</h4>
+      <ul class="f-contact">
+        <li>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>สำนักงานใหญ่<br>จันทร์–เสาร์ 8:00–18:00</span>
+        </li>
+        <li>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 21V9l9-6 9 6v12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 21v-6h6v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          <span>ศูนย์คัดแยกและรับ–ส่งสินค้า<br>เปิด 24 ชั่วโมงทุกวัน</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bottom">
+    © <span id="yr">2569</span> บริษัท สปีดฮอล โลจิสติกส์ จำกัด · ใบอนุญาตประกอบการขนส่งทางบก เลขที่ ขบ 1021/2564
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- footer year (Buddhist era) ---- */
+  document.getElementById('yr').textContent = new Date().getFullYear() + 543;
+
+  /* ---- mobile nav ---- */
+  var navToggle = document.getElementById('navToggle');
+  var mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', function(){
+    var open = mobileMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobileMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded','false');
+    });
+  });
+
+  /* ============ TRACKING WIDGET ============ */
+  var CHECK = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var HUBS = ['เชียงใหม่','ขอนแก่น','นครราชสีมา','พิษณุโลก','ชลบุรี','สุราษฎร์ธานี','สงขลา (หาดใหญ่)','ภูเก็ต','อุบลราชธานี','อุดรธานี','นครศรีธรรมราช','ระยอง'];
+  var STEPS = [
+    {label:'รับของแล้ว',       title:'รับพัสดุจากผู้ส่ง',   loc:'จุดรับสินค้า · บางนา กรุงเทพฯ', desc:'พนักงานรับพัสดุและลงทะเบียนเข้าระบบเรียบร้อย'},
+    {label:'คัดแยกที่ฮับ',      title:'คัดแยกที่ฮับบางนา',   loc:'ศูนย์คัดแยกบางนา',             desc:'คัดแยกตามสายขนส่งและขึ้นรถเรียบร้อย'},
+    {label:'ระหว่างขนส่ง',      title:'รถออกจากฮับบางนา',    loc:'ทางหลวงสายหลัก · ระหว่างเส้นทาง', desc:'รถสาย{H} มุ่งหน้าสู่ปลายทางตามกำหนดการเดินรถ'},
+    {label:'ถึงสาขาปลายทาง',    title:'ถึงสาขา{H}',          loc:'สาขา{H}',                       desc:'พัสดุถึงสาขาปลายทาง รอรอบรถจัดส่ง'},
+    {label:'จัดส่งสำเร็จ',      title:'จัดส่งเรียบร้อย',     loc:'{H}',                           desc:'ผู้รับลงนามรับสินค้าเรียบร้อย (ส***)'}
+  ];
+  var BADGES = [['อยู่ในระบบ','blue'],['คัดแยกแล้ว','blue'],['อยู่ระหว่างขนส่ง','orange'],['รอจัดส่ง','orange'],['จัดส่งสำเร็จ','green']];
+
+  var tForm = document.getElementById('trackForm');
+  var tInput = document.getElementById('trackInput');
+  var tErrBox = document.getElementById('trackError');
+  var tErrText = document.getElementById('trackErrorText');
+  var tResult = document.getElementById('trackResult');
+
+  function hashStr(s){ var h=7,i; for(i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; } return h; }
+  function fmtDate(d){
+    return new Intl.DateTimeFormat('th-TH',{day:'numeric',month:'short',year:'numeric'}).format(d)
+      + ' · ' + new Intl.DateTimeFormat('th-TH',{hour:'2-digit',minute:'2-digit',hour12:false}).format(d) + ' น.';
+  }
+
+  function renderTrack(code){
+    var digits = code.slice(3);
+    var h = hashStr(digits);
+    var cur = (h % 5) + 1;                 /* ขั้นปัจจุบัน 1-5 */
+    var hub = HUBS[h % HUBS.length];
+    var now = Date.now();
+
+    /* เวลาย้อนหลังแบบ deterministic */
+    var times = [];
+    var t = now - ((h % 5) + 2) * 3600e3;
+    times[cur-1] = t;
+    for (var i = cur - 2; i >= 0; i--){
+      t = t - (((h >> (i * 2)) % 10) + 6) * 3600e3;
+      times[i] = t;
+    }
+
+    /* stepper */
+    var stepper = document.getElementById('stepper');
+    stepper.innerHTML = '';
+    STEPS.forEach(function(s, idx){
+      var n = idx + 1;
+      var st = n < cur ? 'done' : (n === cur ? 'active' : 'todo');
+      var li = document.createElement('li');
+      li.className = 'step ' + st;
+      li.innerHTML = '<div class="dot">' + (n < cur ? CHECK : '<span>' + n + '</span>') + '</div>'
+                   + '<div class="s-label">' + s.label + '</div>';
+      stepper.appendChild(li);
+    });
+    document.getElementById('stepCaption').textContent =
+      'ขั้นตอนปัจจุบัน: ' + STEPS[cur-1].label + ' (ขั้นที่ ' + cur + ' จาก 5)';
+
+    /* badge + ETA */
+    document.getElementById('trackCode').textContent = code;
+    var badge = document.getElementById('trackBadge');
+    badge.textContent = BADGES[cur-1][0];
+    badge.className = 'badge ' + BADGES[cur-1][1];
+    var eta = document.getElementById('trackEta');
+    if (cur < 5){
+      var etaDate = new Date(now + ((h % 2) + 1) * 86400e3);
+      eta.textContent = 'คาดว่าจัดส่งถึง ' + new Intl.DateTimeFormat('th-TH',{day:'numeric',month:'long',year:'numeric'}).format(etaDate);
+    } else {
+      eta.textContent = 'จัดส่งสำเร็จเมื่อ ' + fmtDate(new Date(times[4]));
+    }
+
+    /* timeline */
+    var tl = document.getElementById('timeline');
+    tl.innerHTML = '';
+    STEPS.forEach(function(s, idx){
+      var n = idx + 1;
+      var done = n <= cur;
+      var item = document.createElement('div');
+      item.className = 't-item' + (n === cur ? ' latest' : '') + (done ? '' : ' pending');
+      var fill = function(str){ return str.split('{H}').join(hub); };
+      item.innerHTML = '<div class="t-time">' + (done ? fmtDate(new Date(times[idx])) : 'รอดำเนินการ') + '</div>'
+        + '<div><div class="t-title">' + fill(s.title) + '</div>'
+        + '<div class="t-loc">' + fill(s.loc) + ' — ' + fill(s.desc) + '</div></div>';
+      tl.appendChild(item);
+    });
+
+    tResult.hidden = false;
+    tResult.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block:'nearest'});
+  }
+
+  tForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var raw = tInput.value.trim().toUpperCase().replace(/\s+/g,'');
+    var code = /^\d{8}$/.test(raw) ? 'SH-' + raw : raw;
+    if (!/^SH-\d{8}$/.test(code)){
+      tErrText.textContent = 'รูปแบบเลขติดตามไม่ถูกต้อง กรุณากรอก "SH-" ตามด้วยตัวเลข 8 หลัก เช่น SH-88012345';
+      tErrBox.hidden = false;
+      tInput.setAttribute('aria-invalid','true');
+      tResult.hidden = true;
+      tInput.focus();
+      return;
+    }
+    tErrBox.hidden = true;
+    tInput.removeAttribute('aria-invalid');
+    tInput.value = code;
+    renderTrack(code);
+  });
+
+  document.querySelectorAll('[data-track]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      tInput.value = btn.getAttribute('data-track');
+      tForm.requestSubmit();
+    });
+  });
+
+  /* ============ ZONE CHECKER ============ */
+  var ZONE1 = new Set(['กรุงเทพมหานคร','นนทบุรี','ปทุมธานี','สมุทรปราการ','สมุทรสาคร','นครปฐม']);
+  var ZONE2 = new Set(['พระนครศรีอยุธยา','อ่างทอง','ลพบุรี','สิงห์บุรี','ชัยนาท','สระบุรี','ชลบุรี','ระยอง','จันทบุรี','ตราด','ฉะเชิงเทรา','ปราจีนบุรี','นครนายก','สระแก้ว','สุพรรณบุรี','กาญจนบุรี','ราชบุรี','เพชรบุรี','ประจวบคีรีขันธ์','นครสวรรค์','อุทัยธานี','กำแพงเพชร','สมุทรสงคราม']);
+  var ALL_PROV = new Set(Array.prototype.map.call(document.getElementById('provList').options, function(o){ return o.value; }));
+  var ZONE_INFO = {
+    1:{cls:'z1', chip:'โซน 1', name:'โซน 1 — กรุงเทพฯ และปริมณฑล',   time:'ภายใน 1 วัน', rate:'฿40', next:'฿10/กก.'},
+    2:{cls:'z2', chip:'โซน 2', name:'โซน 2 — ภาคกลางและตะวันออก',    time:'1–2 วัน',     rate:'฿60', next:'฿15/กก.'},
+    3:{cls:'z3', chip:'โซน 3', name:'โซน 3 — ต่างภาค (เหนือ อีสาน ใต้)', time:'2–3 วัน',  rate:'฿85', next:'฿20/กก.'}
+  };
+
+  var zForm = document.getElementById('zoneForm');
+  var zInput = document.getElementById('zoneInput');
+  var zErrBox = document.getElementById('zoneError');
+  var zErrText = document.getElementById('zoneErrorText');
+  var zResult = document.getElementById('zoneResult');
+
+  function renderZone(p, z){
+    var info = ZONE_INFO[z];
+    document.getElementById('zrName').textContent = (p === 'กรุงเทพมหานคร') ? p : 'จังหวัด' + p;
+    var chip = document.getElementById('zrChip');
+    chip.textContent = info.chip;
+    chip.className = 'z-chip ' + info.cls;
+    document.getElementById('zrZone').textContent = info.name;
+    document.getElementById('zrTime').textContent = info.time;
+    document.getElementById('zrRate').textContent = info.rate;
+    document.getElementById('zrNext').textContent = info.next;
+    zResult.hidden = false;
+  }
+
+  zForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var p = zInput.value.trim();
+    if (!p || !ALL_PROV.has(p)){
+      zErrText.textContent = p
+        ? 'ไม่พบจังหวัด "' + p + '" กรุณาพิมพ์และเลือกจากรายการให้ถูกต้อง'
+        : 'กรุณาพิมพ์ชื่อจังหวัดปลายทาง';
+      zErrBox.hidden = false;
+      zInput.setAttribute('aria-invalid','true');
+      zResult.hidden = true;
+      zInput.focus();
+      return;
+    }
+    zErrBox.hidden = true;
+    zInput.removeAttribute('aria-invalid');
+    var z = ZONE1.has(p) ? 1 : (ZONE2.has(p) ? 2 : 3);
+    renderZone(p, z);
+  });
+
+  document.querySelectorAll('[data-prov]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      zInput.value = btn.getAttribute('data-prov');
+      zForm.requestSubmit();
+    });
+  });
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+</body>
+</html>

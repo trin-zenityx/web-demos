@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>บ้านสุขใจ — ศูนย์ดูแลผู้สูงอายุ นครปฐม | ดูแลท่านเหมือนพ่อแม่ของเราเอง</title>
+<meta name="description" content="บ้านสุขใจ ศูนย์ดูแลผู้สูงอายุกลางสวนที่นครปฐม พยาบาลเวร 24 ชั่วโมง แพทย์ตรวจทุกสัปดาห์ แพ็กเกจเริ่ม ฿35,000/เดือน นัดเยี่ยมชมได้ทุกวัน">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&family=Niramit:wght@300;400;500;600&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+<script>
+try{var s=localStorage.getItem('bsj-font-size');var m={s:'100%',m:'112.5%',l:'125%'};document.documentElement.style.fontSize=m[s]||m.m;}catch(e){document.documentElement.style.fontSize='112.5%';}
+</script>
+<style>
+:root{
+  --warm:#f8f3ea;
+  --warm-soft:#fdfaf4;
+  --sage:#7d9b76;
+  --sage-deep:#5c7a56;
+  --sage-mist:#eef2e9;
+  --terra:#c4845a;
+  --terra-deep:#a96c44;
+  --ink:#3b332b;
+  --muted:#7a6f60;
+  --line:rgba(59,51,43,.16);
+  --shadow:0 1rem 2.5rem rgba(59,51,43,.10);
+  --radius:1.25rem;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:112.5%;scroll-behavior:smooth}
+body{
+  font-family:'Sarabun',sans-serif;
+  font-weight:400;
+  font-size:1rem;
+  line-height:1.8;
+  color:var(--ink);
+  background:var(--warm);
+  background-image:radial-gradient(circle at 85% 8%, rgba(196,132,90,.07), transparent 32rem),
+                   radial-gradient(circle at 5% 90%, rgba(125,155,118,.09), transparent 30rem);
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--sage-deep)}
+:focus-visible{outline:.2rem solid var(--terra);outline-offset:.18rem;border-radius:.3rem}
+.wrap{max-width:72rem;margin-inline:auto;padding-inline:clamp(1rem,4vw,2.5rem)}
+section[id],footer[id]{scroll-margin-top:5.75rem}
+h1,h2,h3,.brand-name{font-family:'Niramit',sans-serif}
+.en{font-family:'Lora',serif;font-style:italic}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- skip link ---------- */
+.skip-link{position:fixed;top:-4rem;left:1rem;z-index:200;background:var(--ink);color:var(--warm);padding:.7rem 1.2rem;border-radius:.6rem;text-decoration:none;transition:top .2s}
+.skip-link:focus-visible{top:.8rem}
+
+/* ---------- font size switcher ---------- */
+.font-switch{
+  position:fixed;top:5.25rem;right:1rem;z-index:70;
+  display:flex;align-items:center;gap:.3rem;
+  background:var(--warm-soft);border:1px solid var(--line);border-radius:999px;
+  padding:.35rem .45rem;box-shadow:0 .5rem 1.5rem rgba(59,51,43,.14);
+}
+.font-switch .fs-label{font-family:'Niramit',sans-serif;font-weight:500;font-size:.78rem;color:var(--muted);padding-inline:.5rem .15rem;white-space:nowrap}
+.font-switch button{
+  min-width:3rem;min-height:3rem;border:1px solid transparent;border-radius:999px;
+  background:transparent;color:var(--ink);font-family:'Niramit',sans-serif;font-weight:500;font-size:.95rem;
+  cursor:pointer;padding:.4rem .85rem;transition:background .18s,color .18s,border-color .18s;
+}
+.font-switch button:hover{border-color:var(--line)}
+.font-switch button.is-active{background:var(--sage-deep);color:#fff}
+@media (max-width:560px){
+  .font-switch{top:auto;bottom:1rem;right:1rem}
+  .font-switch .fs-label{display:none}
+}
+
+/* ---------- nav ---------- */
+.site-nav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(248,243,234,.94);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4.75rem}
+.brand{display:flex;flex-direction:column;line-height:1.15;text-decoration:none;color:var(--ink);padding-block:.4rem}
+.brand-name{font-weight:600;font-size:1.5rem;color:var(--sage-deep)}
+.brand .en{font-size:.85rem;color:var(--terra-deep)}
+.nav-links{display:flex;align-items:center;gap:.25rem;list-style:none}
+.nav-links a{
+  display:inline-flex;align-items:center;min-height:3rem;
+  padding:.5rem .95rem;border-radius:.7rem;text-decoration:none;color:var(--ink);
+  font-family:'Niramit',sans-serif;font-weight:500;font-size:1rem;transition:background .18s,color .18s;
+}
+.nav-links a:hover{background:var(--sage-mist);color:var(--sage-deep)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  min-height:3.1rem;padding:.6rem 1.6rem;border-radius:999px;border:1px solid transparent;
+  font-family:'Niramit',sans-serif;font-weight:500;font-size:1rem;text-decoration:none;cursor:pointer;
+  transition:transform .18s,box-shadow .18s,background .18s,color .18s;
+}
+.btn-terra{background:var(--terra);color:#fff;box-shadow:0 .4rem 1.2rem rgba(196,132,90,.35)}
+.btn-terra:hover{background:var(--terra-deep);transform:translateY(-2px)}
+.btn-outline{border-color:var(--sage-deep);color:var(--sage-deep);background:transparent}
+.btn-outline:hover{background:var(--sage-mist)}
+.btn-nav{margin-left:.6rem}
+.nav-toggle{
+  display:none;min-width:3rem;min-height:3rem;border:1px solid var(--line);border-radius:.75rem;
+  background:var(--warm-soft);cursor:pointer;align-items:center;justify-content:center;
+}
+.nav-toggle svg{width:1.5rem;height:1.5rem;stroke:var(--ink)}
+@media (max-width:920px){
+  .nav-toggle{display:inline-flex}
+  .nav-links{
+    position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;
+    background:var(--warm-soft);border-bottom:1px solid var(--line);padding:.8rem 1rem 1.2rem;
+    display:none;box-shadow:var(--shadow);
+  }
+  .nav-links.is-open{display:flex}
+  .nav-links a{width:100%}
+  .btn-nav{margin:0.5rem 0 0;justify-content:center}
+}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(2.5rem,7vw,5.5rem) clamp(3rem,7vw,5rem)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+.kicker{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:'Niramit',sans-serif;font-weight:500;font-size:.95rem;color:var(--sage-deep);
+  background:var(--sage-mist);border:1px solid rgba(125,155,118,.35);
+  padding:.35rem 1.1rem;border-radius:999px;margin-bottom:1.2rem;
+}
+.kicker .en{color:var(--terra-deep)}
+.hero h1{font-weight:600;font-size:clamp(2.1rem,5.2vw,3.5rem);line-height:1.28;letter-spacing:-.01em}
+.hero h1 em{font-family:'Lora',serif;font-style:italic;font-weight:400;color:var(--terra-deep)}
+.hero .lead{margin-top:1.2rem;font-size:1.1rem;color:var(--muted);max-width:34rem;font-weight:300}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:1.8rem}
+.trust-chips{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem;list-style:none}
+.trust-chips li{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--warm-soft);border:1px solid var(--line);border-radius:999px;
+  padding:.55rem 1.15rem;font-family:'Niramit',sans-serif;font-weight:500;font-size:.95rem;
+}
+.trust-chips svg{width:1.35rem;height:1.35rem;flex:none;stroke:var(--sage-deep)}
+.hero-photo{position:relative}
+.hero-photo::before{
+  content:"";position:absolute;inset:-.9rem .9rem .9rem -.9rem;
+  border:2px solid rgba(125,155,118,.45);border-radius:1.75rem;z-index:0;
+}
+.hero-photo img{
+  position:relative;z-index:1;width:100%;height:clamp(19rem,42vw,30rem);object-fit:cover;
+  border-radius:1.75rem;box-shadow:var(--shadow);
+}
+.hero-photo figcaption{
+  position:relative;z-index:1;margin-top:.7rem;font-size:.9rem;color:var(--muted);
+  display:flex;align-items:center;gap:.5rem;
+}
+.hero-photo figcaption svg{width:1rem;height:1rem;stroke:var(--terra-deep);flex:none}
+@media (max-width:920px){.hero-grid{grid-template-columns:1fr}}
+
+/* ---------- section scaffolding ---------- */
+.section{padding-block:clamp(3rem,7vw,5.5rem)}
+.section-head{max-width:44rem;margin-bottom:clamp(1.8rem,4vw,3rem)}
+.section-head.center{margin-inline:auto;text-align:center}
+.section-head .en{color:var(--terra-deep);font-size:1.05rem;display:block;margin-bottom:.35rem}
+.section-head h2{font-weight:600;font-size:clamp(1.7rem,3.8vw,2.5rem);line-height:1.35}
+.section-head p{margin-top:.8rem;color:var(--muted);font-weight:300}
+
+/* ---------- philosophy ---------- */
+.philosophy-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+.philosophy-grid img{width:100%;height:clamp(17rem,34vw,26rem);object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow)}
+.philosophy-points{list-style:none;margin-top:1.4rem;display:grid;gap:1rem}
+.philosophy-points li{display:flex;gap:.9rem;align-items:flex-start}
+.philosophy-points svg{width:1.6rem;height:1.6rem;flex:none;stroke:var(--sage-deep);margin-top:.25rem}
+.philosophy-points strong{font-family:'Niramit',sans-serif;font-weight:500;display:block;font-size:1.05rem}
+.philosophy-points span{color:var(--muted);font-weight:300}
+@media (max-width:920px){.philosophy-grid{grid-template-columns:1fr}}
+
+/* ---------- panorama tour ---------- */
+.pano-wrap{position:relative}
+.pano-frame{
+  overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+  border-radius:1.5rem;border:1px solid var(--line);box-shadow:var(--shadow);
+  cursor:grab;background:var(--sage-mist);
+}
+.pano-frame::-webkit-scrollbar{display:none}
+.pano-frame.is-dragging{cursor:grabbing}
+.pano-img{
+  width:230%;max-width:none;height:clamp(18rem,52vh,30rem);object-fit:cover;
+  user-select:none;-webkit-user-select:none;
+}
+.pano-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:3.25rem;height:3.25rem;border-radius:50%;border:1px solid var(--line);
+  background:rgba(253,250,244,.94);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
+  box-shadow:0 .4rem 1rem rgba(59,51,43,.18);transition:background .18s,transform .18s;z-index:2;
+}
+.pano-arrow:hover{background:#fff;transform:translateY(-50%) scale(1.06)}
+.pano-arrow svg{width:1.4rem;height:1.4rem;stroke:var(--ink)}
+.pano-arrow.prev{left:1rem}
+.pano-arrow.next{right:1rem}
+.pano-hint{
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+  margin-top:1rem;color:var(--muted);font-family:'Niramit',sans-serif;font-weight:500;font-size:.95rem;
+}
+.pano-hint svg{width:1.3rem;height:1.3rem;stroke:var(--terra-deep);animation:hintSway 2.4s ease-in-out infinite}
+@keyframes hintSway{0%,100%{transform:translateX(-4px)}50%{transform:translateX(4px)}}
+
+/* ---------- packages ---------- */
+#packages{background:var(--sage-mist);border-block:1px solid var(--line)}
+.packages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,2.5vw,1.8rem)}
+.pkg{
+  background:var(--warm-soft);border:1px solid var(--line);border-radius:var(--radius);
+  padding:clamp(1.4rem,2.5vw,2rem);display:flex;flex-direction:column;gap:1rem;
+  transition:transform .2s,box-shadow .2s;position:relative;
+}
+.pkg:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.pkg.featured{border:2px solid var(--terra);box-shadow:0 1.2rem 3rem rgba(196,132,90,.18)}
+.pkg-badge{
+  position:absolute;top:-.95rem;left:50%;transform:translateX(-50%);
+  background:var(--terra);color:#fff;font-family:'Niramit',sans-serif;font-weight:500;font-size:.85rem;
+  padding:.3rem 1.1rem;border-radius:999px;white-space:nowrap;
+}
+.pkg h3{font-weight:600;font-size:1.4rem}
+.pkg .fit{color:var(--muted);font-weight:300;font-size:.95rem;margin-top:-.6rem}
+.pkg-price{display:flex;align-items:baseline;gap:.4rem;padding-block:.6rem;border-block:1px dashed var(--line)}
+.pkg-price .amount{font-family:'Niramit',sans-serif;font-weight:600;font-size:2.3rem;color:var(--terra-deep);letter-spacing:-.01em}
+.pkg-price .per{color:var(--muted);font-size:.95rem}
+.pkg ul{list-style:none;display:grid;gap:.65rem;flex:1}
+.pkg li{display:flex;gap:.6rem;align-items:flex-start;font-weight:300}
+.pkg li svg{width:1.25rem;height:1.25rem;flex:none;stroke:var(--sage-deep);margin-top:.3rem}
+.pkg .btn{width:100%}
+@media (max-width:920px){.packages-grid{grid-template-columns:1fr;max-width:36rem;margin-inline:auto}}
+.pkg-note{
+  margin-top:1.8rem;text-align:center;color:var(--muted);font-weight:300;font-size:.95rem;
+}
+
+/* ---------- activities ---------- */
+.activities-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2rem,5vw,3.5rem);align-items:start}
+.activities-photo img{width:100%;height:clamp(16rem,32vw,24rem);object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow)}
+.activities-photo figcaption{margin-top:.7rem;font-size:.9rem;color:var(--muted)}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--warm-soft);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;min-width:36rem}
+caption{text-align:left;font-family:'Niramit',sans-serif;font-weight:500;padding:1rem 1.2rem .4rem;color:var(--sage-deep)}
+th,td{padding:.85rem 1.1rem;text-align:left;border-bottom:1px solid var(--line);font-weight:300}
+thead th{font-family:'Niramit',sans-serif;font-weight:500;color:var(--sage-deep);background:rgba(125,155,118,.12);white-space:nowrap}
+tbody th{font-family:'Niramit',sans-serif;font-weight:500;white-space:nowrap;color:var(--ink)}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(196,132,90,.06)}
+@media (max-width:920px){.activities-grid{grid-template-columns:1fr}}
+
+/* ---------- care team band ---------- */
+.team-band{
+  background:linear-gradient(120deg,var(--sage-deep),#4c6647);
+  color:var(--warm);border-radius:1.75rem;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1.15fr;box-shadow:var(--shadow);
+}
+.team-band img{width:100%;height:100%;min-height:20rem;object-fit:cover}
+.team-band .team-body{padding:clamp(1.8rem,4vw,3rem)}
+.team-band .en{color:#e8c9a8;font-size:1rem;display:block;margin-bottom:.3rem}
+.team-band h3{font-weight:600;font-size:clamp(1.4rem,2.8vw,1.9rem);line-height:1.4}
+.team-band p{margin-top:.8rem;font-weight:300;color:rgba(248,243,234,.88)}
+.team-stats{list-style:none;display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.6rem}
+.team-stats li{
+  flex:1 1 9rem;background:rgba(248,243,234,.12);border:1px solid rgba(248,243,234,.25);
+  border-radius:1rem;padding:.9rem 1.1rem;
+}
+.team-stats .num{font-family:'Niramit',sans-serif;font-weight:600;font-size:1.6rem;display:block;line-height:1.2}
+.team-stats .lbl{font-size:.9rem;color:rgba(248,243,234,.85);font-weight:300}
+@media (max-width:920px){.team-band{grid-template-columns:1fr}.team-band img{min-height:14rem;max-height:18rem}}
+
+/* ---------- reviews ---------- */
+.reviews-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.2rem,2.5vw,1.8rem)}
+.review{
+  background:var(--warm-soft);border:1px solid var(--line);border-radius:var(--radius);
+  padding:clamp(1.4rem,2.5vw,2rem);display:flex;flex-direction:column;gap:1.2rem;
+  transition:transform .2s,box-shadow .2s;
+}
+.review:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.review .quote-mark{width:2.2rem;height:2.2rem;fill:rgba(196,132,90,.35)}
+.review p{font-weight:300;font-size:1.02rem}
+.review footer{display:flex;align-items:center;gap:.9rem;margin-top:auto}
+.review .avatar{
+  width:3.25rem;height:3.25rem;border-radius:50%;flex:none;
+  background:var(--sage);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-family:'Niramit',sans-serif;font-weight:600;font-size:1.25rem;
+}
+.review .who strong{font-family:'Niramit',sans-serif;font-weight:500;display:block}
+.review .who span{color:var(--muted);font-size:.9rem;font-weight:300}
+@media (max-width:920px){.reviews-grid{grid-template-columns:1fr}}
+
+/* ---------- CTA ---------- */
+.cta-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4rem);align-items:center;background:var(--warm-soft);border:1px solid var(--line);border-radius:1.75rem;overflow:hidden;box-shadow:var(--shadow)}
+.cta-body{padding:clamp(1.8rem,4vw,3rem)}
+.cta-body .en{color:var(--terra-deep);font-size:1rem;display:block;margin-bottom:.3rem}
+.cta-body h2{font-weight:600;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.35}
+.cta-body>p{margin-top:.8rem;color:var(--muted);font-weight:300}
+.cta-photo img{width:100%;height:100%;min-height:24rem;object-fit:cover}
+form{margin-top:1.6rem;display:grid;gap:1rem}
+.field label{display:block;font-family:'Niramit',sans-serif;font-weight:500;margin-bottom:.4rem}
+.field input{
+  width:100%;min-height:3.4rem;border:1px solid var(--line);border-radius:.85rem;
+  background:#fff;padding:.6rem 1.1rem;font-family:'Sarabun',sans-serif;font-size:1.05rem;color:var(--ink);
+  transition:border-color .18s,box-shadow .18s;
+}
+.field input:focus{border-color:var(--sage-deep);box-shadow:0 0 0 .25rem rgba(125,155,118,.2);outline:none}
+.form-note{font-size:.9rem;color:var(--muted);font-weight:300}
+.form-success{
+  display:none;margin-top:1.2rem;background:var(--sage-mist);border:1px solid rgba(125,155,118,.5);
+  border-radius:1rem;padding:1rem 1.3rem;font-family:'Niramit',sans-serif;font-weight:500;color:var(--sage-deep);
+}
+.form-success.is-visible{display:flex;gap:.7rem;align-items:flex-start}
+.form-success svg{width:1.5rem;height:1.5rem;flex:none;stroke:var(--sage-deep);margin-top:.15rem}
+@media (max-width:920px){.cta-grid{grid-template-columns:1fr}.cta-photo img{min-height:14rem;max-height:18rem}}
+
+/* ---------- footer ---------- */
+.site-footer{background:var(--ink);color:rgba(248,243,234,.85);margin-top:clamp(3rem,7vw,5.5rem)}
+.footer-inner{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:2.5rem;padding-block:clamp(2.5rem,5vw,4rem)}
+.site-footer h3{color:var(--warm);font-weight:500;font-size:1.15rem;margin-bottom:1rem}
+.site-footer .brand-name{color:var(--warm);font-size:1.6rem}
+.site-footer .en{color:var(--terra);font-size:.9rem}
+.site-footer address{font-style:normal;font-weight:300;line-height:1.9;margin-top:1rem}
+.footer-list{list-style:none;display:grid;gap:.8rem;font-weight:300}
+.footer-list a{color:rgba(248,243,234,.85);text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;min-height:3rem}
+.footer-list a:hover{color:#fff;text-decoration:underline}
+.footer-list svg{width:1.2rem;height:1.2rem;stroke:var(--terra);flex:none}
+.footer-bottom{border-top:1px solid rgba(248,243,234,.15);padding-block:1.2rem;text-align:center;font-size:.9rem;color:rgba(248,243,234,.55);font-weight:300}
+@media (max-width:820px){.footer-inner{grid-template-columns:1fr;gap:2rem}}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .pano-hint svg{animation:none}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<!-- ปุ่มปรับขนาดตัวอักษร (signature) -->
+<div class="font-switch" role="group" aria-label="ปรับขนาดตัวอักษรทั้งเว็บ">
+  <span class="fs-label" aria-hidden="true">ตัวอักษร</span>
+  <button type="button" data-font-size="s" aria-pressed="false">เล็ก</button>
+  <button type="button" data-font-size="m" aria-pressed="true">กลาง</button>
+  <button type="button" data-font-size="l" aria-pressed="false">ใหญ่</button>
+</div>
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="บ้านสุขใจ กลับขึ้นด้านบน">
+      <span class="brand-name">บ้านสุขใจ</span>
+      <span class="en">Baan Sukjai Elderly Care</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="เปิดเมนู">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav aria-label="เมนูหลัก">
+      <ul class="nav-links" id="navMenu">
+        <li><a href="#tour">เดินชมสถานที่</a></li>
+        <li><a href="#packages">แพ็กเกจดูแล</a></li>
+        <li><a href="#activities">กิจกรรม</a></li>
+        <li><a href="#reviews">เสียงจากครอบครัว</a></li>
+        <li><a class="btn btn-terra btn-nav" href="#contact">นัดเยี่ยมชม</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker">ศูนย์ดูแลผู้สูงอายุ · นครปฐม <span class="en">— like home, not hospital</span></p>
+        <h1>ดูแลท่าน<br><em>เหมือนพ่อแม่</em>ของเราเอง</h1>
+        <p class="lead">บ้านสุขใจคือบ้านหลังที่สองกลางสวนร่มรื่น ที่เชื่อว่าวัยเกษียณควรได้ใช้ชีวิตอย่างอบอุ่น ปลอดภัย และมีศักดิ์ศรี ทีมพยาบาลและผู้ดูแลอยู่เคียงข้างท่านตลอด 24 ชั่วโมง</p>
+        <div class="hero-cta">
+          <a class="btn btn-terra" href="#contact">นัดเยี่ยมชมบ้านสุขใจ</a>
+          <a class="btn btn-outline" href="#packages">ดูแพ็กเกจดูแล</a>
+        </div>
+        <ul class="trust-chips">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+            พยาบาลเวร 24 ชั่วโมง
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M9 15l2 2 4-4"/></svg>
+            แพทย์ตรวจทุกสัปดาห์
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            กล้องออนไลน์ให้ลูกหลานดูได้
+          </li>
+        </ul>
+      </div>
+      <figure class="hero-photo">
+        <img src="../assets/elderly-hero.jpg" alt="ห้องรับแขกบรรยากาศอบอุ่นของบ้านสุขใจ ผู้สูงอายุนั่งพักผ่อนริมหน้าต่างรับแสงเช้า">
+        <figcaption>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg>
+          ห้องนั่งเล่นกลาง บ้านสุขใจ อำเภอเมือง จังหวัดนครปฐม
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="section" aria-labelledby="philosophy-h">
+    <div class="wrap philosophy-grid">
+      <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=1000&auto=format&fit=crop" alt="ผู้ดูแลกำลังพูดคุยและจับมือผู้สูงอายุอย่างอบอุ่น" loading="lazy">
+      <div>
+        <div class="section-head">
+          <span class="en">Our Promise</span>
+          <h2 id="philosophy-h">ที่นี่เป็นบ้าน<br>ไม่ใช่โรงพยาบาล</h2>
+          <p>เราออกแบบทุกอย่างให้เหมือนบ้านจริงๆ — กลิ่นข้าวต้มยามเช้า เสียงนกในสวน และผู้ดูแลที่รู้จักท่านด้วยชื่อ ไม่ใช่หมายเลขเตียง</p>
+        </div>
+        <ul class="philosophy-points">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+            <div><strong>ห้องพักเหมือนบ้าน</strong><span>ห้องเดี่ยวตกแต่งอบอุ่น นำรูปครอบครัวและของใช้ประจำตัวมาเองได้</span></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21c-4-3.5-8-6.6-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 3.5C20 14.4 16 17.5 12 21z"/></svg>
+            <div><strong>อาหารปรุงตามใจท่าน</strong><span>ครัวในบ้านปรุงสดทุกมื้อ ปรับตามโรคประจำตัวและรสชาติที่ท่านชอบ</span></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <div><strong>ลูกหลานเยี่ยมได้ทุกวัน</strong><span>เปิดเยี่ยม 08:00–18:00 ไม่ต้องนัดล่วงหน้า พร้อมรูปและวิดีโออัปเดตในกลุ่มไลน์ครอบครัวทุกสัปดาห์</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANORAMA TOUR (signature) -->
+  <section class="section" id="tour" aria-labelledby="tour-h">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="en">Panorama Tour</span>
+        <h2 id="tour-h">เดินชมสถานที่จากที่บ้าน</h2>
+        <p>ภาพพาโนรามาบรรยากาศจริงของบ้านสุขใจ ลากไปทางซ้ายหรือขวาเพื่อชมรอบๆ เหมือนได้ยืนอยู่ตรงนั้น</p>
+      </div>
+      <div class="pano-wrap">
+        <div class="pano-frame" id="panoFrame" tabindex="0" role="region" aria-label="ภาพพาโนรามาบ้านสุขใจ ลากหรือกดลูกศรซ้ายขวาเพื่อเลื่อนชม">
+          <img class="pano-img" id="panoImg" src="../assets/elderly-hero.jpg" alt="ภาพพาโนรามามุมกว้างของห้องรับแขกและสวนของบ้านสุขใจ" draggable="false">
+        </div>
+        <button class="pano-arrow prev" id="panoPrev" type="button" aria-label="เลื่อนดูภาพไปทางซ้าย">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button class="pano-arrow next" id="panoNext" type="button" aria-label="เลื่อนดูภาพไปทางขวา">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <p class="pano-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12H2m0 0l3-3m-3 3l3 3M16 12h6m0 0l-3-3m3 3l-3 3"/></svg>
+        ลากดูได้เลย
+      </p>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section class="section" id="packages" aria-labelledby="packages-h">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="en">Care Packages</span>
+        <h2 id="packages-h">แพ็กเกจดูแลรายเดือน</h2>
+        <p>เลือกตามความสามารถในการช่วยเหลือตัวเองของท่าน ทุกแพ็กเกจปรับแผนการดูแลรายบุคคลร่วมกับแพทย์และครอบครัว</p>
+      </div>
+      <div class="packages-grid">
+        <article class="pkg">
+          <h3>ช่วยเหลือตัวเองได้</h3>
+          <p class="fit">เหมาะสำหรับท่านที่ยังทำกิจวัตรประจำวันเองได้</p>
+          <p class="pkg-price"><span class="amount">฿35,000</span><span class="per">/ เดือน</span></p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>ห้องเดี่ยวปรับอากาศ พร้อมระเบียงรับแดดเช้า</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>อาหาร 3 มื้อ และของว่าง 2 มื้อ ปรับตามโรคประจำตัว</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>กิจกรรมสันทนาการทุกวัน เช้า–เย็น</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>ตรวจสุขภาพพื้นฐานทุกเดือน</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>ทำความสะอาดห้องและซักรีดประจำสัปดาห์</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>รายงานความเรียบร้อยให้ลูกหลานทุกสัปดาห์</li>
+          </ul>
+          <a class="btn btn-outline" href="#contact">สอบถามแพ็กเกจนี้</a>
+        </article>
+
+        <article class="pkg featured">
+          <span class="pkg-badge">ครอบครัวเลือกมากที่สุด</span>
+          <h3>กึ่งพึ่งพา</h3>
+          <p class="fit">สำหรับท่านที่ต้องการผู้ช่วยในบางกิจวัตร</p>
+          <p class="pkg-price"><span class="amount">฿48,000</span><span class="per">/ เดือน</span></p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>ทุกอย่างในแพ็กเกจ “ช่วยเหลือตัวเองได้”</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>ผู้ดูแลช่วยอาบน้ำ แต่งตัว และพาเดินออกกำลังกาย</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>เตรียมและป้อนยาตามเวลาที่แพทย์สั่ง</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>กายภาพบำบัด 2 ครั้งต่อสัปดาห์</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>เฝ้าระวังอุบัติเหตุตอนกลางคืน</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>รถรับ–ส่งพบแพทย์ตามนัดทุกครั้ง</li>
+          </ul>
+          <a class="btn btn-terra" href="#contact">สอบถามแพ็กเกจนี้</a>
+        </article>
+
+        <article class="pkg">
+          <h3>พึ่งพาเต็ม</h3>
+          <p class="fit">สำหรับท่านที่ต้องการการดูแลใกล้ชิดตลอดเวลา</p>
+          <p class="pkg-price"><span class="amount">฿65,000</span><span class="per">/ เดือน</span></p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>ผู้ดูแลใกล้ชิดตลอด 24 ชั่วโมง</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>ดูแลท่านที่ติดเตียง พลิกตัวป้องกันแผลกดทับ</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>ดูแลสายสวนและอุปกรณ์ทางการแพทย์</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>พยาบาลวิชาชีพเวรกลางคืน</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>กายภาพและฝึกการเคลื่อนไหวรายวัน</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>ประสานแพทย์ฉุกเฉินและโรงพยาบาลตลอดเวลา</li>
+          </ul>
+          <a class="btn btn-outline" href="#contact">สอบถามแพ็กเกจนี้</a>
+        </article>
+      </div>
+      <p class="pkg-note">ทุกแพ็กเกจรวมค่าน้ำ–ไฟ อินเทอร์เน็ตในห้อง และสิทธิ์ใช้พื้นที่ส่วนกลางทั้งหมด · ทดลองพักระยะสั้น 7 วัน เริ่มต้น ฿9,900</p>
+    </div>
+  </section>
+
+  <!-- ACTIVITIES -->
+  <section class="section" id="activities" aria-labelledby="activities-h">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="en">Weekly Activities</span>
+        <h2 id="activities-h">กิจกรรมประจำสัปดาห์</h2>
+        <p>ตารางกิจกรรมที่ทำซ้ำทุกสัปดาห์ให้ท่านคุ้นเคยและมีเพื่อนร่วมกิจกรรมประจำ เข้าร่วมได้ตามสบาย ไม่บังคับ</p>
+      </div>
+      <div class="activities-grid">
+        <figure class="activities-photo">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1000&auto=format&fit=crop" alt="ผู้สูงอายุยิ้มแย้มขณะร่วมกิจกรรมกลุ่มในช่วงบ่าย" loading="lazy">
+          <figcaption>กิจกรรมยามบ่ายที่ห้องนั่งเล่นกลาง ทุกท่านเข้าร่วมได้ตามใจชอบ</figcaption>
+        </figure>
+        <div class="table-scroll">
+          <table>
+            <caption>ตารางกิจกรรม จันทร์–อาทิตย์</caption>
+            <thead>
+              <tr><th scope="col">วัน</th><th scope="col">ช่วงเช้า</th><th scope="col">ช่วงบ่าย</th><th scope="col">ช่วงเย็น</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">จันทร์</th><td>โยคะเช้าเบาๆ</td><td>ทำสวนริมระเบียง</td><td>ฟังเพลงเก่าเพราะๆ</td></tr>
+              <tr><th scope="row">อังคาร</th><td>สวดมนต์และทำสมาธิ</td><td>วาดรูประบายสี</td><td>ชมภาพยนตร์ไทยเก่า</td></tr>
+              <tr><th scope="row">พุธ</th><td>ยืดเส้นยืดสาย</td><td>ทำขนมไทยด้วยกัน</td><td>เล่าเรื่องเก่าสมัยหนุ่มสาว</td></tr>
+              <tr><th scope="row">พฤหัสบดี</th><td>โยคะเช้าเบาๆ</td><td>รดน้ำต้นไม้ในสวน</td><td>บิงโกประจำสัปดาห์</td></tr>
+              <tr><th scope="row">ศุกร์</th><td>ตักบาตรยามเช้า</td><td>นวดผ่อนคลายมือเท้า</td><td>ร้องเพลงคาราโอเกะ</td></tr>
+              <tr><th scope="row">เสาร์</th><td>รอลูกหลานมาเยี่ยม</td><td>ตลาดนัดเล็กๆ ในสวน</td><td>ปิกนิกใต้ร่มไม้</td></tr>
+              <tr><th scope="row">อาทิตย์</th><td>ทำบุญวันอาทิตย์</td><td>ทานข้าวร่วมกันโต๊ะใหญ่</td><td>ดูละครย้อนหลัง</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARE TEAM -->
+  <section class="section" aria-labelledby="team-h">
+    <div class="wrap">
+      <div class="team-band">
+        <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?q=80&w=1000&auto=format&fit=crop" alt="พยาบาลผู้ดูแลยิ้มพูดคุยกับผู้สูงอายุบนรถเข็นอย่างใกล้ชิด" loading="lazy">
+        <div class="team-body">
+          <span class="en">Our Care Team</span>
+          <h3 id="team-h">ทีมที่อยู่ข้างท่านทุกชั่วโมง</h3>
+          <p>หัวหน้าทีมดูแลของเราเป็นพยาบาลวิชาชีพที่ผ่านงานโรงพยาบาลมากว่า 15 ปี ผู้ดูแลทุกคนผ่านการอบรมการดูแลผู้สูงอายุเฉพาะทางและการช่วยชีวิตฉุกเฉิน ที่สำคัญที่สุด — เราคัดคนที่ใจรักงานดูแลจริงๆ</p>
+          <ul class="team-stats">
+            <li><span class="num">9 ปี</span><span class="lbl">ที่ดูแลครอบครัวไทยมาตั้งแต่ 2560</span></li>
+            <li><span class="num">1 : 4</span><span class="lbl">ผู้ดูแลต่อผู้สูงอายุในช่วงกลางวัน</span></li>
+            <li><span class="num">24 ชม.</span><span class="lbl">พยาบาลและผู้ดูแลเวรตลอดคืน</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section" id="reviews" aria-labelledby="reviews-h">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="en">From Our Families</span>
+        <h2 id="reviews-h">เสียงจากลูกหลาน</h2>
+      </div>
+      <div class="reviews-grid">
+        <blockquote class="review">
+          <svg class="quote-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 8c-3 .5-5 2.5-5 6v2h5v-6H7.5c.3-1.2 1.2-1.8 2.5-2V8zm9 0c-3 .5-5 2.5-5 6v2h5v-6h-2.5c.3-1.2 1.2-1.8 2.5-2V8z"/></svg>
+          <p>“ตอนแรกคุณแม่ไม่อยากมาอยู่เลยค่ะ แต่พอได้ลองมาเยี่ยมแล้วเห็นสวนกับเพื่อนๆ แม่กลับถามเองว่าเมื่อไหร่จะได้ย้ายมา ตอนนี้ทุกเช้าพี่ๆ ผู้ดูแลจะส่งรูปแม่ตอนทำสวนมาให้ในกลุ่มไลน์ครอบครัว เราสบายใจมากค่ะ”</p>
+          <footer>
+            <span class="avatar" aria-hidden="true">ม</span>
+            <span class="who"><strong>คุณมาลี วงศ์สว่าง</strong><span>ลูกสาวของคุณยายทองใบ · อยู่กับเรา 2 ปี</span></span>
+          </footer>
+        </blockquote>
+        <blockquote class="review">
+          <svg class="quote-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 8c-3 .5-5 2.5-5 6v2h5v-6H7.5c.3-1.2 1.2-1.8 2.5-2V8zm9 0c-3 .5-5 2.5-5 6v2h5v-6h-2.5c.3-1.2 1.2-1.8 2.5-2V8z"/></svg>
+          <p>“คุณพ่อเป็นเบาหวานและเคยล้มที่บ้าน ตัดสินใจยากมากครับ แต่ทีมพยาบาลที่นี่คุมยาและค่าน้ำตาลให้ทุกวัน หมอก็มาตรวจทุกสัปดาห์จริงตามที่บอกไว้ ผมเปิดกล้องดูพ่อได้ทุกคืนก่อนนอน ใจชื้นขึ้นเยอะครับ”</p>
+          <footer>
+            <span class="avatar" aria-hidden="true">ว</span>
+            <span class="who"><strong>คุณวิชัย ตั้งกิจเจริญ</strong><span>ลูกชายของคุณพ่อสมบัติ · อยู่กับเรา 1 ปี 4 เดือน</span></span>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <div class="cta-grid">
+        <div class="cta-body">
+          <span class="en">Visit Us</span>
+          <h2 id="contact-h">มาเยี่ยมชมกันก่อน<br>ไม่มีค่าใช้จ่าย</h2>
+          <p>ทางที่ดีที่สุดคือมาเห็นด้วยตาตัวเอง ลองทานข้าวกลางวันกับเรา คุยกับผู้สูงอายุที่อยู่จริง แล้วค่อยตัดสินใจ ฝากชื่อและเบอร์ไว้ ทีมงานจะโทรกลับเพื่อนัดวันเยี่ยมชม</p>
+          <form id="visitForm" novalidate>
+            <div class="field">
+              <label for="fName">ชื่อผู้ติดต่อ</label>
+              <input id="fName" name="name" type="text" autocomplete="name" placeholder="เช่น คุณสมชาย ใจดี" required>
+            </div>
+            <div class="field">
+              <label for="fPhone">เบอร์โทรศัพท์</label>
+              <input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="เช่น 081-234-5678" required>
+            </div>
+            <button class="btn btn-terra" type="submit">ขอนัดเยี่ยมชม</button>
+            <p class="form-note">เราโทรกลับภายใน 24 ชั่วโมง (เวลาทำการ 08:00–18:00 น.) ข้อมูลของคุณใช้เพื่อติดต่อนัดหมายเท่านั้น</p>
+          </form>
+          <div class="form-success" id="formSuccess" role="status" tabindex="-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4L12 14l-3-3"/></svg>
+            <span>ขอบคุณค่ะ ได้รับข้อมูลแล้ว ทีมงานบ้านสุขใจจะโทรกลับภายใน 24 ชั่วโมงเพื่อนัดวันเยี่ยมชมค่ะ</span>
+          </div>
+        </div>
+        <div class="cta-photo">
+          <img src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?q=80&w=1000&auto=format&fit=crop" alt="มือของลูกหลานจับมือผู้สูงอายุอย่างอบอุ่น" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <span class="brand-name">บ้านสุขใจ</span><br>
+      <span class="en">Baan Sukjai Elderly Care</span>
+      <address>
+        88 หมู่ 3 ถนนเพชรเกษม ตำบลสวนป่าน<br>
+        อำเภอเมือง จังหวัดนครปฐม 73000<br>
+        เปิดเยี่ยมทุกวัน 08:00–18:00 น.
+      </address>
+    </div>
+    <div>
+      <h3>ติดต่อเรา</h3>
+      <ul class="footer-list">
+        <li><a href="tel:+6634216789"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13 1 .37 2 .72 2.9a2 2 0 0 1-.45 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.94.35 1.9.6 2.9.72a2 2 0 0 1 1.6 2z"/></svg>034-216-789</a></li>
+        <li><a href="tel:+66865321478"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>086-532-1478</a></li>
+        <li><a href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>ส่งข้อความนัดเยี่ยมชม</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>ทางลัด</h3>
+      <ul class="footer-list">
+        <li><a href="#tour">เดินชมสถานที่จากที่บ้าน</a></li>
+        <li><a href="#packages">แพ็กเกจดูแลรายเดือน</a></li>
+        <li><a href="#activities">กิจกรรมประจำสัปดาห์</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span id="year">2569</span> บ้านสุขใจ ศูนย์ดูแลผู้สูงอายุ · เว็บไซต์ตัวอย่างเพื่อการนำเสนอ</div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- font size switcher ---------- */
+  var KEY = 'bsj-font-size';
+  var SIZES = { s:'100%', m:'112.5%', l:'125%' };
+  function applyFont(size){
+    if(!SIZES[size]){ size = 'm'; }
+    document.documentElement.style.fontSize = SIZES[size];
+    var btns = document.querySelectorAll('[data-font-size]');
+    for(var i=0;i<btns.length;i++){
+      var on = btns[i].getAttribute('data-font-size') === size;
+      btns[i].classList.toggle('is-active', on);
+      btns[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+  }
+  var stored = null;
+  try{ stored = window.localStorage.getItem(KEY); }catch(e){}
+  applyFont(stored || 'm');
+  document.addEventListener('click', function(ev){
+    var t = ev.target;
+    var b = (t && t.closest) ? t.closest('[data-font-size]') : null;
+    if(!b){ return; }
+    var v = b.getAttribute('data-font-size');
+    applyFont(v);
+    try{ window.localStorage.setItem(KEY, v); }catch(e){}
+  });
+
+  /* ---------- mobile nav ---------- */
+  var navToggle = document.getElementById('navToggle');
+  var navMenu = document.getElementById('navMenu');
+  if(navToggle && navMenu){
+    navToggle.addEventListener('click', function(){
+      var open = navMenu.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', open ? 'ปิดเมนู' : 'เปิดเมนู');
+    });
+    navMenu.addEventListener('click', function(ev){
+      if(ev.target && ev.target.tagName === 'A'){
+        navMenu.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.setAttribute('aria-label', 'เปิดเมนู');
+      }
+    });
+  }
+
+  /* ---------- panorama tour ---------- */
+  var frame = document.getElementById('panoFrame');
+  if(frame){
+    var dragging = false, startX = 0, startScroll = 0;
+    frame.addEventListener('pointerdown', function(e){
+      if(e.pointerType !== 'mouse'){ return; } /* มือถือใช้ native touch scroll */
+      dragging = true;
+      startX = e.clientX;
+      startScroll = frame.scrollLeft;
+      frame.classList.add('is-dragging');
+      try{ frame.setPointerCapture(e.pointerId); }catch(err){}
+    });
+    frame.addEventListener('pointermove', function(e){
+      if(!dragging){ return; }
+      frame.scrollLeft = startScroll - (e.clientX - startX);
+    });
+    function endDrag(){
+      dragging = false;
+      frame.classList.remove('is-dragging');
+    }
+    frame.addEventListener('pointerup', endDrag);
+    frame.addEventListener('pointercancel', endDrag);
+    function nudge(dir){
+      frame.scrollBy({ left: frame.clientWidth * 0.55 * dir, behavior: reduced ? 'auto' : 'smooth' });
+    }
+    var prev = document.getElementById('panoPrev');
+    var next = document.getElementById('panoNext');
+    if(prev){ prev.addEventListener('click', function(){ nudge(-1); }); }
+    if(next){ next.addEventListener('click', function(){ nudge(1); }); }
+    frame.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowLeft'){ e.preventDefault(); nudge(-1); }
+      else if(e.key === 'ArrowRight'){ e.preventDefault(); nudge(1); }
+    });
+    /* เปิดมาให้เห็นกลางภาพ เชิญให้ลาก */
+    function centerPano(){
+      var max = frame.scrollWidth - frame.clientWidth;
+      if(max > 0){ frame.scrollLeft = max / 2; }
+    }
+    if(document.readyState === 'complete'){ centerPano(); }
+    else{ window.addEventListener('load', centerPano); }
+  }
+
+  /* ---------- visit form ---------- */
+  var form = document.getElementById('visitForm');
+  var success = document.getElementById('formSuccess');
+  if(form && success){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var name = document.getElementById('fName');
+      var phone = document.getElementById('fPhone');
+      var ok = true;
+      if(!name.value.trim()){ ok = false; name.focus(); }
+      else if(!/^[0-9\s\-+]{9,15}$/.test(phone.value.trim())){ ok = false; phone.focus(); }
+      if(!ok){ return; }
+      form.reset();
+      success.classList.add('is-visible');
+      success.focus();
+    });
+  }
+
+  /* ---------- footer year (พ.ศ.) ---------- */
+  var y = document.getElementById('year');
+  if(y){ y.textContent = String(new Date().getFullYear() + 543); }
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+</body>
+</html>

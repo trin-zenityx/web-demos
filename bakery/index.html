@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ครัวซองว์ — เบเกอรี่อบสดทุกเช้า ย่านอารีย์</title>
+<meta name="description" content="ครัวซองว์ เบเกอรี่ฝรั่งเศสย่านอารีย์ อบสดทุกเช้าตีห้าครึ่ง ครัวซองว์เนยแท้ ซาวร์โดว์ ทาร์ต และเค้ก เปิดทุกวัน 7:00-19:00">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500&family=Pacifico&family=Pattaya&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#fdf6e9;
+  --butter:#f2b33d;
+  --cocoa:#4a2f1d;
+  --pink:#f3d8c7;
+  --ink:#3a2a1c;
+  --muted:#8a7260;
+  --line:rgba(58,42,28,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Noto Sans Thai',sans-serif;
+  font-size:16px;
+  line-height:1.75;
+  background:var(--cream);
+  color:var(--ink);
+}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+[hidden]{display:none!important;}
+:focus-visible{outline:3px solid var(--butter);outline-offset:2px;border-radius:4px;}
+h1,h2,h3{font-family:'Pattaya',sans-serif;font-weight:400;line-height:1.3;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px;}
+section{scroll-margin-top:96px;}
+.script{font-family:'Pacifico',cursive;font-size:1.05rem;color:var(--cocoa);}
+.sec-head{text-align:center;margin-bottom:38px;}
+.sec-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);color:var(--cocoa);margin:4px 0 6px;}
+.sec-note{color:var(--muted);}
+.section{padding:72px 0;}
+.band-pink{background:var(--pink);}
+
+/* ---------- header ---------- */
+.site-head{
+  position:sticky;top:0;z-index:60;
+  background:rgba(253,246,233,.92);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.head-in{max-width:1120px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.brand{font-family:'Pattaya',sans-serif;font-size:1.6rem;color:var(--cocoa);text-decoration:none;padding:6px 12px 6px 0;}
+.main-nav{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;}
+.main-nav a{
+  text-decoration:none;color:var(--muted);font-size:.95rem;
+  padding:10px 12px;min-height:44px;display:inline-flex;align-items:center;
+  border-radius:10px;transition:color .2s,background .2s;
+}
+.main-nav a:hover{color:var(--cocoa);background:rgba(242,179,61,.18);}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;padding:10px 22px;border-radius:999px;
+  font-family:'Noto Sans Thai',sans-serif;font-size:1rem;font-weight:500;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:transform .15s,background .2s,box-shadow .15s;
+}
+.btn:active{transform:scale(.97);}
+.btn-butter{background:var(--butter);color:#2c1b0e;box-shadow:0 2px 0 rgba(74,47,29,.28);}
+.btn-butter:hover{background:#f6bd55;}
+.btn-ghost{background:transparent;color:var(--cocoa);border:2px solid var(--cocoa);}
+.btn-ghost:hover{background:rgba(74,47,29,.06);}
+.head-cta{margin-left:4px;}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:72px 0 64px;}
+.hero .script{
+  font-size:clamp(1.15rem,2vw,1.5rem);
+  display:inline-block;transform:rotate(-2deg);
+  background:linear-gradient(transparent 58%,rgba(242,179,61,.55) 58%);
+  padding:0 6px;
+}
+.hero h1{font-size:clamp(2.4rem,5.5vw,4.1rem);color:var(--cocoa);margin:8px 0 14px;}
+.hero .lead{color:var(--muted);max-width:46ch;margin-bottom:28px;}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
+.hero-media img{
+  border-radius:26px;width:100%;aspect-ratio:4/3;object-fit:cover;
+  box-shadow:0 24px 48px -24px rgba(74,47,29,.45);
+}
+
+/* ---------- split-flap board ---------- */
+.board-frame{
+  --cw:clamp(8px,2.4vw,17px);
+  max-width:760px;margin:0 auto;
+  background:linear-gradient(160deg,#2b1a0c,#180d04);
+  border:6px solid #3a2412;border-radius:20px;
+  padding:22px 20px 26px;
+  box-shadow:0 30px 60px -30px rgba(58,42,28,.5),inset 0 1px 0 rgba(253,246,233,.12);
+}
+.board-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;padding:0 4px;}
+.b-title{font-family:'Pattaya',sans-serif;color:var(--cream);font-size:1.3rem;}
+.b-session{font-family:'Pacifico',cursive;color:var(--butter);font-size:.95rem;}
+.flap-wrap{overflow-x:auto;padding-bottom:4px;}
+.flap-head,.flap-row{display:flex;gap:6px;width:max-content;margin:0 auto;}
+.flap-head{margin-bottom:8px;color:rgba(253,246,233,.5);font-size:.72rem;letter-spacing:.04em;}
+.flap-head span{display:block;}
+.h-name{width:calc(14 * var(--cw) + 13px);}
+.h-price{width:calc(5 * var(--cw) + 4px);text-align:center;}
+.h-status{width:calc(10 * var(--cw) + 9px);text-align:right;}
+.flap-row{margin-bottom:6px;}
+.flap-group{display:flex;gap:1px;}
+.flap-cell{
+  width:var(--cw);height:calc(var(--cw) * 1.72);flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(to bottom,#2b1b0d 0%,#2b1b0d 48%,#1a0f05 52%,#1a0f05 100%);
+  color:#f6c25e;border-radius:2px;
+  font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  font-size:clamp(10px,calc(var(--cw) * 1.05),19px);
+  box-shadow:inset 0 1px 0 rgba(253,246,233,.07);
+}
+.flap-cell.ticking{animation:flapTick .08s linear;}
+@keyframes flapTick{0%{transform:rotateX(72deg);}100%{transform:rotateX(0deg);}}
+.board-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:18px;padding:0 4px;}
+.board-note{color:rgba(253,246,233,.55);font-size:.9rem;}
+
+/* ---------- stamp card ---------- */
+.stamp-card{
+  max-width:500px;margin:0 auto;position:relative;
+  background:#e2c193;
+  background-image:radial-gradient(rgba(74,47,29,.09) 1px,transparent 1px);
+  background-size:14px 14px;
+  border-radius:18px;padding:30px 26px 34px;
+  box-shadow:0 22px 44px -22px rgba(74,47,29,.45);
+}
+.stamp-card::before{
+  content:'';position:absolute;inset:10px;
+  border:2px dashed rgba(74,47,29,.35);border-radius:12px;pointer-events:none;
+}
+.sc-script{font-family:'Pacifico',cursive;color:var(--cocoa);opacity:.7;text-align:center;font-size:.95rem;}
+.stamp-card h3{font-size:1.65rem;color:var(--cocoa);text-align:center;margin:2px 0 4px;}
+.sc-sub{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:22px;}
+.stamp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;justify-items:center;margin-bottom:20px;}
+.stamp-slot{
+  width:64px;height:64px;min-width:44px;min-height:44px;border-radius:50%;
+  border:2px dashed rgba(74,47,29,.45);background:rgba(253,246,233,.5);
+  cursor:pointer;display:grid;place-items:center;padding:0;
+  transition:transform .15s,border-color .2s,box-shadow .2s;
+}
+.stamp-slot.next{border-color:var(--cocoa);border-style:solid;box-shadow:0 0 0 4px rgba(242,179,61,.35);}
+.stamp-slot.next:hover{transform:scale(1.07);}
+.stamp-slot.stamped{border-color:transparent;background:rgba(253,246,233,.25);cursor:default;}
+.stamp-slot:not(.stamped):not(.next){opacity:.45;cursor:default;}
+.stamp-ink{width:54px;height:54px;color:var(--cocoa);opacity:0;transform:scale(1.7) rotate(-18deg);}
+.stamped .stamp-ink{opacity:.9;transform:scale(1) rotate(-7deg);}
+.stamped.just .stamp-ink{animation:stampPop .4s cubic-bezier(.2,1.7,.4,1) both;}
+@keyframes stampPop{
+  0%{opacity:0;transform:scale(1.9) rotate(-22deg);}
+  55%{opacity:1;transform:scale(.94) rotate(3deg);}
+  100%{opacity:.9;transform:scale(1) rotate(-7deg);}
+}
+.sc-msg{text-align:center;color:var(--cocoa);font-weight:500;min-height:1.8em;margin-bottom:14px;}
+.sc-msg.done{background:rgba(242,179,61,.45);border-radius:10px;padding:6px 10px;}
+.stamp-reset{margin:0 auto;}
+
+/* ---------- signature menu ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  box-shadow:0 14px 30px -18px rgba(74,47,29,.25);
+  transition:transform .25s,box-shadow .25s;
+}
+.card:hover{transform:translateY(-5px);box-shadow:0 24px 40px -18px rgba(74,47,29,.35);}
+.card img{aspect-ratio:4/3;object-fit:cover;width:100%;}
+.card-body{padding:18px 18px 20px;}
+.card h3{color:var(--cocoa);font-size:1.3rem;margin-bottom:6px;}
+.card-body p{color:var(--muted);font-size:.95rem;}
+.card .price{margin-top:12px;font-family:'Pattaya',sans-serif;color:var(--cocoa);font-size:1.3rem;}
+
+/* ---------- story ---------- */
+.story-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:start;}
+.story-copy h2{font-size:clamp(1.9rem,3.4vw,2.5rem);color:var(--cocoa);margin:4px 0 16px;}
+.story-copy p{color:var(--muted);margin-bottom:16px;}
+.story-img{border-radius:18px;margin-top:10px;aspect-ratio:16/10;object-fit:cover;width:100%;}
+.hours{background:var(--pink);border-radius:18px;padding:28px;}
+.hours h3{color:var(--cocoa);font-size:1.2rem;margin:20px 0 6px;}
+.hours h3:first-child{margin-top:0;}
+.hours p{font-size:.97rem;}
+.hours .big{font-family:'Pattaya',sans-serif;font-size:1.5rem;color:var(--cocoa);}
+.hours a{color:var(--cocoa);}
+
+/* ---------- footer ---------- */
+.site-foot{background:var(--cocoa);color:var(--cream);padding:44px 20px 30px;text-align:center;}
+.f-brand{font-family:'Pattaya',sans-serif;font-size:1.8rem;color:var(--butter);}
+.f-script{font-family:'Pacifico',cursive;opacity:.8;margin:6px 0 14px;}
+.site-foot p{color:rgba(253,246,233,.72);font-size:.9rem;}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding:48px 0 44px;gap:32px;}
+  .hero-media{order:-1;}
+  .story-grid{grid-template-columns:1fr;}
+}
+@media (max-width:640px){
+  .main-nav{order:3;width:100%;justify-content:center;}
+  .hero{padding-top:36px;}
+  .section{padding:52px 0;}
+}
+@media (max-width:480px){
+  .board-frame{padding:16px 12px 20px;border-width:5px;}
+  .stamp-grid{gap:10px;}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation:none!important;transition:none!important;}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<header class="site-head">
+  <div class="head-in">
+    <a class="brand" href="#top">ครัวซองว์</a>
+    <nav class="main-nav" aria-label="เมนูหลัก">
+      <a href="#board">เมนูวันนี้</a>
+      <a href="#stamps">บัตรสะสมแต้ม</a>
+      <a href="#menu">ซิกเนเจอร์</a>
+      <a href="#story">เรื่องราว</a>
+    </nav>
+    <a class="btn btn-butter head-cta" href="tel:021234567">สั่งล่วงหน้า</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- hero -->
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="script">fresh from the oven</p>
+      <h1>อบสดทุกเช้า ตีห้าครึ่ง</h1>
+      <p class="lead">เบเกอรี่ฝรั่งเศสเล็กๆ ย่านอารีย์ นวดแป้งและพับเนยด้วยมือทุกคืน อบรอบแรกตีห้าครึ่ง กลิ่นเนยหอมลอยทั้งซอยก่อนร้านจะเปิดเสียอีก</p>
+      <div class="hero-cta">
+        <a class="btn btn-butter" href="#board">ดูเมนูวันนี้</a>
+        <a class="btn btn-ghost" href="#story">เวลาเปิดร้าน</a>
+      </div>
+    </div>
+    <figure class="hero-media">
+      <img src="../assets/bakery-hero.jpg" alt="ตู้ขนมเบเกอรี่ยามเช้าของร้านครัวซองว์ ครัวซองว์และขนมปังอบสดเรียงอยู่ในตู้ไม้" width="1200" height="900"
+        onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=80&amp;w=1000&amp;auto=format&amp;fit=crop';">
+    </figure>
+  </section>
+
+  <!-- split-flap board -->
+  <section id="board" class="section" aria-labelledby="board-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="script">today's bake</p>
+        <h2 id="board-title">ป้ายเมนูวันนี้</h2>
+        <p class="sec-note">ป้ายพลิกอัปเดตตามรอบเวลาจริงของร้าน รอบเช้าและรอบเย็นไม่เหมือนกัน</p>
+      </div>
+      <div class="board-frame">
+        <div class="board-top">
+          <p class="b-title">เมนูประจำวัน</p>
+          <p class="b-session" id="boardSession">รอบเช้า</p>
+        </div>
+        <div class="flap-wrap">
+          <div class="flap-head" aria-hidden="true">
+            <span class="h-name">ชื่อขนม</span><span class="h-price">ราคา</span><span class="h-status">สถานะ</span>
+          </div>
+          <div id="flapRows" role="table" aria-label="รายการเบเกอรี่วันนี้"></div>
+        </div>
+        <div class="board-foot">
+          <p class="board-note">ของอบใหม่หมดเร็ว แวะมาก่อน 10 โมงถ้าอยากได้ครัวซองว์ร้อนๆ</p>
+          <button type="button" class="btn btn-butter" id="swapMenu">สลับเมนูเย็น</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- stamp card -->
+  <section id="stamps" class="section band-pink" aria-labelledby="stamps-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="script">loyalty card</p>
+        <h2 id="stamps-title">บัตรสะสมแต้ม</h2>
+        <p class="sec-note">ซื้อเบเกอรี่ 1 ชิ้น รับ 1 แต้ม — แตะช่องถัดไปเพื่อประทับแต้มได้เลย</p>
+      </div>
+      <div class="stamp-card">
+        <p class="sc-script">Croissant House</p>
+        <h3>สะสม 8 แต้ม แลกครัวซองว์ฟรี</h3>
+        <p class="sc-sub">ใช้ได้ทุกวันที่ร้าน ไม่มีวันหมดอายุ</p>
+        <div class="stamp-grid" id="stampGrid">
+          <button type="button" class="stamp-slot"><svg class="stamp-ink" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="24" cy="24" r="15.5" fill="none" stroke="currentColor" stroke-width="1" opacity=".65"/><path d="M12 27c1.5-7 7-12 15-12 4 0 7 1.5 9 3.5-2.5 6-8 11-15 12.5-4-.8-7.5-2-9-4z" fill="currentColor" opacity=".9"/></svg></button>
+          <button type="button" class="stamp-slot"><svg class="stamp-ink" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="24" cy="24" r="15.5" fill="none" stroke="currentColor" stroke-width="1" opacity=".65"/><path d="M12 27c1.5-7 7-12 15-12 4 0 7 1.5 9 3.5-2.5 6-8 11-15 12.5-4-.8-7.5-2-9-4z" fill="currentColor" opacity=".9"/></svg></button>
+          <button type="button" class="stamp-slot"><svg class="stamp-ink" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="24" cy="24" r="15.5" fill="none" stroke="currentColor" stroke-width="1" opacity=".65"/><path d="M12 27c1.5-7 7-12 15-12 4 0 7 1.5 9 3.5-2.5 6-8 11-15 12.5-4-.8-7.5-2-9-4z" fill="currentColor" opacity=".9"/></svg></button>
+          <button type="button" class="stamp-slot"><svg class="stamp-ink" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="24" cy="24" r="15.5" fill="none" stroke="currentColor" stroke-width="1" opacity=".65"/><path d="M12 27c1.5-7 7-12 15-12 4 0 7 1.5 9 3.5-2.5 6-8 11-15 12.5-4-.8-7.5-2-9-4z" fill="currentColor" opacity=".9"/></svg></button>
+          <button type="button" class="stamp-slot"><svg class="stamp-ink" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="24" cy="24" r="15.5" fill="none" stroke="currentColor" stroke-width="1" opacity=".65"/><path d="M12 27c1.5-7 7-12 15-12 4 0 7 1.5 9 3.5-2.5 6-8 11-15 12.5-4-.8-7.5-2-9-4z" fill="currentColor" opacity=".9"/></svg></button>
+          <button type="button" class="stamp-slot"><svg class="stamp-ink" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="24" cy="24" r="15.5" fill="none" stroke="currentColor" stroke-width="1" opacity=".65"/><path d="M12 27c1.5-7 7-12 15-12 4 0 7 1.5 9 3.5-2.5 6-8 11-15 12.5-4-.8-7.5-2-9-4z" fill="currentColor" opacity=".9"/></svg></button>
+          <button type="button" class="stamp-slot"><svg class="stamp-ink" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="24" cy="24" r="15.5" fill="none" stroke="currentColor" stroke-width="1" opacity=".65"/><path d="M12 27c1.5-7 7-12 15-12 4 0 7 1.5 9 3.5-2.5 6-8 11-15 12.5-4-.8-7.5-2-9-4z" fill="currentColor" opacity=".9"/></svg></button>
+          <button type="button" class="stamp-slot"><svg class="stamp-ink" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="24" cy="24" r="15.5" fill="none" stroke="currentColor" stroke-width="1" opacity=".65"/><path d="M12 27c1.5-7 7-12 15-12 4 0 7 1.5 9 3.5-2.5 6-8 11-15 12.5-4-.8-7.5-2-9-4z" fill="currentColor" opacity=".9"/></svg></button>
+        </div>
+        <p class="sc-msg" id="stampMsg" aria-live="polite"></p>
+        <button type="button" class="btn btn-ghost stamp-reset" id="stampReset" hidden>เริ่มสะสมใหม่</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- signature menu -->
+  <section id="menu" class="section" aria-labelledby="menu-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="script">signature</p>
+        <h2 id="menu-title">ซิกเนเจอร์ของเรา</h2>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="ครัวซองว์เนยแท้อบสีทอง ชั้นแป้งกรอบเรียงเป็นชั้น" loading="lazy" width="1000" height="750">
+          <div class="card-body">
+            <h3>ครัวซองว์เนยแท้</h3>
+            <p>พับเนยฝรั่งเศส 27 ชั้น อบจนสีทอง กรอบนอกนุ่มใน</p>
+            <p class="price">85.-</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="ซาวร์โดว์ก้อนกลมเปลือกกรอบ ผ่าแป้งเป็นลวดลาย" loading="lazy" width="1000" height="750">
+          <div class="card-body">
+            <h3>ซาวร์โดว์อารีย์</h3>
+            <p>หมักช้า 24 ชั่วโมงด้วยยีสต์ธรรมชาติประจำร้าน เปลือกกรอบ เคี้ยวเพลิน</p>
+            <p class="price">140.-</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="ทาร์ตผลไม้ตามฤดู หน้าคัสตาร์ดวานิลลา ตกแต่งผลไม้สด" loading="lazy" width="1000" height="750">
+          <div class="card-body">
+            <h3>ทาร์ตผลไม้ตามฤดู</h3>
+            <p>ฐานทาร์ตเนยจืด คัสตาร์ดวานิลลา ผลไม้จากตลาดเช้าออเงิน</p>
+            <p class="price">95.-</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="เค้กช็อกโกแลตเกลือทะเลหน้านิ่ม เสิร์ฟเป็นชิ้นพอดีคำ" loading="lazy" width="1000" height="750">
+          <div class="card-body">
+            <h3>เค้กช็อกโกแลตเกลือทะเล</h3>
+            <p>ช็อกโกแลต 70% เกลือบ้านแหลม หวานน้อย เข้มกำลังดี</p>
+            <p class="price">120.-</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- story + hours -->
+  <section id="story" class="section" aria-labelledby="story-title">
+    <div class="wrap story-grid">
+      <div class="story-copy">
+        <p class="script">our story</p>
+        <h2 id="story-title">ร้านเล็กๆ ที่ตื่นก่อนทั้งซอย</h2>
+        <p>ครัวซองว์เริ่มจากเตาอบตัวแรกในครัวบ้านพักย่านอารีย์ เมื่อปี 2562 เชฟแป้ง อดีตคนทำงานสายการเงิน ลาออกมานวดแป้งเต็มตัว ทุกวันนี้เรายังทำเหมือนเดิมทุกอย่าง นวดมือทุกก้อน พับเนยทุกชั้น และไม่ขายของค้างคืน</p>
+        <p>เบเกอรี่ที่เหลือตอนเย็น เราแบ่งให้เพื่อนบ้านในซอยเสมอ เพราะอยากให้ทุกชิ้นที่ออกจากเตา ได้ไปถึงมือคนในวันที่มันอร่อยที่สุด</p>
+        <img class="story-img" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="ขนมปังอบสดหลายก้อนวางเรียงบนโต๊ะไม้หน้าร้าน" loading="lazy" width="1000" height="625">
+      </div>
+      <aside class="hours" aria-label="เวลาเปิดร้านและที่ตั้ง">
+        <h3>เวลาเปิด</h3>
+        <p class="big">เปิดทุกวัน 07:00 – 19:00</p>
+        <p>รอบอบ: 05:30 / 10:00 / 16:00</p>
+        <h3>ที่ตั้ง</h3>
+        <p>88/2 ซอยอารีย์ 4 ฝั่งเหนือ แขวงสามเสนใน เขตพญาไท กรุงเทพฯ</p>
+        <p>เดินจาก BTS อารีย์ ประมาณ 5 นาที</p>
+        <h3>สั่งล่วงหน้า</h3>
+        <p>โทร. <a href="tel:021234567">02-123-4567</a> (รับสั่งถึง 17:00)</p>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <p class="f-brand">ครัวซองว์</p>
+  <p class="f-script">baked with love in Ari</p>
+  <p>เปิดทุกวัน 07:00 – 19:00 · โทร. 02-123-4567</p>
+  <p>© 2569 ครัวซองว์ เบเกอรี่ประจำซอยอารีย์</p>
+</footer>
+
+<script>
+(function(){
+'use strict';
+var REDUCED = false;
+try { REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e){}
+
+/* ================= split-flap board ================= */
+var FLAP_CHARS = 'กขคงจฉชซญดตถทนบปผพฟภมยรลวศษสหอฮเแโไใ0123456789.-';
+var NAME_W = 14, PRICE_W = 5, STATUS_W = 10;
+
+var MENUS = {
+  morning: {
+    label: 'รอบเช้า',
+    rows: [
+      ['ครัวซองว์เนยสด','85.-','เพิ่งออกจากเตา'],
+      ['อัลมอนด์ครัวซองว์','95.-','เหลือ 6'],
+      ['ซาวร์โดว์ก้อน','140.-','เหลือ 2'],
+      ['ทาร์ตมะม่วง','95.-','รอบ 10 โมง'],
+      ['ขนมปังฝักบัว','65.-','หมด'],
+      ['กาแฟส้มเย็น','90.-','พร้อมเสิร์ฟ']
+    ]
+  },
+  evening: {
+    label: 'รอบเย็น',
+    rows: [
+      ['ครัวซองว์ช็อกโก','90.-','เหลือ 4'],
+      ['เค้กนิวยอร์กชีส','120.-','เหลือ 3'],
+      ['บราวนี่เกลือทะเล','75.-','เพิ่งออกจากเตา'],
+      ['คุกกี้เนยสด','55.-','เหลือ 9'],
+      ['ทาร์ตเลมอน','85.-','หมด'],
+      ['ชาเอิร์ลเกรย์','70.-','พร้อมเสิร์ฟ']
+    ]
+  }
+};
+
+function graphemes(s){
+  if (window.Intl && Intl.Segmenter){
+    var seg = new Intl.Segmenter('th', {granularity:'grapheme'});
+    return Array.from(seg.segment(s), function(x){ return x.segment; });
+  }
+  return Array.from(s);
+}
+function padCells(s, w){
+  var g = graphemes(s);
+  if (g.length > w) g = g.slice(0, w);
+  while (g.length < w) g.push(' ');
+  return g;
+}
+
+var flapRows = document.getElementById('flapRows');
+var sessionEl = document.getElementById('boardSession');
+var swapBtn = document.getElementById('swapMenu');
+var currentKey = null;
+var started = false;
+var io = null;
+
+function flapCell(cell, target, baseDelay){
+  if (cell._iv){ clearInterval(cell._iv); cell._iv = null; }
+  if (cell._to){ clearTimeout(cell._to); cell._to = null; }
+  if (REDUCED){ cell.textContent = target; return; }
+  var ticks = 3 + Math.floor(Math.random()*6);
+  var n = 0;
+  cell._to = setTimeout(function(){
+    cell._iv = setInterval(function(){
+      if (n >= ticks){
+        cell.textContent = target;
+        cell.classList.remove('ticking');
+        clearInterval(cell._iv);
+        cell._iv = null;
+        return;
+      }
+      cell.textContent = FLAP_CHARS.charAt(Math.floor(Math.random()*FLAP_CHARS.length));
+      cell.classList.remove('ticking');
+      void cell.offsetWidth;
+      cell.classList.add('ticking');
+      n++;
+    }, 55 + Math.random()*35);
+  }, baseDelay + Math.random()*260);
+}
+
+function buildCells(grp, count){
+  while (grp.children.length < count){
+    var c = document.createElement('span');
+    c.className = 'flap-cell';
+    c.textContent = '\u00a0';
+    grp.appendChild(c);
+  }
+}
+
+function setMenu(key){
+  currentKey = key;
+  var menu = MENUS[key];
+  sessionEl.textContent = menu.label;
+  swapBtn.textContent = (key === 'morning') ? 'สลับเมนูเย็น' : 'สลับเมนูเช้า';
+
+  while (flapRows.children.length < menu.rows.length){
+    var row = document.createElement('div');
+    row.className = 'flap-row';
+    row.setAttribute('role','row');
+    var cls = ['g-name','g-price','g-status'];
+    for (var k = 0; k < 3; k++){
+      var g = document.createElement('span');
+      g.className = 'flap-group ' + cls[k];
+      g.setAttribute('aria-hidden','true');
+      row.appendChild(g);
+    }
+    flapRows.appendChild(row);
+  }
+
+  for (var i = 0; i < menu.rows.length; i++){
+    var r = menu.rows[i];
+    var rowEl = flapRows.children[i];
+    rowEl.setAttribute('aria-label', r[0] + ' ราคา ' + r[1].replace('.-','') + ' บาท ' + r[2]);
+    var groups = rowEl.querySelectorAll('.flap-group');
+    var cols = [padCells(r[0], NAME_W), padCells(r[1], PRICE_W), padCells(r[2], STATUS_W)];
+    for (var gi = 0; gi < 3; gi++){
+      buildCells(groups[gi], cols[gi].length);
+      for (var ci = 0; ci < cols[gi].length; ci++){
+        var t = cols[gi][ci];
+        flapCell(groups[gi].children[ci], t === ' ' ? '\u00a0' : t, i * 100);
+      }
+    }
+  }
+}
+
+function defaultKey(){ return (new Date().getHours() < 12) ? 'morning' : 'evening'; }
+function startDefault(){
+  if (started) return;
+  started = true;
+  setMenu(defaultKey());
+  if (io) io.disconnect();
+}
+
+if (!REDUCED && 'IntersectionObserver' in window){
+  io = new IntersectionObserver(function(entries){
+    for (var i = 0; i < entries.length; i++){
+      if (entries[i].isIntersecting) startDefault();
+    }
+  }, {threshold:.2});
+  io.observe(document.getElementById('board'));
+} else {
+  startDefault();
+}
+
+swapBtn.addEventListener('click', function(){
+  if (!started){
+    started = true;
+    if (io) io.disconnect();
+    setMenu(defaultKey() === 'morning' ? 'evening' : 'morning');
+  } else {
+    setMenu(currentKey === 'morning' ? 'evening' : 'morning');
+  }
+});
+
+/* ================= stamp card ================= */
+var STAMP_KEY = 'croissant-house-stamps-v1';
+var grid = document.getElementById('stampGrid');
+var msg = document.getElementById('stampMsg');
+var resetBtn = document.getElementById('stampReset');
+var stamps = 0;
+try {
+  var saved = parseInt(localStorage.getItem(STAMP_KEY), 10);
+  if (!isNaN(saved)) stamps = Math.min(8, Math.max(0, saved));
+} catch(e){}
+
+function saveStamps(){
+  try { localStorage.setItem(STAMP_KEY, String(stamps)); } catch(e){}
+}
+
+function renderStamps(just){
+  var slots = grid.querySelectorAll('.stamp-slot');
+  for (var i = 0; i < slots.length; i++){
+    var s = slots[i];
+    var done = i < stamps;
+    s.classList.toggle('stamped', done);
+    s.classList.toggle('next', !done && i === stamps && stamps < 8);
+    s.setAttribute('aria-pressed', done ? 'true' : 'false');
+    if (done){
+      s.setAttribute('aria-label', 'แต้มที่ ' + (i+1) + ' ประทับแล้ว');
+    } else if (i === stamps && stamps < 8){
+      s.setAttribute('aria-label', 'แตะเพื่อประทับแต้มที่ ' + (i+1));
+    } else {
+      s.setAttribute('aria-label', 'ช่องแต้มที่ ' + (i+1) + ' ยังไม่ถึง');
+    }
+    s.classList.remove('just');
+    if (i === just){
+      void s.offsetWidth;
+      s.classList.add('just');
+    }
+  }
+  if (stamps >= 8){
+    msg.textContent = 'ครบ 8 แต้มแล้ว! แลกครัวซองว์ฟรี 1 ชิ้นได้ที่เคาน์เตอร์';
+    msg.classList.add('done');
+    resetBtn.hidden = false;
+  } else {
+    msg.textContent = 'สะสมแล้ว ' + stamps + ' จาก 8 แต้ม';
+    msg.classList.remove('done');
+    resetBtn.hidden = true;
+  }
+}
+
+grid.addEventListener('click', function(e){
+  var slot = (e.target && e.target.closest) ? e.target.closest('.stamp-slot') : null;
+  if (!slot) return;
+  var idx = -1;
+  for (var i = 0; i < grid.children.length; i++){
+    if (grid.children[i] === slot){ idx = i; break; }
+  }
+  if (idx === stamps && stamps < 8){
+    stamps++;
+    saveStamps();
+    renderStamps(idx);
+  }
+});
+
+resetBtn.addEventListener('click', function(){
+  stamps = 0;
+  saveStamps();
+  renderStamps(-1);
+});
+
+renderStamps(-1);
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STUDIO NINE — เอเจนซีครีเอทีฟ &amp; แบรนด์ดีไซน์</title>
+<meta name="description" content="STUDIO NINE เอเจนซีครีเอทีฟสัญชาติไทย สร้างแบรนด์ เว็บไซต์ คอนเทนต์ และระบบ AI Automation ที่คนจำได้">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0a0a0f;
+  --panel:#12121a;
+  --violet:#8b5cf6;
+  --magenta:#e04fd0;
+  --ink:#f2f0fa;
+  --muted:#8d88a3;
+  --line:rgba(242,240,250,.1);
+  --fx:50%;
+  --fy:50%;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void);
+  color:var(--ink);
+  font-family:'Anuphan',sans-serif;
+  font-size:16px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+::selection{background:var(--violet);color:#fff}
+:focus-visible{outline:2px solid var(--violet);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.en{font-family:'Unbounded',sans-serif}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(10,10,15,.75);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;padding:0 24px;
+  height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.logo{
+  font-family:'Unbounded',sans-serif;font-weight:800;font-size:17px;letter-spacing:.08em;
+  background:linear-gradient(90deg,var(--ink),var(--violet));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.nav-menu{display:flex;gap:32px;list-style:none}
+.nav-menu a{
+  font-size:15px;color:var(--muted);transition:color .25s;
+  min-height:44px;display:inline-flex;align-items:center;
+}
+.nav-menu a:hover{color:var(--ink)}
+.btn-outline{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;padding:10px 26px;
+  border:1px solid var(--violet);border-radius:999px;
+  background:transparent;color:var(--ink);
+  font-size:15px;font-weight:500;letter-spacing:.02em;
+  transition:background .3s,box-shadow .3s,transform .2s;
+}
+.btn-outline:hover{background:var(--violet);box-shadow:0 0 32px rgba(139,92,246,.45)}
+.btn-solid{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:52px;padding:14px 36px;border:none;border-radius:999px;
+  background:linear-gradient(120deg,var(--violet),var(--magenta));
+  color:#fff;font-size:16px;font-weight:600;letter-spacing:.02em;
+  transition:box-shadow .3s,transform .2s;
+}
+.btn-solid:hover{box-shadow:0 0 44px rgba(224,79,208,.5);transform:translateY(-2px)}
+.nav-toggle{display:none;background:none;border:none;color:var(--ink);width:44px;height:44px}
+.nav-toggle svg{width:24px;height:24px}
+
+/* ---------- HERO / FLASHLIGHT ---------- */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;align-items:center;
+  padding:140px 0 90px;
+  background:var(--void);
+}
+.hero-media{
+  position:absolute;inset:0;z-index:0;overflow:hidden;
+}
+.hero-media img{
+  width:100%;height:100%;object-fit:cover;opacity:.55;
+  filter:saturate(1.15) contrast(1.05);
+}
+.hero-media::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,10,15,.55),rgba(10,10,15,.35) 45%,var(--void) 96%);
+}
+.hero-inner{position:relative;z-index:2;width:100%}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  color:var(--muted);font-size:14px;letter-spacing:.28em;text-transform:uppercase;
+  margin-bottom:28px;
+}
+.hero-eyebrow::before{content:"";width:36px;height:1px;background:var(--violet)}
+
+.flash-zone{position:relative}
+.flash-text{
+  font-family:'Unbounded',sans-serif;font-weight:800;
+  font-size:clamp(34px,6.4vw,84px);
+  line-height:1.14;letter-spacing:.01em;
+  max-width:15ch;
+}
+.flash-text .grad{
+  background:linear-gradient(100deg,var(--violet) 10%,var(--magenta) 90%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.flash-overlay{
+  position:absolute;inset:-40px;z-index:3;pointer-events:none;
+  background:var(--void);
+  -webkit-mask-image:radial-gradient(circle 190px at var(--fx) var(--fy),transparent 0,black 72%);
+  mask-image:radial-gradient(circle 190px at var(--fx) var(--fy),transparent 0,black 72%);
+  opacity:0;transition:opacity .6s;
+}
+.flash-enabled .flash-overlay{opacity:1}
+.flash-hint{
+  display:none;margin-top:18px;color:var(--muted);font-size:14px;letter-spacing:.1em;
+}
+.flash-enabled .flash-hint{display:block}
+
+.hero-sub{
+  margin-top:34px;max-width:560px;color:var(--muted);font-size:17px;font-weight:300;
+}
+.hero-actions{margin-top:40px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.link-quiet{
+  display:inline-flex;align-items:center;min-height:44px;
+  color:var(--muted);font-size:15px;border-bottom:1px solid var(--line);
+  transition:color .25s,border-color .25s;
+}
+.link-quiet:hover{color:var(--ink);border-color:var(--violet)}
+
+.hero-stats{
+  margin-top:64px;display:flex;gap:48px;flex-wrap:wrap;
+  padding-top:28px;border-top:1px solid var(--line);max-width:640px;
+}
+.hero-stats div strong{
+  display:block;font-family:'Unbounded',sans-serif;font-weight:600;font-size:24px;color:var(--ink);
+}
+.hero-stats div span{color:var(--muted);font-size:14px}
+
+/* ---------- SECTION HEADS ---------- */
+.section{padding:110px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:56px;flex-wrap:wrap}
+.sec-label{
+  color:var(--violet);font-size:13px;letter-spacing:.3em;text-transform:uppercase;
+  display:block;margin-bottom:14px;
+}
+.sec-title{
+  font-family:'Unbounded',sans-serif;font-weight:600;
+  font-size:clamp(26px,3.6vw,44px);line-height:1.25;
+}
+.sec-desc{max-width:380px;color:var(--muted);font-size:15px}
+
+/* ---------- SERVICES ---------- */
+.services{background:linear-gradient(180deg,var(--void),var(--panel) 50%,var(--void))}
+.svc-list{list-style:none;border-top:1px solid var(--line)}
+.svc-item{
+  display:grid;grid-template-columns:70px 1fr auto;align-items:center;gap:24px;
+  padding:34px 8px;border-bottom:1px solid var(--line);
+  transition:padding-left .35s ease,background .35s ease;
+}
+.svc-item:hover{padding-left:28px;background:rgba(139,92,246,.05)}
+.svc-num{
+  font-family:'Unbounded',sans-serif;font-size:14px;color:var(--muted);font-weight:400;
+}
+.svc-item h3{
+  font-family:'Unbounded',sans-serif;font-weight:600;font-size:clamp(19px,2.4vw,28px);
+  margin-bottom:6px;transition:color .3s;
+}
+.svc-item:hover h3{color:var(--violet)}
+.svc-item p{color:var(--muted);font-size:15px;max-width:640px}
+.svc-arrow{
+  width:44px;height:44px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;flex:none;
+  transition:border-color .3s,background .3s,transform .3s;
+}
+.svc-item:hover .svc-arrow{border-color:var(--violet);background:var(--violet);transform:rotate(-45deg)}
+.svc-arrow svg{width:18px;height:18px;stroke:var(--ink)}
+
+/* ---------- WORK GRID ---------- */
+.work-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.work-card{
+  position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  background:var(--panel);padding:0;text-align:left;
+  aspect-ratio:4/3;width:100%;display:block;
+  transition:border-color .3s,transform .3s;
+}
+.work-card:hover{border-color:rgba(139,92,246,.6);transform:translateY(-4px)}
+.work-card img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .6s ease,filter .6s ease;filter:brightness(.85);
+}
+.work-card:hover img{transform:scale(1.05);filter:brightness(1)}
+.work-meta{
+  position:absolute;left:0;right:0;bottom:0;padding:20px;
+  background:linear-gradient(180deg,transparent,rgba(10,10,15,.92));
+  display:flex;align-items:flex-end;justify-content:space-between;gap:12px;
+}
+.work-meta h3{font-size:17px;font-weight:600}
+.work-meta span{color:var(--muted);font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.work-plus{
+  width:38px;height:38px;flex:none;border-radius:50%;
+  border:1px solid rgba(242,240,250,.35);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--ink);transition:background .3s,border-color .3s;
+}
+.work-card:hover .work-plus{background:var(--violet);border-color:var(--violet)}
+.work-plus svg{width:16px;height:16px;stroke:currentColor}
+
+/* ---------- LIGHTBOX ---------- */
+.lightbox{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(10,10,15,.94);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
+}
+.lightbox.open{opacity:1;visibility:visible}
+.lb-figure{max-width:min(920px,88vw);width:100%;padding:0 70px}
+.lb-figure img{
+  width:100%;max-height:70vh;object-fit:contain;border-radius:12px;
+  box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 60px rgba(139,92,246,.12);
+}
+.lb-caption{
+  margin-top:18px;display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
+}
+.lb-caption h3{font-family:'Unbounded',sans-serif;font-weight:600;font-size:20px}
+.lb-caption p{color:var(--muted);font-size:14px}
+.lb-count{color:var(--muted);font-size:13px;font-family:'Unbounded',sans-serif;letter-spacing:.15em}
+.lb-btn{
+  position:absolute;width:52px;height:52px;border-radius:50%;
+  border:1px solid var(--line);background:rgba(18,18,26,.8);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .25s,border-color .25s;z-index:2;
+}
+.lb-btn:hover{background:var(--violet);border-color:var(--violet)}
+.lb-btn svg{width:20px;height:20px;stroke:currentColor}
+.lb-close{top:24px;right:24px}
+.lb-prev{left:20px;top:50%;transform:translateY(-50%)}
+.lb-next{right:20px;top:50%;transform:translateY(-50%)}
+
+/* ---------- NUMBERS / CLIENTS ---------- */
+.numbers{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.num-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.num-grid strong{
+  display:block;font-family:'Unbounded',sans-serif;font-weight:800;
+  font-size:clamp(30px,3.4vw,46px);
+  background:linear-gradient(120deg,var(--violet),var(--magenta));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:8px;
+}
+.num-grid span{color:var(--muted);font-size:15px}
+.clients{
+  margin-top:70px;padding-top:40px;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:18px 44px;align-items:center;
+}
+.clients span{
+  font-family:'Unbounded',sans-serif;font-weight:400;font-size:15px;
+  color:var(--muted);letter-spacing:.06em;transition:color .3s;
+}
+.clients span:hover{color:var(--ink)}
+
+/* ---------- CTA / FOOTER ---------- */
+.cta{text-align:center;padding:140px 0}
+.cta h2{
+  font-family:'Unbounded',sans-serif;font-weight:800;
+  font-size:clamp(30px,5vw,60px);line-height:1.2;max-width:18ch;margin:0 auto 22px;
+}
+.cta p{color:var(--muted);max-width:480px;margin:0 auto 40px;font-size:17px;font-weight:300}
+footer{border-top:1px solid var(--line);padding:56px 0 40px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
+.foot-grid p{color:var(--muted);font-size:14px;max-width:320px}
+.foot-grid h4{
+  font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:16px;font-weight:500;
+}
+.foot-grid ul{list-style:none}
+.foot-grid li{margin-bottom:10px}
+.foot-grid li a{
+  color:var(--ink);font-size:15px;display:inline-flex;align-items:center;min-height:32px;
+  transition:color .25s;
+}
+.foot-grid li a:hover{color:var(--violet)}
+.foot-bottom{
+  margin-top:48px;padding-top:24px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  color:var(--muted);font-size:13px;
+}
+
+/* ---------- REVEAL ON SCROLL ---------- */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:960px){
+  .work-grid{grid-template-columns:repeat(2,1fr)}
+  .num-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .nav-menu{
+    position:fixed;top:72px;left:0;right:0;
+    flex-direction:column;gap:0;
+    background:rgba(10,10,15,.98);border-bottom:1px solid var(--line);
+    padding:8px 24px 20px;display:none;
+  }
+  .nav-menu.open{display:flex}
+  .nav-menu a{padding:12px 0}
+  .nav-toggle{display:flex;align-items:center;justify-content:center}
+  .nav-cta{display:none}
+  .svc-item{grid-template-columns:1fr;gap:10px;padding:28px 4px}
+  .svc-item:hover{padding-left:12px}
+  .svc-arrow{display:none}
+  .work-grid{grid-template-columns:1fr}
+  .lb-figure{padding:0 16px}
+  .lb-prev{left:8px}
+  .lb-next{right:8px}
+  .lb-btn{width:44px;height:44px}
+  .section{padding:80px 0}
+  .hero-stats{gap:28px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .flash-overlay{display:none!important}
+  .rv{opacity:1;transform:none}
+}
+@media (hover:none){
+  .flash-overlay{display:none!important}
+  .flash-hint{display:none!important}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">STUDIO&nbsp;NINE</a>
+    <nav aria-label="เมนูหลัก">
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#services">บริการ</a></li>
+        <li><a href="#work">ผลงาน</a></li>
+        <li><a href="#about">สตูดิโอ</a></li>
+        <li><a href="#contact">ติดต่อ</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="btn-outline nav-cta">เริ่มโปรเจกต์</a>
+    <button class="nav-toggle" id="navToggle" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="navMenu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <img src="../assets/agency-hero.jpg" alt="บรรยากาศสตูดิโอกลางคืนของ STUDIO NINE แสงนีออนสีม่วงสะท้อนบนโต๊ะทำงาน" fetchpriority="high">
+  </div>
+  <div class="wrap hero-inner">
+    <p class="hero-eyebrow en">CREATIVE STUDIO — BANGKOK</p>
+    <div class="flash-zone" id="flashZone">
+      <h1 class="flash-text">
+        เราสร้าง<span class="grad">แบรนด์</span><br>
+        ที่คน<span class="grad">จำ</span>ได้
+      </h1>
+      <div class="flash-overlay" aria-hidden="true"></div>
+    </div>
+    <p class="flash-hint en">— MOVE YOUR LIGHT</p>
+    <p class="hero-sub">เอเจนซีครีเอทีฟสัญชาติไทย ผสานกลยุทธ์แบรนด์ ดีไซน์ และเทคโนโลยี AI เข้าด้วยกัน เพื่อธุรกิจที่อยากโดดเด่นในความมืดของตลาด</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-solid">คุยกับเรา</a>
+      <a href="#work" class="link-quiet">ดูผลงานของเรา</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong class="en">120+</strong><span>โปรเจกต์ที่ส่งมอบ</span></div>
+      <div><strong class="en">9 ปี</strong><span>ประสบการณ์ในวงการ</span></div>
+      <div><strong class="en">14</strong><span>รางวัลดีไซน์</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services" id="services">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <span class="sec-label en">SERVICES</span>
+        <h2 class="sec-title">สิ่งที่เราทำได้ดีที่สุด</h2>
+      </div>
+      <p class="sec-desc">สี่สายงานหลักที่ทำงานร่วมกันเป็นทีมเดียว ตั้งแต่วันแรกของแบรนด์จนถึงวันที่ระบบทำงานอัตโนมัติ</p>
+    </div>
+    <ul class="svc-list">
+      <li class="svc-item rv">
+        <span class="svc-num en">01</span>
+        <div>
+          <h3>Branding</h3>
+          <p>กลยุทธ์แบรนด์ ตัวตน โลโก้ และภาษาภาพที่ทำให้ธุรกิจของคุณมีเสียงเป็นของตัวเอง ไม่ใช่แค่สวย แต่ขายได้และจำได้</p>
+        </div>
+        <span class="svc-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </li>
+      <li class="svc-item rv">
+        <span class="svc-num en">02</span>
+        <div>
+          <h3>Web Design &amp; Development</h3>
+          <p>เว็บไซต์ที่โหลดไว ดูแพง และเปลี่ยนผู้ชมเป็นลูกค้า ออกแบบเองทุกพิกเซล พัฒนาด้วยมาตรฐานสากล</p>
+        </div>
+        <span class="svc-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </li>
+      <li class="svc-item rv">
+        <span class="svc-num en">03</span>
+        <div>
+          <h3>Content Production</h3>
+          <p>ภาพถ่าย วิดีโอ และคอนเทนต์โซเชียลที่เล่าเรื่องแบรนด์อย่างมีชั้นเชิง จากคอนเซปต์ถึงโพสต์จบในที่เดียว</p>
+        </div>
+        <span class="svc-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </li>
+      <li class="svc-item rv">
+        <span class="svc-num en">04</span>
+        <div>
+          <h3>AI Automation</h3>
+          <p>ระบบอัตโนมัติด้านการตลาดและบริการลูกค้า ตั้งแต่แชตบอตตอบแชท จนถึงเวิร์กโฟลว์หลังบ้านที่ประหยัดเวลาทีมหลายชั่วโมงต่อวัน</p>
+        </div>
+        <span class="svc-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <span class="sec-label en">SELECTED WORK</span>
+        <h2 class="sec-title">ผลงานที่เราภูมิใจ</h2>
+      </div>
+      <p class="sec-desc">คัดมาเฉพาะโปรเจกต์ที่สร้างผลลัพธ์จับต้องได้ให้ลูกค้า — คลิกเพื่อดูภาพใหญ่</p>
+    </div>
+    <div class="work-grid">
+      <button class="work-card rv" data-lb="0" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop" alt="โต๊ะออกแบบงานรีแบรนด์คาเฟ่ท้องถิ่น พร้อมอุปกรณ์สเก็ตช์และตัวอย่างสี" loading="lazy">
+        <span class="work-meta">
+          <span><span>Branding</span><h3>รีแบรนด์คาเฟ่ท้องถิ่น</h3></span>
+          <span class="work-plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </span>
+      </button>
+      <button class="work-card rv" data-lb="1" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1000&auto=format&fit=crop" alt="ทีมประชุมวางกลยุทธ์แคมเปญเปิดตัวสินค้าเทค" loading="lazy">
+        <span class="work-meta">
+          <span><span>Campaign</span><h3>แคมเปญเปิดตัวสินค้าเทค</h3></span>
+          <span class="work-plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </span>
+      </button>
+      <button class="work-card rv" data-lb="2" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop" alt="ทีมครีเอทีฟระดมไอเดียภาพลักษณ์แบรนด์แฟชั่นรอบโต๊ะทำงาน" loading="lazy">
+        <span class="work-meta">
+          <span><span>Identity</span><h3>ภาพลักษณ์แบรนด์แฟชั่น</h3></span>
+          <span class="work-plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </span>
+      </button>
+      <button class="work-card rv" data-lb="3" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop" alt="ทีมงานในออฟฟิศร่วมออกแบบเว็บไซต์อีคอมเมิร์ซสมัยใหม่" loading="lazy">
+        <span class="work-meta">
+          <span><span>Web</span><h3>เว็บอีคอมเมิร์ซสมัยใหม่</h3></span>
+          <span class="work-plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </span>
+      </button>
+      <button class="work-card rv" data-lb="4" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=1000&auto=format&fit=crop" alt="เลนส์กล้องถ่ายภาพสินค้าเครื่องสำอางในสตูดิโอแสงนีออน" loading="lazy">
+        <span class="work-meta">
+          <span><span>Photography</span><h3>ถ่ายภาพสินค้าเครื่องสำอาง</h3></span>
+          <span class="work-plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </span>
+      </button>
+      <button class="work-card rv" data-lb="5" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop" alt="กระบวนการออกแบบระบบอัตโนมัติหลังบ้านร้านอาหารบนโต๊ะออกแบบ" loading="lazy">
+        <span class="work-meta">
+          <span><span>AI Automation</span><h3>ระบบอัตโนมัติร้านอาหาร</h3></span>
+          <span class="work-plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="ดูผลงานขนาดใหญ่">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="ปิดหน้าต่างผลงาน">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="ผลงานก่อนหน้า">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg>
+  </button>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="ผลงานถัดไป">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+  </button>
+  <figure class="lb-figure">
+    <img id="lbImg" src="" alt="">
+    <figcaption class="lb-caption">
+      <div>
+        <h3 id="lbTitle"></h3>
+        <p id="lbDesc"></p>
+      </div>
+      <span class="lb-count" id="lbCount"></span>
+    </figcaption>
+  </figure>
+</div>
+
+<!-- NUMBERS / ABOUT -->
+<section class="section numbers" id="about">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <span class="sec-label en">THE STUDIO</span>
+        <h2 class="sec-title">ตัวเลขที่พูดแทนเรา</h2>
+      </div>
+      <p class="sec-desc">สตูดิโอเล็กๆ ในทองหล่อ ที่ทำงานกับแบรนด์ทั่วประเทศ ด้วยทีมครีเอทีฟ นักกลยุทธ์ และวิศวกรที่คุยภาษาเดียวกัน</p>
+    </div>
+    <div class="num-grid rv">
+      <div><strong class="en">120+</strong><span>โปรเจกต์ที่ส่งมอบสำเร็จ</span></div>
+      <div><strong class="en">92%</strong><span>ลูกค้ากลับมาใช้บริการซ้ำ</span></div>
+      <div><strong class="en">14</strong><span>รางวัลดีไซน์ระดับประเทศ</span></div>
+      <div><strong class="en">18</strong><span>คนในทีมที่คลั่งงานครีเอทีฟ</span></div>
+    </div>
+    <div class="clients rv" aria-label="ลูกค้าของเรา">
+      <span>KAAN COFFEE</span>
+      <span>MERAKI HOTELS</span>
+      <span>NOVA FINTECH</span>
+      <span>SOOK WELLNESS</span>
+      <span>PLERN STUDIO</span>
+      <span>ARUN SKINCARE</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="wrap rv">
+    <span class="sec-label en">LET'S TALK</span>
+    <h2>พร้อมให้แบรนด์ของคุณ<span class="grad" style="background:linear-gradient(100deg,var(--violet),var(--magenta));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">เปล่งประกาย</span>แล้วหรือยัง</h2>
+    <p>เล่าไอเดียของคุณให้เราฟัง เราจะตอบกลับภายใน 24 ชั่วโมง พร้อมข้อเสนอแนวทางเบื้องต้นโดยไม่มีค่าใช้จ่าย</p>
+    <a class="btn-solid" href="mailto:hello@studionine.co.th">คุยกับเรา — hello@studionine.co.th</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="logo" style="margin-bottom:16px">STUDIO&nbsp;NINE</p>
+        <p>เอเจนซีครีเอทีฟและแบรนด์ดีไซน์ในกรุงเทพฯ เราเชื่อว่างานที่ดีเกิดจากความกล้าที่จะแตกต่าง และความพิถีพิถันในทุกรายละเอียด</p>
+      </div>
+      <div>
+        <h4>สตูดิโอ</h4>
+        <ul>
+          <li><a href="https://maps.google.com/?q=Thong+Lo+Bangkok" target="_blank" rel="noopener">ซอยทองหล่อ 9 กรุงเทพฯ 10110</a></li>
+          <li><a href="mailto:hello@studionine.co.th">hello@studionine.co.th</a></li>
+          <li><a href="tel:+6621234567">02 123 4567</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>เมนู</h4>
+        <ul>
+          <li><a href="#services">บริการ</a></li>
+          <li><a href="#work">ผลงาน</a></li>
+          <li><a href="#about">สตูดิโอ</a></li>
+          <li><a href="#contact">ติดต่อ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 STUDIO NINE Co., Ltd. สงวนลิขสิทธิ์</span>
+      <span class="en">DESIGNED &amp; BUILT IN THE DARK</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- Flashlight reveal ---------- */
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hoverNone = window.matchMedia('(hover: none)').matches;
+  var hero = document.querySelector('.hero');
+  var flashZone = document.getElementById('flashZone');
+
+  if (!reduced && !hoverNone && hero && flashZone) {
+    hero.classList.add('flash-enabled');
+    hero.addEventListener('pointermove', function(e){
+      var r = flashZone.getBoundingClientRect();
+      var x = ((e.clientX - r.left) / r.width) * 100;
+      var y = ((e.clientY - r.top) / r.height) * 100;
+      flashZone.style.setProperty('--fx', x.toFixed(2) + '%');
+      flashZone.style.setProperty('--fy', y.toFixed(2) + '%');
+    });
+  }
+
+  /* ---------- Mobile nav ---------- */
+  var navToggle = document.getElementById('navToggle');
+  var navMenu = document.getElementById('navMenu');
+  navToggle.addEventListener('click', function(){
+    var open = navMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'ปิดเมนู' : 'เปิดเมนู');
+  });
+  navMenu.addEventListener('click', function(e){
+    if (e.target.tagName === 'A') {
+      navMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  /* ---------- Reveal on scroll ---------- */
+  var rvEls = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window && !reduced) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    rvEls.forEach(function(el){ io.observe(el); });
+  } else {
+    rvEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------- Lightbox ---------- */
+  var works = [
+    {
+      src: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop',
+      alt: 'โต๊ะออกแบบงานรีแบรนด์คาเฟ่ท้องถิ่น พร้อมอุปกรณ์สเก็ตช์และตัวอย่างสี',
+      title: 'รีแบรนด์คาเฟ่ท้องถิ่น',
+      desc: 'Branding — อัตลักษณ์ใหม่ทั้งระบบ ตั้งแต่โลโก้ บรรจุภัณฑ์ ถึงป้ายหน้าร้าน ยอดติดตามโซเชียลเพิ่มขึ้น 3 เท่าใน 6 เดือน'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1000&auto=format&fit=crop',
+      alt: 'ทีมประชุมวางกลยุทธ์แคมเปญเปิดตัวสินค้าเทค',
+      title: 'แคมเปญเปิดตัวสินค้าเทค',
+      desc: 'Campaign — แคมเปญเปิดตัวข้ามสื่อออนไลน์และออฟไลน์ สร้างยอดลงทะเบียนรอล่วงหน้ากว่า 40,000 รายในสัปดาห์แรก'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop',
+      alt: 'ทีมครีเอทีฟระดมไอเดียภาพลักษณ์แบรนด์แฟชั่นรอบโต๊ะทำงาน',
+      title: 'ภาพลักษณ์แบรนด์แฟชั่น',
+      desc: 'Identity — ระบบภาพลักษณ์แบรนด์เสื้อผ้ารุ่นใหม่ ครบทุกจุดสัมผัส ตั้งแต่ป้ายแขวนถึงหน้าร้านออนไลน์'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop',
+      alt: 'ทีมงานในออฟฟิศร่วมออกแบบเว็บไซต์อีคอมเมิร์ซสมัยใหม่',
+      title: 'เว็บอีคอมเมิร์ซสมัยใหม่',
+      desc: 'Web — ออกแบบและพัฒนาเว็บขายของที่โหลดเร็วกว่าเดิม 4 เท่า อัตราการสั่งซื้อเพิ่มขึ้น 68% หลังเปิดตัว'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=1000&auto=format&fit=crop',
+      alt: 'เลนส์กล้องถ่ายภาพสินค้าเครื่องสำอางในสตูดิโอแสงนีออน',
+      title: 'ถ่ายภาพสินค้าเครื่องสำอาง',
+      desc: 'Photography — เซ็ตภาพสินค้าโทนนีออนเข้มกว่า 200 ภาพ สำหรับแคมเปญเปิดตัวไลน์ผลิตภัณฑ์ใหม่ทั่วประเทศ'
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop',
+      alt: 'กระบวนการออกแบบระบบอัตโนมัติหลังบ้านร้านอาหารบนโต๊ะออกแบบ',
+      title: 'ระบบอัตโนมัติร้านอาหาร',
+      desc: 'AI Automation — ระบบรับออเดอร์และตอบลูกค้าอัตโนมัติผ่านแชท ลดภาระทีมหน้าร้านลง 60% ต่อวัน'
+    }
+  ];
+
+  var lightbox = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbTitle = document.getElementById('lbTitle');
+  var lbDesc = document.getElementById('lbDesc');
+  var lbCount = document.getElementById('lbCount');
+  var lbClose = document.getElementById('lbClose');
+  var lbPrev = document.getElementById('lbPrev');
+  var lbNext = document.getElementById('lbNext');
+  var current = 0;
+  var lastFocus = null;
+
+  function renderLb(){
+    var w = works[current];
+    lbImg.src = w.src;
+    lbImg.alt = w.alt;
+    lbTitle.textContent = w.title;
+    lbDesc.textContent = w.desc;
+    lbCount.textContent = (current + 1) + ' / ' + works.length;
+  }
+
+  function openLb(i){
+    current = i;
+    renderLb();
+    lastFocus = document.activeElement;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+  }
+
+  function closeLb(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+  }
+
+  function stepLb(dir){
+    current = (current + dir + works.length) % works.length;
+    renderLb();
+  }
+
+  document.querySelectorAll('.work-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      openLb(parseInt(card.getAttribute('data-lb'), 10));
+    });
+  });
+
+  lbClose.addEventListener('click', closeLb);
+  lbPrev.addEventListener('click', function(){ stepLb(-1); });
+  lbNext.addEventListener('click', function(){ stepLb(1); });
+
+  lightbox.addEventListener('click', function(e){
+    if (e.target === lightbox) closeLb();
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') { closeLb(); return; }
+    if (e.key === 'ArrowLeft') { stepLb(-1); return; }
+    if (e.key === 'ArrowRight') { stepLb(1); return; }
+    if (e.key === 'Tab') {
+      /* basic focus trap */
+      var focusables = [lbClose, lbPrev, lbNext];
+      var active = document.activeElement;
+      var idx = focusables.indexOf(active);
+      if (e.shiftKey) {
+        if (idx <= 0) { e.preventDefault(); focusables[focusables.length - 1].focus(); }
+      } else {
+        if (idx === focusables.length - 1 || idx === -1) { e.preventDefault(); focusables[0].focus(); }
+      }
+    }
+  });
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+</body>
+</html>

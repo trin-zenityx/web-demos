@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="WOODSMITH — เฟอร์นิเจอร์ไม้จริงทำมือในกรุงเทพฯ สั่งทำตามแบบ ออกแบบโต๊ะของคุณเองพร้อมเห็นราคาทันที">
+<title>WOODSMITH — เฟอร์นิเจอร์ไม้ทำมือ สั่งทำตามแบบ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500&family=Charm:wght@400;700&family=Tenor+Sans&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bone:#f5f1ea;
+  --bone-2:#efe7da;
+  --ivory:#fbf8f2;
+  --oak:#a4713b;
+  --oak-deep:#7c5427;
+  --char:#2a241e;
+  --muted:#7d7165;
+  --line:rgba(42,36,30,.14);
+  --radius:20px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Anuphan',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.7;
+  color:var(--char);
+  background:var(--bone);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+::selection{background:var(--oak);color:var(--bone)}
+:focus-visible{outline:2px solid var(--oak);outline-offset:3px;border-radius:6px}
+[hidden]{display:none!important}
+.wrap{width:min(1200px,100% - 40px);margin-inline:auto}
+.en{font-family:'Tenor Sans',sans-serif}
+section[id]{scroll-margin-top:84px}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:48px;padding:13px 26px;border-radius:999px;
+  font-weight:500;font-size:15px;line-height:1.2;
+  transition:background .3s,color .3s,border-color .3s,transform .3s;
+}
+.btn svg{flex:none}
+.btn-dark{background:var(--char);color:var(--bone)}
+.btn-dark:hover{background:var(--oak-deep)}
+.btn-oak{background:var(--oak);color:#fff}
+.btn-oak:hover{background:var(--oak-deep)}
+.btn-ghost-bone{border:1px solid rgba(245,241,234,.5);color:var(--bone)}
+.btn-ghost-bone:hover{border-color:var(--bone);background:rgba(245,241,234,.12)}
+.btn-ghost{border:1px solid var(--line);color:var(--char)}
+.btn-ghost:hover{border-color:var(--oak);color:var(--oak-deep)}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(245,241,234,.88);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  transition:box-shadow .3s;
+}
+.nav.scrolled{box-shadow:0 10px 34px rgba(42,36,30,.09)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
+.logo{font-family:'Tenor Sans',sans-serif;font-size:19px;letter-spacing:.24em;display:inline-flex;align-items:center;gap:10px;min-height:44px}
+.logo svg{color:var(--oak)}
+.nav-links{display:flex;gap:6px}
+.nav-links a{
+  display:inline-flex;align-items:center;min-height:44px;padding:10px 14px;
+  font-size:15px;color:var(--muted);border-radius:10px;transition:color .25s,background .25s;
+}
+.nav-links a:hover{color:var(--char);background:rgba(42,36,30,.05)}
+.nav-cta{min-height:44px;padding:11px 20px;font-size:14px}
+.menu-btn{display:none;width:44px;height:44px;align-items:center;justify-content:center;border-radius:10px}
+.mobile-panel{display:none;flex-direction:column;padding:6px 20px 16px;border-top:1px solid var(--line);background:var(--bone)}
+.mobile-panel.open{display:flex}
+.mobile-panel a{display:flex;align-items:center;min-height:48px;padding:12px 4px;border-bottom:1px solid var(--line);font-size:16px}
+.mobile-panel a:last-child{border-bottom:0;color:var(--oak-deep);font-weight:500}
+@media(max-width:880px){
+  .nav-links,.nav-cta{display:none}
+  .menu-btn{display:inline-flex}
+}
+@media(min-width:881px){.mobile-panel{display:none!important}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:88vh;min-height:calc(100svh - 72px);display:flex;align-items:flex-end;overflow:hidden;background:var(--char)}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(42,36,30,.38) 0%,rgba(42,36,30,.12) 42%,rgba(42,36,30,.72) 100%);
+}
+.hero-content{position:relative;z-index:1;width:100%;color:var(--bone);padding:110px 0 64px}
+.eyebrow{
+  font-family:'Tenor Sans',sans-serif;text-transform:uppercase;
+  letter-spacing:.3em;font-size:12px;color:var(--oak);
+  display:inline-flex;align-items:center;gap:12px;
+}
+.hero .eyebrow{color:#e0c49b}
+.eyebrow::before{content:"";width:34px;height:1px;background:currentColor}
+.hero h1{
+  font-family:'Charm',sans-serif;font-weight:400;
+  font-size:clamp(44px,7.4vw,86px);line-height:1.06;
+  margin:16px 0 18px;max-width:12ch;
+}
+.hero-sub{max-width:560px;font-size:17px;color:rgba(245,241,234,.88);font-weight:300}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+.hero-stats{
+  display:flex;gap:clamp(24px,5vw,64px);flex-wrap:wrap;
+  margin-top:56px;padding-top:26px;border-top:1px solid rgba(245,241,234,.25);
+}
+.stat b{font-family:'Tenor Sans',sans-serif;font-weight:400;font-size:clamp(22px,2.6vw,30px);display:block;letter-spacing:.02em}
+.stat span{font-size:14px;color:rgba(245,241,234,.7)}
+
+/* ---------- section base ---------- */
+.section{padding:clamp(72px,9vw,110px) 0}
+.sec-head{max-width:660px;margin-bottom:clamp(36px,5vw,56px)}
+.sec-head h2{
+  font-family:'Charm',sans-serif;font-weight:400;
+  font-size:clamp(34px,4.6vw,54px);line-height:1.16;margin-top:14px;
+}
+.sec-head p{color:var(--muted);margin-top:12px;font-size:16px}
+
+/* ---------- configurator ---------- */
+.config{background:linear-gradient(180deg,var(--bone) 0%,var(--bone-2) 100%)}
+.config-card{
+  background:var(--ivory);border:1px solid var(--line);border-radius:26px;overflow:hidden;
+  display:grid;grid-template-columns:1.04fr .96fr;
+  box-shadow:0 30px 80px rgba(42,36,30,.10);
+}
+.config-media{position:relative;min-height:460px}
+.config-media img.main{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:filter .6s ease;
+}
+.tint{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply;pointer-events:none}
+.tint rect{transition:fill .5s ease,fill-opacity .5s ease}
+.config-caption{
+  position:absolute;left:16px;right:16px;bottom:16px;z-index:2;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  background:rgba(42,36,30,.74);color:var(--bone);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border-radius:14px;padding:12px 18px;font-size:14px;
+}
+.config-caption b{font-weight:500}
+.config-caption .en{letter-spacing:.06em;color:#e0c49b}
+.config-body{padding:clamp(24px,3.4vw,42px)}
+.config-body>h3{font-family:'Charm',sans-serif;font-weight:400;font-size:clamp(26px,3vw,32px);line-height:1.25}
+.config-note{font-size:14px;color:var(--muted);margin:6px 0 26px}
+.opt-group{border:0;margin-bottom:24px}
+.opt-group legend{
+  font-family:'Tenor Sans',sans-serif;text-transform:uppercase;letter-spacing:.2em;
+  font-size:12px;color:var(--muted);margin-bottom:12px;padding:0;
+}
+.opt-col{display:grid;gap:10px}
+.opt-2col{grid-template-columns:1fr 1fr}
+.opt{
+  position:relative;display:flex;align-items:center;gap:13px;
+  min-height:56px;padding:11px 16px;
+  border:1px solid var(--line);border-radius:14px;background:#fff;
+  cursor:pointer;transition:border-color .25s,background .25s,box-shadow .25s;
+}
+.opt:hover{border-color:rgba(42,36,30,.38)}
+.opt:has(input:checked){border-color:var(--oak);background:rgba(164,113,59,.09);box-shadow:0 0 0 1px var(--oak)}
+.opt:has(input:focus-visible){outline:2px solid var(--oak);outline-offset:2px}
+.opt input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.dot{width:34px;height:34px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px rgba(42,36,30,.18),inset 0 -6px 10px rgba(0,0,0,.14)}
+.opt-txt{display:flex;flex-direction:column;line-height:1.35;min-width:0}
+.opt-name{font-weight:500;font-size:15px}
+.opt-sub{font-size:13px;color:var(--muted)}
+.opt-add{margin-left:auto;font-family:'Tenor Sans',sans-serif;font-size:14px;color:var(--oak-deep);white-space:nowrap;padding-left:8px}
+.price-box{
+  border-top:1px solid var(--line);margin-top:4px;padding-top:20px;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;
+}
+.price-label{font-size:14px;color:var(--muted)}
+.price{
+  font-family:'Tenor Sans',sans-serif;font-weight:400;
+  font-size:clamp(32px,3.6vw,42px);line-height:1.1;letter-spacing:.01em;
+}
+.price small{font-size:16px;color:var(--muted);letter-spacing:0}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.05)}100%{transform:scale(1)}}
+.price.pop{animation:pop .35s ease}
+.summary{font-size:14px;color:var(--muted);margin-top:8px}
+.quote-area{margin-top:22px;display:grid;gap:12px}
+.micro{font-size:13px;color:var(--muted)}
+.quote-success{
+  margin-top:22px;border:1px solid rgba(164,113,59,.45);background:rgba(164,113,59,.09);
+  border-radius:18px;padding:24px;display:grid;gap:10px;
+}
+.ok-head{display:flex;align-items:center;gap:12px}
+.ok-head svg{color:var(--oak-deep);flex:none}
+.ok-head h4{font-family:'Charm',sans-serif;font-weight:700;font-size:22px}
+.ok-note{font-size:14px;color:var(--muted)}
+.quote-success .btn{justify-self:start;margin-top:6px}
+
+/* ---------- story (sticky feature) ---------- */
+.story{background:var(--char);color:var(--bone)}
+.story .sec-head p{color:rgba(245,241,234,.65)}
+.story .eyebrow{color:#d9a86b}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4.5vw,72px);align-items:start}
+.story-media{
+  position:sticky;top:96px;height:min(72vh,640px);
+  border-radius:22px;overflow:hidden;background:#211b15;
+  border:1px solid rgba(245,241,234,.1);
+}
+.story-media img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .7s ease;
+}
+.story-media img.active{opacity:1}
+.story-count{
+  position:absolute;top:16px;left:16px;z-index:2;
+  font-family:'Tenor Sans',sans-serif;letter-spacing:.18em;font-size:13px;
+  background:rgba(42,36,30,.66);color:var(--bone);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  padding:9px 16px;border-radius:999px;
+}
+.step{
+  min-height:64vh;display:flex;flex-direction:column;justify-content:center;
+  padding:44px 0;border-bottom:1px solid rgba(245,241,234,.12);
+  opacity:.35;transition:opacity .5s ease;
+}
+.step:last-child{border-bottom:0}
+.step.active{opacity:1}
+.step-num{font-family:'Tenor Sans',sans-serif;letter-spacing:.24em;font-size:13px;color:var(--oak)}
+.step h3{font-family:'Charm',sans-serif;font-weight:400;font-size:clamp(28px,3.2vw,38px);margin:12px 0 12px;line-height:1.2}
+.step p{color:rgba(245,241,234,.72);max-width:48ch;font-weight:300}
+.step-meta{margin-top:16px;font-size:14px;color:#d9a86b;letter-spacing:.04em}
+
+/* ---------- collection ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--ivory);
+  transition:transform .35s ease,box-shadow .35s ease;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 26px 56px rgba(42,36,30,.13)}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.card-body{padding:22px 22px 24px}
+.card h3{font-family:'Charm',sans-serif;font-weight:400;font-size:27px;line-height:1.25}
+.card p{color:var(--muted);font-size:15px;margin:8px 0 16px}
+.card-price{
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  border-top:1px solid var(--line);padding-top:14px;
+}
+.price-from{font-size:13px;color:var(--muted)}
+.card-price b{font-family:'Tenor Sans',sans-serif;font-weight:400;font-size:21px;letter-spacing:.02em}
+
+/* ---------- reviews ---------- */
+.reviews{background:var(--bone-2)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.review{
+  border:1px solid var(--line);border-radius:var(--radius);padding:28px;background:var(--ivory);
+  display:flex;flex-direction:column;gap:14px;
+}
+.stars{display:flex;gap:4px;color:var(--oak)}
+.review p{flex:1;font-size:16px}
+.review cite{font-style:normal;font-size:14px;color:var(--muted)}
+.review cite b{color:var(--char);font-weight:500}
+
+/* ---------- showroom ---------- */
+.showroom-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(28px,4vw,56px);align-items:stretch}
+.info-list{display:grid;gap:20px;margin:26px 0 30px}
+.info-list li{display:flex;gap:16px;align-items:flex-start}
+.info-ic{
+  width:46px;height:46px;border-radius:14px;flex:none;
+  background:rgba(164,113,59,.13);color:var(--oak-deep);
+  display:flex;align-items:center;justify-content:center;
+}
+.info-list b{display:block;font-weight:500}
+.info-list span{font-size:15px;color:var(--muted)}
+.showroom-img{border-radius:22px;overflow:hidden;min-height:340px;position:relative}
+.showroom-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* ---------- footer ---------- */
+footer{background:var(--char);color:rgba(245,241,234,.72);padding:70px 0 34px}
+.foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.foot-brand{max-width:320px}
+.foot-logo{font-family:'Tenor Sans',sans-serif;letter-spacing:.24em;color:var(--bone);font-size:20px;margin-bottom:14px}
+.foot-brand p{font-size:14px;font-weight:300}
+.foot-col h5{
+  font-family:'Tenor Sans',sans-serif;text-transform:uppercase;letter-spacing:.2em;
+  font-size:12px;color:#d9a86b;margin-bottom:16px;font-weight:400;
+}
+.foot-col a,.foot-col span{display:flex;align-items:center;min-height:40px;font-size:15px;color:rgba(245,241,234,.72)}
+.foot-col a:hover{color:var(--bone)}
+.foot-bottom{
+  border-top:1px solid rgba(245,241,234,.14);margin-top:48px;padding-top:24px;
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;
+}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media(max-width:1020px){
+  .config-card{grid-template-columns:1fr}
+  .config-media{min-height:380px}
+  .cards,.reviews-grid{grid-template-columns:repeat(2,1fr)}
+  .showroom-grid{grid-template-columns:1fr}
+}
+@media(max-width:880px){
+  .story-grid{grid-template-columns:1fr}
+  .story-media{top:76px;height:42vh;min-height:260px}
+  .step{min-height:56vh}
+}
+@media(max-width:640px){
+  .cards,.reviews-grid{grid-template-columns:1fr}
+  .opt-2col{grid-template-columns:1fr}
+  .hero-content{padding:90px 0 48px}
+  .config-media{min-height:300px}
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+  .reveal{opacity:1;transform:none}
+  .price.pop{animation:none}
+  .step{opacity:1}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top" aria-label="WOODSMITH กลับขึ้นด้านบน">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 20V8l8-5 8 5v12"/><path d="M9 20v-6h6v6"/></svg>
+      WOODSMITH
+    </a>
+    <nav aria-label="เมนูหลัก">
+      <ul class="nav-links">
+        <li><a href="#custom">ออกแบบโต๊ะ</a></li>
+        <li><a href="#craft">ขั้นตอนผลิต</a></li>
+        <li><a href="#collection">คอลเลกชัน</a></li>
+        <li><a href="#reviews">รีวิว</a></li>
+        <li><a href="#showroom">โชว์รูม</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-dark nav-cta" href="#custom">สั่งทำตามแบบ</a>
+    <button class="menu-btn" id="menuBtn" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="mobilePanel">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#custom">ออกแบบโต๊ะ</a>
+    <a href="#craft">ขั้นตอนผลิต</a>
+    <a href="#collection">คอลเลกชัน</a>
+    <a href="#reviews">รีวิว</a>
+    <a href="#showroom">โชว์รูม</a>
+    <a href="#custom">สั่งทำตามแบบ</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <img src="../assets/furniture-hero.jpg" alt="โชว์รูมเฟอร์นิเจอร์ไม้ของ WOODSMITH บรรยากาศอบอุ่นด้วยโต๊ะและเก้าอี้ไม้" fetchpriority="high">
+    <div class="wrap hero-content">
+      <span class="eyebrow">Woodsmith · Handcrafted in Bangkok</span>
+      <h1>เฟอร์นิเจอร์ที่แก่ไปด้วยคุณ</h1>
+      <p class="hero-sub">โต๊ะ ชั้นวาง และเตียงจากไม้จริงทั้งท่อน ทำด้วยมือทีละชิ้นในกรุงเทพฯ ยิ่งใช้นานเนื้อไม้ยิ่งลึก สียิ่งอบอุ่น — ออกแบบตามมิติบ้านของคุณได้ทุกรายละเอียด</p>
+      <div class="hero-cta">
+        <a class="btn btn-oak" href="#custom">
+          ออกแบบโต๊ะของคุณ
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost-bone" href="#collection">ดูคอลเลกชัน</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b class="en">12 ปี</b><span>ประสบการณ์งานช่างมือ</span></div>
+        <div class="stat"><b class="en">480+</b><span>ชิ้นงานที่ส่งมอบทั่วไทย</span></div>
+        <div class="stat"><b class="en">10 ปี</b><span>รับประกันโครงสร้าง</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONFIGURATOR -->
+  <section class="section config" id="custom">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Custom Table Builder</span>
+        <h2>ออกแบบโต๊ะของคุณ</h2>
+        <p>เลือกชนิดไม้ ขนาด และรายละเอียดขา เห็นราคาอัพเดททันทีก่อนคุยกับช่างตัวจริง — ไม่มีค่าใช้จ่ายจนกว่าจะยืนยันสั่งผลิต</p>
+      </div>
+
+      <div class="config-card reveal">
+        <div class="config-media">
+          <img class="main" id="tableImg" src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?q=80&w=1200&auto=format&fit=crop" alt="โต๊ะอาหารไม้ท็อปหนาในพื้นที่จัดแสดงแสงธรรมชาติ" loading="lazy">
+          <svg class="tint" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <rect id="tintRect" x="0" y="0" width="100" height="100" fill="#a9763f" fill-opacity="0.38"></rect>
+          </svg>
+          <div class="config-caption">
+            <b id="capWood">ไม้โอ๊ค</b>
+            <span class="en" id="capSize">120 × 75 ซม.</span>
+          </div>
+        </div>
+
+        <div class="config-body" id="configForm">
+          <h3>โต๊ะอาหาร รุ่นเฮสเปอร์</h3>
+          <p class="config-note">ราคาฐาน <span class="en">฿18,900</span> · ระยะผลิต 4–6 สัปดาห์ · ท็อปไม้หนา 3.5 ซม.</p>
+
+          <fieldset class="opt-group">
+            <legend>ชนิดไม้</legend>
+            <div class="opt-col" style="grid-template-columns:repeat(3,1fr)">
+              <label class="opt">
+                <input type="radio" name="wood" value="oak" checked>
+                <span class="dot" style="--c:#b0824c" aria-hidden="true"></span>
+                <span class="opt-txt"><span class="opt-name">โอ๊ค</span></span>
+                <span class="opt-add">+0</span>
+              </label>
+              <label class="opt">
+                <input type="radio" name="wood" value="walnut">
+                <span class="dot" style="--c:#4b3424" aria-hidden="true"></span>
+                <span class="opt-txt"><span class="opt-name">วอลนัท</span></span>
+                <span class="opt-add en">+4,500</span>
+              </label>
+              <label class="opt">
+                <input type="radio" name="wood" value="teak">
+                <span class="dot" style="--c:#96682f" aria-hidden="true"></span>
+                <span class="opt-txt"><span class="opt-name">สัก</span></span>
+                <span class="opt-add en">+7,900</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="opt-group">
+            <legend>ขนาดท็อปโต๊ะ</legend>
+            <div class="opt-col">
+              <label class="opt">
+                <input type="radio" name="size" value="s120" checked>
+                <span class="opt-txt"><span class="opt-name">4 ที่นั่ง · 120 ซม.</span><span class="opt-sub">เหมาะกับคอนโดและมุมอาหารเล็ก</span></span>
+                <span class="opt-add">+0</span>
+              </label>
+              <label class="opt">
+                <input type="radio" name="size" value="s180">
+                <span class="opt-txt"><span class="opt-name">6 ที่นั่ง · 180 ซม.</span><span class="opt-sub">ขนาดยอดนิยมสำหรับบ้านครอบครัว</span></span>
+                <span class="opt-add en">+6,000</span>
+              </label>
+              <label class="opt">
+                <input type="radio" name="size" value="s240">
+                <span class="opt-txt"><span class="opt-name">8 ที่นั่ง · 240 ซม.</span><span class="opt-sub">สำหรับห้องอาหารใหญ่และงานเลี้ยง</span></span>
+                <span class="opt-add en">+12,000</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="opt-group">
+            <legend>รูปแบบขา</legend>
+            <div class="opt-col opt-2col">
+              <label class="opt">
+                <input type="radio" name="legs" value="steel" checked>
+                <span class="opt-txt"><span class="opt-name">ขาเหล็กดำ</span><span class="opt-sub">โมเดิร์น โปร่ง</span></span>
+                <span class="opt-add">+0</span>
+              </label>
+              <label class="opt">
+                <input type="radio" name="legs" value="wood">
+                <span class="opt-txt"><span class="opt-name">ขาไม้</span><span class="opt-sub">ไม้ชนิดเดียวกับท็อป</span></span>
+                <span class="opt-add en">+1,500</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="opt-group">
+            <legend>พื้นผิวสัมผัส</legend>
+            <div class="opt-col opt-2col">
+              <label class="opt">
+                <input type="radio" name="finish" value="matte" checked>
+                <span class="opt-txt"><span class="opt-name">ผิวด้าน</span><span class="opt-sub">เคลือบแลคเกอร์ด้าน กันรอย</span></span>
+                <span class="opt-add">+0</span>
+              </label>
+              <label class="opt">
+                <input type="radio" name="finish" value="oil">
+                <span class="opt-txt"><span class="opt-name">ผิวน้ำมัน</span><span class="opt-sub">น้ำมันธรรมชาติ สัมผัสเนื้อไม้จริง</span></span>
+                <span class="opt-add">+0</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div id="quoteArea" class="quote-area">
+            <div class="price-box">
+              <div>
+                <div class="price-label">ราคาสุทธิ (รวมภาษี)</div>
+                <div class="price en"><span id="priceNum">฿18,900</span> <small>บาท</small></div>
+                <div class="summary" id="sumText">โต๊ะโอ๊ค · ท็อป 120 × 75 ซม. · ขาเหล็กดำ · ผิวด้าน</div>
+              </div>
+            </div>
+            <button class="btn btn-dark" id="quoteBtn" type="button">
+              ขอใบเสนอราคา
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <p class="micro">ช่างวัดหน้างานฟรีในกรุงเทพฯ และปริมณฑลก่อนเริ่มผลิต</p>
+          </div>
+
+          <div class="quote-success" id="quoteOK" role="status" aria-live="polite" hidden>
+            <div class="ok-head">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+              <h4>ได้รับรายละเอียดของคุณแล้ว</h4>
+            </div>
+            <p id="okSum"></p>
+            <p class="ok-note">ทีมช่างจะติดต่อกลับพร้อมใบเสนอราคาและแบบ 3 มิติภายใน 24 ชั่วโมงทำการ หากต้องการเปลี่ยนไม้หรือขนาด แก้ไขได้อีกครั้งด้านล่าง</p>
+            <button class="btn btn-ghost" id="editBtn" type="button">ปรับแบบอีกครั้ง</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STICKY FEATURE STORY -->
+  <section class="section story" id="craft">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Craft Process</span>
+        <h2>จากท่อนไม้ สู่บ้านของคุณ</h2>
+        <p>ทุกชิ้นผ่านมือช่าง 4 ขั้นตอนหลัก ใช้เวลาอย่างต่ำ 60 วันต่อชิ้น เลื่อนอ่านทีละขั้นเพื่อดูภาพหน้างานจริง</p>
+      </div>
+      <div class="story-grid">
+        <div class="story-media" aria-hidden="false">
+          <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200&auto=format&fit=crop" alt="ตัวอย่างงานไม้และเฟอร์นิเจอร์ที่ผ่านการคัดเลือกจัดแสดงในโชว์รูม" class="active" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop" alt="โซฟาและเฟอร์นิเจอร์ไม้ในห้องนั่งเล่นโทนอบอุ่น" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1200&auto=format&fit=crop" alt="มุมนั่งเล่นที่ประกอบเฟอร์นิเจอร์ไม้เสร็จสมบูรณ์" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?q=80&w=1200&auto=format&fit=crop" alt="โต๊ะไม้ที่ขัดและทาน้ำมันเสร็จพร้อมส่งมอบ" loading="lazy">
+          <span class="story-count en" id="storyCount">01 / 04</span>
+        </div>
+        <div class="story-steps">
+          <article class="step active" data-step="0">
+            <span class="step-num en">STEP 01</span>
+            <h3>คัดไม้ทีละท่อน</h3>
+            <p>เราเลือกไม้โอ๊ค วอลนัท และสักจากสวนปลูกที่ได้รับการรับรอง ตรวจรอยแตก ทิศเสี้ยน และความหนาแน่นทีละท่อนก่อนรับเข้าโรงงาน ไม้ที่ไม่ผ่านเกณฑ์จะไม่เข้าสายการผลิต</p>
+            <span class="step-meta">คัดแล้วใช้ได้เพียง 6 ใน 10 ท่อน</span>
+          </article>
+          <article class="step" data-step="1">
+            <span class="step-num en">STEP 02</span>
+            <h3>อบแห้ง 45 วัน</h3>
+            <p>ไม้ทุกชุดเข้าตู้อบควบคุมอุณหภูมิและความชื้นนาน 45 วัน จนความชื้นในเนื้อไม้คงที่ที่ 8–12% ไม่หด ไม่บิด ไม่แยกรอยเมื่อไปอยู่ในห้องแอร์จริง</p>
+            <span class="step-meta">ความชื้นคงที่ 8–12%</span>
+          </article>
+          <article class="step" data-step="2">
+            <span class="step-num en">STEP 03</span>
+            <h3>ประกอบด้วยเดือยไม้</h3>
+            <p>ช่างประกอบร่วมเดือยแบบงานไม้ดั้งเดิม ไม่พึ่งตะปูหรือสกรูเป็นหลัก ทุกข้อต่อทดสอบแรงกดและแรงดึงก่อนส่งต่อให้ทีมเก็บผิว</p>
+            <span class="step-meta">รับประกันโครงสร้าง 10 ปี</span>
+          </article>
+          <article class="step" data-step="3">
+            <span class="step-num en">STEP 04</span>
+            <h3>ขัด 5 ระดับ ทาน้ำมัน 3 ชั้น</h3>
+            <p>ขัดผิวจากหยาบถึงละเอียด 5 ระดับ แล้วทาน้ำมันธรรมชาติซ้ำ 3 ชั้น เว้นวันให้ไม้ดูดซึม ผิวสัมผัสจึงนุ่ม เห็นเสี้ยนไม้ชัด และซ่อมบำรุงได้ตลอดอายุการใช้งาน</p>
+            <span class="step-meta">ดูแลฟรีครั้งแรกภายใน 1 ปี</span>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section class="section" id="collection">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Collection</span>
+        <h2>ชิ้นงานที่พร้อมสั่งผลิต</h2>
+        <p>สามรุ่นขายดีที่ปรับขนาด ชนิดไม้ และพื้นผิวได้เหมือนกันทุกชิ้น ราคาเริ่มต้นจากสเปกมาตรฐาน</p>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?q=80&w=1200&auto=format&fit=crop" alt="โต๊ะอาหารไม้โอ๊ครุ่นเฮสเปอร์ท็อปหนาในห้องรับประทานอาหาร" loading="lazy">
+          <div class="card-body">
+            <h3>โต๊ะอาหาร เฮสเปอร์</h3>
+            <p>ท็อปไม้โอ๊คหนา 3.5 ซม. ขาเหล็กเคลือบดำด้าน รับน้ำหนักเต็มพื้นท็อปโดยไม่สั่น</p>
+            <div class="card-price"><span class="price-from">เริ่มต้น</span><b class="en">฿18,900</b></div>
+          </div>
+        </article>
+        <article class="card reveal">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1200&auto=format&fit=crop" alt="ชั้นหนังสือไม้รุ่นอาร์เดนจัดวางในมุมห้องนั่งเล่น" loading="lazy">
+          <div class="card-body">
+            <h3>ชั้นหนังสือ อาร์เดน</h3>
+            <p>ชั้นไม้สัก 5 ระดับปรับความสูงได้ โครงเดือยไม้ทั้งหลัง แข็งแรงโดยไม่ต้องยึดผนัง</p>
+            <div class="card-price"><span class="price-from">เริ่มต้น</span><b class="en">฿24,500</b></div>
+          </div>
+        </article>
+        <article class="card reveal">
+          <img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?q=80&w=1200&auto=format&fit=crop" alt="เตียงไม้สักรุ่นนิลกาลในห้องนอนโทนอบอุ่นผ้าปูสีครีม" loading="lazy">
+          <div class="card-body">
+            <h3>เตียงไม้สัก นิลกาล</h3>
+            <p>หัวเตียงสักแผ่นใหญ่เก็บมุมมน โครงล็อกเดือยเงียบสนิท รองรับที่นอนหนักได้ทุกรุ่น</p>
+            <div class="card-price"><span class="price-from">เริ่มต้น</span><b class="en">฿32,000</b></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section reviews" id="reviews">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Client Stories</span>
+        <h2>เสียงจากบ้านที่ใช้งานจริง</h2>
+      </div>
+      <div class="reviews-grid">
+        <figure class="review reveal">
+          <div class="stars" aria-label="คะแนน 5 จาก 5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+          </div>
+          <p>“โต๊ะตัวนี้อยู่กับบ้านเรามา 3 ปี ยิ่งใช้ยิ่งสวย รอยเวลาบนเนื้อไม้ทำให้มันมีเรื่องเล่าของตัวเอง”</p>
+          <figcaption><cite><b>คุณปิยะ</b> · บ้านเดี่ยว กรุงเทพฯ</cite></figcaption>
+        </figure>
+        <figure class="review reveal">
+          <div class="stars" aria-label="คะแนน 5 จาก 5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+          </div>
+          <p>“สั่งทำชั้นหนังสือตามขนาดผนังพอดีเป๊ะทุกมิลลิเมตร งานเนี้ยบกว่าที่จินตนาการไว้มาก”</p>
+          <figcaption><cite><b>คุณมินต์</b> · ทาวน์โฮม เชียงใหม่</cite></figcaption>
+        </figure>
+        <figure class="review reveal">
+          <div class="stars" aria-label="คะแนน 5 จาก 5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6 1.04-4.9 4.5 1.3 6.7L12 17.8 6.1 20.5l1.3-6.7-4.9-4.5 6.6-1.04z"/></svg>
+          </div>
+          <p>“ทีมงานอธิบายความต่างของไม้แต่ละชนิดละเอียดมาก จนได้เตียงสักที่ถูกใจทั้งบ้าน นอนเงียบไม่มีเสียงเลย”</p>
+          <figcaption><cite><b>คุณอริสรา</b> · คอนโด นนทบุรี</cite></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWROOM -->
+  <section class="section" id="showroom">
+    <div class="wrap showroom-grid">
+      <div class="showroom-info reveal">
+        <span class="eyebrow">Showroom</span>
+        <h2 style="font-family:'Charm',sans-serif;font-weight:400;font-size:clamp(34px,4.6vw,52px);line-height:1.16;margin-top:14px">แวะมาจับเนื้อไม้ตัวจริง</h2>
+        <ul class="info-list">
+          <li>
+            <span class="info-ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.4-7-11a7 7 0 1 1 14 0c0 5.6-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </span>
+            <div><b>โชว์รูมลาดพร้าว</b><span>88/2 ถนนลาดพร้าว 101 แขวงคลองจั่น เขตบางกะปิ กรุงเทพฯ 10240</span></div>
+          </li>
+          <li>
+            <span class="info-ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <div><b>เวลาเปิดทำการ</b><span>จันทร์–เสาร์ 10:00–19:00 น. · หยุดวันอาทิตย์</span></div>
+          </li>
+          <li>
+            <span class="info-ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l1.5 4.5L8 10a12 12 0 0 0 6 6l1.5-2.5L20 15v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg>
+            </span>
+            <div><b>ติดต่อ</b><span><span class="en">02-104-7788</span> · Line <span class="en">@woodsmith</span></span></div>
+          </li>
+        </ul>
+        <a class="btn btn-dark" href="#custom">
+          นัดคิวเข้าชมโชว์รูม
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="showroom-img reveal">
+        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200&auto=format&fit=crop" alt="บรรยากาศภายในโชว์รูม WOODSMITH สาขาลาดพร้าว จัดแสดงเฟอร์นิเจอร์ไม้โทนอบอุ่น" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="foot-logo">WOODSMITH</div>
+        <p>เฟอร์นิเจอร์ไม้จริงทำมือในกรุงเทพฯ ผลิตทีละชิ้นด้วยช่างประจำโรงงานของเราเอง ตั้งแต่ปี 2557</p>
+      </div>
+      <div class="foot-col">
+        <h5>เมนู</h5>
+        <a href="#custom">ออกแบบโต๊ะ</a>
+        <a href="#craft">ขั้นตอนผลิต</a>
+        <a href="#collection">คอลเลกชัน</a>
+        <a href="#reviews">รีวิวลูกค้า</a>
+      </div>
+      <div class="foot-col">
+        <h5>ติดต่อ</h5>
+        <span>88/2 ถนนลาดพร้าว 101 กรุงเทพฯ</span>
+        <span class="en">02-104-7788</span>
+        <span>Line <span class="en">@woodsmith</span></span>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span class="en" id="yr">2569</span> WOODSMITH Studio · สงวนลิขสิทธิ์</span>
+      <span>ออกแบบและผลิตด้วยมือในกรุงเทพฯ</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(s, c){ return (c || document).querySelector(s); };
+  var $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- nav ---------- */
+  var nav = $('#nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var menuBtn = $('#menuBtn');
+  var mobilePanel = $('#mobilePanel');
+  menuBtn.addEventListener('click', function(){
+    var open = mobilePanel.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'ปิดเมนู' : 'เปิดเมนู');
+  });
+  $$('#mobilePanel a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobilePanel.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.setAttribute('aria-label', 'เปิดเมนู');
+    });
+  });
+
+  /* ---------- configurator ---------- */
+  var BASE = 18900;
+  var OPT = {
+    wood: {
+      oak:    { label: 'โอ๊ค',    add: 0,    tint: '#a9763f', op: 0.38, filter: 'none' },
+      walnut: { label: 'วอลนัท', add: 4500, tint: '#40291a', op: 0.50, filter: 'brightness(.82) sepia(.38) contrast(1.06)' },
+      teak:   { label: 'สัก',     add: 7900, tint: '#8a5f2c', op: 0.42, filter: 'sepia(.22) saturate(1.12) brightness(.95)' }
+    },
+    size: {
+      s120: { label: '120 ซม. · 4 ที่นั่ง', short: '120 × 75 ซม.',  add: 0 },
+      s180: { label: '180 ซม. · 6 ที่นั่ง', short: '180 × 90 ซม.',  add: 6000 },
+      s240: { label: '240 ซม. · 8 ที่นั่ง', short: '240 × 100 ซม.', add: 12000 }
+    },
+    legs: {
+      steel: { label: 'ขาเหล็กดำ', add: 0 },
+      wood:  { label: 'ขาไม้',     add: 1500 }
+    },
+    finish: {
+      matte: { label: 'ผิวด้าน',   add: 0 },
+      oil:   { label: 'ผิวน้ำมัน', add: 0 }
+    }
+  };
+  var state = { wood: 'oak', size: 's120', legs: 'steel', finish: 'matte' };
+  var fmt = function(n){ return '฿' + n.toLocaleString('en-US'); };
+
+  var priceNum = $('#priceNum');
+  var sumText = $('#sumText');
+  var capWood = $('#capWood');
+  var capSize = $('#capSize');
+  var tintRect = $('#tintRect');
+  var tableImg = $('#tableImg');
+
+  function render(){
+    var w = OPT.wood[state.wood];
+    var s = OPT.size[state.size];
+    var l = OPT.legs[state.legs];
+    var f = OPT.finish[state.finish];
+    var total = BASE + w.add + s.add + l.add + f.add;
+    priceNum.textContent = fmt(total);
+    if (!reduceMotion){
+      priceNum.classList.remove('pop');
+      void priceNum.offsetWidth;
+      priceNum.classList.add('pop');
+    }
+    sumText.textContent = 'โต๊ะ' + w.label + ' · ท็อป ' + s.short + ' · ' + l.label + ' · ' + f.label;
+    capWood.textContent = 'ไม้' + w.label;
+    capSize.textContent = s.short;
+    tintRect.setAttribute('fill', w.tint);
+    tintRect.setAttribute('fill-opacity', String(w.op));
+    tableImg.style.filter = w.filter;
+  }
+  $$('#configForm input[type="radio"]').forEach(function(inp){
+    inp.addEventListener('change', function(){
+      state[inp.name] = inp.value;
+      render();
+    });
+  });
+  render();
+
+  var quoteBtn = $('#quoteBtn');
+  var quoteArea = $('#quoteArea');
+  var quoteOK = $('#quoteOK');
+  var okSum = $('#okSum');
+  var editBtn = $('#editBtn');
+  quoteBtn.addEventListener('click', function(){
+    okSum.textContent = sumText.textContent + ' — ' + priceNum.textContent + ' บาท';
+    quoteArea.hidden = true;
+    quoteOK.hidden = false;
+    quoteOK.setAttribute('tabindex', '-1');
+    quoteOK.focus({ preventScroll: false });
+  });
+  editBtn.addEventListener('click', function(){
+    quoteOK.hidden = true;
+    quoteArea.hidden = false;
+    quoteBtn.focus();
+  });
+
+  /* ---------- sticky feature story ---------- */
+  var frames = $$('.story-media img');
+  var steps = $$('.step');
+  var countEl = $('#storyCount');
+  if ('IntersectionObserver' in window){
+    var stepObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          var i = parseInt(en.target.getAttribute('data-step'), 10);
+          steps.forEach(function(st){ st.classList.toggle('active', st === en.target); });
+          frames.forEach(function(fr, j){ fr.classList.toggle('active', j === Math.min(i, frames.length - 1)); });
+          countEl.textContent = ('0' + (i + 1)) + ' / 04';
+        }
+      });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    steps.forEach(function(st){ stepObserver.observe(st); });
+  } else {
+    steps.forEach(function(st){ st.classList.add('active'); });
+    frames[0].classList.add('active');
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  var revs = $$('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)){
+    revs.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var revealObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          en.target.classList.add('in');
+          revealObserver.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revs.forEach(function(el){ revealObserver.observe(el); });
+  }
+
+  /* ---------- footer year (พ.ศ.) ---------- */
+  $('#yr').textContent = String(new Date().getFullYear() + 543);
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+</body>
+</html>
