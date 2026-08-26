@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คุ้มครองดี — โบรกเกอร์ประกันภัย | เช็คเบี้ยฟรีใน 1 นาที</title>
+<meta name="description" content="คุ้มครองดี โบรกเกอร์ประกันภัยใบอนุญาต คปภ. เปรียบเทียบเบี้ยจาก 12 บริษัทประกัน เช็คเบี้ยฟรีใน 1 นาที รถยนต์ สุขภาพ บ้าน อธิบายเป็นภาษาคน">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Sarabun:wght@300;400;500&family=Thasadith:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f9fc; --card:#ffffff; --blue:#1e5aa8; --navy:#12325c; --coral:#ff8b7b;
+  --ink:#1b2733; --muted:#5c6b7a; --line:#e3e9f0;
+  --blue-soft:#eaf1fa; --coral-soft:#fff0ee;
+  --radius:18px; --radius-sm:12px;
+  --shadow:0 6px 24px rgba(18,50,92,.08);
+  --shadow-lg:0 18px 48px rgba(18,50,92,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: no-preference){
+  html{scroll-behavior:smooth}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  .ring-fg{transition:stroke-dashoffset .7s cubic-bezier(.4,0,.2,1)}
+  .panel{animation:panelIn .45s ease both}
+  @keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .btn{transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease}
+  .type-card{transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+}
+body{
+  font-family:'Sarabun',sans-serif;font-weight:400;font-size:16px;line-height:1.7;
+  color:var(--ink);background:var(--bg);
+}
+h1,h2,h3,.th-head{font-family:'Thasadith',sans-serif;font-weight:700;line-height:1.25;color:var(--navy)}
+.num{font-family:'DM Sans',sans-serif}
+img{max-width:100%;display:block}
+a{color:var(--blue);text-decoration:none}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.skip{position:absolute;left:-999px;top:0;background:var(--navy);color:#fff;padding:12px 18px;z-index:200;border-radius:0 0 10px 0}
+.skip:focus{left:0}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:48px;padding:13px 26px;border-radius:999px;border:0;cursor:pointer;
+  font-family:'Sarabun',sans-serif;font-size:16px;font-weight:500;line-height:1.3;
+}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 8px 20px rgba(30,90,168,.28)}
+.btn-primary:hover{background:#174c8e;transform:translateY(-2px)}
+.btn-coral{background:var(--coral);color:var(--navy);box-shadow:0 8px 20px rgba(255,139,123,.35)}
+.btn-coral:hover{background:#ff7766;transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--navy);border:2px solid var(--line)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;box-shadow:none;transform:none}
+.btn-sm{min-height:44px;padding:10px 20px;font-size:15px}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+}
+.nav-in{display:flex;align-items:center;gap:26px;min-height:72px}
+.brand{display:flex;align-items:center;gap:11px;font-family:'Thasadith',sans-serif;font-weight:700;font-size:24px;color:var(--navy)}
+.brand svg{flex:none}
+.nav-links{display:flex;align-items:center;gap:6px;margin-left:auto;list-style:none}
+.nav-links a{
+  display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;
+  color:var(--ink);font-weight:500;font-size:15.5px;border-radius:10px;
+}
+.nav-links a:hover{color:var(--blue);background:var(--blue-soft)}
+.nav-cta{margin-left:8px}
+.menu-btn{
+  display:none;margin-left:auto;min-width:44px;min-height:44px;border:1.5px solid var(--line);
+  background:#fff;border-radius:12px;cursor:pointer;align-items:center;justify-content:center;
+}
+@media (max-width:860px){
+  .menu-btn{display:inline-flex}
+  .nav-cta{display:none}
+  .nav-links{
+    position:absolute;top:72px;left:0;right:0;flex-direction:column;align-items:stretch;
+    background:#fff;border-bottom:1px solid var(--line);padding:12px 22px 20px;gap:4px;
+    display:none;box-shadow:var(--shadow);
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{width:100%}
+}
+
+/* ---------- Hero ---------- */
+.hero{padding:64px 0 0;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;background:var(--blue-soft);color:var(--blue);
+  font-weight:500;font-size:15px;padding:8px 16px;border-radius:999px;margin-bottom:22px;
+}
+.hero h1{font-size:clamp(34px,4.6vw,56px);letter-spacing:-.01em;margin-bottom:18px}
+.hero h1 .hl{color:var(--blue);position:relative;white-space:nowrap}
+.hero h1 .hl::after{
+  content:"";position:absolute;left:0;right:0;bottom:4px;height:12px;background:var(--coral-soft);
+  border-radius:6px;z-index:-1;
+}
+.lead{font-size:18px;color:var(--muted);max-width:52ch;margin-bottom:30px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:38px}
+.hero-media{position:relative}
+.hero-media img{border-radius:26px;box-shadow:var(--shadow-lg);aspect-ratio:4/3.4;object-fit:cover;width:100%}
+.float-card{
+  position:absolute;left:-26px;bottom:34px;background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);
+  padding:16px 20px;display:flex;align-items:center;gap:13px;max-width:290px;
+}
+.float-card .fc-ico{width:44px;height:44px;flex:none;border-radius:12px;background:var(--coral-soft);display:grid;place-items:center}
+.float-card b{display:block;font-family:'Thasadith',sans-serif;font-size:17px;color:var(--navy);line-height:1.35}
+.float-card span{font-size:15px;color:var(--muted);line-height:1.4}
+@media (max-width:960px){
+  .hero{padding:44px 0 0}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .float-card{left:14px;bottom:14px}
+}
+
+/* ---------- Trust strip ---------- */
+.trust{margin-top:58px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+.trust-in{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:26px 0}
+.trust-item{display:flex;align-items:center;gap:13px;justify-content:center;text-align:left}
+.trust-item .t-ico{width:44px;height:44px;flex:none;border-radius:12px;background:var(--blue-soft);display:grid;place-items:center}
+.trust-item b{display:block;font-family:'Thasadith',sans-serif;font-size:16.5px;color:var(--navy);line-height:1.35}
+.trust-item span{font-size:15px;color:var(--muted);line-height:1.4}
+@media (max-width:900px){.trust-in{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.trust-in{grid-template-columns:1fr}.trust-item{justify-content:flex-start}}
+
+/* ---------- Section headers ---------- */
+section{padding:86px 0}
+.sec-head{max-width:640px;margin:0 auto 48px;text-align:center}
+.sec-head .kicker{font-family:'Thasadith',sans-serif;font-weight:700;color:var(--coral);font-size:17px;letter-spacing:.04em;margin-bottom:8px}
+.sec-head h2{font-size:clamp(28px,3.4vw,40px);margin-bottom:12px}
+.sec-head p{color:var(--muted);font-size:16.5px}
+
+/* ---------- Quote wizard ---------- */
+.quote{background:linear-gradient(180deg,var(--bg) 0%,#eef3fa 100%)}
+.wizard{
+  max-width:860px;margin:0 auto;background:var(--card);border-radius:26px;box-shadow:var(--shadow-lg);
+  padding:44px 44px 40px;position:relative;border:1px solid var(--line);
+}
+.wizard-top{display:flex;align-items:center;gap:22px;margin-bottom:32px;flex-wrap:wrap}
+.ring-wrap{position:relative;width:76px;height:76px;flex:none}
+.ring-wrap svg{display:block}
+.ring-text{
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-family:'DM Sans',sans-serif;font-weight:700;font-size:16px;color:var(--navy);
+}
+.step-label b{display:block;font-family:'Thasadith',sans-serif;font-size:21px;color:var(--navy);line-height:1.3}
+.step-label span{font-size:15.5px;color:var(--muted)}
+.panel legend{
+  font-family:'Thasadith',sans-serif;font-weight:700;font-size:22px;color:var(--navy);
+  margin-bottom:22px;padding:0;float:left;width:100%;
+}
+.panel{border:0}
+@media (max-width:640px){.wizard{padding:30px 20px 28px}}
+
+/* step 1 — type cards */
+.type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;clear:both}
+.type-card{position:relative;cursor:pointer;display:block}
+.type-card input{position:absolute;opacity:0;width:1px;height:1px}
+.type-card .tc-body{
+  border:2px solid var(--line);border-radius:var(--radius);padding:26px 18px 22px;text-align:center;
+  background:#fff;display:flex;flex-direction:column;align-items:center;gap:12px;min-height:176px;justify-content:center;
+}
+.type-card .tc-ico{width:58px;height:58px;border-radius:16px;background:var(--blue-soft);display:grid;place-items:center;color:var(--blue)}
+.type-card b{font-family:'Thasadith',sans-serif;font-size:18.5px;color:var(--navy);line-height:1.3}
+.type-card small{font-size:15px;color:var(--muted);line-height:1.45;display:block}
+.type-card:hover .tc-body{border-color:#b9cce6;transform:translateY(-3px);box-shadow:var(--shadow)}
+.type-card input:checked + .tc-body{border-color:var(--blue);background:var(--blue-soft);box-shadow:0 10px 26px rgba(30,90,168,.16)}
+.type-card input:checked + .tc-body .tc-ico{background:var(--blue);color:#fff}
+.type-card input:focus-visible + .tc-body{outline:3px solid var(--coral);outline-offset:3px}
+.type-card .tc-check{
+  position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;
+  background:var(--blue);color:#fff;display:none;place-items:center;
+}
+.type-card input:checked ~ .tc-check{display:grid}
+@media (max-width:640px){.type-grid{grid-template-columns:1fr}.type-card .tc-body{min-height:0;flex-direction:row;text-align:left;padding:18px}}
+
+/* step 2 — slider + chips */
+.field-block{margin-bottom:34px}
+.field-block > span{display:block;font-weight:500;font-size:16.5px;color:var(--navy);margin-bottom:14px}
+.age-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.age-out{
+  min-width:118px;text-align:center;background:var(--coral-soft);color:var(--navy);
+  font-family:'DM Sans',sans-serif;font-weight:700;font-size:24px;border-radius:14px;padding:10px 16px;
+}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;flex:1;min-width:200px;height:44px;background:transparent;cursor:pointer;
+}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--blue) var(--fill,29%),var(--line) var(--fill,29%))}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:30px;height:30px;margin-top:-11px;border-radius:50%;
+  background:#fff;border:5px solid var(--blue);box-shadow:0 3px 10px rgba(18,50,92,.25);
+}
+input[type=range]::-moz-range-track{height:8px;border-radius:99px;background:var(--line)}
+input[type=range]::-moz-range-progress{height:8px;border-radius:99px;background:var(--blue)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:5px solid var(--blue);box-shadow:0 3px 10px rgba(18,50,92,.25)}
+.range-scale{display:flex;justify-content:space-between;font-size:15px;color:var(--muted);font-family:'DM Sans',sans-serif;margin-top:2px}
+.chip-row{display:flex;gap:12px;flex-wrap:wrap}
+.chip{position:relative;cursor:pointer}
+.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.chip .chip-body{
+  display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:12px 24px;
+  border:2px solid var(--line);border-radius:999px;background:#fff;
+  font-family:'DM Sans',sans-serif;font-weight:700;font-size:17px;color:var(--navy);
+}
+.chip:hover .chip-body{border-color:#b9cce6}
+.chip input:checked + .chip-body{border-color:var(--coral);background:var(--coral-soft);color:var(--navy)}
+.chip input:focus-visible + .chip-body{outline:3px solid var(--coral);outline-offset:3px}
+.wizard-actions{display:flex;gap:14px;justify-content:space-between;margin-top:34px;flex-wrap:wrap}
+.wizard-actions .spacer{flex:1}
+
+/* step 3 — result */
+.result-head{
+  text-align:center;background:var(--blue-soft);border-radius:var(--radius);padding:28px 22px;margin-bottom:30px;
+}
+.result-head .lbl{font-size:16px;color:var(--muted);margin-bottom:6px}
+.premium{
+  font-family:'DM Sans',sans-serif;font-weight:700;font-size:clamp(38px,6vw,52px);color:var(--blue);line-height:1.1;
+}
+.premium small{font-size:18px;font-weight:500;color:var(--muted)}
+.result-head .meta{font-size:15.5px;color:var(--muted);margin-top:8px}
+.pack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:30px}
+.pack{
+  border:2px solid var(--line);border-radius:var(--radius);padding:24px 20px;background:#fff;
+  display:flex;flex-direction:column;gap:6px;position:relative;
+}
+.pack.best{border-color:var(--coral);box-shadow:0 12px 30px rgba(255,139,123,.18)}
+.pack .tag{
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--coral);color:var(--navy);
+  font-size:14.5px;font-weight:500;padding:4px 14px;border-radius:999px;white-space:nowrap;
+}
+.pack h3{font-size:20px;margin-top:6px}
+.pack .price{font-family:'DM Sans',sans-serif;font-weight:700;font-size:26px;color:var(--blue)}
+.pack .price small{font-size:15px;color:var(--muted);font-weight:500}
+.pack ul{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:9px}
+.pack li{display:flex;gap:9px;font-size:15.5px;color:var(--ink);line-height:1.5}
+.pack li svg{flex:none;margin-top:4px}
+@media (max-width:760px){.pack-grid{grid-template-columns:1fr}.pack.best{order:-1}}
+
+/* callback form */
+.callback{background:var(--coral-soft);border-radius:var(--radius);padding:26px;text-align:center}
+.callback h3{font-size:21px;margin-bottom:6px}
+.callback p{font-size:15.5px;color:var(--muted);margin-bottom:18px}
+.cb-row{display:flex;gap:12px;max-width:460px;margin:0 auto}
+.cb-row input{
+  flex:1;min-height:52px;border:2px solid #f3d2cd;border-radius:14px;padding:10px 18px;
+  font-family:'DM Sans',sans-serif;font-size:17px;color:var(--ink);background:#fff;min-width:0;
+}
+.cb-row input:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-color:var(--blue)}
+.cb-err{display:none;margin-top:12px;font-size:15px;color:#b23a2e;font-weight:500}
+.cb-err.show{display:block}
+@media (max-width:520px){.cb-row{flex-direction:column}.cb-row .btn{width:100%}}
+.success{text-align:center;padding:26px 10px 10px}
+.success .ok{
+  width:74px;height:74px;border-radius:50%;background:var(--blue-soft);display:grid;place-items:center;margin:0 auto 18px;
+}
+.success h3{font-size:24px;margin-bottom:8px}
+.success p{color:var(--muted);font-size:16px;max-width:46ch;margin:0 auto 20px}
+.text-btn{
+  background:none;border:0;cursor:pointer;color:var(--blue);font-family:'Sarabun',sans-serif;
+  font-size:15.5px;font-weight:500;text-decoration:underline;min-height:44px;padding:8px 12px;
+}
+
+/* ---------- Why us ---------- */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.why-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.why-card img{aspect-ratio:16/9.5;object-fit:cover;width:100%}
+.why-body{padding:24px 24px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+.why-body .w-ico{width:48px;height:48px;border-radius:13px;background:var(--blue-soft);display:grid;place-items:center;color:var(--blue);margin-top:-46px;position:relative;border:4px solid #fff}
+.why-body h3{font-size:21px}
+.why-body p{font-size:15.5px;color:var(--muted)}
+@media (max-width:860px){.why-grid{grid-template-columns:1fr;max-width:560px;margin:0 auto}}
+
+/* ---------- CTA band ---------- */
+.band{
+  background:var(--navy);border-radius:26px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;
+  align-items:stretch;color:#fff;
+}
+.band-media img{width:100%;height:100%;object-fit:cover;min-height:280px}
+.band-body{padding:46px 44px;display:flex;flex-direction:column;justify-content:center;gap:14px;align-items:flex-start}
+.band-body h2{color:#fff;font-size:clamp(26px,3vw,34px)}
+.band-body p{color:#c6d4e6;font-size:16px;max-width:46ch}
+@media (max-width:820px){.band{grid-template-columns:1fr}.band-body{padding:34px 26px 40px}}
+
+/* ---------- Reviews ---------- */
+.rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:960px;margin:0 auto}
+.rev-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:16px}
+.stars{display:flex;gap:4px;color:#f0a93b}
+.rev-card blockquote{font-size:16.5px;line-height:1.75;color:var(--ink)}
+.rev-who{display:flex;align-items:center;gap:14px;margin-top:auto}
+.avatar{
+  width:52px;height:52px;border-radius:50%;flex:none;display:grid;place-items:center;
+  font-family:'Thasadith',sans-serif;font-weight:700;font-size:19px;color:#fff;background:var(--blue);
+}
+.avatar.alt{background:var(--coral);color:var(--navy)}
+.rev-who b{display:block;font-family:'Thasadith',sans-serif;font-size:17px;color:var(--navy);line-height:1.3}
+.rev-who span{font-size:15px;color:var(--muted)}
+@media (max-width:760px){.rev-grid{grid-template-columns:1fr}}
+
+/* ---------- FAQ ---------- */
+.faq-list{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.faq-list details{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden}
+.faq-list summary{
+  cursor:pointer;list-style:none;display:flex;align-items:center;gap:14px;min-height:56px;
+  padding:16px 22px;font-family:'Thasadith',sans-serif;font-weight:700;font-size:18px;color:var(--navy);
+}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary .fx{
+  margin-left:auto;flex:none;width:34px;height:34px;border-radius:10px;background:var(--blue-soft);
+  display:grid;place-items:center;color:var(--blue);
+}
+.faq-list details[open] summary .fx svg{transform:rotate(45deg)}
+.faq-list .fx svg{transition:transform .25s ease}
+@media (prefers-reduced-motion:reduce){.faq-list .fx svg{transition:none}}
+.faq-list details p{padding:0 22px 20px;color:var(--muted);font-size:15.5px}
+
+/* ---------- Footer ---------- */
+footer{background:var(--navy);color:#c6d4e6;padding:64px 0 0}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;padding-bottom:44px}
+.foot-grid h3{color:#fff;font-size:19px;margin-bottom:16px}
+.foot-grid p,.foot-grid li{font-size:15.5px;line-height:1.8}
+.foot-grid ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.foot-grid a{color:#c6d4e6}
+.foot-grid a:hover{color:var(--coral)}
+.foot-brand{display:flex;align-items:center;gap:11px;font-family:'Thasadith',sans-serif;font-weight:700;font-size:23px;color:#fff;margin-bottom:14px}
+.foot-contact li{display:flex;gap:11px;align-items:flex-start}
+.foot-contact svg{flex:none;margin-top:5px}
+.foot-bar{border-top:1px solid rgba(255,255,255,.14);padding:20px 0;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:15px}
+@media (max-width:820px){.foot-grid{grid-template-columns:1fr;gap:30px}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+<a class="skip" href="#quote">ข้ามไปเช็คเบี้ย</a>
+
+<!-- ================= NAV ================= -->
+<nav class="nav" aria-label="เมนูหลัก">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="คุ้มครองดี กลับขึ้นด้านบน">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+        <path d="M17 2.5 29 7v8.5c0 7.4-5 13.4-12 16-7-2.6-12-8.6-12-16V7l12-4.5Z" fill="#1e5aa8"/>
+        <path d="m11.5 17 3.8 3.8 7.4-7.6" stroke="#ff8b7b" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      คุ้มครองดี
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="เปิดเมนู">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#12325c" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16"/>
+      </svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#quote">เช็คเบี้ย</a></li>
+      <li><a href="#why">ทำไมคุ้มครองดี</a></li>
+      <li><a href="#reviews">รีวิวลูกค้า</a></li>
+      <li><a href="#faq">คำถามที่พบบ่อย</a></li>
+      <li><a href="#contact">ติดต่อเรา</a></li>
+    </ul>
+    <a class="btn btn-primary btn-sm nav-cta" href="#quote">เช็คเบี้ยฟรี</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="badge">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2 20 5.5V12c0 5-3.4 9-8 10.5C7.4 21 4 17 4 12V5.5L12 2Z"/><path d="m8.8 12 2.3 2.3 4.2-4.4"/>
+        </svg>
+        โบรกเกอร์ประกันภัย ใบอนุญาต คปภ. ถูกต้อง
+      </span>
+      <h1>ประกันที่<span class="hl">เข้าใจง่าย</span><br>ในภาษาคน</h1>
+      <p class="lead">เราเปรียบเทียบแผนประกันจาก 12 บริษัทชั้นนำให้คุณในที่เดียว อธิบายทุกเงื่อนไขแบบตรงไปตรงมา ไม่มีศัพท์เทคนิคซ่อนอยู่ — เช็คเบี้ยฟรี ไม่ผูกมัด</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#quote">
+          เช็คเบี้ยฟรีใน 1 นาที
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#why">รู้จักเราให้มากขึ้น</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="../assets/insurance-hero.jpg" alt="ที่ปรึกษาประกันกำลังอธิบายแผนความคุ้มครองให้ลูกค้าฟังที่โต๊ะทำงาน" width="1200" height="1020" fetchpriority="high">
+      <div class="float-card">
+        <span class="fc-ico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#12325c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9.2"/></svg>
+        </span>
+        <div><b>เคลมอนุมัติเฉลี่ย 3.2 วัน</b><span>ทีมงานติดตามให้จนจบเคส</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="trust">
+    <div class="wrap trust-in">
+      <div class="trust-item">
+        <span class="t-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 5.5V12c0 5-3.4 9-8 10.5C7.4 21 4 17 4 12V5.5L12 2Z"/><path d="m8.8 12 2.3 2.3 4.2-4.4"/></svg></span>
+        <div><b>ใบอนุญาต คปภ.</b><span>นายหน้าประกันภัย ข1234/2567</span></div>
+      </div>
+      <div class="trust-item">
+        <span class="t-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></span>
+        <div><b>พาร์ทเนอร์ 12 บริษัท</b><span>เปรียบเทียบเบี้ยจริงทุกแผน</span></div>
+      </div>
+      <div class="trust-item">
+        <span class="t-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 19v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 17.5V19"/><circle cx="9.8" cy="8" r="3.6"/><path d="M20 19v-1.5a3.5 3.5 0 0 0-2.6-3.4M15.5 4.6a3.6 3.6 0 0 1 0 6.8"/></svg></span>
+        <div><b>ลูกค้า 40,000+ กรมธรรม์</b><span>ดูแลมากว่า 9 ปี</span></div>
+      </div>
+      <div class="trust-item">
+        <span class="t-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16.5v3a2 2 0 0 1-2.2 2A19 19 0 0 1 2.5 5.2 2 2 0 0 1 4.5 3h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.6 10.8a16 16 0 0 0 4.6 4.6l1.2-1.15a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 21 16.5Z"/></svg></span>
+        <div><b>ช่วยเคลม 24 ชม.</b><span>สายด่วนเหตุฉุกเฉินทุกวัน</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ================= QUOTE WIZARD ================= -->
+<section class="quote" id="quote" aria-labelledby="quoteTitle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">เช็คเบี้ยฟรี ไม่ผูกมัด</div>
+      <h2 id="quoteTitle">รู้เบี้ยประมาณของคุณใน 3 ขั้นตอน</h2>
+      <p>เลือกประเภท ใส่รายละเอียดสั้นๆ แล้วดูเบี้ยประมาณการพร้อมแพ็กเกจเทียบกันทันที</p>
+    </div>
+
+    <div class="wizard reveal" id="wizard">
+      <div class="wizard-top">
+        <div class="ring-wrap" aria-hidden="true">
+          <svg viewBox="0 0 72 72" width="76" height="76">
+            <defs>
+              <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#1e5aa8"/>
+                <stop offset="100%" stop-color="#ff8b7b"/>
+              </linearGradient>
+            </defs>
+            <circle cx="36" cy="36" r="30" fill="none" stroke="#e3e9f0" stroke-width="7"/>
+            <circle id="ringFg" class="ring-fg" cx="36" cy="36" r="30" fill="none" stroke="url(#ringGrad)" stroke-width="7" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="126.3" transform="rotate(-90 36 36)"/>
+          </svg>
+          <span class="ring-text num" id="ringText">33%</span>
+        </div>
+        <div class="step-label">
+          <b id="stepTitle">ขั้นที่ 1 จาก 3</b>
+          <span id="stepSub">เลือกประเภทประกันที่สนใจ</span>
+        </div>
+      </div>
+
+      <div aria-live="polite">
+        <!-- STEP 1 -->
+        <fieldset class="panel" id="panel1">
+          <legend>อยากเช็คเบี้ยประกันประเภทไหน?</legend>
+          <div class="type-grid">
+            <label class="type-card">
+              <input type="radio" name="ptype" value="car">
+              <span class="tc-body">
+                <span class="tc-ico" aria-hidden="true">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13.5 5.6 8.2A2 2 0 0 1 7.5 6.8h9a2 2 0 0 1 1.9 1.4L20 13.5M4 13.5h16M4 13.5v4.2a1.3 1.3 0 0 0 1.3 1.3h.9a1.3 1.3 0 0 0 1.3-1.3v-1h9v1a1.3 1.3 0 0 0 1.3 1.3h.9a1.3 1.3 0 0 0 1.3-1.3v-4.2"/><circle cx="7.4" cy="15.6" r=".4"/><circle cx="16.6" cy="15.6" r=".4"/></svg>
+                </span>
+                <span><b>ประกันรถยนต์</b><small>ภัยชั้น 1–3 ทุนคุ้มครองรถและบุคคลภายนอก</small></span>
+              </span>
+              <span class="tc-check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+            </label>
+            <label class="type-card">
+              <input type="radio" name="ptype" value="health">
+              <span class="tc-body">
+                <span class="tc-ico" aria-hidden="true">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.4 5 6.6 5c2 0 3.6 1.1 4.4 2.7h2c.8-1.6 2.4-2.7 4.4-2.7 3.2 0 5.2 3 3.9 6.3-1.8 4.6-9.3 9.2-9.3 9.2Z" transform="scale(.92) translate(1 .5)"/><path d="M4.5 12.5h4l1.6-2.8 2.6 5 1.6-2.2h5"/></svg>
+                </span>
+                <span><b>ประกันสุขภาพ</b><small>เหมาจ่ายค่ารักษา IPD/OPD ทุกโรงพยาบาล</small></span>
+              </span>
+              <span class="tc-check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+            </label>
+            <label class="type-card">
+              <input type="radio" name="ptype" value="home">
+              <span class="tc-body">
+                <span class="tc-ico" aria-hidden="true">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-7.5L21 11M5.5 9.5V20a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V9.5M9.8 21v-5.5h4.4V21"/></svg>
+                </span>
+                <span><b>ประกันบ้าน</b><small>คุ้มครองสิ่งปลูกสร้างและทรัพย์สินภายใน</small></span>
+              </span>
+              <span class="tc-check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+            </label>
+          </div>
+          <div class="wizard-actions">
+            <span class="spacer"></span>
+            <button type="button" class="btn btn-primary" id="toStep2" disabled>ถัดไป</button>
+          </div>
+        </fieldset>
+
+        <!-- STEP 2 -->
+        <fieldset class="panel" id="panel2" hidden>
+          <legend>รายละเอียดเบื้องต้นของคุณ</legend>
+          <div class="field-block">
+            <span id="ageLabel">อายุของผู้เอาประกัน</span>
+            <div class="age-row">
+              <input type="range" id="ageRange" min="20" max="70" step="1" value="35" aria-labelledby="ageLabel" aria-describedby="ageOut">
+              <output class="age-out" id="ageOut" for="ageRange">35 ปี</output>
+            </div>
+            <div class="range-scale" aria-hidden="true"><span>20 ปี</span><span>70 ปี</span></div>
+          </div>
+          <div class="field-block">
+            <span id="covLabel">มูลค่าความคุ้มครองที่ต้องการ</span>
+            <div class="chip-row" role="group" aria-labelledby="covLabel">
+              <label class="chip">
+                <input type="radio" name="cov" value="500000">
+                <span class="chip-body num">฿500,000</span>
+              </label>
+              <label class="chip">
+                <input type="radio" name="cov" value="1000000" checked>
+                <span class="chip-body num">฿1,000,000</span>
+              </label>
+              <label class="chip">
+                <input type="radio" name="cov" value="3000000">
+                <span class="chip-body num">฿3,000,000</span>
+              </label>
+            </div>
+          </div>
+          <div class="wizard-actions">
+            <button type="button" class="btn btn-ghost" id="backTo1">ย้อนกลับ</button>
+            <button type="button" class="btn btn-primary" id="toStep3">ดูเบี้ยประมาณการ</button>
+          </div>
+        </fieldset>
+
+        <!-- STEP 3 -->
+        <div class="panel" id="panel3" hidden>
+          <div class="result-head">
+            <div class="lbl">เบี้ยประมาณการต่อปีของคุณ</div>
+            <div class="premium"><span id="premNum" class="num">฿0</span> <small>/ ปี</small></div>
+            <div class="meta" id="premMeta">—</div>
+          </div>
+
+          <div class="pack-grid" id="packGrid">
+            <div class="pack">
+              <h3>คุ้มเบสิก</h3>
+              <div class="price"><span id="pBasic" class="num">฿0</span> <small>/ปี</small></div>
+              <ul>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>ความคุ้มครองหลักมาตรฐาน</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>ช่วยเหลือเคลมเวลาทำการ</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>แจ้งเตือนต่ออายุล่วงหน้า</li>
+              </ul>
+            </div>
+            <div class="pack best">
+              <span class="tag">คุ้มค่าที่สุด</span>
+              <h3>คุ้มพลัส</h3>
+              <div class="price"><span id="pPlus" class="num">฿0</span> <small>/ปี</small></div>
+              <ul>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>ทุกอย่างในคุ้มเบสิก</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>ผู้ช่วยเคลมส่วนตัว 24 ชม.</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>อ่านเงื่อนไขให้ฟังก่อนเซ็น</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>ทบทวนกรมธรรม์ฟรีปีละ 1 ครั้ง</li>
+              </ul>
+            </div>
+            <div class="pack">
+              <h3>คุ้มแม็กซ์</h3>
+              <div class="price"><span id="pMax" class="num">฿0</span> <small>/ปี</small></div>
+              <ul>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>ทุกอย่างในคุ้มพลัส</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>เคลมด่วนภายใน 48 ชม.</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>ที่ปรึกษาประจำตัวตลอดสัญญา</li>
+                <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>ทบทวนฟรี 2 ครั้งต่อปี</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="callback" id="cbBox">
+            <h3>อยากให้ที่ปรึกษาโทรกลับ?</h3>
+            <p>ฝากเบอร์ไว้ เราโทรหาภายใน 30 นาทีในเวลาทำการ พร้อมเสนอแผนจริงจาก 12 บริษัท</p>
+            <form class="cb-row" id="cbForm" novalidate>
+              <label for="phoneInput" class="num" style="position:absolute;left:-9999px">เบอร์โทรศัพท์</label>
+              <input type="tel" id="phoneInput" inputmode="tel" autocomplete="tel" placeholder="08x-xxx-xxxx" maxlength="10">
+              <button type="submit" class="btn btn-coral">ให้ที่ปรึกษาโทรกลับ</button>
+            </form>
+            <div class="cb-err" id="cbErr">กรุณากรอกเบอร์โทรศัพท์ 9–10 หลักให้ถูกต้อง เช่น 0812345678</div>
+          </div>
+
+          <div class="success" id="successBox" hidden>
+            <div class="ok" aria-hidden="true">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#1e5aa8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5L19.5 7"/></svg>
+            </div>
+            <h3>รับเรื่องเรียบร้อยแล้ว</h3>
+            <p>ที่ปรึกษาของเราจะโทรกลับหาเบอร์ <b class="num" id="okPhone">—</b> ภายใน 30 นาทีในเวลาทำการ (จันทร์–เสาร์ 8:30–18:00 น.) พร้อมแผนประกันที่เหมาะกับคุณที่สุด</p>
+            <button type="button" class="text-btn" id="startOver">คำนวณเบี้ยใหม่อีกครั้ง</button>
+          </div>
+
+          <div style="text-align:center;margin-top:20px" id="reCalcWrap">
+            <button type="button" class="text-btn" id="reCalc">ปรับเงื่อนไขแล้วคำนวณใหม่</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY US ================= -->
+<section id="why" aria-labelledby="whyTitle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">ทำไมลูกค้าเลือกคุ้มครองดี</div>
+      <h2 id="whyTitle">เรื่องประกันไม่ต้องซับซ้อน</h2>
+      <p>สามสิ่งที่เรายึดมั่นมาตั้งแต่วันแรก เพื่อให้คุณตัดสินใจได้มั่นใจ</p>
+    </div>
+    <div class="why-grid">
+      <article class="why-card reveal">
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1000&auto=format&fit=crop" alt="มือกำลังกดเครื่องคิดเลขเปรียบเทียบเบี้ยประกันบนโต๊ะทำงาน" loading="lazy" width="1000" height="667">
+        <div class="why-body">
+          <span class="w-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="3" width="15" height="18" rx="2"/><path d="M8.5 7.5h7M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01M8.5 18.5h7"/></svg></span>
+          <h3>เปรียบเทียบให้ฟรี ไม่บวกเพิ่ม</h3>
+          <p>เราได้ค่าคอมมิชชันจากบริษัทประกันโดยตรง เบี้ยที่คุณเห็นจึงเท่ากับที่ซื้อเองจากบริษัททุกบาท แถมได้คนกลางคอยเทียบเงื่อนไขให้</p>
+        </div>
+      </article>
+      <article class="why-card reveal">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1000&auto=format&fit=crop" alt="สองมือจับกันแน่นแสดงถึงการช่วยเหลือเคลมประกัน" loading="lazy" width="1000" height="667">
+        <div class="why-body">
+          <span class="w-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16.5v3a2 2 0 0 1-2.2 2A19 19 0 0 1 2.5 5.2 2 2 0 0 1 4.5 3h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.6 10.8a16 16 0 0 0 4.6 4.6l1.2-1.15a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 21 16.5Z"/></svg></span>
+          <h3>เคลมมีเราช่วย 24 ชม.</h3>
+          <p>เกิดเหตุตอนไหนก็โทรหาเราได้ ทีมเคลมประจำตัวช่วยเตรียมเอกสาร คุยกับบริษัทประกัน และติดตามจนเงินเข้าบัญชี — เฉลี่ยอนุมัติใน 3.2 วัน</p>
+        </div>
+      </article>
+      <article class="why-card reveal">
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop" alt="เอกสารสัญญาประกันบนโต๊ะพร้อมปากกาสำหรับตรวจเงื่อนไข" loading="lazy" width="1000" height="667">
+        <div class="why-body">
+          <span class="w-ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></span>
+          <h3>ไม่มีข้อยกเว้นซ่อน</h3>
+          <p>ก่อนเซ็นทุกครั้ง ที่ปรึกษาจะเปิดหน้าข้อยกเว้นอ่านให้ฟังทีละข้อเป็นภาษาคน อะไรไม่คุ้มเราบอกตรงๆ ไม่ปล่อยให้ไปเจอเองตอนเคลม</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA BAND ================= -->
+<section style="padding-top:0" aria-labelledby="bandTitle">
+  <div class="wrap">
+    <div class="band reveal">
+      <div class="band-media">
+        <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?q=80&w=1000&auto=format&fit=crop" alt="ทีมที่ปรึกษาประกันของคุ้มครองดีกำลังประชุมร่วมกันในออฟฟิศ" loading="lazy" width="1000" height="667">
+      </div>
+      <div class="band-body">
+        <h2 id="bandTitle">คุยกับคนจริง ไม่ใช่บอท</h2>
+        <p>ที่ปรึกษาทุกคนของเราผ่านการอบรมและมีใบอนุญาต คปภ. โทรคุยได้ทุกวันจันทร์–เสาร์ 8:30–18:00 น. หรือฝากเบอร์ไว้ให้เราโทรกลับ</p>
+        <a class="btn btn-coral" href="#quote">เริ่มเช็คเบี้ยเลย</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section id="reviews" style="padding-top:0" aria-labelledby="revTitle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">เสียงจากลูกค้า</div>
+      <h2 id="revTitle">คนจริง เคลมจริง เล่าเอง</h2>
+    </div>
+    <div class="rev-grid">
+      <article class="rev-card reveal">
+        <div class="stars" aria-label="คะแนน 5 จาก 5">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9 2.9-6Z"/></svg>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9 2.9-6Z"/></svg>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9 2.9-6Z"/></svg>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9 2.9-6Z"/></svg>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9 2.9-6Z"/></svg>
+        </div>
+        <blockquote>รถชนตอนตีสอง โทรหาทีมเคลมแล้วมีคนรับสายจริงๆ ช่วยเรียกรถยก คุยกับกรมธรรม์ให้หมด เงินค่าซ่อมเข้าใน 4 วัน ไม่เคยรู้สึกมาก่อนว่าประกันจะช่วยได้ขนาดนี้</blockquote>
+        <div class="rev-who">
+          <span class="avatar" aria-hidden="true">ว</span>
+          <div><b>คุณวรินทร์ สุขใส</b><span>เจ้าของร้านกาแฟ เชียงใหม่ — ลูกค้าประกันรถยนต์ 3 ปี</span></div>
+        </div>
+      </article>
+      <article class="rev-card reveal">
+        <div class="stars" aria-label="คะแนน 5 จาก 5">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9 2.9-6Z"/></svg>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9 2.9-6Z"/></svg>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9 2.9-6Z"/></svg>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9 2.9-6Z"/></svg>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9 2.9-6Z"/></svg>
+        </div>
+        <blockquote>เคยซื้อประกันสุขภาพเองแล้วงงเงื่อนไข ที่นี่ที่ปรึกษาอ่านข้อยกเว้นให้ฟังทีละข้อ เทียบ 4 แผนบนกระดาษแผ่นเดียว สุดท้ายได้แผนที่ถูกกว่าเดิมแต่คุ้มกว่าเยอะ</blockquote>
+        <div class="rev-who">
+          <span class="avatar alt" aria-hidden="true">ภ</span>
+          <div><b>คุณภัทรพงษ์ มีชัย</b><span>พนักงานบริษัท กรุงเทพฯ — ลูกค้าประกันสุขภาพ 2 ปี</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" style="padding-top:0" aria-labelledby="faqTitle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">คำถามที่พบบ่อย</div>
+      <h2 id="faqTitle">สงสัยอะไร ถามได้เลย</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details>
+        <summary>ใช้บริการโบรกเกอร์ต้องจ่ายเพิ่มไหม?
+          <span class="fx" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <p>ไม่ต้องจ่ายเพิ่มครับ เบี้ยที่คุณจ่ายเท่ากับการซื้อตรงจากบริษัทประกันทุกประการ เราได้รับค่าคอมมิชชันจากบริษัทประกันโดยตรง คุณจึงได้ทั้งราคาเท่าเดิมและทีมงานช่วยดูแลฟรี</p>
+      </details>
+      <details>
+        <summary>เบี้ยที่เช็คจากเว็บตรงกับของจริงแค่ไหน?
+          <span class="fx" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <p>ตัวเลขในหน้านี้เป็นเบี้ยประมาณการจากช่วงราคาจริงในตลาด โดยทั่วไปคลาดเคลื่อนไม่เกิน 10–15% เบี้ยจริงขึ้นกับรายละเอียดเพิ่มเติม เช่น รุ่นรถ ประวัติสุขภาพ หรือที่ตั้งบ้าน ซึ่งที่ปรึกษาจะสรุปให้ครบก่อนตัดสินใจเสมอ</p>
+      </details>
+      <details>
+        <summary>ถ้าเกิดเหตุต้องเคลมเอง หรือทีมงานช่วยได้?
+          <span class="fx" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <p>ทีมเคลมของเราช่วยได้เต็มที่ครับ โทรสายด่วน 02-105-6789 ได้ 24 ชม. เราช่วยเตรียมเอกสาร ยื่นเรื่อง และติดตามสถานะกับบริษัทประกันจนเงินเข้าบัญชี ลูกค้าส่วนใหญ่แทบไม่ต้องจัดการเองเลย</p>
+      </details>
+      <details>
+        <summary>ต้องเตรียมเอกสารอะไรบ้างตอนซื้อประกัน?
+          <span class="fx" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <p>พื้นฐานแค่บัตรประชาชนใบเดียว ส่วนเอกสารเฉพาะประเภท เช่น สำเนาทะเบียนรถหรือโฉนดบ้าน ที่ปรึกษาจะแจ้งล่วงหน้าเป็นขั้นตอน และช่วยตรวจความครบถ้วนให้ก่อนยื่นทุกครั้ง</p>
+      </details>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact">
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-brand">
+        <svg width="30" height="30" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+          <path d="M17 2.5 29 7v8.5c0 7.4-5 13.4-12 16-7-2.6-12-8.6-12-16V7l12-4.5Z" fill="#ff8b7b"/>
+          <path d="m11.5 17 3.8 3.8 7.4-7.6" stroke="#12325c" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        คุ้มครองดี
+      </div>
+      <p>โบรกเกอร์ประกันภัยที่เชื่อว่าเรื่องยากอธิบายให้เข้าใจง่ายได้เสมอ ดูแลลูกค้ากว่า 40,000 กรมธรรม์ทั่วประเทศมาแล้ว 9 ปี</p>
+    </div>
+    <div>
+      <h3>ติดต่อเรา</h3>
+      <ul class="foot-contact">
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff8b7b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.6-7-11a7 7 0 1 1 14 0c0 5.4-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <span>อาคารอโศกทาวเวอร์ ชั้น 12<br>ถนนสุขุมวิท 21 (อโศก) เขตวัฒนา<br>กรุงเทพมหานคร 10110</span>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff8b7b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16.5v3a2 2 0 0 1-2.2 2A19 19 0 0 1 2.5 5.2 2 2 0 0 1 4.5 3h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.6 10.8a16 16 0 0 0 4.6 4.6l1.2-1.15a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 21 16.5Z"/></svg>
+          <a href="tel:021056789" class="num">02-105-6789</a>&nbsp;(24 ชม.)
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff8b7b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 7.5V12l3 2"/></svg>
+          <span>จันทร์–เสาร์ 8:30–18:00 น.</span>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3>เมนูลัด</h3>
+      <ul>
+        <li><a href="#quote">เช็คเบี้ยฟรี</a></li>
+        <li><a href="#why">ทำไมต้องคุ้มครองดี</a></li>
+        <li><a href="#reviews">รีวิวจากลูกค้า</a></li>
+        <li><a href="#faq">คำถามที่พบบ่อย</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <div class="wrap" style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:0 22px">
+      <span>นายหน้าประกันภัย ใบอนุญาต คปภ. เลขที่ ข1234/2567</span>
+      <span>© 2569 คุ้มครองดี จำกัด สงวนลิขสิทธิ์</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Mobile menu ---------- */
+  var menuBtn = document.getElementById('menuBtn');
+  var navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.addEventListener('click', function(e){
+    if (e.target.closest('a')){
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');
+    }
+  });
+
+  /* ---------- Reveal on scroll ---------- */
+  if (RM || !('IntersectionObserver' in window)){
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- Quote wizard ---------- */
+  var CIRC = 188.5;
+  var state = { type:null, age:35, cov:1000000, step:1, premium:0 };
+
+  var ringFg   = document.getElementById('ringFg');
+  var ringText = document.getElementById('ringText');
+  var stepTitle= document.getElementById('stepTitle');
+  var stepSub  = document.getElementById('stepSub');
+  var panels   = [null, document.getElementById('panel1'), document.getElementById('panel2'), document.getElementById('panel3')];
+
+  var typeLabels = { car:'ประกันรถยนต์', health:'ประกันสุขภาพ', home:'ประกันบ้าน' };
+  var bases      = { car:13500, health:24000, home:2900 };
+  var covFactor  = { '500000':0.62, '1000000':1, '3000000':2.55 };
+
+  function ageFactor(type, age){
+    if (type === 'car'){
+      if (age < 25) return 1.25;
+      if (age < 35) return 1.10;
+      if (age <= 55) return 1.00;
+      return 1.08;
+    }
+    if (type === 'health'){ return 1 + (age - 35) * 0.022; }
+    return 1 + (age - 35) * 0.002;
+  }
+  function fmt(n){
+    return '฿' + (Math.round(n / 100) * 100).toLocaleString('en-US');
+  }
+  function setProgress(p){
+    ringFg.style.strokeDashoffset = String(CIRC * (1 - p / 100));
+    ringText.textContent = p + '%';
+  }
+  function showStep(n){
+    state.step = n;
+    for (var i = 1; i <= 3; i++){ panels[i].hidden = (i !== n); }
+    setProgress(n === 1 ? 33 : n === 2 ? 66 : 100);
+    var meta = {
+      1:['ขั้นที่ 1 จาก 3','เลือกประเภทประกันที่สนใจ'],
+      2:['ขั้นที่ 2 จาก 3','รายละเอียดเบื้องต้น'],
+      3:['ขั้นที่ 3 จาก 3','เบี้ยประมาณการของคุณ']
+    }[n];
+    stepTitle.textContent = meta[0];
+    stepSub.textContent   = meta[1];
+  }
+
+  /* step 1 */
+  var toStep2 = document.getElementById('toStep2');
+  document.querySelectorAll('input[name="ptype"]').forEach(function(r){
+    r.addEventListener('change', function(){
+      state.type = r.value;
+      toStep2.disabled = false;
+    });
+  });
+  toStep2.addEventListener('click', function(){ if (state.type) showStep(2); });
+
+  /* step 2 */
+  var ageRange = document.getElementById('ageRange');
+  var ageOut   = document.getElementById('ageOut');
+  function syncAge(){
+    state.age = parseInt(ageRange.value, 10);
+    ageOut.textContent = state.age + ' ปี';
+    var pct = ((state.age - 20) / 50 * 100).toFixed(1) + '%';
+    ageRange.style.setProperty('--fill', pct);
+  }
+  ageRange.addEventListener('input', syncAge);
+  syncAge();
+
+  document.querySelectorAll('input[name="cov"]').forEach(function(r){
+    r.addEventListener('change', function(){ state.cov = parseInt(r.value, 10); });
+  });
+  document.getElementById('backTo1').addEventListener('click', function(){ showStep(1); });
+
+  /* step 3 — result */
+  var premNum  = document.getElementById('premNum');
+  var premMeta = document.getElementById('premMeta');
+  var pBasic = document.getElementById('pBasic');
+  var pPlus  = document.getElementById('pPlus');
+  var pMax   = document.getElementById('pMax');
+
+  function countUp(el, target){
+    if (RM){ el.textContent = fmt(target); return; }
+    var start = null, dur = 650;
+    function tick(ts){
+      if (!start) start = ts;
+      var t = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = fmt(target * eased);
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  document.getElementById('toStep3').addEventListener('click', function(){
+    var prem = bases[state.type] * ageFactor(state.type, state.age) * covFactor[String(state.cov)];
+    state.premium = prem;
+    premMeta.textContent = typeLabels[state.type] + ' · อายุ ' + state.age + ' ปี · ทุนคุ้มครอง ' +
+      '฿' + state.cov.toLocaleString('en-US');
+    pBasic.textContent = fmt(prem * 0.82);
+    pPlus.textContent  = fmt(prem);
+    pMax.textContent   = fmt(prem * 1.38);
+    showStep(3);
+    countUp(premNum, prem);
+    document.getElementById('cbBox').hidden = false;
+    document.getElementById('reCalcWrap').style.display = '';
+    document.getElementById('successBox').hidden = true;
+    document.getElementById('cbForm').reset();
+    document.getElementById('cbErr').classList.remove('show');
+  });
+
+  /* callback form */
+  var cbForm = document.getElementById('cbForm');
+  var phoneInput = document.getElementById('phoneInput');
+  var cbErr  = document.getElementById('cbErr');
+  cbForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var v = phoneInput.value.replace(/[\s-]/g, '');
+    if (!/^0\d{8,9}$/.test(v)){
+      cbErr.classList.add('show');
+      phoneInput.focus();
+      return;
+    }
+    cbErr.classList.remove('show');
+    document.getElementById('cbBox').hidden = true;
+    document.getElementById('reCalcWrap').style.display = 'none';
+    document.getElementById('okPhone').textContent = v;
+    document.getElementById('successBox').hidden = false;
+  });
+
+  /* restart */
+  document.getElementById('startOver').addEventListener('click', function(){
+    showStep(1);
+    document.getElementById('wizard').scrollIntoView(RM ? {} : {behavior:'smooth', block:'start'});
+  });
+  document.getElementById('reCalc').addEventListener('click', function(){ showStep(2); });
+
+  showStep(1);
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+</body>
+</html>
