@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>นอนดี NONDEE — แคปซูลโฮสเทล อารีย์ | เริ่มต้น ฿390/คืน</title>
+<meta name="description" content="นอนดี NONDEE แคปซูลโฮสเทลใจกลางอารีย์ เดิน 4 นาทีจาก BTS อารีย์ เตียงแคปซูลสะอาด ปลอดภัย เริ่มต้น ฿390 ต่อคืน เช็คราคารายวันและจองเตียงได้ทันที">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=KoHo:wght@300;400;500;600&family=Sarabun:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f4f2; --card:#fff; --wood:#a4713b; --orange:#ff6b35; --orange-dark:#e04e1a;
+  --ink:#24211c; --muted:#736b60; --line:#e4e0da;
+  --radius:16px; --shadow:0 1px 2px rgba(36,33,28,.05),0 10px 30px rgba(36,33,28,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Sarabun',sans-serif;font-size:16px;line-height:1.65;
+  background:var(--bg);color:var(--ink);
+}
+h1,h2,h3,.koho{font-family:'KoHo',sans-serif;line-height:1.25}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px;border-radius:4px}
+.container{max-width:1120px;margin:0 auto;padding:0 20px}
+section{scroll-margin-top:84px}
+.eyebrow{
+  font-family:'KoHo',sans-serif;font-weight:500;font-size:14px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--wood);margin-bottom:10px;
+}
+.h2{font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:600;margin-bottom:10px}
+.sub{color:var(--muted);max-width:56ch}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:0 24px;border-radius:12px;border:1px solid transparent;
+  font-family:'KoHo',sans-serif;font-weight:500;font-size:16px;
+  transition:background .18s ease,transform .18s ease,border-color .18s ease,color .18s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn-orange{background:var(--orange);color:#fff}
+.btn-orange:hover{background:var(--orange-dark)}
+.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.12)}
+.btn-line{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn-line:hover{border-color:var(--wood);color:var(--wood)}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(245,244,242,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+.logo{font-family:'KoHo',sans-serif;font-weight:600;font-size:26px;letter-spacing:.01em;display:flex;align-items:baseline;gap:8px}
+.logo .en{font-size:12px;font-weight:500;letter-spacing:.28em;color:var(--wood)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{
+  display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:10px;
+  font-size:15px;color:var(--muted);transition:color .15s ease,background .15s ease;
+}
+.nav-links a:hover{color:var(--ink);background:#edeae5}
+.nav .btn{min-height:44px;padding:0 20px;font-size:15px}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;color:#fff;min-height:min(82vh,720px);display:flex;align-items:flex-end}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#3a342c}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(36,33,28,.18) 0%,rgba(36,33,28,.38) 45%,rgba(36,33,28,.82) 100%);
+}
+.hero-in{position:relative;z-index:2;width:100%;padding:120px 0 56px}
+.hero .tag{
+  display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;
+  font-family:'KoHo',sans-serif;font-weight:500;font-size:14px;letter-spacing:.12em;
+  padding:8px 14px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(36,33,28,.35);
+}
+.hero h1{font-size:clamp(2rem,5.2vw,3.5rem);font-weight:600;max-width:14ch;text-wrap:balance}
+.hero p.lead{margin-top:14px;max-width:52ch;color:rgba(255,255,255,.88);font-size:17px}
+.hero-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:26px}
+.price-chip{
+  display:inline-flex;align-items:baseline;gap:8px;background:#fff;color:var(--ink);
+  border-radius:14px;padding:12px 18px;box-shadow:var(--shadow);
+}
+.price-chip .k{font-size:14px;color:var(--muted)}
+.price-chip .v{font-family:'KoHo',sans-serif;font-weight:600;font-size:26px;color:var(--orange-dark)}
+.hero-stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.hero-stats span{
+  display:inline-flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.9);
+  background:rgba(36,33,28,.42);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:8px 14px;
+}
+.hero-stats svg{width:16px;height:16px;flex:none}
+
+/* ---------- Sections ---------- */
+.section{padding:72px 0}
+.section + .section{border-top:1px solid var(--line)}
+.sec-head{margin-bottom:34px}
+
+/* ---------- Calendar ---------- */
+.cal-card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:26px}
+.cal-top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 16px;margin-bottom:6px}
+.cal-range{font-family:'KoHo',sans-serif;font-weight:500;font-size:18px;color:var(--wood)}
+.hint{color:var(--muted);font-size:15px;margin-bottom:18px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.wd{
+  text-align:center;font-family:'KoHo',sans-serif;font-weight:500;font-size:13px;color:var(--muted);
+  padding:6px 0 8px;
+}
+.blank{min-height:44px}
+.day{
+  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  min-height:64px;border:1px solid rgba(36,33,28,.06);border-radius:12px;background:#eee;
+  color:var(--ink);padding:6px 2px;
+  transition:transform .12s ease,box-shadow .12s ease,background .15s ease;
+}
+.day:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(36,33,28,.14)}
+.day .d{font-family:'KoHo',sans-serif;font-weight:600;font-size:15px;line-height:1.15}
+.day .p{font-size:12px;line-height:1.2;font-weight:400}
+.day.we .d{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px}
+.day.hol::before{
+  content:"";position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;
+  background:var(--wood);
+}
+.day.today{box-shadow:inset 0 0 0 2px var(--ink)}
+.day.sel-start,.day.sel-end{box-shadow:inset 0 0 0 2px rgba(36,33,28,.35)}
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:20px;font-size:14px;color:var(--muted)}
+.legend .bar{width:160px;height:12px;border-radius:6px;background:linear-gradient(90deg,hsl(100,58%,90%),hsl(57,75%,74%),hsl(14,92%,57%))}
+.legend .keys{display:flex;gap:6px;align-items:baseline}
+.legend .dot{width:7px;height:7px;border-radius:50%;background:var(--wood);display:inline-block;margin-right:6px;vertical-align:1px}
+.legend .u{text-decoration:underline;text-underline-offset:3px}
+
+.summary{
+  margin-top:22px;border:1px solid #ffd9c4;background:#fff7f2;border-radius:16px;
+  padding:18px 20px;display:none;
+}
+.summary.show{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
+.summary .lines{display:flex;flex-direction:column;gap:2px}
+.summary .dates{font-family:'KoHo',sans-serif;font-weight:500;font-size:17px}
+.summary .math{color:var(--muted);font-size:15px}
+.summary .total{font-family:'KoHo',sans-serif;font-weight:600;font-size:22px;color:var(--orange-dark)}
+.success{display:flex;gap:16px;align-items:flex-start;width:100%}
+.success .ic{
+  flex:none;width:46px;height:46px;border-radius:50%;background:#e6f4ea;color:#1d7a3d;
+  display:flex;align-items:center;justify-content:center;
+}
+.success .ic svg{width:24px;height:24px}
+.success h3{font-size:19px;font-weight:600;margin-bottom:2px}
+.success p{color:var(--muted);font-size:15px}
+.success .code{
+  display:inline-block;margin-top:6px;font-family:'KoHo',sans-serif;font-weight:600;letter-spacing:.08em;
+  background:#fff;border:1px dashed var(--wood);color:var(--wood);border-radius:8px;padding:4px 12px;
+}
+.success .btn{margin-left:auto;align-self:center}
+
+/* ---------- Beds ---------- */
+.beds{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.bed-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.bed-card .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#e9e5df}
+.bed-card .ph img{width:100%;height:100%;object-fit:cover}
+.bed-card .badge{
+  position:absolute;top:12px;left:12px;background:rgba(36,33,28,.78);color:#fff;
+  font-family:'KoHo',sans-serif;font-size:13px;font-weight:500;border-radius:999px;padding:6px 12px;
+}
+.bed-body{padding:20px;display:flex;flex-direction:column;gap:12px;flex:1}
+.bed-body h3{font-size:20px;font-weight:600}
+.bed-price{display:flex;align-items:baseline;gap:6px}
+.bed-price .v{font-family:'KoHo',sans-serif;font-weight:600;font-size:28px;color:var(--orange-dark)}
+.bed-price .k{color:var(--muted);font-size:14px}
+.bed-feats{display:flex;flex-direction:column;gap:7px;color:var(--muted);font-size:15px}
+.bed-feats li{display:flex;gap:9px;align-items:flex-start}
+.bed-feats svg{width:17px;height:17px;flex:none;color:var(--wood);margin-top:3px}
+.bed-card .btn{margin-top:auto}
+
+/* ---------- Amenities ---------- */
+.amen{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px}
+.amen .it{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;
+  display:flex;align-items:center;gap:12px;font-size:15px;
+}
+.amen .it svg{width:24px;height:24px;flex:none;color:var(--wood)}
+.amen .it b{font-family:'KoHo',sans-serif;font-weight:500;display:block;font-size:15px}
+.amen .it small{color:var(--muted);font-size:13px}
+
+/* ---------- Location ---------- */
+.loc{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:start}
+.loc-list{display:flex;flex-direction:column;gap:4px}
+.loc-list li{display:flex;gap:14px;align-items:flex-start;padding:13px 4px;border-bottom:1px solid var(--line)}
+.loc-list li:last-child{border-bottom:none}
+.loc-list svg{width:20px;height:20px;flex:none;color:var(--wood);margin-top:3px}
+.loc-list .t{font-family:'KoHo',sans-serif;font-weight:500;font-size:16px}
+.loc-list .m{color:var(--muted);font-size:14.5px}
+.loc-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+.loc-card h3{font-size:18px;font-weight:600;margin-bottom:14px}
+.loc-rows{display:flex;flex-direction:column;gap:12px;font-size:15px}
+.loc-rows .r{display:flex;justify-content:space-between;gap:14px;border-bottom:1px dashed var(--line);padding-bottom:10px}
+.loc-rows .r:last-child{border-bottom:none;padding-bottom:0}
+.loc-rows .k{color:var(--muted)}
+.loc-rows .v{font-weight:400;text-align:right}
+.loc-card .btn{width:100%;margin-top:18px}
+
+/* ---------- Reviews ---------- */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rev{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+.stars{display:flex;gap:3px;color:var(--orange)}
+.stars svg{width:17px;height:17px}
+.stars svg.off{color:var(--line)}
+.rev p{font-size:15.5px}
+.rev .who{margin-top:auto;font-size:14px;color:var(--muted)}
+.rev .who b{font-family:'KoHo',sans-serif;font-weight:500;color:var(--ink);display:block;font-size:15px}
+.rev-score{display:flex;align-items:baseline;gap:10px;margin-bottom:26px}
+.rev-score .n{font-family:'KoHo',sans-serif;font-weight:600;font-size:40px}
+.rev-score .d{color:var(--muted);font-size:15px}
+
+/* ---------- Footer ---------- */
+footer{background:var(--ink);color:#cfc9c0;margin-top:0}
+.foot-in{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:30px;padding:56px 0 34px}
+.foot-in h4{font-family:'KoHo',sans-serif;font-weight:500;color:#fff;font-size:16px;margin-bottom:14px}
+.foot-in p,.foot-in li{font-size:14.5px;line-height:1.8}
+.foot-logo{font-family:'KoHo',sans-serif;font-weight:600;font-size:28px;color:#fff}
+.foot-logo .en{font-size:12px;letter-spacing:.28em;color:var(--orange);margin-left:8px}
+.foot-in address{font-style:normal}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.12);padding:18px 0 26px;font-size:13.5px;color:#9a938a;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+  .beds,.revs{grid-template-columns:1fr 1fr}
+  .amen{grid-template-columns:1fr 1fr}
+  .loc{grid-template-columns:1fr}
+  .foot-in{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .nav-links{display:none}
+  .section{padding:52px 0}
+  .beds,.revs{grid-template-columns:1fr}
+  .cal-card{padding:18px 14px;border-radius:16px}
+  .day{min-height:52px;border-radius:9px}
+  .day .d{font-size:14px}
+  .day .p{font-size:11px}
+  .summary.show{flex-direction:column;align-items:stretch}
+  .success .btn{margin-left:0}
+  .hero-in{padding:96px 0 44px}
+}
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="container nav-in">
+    <a href="#top" class="logo">นอนดี<span class="en">NONDEE</span></a>
+    <nav class="nav-links" aria-label="เมนูหลัก">
+      <a href="#calendar">ปฏิทินราคา</a>
+      <a href="#beds">ประเภทเตียง</a>
+      <a href="#location">ทำเลที่ตั้ง</a>
+      <a href="#reviews">รีวิวผู้เข้าพัก</a>
+    </nav>
+    <a href="#calendar" class="btn btn-orange">จองเตียง</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <img class="bg" src="../assets/hostel-hero.jpg" alt="ทางเดินแคปซูลที่นอนไม้โทนอบอุ่นภายในโฮสเทลนอนดี ย่านอารีย์" fetchpriority="high">
+  <div class="container hero-in">
+    <span class="tag">แคปซูลโฮสเทล · อารีย์ กรุงเทพฯ</span>
+    <h1>นอนสบาย จ่ายน้อย ใจกลางเมือง</h1>
+    <p class="lead">แคปซูลส่วนตัวสะอาด ปลอดภัย เงียบสงบ เดิน 4 นาทีจาก BTS อารีย์ เหมาะทั้งนักเดินทาง คนทำงาน และสายคาเฟ่ที่อยากพักใกล้ของกินดี</p>
+    <div class="hero-row">
+      <span class="price-chip"><span class="k">เริ่มต้น</span><span class="v">฿390</span><span class="k">/ คืน</span></span>
+      <a href="#calendar" class="btn btn-orange">ดูปฏิทินราคา
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#beds" class="btn btn-ghost">ดูประเภทเตียง</a>
+    </div>
+    <div class="hero-stats">
+      <span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>4.8/5 จาก 1,200+ รีวิว</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-7.8 7-13a7 7 0 1 0-14 0c0 5.2 7 13 7 13z"/><circle cx="12" cy="9" r="2.6"/></svg>300 ม. จาก BTS อารีย์</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>แผนกต้อนรับ 24 ชม.</span>
+    </div>
+  </div>
+</section>
+
+<main>
+<!-- ================= PRICE HEATMAP CALENDAR ================= -->
+<section class="section" id="calendar">
+  <div class="container">
+    <div class="sec-head">
+      <p class="eyebrow">ราคาตามวันจริง</p>
+      <h2 class="h2">ปฏิทินราคาเตียง 30 วันข้างหน้า</h2>
+      <p class="sub">ราคาเตียงแคปซูลรวมต่อคืน อัปเดตตามวันเสาร์–อาทิตย์และวันหยุดนักขัตฤก์ แตะเลือกวันเช็คอินและเช็คเอาต์เพื่อดูราคารวมทันที</p>
+    </div>
+
+    <div class="cal-card">
+      <div class="cal-top">
+        <span class="cal-range" id="calRange"></span>
+        <span class="hint" style="margin:0">ราคาแสดงเป็นบาท/คืน สำหรับเตียงแคปซูลรวม 1 ท่าน</span>
+      </div>
+      <p class="hint" id="calHint" aria-live="polite">แตะวันเช็คอิน แล้วแตะวันเช็คเอาต์</p>
+      <noscript><p class="hint">กรุณาเปิดใช้งาน JavaScript เพื่อดูปฏิทินราคาและจองเตียง</p></noscript>
+      <div class="cal-grid" id="calGrid" role="group" aria-label="ปฏิทินเลือกวันเข้าพัก 30 วัน"></div>
+
+      <div class="legend" aria-hidden="true">
+        <span class="bar"></span>
+        <span class="keys"><span>฿390</span><span>–</span><span>฿690</span></span>
+        <span>สีเขียวอ่อน = วันธรรมดา · ส้มแดง = แพงสุด</span>
+        <span><span class="u">เส้นใต้</span> = เสาร์–อาทิตย์</span>
+        <span><span class="dot"></span>วันหยุดนักขัตฤก์</span>
+      </div>
+
+      <div class="summary" id="summary" role="status"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BED TYPES ================= -->
+<section class="section" id="beds">
+  <div class="container">
+    <div class="sec-head">
+      <p class="eyebrow">เลือกสไตล์การนอนของคุณ</p>
+      <h2 class="h2">ประเภทที่พักและราคา</h2>
+      <p class="sub">ทุกเตียงมีม่านกั้นส่วนตัว ไฟอ่านหนังสือ ปลั๊กและพอร์ต USB ผ้าปูเปลี่ยนใหม่ทุกเช็คอิน รวมผ้าเช็ดตัวและ Wi-Fi ความเร็วสูง</p>
+    </div>
+
+    <div class="beds">
+      <article class="bed-card">
+        <div class="ph">
+          <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=1000&auto=format&fit=crop" alt="เตียงแคปซูลรวมสองชั้นโครงไม้ พร้อมม่านกั้นส่วนตัวทุกเตียง" loading="lazy">
+        </div>
+        <div class="bed-body">
+          <h3>แคปซูลรวม (Mixed Dorm)</h3>
+          <div class="bed-price"><span class="v">฿390</span><span class="k">/ คืน · 1 ท่าน</span></div>
+          <ul class="bed-feats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>หอพักรวม 12 แคปซูล เพดานสูง ไม่อึดอัด</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>ม่านกั้น ไฟอ่านหนังสือ ปลั๊ก + USB ทุกเตียง</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>ล็อกเกอร์ส่วนตัวใส่กระเป๋าเดินทางใบใหญ่ได้</li>
+          </ul>
+          <a href="#calendar" class="btn btn-line">เลือกวันที่เข้าพัก</a>
+        </div>
+      </article>
+
+      <article class="bed-card">
+        <div class="ph">
+          <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1000&auto=format&fit=crop" alt="ห้องแคปซูลโซนหญิงล้วน โทนสว่างสะอาดตา เตียงจัดเรียงเป็นระเบียบ" loading="lazy">
+          <span class="badge">ยอดนิยม</span>
+        </div>
+        <div class="bed-body">
+          <h3>แคปซูลหญิงล้วน (Female Dorm)</h3>
+          <div class="bed-price"><span class="v">฿450</span><span class="k">/ คืน · 1 ท่าน</span></div>
+          <ul class="bed-feats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>โซนหญิงล้วน 8 แคปซูล เข้า–ออกด้วยคีย์การ์ดเฉพาะชั้น</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>มุมแต่งตัว กระจกบานใหญ่ และที่วางเครื่องสำอาง</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>ห้องน้ำรวมเฉพาะโซน พร้อมไดร์เป่าผม</li>
+          </ul>
+          <a href="#calendar" class="btn btn-line">เลือกวันที่เข้าพัก</a>
+        </div>
+      </article>
+
+      <article class="bed-card">
+        <div class="ph">
+          <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=1000&auto=format&fit=crop" alt="ห้องส่วนตัวเตียงควีนไซส์ ผ้าปูที่นอนสีขาว โคมไฟโทนอบอุ่น" loading="lazy">
+        </div>
+        <div class="bed-body">
+          <h3>ห้องส่วนตัว 2 ท่าน (Private Room)</h3>
+          <div class="bed-price"><span class="v">฿890</span><span class="k">/ คืน · 2 ท่าน</span></div>
+          <ul class="bed-feats">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>เตียงควีนไซส์ ห้องล็อกกุญแจส่วนตัว เงียบสงบ</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>โต๊ะทำงานเล็ก ตู้เสื้อผ้า และช่องเก็บกระเป๋า</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>ห้องน้ำรวมแยกชั้น สะอาด ทำความสะอาดวันละ 2 รอบ</li>
+          </ul>
+          <a href="#calendar" class="btn btn-line">เลือกวันที่เข้าพัก</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="amen">
+      <div class="it">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 9.5C8.5 4.7 15.5 4.7 21 9.5"/><path d="M6 13c3.3-2.8 8.7-2.8 12 0"/><path d="M9 16.4c1.7-1.4 4.3-1.4 6 0"/><circle cx="12" cy="19.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+        <span><b>Wi-Fi 1 Gbps</b><small>ทุกชั้น ทุกเตียง</small></span>
+      </div>
+      <div class="it">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18"/><path d="M4.5 7.5l15 9"/><path d="M19.5 7.5l-15 9"/></svg>
+        <span><b>แอร์เย็นทั้งอาคาร</b><small>เปิด 24 ชั่วโมง</small></span>
+      </div>
+      <div class="it">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h16v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-6z"/><path d="M2 12h2M20 12h2"/><path d="M9 10V8h6v2"/></svg>
+        <span><b>ครัวส่วนกลาง</b><small>ตู้เย็น ไมโครเวฟ กาแฟฟรีเช้า</small></span>
+      </div>
+      <div class="it">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="13" r="4.5"/><path d="M7.5 6h.01M10.5 6h.01"/></svg>
+        <span><b>เครื่องซักผ้าหยอดเหรียญ</b><small>ซัก–อบ ชั้น 1</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOCATION ================= -->
+<section class="section" id="location">
+  <div class="container">
+    <div class="sec-head">
+      <p class="eyebrow">ทำเลที่ตั้ง</p>
+      <h2 class="h2">ใจกลางอารีย์ เดินทางง่าย ของกินเพียบ</h2>
+      <p class="sub">โฮสเทลตั้งอยู่ในซอยอารีย์ 2 ย่านคาเฟ่และสตรีทฟู้ดชื่อดัง เดินไม่กี่นาทีถึง BTS เข้าเมืองหรือไปสนามบินก็สะดวก</p>
+    </div>
+
+    <div class="loc">
+      <ul class="loc-list">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-7.8 7-13a7 7 0 1 0-14 0c0 5.2 7 13 7 13z"/><circle cx="12" cy="9" r="2.6"/></svg>
+          <span><span class="t">BTS อารีย์ — 300 ม. (เดิน 4 นาที)</span><br><span class="m">นั่ง 2 สถานีถึงสยาม ต่อรถไฟฟ้าไปสนามบินได้ที่พญาไท</span></span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8z"/><path d="M17 10h2a2.5 2.5 0 0 1 0 5h-2"/><path d="M8 3.5c0 1-1 1.4-1 2.5M12 3.5c0 1-1 1.4-1 2.5"/></svg>
+          <span><span class="t">ร้านกาแฟสเปเชียลตี้ 5 ร้าน ในรัศมีเดิน 5 นาที</span><br><span class="m">ย่านอารีย์ขึ้นชื่อเรื่องคาเฟ่ บรันช์ และเบเกอรีเปิดเช้า</span></span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 21V8l8-5 8 5v13"/><path d="M4 21h16"/><path d="M10 21v-6h4v6"/></svg>
+          <span><span class="t">ซอยอารีย์ 1 — 200 ม.</span><br><span class="m">แหล่งสตรีทฟู้ดและร้านก๋วยเตี๋ยวเจ้าดัง เปิดถึงสามทุ่ม</span></span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+          <span><span class="t">สะดวกซื้อ 24 ชม. — 50 ม. · รพ.พญาไท 2 — 1 สถานี</span><br><span class="m">ของจำเป็นอยู่ใกล้แค่ปากซอย อุ่นใจทั้งกลางวันและกลางคืน</span></span>
+        </li>
+      </ul>
+
+      <aside class="loc-card">
+        <h3>ข้อมูลเข้าพัก</h3>
+        <div class="loc-rows">
+          <div class="r"><span class="k">ที่อยู่</span><span class="v">12/3 ซอยอารีย์ 2 ถนนพหลโยธิน แขวงสามเสนใน เขตพญาไท กรุงเทพฯ</span></div>
+          <div class="r"><span class="k">เช็คอิน</span><span class="v">14:00 น. (รับฝากกระเป๋าก่อนได้ฟรี)</span></div>
+          <div class="r"><span class="k">เช็คเอาต์</span><span class="v">11:00 น.</span></div>
+          <div class="r"><span class="k">แผนกต้อนรับ</span><span class="v">เปิด 24 ชั่วโมง</span></div>
+          <div class="r"><span class="k">โทรศัพท์</span><span class="v">02-012-3456</span></div>
+          <div class="r"><span class="k">LINE</span><span class="v">@nondee</span></div>
+        </div>
+        <a href="#calendar" class="btn btn-orange">จองเตียงตอนนี้</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section class="section" id="reviews">
+  <div class="container">
+    <div class="sec-head">
+      <p class="eyebrow">เสียงจากผู้เข้าพัก</p>
+      <h2 class="h2">รีวิวจริงจากแขกของนอนดี</h2>
+      <div class="rev-score" style="margin-top:12px">
+        <span class="n">4.8</span>
+        <span class="d">คะแนนเฉลี่ยจาก 1,200+ รีวิวบนแพลตฟอร์มจองชั้นนำ</span>
+      </div>
+    </div>
+
+    <div class="revs">
+      <article class="rev">
+        <div class="stars" aria-label="คะแนน 5 จาก 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+        </div>
+        <p>“แคปซูลกว้างกว่าที่คิด ม่านกั้นทึบแสงมาก นอนหลับสบายทั้งที่อยู่หอรวม ที่ชอบสุดคือเดินไป BTS แป๊บเดียว ตอนเช้าแวะร้านกาแฟแถวบ้านได้ก่อนเข้าเมือง”</p>
+        <div class="who"><b>คุณมินท์</b>กรุงเทพมหานคร · พัก 3 คืน แคปซูลหญิงล้วน</div>
+      </article>
+
+      <article class="rev">
+        <div class="stars" aria-label="คะแนน 5 จาก 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+        </div>
+        <p>“Super clean capsules and the staff were incredibly helpful. Great location in Ari — quiet street but close to everything. Best value hostel I found in Bangkok this trip.”</p>
+        <div class="who"><b>Daniel K.</b>เยอรมนี · พัก 5 คืน แคปซูลรวม</div>
+      </article>
+
+      <article class="rev">
+        <div class="stars" aria-label="คะแนน 4 จาก 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+          <svg class="off" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.26 6.6.56-5 4.4 1.5 6.44L12 16.9 5.99 19.66l1.5-6.44-5-4.4 6.6-.56z"/></svg>
+        </div>
+        <p>“จองห้องส่วนตัวสองท่าน ราคานี้ในอารีย์ถือว่าคุ้มมาก ห้องสะอาด แอร์เย็น ห้องน้ำรวมแต่สะอาดและไม่ต้องรอคิว อยากให้มีที่แขวนผ้าเพิ่มนิดเดียว โดยรวมประทับใจครับ”</p>
+        <div class="who"><b>คุณเต้ย</b>เชียงใหม่ · พัก 2 คืน ห้องส่วนตัว</div>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container foot-in">
+    <div>
+      <p class="foot-logo">นอนดี<span class="en">NONDEE</span></p>
+      <p style="margin-top:12px;max-width:38ch">แคปซูลโฮสเทลสมาร์ทบัดเจตย่านอารีย์ นอนสบาย ปลอดภัย จ่ายน้อย ในราคาที่เข้าถึงได้ทุกวัน</p>
+    </div>
+    <div>
+      <h4>ติดต่อเรา</h4>
+      <address>
+        <p>12/3 ซอยอารีย์ 2 ถนนพหลโยธิน<br>แขวงสามเสนใน เขตพญาไท กรุงเทพฯ 10400</p>
+        <p>โทร 02-012-3456<br>LINE: @nondee<br>อีเมล stay@nondee.example.co.th</p>
+      </address>
+    </div>
+    <div>
+      <h4>เวลาทำการ</h4>
+      <ul>
+        <li>แผนกต้อนรับ: 24 ชั่วโมง</li>
+        <li>เช็คอิน: 14:00 น. เป็นต้นไป</li>
+        <li>เช็คเอาต์: ก่อน 11:00 น.</li>
+        <li>ครัวส่วนกลาง: 06:00–22:00 น.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div class="container" style="display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;padding:0">
+      <span>© <span id="yr">2569</span> นอนดี โฮสเทล สงวนลิขสิทธิ์</span>
+      <span>เว็บไซต์ตัวอย่างสำหรับการนำเสนอ</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var TH_MONTHS = ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
+  var TH_MONTHS_S = ["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+  var TH_DAYS = ["อา","จ","อ","พ","พฤ","ศ","ส"];
+  var TH_DAYS_FULL = ["อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสบดี","ศุกร์","เสาร์"];
+
+  var HOLIDAYS = {
+    "2026-01-01":"วันขึ้นปีใหม่","2026-03-03":"วันมาฆบูชา","2026-04-06":"วันจักรี",
+    "2026-04-13":"วันสงกรานต์","2026-04-14":"วันสงกรานต์","2026-04-15":"วันสงกรานต์",
+    "2026-05-01":"วันแรงงานแห่งชาติ","2026-05-05":"วันฉัตรมงคล","2026-05-31":"วันวิสาขบูชา",
+    "2026-06-03":"วันเฉลิมพระชนมพรรษาสมเด็จพระราชินี","2026-07-28":"วันเฉลิมพระชนมพรรษา ร.10",
+    "2026-07-29":"วันอาสาฬหบูชา","2026-08-12":"วันแม่แห่งชาติ","2026-10-13":"วันคล้ายวันสวรรคต ร.9",
+    "2026-10-23":"วันปิยมหาราช","2026-12-05":"วันพ่อแห่งชาติ","2026-12-10":"วันรัฐธรรมนูญ",
+    "2026-12-31":"วันสิ้นปี",
+    "2027-01-01":"วันขึ้นปีใหม่","2027-02-21":"วันมาฆบูชา","2027-04-06":"วันจักรี",
+    "2027-04-13":"วันสงกรานต์","2027-04-14":"วันสงกรานต์","2027-04-15":"วันสงกรานต์",
+    "2027-05-01":"วันแรงงานแห่งชาติ","2027-05-05":"วันฉัตรมงคล",
+    "2027-06-03":"วันเฉลิมพระชนมพรรษาสมเด็จพระราชินี","2027-07-28":"วันเฉลิมพระชนมพรรษา ร.10",
+    "2027-08-12":"วันแม่แห่งชาติ","2027-10-13":"วันคล้ายวันสวรรคต ร.9","2027-10-23":"วันปิยมหาราช",
+    "2027-12-05":"วันพ่อแห่งชาติ","2027-12-10":"วันรัฐธรรมนูญ","2027-12-31":"วันสิ้นปี"
+  };
+
+  var P_MIN = 390, P_MAX = 690;
+
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  function keyOf(d){ return d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate()); }
+  function fmtTH(d){ return d.getDate() + " " + TH_MONTHS_S[d.getMonth()] + " " + (d.getFullYear()+543); }
+  function baht(n){ return "฿" + n.toLocaleString("en-US"); }
+
+  function priceFor(d){
+    var p = P_MIN, dow = d.getDay();
+    if(dow === 0) p = 450;
+    if(dow === 5) p = 550;
+    if(dow === 6) p = 590;
+    if(HOLIDAYS[keyOf(d)]){
+      p = P_MAX;
+    } else {
+      var nx = new Date(d); nx.setDate(nx.getDate()+1);
+      if(HOLIDAYS[keyOf(nx)] && p < 590) p = 590;
+    }
+    return p;
+  }
+
+  function heat(p){
+    var t = (p - P_MIN) / (P_MAX - P_MIN);
+    var h = Math.round(100 + (14 - 100) * t);
+    var s = Math.round(58 + (92 - 58) * t);
+    var l = Math.round(90 + (57 - 90) * t);
+    return { css: "hsl(" + h + "," + s + "%," + l + "%)", t: t };
+  }
+
+  /* ---------- Build 30-day window ---------- */
+  var today = new Date(); today.setHours(0,0,0,0);
+  var days = [];
+  for(var i = 0; i < 30; i++){
+    var d = new Date(today); d.setDate(d.getDate()+i); days.push(d);
+  }
+
+  var first = days[0], last = days[days.length-1];
+  var rangeTxt = first.getDate() + " " + TH_MONTHS[first.getMonth()] + " – " + last.getDate() + " " + TH_MONTHS[last.getMonth()] + " " + (last.getFullYear()+543);
+  document.getElementById("calRange").textContent = rangeTxt;
+
+  var grid = document.getElementById("calGrid");
+  var frag = document.createDocumentFragment();
+
+  for(var w = 0; w < 7; w++){
+    var wd = document.createElement("div");
+    wd.className = "wd"; wd.textContent = TH_DAYS[w];
+    frag.appendChild(wd);
+  }
+  for(var b = 0; b < first.getDay(); b++){
+    var bl = document.createElement("div");
+    bl.className = "blank"; bl.setAttribute("aria-hidden","true");
+    frag.appendChild(bl);
+  }
+
+  var cells = [];
+  days.forEach(function(d, idx){
+    var p = priceFor(d);
+    var key = keyOf(d);
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "day";
+    if(d.getDay() === 0 || d.getDay() === 6) btn.classList.add("we");
+    if(HOLIDAYS[key]) btn.classList.add("hol");
+    if(idx === 0) btn.classList.add("today");
+    btn.setAttribute("data-i", idx);
+
+    var label = "วัน" + TH_DAYS_FULL[d.getDay()] + "ที่ " + fmtTH(d) + " ราคา " + p + " บาท";
+    if(HOLIDAYS[key]) label += " (" + HOLIDAYS[key] + ")";
+    if(idx === 0) label += " (วันนี้)";
+    btn.setAttribute("aria-label", label);
+    btn.title = label;
+    btn.setAttribute("aria-pressed","false");
+
+    var sd = document.createElement("span"); sd.className = "d"; sd.textContent = d.getDate();
+    var sp = document.createElement("span"); sp.className = "p"; sp.textContent = baht(p);
+    btn.appendChild(sd); btn.appendChild(sp);
+    frag.appendChild(btn);
+    cells.push({ el: btn, date: d, price: p });
+  });
+  grid.appendChild(frag);
+
+  /* ---------- Selection state ---------- */
+  var ci = -1, co = -1;
+  var summary = document.getElementById("summary");
+  var hintEl = document.getElementById("calHint");
+
+  function paint(){
+    cells.forEach(function(c, idx){
+      var el = c.el;
+      el.classList.remove("sel-start","sel-end");
+      el.setAttribute("aria-pressed","false");
+      var h = heat(c.price);
+      var bg = h.css, fg = h.t > 0.55 ? "#ffffff" : "#24211c";
+      if(ci !== -1 && co !== -1 && idx >= ci && idx < co){
+        bg = "#ffe3d2"; fg = "#24211c";
+      }
+      if(idx === ci){
+        bg = "#ff6b35"; fg = "#ffffff";
+        el.classList.add("sel-start");
+        el.setAttribute("aria-pressed","true");
+      }
+      if(idx === co && co !== -1){
+        bg = "#e04e1a"; fg = "#ffffff";
+        el.classList.add("sel-end");
+        el.setAttribute("aria-pressed","true");
+      }
+      el.style.background = bg;
+      el.style.color = fg;
+    });
+  }
+
+  function renderSummary(){
+    if(ci === -1){
+      summary.className = "summary"; summary.innerHTML = "";
+      hintEl.textContent = "แตะวันเช็คอิน แล้วแตะวันเช็คเอาต์";
+      return;
+    }
+    if(co === -1){
+      summary.className = "summary"; summary.innerHTML = "";
+      hintEl.textContent = "เช็คอิน " + fmtTH(days[ci]) + " — แตะเลือกวันเช็คเอาต์";
+      return;
+    }
+    var nights = co - ci;
+    var total = 0;
+    for(var k = ci; k < co; k++) total += cells[k].price;
+    var avg = Math.round(total / nights);
+    hintEl.textContent = "เลือกแล้ว " + nights + " คืน — แตะวันใหม่เพื่อเริ่มเลือกใหม่";
+
+    summary.innerHTML = "";
+    summary.className = "summary show";
+
+    var lines = document.createElement("div"); lines.className = "lines";
+    var dl = document.createElement("span"); dl.className = "dates";
+    dl.textContent = "เช็คอิน " + fmtTH(days[ci]) + " → เช็คเอาต์ " + fmtTH(days[co]);
+    var ml = document.createElement("span"); ml.className = "math";
+    ml.textContent = nights + " คืน × เฉลี่ย " + baht(avg) + " ต่อคืน (เตียงแคปซูลรวม 1 ท่าน)";
+    lines.appendChild(dl); lines.appendChild(ml);
+
+    var tl = document.createElement("span"); tl.className = "total";
+    tl.textContent = "รวม " + baht(total);
+
+    var btn = document.createElement("button");
+    btn.type = "button"; btn.className = "btn btn-orange"; btn.id = "bookBtn";
+    btn.textContent = "จองเตียง";
+    btn.addEventListener("click", book);
+
+    summary.appendChild(lines); summary.appendChild(tl); summary.appendChild(btn);
+  }
+
+  function book(){
+    var nights = co - ci, total = 0;
+    for(var k = ci; k < co; k++) total += cells[k].price;
+    var code = "ND-" + Math.floor(100000 + Math.random()*900000);
+
+    summary.innerHTML = "";
+    var wrap = document.createElement("div"); wrap.className = "success";
+
+    var ic = document.createElement("span"); ic.className = "ic";
+    ic.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>';
+
+    var box = document.createElement("div");
+    var h3 = document.createElement("h3"); h3.textContent = "จองเตียงสำเร็จแล้ว";
+    var p1 = document.createElement("p");
+    p1.textContent = "เช็คอิน " + fmtTH(days[ci]) + " → เช็คเอาต์ " + fmtTH(days[co]) + " · " + nights + " คืน · ยอดรวม " + baht(total) + " (ชำระที่เคาน์เตอร์)";
+    var p2 = document.createElement("p");
+    p2.textContent = "ที่นอนของคุณถูกกันไว้แล้ว แสดงรหัสการจองนี้ที่แผนกต้อนรับตอนเช็คอิน";
+    var cd = document.createElement("span"); cd.className = "code"; cd.textContent = code;
+    box.appendChild(h3); box.appendChild(p1); box.appendChild(p2); box.appendChild(cd);
+
+    var again = document.createElement("button");
+    again.type = "button"; again.className = "btn btn-line";
+    again.textContent = "เลือกวันใหม่";
+    again.addEventListener("click", function(){
+      ci = -1; co = -1; paint(); renderSummary();
+      document.getElementById("calendar").scrollIntoView({ block: "start" });
+    });
+
+    wrap.appendChild(ic); wrap.appendChild(box); wrap.appendChild(again);
+    summary.appendChild(wrap);
+    hintEl.textContent = "จองสำเร็จ รหัสการจอง " + code;
+  }
+
+  grid.addEventListener("click", function(ev){
+    var t = ev.target.closest(".day");
+    if(!t) return;
+    var i = parseInt(t.getAttribute("data-i"), 10);
+    if(ci === -1 || co !== -1 || i <= ci){
+      ci = i; co = -1;
+    } else {
+      co = i;
+    }
+    paint(); renderSummary();
+  });
+
+  paint();
+
+  document.getElementById("yr").textContent = new Date().getFullYear() + 543;
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+</body>
+</html>

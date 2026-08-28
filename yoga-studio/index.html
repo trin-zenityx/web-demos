@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>หายใจ HAAYJAI — สตูดิโอโยคะและพิลาทิส เอกมัย</title>
+<meta name="description" content="หายใจ สตูดิโอโยคะและพิลาทิสที่เอกมัย คลาสเล็ก อบอุ่น เงียบสงบ เริ่มต้นครั้งละ ฿450 จองผ่าน LINE @haayjai">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@200;300;400&family=Noto+Sans+Thai:wght@300;400&family=Tenor+Sans&display=swap" rel="stylesheet">
+<style>
+:root{
+  --air:#faf8f4;
+  --stone:#e8e2d6;
+  --moss:#7d8f74;
+  --ink:#3a3d36;
+  --muted:#8a8d82;
+  --line:rgba(58,61,54,.12);
+  --head:'Anuphan',sans-serif;
+  --body:'Noto Sans Thai',sans-serif;
+  --en:'Tenor Sans',serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--air);
+  color:var(--ink);
+  font-family:var(--body);
+  font-weight:300;
+  font-size:16px;
+  line-height:1.9;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+section{scroll-margin-top:90px}
+::selection{background:var(--stone);color:var(--ink)}
+:focus-visible{outline:2px solid var(--moss);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ---------- kicker / headings ---------- */
+.kicker{
+  font-family:var(--en);
+  font-size:11px;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:22px;
+}
+h1,h2,h3{font-family:var(--head);font-weight:200;letter-spacing:.05em;line-height:1.35}
+h2{font-size:clamp(30px,4.4vw,50px);margin-bottom:18px}
+.sec-head{max-width:640px;margin-bottom:clamp(40px,6vw,72px)}
+.sec-head p{color:var(--muted);font-size:15px}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(250,248,244,.82);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent;
+  transition:border-color .35s ease,background .35s ease;
+}
+.nav.scrolled{border-bottom-color:var(--line)}
+.nav-inner{
+  max-width:1120px;margin:0 auto;padding:0 24px;
+  min-height:72px;display:flex;align-items:center;gap:32px;
+}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--head);font-weight:300;font-size:22px;letter-spacing:.14em}
+.brand svg{flex:none}
+.brand small{font-family:var(--en);font-size:10px;letter-spacing:.32em;color:var(--muted);text-transform:uppercase;margin-top:6px}
+.nav-links{display:flex;gap:6px;margin-left:auto}
+.nav-links a{
+  display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;
+  font-size:14px;color:var(--muted);transition:color .25s ease;
+}
+.nav-links a:hover{color:var(--ink)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:10px 26px;
+  border:1px solid var(--ink);border-radius:2px;
+  font-family:var(--body);font-weight:300;font-size:14px;letter-spacing:.08em;
+  color:var(--ink);background:transparent;cursor:pointer;
+  transition:background .3s ease,color .3s ease,border-color .3s ease;
+}
+.btn:hover{background:var(--moss);border-color:var(--moss);color:var(--air)}
+.btn.ghost{border-color:transparent;color:var(--muted)}
+.btn.ghost:hover{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.nav-cta{margin-left:8px;min-height:44px;padding:8px 22px}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(64px,10vw,120px) 0 0;text-align:center}
+.hero h1{font-size:clamp(46px,8.5vw,104px);letter-spacing:.08em;margin:10px 0 26px}
+.hero .lede{max-width:520px;margin:0 auto;color:var(--muted);font-size:16px}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:38px}
+.breath{
+  width:120px;height:120px;margin:0 auto 30px;
+  border:1px solid var(--moss);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--head);font-weight:200;font-size:15px;letter-spacing:.3em;color:var(--moss);
+  text-indent:.3em;
+  animation:breath 8s ease-in-out infinite;
+}
+@keyframes breath{
+  0%,100%{transform:scale(1);opacity:.65}
+  50%{transform:scale(1.28);opacity:1}
+}
+.hero-img{
+  max-width:1120px;margin:clamp(48px,7vw,80px) auto 0;padding:0 24px;
+}
+.hero-img img{
+  width:100%;height:clamp(320px,56vh,560px);object-fit:cover;border-radius:3px;
+}
+.hero-img figcaption{
+  font-family:var(--en);font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);text-align:center;margin-top:16px;
+}
+
+/* ---------- sections ---------- */
+.sect{padding:clamp(72px,10vw,132px) 0}
+.sect.tint{background:rgba(232,226,214,.32);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+/* ---------- pose player ---------- */
+.player{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  border:1px solid var(--line);border-radius:3px;background:#fff;
+  overflow:hidden;
+}
+.stage{
+  background:linear-gradient(180deg,#fdfcf8 0%,var(--air) 100%);
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(20px,4vw,44px);border-right:1px solid var(--line);
+}
+.stage svg{width:100%;max-width:420px;height:auto}
+.panel{padding:clamp(28px,4.5vw,52px);display:flex;flex-direction:column}
+.pose-count{font-family:var(--en);font-size:12px;letter-spacing:.3em;color:var(--muted);margin-bottom:18px}
+.pose-name{font-family:var(--head);font-weight:300;font-size:clamp(28px,3.4vw,40px);letter-spacing:.06em;line-height:1.3}
+.pose-san{font-family:var(--en);font-size:13px;letter-spacing:.14em;color:var(--moss);margin:8px 0 20px}
+.pose-desc{color:var(--muted);font-size:15px;max-width:38ch}
+.controls{display:flex;flex-wrap:wrap;gap:12px;margin-top:auto;padding-top:34px}
+.controls .btn{padding:10px 22px}
+.dots{display:flex;gap:4px;margin-top:26px}
+.dot{
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  background:transparent;border:none;cursor:pointer;
+}
+.dot::before{
+  content:"";width:8px;height:8px;border-radius:50%;
+  background:var(--stone);border:1px solid var(--muted);
+  transition:background .3s ease,transform .3s ease;
+}
+.dot[aria-current="true"]::before{background:var(--moss);border-color:var(--moss);transform:scale(1.35)}
+
+/* ---------- schedule ---------- */
+.sched{border-top:1px solid var(--line)}
+.sched li{
+  display:grid;grid-template-columns:170px 1fr auto auto;gap:20px;align-items:baseline;
+  padding:24px 6px;border-bottom:1px solid var(--line);
+  transition:background .25s ease;
+}
+.sched li:hover{background:rgba(232,226,214,.35)}
+.sched .when{font-family:var(--en);font-size:13px;letter-spacing:.12em;color:var(--muted)}
+.sched .what{font-family:var(--head);font-weight:300;font-size:21px;letter-spacing:.05em}
+.sched .what span{display:block;font-family:var(--body);font-size:13px;color:var(--muted);letter-spacing:.02em}
+.sched .who{font-size:14px;color:var(--muted)}
+.level{
+  font-family:var(--en);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--moss);border:1px solid var(--moss);border-radius:999px;
+  padding:6px 14px;white-space:nowrap;
+}
+.sched-note{margin-top:26px;font-size:14px;color:var(--muted)}
+
+/* ---------- pricing ---------- */
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.price-card{
+  border:1px solid var(--line);border-radius:3px;background:#fff;
+  padding:clamp(28px,3.4vw,44px);display:flex;flex-direction:column;
+  transition:border-color .3s ease,transform .3s ease;
+}
+.price-card:hover{border-color:var(--moss)}
+.price-card.feat{background:linear-gradient(180deg,rgba(125,143,116,.08),rgba(125,143,116,.02));border-color:var(--moss)}
+.price-card h3{font-size:23px;font-weight:300;letter-spacing:.06em}
+.price-card .tag{font-family:var(--en);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--moss);margin-bottom:14px}
+.amount{font-family:var(--en);font-size:clamp(38px,3.6vw,50px);letter-spacing:.02em;margin:18px 0 4px}
+.amount small{font-size:15px;color:var(--muted);letter-spacing:.1em}
+.per{font-size:13px;color:var(--muted);margin-bottom:24px}
+.price-card ul{border-top:1px solid var(--line);margin-bottom:30px}
+.price-card ul li{
+  padding:12px 0;border-bottom:1px solid var(--line);
+  font-size:14px;color:var(--muted);
+}
+.price-card .btn{margin-top:auto;width:100%}
+
+/* ---------- teachers ---------- */
+.teachers{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.teacher img{
+  width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:3px;
+  filter:saturate(.82);
+}
+.teacher h3{font-size:22px;font-weight:300;letter-spacing:.06em;margin:20px 0 2px}
+.teacher .role{font-family:var(--en);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--moss);margin-bottom:12px}
+.teacher p{font-size:14px;color:var(--muted)}
+
+/* ---------- space + rules ---------- */
+.space-img{width:100%;height:clamp(280px,44vh,460px);object-fit:cover;border-radius:3px;filter:saturate(.85)}
+.rules{margin-top:clamp(40px,6vw,64px);border-top:1px solid var(--line)}
+.rules li{
+  display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline;
+  padding:26px 6px;border-bottom:1px solid var(--line);
+}
+.rules .no{font-family:var(--en);font-size:14px;letter-spacing:.24em;color:var(--muted)}
+.rules h3{font-size:20px;font-weight:300;letter-spacing:.05em;margin-bottom:4px}
+.rules p{font-size:14px;color:var(--muted)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:clamp(56px,8vw,88px) 0 40px;background:var(--air)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
+.foot-brand{font-family:var(--head);font-weight:300;font-size:26px;letter-spacing:.14em;margin-bottom:6px}
+.foot-brand small{display:block;font-family:var(--en);font-size:10px;letter-spacing:.32em;color:var(--muted);text-transform:uppercase;margin-top:4px}
+footer h4{font-family:var(--en);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);font-weight:400;margin-bottom:16px}
+footer p,footer li{font-size:14px;color:var(--muted)}
+footer li{margin-bottom:8px}
+.foot-line{margin-top:clamp(40px,6vw,64px);padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot-line p{font-family:var(--en);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .player{grid-template-columns:1fr}
+  .stage{border-right:none;border-bottom:1px solid var(--line)}
+  .prices{grid-template-columns:1fr;max-width:460px;margin:0 auto}
+  .teachers{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+  .foot-grid{grid-template-columns:1fr;gap:32px}
+}
+@media (max-width:760px){
+  .nav-links{display:none}
+  .sched li{grid-template-columns:1fr auto;gap:6px 16px}
+  .sched .when{grid-column:1/-1}
+  .rules li{grid-template-columns:1fr;gap:6px}
+  .cta-row .btn{width:100%}
+}
+@media (max-width:420px){
+  body{font-size:15px}
+  .brand small{display:none}
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .breath{animation:none;opacity:.8}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand" aria-label="หายใจ สตูดิโอโยคะ — กลับขึ้นด้านบน">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+        <path d="M4 20 C10 14, 20 14, 26 20" stroke="#7d8f74" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M7 15 C11.5 10.5, 18.5 10.5, 23 15" stroke="#3a3d36" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M11 10 C13.5 7.5, 16.5 7.5, 19 10" stroke="#8a8d82" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      หายใจ <small>Haayjai</small>
+    </a>
+    <nav class="nav-links" aria-label="เมนูหลัก">
+      <a href="#poses">ลำดับท่า</a>
+      <a href="#schedule">ตารางเรียน</a>
+      <a href="#pricing">ราคา</a>
+      <a href="#teachers">ครูผู้สอน</a>
+      <a href="#contact">ติดต่อ</a>
+    </nav>
+    <a class="btn nav-cta" href="#pricing">จองคลาส</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" aria-label="แนะนำสตูดิโอ">
+    <div class="wrap">
+      <div class="breath" aria-hidden="true"><span>หายใจ</span></div>
+      <p class="kicker">Yoga &amp; Pilates Studio — Ekkamai</p>
+      <h1>กลับมาหายใจ</h1>
+      <p class="lede">สตูดิโอโยคะและพิลาทิสเล็กๆ ใจกลางเอกมัย ห้องเรียนแสงธรรมชาติ คลาสละไม่เกิน 12 คน ที่นี่เราไม่เร่ง — แค่กลับมาอยู่กับลมหายใจของตัวเอง</p>
+      <div class="cta-row">
+        <a class="btn" href="#pricing">จองคลาสแรก ฿450</a>
+        <a class="btn ghost" href="#schedule">ดูตารางเรียน</a>
+      </div>
+    </div>
+    <figure class="hero-img">
+      <img src="../assets/yoga-hero.jpg" alt="ผู้ฝึกโยคะในห้องเรียนแสงธรรมชาติของสตูดิโอหายใจ" fetchpriority="high">
+      <figcaption>Haayjai Studio — Ekkamai, Bangkok</figcaption>
+    </figure>
+  </section>
+
+  <!-- POSE SEQUENCE PLAYER -->
+  <section class="sect" id="poses" aria-label="ลำดับท่าโยคะพื้นฐาน">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Pose Sequence</p>
+        <h2>ท่าพื้นฐานสำหรับมือใหม่</h2>
+        <p>หกท่าที่คุณจะได้เจอในคลาสแรก เคลื่อนต่อเนื่องตามลมหายใจ — กดเล่นอัตโนมัติ หรือเลื่อนดูทีละท่า</p>
+      </div>
+
+      <div class="player" role="region" aria-label="ตัวเล่นลำดับท่าโยคะ" tabindex="0">
+        <div class="stage">
+          <svg id="fig" viewBox="0 0 320 240" role="img" aria-label="ภาพเส้นแสดงท่าโยคะปัจจุบัน">
+            <line x1="30" y1="216" x2="290" y2="216" stroke="rgba(58,61,54,.12)" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="60" y="212" width="200" height="6" rx="3" fill="#e8e2d6" opacity=".7"/>
+            <g stroke-linecap="round" fill="none">
+              <line data-a="shoulder" data-b="elbowB" stroke="#8a8d82" stroke-width="4.5"/>
+              <line data-a="elbowB" data-b="handB" stroke="#8a8d82" stroke-width="4.5"/>
+              <line data-a="hip" data-b="kneeB" stroke="#8a8d82" stroke-width="4.5"/>
+              <line data-a="kneeB" data-b="footB" stroke="#8a8d82" stroke-width="4.5"/>
+              <line data-a="shoulder" data-b="mid" stroke="#3a3d36" stroke-width="5"/>
+              <line data-a="mid" data-b="hip" stroke="#3a3d36" stroke-width="5"/>
+              <line data-a="shoulder" data-b="elbowF" stroke="#3a3d36" stroke-width="5"/>
+              <line data-a="elbowF" data-b="handF" stroke="#3a3d36" stroke-width="5"/>
+              <line data-a="hip" data-b="kneeF" stroke="#3a3d36" stroke-width="5"/>
+              <line data-a="kneeF" data-b="footF" stroke="#3a3d36" stroke-width="5"/>
+            </g>
+            <circle id="figHead" cx="160" cy="58" r="13" fill="#faf8f4" stroke="#3a3d36" stroke-width="5"/>
+          </svg>
+        </div>
+        <div class="panel">
+          <p class="pose-count" id="poseCount">01 / 06</p>
+          <h3 class="pose-name" id="poseName" aria-live="polite">ท่าภูเขา</h3>
+          <p class="pose-san" id="poseSan">Tadasana · ตาทาสนะ</p>
+          <p class="pose-desc" id="poseDesc">ยืนตรง เท้าชิดกัน กระจายน้ำหนักเท่าๆ กันทั้งสองข้าง รู้สึกถึงแนวกระดูกสันหลังที่ยืดยาวจากก้นกบถึงกระหม่อม</p>
+          <div class="controls">
+            <button class="btn ghost" id="prevBtn" type="button" aria-label="ท่าก่อนหน้า">ก่อนหน้า</button>
+            <button class="btn" id="nextBtn" type="button" aria-label="ท่าถัดไป">ถัดไป</button>
+            <button class="btn ghost" id="autoBtn" type="button" aria-pressed="true">หยุดอัตโนมัติ</button>
+          </div>
+          <div class="dots" id="dots" role="tablist" aria-label="เลือกท่าโดยตรง"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section class="sect tint" id="schedule" aria-label="ตารางคลาสประจำสัปดาห์">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Weekly Schedule</p>
+        <h2>ตารางคลาสสัปดาห์นี้</h2>
+        <p>คลาสเช้า เที่ยง และเย็น — เลือกเวลาที่เข้ากับจังหวะชีวิตของคุณ</p>
+      </div>
+      <ul class="sched">
+        <li>
+          <span class="when">จันทร์ · 07:00–08:15</span>
+          <span class="what">Vinyasa Flow <span>วิญยาสต่อเนื่องตามลมหายใจ ปลุกร่างกายยามเช้า</span></span>
+          <span class="who">ครูมินต์</span>
+          <span class="level">ทุกระดับ</span>
+        </li>
+        <li>
+          <span class="when">อังคาร · 12:15–13:00</span>
+          <span class="what">Yin Yoga <span>ค้างท่านานๆ คลายพังผืด พักกลางวันอย่างลึก</span></span>
+          <span class="who">ครูเต้</span>
+          <span class="level">เริ่มต้น</span>
+        </li>
+        <li>
+          <span class="when">พุธ · 07:00–08:15</span>
+          <span class="what">Vinyasa Flow <span>วิญยาสต่อเนื่องตามลมหายใจ ปลุกร่างกายยามเช้า</span></span>
+          <span class="who">ครูมินต์</span>
+          <span class="level">ทุกระดับ</span>
+        </li>
+        <li>
+          <span class="when">พฤหัสบดี · 18:30–19:30</span>
+          <span class="what">Pilates Mat <span>พิลาทิสบนเสื่อ เก็บแกนกลางลำตัวหลังเลิกงาน</span></span>
+          <span class="who">ครูนิว</span>
+          <span class="level">ระดับกลาง</span>
+        </li>
+        <li>
+          <span class="when">ศุกร์ · 12:15–13:00</span>
+          <span class="what">Yin Yoga <span>ค้างท่านานๆ คลายพังผืด พักกลางวันอย่างลึก</span></span>
+          <span class="who">ครูเต้</span>
+          <span class="level">เริ่มต้น</span>
+        </li>
+        <li>
+          <span class="when">เสาร์ · 09:00–10:15</span>
+          <span class="what">Gentle Hatha <span>หฐะเบาๆ วันละท่า เหมาะกับเช้าวันหยุด</span></span>
+          <span class="who">ครูนิว</span>
+          <span class="level">ทุกระดับ</span>
+        </li>
+      </ul>
+      <p class="sched-note">จองล่วงหน้าผ่าน LINE @haayjai อย่างน้อย 2 ชั่วโมง — ยกเลิกฟรีก่อนคลาสเริ่ม 3 ชั่วโมง</p>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="sect" id="pricing" aria-label="ราคาคลาส">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Pricing</p>
+        <h2>เริ่มต้นแบบเบาๆ</h2>
+        <p>ไม่มีค่าสมัคร ไม่มีสัญญาผูกมัด — เลือกจังหวะที่ใช่สำหรับคุณ</p>
+      </div>
+      <div class="prices">
+        <div class="price-card">
+          <p class="tag">Drop-in</p>
+          <h3>ครั้งละ</h3>
+          <p class="amount">฿450<small> / ครั้ง</small></p>
+          <p class="per">สำหรับมาลอง หรือตารางยังไม่แน่นอน</p>
+          <ul>
+            <li>เลือกได้ทุกคลาสในตาราง</li>
+            <li>ยืมเสื่อและบล็อกฟรี</li>
+            <li>ชาอุ่นหลังคลาส</li>
+          </ul>
+          <a class="btn" href="#contact">จองครั้งแรก</a>
+        </div>
+        <div class="price-card feat">
+          <p class="tag">Most Loved</p>
+          <h3>แพ็ก 10 ครั้ง</h3>
+          <p class="amount">฿3,900<small> / 10 ครั้ง</small></p>
+          <p class="per">เฉลี่ย ฿390 ต่อครั้ง · ใช้ได้ใน 4 เดือน</p>
+          <ul>
+            <li>เลือกได้ทุกคลาสในตาราง</li>
+            <li>ยืมเสื่อ บล็อก และผ้าขนหนูฟรี</li>
+            <li>โอนสิทธิ์ให้เพื่อนได้ 1 ครั้ง</li>
+          </ul>
+          <a class="btn" href="#contact">เลือกแพ็กนี้</a>
+        </div>
+        <div class="price-card">
+          <p class="tag">Monthly</p>
+          <h3>รายเดือนไม่จำกัด</h3>
+          <p class="amount">฿3,200<small> / เดือน</small></p>
+          <p class="per">เข้าได้ทุกคลาส มากี่ครั้งก็ได้</p>
+          <ul>
+            <li>ทุกคลาสในตาราง ไม่จำกัดครั้ง</li>
+            <li>เวิร์กช็อปหายใจรายเดือนฟรี</li>
+            <li>พักสิทธิ์ได้ 7 วันต่อเดือน</li>
+          </ul>
+          <a class="btn" href="#contact">เริ่มรายเดือน</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEACHERS -->
+  <section class="sect tint" id="teachers" aria-label="ครูผู้สอน">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Teachers</p>
+        <h2>ครูของเรา</h2>
+        <p>ครูสามคนที่จะคอยดูแลฟอร์มและลมหายใจของคุณ ทีละคน ไม่เร่ง ไม่เปรียบเทียบ</p>
+      </div>
+      <div class="teachers">
+        <div class="teacher">
+          <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=1000&auto=format&fit=crop" alt="ครูมินต์กำลังสาธิตท่าโยคะยืดแนวหลัง" loading="lazy">
+          <h3>ครูมินต์</h3>
+          <p class="role">Vinyasa · Hatha</p>
+          <p>ฝึกโยคะมา 12 ปี ผ่านการอบรมครู RYT-500 จากเชียงใหม่และอินเดีย เชื่อว่าทุกร่างกายมีจังหวะของตัวเอง</p>
+        </div>
+        <div class="teacher">
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1000&auto=format&fit=crop" alt="ครูเต้นั่งสมาธิหลับตาในห้องเรียน" loading="lazy">
+          <h3>ครูเต้</h3>
+          <p class="role">Yin · Meditation</p>
+          <p>เชี่ยวชาญหยินโยคะและการนั่งหายใจ ห้องของครูเต้เงียบที่สุดในสตูดิโอ — และคนหลับบ่อยที่สุดเช่นกัน</p>
+        </div>
+        <div class="teacher">
+          <img src="https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?q=80&w=1000&auto=format&fit=crop" alt="ครูนิววอร์มร่างกายบนเสื่อพิลาทิส" loading="lazy">
+          <h3>ครูนิว</h3>
+          <p class="role">Pilates Mat</p>
+          <p>สายแกนกลางลำตัวแบบนุ่มแต่แน่น คอยเดินแก้ฟอร์มทีละคน คลาสเย็นวันพฤหัสเต็มเร็วที่สุดของสัปดาห์</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPACE + RULES -->
+  <section class="sect" aria-label="พื้นที่และกฎของห้องเรียน">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Our Space</p>
+        <h2>ห้องเรียนที่หายใจได้</h2>
+        <p>พื้นไม้จริง แสงธรรมชาติตลอดวัน และกลิ่นไม้จันทน์อ่อนๆ — คลาสละไม่เกิน 12 คนเสมอ</p>
+      </div>
+      <img class="space-img" src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1000&auto=format&fit=crop" alt="บรรยากาศห้องเรียนโยคะพื้นไม้แสงนุ่มของสตูดิโอหายใจ" loading="lazy">
+      <ul class="rules" aria-label="กฎของห้องเรียน">
+        <li>
+          <span class="no">01</span>
+          <div>
+            <h3>มาถึงก่อนคลาส 10 นาที</h3>
+            <p>ให้เวลาตัวเองเปลี่ยนชุด วางเสื่อ และนั่งนิ่งๆ ก่อนเริ่ม — ประตูห้องปิดตรงเวลาเพื่อไม่รบกวนคนที่มาก่อน</p>
+          </div>
+        </li>
+        <li>
+          <span class="no">02</span>
+          <div>
+            <h3>โทรศัพท์เก็บในล็อกเกอร์</h3>
+            <p>ปิดเสียงและเก็บให้เรียบร้อย หนึ่งชั่วโมงนี้เป็นของคุณคนเดียว โลกภายนอกรอได้</p>
+          </div>
+        </li>
+        <li>
+          <span class="no">03</span>
+          <div>
+            <h3>งดน้ำหอมและกลิ่นแรง</h3>
+            <p>เราหายใจลึกร่วมกันทั้งห้อง กลิ่นที่อ่อนโยนที่สุดคือกลิ่นธรรมชาติของตัวเราเอง</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-brand">หายใจ <small>Haayjai Yoga &amp; Pilates</small></p>
+        <p>สตูดิโอโยคะและพิลาทิสใจกลางเอกมัย<br>คลาสเล็ก เงียบสงบ เป็นธรรมชาติ</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li>ซอยเอกมัย 10 แขวงคลองตันเหนือ</li>
+          <li>เขตวัฒนา กรุงเทพฯ 10110</li>
+          <li>BTS เอกมัย ทางออก 1 · เดิน 8 นาที</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>เปิดทุกวัน 06:30–20:30</li>
+          <li>LINE: @haayjai</li>
+          <li>โทร 02-714-8890</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-line">
+      <p>© 2569 Haayjai Studio</p>
+      <p>Breathe In · Breathe Out</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- nav scrolled state ---------- */
+  var nav = document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 24); }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- pose sequence player ---------- */
+  var KEYS = ['head','shoulder','mid','hip','elbowF','handF','elbowB','handB','kneeF','footF','kneeB','footB'];
+
+  var POSES = [
+    {
+      name:'ท่าภูเขา', san:'Tadasana · ตาทาสนะ',
+      desc:'ยืนตรง เท้าชิดกัน กระจายน้ำหนักเท่าๆ กันทั้งสองข้าง รู้สึกถึงแนวกระดูกสันหลังที่ยืดยาวจากก้นกบถึงกระหม่อม',
+      p:{head:[160,58],shoulder:[160,80],mid:[160,105],hip:[160,130],elbowF:[170,106],handF:[173,136],elbowB:[150,106],handB:[147,136],kneeF:[164,170],footF:[167,210],kneeB:[154,170],footB:[151,210]}
+    },
+    {
+      name:'ท่าก้ม', san:'Uttanasana · อุตตานาสนะ',
+      desc:'ก้มพับจากสะโพก ปล่อยศีรษะและคอให้หย่อนลงสู่พื้น คลายแนวหลังทั้งแผ่นและหลังขา หายใจออกยาวๆ',
+      p:{head:[222,166],shoulder:[205,150],mid:[177,136],hip:[150,122],elbowF:[211,172],handF:[209,203],elbowB:[199,174],handB:[197,205],kneeF:[154,168],footF:[157,210],kneeB:[144,168],footB:[141,210]}
+    },
+    {
+      name:'ท่าแมว–วัว', san:'Marjaryasana · มารชารียาสนะ',
+      desc:'คุกเข่าสี่จุด มือใต้ไหล่ เข่าใต้สะโพก อ้าอกโค้งหลังตามลมหายใจเข้า นวดกระดูกสันหลังทีละช่วง',
+      p:{head:[96,110],shoulder:[117,136],mid:[160,154],hip:[201,134],elbowF:[121,172],handF:[121,208],elbowB:[109,172],handB:[109,208],kneeF:[205,184],footF:[226,204],kneeB:[193,184],footB:[212,206]}
+    },
+    {
+      name:'ท่าสุนัขหันหน้าลง', san:'Adho Mukha Svanasana · อโธมุขสวานาสนะ',
+      desc:'ยกสะโพกสูงเป็นรูปตัววีกลับหัว ดันพื้นด้วยฝ่ามือทั้งสิบนิ้ว ยืดแนวหลังและหลังขาให้ยาวที่สุด',
+      p:{head:[108,182],shoulder:[125,156],mid:[155,125],hip:[186,94],elbowF:[111,181],handF:[96,207],elbowB:[121,183],handB:[108,209],kneeF:[215,150],footF:[237,209],kneeB:[206,149],footB:[226,209]}
+    },
+    {
+      name:'ท่านักรบ 1', san:'Virabhadrasana I · วีรภัทราสนะ',
+      desc:'ก้าวเท้าหน้ายาว เข่างอตั้งฉาก เท้าหลังวางเฉียง ยกแขนเหนือศีรษะ เปิดอกรับลมหายใจเข้าเต็มปอด',
+      p:{head:[160,70],shoulder:[160,92],mid:[163,116],hip:[166,140],elbowF:[169,60],handF:[172,32],elbowB:[151,60],handB:[148,32],kneeF:[207,157],footF:[213,210],kneeB:[127,174],footB:[90,210]}
+    },
+    {
+      name:'ท่าเด็ก', san:'Balasana · พาลาสนะ',
+      desc:'นั่งทับส้นเท้า ก้มหน้าผากแตะพื้น แขนยื่นไปด้านหน้า ท่าพักที่กลับมาได้เสมอเมื่อร่างกายขอ',
+      p:{head:[94,194],shoulder:[114,186],mid:[150,181],hip:[190,180],elbowF:[84,196],handF:[58,203],elbowB:[90,203],handB:[64,209],kneeF:[178,194],footF:[224,200],kneeB:[168,202],footB:[214,209]}
+    }
+  ];
+
+  var idx = 0;
+  var cur = {};
+  KEYS.forEach(function(k){ cur[k] = POSES[0].p[k].slice(); });
+
+  var lines = document.querySelectorAll('#fig line[data-a]');
+  var headEl = document.getElementById('figHead');
+  var nameEl = document.getElementById('poseName');
+  var sanEl = document.getElementById('poseSan');
+  var descEl = document.getElementById('poseDesc');
+  var countEl = document.getElementById('poseCount');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var autoBtn = document.getElementById('autoBtn');
+  var dotsWrap = document.getElementById('dots');
+  var rafId = null;
+  var timer = null;
+
+  function render(){
+    for (var i = 0; i < lines.length; i++){
+      var l = lines[i];
+      var a = cur[l.getAttribute('data-a')];
+      var b = cur[l.getAttribute('data-b')];
+      l.setAttribute('x1', a[0]); l.setAttribute('y1', a[1]);
+      l.setAttribute('x2', b[0]); l.setAttribute('y2', b[1]);
+    }
+    headEl.setAttribute('cx', cur.head[0]);
+    headEl.setAttribute('cy', cur.head[1]);
+  }
+
+  function updateInfo(){
+    var pose = POSES[idx];
+    nameEl.textContent = pose.name;
+    sanEl.textContent = pose.san;
+    descEl.textContent = pose.desc;
+    countEl.textContent = '0' + (idx + 1) + ' / 06';
+    var dots = dotsWrap.children;
+    for (var i = 0; i < dots.length; i++){
+      if (i === idx){ dots[i].setAttribute('aria-current','true'); }
+      else { dots[i].removeAttribute('aria-current'); }
+    }
+  }
+
+  function goTo(i){
+    idx = ((i % POSES.length) + POSES.length) % POSES.length;
+    var target = POSES[idx].p;
+    updateInfo();
+    if (rafId) cancelAnimationFrame(rafId);
+    if (reduce){
+      KEYS.forEach(function(k){ cur[k] = target[k].slice(); });
+      render();
+      return;
+    }
+    var from = {};
+    KEYS.forEach(function(k){ from[k] = cur[k].slice(); });
+    var t0 = null, dur = 950;
+    function step(ts){
+      if (!t0) t0 = ts;
+      var t = Math.min(1, (ts - t0) / dur);
+      var e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      KEYS.forEach(function(k){
+        cur[k][0] = from[k][0] + (target[k][0] - from[k][0]) * e;
+        cur[k][1] = from[k][1] + (target[k][1] - from[k][1]) * e;
+      });
+      render();
+      if (t < 1) rafId = requestAnimationFrame(step);
+    }
+    rafId = requestAnimationFrame(step);
+  }
+
+  function startAuto(){
+    stopAuto();
+    timer = setInterval(function(){ goTo(idx + 1); }, 4000);
+    autoBtn.textContent = 'หยุดอัตโนมัติ';
+    autoBtn.setAttribute('aria-pressed','true');
+  }
+  function stopAuto(){
+    if (timer) clearInterval(timer);
+    timer = null;
+    autoBtn.textContent = 'เล่นอัตโนมัติ';
+    autoBtn.setAttribute('aria-pressed','false');
+  }
+
+  prevBtn.addEventListener('click', function(){ goTo(idx - 1); if (timer) startAuto(); });
+  nextBtn.addEventListener('click', function(){ goTo(idx + 1); if (timer) startAuto(); });
+  autoBtn.addEventListener('click', function(){ if (timer) stopAuto(); else startAuto(); });
+
+  POSES.forEach(function(pose, i){
+    var d = document.createElement('button');
+    d.type = 'button';
+    d.className = 'dot';
+    d.setAttribute('aria-label', 'ท่าที่ ' + (i + 1) + ' ' + pose.name);
+    d.addEventListener('click', function(){ goTo(i); if (timer) startAuto(); });
+    dotsWrap.appendChild(d);
+  });
+
+  var player = document.querySelector('.player');
+  player.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight'){ e.preventDefault(); goTo(idx + 1); if (timer) startAuto(); }
+    else if (e.key === 'ArrowLeft'){ e.preventDefault(); goTo(idx - 1); if (timer) startAuto(); }
+  });
+
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden){ if (timer) clearInterval(timer); }
+    else if (timer){ startAuto(); }
+  });
+
+  render();
+  updateInfo();
+  if (!reduce) startAuto(); else stopAuto();
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+</body>
+</html>

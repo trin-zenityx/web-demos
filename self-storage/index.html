@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เก็บดี KEPDEE — เซลฟ์สโตเรจ รายเดือน บางนา</title>
+<meta name="description" content="เก็บดี เซลฟ์สโตเรจ ห้องเก็บของส่วนตัวรายเดือน 4.5–18 ตร.ม. เริ่ม ฿1,900/เดือน เข้าออกได้ 24 ชม. ด้วยรหัสส่วนตัว ที่บางนา">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&family=Sarabun:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f8f9; --card:#fff; --orange:#f26b21; --orange-d:#d95a15;
+  --slate:#2e4257; --ink:#1d2836; --muted:#5f6e7e; --line:#e2e7ec;
+  --radius:14px; --shadow:0 10px 30px rgba(30,45,60,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+@media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+body{
+  font-family:"Sarabun",sans-serif; font-size:16px; line-height:1.65;
+  color:#3a4b5d; background:var(--bg); -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.prompt{font-family:"Prompt",sans-serif;color:var(--ink);font-weight:600;line-height:1.25}
+img{max-width:100%;display:block}
+a{color:inherit}
+ul{list-style:none}
+:focus-visible{outline:3px solid rgba(242,107,33,.6);outline-offset:2px;border-radius:8px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:10px 18px;border-radius:10px;z-index:200;text-decoration:none}
+.skip:focus{left:8px}
+.container{max-width:1140px;margin:0 auto;padding:0 20px}
+section{scroll-margin-top:84px}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:12px 24px;border-radius:12px;border:0;cursor:pointer;
+  font-family:"Prompt",sans-serif;font-weight:500;font-size:16px;text-decoration:none;
+  transition:background .2s ease,transform .15s ease,box-shadow .2s ease;
+}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 6px 18px rgba(242,107,33,.32)}
+.btn-primary:hover{background:var(--orange-d)}
+.btn-primary:active{transform:translateY(1px)}
+.btn-ghost{background:#fff;color:var(--slate);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--slate)}
+.btn-block{width:100%}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{display:flex;align-items:center;gap:20px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:"Prompt",sans-serif;font-weight:600;font-size:22px;color:var(--ink)}
+.logo small{font-size:11px;font-weight:500;letter-spacing:.14em;color:var(--muted);margin-top:6px}
+.nav-links{display:flex;gap:2px;margin-left:auto}
+.nav-links a{
+  display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border-radius:10px;
+  text-decoration:none;font-size:15px;color:var(--slate);transition:background .2s ease;
+}
+.nav-links a:hover{background:#eef2f6}
+.nav .btn{min-height:44px;padding:10px 18px;font-size:15px}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;background:var(--ink)}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9}
+.hero-veil{position:absolute;inset:0;background:linear-gradient(100deg,rgba(24,34,46,.92) 0%,rgba(24,34,46,.62) 48%,rgba(24,34,46,.18) 100%)}
+.hero-in{position:relative;padding:96px 0 84px;max-width:640px}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;
+  background:rgba(242,107,33,.16);border:1px solid rgba(242,107,33,.45);
+  color:#ffb27e;font-family:"Prompt",sans-serif;font-weight:500;font-size:14px;letter-spacing:.02em;
+}
+.hero h1{color:#fff;font-size:clamp(30px,5vw,48px);font-weight:600;margin:18px 0 14px}
+.hero p.sub{color:#d7e0e9;font-size:17px;font-weight:300;max-width:520px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.trust{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.trust li{
+  display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:9px 16px;border-radius:999px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);
+  color:#eef3f8;font-size:15px;backdrop-filter:blur(4px);
+}
+.trust svg{width:20px;height:20px;color:#ffa26b;flex:none}
+
+/* ---------- Section base ---------- */
+.sec{padding:76px 0}
+.sec-head{max-width:640px;margin-bottom:38px}
+.sec-kicker{color:var(--orange);font-family:"Prompt",sans-serif;font-weight:500;font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+.sec-head h2{font-size:clamp(24px,3.4vw,32px);margin:8px 0 10px}
+.sec-head p{color:var(--muted)}
+
+/* ---------- Visualizer ---------- */
+.viz-card{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  box-shadow:var(--shadow);padding:28px;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:start;
+}
+.room-wrap{position:relative;background:#fbfcfd;border:1px solid var(--line);border-radius:16px;padding:14px}
+.room-badge{
+  position:absolute;top:14px;left:14px;z-index:2;
+  background:var(--slate);color:#fff;border-radius:999px;padding:7px 16px;
+  font-family:"Prompt",sans-serif;font-weight:500;font-size:14px;box-shadow:0 4px 12px rgba(30,45,60,.25);
+}
+#roomSvg{width:100%;height:auto;display:block}
+#roomG{transform-box:view-box;transform-origin:200px 246px;transition:transform .55s cubic-bezier(.34,1.35,.4,1)}
+#floorGrid line{stroke:#e6ebf0;stroke-width:1}
+.box-g{animation:boxIn .35s ease both}
+@keyframes boxIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.size-chips{display:flex;gap:8px;margin:16px 2px 0;flex-wrap:wrap}
+.size-chip{
+  flex:1;min-width:64px;text-align:center;padding:8px 6px;border-radius:10px;
+  border:1.5px solid var(--line);color:var(--muted);font-size:14px;
+  font-family:"Prompt",sans-serif;font-weight:500;transition:all .25s ease;
+}
+.size-chip b{display:block;font-size:16px;color:var(--slate)}
+.size-chip.on{border-color:var(--orange);background:#fff4ec;color:#c65a18}
+.size-chip.on b{color:var(--orange)}
+.meter-block{margin-top:18px}
+.meter{
+  height:12px;border-radius:999px;background:#edf1f5;overflow:hidden;
+}
+.meter-fill{height:100%;width:0;background:var(--orange);border-radius:999px;transition:width .5s ease}
+.meter-fill.warn{background:#d64545}
+.meter-label{display:flex;justify-content:space-between;gap:10px;margin-top:8px;font-size:14px;color:var(--muted)}
+.rec-line{
+  display:flex;gap:10px;align-items:flex-start;margin-top:16px;padding:14px 16px;
+  background:#f2f6fb;border:1px solid #dfe8f1;border-radius:12px;font-size:15px;color:var(--slate);
+}
+.rec-line svg{width:22px;height:22px;color:var(--orange);flex:none;margin-top:2px}
+.rec-line b{color:var(--ink)}
+
+.viz-panel h3{font-size:19px;margin-bottom:4px}
+.viz-panel .hint{color:var(--muted);font-size:15px;margin-bottom:16px}
+.item{
+  display:flex;align-items:center;gap:12px;min-height:56px;padding:11px 14px;margin-bottom:10px;
+  border:1.5px solid var(--line);border-radius:12px;cursor:pointer;background:#fff;
+  transition:border-color .2s ease,background .2s ease;
+}
+.item:hover{border-color:#c8d2dc}
+.item.on{border-color:var(--orange);background:#fff7f2}
+.item input{width:22px;height:22px;accent-color:var(--orange);flex:none;cursor:pointer}
+.item .ic{
+  width:40px;height:40px;border-radius:10px;background:#f1f4f8;color:var(--slate);
+  display:grid;place-items:center;flex:none;
+}
+.item.on .ic{background:#ffe7d6;color:var(--orange-d)}
+.item .ic svg{width:24px;height:24px}
+.item .nm{flex:1;min-width:0}
+.item .nm b{display:block;font-family:"Prompt",sans-serif;font-weight:500;color:var(--ink);font-size:15.5px;line-height:1.35}
+.item .nm span{font-size:14px;color:var(--muted)}
+.item .ar{font-family:"Prompt",sans-serif;font-weight:500;color:var(--slate);font-size:15px;white-space:nowrap}
+
+.book-box{
+  margin-top:18px;padding:20px;border-radius:16px;color:#eaf0f6;
+  background:linear-gradient(135deg,#2e4257 0%,#22344a 100%);
+}
+.bk-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.bk-size{font-family:"Prompt",sans-serif;font-weight:500;font-size:17px;color:#fff}
+.bk-price{font-size:14px;color:#b9c7d4}
+.bk-note{margin-top:10px;font-size:14px;color:#9fb0c0;text-align:center}
+.bk-ok{text-align:center;padding:6px 0}
+.bk-ok .ok-ic{
+  width:52px;height:52px;margin:0 auto 12px;border-radius:50%;
+  background:rgba(62,178,110,.18);display:grid;place-items:center;color:#5dd39a;
+}
+.bk-ok .ok-ic svg{width:28px;height:28px}
+.bk-ok b{display:block;font-family:"Prompt",sans-serif;font-weight:500;font-size:18px;color:#fff;margin-bottom:6px}
+.bk-ok p{font-size:15px;color:#c3d0dd;margin-bottom:16px}
+.bk-ok .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+.bk-ok .btn-ghost:hover{border-color:#fff}
+
+/* ---------- Size cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease;
+}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.card .ph{aspect-ratio:16/10;overflow:hidden;background:#dfe5eb}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.card:hover .ph img{transform:scale(1.04)}
+.card-body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
+.card-chip{
+  align-self:flex-start;padding:4px 12px;border-radius:999px;background:#fff1e8;color:#c65a18;
+  font-family:"Prompt",sans-serif;font-weight:500;font-size:13.5px;margin-bottom:10px;
+}
+.card-price{font-family:"Prompt",sans-serif;font-weight:600;font-size:23px;color:var(--ink)}
+.card-price span{font-size:14px;font-weight:400;color:var(--muted)}
+.card-area{font-size:14.5px;color:var(--slate);margin:2px 0 12px}
+.card-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.card-list li{display:flex;gap:9px;font-size:15px;color:#3a4b5d;align-items:flex-start}
+.card-list svg{width:18px;height:18px;color:var(--orange);flex:none;margin-top:3px}
+.card-fit{
+  margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);
+  font-size:14px;color:var(--muted);
+}
+.card-fit b{color:var(--slate);font-weight:500}
+
+/* ---------- Steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 24px;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.step:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.step-top{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.step-num{
+  width:46px;height:46px;border-radius:14px;background:var(--orange);color:#fff;
+  display:grid;place-items:center;font-family:"Prompt",sans-serif;font-weight:600;font-size:19px;flex:none;
+  box-shadow:0 6px 14px rgba(242,107,33,.3);
+}
+.step-ic{width:44px;height:44px;border-radius:12px;background:#f1f4f8;color:var(--slate);display:grid;place-items:center}
+.step-ic svg{width:24px;height:24px}
+.step h3{font-size:18px;margin-bottom:8px}
+.step p{color:var(--muted);font-size:15.5px}
+
+/* ---------- FAQ ---------- */
+.faq-wrap{max-width:760px}
+.faq details{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden;
+}
+.faq summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  min-height:56px;padding:15px 18px;font-family:"Prompt",sans-serif;font-weight:500;font-size:16px;color:var(--ink);
+  transition:background .2s ease;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{background:#f6f8fa}
+.faq .chev{width:22px;height:22px;color:var(--muted);flex:none;transition:transform .25s ease}
+.faq details[open] .chev{transform:rotate(180deg);color:var(--orange)}
+.faq .faq-a{padding:2px 18px 18px;color:#3a4b5d;font-size:15.5px}
+
+/* ---------- Footer ---------- */
+footer{background:var(--ink);color:#c3d0dd;padding:60px 0 0}
+.foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:36px;padding-bottom:44px}
+.foot-brand .logo{color:#fff;margin-bottom:14px}
+.foot-brand .logo small{color:#8fa1b3}
+.foot-brand p{font-size:15px;color:#9fb0c0;max-width:340px}
+footer h3{color:#fff;font-size:16px;font-weight:500;margin-bottom:16px}
+.foot-list li{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;font-size:15px}
+.foot-list svg{width:19px;height:19px;color:var(--orange);flex:none;margin-top:3px}
+.foot-tel{
+  display:inline-flex;align-items:center;gap:10px;margin-top:6px;padding:12px 20px;border-radius:12px;
+  background:rgba(242,107,33,.14);border:1px solid rgba(242,107,33,.4);
+  color:#fff;text-decoration:none;font-family:"Prompt",sans-serif;font-weight:500;font-size:19px;min-height:48px;
+}
+.foot-tel svg{width:20px;height:20px;color:#ffa26b}
+.foot-bottom{
+  border-top:1px solid rgba(255,255,255,.1);padding:18px 0;
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-size:14px;color:#7e90a2;
+}
+
+/* ---------- Responsive ---------- */
+@media(max-width:980px){
+  .viz-card{grid-template-columns:1fr}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .nav-links{display:none}
+  .hero-in{padding:72px 0 64px}
+  .sec{padding:56px 0}
+  .viz-card{padding:18px;gap:22px}
+  .foot-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .cards{grid-template-columns:1fr}
+  .hero-cta .btn{width:100%}
+  .item .nm span{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  html{scroll-behavior:auto}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+<a class="skip" href="#visualizer">ข้ามไปยังเครื่องมือประเมินห้อง</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="container nav-in">
+    <a class="logo" href="#top" aria-label="เก็บดี เซลฟ์สโตเรจ กลับขึ้นด้านบน">
+      <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true">
+        <rect width="24" height="24" rx="6" fill="#f26b21"/>
+        <path d="M12 4.8l6.2 3.3v7.8L12 19.2l-6.2-3.3V8.1z" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M5.8 8.1L12 11.4l6.2-3.3M12 11.4v7.8" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+      เก็บดี <small>KEPDEE</small>
+    </a>
+    <nav class="nav-links" aria-label="เมนูหลัก">
+      <a href="#sizes">ขนาดห้อง</a>
+      <a href="#how">วิธีเช่า</a>
+      <a href="#faq">คำถามพบบ่อย</a>
+      <a href="#contact">ติดต่อ</a>
+    </nav>
+    <a class="btn btn-primary" href="#visualizer" style="margin-left:auto">ประเมินขนาดห้อง</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero" aria-label="แนะนำเก็บดี">
+  <img class="hero-img" src="../assets/storage-hero.jpg" alt="ทางเดินในโกดังเก็บดี ประตูห้องเก็บของสีส้มเรียงกันสะอาดเป็นระเบียบ" onerror="this.style.display='none'">
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-in">
+      <span class="kicker">เซลฟ์สโตเรจรายเดือน · บางนา กรุงเทพฯ</span>
+      <h1>พื้นที่เก็บของ ที่โตตามคุณ</h1>
+      <p class="sub">ห้องเก็บของส่วนตัวตั้งแต่ 4.5–18 ตร.ม. เริ่มต้น ฿1,900/เดือน เข้าออกได้ 24 ชั่วโมงด้วยรหัสส่วนตัว ไม่มีสัญญาผูกมัดระยะยาว</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#visualizer">ประเมินขนาดห้องฟรี</a>
+        <a class="btn btn-ghost" href="#sizes">ดูขนาดและราคา</a>
+      </div>
+      <ul class="trust">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.5" y="7" width="14" height="11" rx="2"/><circle cx="9.5" cy="12.5" r="3"/><path d="M16.5 10.5l5-2.5v9l-5-2.5"/>
+          </svg>
+          กล้องวงจรปิด 24 ชม.
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="3" width="16" height="18" rx="2.5"/><circle cx="8.5" cy="8" r=".9"/><circle cx="12" cy="8" r=".9"/><circle cx="15.5" cy="8" r=".9"/><circle cx="8.5" cy="12" r=".9"/><circle cx="12" cy="12" r=".9"/><circle cx="15.5" cy="12" r=".9"/><path d="M8.5 16.5h7"/>
+          </svg>
+          เข้าออกด้วยรหัสส่วนตัว
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3l7 2.8v5.4c0 4.8-3.2 7.8-7 9.3-3.8-1.5-7-4.5-7-9.3V5.8z"/><path d="M9 11.8l2.2 2.2 4-4.2"/>
+          </svg>
+          ประกันภัยรวมในค่าเช่า
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VISUALIZER ================= -->
+<section class="sec" id="visualizer" aria-labelledby="viz-h">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kicker">เครื่องมือประเมินขนาดห้อง</div>
+      <h2 id="viz-h">ของแค่นี้ ต้องห้องเท่าไหร่?</h2>
+      <p>ติ๊กเลือกของที่ต้องการเก็บ เราจะจัดวางให้ดูในห้องจำลอง พร้อมแนะนำขนาดห้องและราคาที่เหมาะสมทันที</p>
+    </div>
+
+    <div class="viz-card">
+      <!-- ซ้าย: ห้องจำลอง -->
+      <div>
+        <div class="room-wrap">
+          <span class="room-badge" id="roomBadge">ห้องขนาด S · 4.5 ตร.ม.</span>
+          <svg id="roomSvg" viewBox="0 0 400 300" role="img" aria-label="ห้องจำลองมุมสามมิติ แสดงของที่เลือกวางอยู่ในห้อง">
+            <g id="roomG">
+              <g id="shellG">
+                <!-- เพดานบางๆ -->
+                <polygon points="56,150 104,60 296,60 344,150" fill="rgba(46,66,87,.05)" stroke="#e2e7ec" stroke-width="1"/>
+                <!-- ผนังซ้าย -->
+                <polygon points="56,246 104,156 104,60 56,150" fill="#f2f5f8" stroke="#dde3ea" stroke-width="1"/>
+                <!-- ผนังขวา -->
+                <polygon points="344,246 296,156 296,60 344,150" fill="#e9eef3" stroke="#dde3ea" stroke-width="1"/>
+                <!-- ผนังหลัง -->
+                <polygon points="104,156 296,156 296,60 104,60" fill="#eef2f6" stroke="#dde3ea" stroke-width="1"/>
+                <!-- ประตูสีส้มบนผนังหลัง -->
+                <rect x="182" y="94" width="40" height="62" rx="3" fill="#f26b21" stroke="#d95a15" stroke-width="2"/>
+                <rect x="188" y="100" width="28" height="24" rx="2" fill="none" stroke="#ffab7e" stroke-width="1.4"/>
+                <circle cx="215" cy="130" r="2.4" fill="#fff"/>
+                <!-- พื้น -->
+                <polygon points="56,246 344,246 296,156 104,156" fill="#ffffff" stroke="#d8dfe6" stroke-width="1.4"/>
+                <g id="floorGrid"></g>
+              </g>
+              <g id="boxesG"></g>
+            </g>
+          </svg>
+        </div>
+
+        <div class="size-chips" id="sizeChips" aria-label="ช่วงขนาดห้องทั้งหมด">
+          <div class="size-chip" data-room="S"><b>S</b>4.5 ตร.ม.</div>
+          <div class="size-chip" data-room="M"><b>M</b>9 ตร.ม.</div>
+          <div class="size-chip" data-room="L"><b>L</b>13.5 ตร.ม.</div>
+          <div class="size-chip" data-room="XL"><b>XL</b>18 ตร.ม.</div>
+        </div>
+
+        <div class="meter-block">
+          <div class="meter" role="progressbar" aria-label="เปอร์เซ็นต์พื้นที่ที่ใช้" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="meterAria">
+            <div class="meter-fill" id="meterFill"></div>
+          </div>
+          <div class="meter-label">
+            <span id="meterText">ยังไม่ได้เลือกของ</span>
+            <span id="meterTotal">รวม 0 ตร.ม.</span>
+          </div>
+        </div>
+
+        <div class="rec-line" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5" opacity=".45"/>
+          </svg>
+          <span id="recText">เลือกของจากรายการทางขวา แล้วเราจะแนะนำขนาดห้องให้ทันที</span>
+        </div>
+      </div>
+
+      <!-- ขวา: checklist -->
+      <div class="viz-panel">
+        <h3>เลือกของที่จะเก็บ</h3>
+        <p class="hint">เลือกได้หลายอย่าง ระบบจะขยายห้องให้อัตโนมัติถ้าของล้น</p>
+
+        <label class="item">
+          <input type="checkbox" id="it-boxes">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.2h16V20H4z"/><path d="M4 9.2L6.6 4.8h10.8L20 9.2"/><path d="M9.5 13h5"/></svg></span>
+          <span class="nm"><b>กล่อง 10 ใบ</b><span>เสื้อผ้า หนังสือ ของใช้จิปาถะ</span></span>
+          <span class="ar">≈ 1 ตร.ม.</span>
+        </label>
+
+        <label class="item">
+          <input type="checkbox" id="it-wardrobe">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3.5" width="12" height="17" rx="1.5"/><path d="M12 3.5v17"/><path d="M9.4 11.2h.01M14.6 11.2h.01" stroke-width="2.6"/></svg></span>
+          <span class="nm"><b>ตู้เสื้อผ้า</b><span>บานเปิด 2 บาน สูงมาตรฐาน</span></span>
+          <span class="ar">≈ 1.2 ตร.ม.</span>
+        </label>
+
+        <label class="item">
+          <input type="checkbox" id="it-bike">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="16.5" r="3.5"/><circle cx="17.5" cy="16.5" r="3.5"/><path d="M6.5 16.5L10 9.5h4.5l3 7M10 9.5L8.8 7h2.7"/></svg></span>
+          <span class="nm"><b>จักรยาน</b><span>ตั้งตรงหรือวางเทียบผนัง</span></span>
+          <span class="ar">≈ 0.8 ตร.ม.</span>
+        </label>
+
+        <label class="item">
+          <input type="checkbox" id="it-sofa">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 11.5V9a3 3 0 013-3h7a3 3 0 013 3v2.5"/><path d="M4 13.5a2 2 0 014 0v.8h8v-.8a2 2 0 014 0v3a2 2 0 01-2 2H6a2 2 0 01-2-2z"/></svg></span>
+          <span class="nm"><b>โซฟา 3 ที่นั่ง</b><span>หุ้มพลาสติกกันฝุ่นให้ฟรี</span></span>
+          <span class="ar">≈ 2 ตร.ม.</span>
+        </label>
+
+        <label class="item">
+          <input type="checkbox" id="it-kitchen">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M3.5 13.5h17"/><circle cx="8" cy="11.2" r="1.3"/><path d="M14 16.6h4"/></svg></span>
+          <span class="nm"><b>ชุดครัว</b><span>เคาน์เตอร์ ตู้แขวน และเครื่องใช้</span></span>
+          <span class="ar">≈ 2.5 ตร.ม.</span>
+        </label>
+
+        <label class="item">
+          <input type="checkbox" id="it-bedroom">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17.5V9"/><path d="M4 13.5h16v4"/><rect x="6" y="10.3" width="4.4" height="3.2" rx="1"/><path d="M2.5 20h19"/></svg></span>
+          <span class="nm"><b>ห้องนอนทั้งหลัง</b><span>เตียง ที่นอน ตู้ และโต๊ะข้าง</span></span>
+          <span class="ar">≈ 4 ตร.ม.</span>
+        </label>
+
+        <div class="book-box" id="bookBox" aria-live="polite">
+          <div class="bk-row">
+            <span class="bk-size" id="bkSize">ห้องขนาด S — 4.5 ตร.ม.</span>
+            <span class="bk-price" id="bkPrice">฿1,900/เดือน · มัดจำ 1 เดือน</span>
+          </div>
+          <button type="button" class="btn btn-primary btn-block" data-action="book">จองห้องขนาดนี้</button>
+          <p class="bk-note">จองฟรี ยังไม่ต้องจ่ายเงิน · ยกเลิกได้ก่อนวันย้ายเข้า</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SIZES ================= -->
+<section class="sec" id="sizes" aria-labelledby="sizes-h" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kicker">ขนาดห้องและราคา</div>
+      <h2 id="sizes-h">ขนาดห้องทั้งหมด</h2>
+      <p>เลือกได้ 4 ขนาดตามปริมาณของ ทุกห้องพื้นคอนกรีต เพดานสูง 3 เมตร ระบายอากาศดี</p>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1000&auto=format&fit=crop" alt="กล่องกระดาษเรียงซ้อนกันในห้องเก็บของขนาดเล็ก" loading="lazy"></div>
+        <div class="card-body">
+          <span class="card-chip">ขนาด S · 4.5 ตร.ม.</span>
+          <div class="card-price">฿1,900<span>/เดือน</span></div>
+          <div class="card-area">กว้างเท่าตู้เสื้อผ้าใบใหญ่</div>
+          <ul class="card-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>กล่อง 15–20 ใบ</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>ตู้เสื้อผ้า 1 ตู้ + จักรยาน 2 คัน</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>เสื้อผ้านอกฤดู หนังสือ ของสะสม</li>
+          </ul>
+          <p class="card-fit"><b>เหมาะกับ:</b> คนอยู่หอพักหรือคอนโดที่ต้องการพื้นที่เพิ่ม</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1610484826967-09c5720778c7?q=80&w=1000&auto=format&fit=crop" alt="กล่องสินค้าและเฟอร์นิเจอร์ชิ้นเล็กในห้องขนาดกลาง" loading="lazy"></div>
+        <div class="card-body">
+          <span class="card-chip">ขนาด M · 9 ตร.ม.</span>
+          <div class="card-price">฿3,200<span>/เดือน</span></div>
+          <div class="card-area">กว้างเท่าห้องนอนเล็ก</div>
+          <ul class="card-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>เฟอร์นิเจอร์คอนโด 1 ห้องนอนทั้งหมด</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>กล่อง 30–40 ใบ</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>เครื่องใช้ไฟฟ้าขนาดกลาง</li>
+          </ul>
+          <p class="card-fit"><b>เหมาะกับ:</b> คนย้ายคอนโด หรือบ้านที่กำลังรีโนเวต</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?q=80&w=1000&auto=format&fit=crop" alt="ทีมงานขนย้ายกล่องของขนาดใหญ่ขึ้นรถบรรทุก" loading="lazy"></div>
+        <div class="card-body">
+          <span class="card-chip">ขนาด L · 13.5 ตร.ม.</span>
+          <div class="card-price">฿4,800<span>/เดือน</span></div>
+          <div class="card-area">กว้างเท่าห้องนั่งเล่น</div>
+          <ul class="card-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>ของทั้งบ้าน 2 ห้องนอน</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>สต็อกสินค้าร้านค้าออนไลน์</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>อุปกรณ์จัดอีเวนต์ บูธ แบคดรอป</li>
+          </ul>
+          <p class="card-fit"><b>เหมาะกับ:</b> พ่อค้าแม่ค้าออนไลน์ และบ้านที่กำลังก่อสร้าง</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=1000&auto=format&fit=crop" alt="ชั้นวางสินค้าและกล่องจัดเก็บในโกดังขนาดใหญ่" loading="lazy"></div>
+        <div class="card-body">
+          <span class="card-chip">ขนาด XL · 18 ตร.ม.</span>
+          <div class="card-price">฿6,500<span>/เดือน</span></div>
+          <div class="card-area">กว้างเท่าโกดังขนาดย่อม</div>
+          <ul class="card-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>สต็อกธุรกิจพร้อมชั้นวางสินค้า</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>เฟอร์นิเจอร์สำนักงานทั้งออฟฟิศ</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>เอกสารย้อนหลังหลายร้อยกล่อง</li>
+          </ul>
+          <p class="card-fit"><b>เหมาะกับ:</b> ธุรกิจที่ต้องการคลังสินค้าหน้าร้าน</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW ================= -->
+<section class="sec" id="how" aria-labelledby="how-h">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kicker">วิธีเช่า</div>
+      <h2 id="how-h">เริ่มใช้งานง่ายใน 3 ขั้นตอน</h2>
+      <p>จากการจองถึงย้ายของเข้าห้อง ใช้เวลาไม่เกินหนึ่งวัน</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-top">
+          <span class="step-num">1</span>
+          <span class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M9 14.5l2.2 2.2 4-4.2"/></svg></span>
+        </div>
+        <h3>จองห้อง</h3>
+        <p>ใช้เครื่องมือประเมินขนาดด้านบน หรือโทรให้ทีมงานช่วยประเมินให้ฟรี จองล็อกราคาได้นาน 7 วัน ยังไม่ต้องจ่ายเงิน</p>
+      </div>
+
+      <div class="step">
+        <div class="step-top">
+          <span class="step-num">2</span>
+          <span class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6h11v10h-11z"/><path d="M13.5 9.5h4.2l3.2 3.6V16h-7.4z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg></span>
+        </div>
+        <h3>ย้ายของเข้า</h3>
+        <p>ขนเองหรือเรียกทีมย้ายของของเรา มีรถเข็น ลิฟต์ขนของ และผ้าห่มกันรอยให้ใช้ฟรี ทำสัญญาหน้างานไม่เกิน 15 นาที</p>
+      </div>
+
+      <div class="step">
+        <div class="step-top">
+          <span class="step-num">3</span>
+          <span class="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="12" r="4.2"/><path d="M12 12h9.5M17.5 12v3.2M20.5 12v2.4"/></svg></span>
+        </div>
+        <h3>เข้าออกได้ทุกวัน</h3>
+        <p>รับรหัสส่วนตัว 6 หลักทันทีหลังเซ็นสัญญา เข้าออกอาคารได้ 24 ชั่วโมง ไม่จำกัดจำนวนครั้ง ไม่มีค่าธรรมเนียมเพิ่ม</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="sec" id="faq" aria-labelledby="faq-h" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-kicker">คำถามพบบ่อย</div>
+      <h2 id="faq-h">สิ่งที่ลูกค้าถามเราบ่อยที่สุด</h2>
+    </div>
+
+    <div class="faq-wrap faq">
+      <details>
+        <summary>เช่าขั้นต่ำกี่เดือน มีเงินมัดจำไหม
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="faq-a">เช่าขั้นต่ำ 1 เดือน คิดค่าเช่าเป็นรายเดือนเต็ม ไม่มีสัญญาผูกมัดระยะยาว มีเงินมัดจำ 1 เดือน ได้คืนเต็มจำนวนเมื่อย้ายออกและส่งมอบห้องตามสภาพเดิม</p>
+      </details>
+      <details>
+        <summary>เข้า-ออกห้องเก็บของได้เวลาไหนบ้าง
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="faq-a">เข้าออกอาคารได้ทุกวันตลอด 24 ชั่วโมง ด้วยรหัสส่วนตัว 6 หลักที่ประตูทางเข้า ส่วนสำนักงานและทีมงานหน้างานให้บริการทุกวัน 8:00–20:00 น.</p>
+      </details>
+      <details>
+        <summary>ของที่เก็บมีประกันคุ้มครองหรือไม่
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="faq-a">ทุกห้องรวมประกันภัยไฟไหม้และภัยธรรมชาติไว้ในค่าเช่าแล้ว คุ้มครองสูงสุด 50,000 บาทต่อห้อง หากของมีมูลค่าสูงกว่านั้น สามารถอัปเกรดวงเงินเพิ่มได้ แจ้งมูลค่าของตอนทำสัญญา</p>
+      </details>
+      <details>
+        <summary>เก็บอะไรไม่ได้บ้าง
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="faq-a">ห้ามเก็บสิ่งผิดกฎหมาย วัตถุไวไฟ สารเคมี ก๊าซ สิ่งมีชีวิต และอาหารสดที่เน่าเสียง่าย สำหรับของที่ต้องคุมอุณหภูมิ เช่น ไวน์หรือผลงานศิลปะ เรามีห้องคุมอุณหภูมิแยกให้เช่าต่างหาก</p>
+      </details>
+      <details>
+        <summary>มีบริการรับ-ส่งของไหม
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="faq-a">มีทีมย้ายของพร้อมรถกระบะตู้ทึบและรถ 6 ล้อ คิดค่าบริการตามระยะทาง เริ่มต้น ฿900 ในเขตบางนา–ศรีนครินทร์ รวมแรงงานยกของ 2 คน นัดล่วงหน้าอย่างน้อย 1 วัน</p>
+      </details>
+      <details>
+        <summary>ต้องใช้เอกสารอะไรในการเช่า
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="faq-a">บุคคลธรรมดาใช้บัตรประชาชนใบเดียว เซ็นสัญญาหน้างานไม่เกิน 15 นาที สำหรับนิติบุคคลเพิ่มสำเนาหนังสือรับรองบริษัทและบัตรประชาชนผู้มีอำนาจเซ็น</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#top" aria-label="เก็บดี เซลฟ์สโตเรจ">
+          <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true">
+            <rect width="24" height="24" rx="6" fill="#f26b21"/>
+            <path d="M12 4.8l6.2 3.3v7.8L12 19.2l-6.2-3.3V8.1z" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M5.8 8.1L12 11.4l6.2-3.3M12 11.4v7.8" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+          เก็บดี <small>KEPDEE</small>
+        </a>
+        <p>เซลฟ์สโตเรจรายเดือนสัญชาติไทย เปิดให้บริการตั้งแต่ปี 2561 ดูแลห้องเก็บของให้ลูกค้ากว่า 4,000 ห้อง ด้วยมาตรฐานความปลอดภัยระดับเดียวกับคลังสินค้าพาณิชย์</p>
+      </div>
+      <div>
+        <h3>ติดต่อเรา</h3>
+        <ul class="foot-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 10-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            123 ถนนบางนา-ตราด กม.4 แขวงบางนา เขตบางนา กรุงเทพมหานคร 10260
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>
+            LINE: @kepdee · hello@kepdee.co.th
+          </li>
+        </ul>
+        <a class="foot-tel" href="tel:021234567">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.8 3.5h3l1.6 4-2 1.6a12 12 0 005.5 5.5l1.6-2 4 1.6v3a2 2 0 01-2.2 2A16.5 16.5 0 014.8 5.7a2 2 0 012-2.2z"/></svg>
+          02-123-4567
+        </a>
+      </div>
+      <div>
+        <h3>เวลาให้บริการ</h3>
+        <ul class="foot-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+            สำนักงาน: ทุกวัน 8:00–20:00 น.
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg>
+            เข้าห้องเก็บของ: 24 ชั่วโมง ด้วยรหัสส่วนตัว
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2569 เก็บดี เซลฟ์สโตเรจ จำกัด สงวนลิขสิทธิ์</span>
+      <span>เว็บไซต์ตัวอย่างสำหรับการนำเสนอ</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- ข้อมูลห้องและสิ่งของ ---------- */
+var COLS=6, ROWS=4;
+var ROOMS=[
+  {id:"S",  area:4.5,  price:1900, scale:0.9},
+  {id:"M",  area:9,    price:3200, scale:1},
+  {id:"L",  area:13.5, price:4800, scale:1.09},
+  {id:"XL", area:18,   price:6500, scale:1.16}
+];
+var ITEMS=[
+  {id:"boxes",    name:"กล่อง 10 ใบ",       area:1.0, h:17, color:"#f0913f"},
+  {id:"wardrobe", name:"ตู้เสื้อผ้า",        area:1.2, h:44, color:"#d96a1f"},
+  {id:"bike",     name:"จักรยาน",            area:0.8, h:23, color:"#5b84a8"},
+  {id:"sofa",     name:"โซฟา 3 ที่นั่ง",     area:2.0, h:19, color:"#c45b4a"},
+  {id:"kitchen",  name:"ชุดครัว",            area:2.5, h:31, color:"#6f8f7a"},
+  {id:"bedroom",  name:"ห้องนอนทั้งหลัง",    area:4.0, h:26, color:"#8a76b0"}
+];
+
+/* ---------- เรขาคณิตห้อง (perspective floor) ---------- */
+var FL=[56,246], FR=[344,246], BR=[296,156], BL=[104,156];
+function lerp(a,b,t){return a+(b-a)*t;}
+function pt(s,t){
+  var lx=lerp(FL[0],BL[0],t), ly=lerp(FL[1],BL[1],t);
+  var rx=lerp(FR[0],BR[0],t), ry=lerp(FR[1],BR[1],t);
+  return [lerp(lx,rx,s), lerp(ly,ry,s)];
+}
+function P(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}
+function shade(hex,f){
+  var n=parseInt(hex.slice(1),16);
+  var r=Math.min(255,Math.round(((n>>16)&255)*f));
+  var g=Math.min(255,Math.round(((n>>8)&255)*f));
+  var b=Math.min(255,Math.round((n&255)*f));
+  return "rgb("+r+","+g+","+b+")";
+}
+function fmt(n){return n.toLocaleString("th-TH");}
+
+/* ---------- เส้นตารางพื้นห้อง (สร้างครั้งเดียว) ---------- */
+(function buildGrid(){
+  var g=document.getElementById("floorGrid");
+  var h="";
+  var c,r,a,b;
+  for(c=1;c<COLS;c++){a=pt(c/COLS,0);b=pt(c/COLS,1);h+='<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'"/>';}
+  for(r=1;r<ROWS;r++){a=pt(0,r/ROWS);b=pt(1,r/ROWS);h+='<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'"/>';}
+  g.innerHTML=h;
+})();
+
+/* ---------- การจัดวาง ---------- */
+function dims(n){
+  if(n<=1)return[1,1];
+  if(n===2)return[2,1];
+  if(n===3)return[3,1];
+  if(n===4)return[2,2];
+  if(n<=6)return[3,2];
+  if(n<=8)return[4,2];
+  if(n===9)return[3,3];
+  if(n<=12)return[4,3];
+  return[COLS,Math.min(ROWS,Math.ceil(n/COLS))];
+}
+function findSpot(grid,w,d){
+  var r,i,rr,cc,ok;
+  for(r=ROWS-d;r>=0;r--){           /* เริ่มจากแถวหลังสุด */
+    for(i=0;i<=COLS-w;i++){
+      ok=true;
+      for(rr=r;rr<r+d&&ok;rr++){
+        for(cc=i;cc<i+w;cc++){
+          if(grid[rr][cc]){ok=false;break;}
+        }
+      }
+      if(ok)return{i:i,r:r};
+    }
+  }
+  return null;
+}
+function layout(items,room){
+  var cellArea=room.area/(COLS*ROWS);
+  var grid=[],r;
+  for(r=0;r<ROWS;r++){grid.push([false,false,false,false,false,false]);}
+  var placed=[], overflow=false;
+  items.forEach(function(it){
+    var need=Math.max(1,Math.round(it.area/cellArea));
+    var dd=dims(need), w=dd[0], d=dd[1];
+    var spot=findSpot(grid,w,d);
+    if(!spot){w=1;d=1;spot=findSpot(grid,1,1);}
+    if(!spot){overflow=true;return;}
+    var rr,cc;
+    for(rr=spot.r;rr<spot.r+d;rr++){for(cc=spot.i;cc<spot.i+w;cc++){grid[rr][cc]=true;}}
+    placed.push({it:it,i:spot.i,r:spot.r,w:w,d:d});
+  });
+  return{placed:placed,overflow:overflow};
+}
+
+/* ---------- วาดกล่อง ---------- */
+function boxSVG(pl,idx){
+  var pad=0.012;
+  var s1=pl.i/COLS+pad, s2=(pl.i+pl.w)/COLS-pad;
+  var t1=pl.r/ROWS+pad, t2=(pl.r+pl.d)/ROWS-pad;
+  var h=pl.it.h;
+  var fl=pt(s1,t1), fr=pt(s2,t1), br=pt(s2,t2), bl=pt(s1,t2);
+  var flu=[fl[0],fl[1]-h], fru=[fr[0],fr[1]-h], bru=[br[0],br[1]-h], blu=[bl[0],bl[1]-h];
+  var c=pl.it.color;
+  return '<g class="box-g" style="animation-delay:'+(idx*70)+'ms">'
+    +'<title>'+pl.it.name+'</title>'
+    +'<polygon points="'+P(bl)+' '+P(fl)+' '+P(flu)+' '+P(blu)+'" fill="'+shade(c,.82)+'"/>'
+    +'<polygon points="'+P(fr)+' '+P(br)+' '+P(bru)+' '+P(fru)+'" fill="'+shade(c,.9)+'"/>'
+    +'<polygon points="'+P(fl)+' '+P(fr)+' '+P(fru)+' '+P(flu)+'" fill="'+shade(c,.7)+'"/>'
+    +'<polygon points="'+P(blu)+' '+P(bru)+' '+P(fru)+' '+P(flu)+'" fill="'+shade(c,1.12)+'" stroke="'+shade(c,.6)+'" stroke-width="1"/>'
+    +'</g>';
+}
+
+/* ---------- อัปเดตทั้งหมด ---------- */
+var boxesG=document.getElementById("boxesG");
+var roomG=document.getElementById("roomG");
+var roomBadge=document.getElementById("roomBadge");
+var meterFill=document.getElementById("meterFill");
+var meterAria=document.getElementById("meterAria");
+var meterText=document.getElementById("meterText");
+var meterTotal=document.getElementById("meterTotal");
+var recText=document.getElementById("recText");
+var chips=document.querySelectorAll("#sizeChips .size-chip");
+var bookBox=document.getElementById("bookBox");
+var bookInit=bookBox.innerHTML;
+var state={room:ROOMS[0]};
+
+function selItems(){
+  return ITEMS.filter(function(it){return document.getElementById("it-"+it.id).checked;});
+}
+function pickRoom(total){
+  for(var i=0;i<ROOMS.length;i++){if(ROOMS[i].area>=total)return ROOMS[i];}
+  return ROOMS[ROOMS.length-1];
+}
+function updateBook(){
+  var s=document.getElementById("bkSize"), p=document.getElementById("bkPrice");
+  if(!s||!p)return;
+  var r=state.room;
+  s.textContent="ห้องขนาด "+r.id+" — "+r.area+" ตร.ม.";
+  p.textContent="฿"+fmt(r.price)+"/เดือน · มัดจำ 1 เดือน คืนเต็มจำนวน";
+}
+function update(){
+  var items=selItems();
+  var total=items.reduce(function(s,x){return s+x.area;},0);
+  var room=pickRoom(total), guard=0;
+  var res=layout(items,room);
+  while(res.overflow&&room.id!=="XL"&&guard<5){
+    room=ROOMS[ROOMS.indexOf(room)+1];
+    res=layout(items,room);
+    guard++;
+  }
+  state.room=room;
+
+  /* วาดของ: แถวหลังก่อน แถวหน้าทับ */
+  var ps=res.placed.slice().sort(function(a,b){return b.r-a.r||a.i-b.i;});
+  var html="";
+  ps.forEach(function(pl,idx){html+=boxSVG(pl,idx);});
+  boxesG.innerHTML=html;
+  roomG.style.transform="scale("+room.scale+")";
+
+  /* ป้ายและชิป */
+  roomBadge.textContent="ห้องขนาด "+room.id+" · "+room.area+" ตร.ม.";
+  chips.forEach(function(ch){ch.classList.toggle("on",ch.getAttribute("data-room")===room.id);});
+
+  /* มาตรวัด */
+  var pct=total>0?Math.round(total/room.area*100):0;
+  meterFill.style.width=Math.min(100,pct)+"%";
+  meterFill.classList.toggle("warn",pct>85);
+  meterAria.setAttribute("aria-valuenow",String(Math.min(100,pct)));
+  meterText.textContent=total>0?("ใช้พื้นที่ประมาณ "+pct+"% ของห้องขนาด "+room.id):"ยังไม่ได้เลือกของ";
+  meterTotal.textContent="รวม "+total.toFixed(1)+" ตร.ม.";
+
+  /* คำแนะนำ */
+  if(total===0){
+    recText.innerHTML="เลือกของจากรายการทางขวา แล้วเราจะแนะนำขนาดห้องให้ทันที";
+  }else{
+    recText.innerHTML="ของทั้งหมด ≈ <b>"+total.toFixed(1)+" ตร.ม.</b> — แนะนำ <b>ห้องขนาด "+room.id
+      +" ("+room.area+" ตร.ม.)</b> ราคา <b>฿"+fmt(room.price)+"/เดือน</b>";
+  }
+  updateBook();
+}
+
+/* ---------- ผูกอีเวนต์ checkbox ---------- */
+ITEMS.forEach(function(it){
+  var el=document.getElementById("it-"+it.id);
+  el.addEventListener("change",function(){
+    var lab=el.closest("label");
+    if(lab){lab.classList.toggle("on",el.checked);}
+    update();
+  });
+});
+
+/* ---------- ปุ่มจอง ---------- */
+bookBox.addEventListener("click",function(e){
+  var b=e.target.closest("[data-action]");
+  if(!b)return;
+  var act=b.getAttribute("data-action");
+  if(act==="book"){
+    var r=state.room;
+    var ref="KPD-"+Math.floor(1000+Math.random()*9000);
+    bookBox.innerHTML='<div class="bk-ok">'
+      +'<div class="ok-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5l5 5L19.5 7"/></svg></div>'
+      +'<b>รับจองห้องขนาด '+r.id+' แล้ว</b>'
+      +'<p>เลขที่จอง '+ref+' · ฿'+fmt(r.price)+'/เดือน<br>ทีมงานเก็บดีจะโทรยืนยันภายใน 30 นาที (ทุกวัน 8:00–20:00 น.)</p>'
+      +'<button type="button" class="btn btn-ghost" data-action="reset">ประเมินขนาดใหม่</button>'
+      +'</div>';
+  }else if(act==="reset"){
+    bookBox.innerHTML=bookInit;
+    updateBook();
+  }
+});
+
+update();
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+</body>
+</html>
