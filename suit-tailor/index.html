@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAISON TAILOR — ร้านตัดสูทสั่งวัดตัว ย่านสีลม</title>
+<meta name="description" content="เมซง เทเลอร์ ร้านตัดสูทสั่งวัดตัวย่านสีลม ช่างสูทประสบการณ์ 40 ปี วัดสัดส่วนละเอียด 28 จุด ตัดเย็บด้วยมือ พร้อมสวมใน 3 สัปดาห์">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;1,400&family=Sarabun:wght@300;400;500&family=Taviraj:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1a2233;
+  --wine:#7a2e3a;
+  --ivory:#f1ebdd;
+  --brass:#b08d57;
+  --ink:#191c24;
+  --muted:#6b7180;
+  --line:rgba(25,28,36,.14);
+  --f-th:'Taviraj',serif;
+  --f-en:'Libre Caslon Text',serif;
+  --f-body:'Sarabun',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--f-body);
+  font-size:16px;
+  font-weight:300;
+  line-height:1.75;
+  color:var(--ink);
+  background:var(--ivory);
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+.en{font-family:var(--f-en)}
+.wrap{max-width:1160px;margin-inline:auto;padding-inline:clamp(18px,4vw,40px)}
+section{padding-block:clamp(56px,8vw,104px)}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:2px}
+
+/* ---------- header ---------- */
+.topbar{background:#131a29;color:rgba(241,235,221,.75);font-size:13.5px;letter-spacing:.02em}
+.topbar .wrap{display:flex;justify-content:space-between;gap:16px;padding-block:7px}
+.topbar span{white-space:nowrap}
+.topbar .tb-r{display:flex;gap:22px}
+header.site{
+  position:sticky;top:0;z-index:50;
+  background:var(--navy);
+  border-bottom:1px solid rgba(176,141,87,.35);
+}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px}
+.brand{font-family:var(--f-en);font-size:21px;letter-spacing:.24em;color:var(--ivory);text-decoration:none;white-space:nowrap}
+.brand em{font-style:italic;color:var(--brass)}
+nav.site-nav{display:flex;align-items:center;gap:4px}
+nav.site-nav a{
+  display:inline-flex;align-items:center;min-height:44px;padding:0 12px;
+  color:rgba(241,235,221,.82);text-decoration:none;font-size:15px;font-weight:400;
+  border-bottom:2px solid transparent;
+}
+nav.site-nav a:hover{color:var(--brass)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:46px;padding:0 24px;border-radius:999px;
+  font-family:var(--f-body);font-size:15.5px;font-weight:500;
+  background:var(--wine);color:var(--ivory);border:1px solid transparent;
+  text-decoration:none;cursor:pointer;transition:background .25s,border-color .25s,color .25s;
+  white-space:nowrap;
+}
+.btn:hover{background:#682734}
+.btn.ghost{background:transparent;border-color:rgba(241,235,221,.45);color:var(--ivory)}
+.btn.ghost:hover{border-color:var(--brass);color:var(--brass);background:transparent}
+.btn.ghost.dark{border-color:rgba(25,28,36,.4);color:var(--ink)}
+.btn.ghost.dark:hover{border-color:var(--wine);color:var(--wine)}
+.btn.big{min-height:54px;padding:0 32px;font-size:16.5px;width:100%}
+.menu-btn{
+  display:none;flex-direction:column;justify-content:center;gap:6px;
+  width:48px;height:48px;padding:10px;background:none;border:1px solid rgba(241,235,221,.3);
+  border-radius:8px;cursor:pointer;
+}
+.menu-btn span{display:block;height:2px;background:var(--ivory);border-radius:2px}
+
+/* ---------- hero ---------- */
+.hero{padding:0;background:var(--ivory)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;min-height:560px}
+.hero-txt{display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,6vw,84px) clamp(24px,5vw,72px)}
+.kick{
+  font-family:var(--f-en);font-style:italic;font-size:14px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--brass);margin-bottom:18px;
+}
+.hero h1{
+  font-family:var(--f-th);font-weight:600;
+  font-size:clamp(34px,4.8vw,56px);line-height:1.28;letter-spacing:.01em;
+  margin-bottom:20px;
+}
+.hero h1 .en{font-style:italic;font-weight:400;color:var(--wine)}
+.lead{font-size:17.5px;color:#3d414c;max-width:34em;margin-bottom:14px}
+.hero-sub{font-size:15.5px;color:var(--muted);margin-bottom:32px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+.hero-img{position:relative;min-height:340px}
+.hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-img::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(26,34,51,.28),rgba(26,34,51,0) 40%);
+  pointer-events:none;
+}
+.rule{height:1px;background:var(--line);border:0}
+
+/* ---------- stats ---------- */
+.stats{padding-block:0;background:var(--ivory)}
+.stats .wrap{padding-block:34px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.stat b{display:block;font-family:var(--f-en);font-weight:400;font-size:clamp(26px,3vw,34px);color:var(--wine);line-height:1.2}
+.stat span{font-size:14.5px;color:var(--muted)}
+.stat{border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+
+/* ---------- section headers ---------- */
+.sec-head{text-align:center;max-width:640px;margin:0 auto clamp(36px,5vw,56px)}
+.sec-head .kick{margin-bottom:12px}
+.sec-head h2{font-family:var(--f-th);font-weight:600;font-size:clamp(27px,3.4vw,40px);line-height:1.35}
+.sec-head p{color:var(--muted);margin-top:12px;font-size:16px}
+.sec-head.on-dark h2{color:var(--ivory)}
+.sec-head.on-dark p{color:rgba(241,235,221,.65)}
+.sec-lines{display:flex;align-items:center;gap:14px;justify-content:center;margin-top:18px}
+.sec-lines::before,.sec-lines::after{content:"";height:1px;width:64px;background:var(--brass);opacity:.6}
+
+/* ---------- builder ---------- */
+.builder{background:var(--navy);color:var(--ivory)}
+.build-grid{display:grid;grid-template-columns:minmax(300px,440px) 1fr;gap:clamp(24px,4vw,52px);align-items:start}
+.stage{
+  background:var(--ivory);border:1px solid rgba(176,141,87,.5);border-radius:14px;
+  padding:clamp(16px,3vw,28px);text-align:center;
+  position:sticky;top:96px;
+}
+.stage svg{width:100%;max-width:360px;height:auto;margin-inline:auto}
+.stage-note{font-size:13.5px;color:var(--muted);margin-top:10px}
+.seam{fill:none;stroke:rgba(15,18,26,.45);stroke-width:1.6}
+.btn-suit{fill:#23262e;stroke:#b08d57;stroke-width:1.6}
+
+.grp{border:0;margin-bottom:26px}
+.grp legend{
+  font-family:var(--f-th);font-weight:500;font-size:17px;color:var(--brass);
+  letter-spacing:.04em;margin-bottom:12px;padding:0;
+}
+.grp legend small{font-family:var(--f-body);font-size:13px;color:rgba(241,235,221,.55);letter-spacing:0}
+.opt-row{display:grid;gap:10px}
+.opt{
+  position:relative;display:flex;align-items:center;gap:14px;
+  min-height:52px;padding:11px 16px;cursor:pointer;
+  border:1px solid rgba(241,235,221,.18);border-radius:10px;
+  transition:border-color .2s,background .2s;
+}
+.opt input{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden}
+.opt::before{
+  content:"";flex:none;width:18px;height:18px;border-radius:50%;
+  border:2px solid rgba(241,235,221,.4);
+}
+.opt:has(input:checked){border-color:var(--brass);background:rgba(176,141,87,.1)}
+.opt:has(input:checked)::before{
+  border-color:var(--brass);
+  background:radial-gradient(circle at center,var(--brass) 0 5px,transparent 6px);
+}
+.opt:has(input:focus-visible){outline:2px solid var(--brass);outline-offset:2px}
+.opt-t{flex:1;display:flex;flex-direction:column;line-height:1.45}
+.opt-t b{font-weight:500;font-size:15.5px}
+.opt-t i{font-style:normal;font-size:13px;color:rgba(241,235,221,.55)}
+.opt-p{font-family:var(--f-en);font-size:14px;color:var(--brass);white-space:nowrap}
+.sw-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sw{
+  position:relative;display:flex;align-items:center;gap:12px;
+  min-height:60px;padding:9px 12px;cursor:pointer;
+  border:1px solid rgba(241,235,221,.18);border-radius:10px;
+  transition:border-color .2s,background .2s;
+}
+.sw input{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden}
+.chip{
+  flex:none;width:42px;height:42px;border-radius:8px;
+  border:1px solid rgba(0,0,0,.35);background:var(--c);
+}
+.chip.plaid{
+  background:
+    repeating-linear-gradient(90deg,transparent 0 11px,rgba(122,46,58,.85) 11px 13px),
+    repeating-linear-gradient(0deg,transparent 0 11px,rgba(241,235,221,.4) 11px 12px),
+    #28303f;
+}
+.sw:has(input:checked){border-color:var(--brass);background:rgba(176,141,87,.1)}
+.sw:has(input:focus-visible){outline:2px solid var(--brass);outline-offset:2px}
+.sw-t{display:flex;flex-direction:column;line-height:1.4}
+.sw-t b{font-weight:500;font-size:14.5px}
+.sw-t small{font-size:12px;color:rgba(241,235,221,.55)}
+
+.panel{
+  border:1px solid rgba(176,141,87,.45);border-radius:12px;
+  background:rgba(241,235,221,.05);padding:clamp(18px,3vw,26px);
+}
+.price-row{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:6px}
+.price-row span{font-size:15px;color:rgba(241,235,221,.7)}
+.price-row strong{font-family:var(--f-en);font-weight:400;font-size:clamp(28px,3vw,36px);color:var(--ivory);line-height:1.1}
+.sum{font-size:14.5px;color:var(--brass);margin-bottom:8px}
+.note{font-size:13px;color:rgba(241,235,221,.55);margin-bottom:18px}
+.done{text-align:center;padding:clamp(26px,4vw,36px)}
+.done svg{width:54px;height:54px;margin:0 auto 14px;display:block}
+.done h3{font-family:var(--f-th);font-weight:600;font-size:23px;margin-bottom:10px}
+.done p{font-size:15px;color:rgba(241,235,221,.78);margin-bottom:8px}
+.done .done-sum{color:var(--brass);font-size:14.5px}
+.done .btn{margin-top:16px}
+
+/* ---------- process ---------- */
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.5vw,30px)}
+.step{border-top:1px solid var(--line);padding-top:20px;position:relative}
+.step .num{
+  font-family:var(--f-en);font-style:italic;font-size:15px;color:var(--brass);
+  letter-spacing:.12em;display:block;margin-bottom:10px;
+}
+.step h3{font-family:var(--f-th);font-weight:600;font-size:20px;margin-bottom:8px}
+.step p{font-size:15px;color:var(--muted)}
+.step .dur{
+  display:inline-block;margin-top:12px;font-size:13px;color:var(--wine);
+  border:1px solid rgba(122,46,58,.35);border-radius:999px;padding:3px 12px;
+}
+.proc-time{
+  margin-top:clamp(28px,4vw,40px);text-align:center;
+  font-family:var(--f-th);font-size:18px;color:var(--ink);
+}
+.proc-time b{font-weight:600;color:var(--wine)}
+
+/* ---------- fabrics ---------- */
+.fabric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.2vw,26px)}
+.fabric{
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#f8f4ea;
+  transition:transform .3s,box-shadow .3s;
+}
+.fabric:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(25,28,36,.1)}
+.fabric figure{aspect-ratio:4/5;overflow:hidden}
+.fabric img{width:100%;height:100%;object-fit:cover}
+.fabric .fb{padding:16px 18px 20px}
+.fabric .fb .en{display:block;font-style:italic;font-size:14px;color:var(--brass);margin-bottom:4px}
+.fabric h3{font-family:var(--f-th);font-weight:600;font-size:18.5px;margin-bottom:6px}
+.fabric p{font-size:14px;color:var(--muted);margin-bottom:10px}
+.fabric .fp{font-family:var(--f-en);font-size:14.5px;color:var(--wine)}
+
+/* ---------- services ---------- */
+.svc-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(18px,2.5vw,30px)}
+.svc{border:1px solid var(--line);border-radius:12px;padding:clamp(22px,3vw,32px);background:#f8f4ea}
+.svc.wine{background:var(--wine);border-color:transparent;color:var(--ivory)}
+.svc .en{display:block;font-style:italic;font-size:14px;color:var(--brass);margin-bottom:6px;letter-spacing:.14em;text-transform:uppercase}
+.svc h3{font-family:var(--f-th);font-weight:600;font-size:23px;margin-bottom:14px}
+.svc-row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:15.5px}
+.svc-row:last-of-type{border-bottom:0}
+.svc-row .p{font-family:var(--f-en);white-space:nowrap;color:var(--wine)}
+.svc .svc-note{font-size:13.5px;color:var(--muted);margin-top:14px}
+.svc.wine p{font-size:15.5px;color:rgba(241,235,221,.85);margin-bottom:12px}
+.svc.wine ul{list-style:none;margin-bottom:18px}
+.svc.wine li{padding:7px 0 7px 26px;position:relative;font-size:15px;color:rgba(241,235,221,.9)}
+.svc.wine li::before{
+  content:"";position:absolute;left:2px;top:15px;width:9px;height:9px;
+  border:1.5px solid var(--brass);transform:rotate(45deg);
+}
+.svc.wine .rent-p{font-family:var(--f-en);font-size:30px;color:var(--ivory);margin-bottom:4px}
+.svc.wine .rent-p small{font-size:14px;color:rgba(241,235,221,.7);font-family:var(--f-body)}
+.svc.wine .btn{border-color:rgba(241,235,221,.5);color:var(--ivory);background:transparent}
+.svc.wine .btn:hover{border-color:var(--ivory);background:rgba(241,235,221,.08)}
+
+/* ---------- reviews ---------- */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.5vw,30px)}
+.rev{border:1px solid var(--line);border-radius:12px;padding:clamp(22px,3vw,30px);background:#f8f4ea;position:relative}
+.rev .q{font-family:var(--f-en);font-size:56px;line-height:.6;color:var(--brass);display:block;margin-bottom:16px}
+.rev p{font-size:15.5px;color:#3d414c;margin-bottom:16px}
+.rev footer{border-top:1px solid var(--line);padding-top:12px}
+.rev footer b{display:block;font-weight:500;font-size:15px}
+.rev footer span{font-size:13.5px;color:var(--muted)}
+
+/* ---------- footer ---------- */
+footer.site{background:var(--navy);color:rgba(241,235,221,.75);padding-block:clamp(48px,6vw,72px) 0}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:clamp(24px,4vw,48px)}
+.foot-brand{font-family:var(--f-en);font-size:24px;letter-spacing:.22em;color:var(--ivory);margin-bottom:14px}
+.foot-brand em{font-style:italic;color:var(--brass)}
+.foot-grid p{font-size:15px}
+.foot-grid h4{
+  font-family:var(--f-en);font-style:italic;font-weight:400;font-size:14px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--brass);margin-bottom:14px;
+}
+.foot-grid ul{list-style:none}
+.foot-grid li{font-size:15px;padding:4px 0}
+.foot-grid a{color:rgba(241,235,221,.85);text-decoration:none;border-bottom:1px solid rgba(176,141,87,.4)}
+.foot-grid a:hover{color:var(--brass)}
+.foot-bottom{
+  margin-top:clamp(32px,4vw,48px);border-top:1px solid rgba(176,141,87,.3);
+  padding-block:20px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  font-size:13.5px;color:rgba(241,235,221,.5);
+}
+
+/* ---------- reveal ---------- */
+html.js .rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+html.js .rv.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:1020px){
+  .build-grid{grid-template-columns:1fr}
+  .stage{position:static;max-width:520px;margin-inline:auto}
+  .proc-grid{grid-template-columns:repeat(2,1fr)}
+  .fabric-grid{grid-template-columns:repeat(2,1fr)}
+  .svc-grid{grid-template-columns:1fr}
+  .rev-grid{grid-template-columns:1fr;max-width:640px;margin-inline:auto}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .topbar{display:none}
+  .menu-btn{display:flex}
+  nav.site-nav{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    background:var(--navy);flex-direction:column;align-items:stretch;
+    border-top:1px solid rgba(176,141,87,.3);padding:8px 18px 16px;gap:2px;
+  }
+  nav.site-nav.open{display:flex}
+  nav.site-nav a{min-height:48px}
+  nav.site-nav .btn{margin-top:8px}
+  .hero-grid{grid-template-columns:1fr;min-height:0}
+  .hero-img{order:-1;min-height:300px}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:26px 12px}
+  .stat:nth-child(3){border-left:0}
+  .sw-grid{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .proc-grid{grid-template-columns:1fr}
+  .fabric-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero-cta .btn{width:100%}
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important;animation:none !important}
+  html.js .rv{opacity:1;transform:none}
+  .fabric:hover{transform:none}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>สีลม กรุงเทพมหานคร — รับนัดหมายล่วงหน้า</span>
+    <span class="tb-r"><span>จันทร์–เสาร์ 10:00–19:00 น.</span><span>โทร <span class="en">02-234-5678</span></span></span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top">MAISON <em>TAILOR</em></a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="เปิดเมนู">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="site-nav" id="siteNav" aria-label="เมนูหลัก">
+      <a href="#top">หน้าแรก</a>
+      <a href="#builder">ออกแบบสูท</a>
+      <a href="#process">ขั้นตอน</a>
+      <a href="#fabrics">ผ้า</a>
+      <a href="#services">บริการ</a>
+      <a href="#reviews">รีวิว</a>
+      <a href="#contact">ติดต่อ</a>
+      <a class="btn" href="#builder">นัดวัดตัว</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" aria-label="แนะนำร้าน">
+    <div class="hero-grid">
+      <div class="hero-txt">
+        <p class="kick">Bespoke Atelier — Silom, Est. 1984</p>
+        <h1>สูทที่ตัดเพื่อ<br>คุณ<span class="en">คนเดียว</span></h1>
+        <p class="lead">ครูประเสริฐ ช่างสูทอาวุโสประสบการณ์กว่า 40 ปี วัดสัดส่วนละเอียด 28 จุด แล้วถ่ายทอดเป็นทรงสูทที่เข้ากับร่างและบุคลิกของคุณโดยเฉพาะ — ตัดเย็บด้วยมือทุกตะเข็บในบ้านหลังเดียวกับร้าน</p>
+        <p class="hero-sub">สูทสั่งตัดเริ่มต้น <span class="en">฿12,900</span> • ฟิตติ้ง 2 ครั้ง • พร้อมสวมใน 3 สัปดาห์</p>
+        <div class="hero-cta">
+          <a class="btn" href="#builder">นัดวัดตัว</a>
+          <a class="btn ghost dark" href="#process">ดูขั้นตอนสั่งตัด</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="../assets/suit-hero.jpg" alt="เสื้อสูทสั่งตัดสีกรมท่าบนหุ่น ในอะทีลีเย่ของเมซง เทเลอร์" fetchpriority="high">
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats" aria-label="ข้อมูลร้านโดยย่อ">
+    <div class="wrap">
+      <div class="stats-grid">
+        <div class="stat rv"><b class="en">42</b><span>ปีแห่งฝีมือช่าง</span></div>
+        <div class="stat rv"><b class="en">28</b><span>จุดวัดสัดส่วน</span></div>
+        <div class="stat rv"><b class="en">300+</b><span>ม้วนผ้าให้เลือก</span></div>
+        <div class="stat rv"><b class="en">3</b><span>สัปดาห์พร้อมสวม</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUIT BUILDER -->
+  <section class="builder" id="builder" aria-label="ออกแบบสูทของคุณ">
+    <div class="wrap">
+      <div class="sec-head on-dark rv">
+        <p class="kick">The Configurator</p>
+        <h2>ออกแบบสูทของคุณ</h2>
+        <p>เลือกทรงปก แบบกระดุม ช่องเสริม และผ้า — ภาพสูทและราคาจะปรับตามแบบของคุณทันที</p>
+        <div class="sec-lines" aria-hidden="true"></div>
+      </div>
+
+      <div class="build-grid">
+        <figure class="stage rv">
+          <svg viewBox="0 0 400 470" role="img" aria-label="ภาพวาดเสื้อสูทหน้าตรง เปลี่ยนรูปปก กระดุม และสีผ้าตามตัวเลือก">
+            <defs>
+              <pattern id="plaid" width="30" height="30" patternUnits="userSpaceOnUse">
+                <rect width="30" height="30" fill="#28303f"/>
+                <path d="M0 0V30M0 0H30" stroke="#7a2e3a" stroke-width="3" opacity=".5" fill="none"/>
+                <path d="M15 0V30M0 15H30" stroke="#f1ebdd" stroke-width="1" opacity=".28" fill="none"/>
+              </pattern>
+            </defs>
+            <path data-fab="b" fill="#26304a" stroke="#10131a" stroke-opacity=".4" stroke-width="1.6"
+              d="M170 60 L106 86 Q93 96 90 142 L86 260 Q84 330 88 382 L125 386 L127 268 Q128 214 125 182 L145 300 L137 428 Q166 438 200 439 Q234 438 263 428 L255 300 L275 182 Q272 214 273 268 L275 386 L312 382 Q316 330 314 260 L310 142 Q307 96 294 86 L230 60 Q200 52 170 60 Z"/>
+            <path class="seam" d="M106 86 Q118 130 125 182"/>
+            <path class="seam" d="M294 86 Q282 130 275 182"/>
+            <path data-fab="d" fill="#1b2336" stroke="#10131a" stroke-opacity=".4" stroke-width="1.4"
+              d="M168 60 Q200 50 232 60 L226 42 Q200 34 174 42 Z"/>
+            <path d="M176 62 L200 270 L224 62 Q200 54 176 62 Z" fill="#f6f1e4" stroke="#10131a" stroke-opacity=".18" stroke-width="1"/>
+            <path d="M190 64 L210 64 L206 88 L212 230 L200 258 L188 230 L194 88 Z" fill="#7a2e3a" stroke="#10131a" stroke-opacity=".3" stroke-width="1"/>
+            <path class="seam" d="M200 268 L200 436"/>
+            <path id="dbSeam" class="seam" style="display:none" d="M228 272 Q246 350 250 430"/>
+            <rect data-fab="d" x="118" y="348" width="58" height="16" rx="3" fill="#1b2336" stroke="#10131a" stroke-opacity=".4" stroke-width="1.3"/>
+            <rect data-fab="d" x="224" y="348" width="58" height="16" rx="3" fill="#1b2336" stroke="#10131a" stroke-opacity=".4" stroke-width="1.3"/>
+            <g id="pktTicket" style="display:none">
+              <rect data-fab="d" x="228" y="328" width="42" height="11" rx="3" fill="#1b2336" stroke="#10131a" stroke-opacity=".4" stroke-width="1.3"/>
+            </g>
+            <g id="pktBreast" style="display:none">
+              <path d="M131 150 L151 150 L141 138 Z" fill="#f1ebdd" stroke="#10131a" stroke-opacity=".2" stroke-width="1"/>
+              <rect data-fab="d" x="124" y="148" width="36" height="7" rx="2" transform="rotate(-4 142 151.5)" fill="#1b2336" stroke="#10131a" stroke-opacity=".4" stroke-width="1.2"/>
+            </g>
+            <g id="lap-notch">
+              <path data-fab="d" fill="#1b2336" stroke="#10131a" stroke-opacity=".45" stroke-width="1.5" d="M170 58 L140 94 L166 108 Q182 196 200 272 L190 66 Z"/>
+              <path data-fab="d" fill="#1b2336" stroke="#10131a" stroke-opacity=".45" stroke-width="1.5" d="M230 58 L260 94 L234 108 Q218 196 200 272 L210 66 Z"/>
+            </g>
+            <g id="lap-peak" style="display:none">
+              <path data-fab="d" fill="#1b2336" stroke="#10131a" stroke-opacity=".45" stroke-width="1.5" d="M170 58 L124 68 L152 100 Q180 196 200 272 L190 66 Z"/>
+              <path data-fab="d" fill="#1b2336" stroke="#10131a" stroke-opacity=".45" stroke-width="1.5" d="M230 58 L276 68 L248 100 Q220 196 200 272 L210 66 Z"/>
+            </g>
+            <g id="lap-shawl" style="display:none">
+              <path data-fab="d" fill="#1b2336" stroke="#10131a" stroke-opacity=".45" stroke-width="1.5" d="M170 58 C146 96 148 150 160 198 C170 236 186 258 200 272 L190 66 Z"/>
+              <path data-fab="d" fill="#1b2336" stroke="#10131a" stroke-opacity=".45" stroke-width="1.5" d="M230 58 C254 96 252 150 240 198 C230 236 214 258 200 272 L210 66 Z"/>
+            </g>
+            <g id="btnSingle">
+              <circle class="btn-suit" cx="200" cy="276" r="7"/>
+              <circle class="btn-suit" cx="200" cy="324" r="7"/>
+            </g>
+            <g id="btnDouble" style="display:none">
+              <circle class="btn-suit" cx="172" cy="276" r="7"/>
+              <circle class="btn-suit" cx="228" cy="276" r="7"/>
+              <circle class="btn-suit" cx="172" cy="324" r="7"/>
+              <circle class="btn-suit" cx="228" cy="324" r="7"/>
+            </g>
+          </svg>
+          <figcaption class="stage-note">ภาพประกอบการตัดเย็บ — ปรับเปลี่ยนตามตัวเลือกแบบเรียลไทม์</figcaption>
+        </figure>
+
+        <div class="opts">
+          <fieldset class="grp rv">
+            <legend>ทรงปกสูท</legend>
+            <div class="opt-row">
+              <label class="opt"><input type="radio" name="lapel" value="notch" checked>
+                <span class="opt-t"><b>ปกเรียว — Notch</b><i>คลาสสิก เหมาะกับทุกโอกาสและทุกวัย</i></span>
+                <span class="opt-p">รวมในฐาน</span></label>
+              <label class="opt"><input type="radio" name="lapel" value="peak">
+                <span class="opt-t"><b>ปกแหลม — Peak</b><i>ทรงพลัง ไหล่ดูกว้าง เจ้าบ่าวและผู้บริหารนิยม</i></span>
+                <span class="opt-p">+฿800</span></label>
+              <label class="opt"><input type="radio" name="lapel" value="shawl">
+                <span class="opt-t"><b>ปกโค้ง — Shawl</b><i>สายงานราตรี ทักซิโด้ และงานพรมแดง</i></span>
+                <span class="opt-p">+฿1,200</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="grp rv">
+            <legend>แบบกระดุม</legend>
+            <div class="opt-row">
+              <label class="opt"><input type="radio" name="btnstyle" value="single" checked>
+                <span class="opt-t"><b>แถวเดียว 2 กระดุม</b><i>Single-breasted — สัดส่วนที่ใส่ง่ายที่สุด</i></span>
+                <span class="opt-p">รวมในฐาน</span></label>
+              <label class="opt"><input type="radio" name="btnstyle" value="double">
+                <span class="opt-t"><b>สองแถว 4 กระดุม</b><i>Double-breasted — สง่างามแบบสายวินเทจ</i></span>
+                <span class="opt-p">+฿1,500</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="grp rv">
+            <legend>ช่องเสริม <small>— เลือกได้มากกว่าหนึ่งรายการ</small></legend>
+            <div class="opt-row">
+              <label class="opt"><input type="checkbox" name="breast" value="1">
+                <span class="opt-t"><b>กระเป๋าหน้าอก</b><i>เวลต์เรียบ พร้อมพ็อกเก็ตสแควร์สีงาช้าง</i></span>
+                <span class="opt-p">+฿350</span></label>
+              <label class="opt"><input type="checkbox" name="ticket" value="1">
+                <span class="opt-t"><b>กระเป๋าตั๋ว</b><i>Ticket pocket เหนือกระเป๋าข้างขวา สายบริติชแท้</i></span>
+                <span class="opt-p">+฿450</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="grp rv">
+            <legend>ผ้า</legend>
+            <div class="sw-grid">
+              <label class="sw"><input type="radio" name="fabric" value="navy" checked>
+                <span class="chip" style="--c:#26304a"></span>
+                <span class="sw-t"><b>กรมท่า</b><small>อิตาเลียนวูล — รวมในฐาน</small></span></label>
+              <label class="sw"><input type="radio" name="fabric" value="gray">
+                <span class="chip" style="--c:#7b7f88"></span>
+                <span class="sw-t"><b>เทากลาง</b><small>วูลสักหลาด — รวมในฐาน</small></span></label>
+              <label class="sw"><input type="radio" name="fabric" value="plaid">
+                <span class="chip plaid"></span>
+                <span class="sw-t"><b>ลายสก็อต</b><small>วินโดว์เพน — +฿1,800</small></span></label>
+              <label class="sw"><input type="radio" name="fabric" value="wine">
+                <span class="chip" style="--c:#6f2c38"></span>
+                <span class="sw-t"><b>เบอร์กันดี</b><small>วูลแคชเมียร์ — +฿1,200</small></span></label>
+            </div>
+          </fieldset>
+
+          <div class="panel rv" id="bookForm">
+            <div class="price-row">
+              <span>ราคาโดยประมาณ</span>
+              <strong id="price" aria-live="polite">฿12,900</strong>
+            </div>
+            <p class="sum" id="sumText">ปกเรียว • กระดุมแถวเดียว 2 กระดุม • ผ้ากรมท่า</p>
+            <p class="note">ราคารวมผ้าและวัตถุดิบ งานตัดเย็บมือทั้งตัว ฟิตติ้ง 2 ครั้ง และบริการปรับแก้หลังส่งมอบภายใน 30 วัน</p>
+            <button class="btn big" id="bookBtn" type="button">จองวัดตัวด้วยแบบนี้</button>
+          </div>
+
+          <div class="panel done" id="bookDone" hidden>
+            <svg viewBox="0 0 52 52" aria-hidden="true">
+              <circle cx="26" cy="26" r="24" fill="none" stroke="#b08d57" stroke-width="2"/>
+              <path d="M15 27 L23 35 L37 19" fill="none" stroke="#b08d57" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>รับแบบเรียบร้อยแล้ว</h3>
+            <p class="done-sum" id="doneSum"></p>
+            <p>ทีมงานจะติดต่อกลับภายใน 1 วันทำการเพื่อยืนยันวันและเวลานัดวัดตัว หรือโทรหาเราได้โดยตรงที่ <span class="en">02-234-5678</span> (จันทร์–เสาร์ 10:00–19:00 น.)</p>
+            <button class="btn ghost" id="againBtn" type="button">ปรับแบบอีกครั้ง</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" aria-label="ขั้นตอนการสั่งตัด">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="kick">The Process</p>
+        <h2>สี่ขั้นตอนสู่สูทตัวโปรด</h2>
+        <p>ทุกตัวผ่านมือครูประเสริฐและทีมช่างเพียง 6 คน ไม่มีงานส่งต่อออกนอกร้าน</p>
+        <div class="sec-lines" aria-hidden="true"></div>
+      </div>
+      <div class="proc-grid">
+        <article class="step rv">
+          <span class="num">No. 01</span>
+          <h3>ปรึกษาและเลือกผ้า</h3>
+          <p>คุยเรื่องโอกาสใช้งาน สไตล์ที่ชอบ และงบประมาณ แล้วเลือกผ้าจากตัวอย่างกว่า 300 ม้วน พร้อมคำแนะนำเรื่องน้ำหนักผ้ากับอากาศเมืองไทย</p>
+          <span class="dur">ประมาณ 45 นาที</span>
+        </article>
+        <article class="step rv">
+          <span class="num">No. 02</span>
+          <h3>วัดสัดส่วน 28 จุด</h3>
+          <p>ครูประเสริฐวัดและบันทึกทรงตัวเฉพาะบุคคล — ไหล่เอียง ท่ายืน แขนยาวไม่เท่ากัน — ทุกรายละเอียดอยู่ในสมุดแพตเทิร์นของคุณ</p>
+          <span class="dur">ประมาณ 30 นาที</span>
+        </article>
+        <article class="step rv">
+          <span class="num">No. 03</span>
+          <h3>ลองครั้งแรก</h3>
+          <p>สวมสูทคราบแรกที่เย็บรวบด้วยด้ายขาว ช่างปักหมุดปรับทรงหน้างานทีละจุด จนทรงนั่งลงตัวทั้งตอนยืนและเคลื่อนไหว</p>
+          <span class="dur">สัปดาห์ที่ 2</span>
+        </article>
+        <article class="step rv">
+          <span class="num">No. 04</span>
+          <h3>ปรับละเอียดและส่งมอบ</h3>
+          <p>เก็บงานละเอียด ตะเข็บมือ กระดุมห่วงมือ และการรีดทรง ลองครั้งสุดท้ายก่อนรับสูทกลับบ้านพร้อมคำแนะนำการดูแล</p>
+          <span class="dur">สัปดาห์ที่ 3</span>
+        </article>
+      </div>
+      <p class="proc-time rv">ระยะเวลารวมโดยประมาณ <b>3 สัปดาห์</b> — งานด่วนพิเศษ 10 วัน รับเฉพาะราย (คิดเพิ่ม 20%)</p>
+    </div>
+  </section>
+
+  <!-- FABRICS -->
+  <section id="fabrics" aria-label="ผ้าแนะนำ" style="background:#ece5d5">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="kick">Cloth Selection</p>
+        <h2>ผ้าแนะนำประจำฤดูกาล</h2>
+        <p>คัดจากโรงทออิตาลีและอังกฤษ นิยามด้วยน้ำหนักที่เหมาะกับอากาศกรุงเทพฯ</p>
+        <div class="sec-lines" aria-hidden="true"></div>
+      </div>
+      <div class="fabric-grid">
+        <article class="fabric rv">
+          <figure><img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1000&auto=format&fit=crop" alt="เนื้อผ้าวูลเมอริโนสีกรมท่า ทอละเอียด" loading="lazy" decoding="async"></figure>
+          <div class="fb">
+            <span class="en">Super 120s Merino</span>
+            <h3>กรมท่าคลาสสิก</h3>
+            <p>วูลเมอริโนออสเตรเลียเนื้อละเอียด หลุดรอยยับเร็ว ซับระบายอากาศดี เหมาะกับสูททำงานตัวแรก</p>
+            <span class="fp">รวมในราคาฐาน</span>
+          </div>
+        </article>
+        <article class="fabric rv">
+          <figure><img src="https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=1000&auto=format&fit=crop" alt="ม้วนผ้าวูลสักหลาดหลายเฉดสีเทาเรียงบนชั้น" loading="lazy" decoding="async"></figure>
+          <div class="fb">
+            <span class="en">Wool Flannel</span>
+            <h3>เทาสักหลาด</h3>
+            <p>ผิวขุยนุ่ม ทรงตัวสวยนิ่ง ให้ลุคสุภาพแบบนักธุรกิจยุโรป สวมคู่เชิ้ตขาวหรือเสื้อคอเต่าได้ทุกวัน</p>
+            <span class="fp">รวมในราคาฐาน</span>
+          </div>
+        </article>
+        <article class="fabric rv">
+          <figure><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop" alt="สุภาพบุรุษสวมสูทลายตารางเฉดสีเทา กำลังปรับแขนเสื้อ" loading="lazy" decoding="async"></figure>
+          <div class="fb">
+            <span class="en">Windowpane</span>
+            <h3>ลายสก็อต</h3>
+            <p>ลายตารางเส้นเบอร์กันดีบนพื้นกรม ให้มิติโดยไม่ฉูดฉาด ตัดชิ้นเดียวหรือเต็มสูทก็สง่า</p>
+            <span class="fp">+฿1,800 ต่อชุด</span>
+          </div>
+        </article>
+        <article class="fabric rv">
+          <figure><img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=1000&auto=format&fit=crop" alt="เสื้อสูทสีเบอร์กันดีบนตะขอ ในห้องแต่งตัว" loading="lazy" decoding="async"></figure>
+          <div class="fb">
+            <span class="en">Wool &amp; Cashmere</span>
+            <h3>เบอร์กันดีแคชเมียร์</h3>
+            <p>วูลผสมแคชเมียร์ 10% สัมผัสนุ่มละมุน เงาเนื้อผ้าลึก เหมาะกับงานเย็นและเจ้าบ่าวที่อยากโดดเด่น</p>
+            <span class="fp">+฿1,200 ต่อชุด</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" aria-label="บริการซ่อมแก้และเช่าสูท">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="kick">Beyond Bespoke</p>
+        <h2>งานซ่อมแก้และเช่าสูท</h2>
+        <p>ดูแลสูทของคุณยาวนานเท่าความสัมพันธ์ของเรา</p>
+        <div class="sec-lines" aria-hidden="true"></div>
+      </div>
+      <div class="svc-grid">
+        <div class="svc rv">
+          <span class="en">Alterations</span>
+          <h3>รับซ่อมแก้สูททุกแบรนด์</h3>
+          <div class="svc-row"><span>เก็บเอวเสื้อสูท / คลายเอว</span><span class="p">฿600</span></div>
+          <div class="svc-row"><span>ตัดขาแขน แต่งปลายแขน (ปล่อยกระดุมจริง)</span><span class="p">฿450</span></div>
+          <div class="svc-row"><span>เก็บขากางเกง เย็บขอบมือ</span><span class="p">฿250</span></div>
+          <div class="svc-row"><span>เปลี่ยนซับในทั้งตัว</span><span class="p">฿1,800</span></div>
+          <div class="svc-row"><span>เปลี่ยนกระดุม / แต่งขลิบปก</span><span class="p">฿150</span></div>
+          <p class="svc-note">ประเมินราคาหน้างานฟรี งานมาตรฐาน 2–3 วัน รับงานด่วน 24 ชั่วโมง (คิดเพิ่ม 30%) — ลูกค้าสั่งตัดกับทางร้านปรับแก้ฟรี 30 วันแรก</p>
+        </div>
+        <div class="svc wine rv">
+          <span class="en">Wedding Rental</span>
+          <h3>เช่าสูทงานแต่ง</h3>
+          <p class="rent-p">฿2,900 <small>/ 3 วัน 2 คืน</small></p>
+          <p>เซ็ตครบสำหรับเจ้าบ่าวและเพื่อนเจ้าบ่าว ดูแลโดยช่างคนเดียวกับงานสั่งตัด</p>
+          <ul>
+            <li>เสื้อสูท กางเกง และเสื้อกั๊ก ครบเซ็ต</li>
+            <li>ไซซ์ S–XXL สีกรม ดำ และเทา</li>
+            <li>ฟิตติ้งปรับทรงก่อนงาน 1 ครั้ง ไม่มีค่าใช้จ่าย</li>
+            <li>บริการซักรีดก่อน–หลังงานรวมในราคา</li>
+          </ul>
+          <a class="btn ghost" href="tel:022345678">โทรสำรองไซซ์</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" aria-label="รีวิวจากลูกค้า" style="background:#ece5d5">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="kick">Kind Words</p>
+        <h2>เสียงจากห้องลองสูท</h2>
+        <div class="sec-lines" aria-hidden="true"></div>
+      </div>
+      <div class="rev-grid">
+        <blockquote class="rev rv">
+          <span class="q" aria-hidden="true">&ldquo;</span>
+          <p>ตัดสูทแต่งงานที่นี่ตัวเดียว ใส่แล้วเข้าทรงทุกจุดจนช่างภาพถามว่าไปทำมาจากไหน งานวันจริงรอดตัวสมบูรณ์แบบ</p>
+          <footer><b>คุณธนกฤต วงศ์ไพศาล</b><span>เจ้าบ่าว — ตัดเดือนมีนาคม 2568</span></footer>
+        </blockquote>
+        <blockquote class="rev rv">
+          <span class="q" aria-hidden="true">&ldquo;</span>
+          <p>สั่งสูททำงานมาแล้ว 8 ตัว รายละเอียดปลายแขน ซับใน และกระดุมห่วงมือไม่เคยทำให้ผิดหวัง ราคานี้หาที่ไหนไม่ได้แล้วในกรุงเทพฯ</p>
+          <footer><b>คุณวรินทร์ เพิ่มพูนสุข</b><span>ผู้บริหารสายการเงิน — ลูกค้าประจำ 5 ปี</span></footer>
+        </blockquote>
+        <blockquote class="rev rv">
+          <span class="q" aria-hidden="true">&ldquo;</span>
+          <p>ครูประเสริฐจำสัดส่วนลูกค้าเก่าได้แม่นมาก กลับมาตัดตัวที่สามเกือบไม่ต้องวัดใหม่ แค่ถามว่าช่วงนี้หนักขึ้นไหม</p>
+          <footer><b>คุณอนันต์ ศรีวิไล</b><span>ลูกค้าประจำ 8 ปี</span></footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site" id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-brand">MAISON <em>TAILOR</em></p>
+        <p>อะทีลีเย่ตัดสูทสั่งวัดตัว สืบทอดฝีมือช่างรุ่นเก่าตั้งแต่ปี 2527 ตัดเย็บทุกตะเข็บในบ้านหลังเดียวกับร้าน ย่านสีลม</p>
+      </div>
+      <div>
+        <h4>เยี่ยมชมร้าน</h4>
+        <ul>
+          <li>125 ถนนสีลม แขวงสุริยวงศ์</li>
+          <li>เขตบางรัก กรุงเทพมหานคร 10500</li>
+          <li>BTS ศาลาแดง ทางออก 2 เดิน 5 นาที</li>
+          <li>จันทร์–เสาร์ 10:00–19:00 น.</li>
+          <li>วันอาทิตย์รับเฉพาะนัดหมาย</li>
+        </ul>
+      </div>
+      <div>
+        <h4>ติดต่อนัดหมาย</h4>
+        <ul>
+          <li>โทร <a href="tel:022345678" class="en">02-234-5678</a></li>
+          <li>มือถือ <a href="tel:0814567890" class="en">081-456-7890</a></li>
+          <li>LINE <span class="en">@maisontailor</span></li>
+          <li><a href="#builder">ออกแบบสูทแล้วจองวัดตัว</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2568 <span class="en">Maison Tailor</span> — Bespoke &amp; Alterations</span>
+      <span>ตัดเพื่อคุณคนเดียว ตั้งแต่ปี 2527</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+document.documentElement.classList.add('js');
+var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- mobile menu ---------- */
+var menuBtn = document.getElementById('menuBtn');
+var siteNav = document.getElementById('siteNav');
+if (menuBtn && siteNav) {
+  menuBtn.addEventListener('click', function(){
+    var open = siteNav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.setAttribute('aria-label', open ? 'ปิดเมนู' : 'เปิดเมนู');
+  });
+  siteNav.addEventListener('click', function(e){
+    if (e.target && e.target.tagName === 'A') {
+      siteNav.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+/* ---------- suit builder ---------- */
+var BASE = 12900;
+var PRICES = {
+  lapel:   { notch:0, peak:800, shawl:1200 },
+  btn:     { single:0, double:1500 },
+  breast:  350,
+  ticket:  450,
+  fabric:  { navy:0, gray:0, plaid:1800, wine:1200 }
+};
+var LABELS = {
+  lapel:   { notch:'ปกเรียว', peak:'ปกแหลม', shawl:'ปกโค้ง' },
+  btn:     { single:'กระดุมแถวเดียว 2 กระดุม', double:'กระดุมสองแถว 4 กระดุม' },
+  fabric:  { navy:'ผ้ากรมท่า อิตาเลียนวูล', gray:'ผ้าเทา วูลสักหลาด', plaid:'ผ้าลายสก็อต วินโดว์เพน', wine:'ผ้าเบอร์กันดี วูลแคชเมียร์' }
+};
+var FAB = {
+  navy:  { b:'#26304a', d:'#1b2336' },
+  gray:  { b:'#7b7f88', d:'#60646c' },
+  plaid: { b:'url(#plaid)', d:'#222939' },
+  wine:  { b:'#6f2c38', d:'#55212b' }
+};
+var state = { lapel:'notch', btn:'single', breast:false, ticket:false, fabric:'navy' };
+
+function fmt(n){ return '฿' + n.toLocaleString('th-TH'); }
+function total(){
+  return BASE + PRICES.lapel[state.lapel] + PRICES.btn[state.btn]
+    + (state.breast ? PRICES.breast : 0)
+    + (state.ticket ? PRICES.ticket : 0)
+    + PRICES.fabric[state.fabric];
+}
+function summary(){
+  var parts = [ LABELS.lapel[state.lapel], LABELS.btn[state.btn] ];
+  var extra = [];
+  if (state.breast) extra.push('กระเป๋าหน้าอก');
+  if (state.ticket) extra.push('กระเป๋าตั๋ว');
+  if (extra.length) parts.push(extra.join(' และ '));
+  parts.push(LABELS.fabric[state.fabric]);
+  return parts.join(' • ');
+}
+function setShow(id, on){
+  var el = document.getElementById(id);
+  if (el) el.style.display = on ? '' : 'none';
+}
+function render(){
+  setShow('lap-notch', state.lapel === 'notch');
+  setShow('lap-peak',  state.lapel === 'peak');
+  setShow('lap-shawl', state.lapel === 'shawl');
+  setShow('btnSingle', state.btn === 'single');
+  setShow('btnDouble', state.btn === 'double');
+  setShow('dbSeam',    state.btn === 'double');
+  setShow('pktBreast', state.breast);
+  setShow('pktTicket', state.ticket);
+  var f = FAB[state.fabric];
+  var base = document.querySelectorAll('[data-fab="b"]');
+  var dark = document.querySelectorAll('[data-fab="d"]');
+  for (var i = 0; i < base.length; i++) base[i].setAttribute('fill', f.b);
+  for (var j = 0; j < dark.length; j++) dark[j].setAttribute('fill', f.d);
+  document.getElementById('price').textContent = fmt(total());
+  document.getElementById('sumText').textContent = summary();
+}
+function bind(name, fn){
+  var inputs = document.querySelectorAll('input[name="' + name + '"]');
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener('change', function(e){ fn(e.target); render(); });
+  }
+}
+bind('lapel',    function(el){ state.lapel = el.value; });
+bind('btnstyle', function(el){ state.btn = el.value; });
+bind('fabric',   function(el){ state.fabric = el.value; });
+bind('breast',   function(el){ state.breast = el.checked; });
+bind('ticket',   function(el){ state.ticket = el.checked; });
+
+/* booking */
+var bookBtn  = document.getElementById('bookBtn');
+var bookForm = document.getElementById('bookForm');
+var bookDone = document.getElementById('bookDone');
+var doneSum  = document.getElementById('doneSum');
+var againBtn = document.getElementById('againBtn');
+if (bookBtn) {
+  bookBtn.addEventListener('click', function(){
+    doneSum.textContent = summary() + ' — ' + fmt(total());
+    bookForm.hidden = true;
+    bookDone.hidden = false;
+    bookDone.setAttribute('tabindex', '-1');
+    bookDone.focus({ preventScroll: false });
+  });
+}
+if (againBtn) {
+  againBtn.addEventListener('click', function(){
+    bookDone.hidden = true;
+    bookForm.hidden = false;
+    bookBtn.focus();
+  });
+}
+render();
+
+/* ---------- reveal on scroll ---------- */
+var rv = document.querySelectorAll('.rv');
+if (reduceMotion || !('IntersectionObserver' in window)) {
+  for (var k = 0; k < rv.length; k++) rv[k].classList.add('in');
+} else {
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting) {
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  for (var m = 0; m < rv.length; m++) io.observe(rv[m]);
+}
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

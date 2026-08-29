@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUNDECH — ติดตั้งโซลาร์เซลล์หลังคาครบวงจร</title>
+<meta name="description" content="SUNDECH รับติดตั้งโซลาร์เซลล์หลังคาบ้านและอาคารครบวงจร ทีมวิศวกรมืออาชีพ รับประกันผลิตไฟ 25 ปี ยื่นขออนุญาตให้ทุกขั้นตอน">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfcf7; --card:#fff; --sun:#f5a623; --sun-soft:#fdeecb; --sky:#1e6fb8; --sky-soft:#e3f0fa;
+  --ink:#1c2b33; --muted:#5d7080; --line:#e3e9dc;
+  --radius:20px; --shadow:0 10px 30px rgba(28,43,51,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Prompt",sans-serif; font-weight:400; font-size:16px; line-height:1.75;
+  color:var(--ink); background:var(--bg); -webkit-font-smoothing:antialiased;
+}
+.en{font-family:"Space Grotesk",sans-serif}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-weight:600;line-height:1.35}
+h2{font-size:clamp(1.6rem,3.2vw,2.3rem);letter-spacing:-.01em}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:500;color:var(--sky);background:var(--sky-soft);padding:6px 14px;border-radius:999px;margin-bottom:16px}
+.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--sun)}
+.sub{color:var(--muted);max-width:56ch;margin-top:12px}
+section{padding:88px 0}
+
+/* ---------- NAV ---------- */
+header{
+  position:sticky;top:0;z-index:50;background:rgba(251,252,247,.9);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.logo{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.45rem;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.logo svg{width:30px;height:30px}
+.nav-links{display:flex;gap:6px;list-style:none}
+.nav-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:10px;font-size:.95rem;color:var(--muted);font-weight:500;transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--ink);background:#f0f4ea}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:48px;padding:0 26px;border-radius:999px;border:0;cursor:pointer;
+  font-family:"Prompt",sans-serif;font-weight:500;font-size:1rem;
+  transition:transform .2s,box-shadow .2s,background .2s;
+}
+.btn-sun{background:var(--sun);color:#231a05;box-shadow:0 6px 18px rgba(245,166,35,.35)}
+.btn-sun:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(245,166,35,.45)}
+.btn-sky{background:var(--sky);color:#fff;box-shadow:0 6px 18px rgba(30,111,184,.3)}
+.btn-sky:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(30,111,184,.4)}
+.btn-ghost{background:transparent;color:var(--sky);border:2px solid var(--sky)}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;padding:0;min-height:min(88vh,760px);display:flex;align-items:flex-end}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(251,252,247,.15) 0%,rgba(251,252,247,.05) 35%,rgba(251,252,247,.92) 82%,var(--bg) 100%)}
+.hero-inner{position:relative;width:100%;padding:120px 0 64px}
+.hero h1{font-size:clamp(2.1rem,5.2vw,3.6rem);font-weight:600;max-width:16ch}
+.hero h1 .hl{color:var(--sun);text-shadow:0 2px 20px rgba(245,166,35,.25)}
+.hero p.lead{font-size:1.12rem;color:var(--muted);max-width:52ch;margin-top:18px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.trust{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px;list-style:none}
+.trust li{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 18px;font-size:.92rem;font-weight:500;box-shadow:var(--shadow)}
+.trust svg{width:22px;height:22px;flex:none}
+
+/* ---------- ESTIMATOR ---------- */
+#estimator{background:linear-gradient(180deg,var(--bg),#f4f8ee 60%,var(--bg))}
+.est-card{
+  background:var(--card);border:1px solid var(--line);border-radius:28px;
+  box-shadow:var(--shadow);padding:clamp(24px,4vw,48px);margin-top:32px;
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);
+}
+.est-left h3{font-size:1.25rem;margin-bottom:6px}
+.est-note{color:var(--muted);font-size:.95rem}
+.slider-block{margin-top:26px}
+.bill-display{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.bill-display .val{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(2.2rem,4vw,3rem);color:var(--sky);line-height:1}
+.bill-display .unit{color:var(--muted);font-size:1rem}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:pointer;
+}
+input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:999px;background:linear-gradient(90deg,var(--sun) var(--fill,15%),#e8eee0 var(--fill,15%))}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:28px;height:28px;margin-top:-9px;border-radius:50%;
+  background:#fff;border:4px solid var(--sun);box-shadow:0 4px 12px rgba(245,166,35,.4);
+}
+input[type=range]::-moz-range-track{height:10px;border-radius:999px;background:#e8eee0}
+input[type=range]::-moz-range-progress{height:10px;border-radius:999px;background:var(--sun)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:4px solid var(--sun);box-shadow:0 4px 12px rgba(245,166,35,.4)}
+.range-marks{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-top:2px}
+.bill-bars{margin-top:30px;display:grid;gap:14px}
+.bar-row{display:grid;grid-template-columns:76px 1fr auto;align-items:center;gap:12px;font-size:.9rem}
+.bar-row .lbl{color:var(--muted);font-weight:500}
+.bar{height:16px;border-radius:999px;background:#e8eee0;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:999px;transition:width .5s cubic-bezier(.22,.8,.3,1)}
+.bar.before i{background:linear-gradient(90deg,#e0704a,var(--sun))}
+.bar.after i{background:linear-gradient(90deg,var(--sky),#57a8e8)}
+.bar-row .num{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:.95rem;white-space:nowrap}
+
+.est-right{display:flex;flex-direction:column;align-items:center;gap:22px}
+.sun-ring{position:relative;width:min(230px,60vw)}
+.sun-ring svg{width:100%;height:auto;transform:rotate(-90deg)}
+.sun-ring .ring-track{fill:none;stroke:#edf2e4;stroke-width:14}
+.sun-ring .ring-fill{fill:none;stroke:url(#sunGrad);stroke-width:14;stroke-linecap:round;transition:stroke-dashoffset .6s cubic-bezier(.22,.8,.3,1)}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.ring-center .kw{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:2.4rem;line-height:1;color:var(--ink)}
+.ring-center .kw small{font-size:1.1rem;font-weight:500;color:var(--muted)}
+.ring-center .cap{font-size:.82rem;color:var(--muted);margin-top:6px}
+.est-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}
+.stat{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:16px 12px;text-align:center}
+.stat .num{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(1.15rem,2vw,1.5rem);color:var(--sky);line-height:1.2}
+.stat .num.sun{color:var(--sun)}
+.stat .cap{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.4}
+.est-cta{width:100%;display:grid;gap:10px}
+.est-fine{font-size:.78rem;color:var(--muted);text-align:center}
+.est-success{
+  display:none;align-items:flex-start;gap:14px;background:#eef7e9;border:1px solid #cfe5c0;
+  border-radius:16px;padding:18px 20px;width:100%;
+}
+.est-success.show{display:flex}
+.est-success svg{width:26px;height:26px;flex:none;margin-top:2px}
+.est-success b{display:block;font-weight:600}
+.est-success span{font-size:.9rem;color:var(--muted)}
+
+/* ---------- PACKAGES ---------- */
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px}
+.pkg{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);
+  transition:transform .25s,box-shadow .25s;
+}
+.pkg:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(28,43,51,.12)}
+.pkg-img{position:relative;height:190px;overflow:hidden}
+.pkg-img img{width:100%;height:100%;object-fit:cover}
+.pkg-kw{
+  position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.94);border-radius:12px;
+  padding:8px 16px;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.25rem;color:var(--sky);
+  box-shadow:0 4px 14px rgba(28,43,51,.15);
+}
+.pkg-kw small{font-size:.85rem;color:var(--muted);font-weight:500}
+.pkg-body{padding:24px;display:flex;flex-direction:column;gap:14px;flex:1}
+.pkg-body h3{font-size:1.2rem}
+.pkg-price{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.7rem;color:var(--ink)}
+.pkg-price small{font-size:.85rem;font-weight:500;color:var(--muted)}
+.pkg-fit{font-size:.9rem;color:var(--muted)}
+.pkg-list{list-style:none;display:grid;gap:9px;font-size:.92rem;margin-top:2px}
+.pkg-list li{display:flex;gap:10px;align-items:flex-start}
+.pkg-list svg{width:18px;height:18px;flex:none;margin-top:4px}
+.pkg .btn{margin-top:auto}
+.pkg.pop{border:2px solid var(--sun);position:relative}
+.pkg-pop-tag{
+  position:absolute;top:16px;right:16px;z-index:2;background:var(--sun);color:#231a05;
+  font-size:.78rem;font-weight:600;padding:6px 14px;border-radius:999px;box-shadow:0 4px 12px rgba(245,166,35,.4);
+}
+
+/* ---------- STEPS ---------- */
+#steps{background:var(--sky);color:#fff}
+#steps .kicker{background:rgba(255,255,255,.14);color:#fff}
+#steps .sub{color:rgba(255,255,255,.75)}
+.step-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:44px}
+.step{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:22px 18px}
+.step .no{
+  font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1rem;color:#231a05;
+  width:38px;height:38px;border-radius:50%;background:var(--sun);display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+}
+.step h3{font-size:1.02rem;font-weight:500;margin-bottom:6px}
+.step p{font-size:.85rem;color:rgba(255,255,255,.72);line-height:1.65}
+
+/* ---------- FAQ ---------- */
+.faq-wrap{max-width:780px;margin:40px auto 0;display:grid;gap:14px}
+details{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+summary{
+  cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:18px 22px;font-weight:500;font-size:1.02rem;min-height:44px;
+}
+summary::-webkit-details-marker{display:none}
+summary .chev{width:22px;height:22px;flex:none;transition:transform .25s}
+details[open] summary .chev{transform:rotate(180deg)}
+details .ans{padding:0 22px 20px;color:var(--muted);font-size:.95rem}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--ink);color:#c9d4da;padding:56px 0 32px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
+.foot-grid .logo{color:#fff}
+.foot-grid p{font-size:.92rem;line-height:1.8;margin-top:14px;max-width:38ch}
+.foot-grid h4{color:#fff;font-size:1rem;font-weight:500;margin-bottom:14px}
+.foot-grid ul{list-style:none;display:grid;gap:10px;font-size:.92rem}
+.foot-grid a{min-height:44px;display:inline-flex;align-items:center}
+.foot-grid a:hover{color:var(--sun)}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-top:22px;font-size:.82rem;color:#8fa0aa;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:900px){
+  .nav-links{display:none}
+  .est-card{grid-template-columns:1fr}
+  .pkg-grid{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto}
+  .step-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr;gap:28px}
+}
+@media (max-width:480px){
+  section{padding:64px 0}
+  .step-grid{grid-template-columns:1fr}
+  .est-stats{grid-template-columns:1fr 1fr}
+  .hero-inner{padding:96px 0 48px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="SUNDECH กลับขึ้นด้านบน">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="7" fill="#f5a623"/><g stroke="#f5a623" stroke-width="2.4" stroke-linecap="round"><path d="M16 2v4M16 26v4M2 16h4M26 16h4M6.1 6.1l2.8 2.8M23.1 23.1l2.8 2.8M25.9 6.1l-2.8 2.8M8.9 23.1l-2.8 2.8"/></g></svg>
+      SUNDECH
+    </a>
+    <nav aria-label="เมนูหลัก">
+      <ul class="nav-links">
+        <li><a href="#estimator">ประเมินความคุ้ม</a></li>
+        <li><a href="#packages">แพ็กเกจ</a></li>
+        <li><a href="#steps">ขั้นตอนติดตั้ง</a></li>
+        <li><a href="#faq">คำถามพบบ่อย</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-sun" href="#estimator">ประเมินฟรี</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" aria-label="แนะนำ SUNDECH">
+    <img class="hero-img" src="../assets/solar-hero.jpg" alt="แผงโซลาร์เซลล์ติดตั้งบนหลังคาบ้านยามแดดส่อง" fetchpriority="high">
+    <div class="hero-veil" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <h1>แดดเมืองไทย<br>เปลี่ยนเป็น<span class="hl">เงิน</span>ทุกวัน</h1>
+      <p class="lead">SUNDECH ติดตั้งโซลาร์เซลล์หลังคาครบวงจร สำหรับบ้านและธุรกิจ ออกแบบโดยวิศวกรไฟฟ้า ผลิตไฟใช้เองลดค่าไฟได้ทันทีตั้งแต่เดือนแรก</p>
+      <div class="hero-cta">
+        <a class="btn btn-sun" href="#estimator">คำนวณความคุ้มของบ้านคุณ</a>
+        <a class="btn btn-ghost" href="#packages">ดูแพ็กเกจติดตั้ง</a>
+      </div>
+      <ul class="trust">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1e6fb8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          ทีมวิศวกรไฟฟ้าใบอนุญาต กวศ.
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          รับประกันผลิตไฟ 25 ปี
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1e6fb8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6z"/><path d="M14 3v6h6"/></svg>
+          ยื่นขออนุญาตการไฟฟ้าให้ครบ
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SAVINGS ESTIMATOR -->
+  <section id="estimator" aria-labelledby="est-title">
+    <div class="wrap">
+      <span class="kicker">SAVINGS ESTIMATOR</span>
+      <h2 id="est-title">ค่าไฟเดือนนี้ของคุณ คุ้มโซลาร์ไหม?</h2>
+      <p class="sub">เลื่อนค่าไฟต่อเดือนของคุณ ระบบคำนวณขนาดแผง เงินลงทุน และจุดคุ้มทุนให้เห็นทันที — อ้างอิงอัตราค่าไฟเฉลี่ย 4.5 บาท/หน่วย และชั่วโมงแดดเมืองไทย</p>
+
+      <div class="est-card">
+        <div class="est-left">
+          <h3>ค่าไฟฟ้าต่อเดือน</h3>
+          <p class="est-note">ลากเพื่อปรับตามบิลค่าไฟจริงของคุณ</p>
+          <div class="slider-block">
+            <div class="bill-display">
+              <span class="val en" id="billVal">5,000</span>
+              <span class="unit">บาท / เดือน</span>
+            </div>
+            <input type="range" id="billRange" min="1000" max="20000" step="100" value="5000"
+              aria-label="ค่าไฟฟ้าต่อเดือน (บาท)" aria-valuetext="5,000 บาทต่อเดือน">
+            <div class="range-marks" aria-hidden="true"><span>฿1,000</span><span>฿20,000</span></div>
+          </div>
+
+          <div class="bill-bars" aria-label="เปรียบเทียบค่าไฟก่อนและหลังติดโซลาร์">
+            <div class="bar-row">
+              <span class="lbl">ก่อนติด</span>
+              <div class="bar before"><i id="barBefore" style="width:100%"></i></div>
+              <span class="num en" id="barBeforeNum">฿5,000</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">หลังติด</span>
+              <div class="bar after"><i id="barAfter" style="width:35%"></i></div>
+              <span class="num en" id="barAfterNum">฿1,750</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="est-right">
+          <div class="sun-ring" role="img" aria-label="วงกลมพลังงานแสดงขนาดระบบที่แนะนำ">
+            <svg viewBox="0 0 200 200" aria-hidden="true">
+              <defs>
+                <linearGradient id="sunGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#f5a623"/>
+                  <stop offset="100%" stop-color="#1e6fb8"/>
+                </linearGradient>
+              </defs>
+              <circle class="ring-track" cx="100" cy="100" r="86"/>
+              <circle class="ring-fill" id="ringFill" cx="100" cy="100" r="86"/>
+            </svg>
+            <div class="ring-center">
+              <div class="kw en"><span id="kwVal">6.5</span> <small>kW</small></div>
+              <div class="cap">ขนาดระบบที่แนะนำ</div>
+            </div>
+          </div>
+
+          <div class="est-stats">
+            <div class="stat">
+              <div class="num en sun" id="saveYear" data-val="41340">฿41,340</div>
+              <div class="cap">ประหยัดต่อปี</div>
+            </div>
+            <div class="stat">
+              <div class="num en" id="invest" data-val="279500">฿279,500</div>
+              <div class="cap">เงินลงทุนโดยประมาณ</div>
+            </div>
+            <div class="stat">
+              <div class="num en" id="payback" data-val="6.8">6.8 ปี</div>
+              <div class="cap">จุดคุ้มทุน</div>
+            </div>
+          </div>
+
+          <div class="est-cta">
+            <button class="btn btn-sky" id="quoteBtn" type="button">ขอใบเสนอตามตัวเลขนี้</button>
+            <p class="est-fine">ตัวเลขประมาณการเบื้องต้น วิศวกรสำรวจหน้างานจริงก่อนสรุปใบเสนอ ไม่มีค่าใช้จ่าย</p>
+          </div>
+
+          <div class="est-success" id="quoteSuccess" role="status">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3f8f3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+            <div>
+              <b>ส่งคำขอใบเสนอเรียบร้อยแล้ว</b>
+              <span id="successDetail">ระบบ 6.5 kW ประหยัดประมาณ ฿41,340/ปี — ทีมวิศวกรจะติดต่อกลับเพื่อนัดสำรวจหลังคาภายใน 1 วันทำการ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section id="packages" aria-labelledby="pkg-title">
+    <div class="wrap">
+      <span class="kicker">แพ็กเกจติดตั้ง</span>
+      <h2 id="pkg-title">3 ขนาด เลือกตามการใช้ไฟ</h2>
+      <p class="sub">ราคารวมอุปกรณ์ ค่าติดตั้ง ยื่นขออนุญาต และรับประกันงานติดตั้ง 2 ปี — ทุกแพ็กเกจใช้แผง Tier-1 และอินเวอร์เตอร์มาตรฐาน มอก.</p>
+
+      <div class="pkg-grid">
+        <article class="pkg">
+          <div class="pkg-img">
+            <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=1000&auto=format&fit=crop" alt="หลังคาบ้านที่ติดตั้งแผงโซลาร์เซลล์ขนาดเล็ก" loading="lazy">
+            <div class="pkg-kw">3 <small>kW</small></div>
+          </div>
+          <div class="pkg-body">
+            <h3>เริ่มต้นประหยัด</h3>
+            <div class="pkg-price en">฿149,000 <small>รวมติดตั้ง</small></div>
+            <p class="pkg-fit">เหมาะกับบ้านค่าไฟเดือนละ 1,500–2,500 บาท ใช้ไฟกลางวันปานกลาง</p>
+            <ul class="pkg-list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="#3f8f3a" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>ประหยัดราว ฿19,000 ต่อปี</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="#3f8f3a" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>แผง 6 แผง พื้นที่หลังคา ~15 ตร.ม.</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="#3f8f3a" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>คุ้มทุนประมาณ 7–8 ปี</li>
+            </ul>
+            <a class="btn btn-ghost" href="#estimator">เทียบกับค่าไฟของคุณ</a>
+          </div>
+        </article>
+
+        <article class="pkg pop">
+          <span class="pkg-pop-tag">ยอดนิยม</span>
+          <div class="pkg-img">
+            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1000&auto=format&fit=crop" alt="แถวแผงโซลาร์เซลล์สีน้ำเงินเข้มรับแสงแดด" loading="lazy">
+            <div class="pkg-kw">5 <small>kW</small></div>
+          </div>
+          <div class="pkg-body">
+            <h3>บ้านอยู่อาศัย</h3>
+            <div class="pkg-price en">฿219,000 <small>รวมติดตั้ง</small></div>
+            <p class="pkg-fit">เหมาะกับบ้านค่าไฟเดือนละ 3,000–5,000 บาท เปิดแอร์กลางวันบ่อย</p>
+            <ul class="pkg-list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="#3f8f3a" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>ประหยัดราว ฿32,000 ต่อปี</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="#3f8f3a" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>แผง 10 แผง พื้นที่หลังคา ~25 ตร.ม.</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="#3f8f3a" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>คุ้มทุนประมาณ 6–7 ปี</li>
+            </ul>
+            <a class="btn btn-sun" href="#estimator">ประเมินบ้านของคุณ</a>
+          </div>
+        </article>
+
+        <article class="pkg">
+          <div class="pkg-img">
+            <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=1000&auto=format&fit=crop" alt="โซลาร์ฟาร์มขนาดใหญ่สำหรับอาคารธุรกิจ" loading="lazy">
+            <div class="pkg-kw">10 <small>kW</small></div>
+          </div>
+          <div class="pkg-body">
+            <h3>ธุรกิจและโฮมออฟฟิศ</h3>
+            <div class="pkg-price en">฿389,000 <small>รวมติดตั้ง</small></div>
+            <p class="pkg-fit">เหมาะกับร้านค้า สำนักงาน ค่าไฟเดือนละ 6,000–12,000 บาท</p>
+            <ul class="pkg-list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="#3f8f3a" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>ประหยัดราว ฿63,000 ต่อปี</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="#3f8f3a" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>แผง 20 แผง พื้นที่หลังคา ~50 ตร.ม.</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="#3f8f3a" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>คุ้มทุนประมาณ 6 ปี</li>
+            </ul>
+            <a class="btn btn-ghost" href="#estimator">เทียบกับค่าไฟของคุณ</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section id="steps" aria-labelledby="steps-title">
+    <div class="wrap">
+      <span class="kicker">ขั้นตอนติดตั้ง</span>
+      <h2 id="steps-title">5 ขั้นตอน จบครบใน 3–4 สัปดาห์</h2>
+      <p class="sub">ดูแลตั้งแต่สำรวจหลังคาจนขึ้นมิเตอร์ผลิตไฟ คุณไม่ต้องยุ่งกับเอกสารเลย</p>
+      <div class="step-grid">
+        <div class="step">
+          <div class="no en">1</div>
+          <h3>สำรวจหน้างาน</h3>
+          <p>วิศวกรวัดหลังคา เช็กทิศแดด โครงสร้าง และตู้ไฟฟ้า ฟรีไม่มีค่าใช้จ่าย</p>
+        </div>
+        <div class="step">
+          <div class="no en">2</div>
+          <h3>ออกแบบและเสนอราคา</h3>
+          <p>จัดวางแผงด้วยโปรแกรมจำลองแดด พร้อมสรุปผลประหยัดรายปีเป็นลายลักษณ์อักษร</p>
+        </div>
+        <div class="step">
+          <div class="no en">3</div>
+          <h3>ยื่นขออนุญาต</h3>
+          <p>จัดการเอกสารการไฟฟ้านครหลวง/ภูมิภาค และหน่วยงานที่เกี่ยวข้องให้ครบทุกฉบับ</p>
+        </div>
+        <div class="step">
+          <div class="no en">4</div>
+          <h3>ติดตั้ง 1–2 วัน</h3>
+          <p>ทีมช่างประจำติดตั้งแผง อินเวอร์เตอร์ และระบบนิรภัย ตรวจสอบโดยวิศวกรก่อนส่งงาน</p>
+        </div>
+        <div class="step">
+          <div class="no en">5</div>
+          <h3>เปิดระบบและดูแล</h3>
+          <p>สอนใช้แอปดูผลิตไฟสด ตรวจระบบปีละ 1 ครั้ง พร้อมรับประกันผลิตไฟ 25 ปี</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div style="text-align:center">
+        <span class="kicker">คำถามพบบ่อย</span>
+        <h2 id="faq-title">สิ่งที่ลูกค้าถามบ่อยที่สุด</h2>
+      </div>
+      <div class="faq-wrap">
+        <details>
+          <summary>หลังคาบ้านผมเหมาะติดโซลาร์ไหม?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="#1e6fb8" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="ans">หลังคาเมทัลชีท กระเบื้อง และคอนกรีตติดตั้งได้ทั้งหมด ทิศใต้และตะวันตกรับแดดดีที่สุด ต้องมีพื้นที่อย่างน้อย 12–15 ตร.ม. ต่อระบบ 3 kW วิศวกรจะสำรวจและประเมินความแข็งแรงโครงสร้างให้ฟรีก่อนตัดสินใจ</div>
+        </details>
+        <details>
+          <summary>วันฝนตกหรือกลางคืนใช้ไฟจากไหน?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="#1e6fb8" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="ans">ระบบ On-Grid เชื่อมกับสายส่งการไฟฟ้าโดยตรง ช่วงที่แผงผลิตไม่พอหรือตอนกลางคืน บ้านจะดึงไฟจากการไฟฟ้าอัตโนมัติ ไฟไม่ดับและไม่ต้องสลับอะไรเอง ส่วนไฟที่ผลิตเกินสามารถขายคืนได้ตามมาตรการรับซื้อไฟฟ้าภาคประชาชน</div>
+        </details>
+        <details>
+          <summary>แผงอยู่ได้กี่ปี ต้องบำรุงรักษาอะไรบ้าง?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="#1e6fb8" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="ans">แผงมีอายุใช้งาน 25–30 ปี ประสิทธิภาพลดลงเพียงปีละ 0.5% เรารับประกันผลิตไฟ 25 ปีและรับประกันงานติดตั้ง 2 ปี การดูแลหลักคือล้างฝุ่นปีละ 1–2 ครั้ง ซึ่งรวมอยู่ในบริการตรวจระบบประจำปีของเรา</div>
+        </details>
+        <details>
+          <summary>ต้องใช้เอกสารอะไรในการขออนุญาต?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="#1e6fb8" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="ans">เพียงสำเนาบัตรประชาชน สำเนาทะเบียนบ้าน และบิลค่าไฟย้อนหลัง 3 เดือน ที่เหลือทั้งแบบวิศวกรรม ใบอนุญาต และการตรวจรับกับการไฟฟ้า ทีมงาน SUNDECH จัดการให้ครบทุกขั้นตอนโดยไม่มีค่าใช้จ่ายเพิ่ม</div>
+        </details>
+        <details>
+          <summary>ถ้าขายบ้าน ระบบโซลาร์ทำอย่างไร?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="#1e6fb8" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="ans">ระบบติดไปกับตัวบ้านและช่วยเพิ่มมูลค่าทรัพย์สิน การโอนสิทธิ์มิเตอร์ทำพร้อมการโอนกรรมสิทธิ์บ้านได้เลย ส่วนการรับประกันโอนต่อให้เจ้าของใหม่ได้ภายใต้เงื่อนไขเดิม ทีมงานช่วยประสานงานเอกสารให้ทุกขั้นตอน</div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#top" aria-label="SUNDECH กลับขึ้นด้านบน">
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="7" fill="#f5a623"/><g stroke="#f5a623" stroke-width="2.4" stroke-linecap="round"><path d="M16 2v4M16 26v4M2 16h4M26 16h4M6.1 6.1l2.8 2.8M23.1 23.1l2.8 2.8M25.9 6.1l-2.8 2.8M8.9 23.1l-2.8 2.8"/></g></svg>
+          SUNDECH
+        </a>
+        <p>บริษัทติดตั้งโซลาร์เซลล์หลังคาครบวงจร ทีมวิศวกรไฟฟ้ามืออาชีพ ดูแลลูกค้าบ้านและธุรกิจกว่า 800 ระบบทั่วปริมณฑล</p>
+      </div>
+      <div>
+        <h4>ติดต่อเรา</h4>
+        <ul>
+          <li>123 ถนนรัตนาธิเบศร์ ตำบลบางกระสอ<br>อำเภอเมือง นนทบุรี 11000</li>
+          <li><a href="tel:025551234">โทร 02-555-1234</a></li>
+          <li><a href="mailto:hello@sundech.co.th">hello@sundech.co.th</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>เวลาทำการ</h4>
+        <ul>
+          <li>จันทร์–เสาร์ 08:30–17:30</li>
+          <li>หยุดวันอาทิตย์และนักขัตฤกษ์</li>
+          <li>สำรวจหน้างานนัดล่วงหน้า 1 วัน</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SUNDECH Solar Co., Ltd. สงวนลิขสิทธิ์</span>
+      <span>เว็บไซต์ตัวอย่างสำหรับนำเสนอเท่านั้น</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Savings estimator ---------- */
+  var TARIFF = 4.5;          // บาท/หน่วย เฉลี่ย
+  var KWH_PER_KW_YR = 1400;  // ผลิตไฟต่อ kW ต่อปี (เมืองไทย)
+  var SELF_USE = 0.85;       // สัดส่วนใช้เอง
+  var MAX_KW = 15;
+
+  var billRange = document.getElementById('billRange');
+  var billVal = document.getElementById('billVal');
+  var barBefore = document.getElementById('barBefore');
+  var barBeforeNum = document.getElementById('barBeforeNum');
+  var barAfter = document.getElementById('barAfter');
+  var barAfterNum = document.getElementById('barAfterNum');
+  var ringFill = document.getElementById('ringFill');
+  var kwVal = document.getElementById('kwVal');
+  var saveYearEl = document.getElementById('saveYear');
+  var investEl = document.getElementById('invest');
+  var paybackEl = document.getElementById('payback');
+  var quoteBtn = document.getElementById('quoteBtn');
+  var quoteSuccess = document.getElementById('quoteSuccess');
+  var successDetail = document.getElementById('successDetail');
+
+  var CIRC = 2 * Math.PI * 86;
+  ringFill.style.strokeDasharray = CIRC;
+  ringFill.style.strokeDashoffset = CIRC;
+
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+
+  function pricePerKW(kw){
+    return 50000 - Math.min((kw - 1) * 1500, 11000); // สเกลถูกลงตามขนาด
+  }
+
+  function calc(bill){
+    var kw = Math.min(Math.max(bill / 700, 1.5), MAX_KW);
+    kw = Math.round(kw * 10) / 10;
+    var saveYr = kw * KWH_PER_KW_YR * TARIFF * SELF_USE;
+    var invest = kw * pricePerKW(kw);
+    var payback = invest / saveYr;
+    var saveMo = saveYr / 12;
+    return { kw: kw, saveYr: saveYr, invest: invest, payback: payback, saveMo: saveMo };
+  }
+
+  function render(bill, animateNumbers){
+    var r = calc(bill);
+    billVal.textContent = fmt(bill);
+    billRange.setAttribute('aria-valuetext', fmt(bill) + ' บาทต่อเดือน');
+    billRange.style.setProperty('--fill', ((bill - 1000) / 19000 * 100) + '%');
+
+    // แถบเปรียบเทียบ ก่อน/หลัง
+    barBefore.style.width = '100%';
+    barBeforeNum.textContent = '฿' + fmt(bill);
+    var afterMo = Math.max(bill - r.saveMo, bill * 0.06);
+    barAfter.style.width = Math.max((afterMo / bill) * 100, 4) + '%';
+    barAfterNum.textContent = '฿' + fmt(afterMo);
+
+    // วงกลมพลังงาน
+    ringFill.style.strokeDashoffset = CIRC * (1 - r.kw / MAX_KW);
+    kwVal.textContent = r.kw.toFixed(1);
+
+    // ตัวเลขสรุป
+    if (animateNumbers && !reduced){
+      countUp(saveYearEl, 0, r.saveYr, function(v){ return '฿' + fmt(v); });
+      countUp(investEl, 0, r.invest, function(v){ return '฿' + fmt(v); });
+      countUp(paybackEl, 0, r.payback, function(v){ return v.toFixed(1) + ' ปี'; });
+    } else {
+      saveYearEl.textContent = '฿' + fmt(r.saveYr);
+      investEl.textContent = '฿' + fmt(r.invest);
+      paybackEl.textContent = r.payback.toFixed(1) + ' ปี';
+    }
+    saveYearEl.setAttribute('data-val', Math.round(r.saveYr));
+    investEl.setAttribute('data-val', Math.round(r.invest));
+    paybackEl.setAttribute('data-val', r.payback.toFixed(1));
+    return r;
+  }
+
+  function countUp(el, from, to, format){
+    var dur = 1100, start = null;
+    function step(ts){
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = format(from + (to - from) * eased);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  billRange.addEventListener('input', function(){
+    render(Number(billRange.value), false);
+    if (quoteSuccess.classList.contains('show')) quoteSuccess.classList.remove('show');
+  });
+
+  // นับตัวเลขขึ้นครั้งเดียวตอนการ์ดเข้าจอ
+  var counted = false;
+  var estCard = document.querySelector('.est-card');
+  if ('IntersectionObserver' in window && !reduced){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting && !counted){
+          counted = true;
+          render(Number(billRange.value), true);
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    io.observe(estCard);
+  } else {
+    counted = true;
+    render(Number(billRange.value), false);
+  }
+
+  // ปุ่มขอใบเสนอ → success
+  quoteBtn.addEventListener('click', function(){
+    var r = calc(Number(billRange.value));
+    successDetail.textContent = 'ระบบ ' + r.kw.toFixed(1) + ' kW ประหยัดประมาณ ฿' + fmt(r.saveYr) +
+      '/ปี คุ้มทุน ' + r.payback.toFixed(1) + ' ปี — ทีมวิศวกรจะติดต่อกลับเพื่อนัดสำรวจหลังคาภายใน 1 วันทำการ';
+    quoteSuccess.classList.add('show');
+    quoteBtn.textContent = 'ส่งคำขอแล้ว ขอบคุณครับ';
+    quoteBtn.disabled = true;
+    setTimeout(function(){
+      quoteBtn.textContent = 'ขอใบเสนอตามตัวเลขนี้';
+      quoteBtn.disabled = false;
+    }, 4000);
+  });
+
+  // ค่าเริ่มต้น
+  render(Number(billRange.value), false);
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

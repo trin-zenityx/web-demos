@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRYSTAL COAT — ศูนย์เคลือบเซรามิค 9H และดูแลรถยนต์ ปากเกร็ด นนทบุรี</title>
+<meta name="description" content="CRYSTAL COAT ศูนย์เคลือบเซรามิคและดูแลรถยนต์ครบวงจร ปากเกร็ด นนทบุรี เคลือบแก้ว 9H รับประกันสูงสุด 5 ปี รับรถถึงบ้าน เปิดจันทร์–เสาร์">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&amp;family=Sarabun:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d1014;
+  --panel:#141a21;
+  --cyan:#38c8e8;
+  --steel:#8b98a6;
+  --ink:#eef3f7;
+  --line:rgba(238,243,247,.1);
+  --cyan-soft:rgba(56,200,232,.12);
+  --radius:14px;
+  --en:'Russo One', 'Sarabun', sans-serif;
+  --th:'Sarabun', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--th);
+  font-weight:300;
+  font-size:16px;
+  line-height:1.75;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font-family:inherit;cursor:pointer}
+.en{font-family:var(--en);font-weight:400;letter-spacing:.04em}
+.container{width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(18px,4vw,32px)}
+section{padding:clamp(64px,9vw,110px) 0}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
+
+/* ---------- headings ---------- */
+.kicker{
+  font-family:var(--en);
+  font-size:.8rem;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--cyan);
+  margin-bottom:14px;
+}
+h1,h2,h3{font-weight:500;line-height:1.3}
+h2{font-size:clamp(1.7rem,3.6vw,2.6rem);margin-bottom:16px}
+.lead{color:var(--steel);max-width:640px;font-size:1.02rem}
+.sec-head{margin-bottom:clamp(36px,5vw,56px)}
+.sec-head.center{text-align:center}
+.sec-head.center .lead{margin:0 auto}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:48px;padding:12px 26px;
+  border-radius:8px;border:1px solid transparent;
+  font-family:var(--th);font-weight:500;font-size:1rem;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+}
+.btn svg{flex:none}
+.btn-cyan{
+  background:var(--cyan);color:#06131a;
+  box-shadow:0 8px 28px rgba(56,200,232,.28);
+}
+.btn-cyan:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(56,200,232,.4)}
+.btn-ghost{
+  background:rgba(238,243,247,.04);color:var(--ink);
+  border-color:var(--line);
+}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn-cyan-soft{background:var(--cyan-soft);color:var(--cyan);border-color:rgba(56,200,232,.35)}
+.btn-cyan-soft:hover{background:rgba(56,200,232,.2)}
+
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  transition:background .3s ease, border-color .3s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(13,16,20,.88);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom-color:var(--line);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px}
+.brand{font-family:var(--en);font-size:1.3rem;letter-spacing:.08em;color:var(--ink)}
+.brand span{color:var(--cyan)}
+.menu{display:flex;gap:clamp(14px,2.4vw,30px)}
+.menu a{
+  display:inline-flex;align-items:center;min-height:44px;
+  font-size:.95rem;color:var(--steel);transition:color .2s ease;
+}
+.menu a:hover{color:var(--ink)}
+.nav .btn{min-height:44px;padding:10px 20px;font-size:.95rem}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100svh;
+  display:flex;align-items:center;
+  padding:120px 0 80px;
+  isolation:isolate;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:-2;
+  background:#101720 url('../assets/auto-hero.jpg') center/cover no-repeat;
+}
+.hero-overlay{
+  position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg, rgba(13,16,20,.72) 0%, rgba(13,16,20,.55) 45%, rgba(13,16,20,.94) 100%);
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--en);font-size:.78rem;letter-spacing:.3em;
+  color:var(--cyan);
+  border:1px solid rgba(56,200,232,.4);
+  background:rgba(56,200,232,.08);
+  padding:10px 18px;border-radius:999px;margin-bottom:26px;
+}
+.hero-badge::before{
+  content:"";width:8px;height:8px;border-radius:50%;
+  background:var(--cyan);box-shadow:0 0 12px var(--cyan);
+}
+.hero h1{
+  font-size:clamp(2.1rem,5.4vw,4rem);
+  line-height:1.25;
+  max-width:16ch;
+  margin-bottom:20px;
+  text-shadow:0 4px 30px rgba(0,0,0,.5);
+}
+.hero p{color:#c6d0da;max-width:520px;margin-bottom:34px;font-size:1.05rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:52px}
+.hero-stats{
+  display:flex;flex-wrap:wrap;gap:clamp(22px,5vw,56px);
+  border-top:1px solid var(--line);padding-top:26px;max-width:640px;
+}
+.hero-stats .num{font-family:var(--en);font-size:1.7rem;color:var(--cyan)}
+.hero-stats .lbl{font-size:.88rem;color:var(--steel)}
+
+/* ---------- scratch ---------- */
+.scratch-sec{background:linear-gradient(180deg,var(--bg) 0%,#0f141b 100%)}
+.scratch-frame{
+  position:relative;
+  aspect-ratio:16/9;
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 30px 80px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.03);
+  user-select:none;
+  -webkit-user-select:none;
+  background:#10161d;
+}
+.scratch-under{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#1a2733,#0f161d) ;
+}
+.scratch-under img{width:100%;height:100%;object-fit:cover}
+#scratchCanvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  touch-action:none;cursor:crosshair;
+}
+.scratch-done{
+  position:absolute;left:50%;bottom:26px;transform:translate(-50%,16px) scale(.94);
+  display:inline-flex;align-items:center;gap:12px;
+  background:rgba(13,16,20,.86);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(56,200,232,.5);
+  color:var(--ink);
+  padding:14px 24px;border-radius:999px;
+  font-weight:500;font-size:1.05rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .5s ease, transform .5s ease;
+  box-shadow:0 12px 40px rgba(0,0,0,.5), 0 0 30px rgba(56,200,232,.18);
+  white-space:nowrap;
+}
+.scratch-done svg{color:var(--cyan)}
+.scratch-done.show{opacity:1;transform:translate(-50%,0) scale(1)}
+.scratch-ui{
+  display:flex;flex-wrap:wrap;align-items:center;gap:16px 22px;
+  margin-top:22px;
+}
+.scratch-meter{
+  flex:1 1 260px;display:flex;align-items:center;gap:14px;
+}
+.meter-track{
+  flex:1;height:10px;border-radius:99px;
+  background:rgba(238,243,247,.08);
+  border:1px solid var(--line);
+  overflow:hidden;
+}
+.meter-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,#1d7d96,var(--cyan));
+  border-radius:99px;
+  box-shadow:0 0 14px rgba(56,200,232,.5);
+  transition:width .3s ease;
+}
+.meter-num{font-size:1rem;color:var(--cyan);min-width:52px;text-align:right}
+.scratch-actions{display:flex;flex-wrap:wrap;gap:12px}
+
+/* ---------- packages ---------- */
+.packages{background:#0f141b}
+.pack-grid{
+  display:grid;gap:22px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  align-items:stretch;
+}
+.pack{
+  position:relative;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:34px 28px 30px;
+  display:flex;flex-direction:column;
+  transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.pack:hover{transform:translateY(-6px);border-color:rgba(56,200,232,.4);box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.pack.hot{
+  border-color:rgba(56,200,232,.55);
+  background:linear-gradient(180deg, rgba(56,200,232,.07), rgba(56,200,232,.02) 40%), var(--panel);
+  box-shadow:0 24px 70px rgba(0,0,0,.5), 0 0 0 1px rgba(56,200,232,.15);
+}
+.pack-flag{
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  font-family:var(--en);font-size:.72rem;letter-spacing:.22em;
+  background:var(--cyan);color:#06131a;
+  padding:7px 18px;border-radius:99px;white-space:nowrap;
+  box-shadow:0 6px 20px rgba(56,200,232,.4);
+}
+.pack-name{font-family:var(--en);font-size:1.05rem;letter-spacing:.14em;color:var(--steel);margin-bottom:6px}
+.pack.hot .pack-name{color:var(--cyan)}
+.pack-years{font-size:1.15rem;font-weight:500;margin-bottom:14px}
+.pack-price{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+.pack-price .cur{font-size:1.1rem;color:var(--steel)}
+.pack-price .val{font-family:var(--en);font-size:2.5rem;color:var(--ink);letter-spacing:.02em}
+.pack-per{font-size:.85rem;color:var(--steel);margin-bottom:22px}
+.pack-list{display:grid;gap:12px;margin-bottom:28px}
+.pack-list li{display:flex;gap:12px;align-items:flex-start;font-size:.95rem;color:#c9d3dc}
+.pack-list svg{flex:none;margin-top:5px;color:var(--cyan)}
+.pack .btn{margin-top:auto;width:100%}
+
+/* ---------- steps ---------- */
+.steps-grid{
+  display:grid;gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+}
+.step{
+  display:flex;gap:18px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px;
+  transition:border-color .25s ease, transform .25s ease;
+}
+.step:hover{border-color:rgba(56,200,232,.4);transform:translateY(-4px)}
+.step-icon{
+  flex:none;width:56px;height:56px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--cyan-soft);
+  border:1px solid rgba(56,200,232,.3);
+  color:var(--cyan);
+}
+.step-no{
+  font-family:var(--en);font-size:.72rem;letter-spacing:.2em;
+  color:var(--steel);margin-bottom:4px;
+}
+.step h3{font-size:1.08rem;margin-bottom:6px}
+.step p{font-size:.92rem;color:var(--steel)}
+
+/* ---------- works ---------- */
+.works{background:#0f141b}
+.works-grid{
+  display:grid;gap:18px;
+  grid-template-columns:repeat(4,1fr);
+}
+.work{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--line);aspect-ratio:4/3;
+  background:var(--panel);
+}
+.work img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.work:hover img{transform:scale(1.05)}
+.work figcaption{
+  position:absolute;inset:auto 0 0 0;
+  padding:34px 16px 14px;
+  background:linear-gradient(180deg,transparent,rgba(13,16,20,.92));
+  font-size:.88rem;color:#d5dde5;
+}
+
+/* ---------- reviews ---------- */
+.review-grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.review{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);padding:30px 28px;
+  display:flex;flex-direction:column;gap:18px;
+}
+.review svg{color:var(--cyan);opacity:.9}
+.review p{color:#ccd5de;font-size:.98rem;flex:1}
+.review-who{display:flex;align-items:center;gap:14px;border-top:1px solid var(--line);padding-top:18px}
+.review-av{
+  flex:none;width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--en);font-size:1rem;color:#06131a;
+  background:linear-gradient(135deg,var(--cyan),#1d7d96);
+}
+.review-who .n{font-weight:500}
+.review-who .c{font-size:.85rem;color:var(--steel)}
+.stars{display:flex;gap:3px;color:var(--cyan)}
+
+/* ---------- pickup ---------- */
+.pickup{
+  background:linear-gradient(120deg, rgba(56,200,232,.14), rgba(56,200,232,.03) 55%), var(--panel);
+  border-top:1px solid rgba(56,200,232,.25);
+  border-bottom:1px solid rgba(56,200,232,.25);
+}
+.pickup-inner{
+  display:flex;flex-wrap:wrap;align-items:center;gap:28px 48px;
+}
+.pickup-text{flex:1 1 340px}
+.pickup-text h2{margin-bottom:10px}
+.pickup-text p{color:#c6d0da}
+.pickup-acts{display:flex;flex-wrap:wrap;gap:14px}
+
+/* ---------- contact / footer ---------- */
+.contact-grid{
+  display:grid;gap:22px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+}
+.contact-card{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);padding:28px;
+}
+.contact-card h3{
+  display:flex;align-items:center;gap:12px;
+  font-size:1.05rem;margin-bottom:14px;color:var(--cyan);
+}
+.contact-card p, .contact-card a{color:#c9d3dc;font-size:.98rem}
+.contact-card a:hover{color:var(--cyan)}
+.contact-card .big{font-family:var(--en);font-size:1.4rem;color:var(--ink);letter-spacing:.05em}
+.footer-bar{
+  border-top:1px solid var(--line);
+  padding:26px 0;margin-top:clamp(48px,7vw,80px);
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+  color:var(--steel);font-size:.88rem;
+}
+.footer-bar .brand{font-size:1rem}
+
+/* ---------- reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .works-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+  .menu{display:none}
+  .hero{padding-top:104px}
+  .pack.hot{order:-1}
+}
+@media (max-width:520px){
+  .works-grid{grid-template-columns:1fr}
+  .hero-cta .btn{width:100%}
+  .scratch-actions .btn{flex:1 1 100%}
+  .hero-stats{gap:18px 28px}
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important;animation:none !important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top">CRYSTAL <span>COAT</span></a>
+    <nav class="menu" aria-label="เมนูหลัก">
+      <a href="#scratch">ลองขัดเงา</a>
+      <a href="#packages">แพ็กเกจ</a>
+      <a href="#steps">ขั้นตอน</a>
+      <a href="#works">ผลงาน</a>
+      <a href="#reviews">รีวิว</a>
+      <a href="#contact">ติดต่อ</a>
+    </nav>
+    <a class="btn btn-cyan" href="#contact">จองคิวเคลือบ</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero-bg" role="img" aria-label="รถยนต์เงาวับ น้ำไหมเป็นหยดบนผิวสีหลังเคลือบเซรามิค"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="container">
+    <span class="hero-badge">9H CERAMIC PRO</span>
+    <h1>เงาที่คุณเห็น<br>คือมาตรฐานของเรา</h1>
+    <p>ศูนย์เคลือบเซรามิคและดูแลรถยนต์ครบวงจร ห้องเคลือบปลอดฝุ่นมาตรฐานสากล ทีมช่างเฉพาะทาง ดูแลรถของคุณเหมือนรถของเราเอง</p>
+    <div class="hero-cta">
+      <a class="btn btn-cyan" href="#packages">ดูแพ็กเกจเคลือบ</a>
+      <a class="btn btn-ghost" href="#scratch">ลองขัดเงาดูสิ</a>
+    </div>
+    <ul class="hero-stats">
+      <li><div class="num">9H</div><div class="lbl">ความแข็งผิวเคลือบ</div></li>
+      <li><div class="num">2,400+</div><div class="lbl">คันที่เราดูแล</div></li>
+      <li><div class="num">5 ปี</div><div class="lbl">รับประกันสูงสุด</div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= SCRATCH TO REVEAL ================= -->
+<section class="scratch-sec" id="scratch">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <p class="kicker">Signature Experience</p>
+      <h2>ลองขัดเงาดูสิ</h2>
+      <p class="lead">ภาพด้านล่างคือรถสภาพก่อนดูแล ลากนิ้วหรือเมาส์ขัดบนภาพเพื่อเปิดผิวเงาจริงหลังเคลือบเซรามิค — เหมือนที่ช่างเราทำทุกวัน</p>
+    </div>
+    <div class="reveal">
+      <div class="scratch-frame" id="scratchFrame">
+        <div class="scratch-under">
+          <img src="../assets/auto-hero.jpg" alt="รถยนต์หลังเคลือบเซรามิค ผิวสีเงาสะท้อนแสง น้ำไหมเป็นหยด">
+        </div>
+        <canvas id="scratchCanvas" aria-label="พื้นที่ทดลองขัดเงา ลากเพื่อลบภาพด้านออก"></canvas>
+        <div class="scratch-done" id="scratchDone" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>เงาแบบนี้แหละผลงานเรา</span>
+        </div>
+      </div>
+      <div class="scratch-ui">
+        <div class="scratch-meter">
+          <div class="meter-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="พื้นที่ที่ขัดแล้ว" id="scratchMeter">
+            <div class="meter-fill" id="scratchBar"></div>
+          </div>
+          <span class="meter-num en" id="scratchPct">0%</span>
+        </div>
+        <div class="scratch-actions">
+          <button type="button" class="btn btn-ghost" id="scratchReset">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+            ขัดใหม่อีกครั้ง
+          </button>
+          <button type="button" class="btn btn-cyan-soft" id="scratchSkip">ข้าม ดูภาพเต็ม</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PACKAGES ================= -->
+<section class="packages" id="packages">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <p class="kicker">Ceramic Packages</p>
+      <h2>แพ็กเกจเคลือบเซรามิค</h2>
+      <p class="lead">ราคารวมเตรียมผิว ขัดแก้รอย และเคลือบในห้องปลอดฝุ่น พร้อมใบรับประกันตัวจริงทุกคัน</p>
+    </div>
+    <div class="pack-grid">
+      <article class="pack reveal">
+        <div class="pack-name">CERAMIC 1Y</div>
+        <div class="pack-years">รับประกัน 1 ปี</div>
+        <div class="pack-price"><span class="cur">฿</span><span class="val">6,900</span></div>
+        <div class="pack-per">เหมาะกับรถใช้งานในเมือง เพิ่งออกรถใหม่</div>
+        <ul class="pack-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>เคลือบเซรามิค 9H จำนวน 1 ชั้น</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>ล้างโฟม pH กลาง + ดูดสนิมดินน้ำมัน</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>ขัดปรับสภาพผิวเบื้องต้น 1 ขั้น</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>ใบรับประกัน 12 เดือน + เช็คระยะ 2 ครั้ง</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">จองแพ็กเกจนี้</a>
+      </article>
+
+      <article class="pack hot reveal">
+        <div class="pack-flag">MOST POPULAR</div>
+        <div class="pack-name">CERAMIC 3Y</div>
+        <div class="pack-years">รับประกัน 3 ปี</div>
+        <div class="pack-price"><span class="cur">฿</span><span class="val">12,900</span></div>
+        <div class="pack-per">คุ้มที่สุด ลูกค้ากว่า 70% เลือกแพ็กเกจนี้</div>
+        <ul class="pack-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>เคลือบเซรามิค 9H จำนวน 2 ชั้น</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>ขัดแก้รอยขนแมวเต็มคัน 2 ขั้น</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>เคลือบกระจกหน้า + ล้อแม็กซ์</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>ใบรับประกัน 36 เดือน + เช็คระยะ 6 ครั้ง</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>รับ–ส่งรถถึงบ้านฟรีในรัศมี 15 กม.</li>
+        </ul>
+        <a class="btn btn-cyan" href="#contact">จองแพ็กเกจนี้</a>
+      </article>
+
+      <article class="pack reveal">
+        <div class="pack-name">DIAMOND 5Y</div>
+        <div class="pack-years">รับประกัน 5 ปี</div>
+        <div class="pack-price"><span class="cur">฿</span><span class="val">19,900</span></div>
+        <div class="pack-per">สูงสุดของเรา สำหรับรถรักษ์และรถหรู</div>
+        <ul class="pack-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>เคลือบ Diamond 9H+ จำนวน 3 ชั้น</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>ขัดแก้รอย + ปรับสภาพสีเต็มขั้น 3 ขั้น</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>เคลือบกระจกรอบคัน ล้อ ยาง และชิ้นพลาสติก</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>ใบรับประกัน 60 เดือน + เช็คระยะไม่จำกัด</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>รับ–ส่งถึงบ้าน + ล้างดูแลผิวเคลือบฟรี 12 ครั้ง</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">จองแพ็กเกจนี้</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEPS ================= -->
+<section id="steps">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <p class="kicker">Our Process</p>
+      <h2>6 ขั้นตอนกว่ารถจะเงา</h2>
+      <p class="lead">ทุกคันผ่านกระบวนการเดียวกันเป๊ะ ๆ ใช้เวลา 1–2 วัน ไม่เร่ง ไม่ข้ามขั้น</p>
+    </div>
+    <div class="steps-grid">
+      <article class="step reveal">
+        <div class="step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.2 4.3 6 7.4 6 10.5a6 6 0 1 1-12 0C6 10.4 8.8 7.3 12 3z"/><path d="M9.5 14a2.5 2.5 0 0 0 2.5 2.5"/></svg></div>
+        <div><div class="step-no">STEP 01</div><h3>ล้างทำความสะอาด</h3><p>พ่นโฟม pH กลาง ล้างทุกซอกมุม ช่องประตู ใต้ซุ้มล้อ ด้วยถุงมือขนแกะและถัง 2 ใบ</p></div>
+      </article>
+      <article class="step reveal">
+        <div class="step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4v6a6 6 0 0 0 12 0V4"/><path d="M6 4h4v4H6zM14 4h4v4h-4z"/></svg></div>
+        <div><div class="step-no">STEP 02</div><h3>ดูดสนิมและคราบฝังแน่น</h3><p>ใช้ดินน้ำมันเกรดละเอียดเก็บสนิมไหล คราบยางมะตอย และฝุ่นโลหะที่ฝังในผิวสี</p></div>
+      </article>
+      <article class="step reveal">
+        <div class="step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="15" r="5.5"/><path d="M17.5 3.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z"/><path d="M20 12v.01"/></svg></div>
+        <div><div class="step-no">STEP 03</div><h3>ขัดแก้รอย</h3><p>วัดความหนาสีทุกจุดก่อนขัด ลบรอยขนแมว รอยน้ำ และริ้วลึกด้วยเครื่องขัด Dual Action</p></div>
+      </article>
+      <article class="step reveal">
+        <div class="step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v5c0 4.6-3.1 8.2-7.5 10-4.4-1.8-7.5-5.4-7.5-10V6z"/><path d="M12 7.2l4 1.6v2.6c0 2.5-1.7 4.4-4 5.4-2.3-1-4-2.9-4-5.4V8.8z"/></svg></div>
+        <div><div class="step-no">STEP 04</div><h3>เคลือบเซรามิค 2 ชั้น</h3><p>ลงเคลือบ 9H ทีละแผงในห้องปลอดฝุ่น ควบคุมอุณหภูมิและความชื้นตลอดการทำงาน</p></div>
+      </article>
+      <article class="step reveal">
+        <div class="step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v3"/><path d="M5.6 6.6l2.1 2.1"/><path d="M18.4 6.6l-2.1 2.1"/><path d="M4 16a8 8 0 0 1 16 0z"/><path d="M2 20h20"/></svg></div>
+        <div><div class="step-no">STEP 05</div><h3>อบด้วยโคมอินฟราเรด</h3><p>อบเร่งการเซ็ตตัวของผิวเคลือบให้แข็งตัวเต็มที่ ก่อนรถออกจากห้องเคลือบ</p></div>
+      </article>
+      <article class="step reveal">
+        <div class="step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5V3h6v1.5"/><path d="M9 13l2.2 2.2L15.5 11"/></svg></div>
+        <div><div class="step-no">STEP 06</div><h3>ตรวจสอบก่อนส่งมอบ</h3><p>หัวหน้าช่างเช็คทุกจุดใต้ไฟ LED หลายมุม ถ่ายรูปเก็บเป็นหลักฐานพร้อมมอบใบรับประกัน</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORKS ================= -->
+<section class="works" id="works">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <p class="kicker">Recent Works</p>
+      <h2>ผลงานล่าสุดจากห้องเคลือบ</h2>
+      <p class="lead">ทุกภาพถ่ายจากงานจริงหน้าร้าน ไม่มีการแต่งภาพเพิ่ม</p>
+    </div>
+    <div class="works-grid">
+      <figure class="work reveal">
+        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="รถสปอร์ตสีแดงเงาวับหลังเคลือบเซรามิค Diamond" loading="lazy">
+        <figcaption>BMW 320d — Diamond 5 ปี</figcaption>
+      </figure>
+      <figure class="work reveal">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="รถสปอร์ตสีเข้มสะท้อนแสงไฟหลังขัดแก้รอยเต็มขั้น" loading="lazy">
+        <figcaption>Nissan GT-R — ขัดแก้รอย + Ceramic 3 ปี</figcaption>
+      </figure>
+      <figure class="work reveal">
+        <img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="รถยนต์สีขาวผิวสีสะอาดเงาหลังดูแลครบวงจร" loading="lazy">
+        <figcaption>Toyota Camry — Ceramic 1 ปี</figcaption>
+      </figure>
+      <figure class="work reveal">
+        <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="รายละเอียดไฟหน้ารถเงาคมหลังขัดเงาและเคลือบกระจก" loading="lazy">
+        <figcaption>Mazda CX-5 — เคลือบกระจกรอบคัน</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section id="reviews">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <p class="kicker">Customer Voices</p>
+      <h2>เสียงจากเจ้าของรถ</h2>
+    </div>
+    <div class="review-grid">
+      <article class="review reveal">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 7H6a3 3 0 0 0-3 3v4a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3v-7a5 5 0 0 0-1-3zm11 0h-4a3 3 0 0 0-3 3v4a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3v-7a5 5 0 0 0-1-3z" opacity=".9"/></svg>
+        <p>เคลือบแพ็กเกจ 3 ปีมาครบ 2 ปีแล้ว น้ำยังไหมเป็นหยดเหมือนวันแรกที่รับรถ ฝนตกทีแทบไม่ต้องเช็ด ช่างอธิบายทุกขั้นตอน ถ่ายรูปส่งให้ดูระหว่างทำตลอด</p>
+        <div class="review-who">
+          <div class="review-av">P</div>
+          <div><div class="n">คุณภัทร วงศ์สุวรรณ</div><div class="c">BMW 320d — Ceramic 3 ปี</div></div>
+        </div>
+      </article>
+      <article class="review reveal">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 7H6a3 3 0 0 0-3 3v4a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3v-7a5 5 0 0 0-1-3zm11 0h-4a3 3 0 0 0-3 3v4a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3v-7a5 5 0 0 0-1-3z" opacity=".9"/></svg>
+        <p>ประทับใจบริการรับรถถึงบ้านมาก ไม่ต้องเสียวันหยุดไปนั่งรอที่ร้าน ตอนส่งรถคืนมีใบรับประกันกับนัดเช็คระยะครบ รู้สึกมั่นใจว่าเงินที่จ่ายไปไม่เสียเปล่า</p>
+        <div class="review-who">
+          <div class="review-av">M</div>
+          <div><div class="n">คุณมิ้นท์ ชนาภา</div><div class="c">Mazda CX-5 — Diamond 5 ปี</div></div>
+        </div>
+      </article>
+      <article class="review reveal">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 7H6a3 3 0 0 0-3 3v4a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3v-7a5 5 0 0 0-1-3zm11 0h-4a3 3 0 0 0-3 3v4a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3v-7a5 5 0 0 0-1-3z" opacity=".9"/></svg>
+        <p>รถกระบะวิ่งงานก่อสร้างหนักมาก คราบดินคลay ปูน ล้างออกง่ายกว่าเดิมเยอะ รอยขนแมวที่เคยมีก็หายไปหมดตอนขัดแก้รอย คุ้มเกินราคาครับ</p>
+        <div class="review-who">
+          <div class="review-av">O</div>
+          <div><div class="n">คุณโอ๊ต ธนกร</div><div class="c">Toyota Hilux Revo — Ceramic 3 ปี</div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PICKUP ================= -->
+<section class="pickup">
+  <div class="container pickup-inner reveal">
+    <div class="pickup-text">
+      <p class="kicker">Door to Door</p>
+      <h2>รับรถถึงบ้าน ส่งคืนถึงหน้าบ้าน</h2>
+      <p>ไม่ต้องขับมาร้านเอง ทีมงานรับรถถึงที่ พร้อมถ่ายรูปสภาพรถก่อน–หลังทุกขั้นตอน บริการฟรีในรัศมี 15 กิโลเมตรรอบปากเกร็ด</p>
+    </div>
+    <div class="pickup-acts">
+      <a class="btn btn-cyan" href="tel:+66812345678">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.9z"/></svg>
+        081-234-5678
+      </a>
+      <a class="btn btn-ghost" href="#contact">ดูเงื่อนไขบริการ</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT / FOOTER ================= -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <p class="kicker">Visit Us</p>
+      <h2>จองคิวหรือแวะมาดูห้องเคลือบ</h2>
+      <p class="lead">เปิดจันทร์–เสาร์ 09:00–18:00 น. (หยุดวันอาทิตย์) รับรถจำนวนจำกัดต่อวัน แนะนำจองล่วงหน้า</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.4-7-11a7 7 0 1 1 14 0c0 5.6-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>ที่ตั้งร้าน</h3>
+        <p>88/8 ถนนติวานนท์ ตำบลปากเกร็ด<br>อำเภอปากเกร็ด จังหวัดนนทบุรี 11120<br>มีที่จอดรถในร่มหน้าร้าน</p>
+      </div>
+      <div class="contact-card reveal">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>เวลาทำการ</h3>
+        <p>จันทร์–เสาร์ <span class="en">09:00–18:00</span> น.<br>หยุดทุกวันอาทิตย์<br>รับรถคันสุดท้าย <span class="en">16:30</span> น.</p>
+      </div>
+      <div class="contact-card reveal">
+        <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>ช่องทางจองคิว</h3>
+        <p><a class="big" href="tel:+66812345678">081-234-5678</a><br>LINE: <a href="#contact">@crystalcoat</a><br>ตอบแชทภายใน 15 นาทีในเวลาทำการ</p>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span class="brand">CRYSTAL <span style="color:var(--cyan)">COAT</span></span>
+      <span>ศูนย์เคลือบเซรามิคและดูแลรถยนต์ ปากเกร็ด นนทบุรี</span>
+      <span>© 2569 CRYSTAL COAT — เว็บไซต์ตัวอย่างเพื่อการนำเสนอ</span>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  'use strict';
+
+  var reduceMotion = false;
+  try { reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
+  /* ---------- nav scroll state ---------- */
+  var nav = document.getElementById('nav');
+  function onScroll(){
+    if (window.scrollY > 12) { nav.classList.add('scrolled'); }
+    else { nav.classList.remove('scrolled'); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- reveal on scroll ---------- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------- scratch to reveal ---------- */
+  var frame   = document.getElementById('scratchFrame');
+  var canvas  = document.getElementById('scratchCanvas');
+  var bar     = document.getElementById('scratchBar');
+  var meter   = document.getElementById('scratchMeter');
+  var pctText = document.getElementById('scratchPct');
+  var doneEl  = document.getElementById('scratchDone');
+  var resetBtn= document.getElementById('scratchReset');
+  var skipBtn = document.getElementById('scratchSkip');
+
+  if (frame && canvas && canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+    var img = new Image();
+    var ready = false;
+    var imgFailed = false;
+    var drawing = false;
+    var lastPt = null;
+    var revealed = false;
+    var dirty = false;
+    var tainted = false;
+    var stroked = 0;
+    var BRUSH = 40; /* รัศมีแปรงขัด หน่วย CSS px */
+
+    function cssRect(){ return frame.getBoundingClientRect(); }
+
+    function coverDraw(source){
+      var w = canvas.width, h = canvas.height;
+      var iw = source.naturalWidth || source.width;
+      var ih = source.naturalHeight || source.height;
+      if (!iw || !ih) { throw new Error('no image size'); }
+      var s = Math.max(w / iw, h / ih);
+      var dw = iw * s, dh = ih * s;
+      ctx.drawImage(source, (w - dw) / 2, (h - dh) / 2, dw, dh);
+    }
+
+    function paintHint(){
+      var w = canvas.width, h = canvas.height;
+      var big = Math.max(26, Math.round(w * 0.048));
+      var small = Math.max(15, Math.round(w * 0.019));
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = 'rgba(238,243,247,0.94)';
+      ctx.font = big + 'px "Russo One", "Sarabun", sans-serif';
+      ctx.fillText('SCRATCH TO SHINE', w / 2, h / 2 - small * 1.4);
+      ctx.font = '300 ' + small + 'px "Sarabun", sans-serif';
+      ctx.fillStyle = 'rgba(238,243,247,0.78)';
+      ctx.fillText('ลากนิ้วหรือเมาส์บนภาพ เพื่อขัดเปิดผิวเงา', w / 2, h / 2 + big * 0.85);
+    }
+
+    function paintTop(){
+      if (!ready) { return; }
+      var w = canvas.width, h = canvas.height;
+      revealed = false;
+      stroked = 0;
+      canvas.style.transition = 'none';
+      canvas.style.opacity = '1';
+      canvas.style.pointerEvents = '';
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.clearRect(0, 0, w, h);
+
+      if (imgFailed) {
+        var g = ctx.createLinearGradient(0, 0, w, h);
+        g.addColorStop(0, '#232d38');
+        g.addColorStop(1, '#131a22');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+      } else {
+        var supportsFilter = (typeof ctx.filter === 'string');
+        try {
+          if (supportsFilter) { ctx.filter = 'grayscale(0.8) brightness(0.55) blur(2px)'; }
+          coverDraw(img);
+        } catch (err) {
+          imgFailed = true;
+          paintTop();
+          return;
+        } finally {
+          if (supportsFilter) { ctx.filter = 'none'; }
+        }
+      }
+
+      /* overlay ฟ้าขุ่นให้ดูด้าน */
+      ctx.fillStyle = 'rgba(20,32,44,0.38)';
+      ctx.fillRect(0, 0, w, h);
+
+      /* เส้นรอยด้านบาง ๆ */
+      ctx.strokeStyle = 'rgba(139,152,166,0.07)';
+      ctx.lineWidth = Math.max(1, Math.round(w / 500));
+      var gap = Math.max(26, Math.round(w / 30));
+      for (var i = -h; i < w + h; i += gap) {
+        ctx.beginPath();
+        ctx.moveTo(i, 0);
+        ctx.lineTo(i + h, h);
+        ctx.stroke();
+      }
+
+      paintHint();
+      setPct(0);
+      doneEl.classList.remove('show');
+      doneEl.setAttribute('aria-hidden', 'true');
+      window.requestAnimationFrame(function(){ canvas.style.transition = ''; });
+    }
+
+    function setup(){
+      var r = cssRect();
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.max(1, Math.round(r.width * dpr));
+      canvas.height = Math.max(1, Math.round(r.height * dpr));
+      paintTop();
+    }
+
+    function stamp(x, y){
+      var r = cssRect();
+      var k = canvas.width / Math.max(1, r.width);
+      var cx = x * k, cy = y * k;
+      var rad = BRUSH * k;
+      ctx.globalCompositeOperation = 'destination-out';
+      var g = ctx.createRadialGradient(cx, cy, rad * 0.3, cx, cy, rad);
+      g.addColorStop(0, 'rgba(0,0,0,1)');
+      g.addColorStop(0.65, 'rgba(0,0,0,0.85)');
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(cx, cy, rad, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function setPct(p){
+      p = Math.max(0, Math.min(100, p));
+      bar.style.width = p + '%';
+      pctText.textContent = p + '%';
+      if (meter) { meter.setAttribute('aria-valuenow', String(p)); }
+    }
+
+    function estimatePct(){
+      var r = cssRect();
+      var area = Math.max(1, r.width * r.height);
+      var covered = stroked * BRUSH * 2;
+      return Math.min(100, Math.round(covered / area * 100));
+    }
+
+    function samplePct(){
+      try {
+        var w = canvas.width, h = canvas.height;
+        var data = ctx.getImageData(0, 0, w, h).data;
+        var stride = 16;
+        var clear = 0, total = 0;
+        for (var y = 0; y < h; y += stride) {
+          for (var x = 0; x < w; x += stride) {
+            total++;
+            if (data[(y * w + x) * 4 + 3] < 40) { clear++; }
+          }
+        }
+        return total ? Math.round(clear / total * 100) : 0;
+      } catch (err) {
+        tainted = true;
+        return estimatePct();
+      }
+    }
+
+    function revealAll(){
+      if (revealed) { return; }
+      revealed = true;
+      drawing = false;
+      setPct(100);
+      doneEl.classList.add('show');
+      doneEl.setAttribute('aria-hidden', 'false');
+      if (reduceMotion) {
+        canvas.style.transition = 'none';
+        canvas.style.opacity = '0';
+      } else {
+        canvas.style.transition = 'opacity 0.9s ease';
+        canvas.style.opacity = '0';
+      }
+      canvas.style.pointerEvents = 'none';
+    }
+
+    function ptFromEvent(e){
+      var r = canvas.getBoundingClientRect();
+      return { x: e.clientX - r.left, y: e.clientY - r.top };
+    }
+
+    canvas.addEventListener('pointerdown', function(e){
+      if (revealed || !ready) { return; }
+      drawing = true;
+      lastPt = ptFromEvent(e);
+      stamp(lastPt.x, lastPt.y);
+      stroked += BRUSH;
+      dirty = true;
+      try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+      e.preventDefault();
+    });
+
+    canvas.addEventListener('pointermove', function(e){
+      if (!drawing || revealed || !lastPt) { return; }
+      var p = ptFromEvent(e);
+      var dx = p.x - lastPt.x, dy = p.y - lastPt.y;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      var step = BRUSH * 0.35;
+      if (dist > step) {
+        var n = Math.floor(dist / step);
+        for (var i = 1; i <= n; i++) {
+          stamp(lastPt.x + dx * i / n, lastPt.y + dy * i / n);
+        }
+        stroked += dist;
+      } else {
+        stamp(p.x, p.y);
+        stroked += step;
+      }
+      lastPt = p;
+      dirty = true;
+    });
+
+    function endStroke(){ drawing = false; lastPt = null; }
+    canvas.addEventListener('pointerup', endStroke);
+    canvas.addEventListener('pointercancel', endStroke);
+    canvas.addEventListener('pointerleave', function(){ if (!drawing) { lastPt = null; } });
+
+    /* sample alpha ทุก ~300ms ระหว่างมีการขัด */
+    window.setInterval(function(){
+      if (!dirty || revealed || !ready) { return; }
+      dirty = false;
+      var pct = tainted ? estimatePct() : samplePct();
+      setPct(pct);
+      if (pct >= 60) { revealAll(); }
+    }, 300);
+
+    resetBtn.addEventListener('click', function(){
+      if (!ready) { return; }
+      paintTop();
+    });
+
+    skipBtn.addEventListener('click', function(){
+      if (!ready) { return; }
+      revealAll();
+    });
+
+    /* resize — วาดชั้นบนใหม่ให้พอดีกรอบ */
+    var resizeTimer = null;
+    window.addEventListener('resize', function(){
+      if (!ready) { return; }
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(function(){
+        if (!revealed) { setup(); }
+      }, 220);
+    });
+
+    /* วาด hint ใหม่หลังฟอนต์โหลดเสร็จ ถ้ายังไม่มีใครเริ่มขัด */
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function(){
+        if (ready && !revealed && stroked === 0 && !drawing) { paintTop(); }
+      });
+    }
+
+    img.onload = function(){ ready = true; setup(); };
+    img.onerror = function(){ ready = true; imgFailed = true; setup(); };
+    img.src = '../assets/auto-hero.jpg';
+  }
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INK SOUL — สตูดิโอสักคัสตอม ย่านอารีย์ | ออกแบบเฉพาะคุณคนเดียว</title>
+<meta name="description" content="INK SOUL สตูดิโอสักคัสตอม — ออกแบบลายเฉพาะตัว ช่างเชี่ยวชาญ 3 สายงาน อุปกรณ์เบิกใหม่ทุกครั้ง">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Pridi:wght@300;400;500;600&family=Sarabun:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e0c0b; --panel:#171312; --gold:#c9a24b; --blood:#8e3b3b;
+  --ink:#ece5d8; --muted:#8f8477; --line:rgba(236,229,216,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Sarabun',sans-serif;font-weight:300;font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input[type=range]{width:100%;accent-color:var(--gold);height:34px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+::selection{background:var(--gold);color:var(--bg)}
+.wrap{max-width:1140px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+section{padding:clamp(3.5rem,8vh,5.5rem) 0}
+.en{font-family:'Cinzel Decorative',serif}
+.th{font-family:'Pridi',serif}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(14,12,11,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1140px;margin:0 auto;padding:1rem clamp(1.25rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{font-family:'Cinzel Decorative',serif;font-weight:700;font-size:1.5rem;color:var(--gold);letter-spacing:.08em}
+.logo small{display:block;font-family:'Pridi';font-weight:400;font-size:.7rem;color:var(--muted);letter-spacing:.2em}
+.nav-links{display:flex;gap:1.6rem;font-size:.95rem}
+.nav-links a{color:var(--muted);transition:color .3s}
+.nav-links a:hover{color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:500;border-radius:99px;padding:.85rem 1.7rem;transition:transform .25s,box-shadow .25s;min-height:44px}
+.btn-g{background:linear-gradient(135deg,#dcbb6a,var(--gold));color:#241a05}
+.btn-g:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(201,162,75,.5)}
+.btn-o{border:1px solid var(--gold);color:var(--gold)}
+.btn-o:hover{background:rgba(201,162,75,.12)}
+@media(max-width:760px){.nav-links{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:88vh;display:grid;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.45}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,12,11,.55),rgba(14,12,11,.92) 75%,var(--bg))}
+.hero-in{position:relative;z-index:2;text-align:center;padding:4rem 1.5rem}
+.hero-kick{font-family:'Cinzel Decorative';font-size:.8rem;letter-spacing:.5em;color:var(--gold);text-transform:uppercase}
+h1{font-family:'Pridi',serif;font-weight:600;font-size:clamp(2.3rem,6vw,4.2rem);line-height:1.3;margin:1.2rem 0 1rem}
+.hero-in p{color:var(--muted);max-width:52ch;margin:0 auto}
+.hero-cta{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;margin-top:1.8rem}
+.rule{width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:1.6rem auto}
+
+/* stencil lab */
+.sec-kick{font-family:'Cinzel Decorative';font-size:.75rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+h2{font-family:'Pridi',serif;font-weight:600;font-size:clamp(1.7rem,3.8vw,2.6rem)}
+.sec-sub{color:var(--muted);margin-top:.5rem;max-width:56ch}
+.lab{display:grid;grid-template-columns:1fr 380px;gap:clamp(1.5rem,3vw,2.5rem);margin-top:2.2rem}
+@media(max-width:960px){.lab{grid-template-columns:1fr}}
+.canvas-card{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:clamp(1rem,2.5vw,2rem);display:grid;place-items:center;position:relative}
+#stencilSvg{width:min(100%,460px);height:auto}
+.arm-note{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);font-size:.78rem;color:var(--muted)}
+.lab-controls{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:1.6rem;align-self:start}
+.lab-controls h3{font-family:'Pridi';font-weight:600;font-size:1.05rem;margin-bottom:1rem}
+.ctl{margin-bottom:1.3rem}
+.ctl>span{display:block;font-size:.85rem;color:var(--muted);margin-bottom:.5rem;font-weight:500}
+.chipset{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{border:1px solid var(--line);border-radius:99px;padding:.55rem 1.05rem;font-size:.88rem;color:var(--muted);transition:all .25s;min-height:44px}
+.chip:hover{border-color:var(--gold);color:var(--gold)}
+.chip.sel{background:var(--gold);border-color:var(--gold);color:#241a05;font-weight:500}
+.ctl label{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted);margin-bottom:.2rem}
+.ctl label b{color:var(--ink);font-variant-numeric:tabular-nums}
+.price-line{border-top:1px dashed var(--line);margin-top:1.2rem;padding-top:1.1rem;display:flex;justify-content:space-between;align-items:baseline}
+.price-line b{font-family:'Cinzel Decorative';font-size:1.5rem;color:var(--gold)}
+.price-line small{color:var(--muted)}
+
+/* artists */
+.artists{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2rem}
+@media(max-width:860px){.artists{grid-template-columns:1fr}}
+.artist{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .35s,border-color .35s}
+.artist:hover{transform:translateY(-6px);border-color:var(--gold)}
+.artist img{height:260px;width:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:filter .5s}
+.artist:hover img{filter:grayscale(0)}
+.artist .ab{padding:1.1rem 1.2rem}
+.artist b{font-family:'Pridi';font-weight:600;font-size:1.05rem}
+.artist span{display:block;color:var(--muted);font-size:.85rem;margin-top:.2rem}
+.artist .st{margin-top:.6rem;font-size:.78rem;color:var(--gold);letter-spacing:.06em}
+
+/* process + faq */
+.proc{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+@media(max-width:860px){.proc{grid-template-columns:repeat(2,1fr)}}
+.step{border-top:2px solid var(--gold);padding-top:1rem}
+.step .n{font-family:'Cinzel Decorative';font-size:1.6rem;color:var(--gold);opacity:.6}
+.step b{display:block;font-weight:500;margin:.4rem 0 .25rem;font-family:'Pridi'}
+.step p{color:var(--muted);font-size:.88rem}
+details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1.2rem;margin-top:.7rem}
+summary{cursor:pointer;font-weight:500;font-family:'Pridi';list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:44px}
+summary::after{content:'+';color:var(--gold);font-size:1.3rem}
+details[open] summary::after{content:'–'}
+details p{color:var(--muted);margin-top:.5rem;font-size:.92rem}
+footer{border-top:1px solid var(--line);padding:2.2rem 0;color:var(--muted);font-size:.88rem}
+.foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+.foot-grid b{color:var(--gold);font-family:'Pridi';font-weight:600}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top">INK SOUL<small>สตูดิโอสักคัสตอม</small></a>
+    <div class="nav-links"><a href="#lab">ออกแบบลายเอง</a><a href="#artists">ช่าง</a><a href="#process">ขั้นตอน</a></div>
+    <a class="btn btn-g" href="#lab">จองออกแบบ</a>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-bg"><img src="../assets/tattoo-hero.jpg" alt="สตูดิโอสักบรรยากาศมืดอบอุ่น ผนังประดับภาพแฟลช" fetchpriority="high"></div>
+    <div class="hero-in">
+      <p class="hero-kick">Custom Tattoo Atelier</p>
+      <h1>ลายที่โลกนี้<br>มีแค่บนผิวคุณ</h1>
+      <p>ไม่มีลายซ้ำ ไม่มีแฟลชสำเร็จ — ช่าง 3 สายงานร่วมออกแบบกับคุณตั้งแต่เส้นแรก อุปกรณ์เบิกใหม่ต่อหน้าทุกครั้ง</p>
+      <div class="rule"></div>
+      <div class="hero-cta">
+        <a class="btn btn-g" href="#lab">ลองประกอบลายเอง</a>
+        <a class="btn btn-o" href="#artists">ดูผลงานช่าง</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="lab">
+    <p class="sec-kick">Design Lab</p>
+    <h2>ประกอบลายในหัวของคุณ — คร่าวๆ ก่อนมาคุยกัน</h2>
+    <p class="sec-sub">เลือกองค์ประกอบ ขนาด และตำแหน่งบนแขน ระบบจะแสดงภาพรวมและประมาณราคาให้คร่าวๆ (ช่างจะวาดจริงใหม่ทั้งหมดตามคอนเซ็ปต์นี้)</p>
+
+    <div class="lab">
+      <div class="canvas-card">
+        <svg id="stencilSvg" viewBox="0 0 460 460" role="img" aria-label="ตัวอย่างลายสักบนแขน">
+          <!-- arm -->
+          <g id="arm">
+            <path d="M150,40 C130,120 128,220 140,320 C146,372 158,420 172,440 L288,440 C302,420 314,372 320,320 C332,220 330,120 310,40 Z" fill="#b98d6f" opacity=".28"/>
+            <path d="M150,40 C130,120 128,220 140,320 C146,372 158,420 172,440 L288,440 C302,420 314,372 320,320 C332,220 330,120 310,40 Z" fill="none" stroke="#8f8477" stroke-width="1.5" opacity=".4"/>
+          </g>
+          <!-- tattoo group (transformed by JS) -->
+          <g id="tattoo" transform="translate(230,210) scale(1)">
+            <g id="lay-main" stroke="#1c1512" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity=".92"></g>
+            <g id="lay-accent" stroke="#8e3b3b" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".85"></g>
+            <g id="lay-frame" stroke="#1c1512" fill="none" stroke-width="2.5" opacity=".7"></g>
+          </g>
+        </svg>
+        <span class="arm-note">ตำแหน่ง: ท้องแขนด้านใน (เปลี่ยนได้ตอนปรึกษา)</span>
+      </div>
+
+      <div class="lab-controls">
+        <h3>องค์ประกอบของคุณ</h3>
+        <div class="ctl">
+          <span>ลายหลัก</span>
+          <div class="chipset" data-layer="main">
+            <button class="chip sel" data-v="koi">ปลาคอย</button>
+            <button class="chip" data-v="dragon">มังกร</button>
+            <button class="chip" data-v="tiger">เสือ</button>
+            <button class="chip" data-v="crane">นกกระเรียน</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <span>องค์ประกอบเสริม</span>
+          <div class="chipset" data-layer="accent">
+            <button class="chip sel" data-v="sakura">ซากุระ</button>
+            <button class="chip" data-v="wave">คลื่น</button>
+            <button class="chip" data-v="flame">เปลวไฟ</button>
+            <button class="chip" data-v="none">ไม่มี</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <span>กรอบ/ลายรอง</span>
+          <div class="chipset" data-layer="frame">
+            <button class="chip sel" data-v="circle">วงกลม</button>
+            <button class="chip" data-v="diamond">เพชร</button>
+            <button class="chip" data-v="none">ไม่มีกรอบ</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <label>ขนาดลาย <b id="sizeVal">14 ซม.</b></label>
+          <input type="range" id="size" min="8" max="20" value="14" aria-label="ขนาดลาย เซนติเมตร">
+        </div>
+        <div class="ctl">
+          <label>ความเข้มงานเงา <b id="shadeVal">กลาง</b></label>
+          <input type="range" id="shade" min="1" max="3" value="2" aria-label="ความเข้มงานเงา">
+        </div>
+        <div class="price-line">
+          <small>ประมาณการ (ขึ้นกับรายละเอียดจริง)</small>
+          <b id="priceOut">฿8,400</b>
+        </div>
+        <button class="btn btn-g" id="bookBtn" style="width:100%;margin-top:1.1rem">จองปรึกษาออกแบบด้วยลายนี้ →</button>
+        <p id="bookOk" hidden style="margin-top:1rem;color:#9fdcb4;font-size:.9rem">รับคิวแล้ว! เลขอ้างอิง <b id="bookRef"></b> — ช่างจะติดต่อกลับภายใน 24 ชม. เพื่อคุยรายละเอียดลายของคุณครับ</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="artists" style="padding-top:0">
+    <p class="sec-kick">Artists</p>
+    <h2>ช่าง 3 สายงาน</h2>
+    <div class="artists">
+      <article class="artist">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1562962230-16e4623d36e6?q=80&w=1000&auto=format&fit=crop" alt="ช่างสักกำลังทำงาน">
+        <div class="ab"><b>อาร์ม — หัวหน้าช่าง</b><span>Oriental / งานเส้นไทย-ญี่ปุ่น · ประสบการณ์ 14 ปี</span><div class="st">เจาะลึก มังกร เสือ ปลาคอย</div></div>
+      </article>
+      <article class="artist">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?q=80&w=1000&auto=format&fit=crop" alt="ช่างสักฝีมือละเอียด">
+        <div class="ab"><b>มิ้ว — งานเส้นบาง</b><span>Fine line / Minimal · ลูกค้าฝรั่ง 60%</span><div class="st">ดอกไม้ ตัวอักษร ลายเล็กละเอียด</div></div>
+      </article>
+      <article class="artist">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1568515387131-4b0f4c5a9b6c?q=80&w=1000&auto=format&fit=crop" alt="ผลงานสักสไตล์แบล็คเวิร์ก" onerror="this.src='https://images.unsplash.com/photo-1562962230-16e4623d36e6?q=80&w=1000&auto=format&fit=crop'">
+        <div class="ab"><b>โจ — แบล็คเวิร์ก</b><span>Blackwork / ลายเข้มทึบ · รางวัลงานสัก 2567</span><div class="st">เรขาคณิต จุดทึบ งานปิดลายเก่า</div></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap" id="process" style="padding-top:0">
+    <p class="sec-kick">Process</p>
+    <h2>จากคำบอกเล่า สู่ลายบนผิว</h2>
+    <div class="proc">
+      <div class="step"><span class="n">01</span><b>คุยคอนเซ็ปต์</b><p>เล่าความหมายที่อยากได้ ช่างช่วยแปลงเป็นภาพ ฟรีไม่มีค่าใช้จ่าย</p></div>
+      <div class="step"><span class="n">02</span><b>สเก็ตช์จริง 2 รอบ</b><p>ช่างวาดลายเฉพาะคุณ ปรับได้ 2 รอบจนกว่าจะใช่</p></div>
+      <div class="step"><span class="n">03</span><b>วัดตำแหน่งบนผิว</b><p>แปะสเตนซิลดูจริงก่อนเริ่มเข็ม เปลี่ยนจุดได้อีก</p></div>
+      <div class="step"><span class="n">04</span><b>สัก + ดูแลหลัง</b><p>อุปกรณ์เบิกใหม่ต่อหน้า พร้อมคู่มือดูแลและครีมหลังสัก</p></div>
+    </div>
+
+    <div style="margin-top:2.5rem">
+      <details><summary>เจ็บไหมครับ ครั้งแรกควรเริ่มตรงไหน?</summary><p>ความรู้สึกเหมือนโดนเล็บข่วนแรงๆ ต่อเนื่อง — ท้องแขนด้านในและต้นขาด้านนอกเป็นจุดที่คนทนที่สุด เหมาะกับลายแรก</p></details>
+      <details><summary>ต้องเตรียมตัวยังไงก่อนสัก?</summary><p>นอนให้พอ กินข้าวอิ่ม งดแอลกอฮอล์ 24 ชม. และอย่าโกนขนบริเวณนั้นเอง (ช่างจะเตรียมให้)</p></details>
+      <details><summary>ลายสักอยู่ได้นานแค่ไหน จางไหม?</summary><p>อยู่ตลอดชีพ แต่จะซอฟต์ลงเล็กน้อยใน 10–20 ปี งานเส้นบางอาจต้องเก็บเส้นทุก 5–8 ปี</p></details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span><b>INK SOUL</b> · อารีย์ซอย 4 (BTS อารีย์ ทางออก 3)</span>
+    <span>จองล่วงหน้าเท่านั้น · อังคาร–อาทิตย์ 12:00–21:00 · LINE @inksoul</span>
+    <span>© 2569 Ink Soul Tattoo</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var PATHS = {
+    main: {
+      koi:    '<path d="M-70,10 C-40,-40 30,-55 65,-15 C30,-20 -5,0 -20,35 C-35,70 10,80 40,60 C20,95 -35,95 -60,55 C-75,35 -78,25 -70,10 Z"/><path d="M60,-18 C72,-30 85,-32 95,-25 C85,-18 78,-8 72,2"/><circle cx="48" cy="-25" r="4"/><path d="M-60,55 C-75,75 -85,80 -95,78 M-65,42 C-80,55 -90,58 -98,55"/>',
+      dragon: '<path d="M-80,30 C-60,-20 -20,-50 20,-45 C60,-40 80,-10 75,20 C70,50 40,65 10,55 C-10,48 -15,30 -5,18 C5,8 22,12 28,24"/><path d="M20,-45 C30,-62 48,-68 62,-62 C55,-52 52,-42 54,-32"/><path d="M-80,30 C-88,45 -88,60 -78,72 M-72,42 C-78,55 -76,68 -66,76"/><path d="M28,24 l14,-8 M22,30 l14,2"/>',
+      tiger:  '<path d="M-65,-10 C-55,-45 -15,-60 20,-50 C55,-40 70,-10 62,20 C54,50 20,62 -12,52 C-44,42 -75,25 -65,-10 Z"/><path d="M-40,-38 L-30,-18 M-15,-48 L-8,-26 M12,-50 L15,-28 M38,-42 L36,-20"/><path d="M50,30 C65,25 78,28 85,40"/><circle cx="18" cy="-15" r="5"/><path d="M-62,15 C-72,28 -74,42 -66,54"/>',
+      crane:  '<path d="M-20,60 C-30,20 -15,-20 15,-40 C5,-15 10,10 30,25 C15,25 5,32 0,45"/><path d="M15,-40 C25,-55 45,-60 60,-52 C48,-45 40,-35 38,-22"/><path d="M-20,60 L-32,85 M-10,58 L-12,85"/><path d="M30,25 C50,20 68,25 78,40"/>'
+    },
+    accent: {
+      sakura: '<g><circle cx="-80" cy="-60" r="8"/><circle cx="-64" cy="-52" r="6"/><circle cx="70" cy="60" r="9"/><circle cx="88" cy="50" r="6"/><circle cx="80" cy="-70" r="7"/><path d="M-80,-60 q10,8 4,18 M70,60 q-12,4 -16,14"/></g>',
+      wave:   '<path d="M-90,50 C-70,30 -55,30 -40,48 C-25,66 -5,66 10,48 C25,30 45,30 62,48 M-85,68 C-68,52 -52,52 -38,66 C-24,80 -6,80 8,66"/>',
+      flame:  '<path d="M75,-55 C85,-40 80,-25 68,-18 C78,-30 72,-42 62,-48 C68,-38 62,-30 55,-27 C60,-38 52,-48 45,-52 C55,-50 60,-44 62,-38 C64,-46 70,-52 75,-55 Z"/><path d="M-85,-65 C-78,-52 -80,-40 -90,-34 C-82,-44 -88,-54 -95,-58"/>',
+      none:   ''
+    },
+    frame: {
+      circle:  '<circle cx="0" cy="0" r="118"/><circle cx="0" cy="0" r="106" stroke-dasharray="4 7"/>',
+      diamond: '<path d="M0,-125 L95,0 L0,125 L-95,0 Z"/><path d="M0,-108 L82,0 L0,108 L-82,0 Z" stroke-dasharray="4 7"/>',
+      none:    ''
+    }
+  };
+  var BASE_PRICE = 6000;      // 8cm baseline
+  var perCm = 600;
+  var state = { main:'koi', accent:'sakura', frame:'circle', size:14, shade:2 };
+  var shadeNames = ['เบา','กลาง','เข้ม'];
+
+  function render(){
+    document.getElementById('lay-main').innerHTML = PATHS.main[state.main];
+    document.getElementById('lay-accent').innerHTML = PATHS.accent[state.accent];
+    document.getElementById('lay-frame').innerHTML = PATHS.frame[state.frame];
+    var scale = state.size / 14;
+    document.getElementById('tattoo').setAttribute('transform', 'translate(230,210) scale(' + scale.toFixed(2) + ')');
+    var shadeOpacity = [0.65, 0.85, 1][state.shade - 1];
+    document.getElementById('lay-main').setAttribute('opacity', shadeOpacity);
+    document.getElementById('sizeVal').textContent = state.size + ' ซม.';
+    document.getElementById('shadeVal').textContent = shadeNames[state.shade - 1];
+    var price = BASE_PRICE + (state.size - 8) * perCm + (state.shade - 1) * 800 + (state.accent !== 'none' ? 600 : 0) + (state.frame !== 'none' ? 400 : 0);
+    document.getElementById('priceOut').textContent = '฿' + price.toLocaleString('th-TH');
+  }
+
+  document.querySelectorAll('.chipset').forEach(function(set){
+    set.addEventListener('click', function(e){
+      var b = e.target.closest('.chip'); if (!b) return;
+      set.querySelectorAll('.chip').forEach(function(x){ x.classList.remove('sel'); });
+      b.classList.add('sel');
+      state[set.dataset.layer] = b.dataset.v;
+      render();
+    });
+  });
+  document.getElementById('size').addEventListener('input', function(e){ state.size = +e.target.value; render(); });
+  document.getElementById('shade').addEventListener('input', function(e){ state.shade = +e.target.value; render(); });
+
+  document.getElementById('bookBtn').addEventListener('click', function(){
+    var ok = document.getElementById('bookOk');
+    document.getElementById('bookRef').textContent = 'INK-' + Math.floor(1000 + Math.random() * 9000);
+    ok.hidden = false;
+    ok.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  render();
+  document.documentElement.style.scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

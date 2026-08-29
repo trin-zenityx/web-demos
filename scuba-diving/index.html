@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEEP BLUE — ศูนย์ดำน้ำและทริปเกาะ จังหวัดชุมพร</title>
+<meta name="description" content="DEEP BLUE Dive Center ชุมพร — สอนดำน้ำลึกมาตรฐาน PADI ตั้งแต่สนอร์เกิ้ลถึง Advanced พร้อมทริปเกาะเต่า สิมิลัน หลีเป๊ะ ออกทุกสัปดาห์">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#04263e;
+  --mid:#0a4a72;
+  --sea:#1d8ec4;
+  --foam:#e8f4fa;
+  --ink:#082031;
+  --muted:#7aa7bf;
+  --line:rgba(232,244,250,.14);
+  --radius:20px;
+  --font-th:'Mitr',sans-serif;
+  --font-en:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-th);
+  font-weight:300;
+  font-size:16px;
+  line-height:1.75;
+  color:var(--foam);
+  background:linear-gradient(180deg,#06324f 0%,var(--deep) 26%,#032135 55%,#021726 82%,#01111d 100%);
+  background-attachment:fixed;
+  min-width:320px;
+}
+::selection{background:var(--sea);color:var(--foam)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+h1,h2,h3,h4{font-family:var(--font-th);font-weight:500;line-height:1.3}
+.en{font-family:var(--font-en)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+section{scroll-margin-top:84px}
+:focus-visible{outline:2px solid var(--sea);outline-offset:3px;border-radius:6px}
+
+.skip-link{
+  position:absolute;left:16px;top:-60px;z-index:100;
+  background:var(--foam);color:var(--ink);padding:12px 20px;border-radius:10px;
+  font-weight:400;transition:top .2s ease;
+}
+.skip-link:focus{top:16px}
+
+/* ---------- eyebrow / headings ---------- */
+.eyebrow{
+  font-family:var(--font-en);font-weight:800;font-size:12px;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--sea);margin-bottom:14px;
+}
+.sec-title{font-size:clamp(28px,4.4vw,44px);margin-bottom:14px}
+.sec-sub{color:var(--muted);max-width:620px;font-size:16px}
+
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px clamp(20px,4vw,56px);
+  transition:background .3s ease,border-color .3s ease,padding .3s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(4,38,62,.88);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-bottom-color:var(--line);
+}
+.brand{font-family:var(--font-en);font-weight:800;font-size:20px;letter-spacing:.14em;color:var(--foam);display:flex;align-items:center;gap:10px;min-height:44px}
+.brand svg{flex:none}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{
+  display:inline-flex;align-items:center;min-height:44px;padding:0 14px;
+  font-size:15px;font-weight:300;color:rgba(232,244,250,.82);border-radius:10px;
+  transition:color .2s ease;
+}
+.nav-links a:hover{color:var(--foam)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:48px;padding:0 26px;border-radius:999px;border:1px solid transparent;
+  font-family:var(--font-th);font-weight:400;font-size:15px;cursor:pointer;
+  transition:transform .2s ease,background .2s ease,color .2s ease,border-color .2s ease;
+  white-space:nowrap;
+}
+.btn-foam{background:var(--foam);color:var(--ink)}
+.btn-foam:hover{background:#fff;transform:translateY(-2px)}
+.btn-ghost{border-color:var(--line);color:var(--foam);background:rgba(232,244,250,.04)}
+.btn-ghost:hover{border-color:var(--sea);color:#fff;transform:translateY(-2px)}
+.nav-cta{min-height:44px;padding:0 20px}
+.menu-btn{
+  display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;
+  background:rgba(232,244,250,.05);cursor:pointer;align-items:center;justify-content:center;
+}
+.menu-btn svg{stroke:var(--foam)}
+@media (max-width:900px){
+  .menu-btn{display:inline-flex}
+  .nav-links{
+    position:absolute;top:calc(100% + 8px);right:20px;left:20px;
+    flex-direction:column;align-items:stretch;gap:2px;
+    background:rgba(4,38,62,.97);border:1px solid var(--line);border-radius:16px;
+    padding:10px;display:none;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{justify-content:center}
+  .nav-links .nav-cta{margin-top:6px}
+}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100vh;min-height:100svh;
+  display:flex;align-items:center;overflow:hidden;
+}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-shade{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(4,38,62,.62) 0%,rgba(4,38,62,.28) 42%,rgba(4,38,62,.86) 88%,var(--deep) 100%);
+}
+.hero-inner{position:relative;z-index:2;width:100%;padding-top:96px;padding-bottom:110px}
+.hero h1{font-size:clamp(40px,7.4vw,76px);font-weight:500;letter-spacing:.01em;margin:10px 0 18px}
+.hero p.lead{max-width:560px;font-size:clamp(15px,1.6vw,18px);color:rgba(232,244,250,.88)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:44px;
+  font-family:var(--font-en);font-weight:600;font-size:12px;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(232,244,250,.6);
+}
+.hero-meta span{display:inline-flex;align-items:center;gap:8px}
+.hero-meta i{width:6px;height:6px;border-radius:50%;background:var(--sea);display:inline-block}
+.scroll-hint{
+  position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:rgba(232,244,250,.65);font-size:13px;
+}
+.scroll-hint svg{animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
+/* ---------- depth gauge section ---------- */
+.depth{position:relative}
+.depth-head{padding:clamp(80px,10vw,130px) 0 10px}
+.depth-inner{
+  display:grid;grid-template-columns:240px minmax(0,1fr);
+  gap:clamp(30px,5vw,84px);
+  max-width:1200px;margin:0 auto;
+  padding:0 clamp(20px,5vw,56px) clamp(90px,10vw,140px);
+}
+.gauge{
+  position:sticky;top:104px;align-self:start;
+  height:calc(100vh - 150px);min-height:460px;max-height:640px;
+  display:flex;flex-direction:column;gap:18px;
+}
+.gauge-num{
+  font-family:var(--font-en);font-weight:800;
+  font-size:clamp(44px,4.6vw,62px);line-height:1;color:var(--foam);
+  display:flex;align-items:baseline;gap:10px;
+}
+.gauge-num .unit{font-family:var(--font-th);font-weight:300;font-size:15px;color:var(--muted)}
+.gauge-zone{
+  font-size:14px;color:var(--sea);font-weight:400;letter-spacing:.02em;
+  min-height:24px;transition:color .3s ease;
+}
+.gauge-mid{position:relative;flex:1;display:flex}
+.gauge-track{
+  position:relative;width:3px;height:100%;border-radius:99px;
+  background:rgba(232,244,250,.12);
+}
+.gauge-fill{
+  position:absolute;top:0;left:0;width:100%;height:0%;
+  border-radius:99px;
+  background:linear-gradient(180deg,var(--foam) 0%,var(--sea) 60%,#0e5c86 100%);
+  box-shadow:0 0 14px rgba(29,142,196,.55);
+}
+.tick{
+  position:absolute;top:var(--p);left:0;width:14px;height:2px;
+  background:rgba(232,244,250,.25);border-radius:2px;
+}
+.tick i{
+  position:absolute;left:22px;top:50%;transform:translateY(-50%);
+  font-style:normal;font-family:var(--font-en);font-weight:600;font-size:11px;
+  letter-spacing:.08em;color:var(--muted);
+  transition:color .25s ease;
+}
+.tick i::after{content:" ม.";font-family:var(--font-th);font-weight:300}
+.tick.on{background:var(--sea)}
+.tick.on i{color:var(--foam)}
+.bubbles{position:absolute;inset:0;pointer-events:none;overflow:visible}
+.bubble{
+  position:absolute;bottom:-10px;left:var(--x);
+  opacity:0;will-change:transform;
+}
+.bubble svg{display:block;animation:sway 3.4s ease-in-out infinite}
+.bubble:nth-child(2) svg{animation-delay:-.9s}
+.bubble:nth-child(3) svg{animation-delay:-1.7s}
+.bubble:nth-child(4) svg{animation-delay:-2.4s}
+.bubble:nth-child(5) svg{animation-delay:-.4s}
+@keyframes sway{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+
+.stations{display:flex;flex-direction:column;gap:clamp(40px,6vh,72px)}
+.station{min-height:82vh;display:flex;align-items:center}
+.station-card{
+  width:100%;
+  display:grid;grid-template-columns:1.04fr 1fr;gap:clamp(22px,3vw,44px);
+  align-items:center;
+  background:rgba(232,244,250,.035);
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:clamp(18px,2.6vw,32px);
+}
+.station:nth-child(even) .station-card .s-media{order:2}
+.s-media{position:relative;overflow:hidden;border-radius:14px}
+.s-media img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.s-depth{
+  position:absolute;left:14px;top:14px;
+  font-family:var(--font-en);font-weight:800;font-size:13px;letter-spacing:.14em;
+  background:rgba(4,38,62,.78);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  border:1px solid var(--line);border-radius:999px;padding:8px 16px;color:var(--foam);
+}
+.s-body .s-tag{
+  font-family:var(--font-en);font-weight:600;font-size:11px;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--sea);margin-bottom:10px;
+}
+.s-body h3{font-size:clamp(22px,2.6vw,30px);margin-bottom:6px}
+.s-body .s-en{
+  font-family:var(--font-en);font-weight:600;font-size:13px;letter-spacing:.1em;
+  color:var(--muted);text-transform:uppercase;margin-bottom:14px;
+}
+.s-body p{color:rgba(232,244,250,.78);font-size:15.5px}
+.s-note{
+  margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);
+  font-size:14px;color:var(--muted);display:flex;gap:10px;align-items:flex-start;
+}
+.s-note svg{flex:none;margin-top:4px}
+
+/* ---------- courses ---------- */
+.courses{padding:clamp(80px,10vw,130px) 0}
+.course-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px;
+}
+.course-card{
+  position:relative;display:flex;flex-direction:column;
+  background:rgba(232,244,250,.035);border:1px solid var(--line);
+  border-radius:var(--radius);padding:30px 28px 28px;
+  transition:transform .25s ease,border-color .25s ease;
+}
+.course-card:hover{transform:translateY(-5px);border-color:rgba(29,142,196,.5)}
+.course-card.featured{background:rgba(29,142,196,.09);border-color:rgba(29,142,196,.55)}
+.c-flag{
+  position:absolute;top:-13px;left:26px;
+  background:var(--sea);color:var(--foam);
+  font-size:12.5px;font-weight:400;padding:5px 14px;border-radius:999px;
+}
+.c-en{font-family:var(--font-en);font-weight:800;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--sea)}
+.c-name{font-size:23px;margin:8px 0 2px}
+.c-time{font-size:14px;color:var(--muted);margin-bottom:18px}
+.c-price{
+  font-family:var(--font-en);font-weight:800;font-size:34px;color:var(--foam);
+  padding:14px 0 16px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.c-price small{font-family:var(--font-th);font-weight:300;font-size:13px;color:var(--muted);margin-left:6px}
+.c-list{margin:18px 0 24px;display:flex;flex-direction:column;gap:11px;flex:1}
+.c-list li{display:flex;gap:11px;font-size:14.5px;color:rgba(232,244,250,.85);align-items:flex-start}
+.c-list svg{flex:none;margin-top:5px}
+.course-card .btn{width:100%}
+
+/* ---------- trips ---------- */
+.trips{padding:clamp(80px,10vw,130px) 0}
+.trip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px}
+.trip-card{
+  display:flex;flex-direction:column;
+  border:1px solid var(--line);border-radius:var(--radius);
+  background:rgba(232,244,250,.03);overflow:hidden;
+  transition:transform .25s ease,border-color .25s ease;
+}
+.trip-card:hover{transform:translateY(-5px);border-color:rgba(29,142,196,.5)}
+.trip-head{
+  padding:24px 26px 20px;
+  background:linear-gradient(160deg,rgba(29,142,196,.22),rgba(10,74,114,.1));
+  border-bottom:1px solid var(--line);
+}
+.t-date{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--foam);
+  background:rgba(4,38,62,.55);border:1px solid var(--line);
+  padding:6px 14px;border-radius:999px;margin-bottom:14px;
+}
+.trip-head h3{font-size:24px}
+.t-trip-en{font-family:var(--font-en);font-weight:600;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.trip-body{padding:20px 26px 26px;display:flex;flex-direction:column;gap:12px;flex:1}
+.t-row{display:flex;justify-content:space-between;gap:14px;font-size:14.5px}
+.t-row .k{color:var(--muted);flex:none}
+.t-row .v{text-align:right;color:rgba(232,244,250,.88)}
+.t-price{
+  margin-top:auto;padding-top:16px;border-top:1px dashed var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.t-price .p{font-family:var(--font-en);font-weight:800;font-size:26px}
+.t-price .left{font-size:13px;color:var(--sea)}
+.t-price .left.soon{color:var(--muted)}
+
+/* ---------- team ---------- */
+.team{padding:clamp(80px,10vw,130px) 0}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px}
+.member{
+  border:1px solid var(--line);border-radius:var(--radius);
+  background:rgba(232,244,250,.03);padding:32px 28px;text-align:center;
+}
+.avatar{
+  width:92px;height:92px;border-radius:50%;margin:0 auto 18px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;font-weight:400;color:var(--foam);
+  background:linear-gradient(160deg,var(--mid),var(--deep));
+  border:1px solid rgba(29,142,196,.5);
+  box-shadow:0 0 0 6px rgba(29,142,196,.1);
+}
+.member h3{font-size:21px}
+.m-name-th{font-size:14px;color:var(--muted);margin-bottom:10px}
+.m-cert{
+  display:inline-block;font-family:var(--font-en);font-weight:600;font-size:11.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--sea);
+  border:1px solid rgba(29,142,196,.4);border-radius:999px;padding:6px 14px;margin-bottom:14px;
+}
+.m-stats{font-family:var(--font-en);font-weight:600;font-size:13px;letter-spacing:.06em;color:rgba(232,244,250,.75);margin-bottom:10px}
+.member p{font-size:14.5px;color:var(--muted)}
+
+/* ---------- cta band ---------- */
+.cta-band{
+  margin:clamp(60px,8vw,100px) auto;max-width:1200px;
+  padding:0 clamp(20px,5vw,56px);
+}
+.cta-box{
+  border-radius:26px;border:1px solid rgba(29,142,196,.4);
+  background:
+    radial-gradient(120% 160% at 85% 0%,rgba(29,142,196,.32) 0%,rgba(10,74,114,.12) 45%,rgba(4,38,62,.2) 100%);
+  padding:clamp(40px,6vw,72px) clamp(24px,5vw,64px);
+  display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;
+}
+.cta-box h2{font-size:clamp(26px,3.6vw,38px);margin-bottom:8px}
+.cta-box p{color:var(--muted);max-width:460px}
+.cta-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);background:rgba(1,17,29,.6)}
+.foot-grid{
+  display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:34px;
+  padding-top:clamp(50px,6vw,76px);padding-bottom:44px;
+}
+.foot-brand{font-family:var(--font-en);font-weight:800;font-size:22px;letter-spacing:.14em;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+footer p,footer li{font-size:14.5px;color:var(--muted)}
+footer h4{font-size:15px;color:var(--foam);font-weight:400;margin-bottom:14px;letter-spacing:.04em}
+.foot-list li{margin-bottom:9px;display:flex;gap:10px;align-items:flex-start}
+.foot-list svg{flex:none;margin-top:5px}
+.foot-list a:hover{color:var(--foam)}
+.foot-bottom{
+  border-top:1px solid var(--line);
+  padding-top:20px;padding-bottom:26px;
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  font-family:var(--font-en);font-size:12px;letter-spacing:.1em;color:rgba(122,167,191,.75);
+}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:1020px){
+  .course-grid,.trip-grid,.team-grid{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:920px){
+  .depth-inner{grid-template-columns:1fr;gap:34px;padding-top:28px}
+  .gauge{
+    top:74px;z-index:30;height:auto;min-height:0;max-height:none;
+    flex-direction:row;align-items:center;gap:16px;
+    background:rgba(4,38,62,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border:1px solid var(--line);border-radius:16px;padding:10px 18px;
+  }
+  .gauge-num{font-size:30px}
+  .gauge-num .unit{font-size:13px}
+  .gauge-zone{font-size:13px;min-width:96px}
+  .gauge-mid{flex:1}
+  .gauge-track{width:100%;height:3px}
+  .gauge-fill{width:0%;height:100%}
+  .tick,.bubbles{display:none}
+  .station{min-height:0;padding:14px 0}
+  .station-card{grid-template-columns:1fr}
+  .station:nth-child(even) .station-card .s-media{order:0}
+}
+@media (max-width:640px){
+  .course-grid,.trip-grid,.team-grid,.foot-grid{grid-template-columns:1fr}
+  .hero-cta .btn{flex:1;justify-content:center}
+  .cta-box{flex-direction:column;align-items:flex-start}
+}
+@media (max-width:420px){
+  .hero h1{font-size:38px}
+  .btn{padding:0 20px}
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .rv{opacity:1;transform:none}
+  .bubble{display:none}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="DEEP BLUE กลับขึ้นด้านบน">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 3c3.4 3.1 5.5 6.4 5.5 9.6a5.5 5.5 0 1 1-11 0C6.5 9.4 8.6 6.1 12 3Z" stroke="#1d8ec4" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M12 10.2c1.4 1.3 2.3 2.7 2.3 4a2.3 2.3 0 1 1-4.6 0c0-1.3.9-2.7 2.3-4Z" fill="#e8f4fa"/>
+    </svg>
+    DEEP&nbsp;BLUE
+  </a>
+  <nav class="nav-links" id="navLinks" aria-label="เมนูหลัก">
+    <a href="#depth">ดำลงไปกับเรา</a>
+    <a href="#courses">คอร์สเรียน</a>
+    <a href="#trips">ทริปเดือนนี้</a>
+    <a href="#team">ทีมครู</a>
+    <a href="#contact">ติดต่อ</a>
+    <a href="#courses" class="btn btn-foam nav-cta">จองคอร์ส</a>
+  </nav>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="เปิดเมนู">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <path d="M3 6h16M3 11h16M3 16h16"/>
+    </svg>
+  </button>
+</header>
+
+<main id="main">
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <img class="hero-img" src="../assets/scuba-hero.jpg" alt="ลำแสงส่องผ่านผิวน้ำทะเลลงสู่โลกใต้ทะเลสีน้ำเงินลึก" fetchpriority="high">
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="hero-inner wrap">
+    <p class="eyebrow">Scuba Diving Center — Chumphon, Thailand</p>
+    <h1>โลกใบใหม่<br>อยู่ลึกแค่นี้</h1>
+    <p class="lead">ศูนย์ดำน้ำ DEEP BLUE จังหวัดชุมพร สอนดำน้ำลึกมาตรฐาน PADI ตั้งแต่ครั้งแรกที่หายใจใต้น้ำ จนถึงจุดลึก 40 เมตร พร้อมทริปเกาะออกทุกสัปดาห์</p>
+    <div class="hero-cta">
+      <a class="btn btn-foam" href="#courses">จองคอร์สดำน้ำ</a>
+      <a class="btn btn-ghost" href="#depth">ดำลงไปกับเรา
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v11M3.5 8.5 8 13l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="hero-meta" aria-label="จุดเด่นของศูนย์">
+      <span><i></i>ครู PADI ประจำศูนย์</span>
+      <span><i></i>ประสบการณ์ 12 ปี</span>
+      <span><i></i>ทริปออกทุกสัปดาห์</span>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">
+    <span>เลื่อนลงเพื่อดำต่อ</span>
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 3v11M4.5 9.5 9 14l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
+
+<!-- ================= DEPTH GAUGE SCROLL ================= -->
+<section class="depth" id="depth" aria-label="ดำลงไปกับเรา — เส้นทางตามความลึก">
+  <div class="depth-head wrap">
+    <p class="eyebrow rv">The Descent</p>
+    <h2 class="sec-title rv">ดำลงไปกับเรา</h2>
+    <p class="sec-sub rv">เลื่อนลงเรื่อยๆ เกจด้านข้างจะบอกว่าตอนนี้คุณลึกแค่ไหน ผ่าน 4 สถานีจริงใต้ทะเลอ่าวไทยที่เราพาไปทุกสัปดาห์</p>
+  </div>
+
+  <div class="depth-inner">
+    <aside class="gauge" aria-hidden="true">
+      <div class="gauge-top">
+        <div class="gauge-num"><span id="depthNum">0</span><span class="unit">เมตร</span></div>
+        <div class="gauge-zone" id="gaugeZone">โซนผิวน้ำ</div>
+      </div>
+      <div class="gauge-mid">
+        <div class="gauge-track">
+          <div class="gauge-fill" id="gaugeFill"></div>
+          <span class="tick on" style="--p:0%" data-m="0"><i>0</i></span>
+          <span class="tick" style="--p:25%" data-m="10"><i>10</i></span>
+          <span class="tick" style="--p:50%" data-m="20"><i>20</i></span>
+          <span class="tick" style="--p:75%" data-m="30"><i>30</i></span>
+          <span class="tick" style="--p:100%" data-m="40"><i>40</i></span>
+        </div>
+        <div class="bubbles">
+          <span class="bubble" style="--x:34%" data-speed="150"><svg width="9" height="9" viewBox="0 0 9 9"><circle cx="4.5" cy="4.5" r="3.6" fill="none" stroke="rgba(232,244,250,.55)" stroke-width="1.2"/></svg></span>
+          <span class="bubble" style="--x:58%" data-speed="240"><svg width="13" height="13" viewBox="0 0 13 13"><circle cx="6.5" cy="6.5" r="5.4" fill="none" stroke="rgba(232,244,250,.45)" stroke-width="1.3"/></svg></span>
+          <span class="bubble" style="--x:44%" data-speed="330"><svg width="7" height="7" viewBox="0 0 7 7"><circle cx="3.5" cy="3.5" r="2.8" fill="none" stroke="rgba(232,244,250,.6)" stroke-width="1"/></svg></span>
+          <span class="bubble" style="--x:66%" data-speed="420"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.8" fill="none" stroke="rgba(232,244,250,.35)" stroke-width="1.4"/></svg></span>
+          <span class="bubble" style="--x:28%" data-speed="520"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4.1" fill="none" stroke="rgba(232,244,250,.5)" stroke-width="1.2"/></svg></span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="stations">
+      <!-- Station 1 : 0 m -->
+      <article class="station">
+        <div class="station-card rv">
+          <div class="s-media">
+            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1000&auto=format&fit=crop" alt="นักดำน้ำตื้นลอยตัวอยู่ผิวน้ำเหนือแนวปะการังตื้น" loading="lazy">
+            <span class="s-depth">0 M</span>
+          </div>
+          <div class="s-body">
+            <p class="s-tag">Station 01 — Surface</p>
+            <h3>ผิวน้ำ</h3>
+            <p class="s-en">Snorkeling Zone</p>
+            <p>จุดเริ่มต้นของทุกคน แค่ลอยตัวหงายหน้ามองลงไป ก็เจอฝูงปลาการ์ตูนและแนวปะการังตื้นสีสันสดใส ไม่ต้องมีประสบการณ์ ไม่ต้องว่ายน้ำเก่ง เรามีเสื้อชูชีพและไกด์ดูแลใกล้ชิดตลอดทริป</p>
+            <p class="s-note">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#1d8ec4" stroke-width="1.4"/><path d="M8 5v3.2l2.2 1.4" stroke="#1d8ec4" stroke-width="1.4" stroke-linecap="round"/></svg>
+              กิจกรรม: สนอร์เกิ้ลเดย์ทริป 2 จุด — เหมาะกับทุกวัย เด็ก 6 ปีขึ้นไปร่วมได้
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Station 2 : 10 m -->
+      <article class="station">
+        <div class="station-card rv">
+          <div class="s-media">
+            <img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?q=80&w=1000&auto=format&fit=crop" alt="แนวปะการังหลากสีที่ความลึกสิบเมตรพร้อมฝูงปลาขนาดเล็ก" loading="lazy">
+            <span class="s-depth">10 M</span>
+          </div>
+          <div class="s-body">
+            <p class="s-tag">Station 02 — Coral Garden</p>
+            <h3>สวนปะการัง</h3>
+            <p class="s-en">First Open Water Dives</p>
+            <p>ระดับความลึกของไดฟ์แรกในคอร์ส Open Water ที่เกาะง่ามยักษ์และเกาะเล่าลิ่ว คุณจะว่ายผ่านปะการังเขากวาง ดอกไม้ทะเล และถ้าโชคดีจะเจอเต่าทะเลกำลังหาอาหารเช้าแบบไม่เร่งรีบ</p>
+            <p class="s-note">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#1d8ec4" stroke-width="1.4"/><path d="M8 5v3.2l2.2 1.4" stroke="#1d8ec4" stroke-width="1.4" stroke-linecap="round"/></svg>
+              กิจกรรม: ไดฟ์ฝึกหัดและฟันไดฟ์ — น้ำอุ่น 28–30 องศา ทัศนวิสัย 10–15 เมตร
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Station 3 : 20 m -->
+      <article class="station">
+        <div class="station-card rv">
+          <div class="s-media">
+            <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1000&auto=format&fit=crop" alt="ลำแสงส่องผ่านน้ำทะเลสีน้ำเงินลงสู่ซากเรือจมเบื้องล่าง" loading="lazy">
+            <span class="s-depth">20 M</span>
+          </div>
+          <div class="s-body">
+            <p class="s-tag">Station 03 — The Wreck</p>
+            <h3>ซากเรือจม</h3>
+            <p class="s-en">Artificial Reef Dive</p>
+            <p>ซากเรือประมงที่จมลงกว่าสิบปี วันนี้กลายเป็นแนวปะการังเทียมและบ้านของฝูงปลาแจ็ค ปลากะพงยักษ์ และปูเสฉวน บรรยากาศเงียบสงบ เหมาะกับการฝึกควบคุมความลึกและถ่ายภาพ</p>
+            <p class="s-note">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#1d8ec4" stroke-width="1.4"/><path d="M8 5v3.2l2.2 1.4" stroke="#1d8ec4" stroke-width="1.4" stroke-linecap="round"/></svg>
+              เงื่อนไข: ต้องมีใบอนุญาต Open Water ขึ้นไป — กระแสน้ำเล็กน้อยช่วงน้ำขึ้น
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Station 4 : 30-40 m -->
+      <article class="station">
+        <div class="station-card rv">
+          <div class="s-media">
+            <img src="https://images.unsplash.com/photo-1582967788606-a171c1080cb0?q=80&w=1000&auto=format&fit=crop" alt="ฝูงปลาขนาดใหญ่ว่ายวนอยู่ในทะเลลึกสีน้ำเงินเข้ม" loading="lazy">
+            <span class="s-depth">30–40 M</span>
+          </div>
+          <div class="s-body">
+            <p class="s-tag">Station 04 — The Deep</p>
+            <h3>จุดลึก</h3>
+            <p class="s-en">Advanced Only</p>
+            <p>เส้นทางของตัวจริงที่จุ่มสุรินทร์และหินแดง โลกตรงนี้เหลือเพียงสีน้ำเงินเข้มกับเสียงลมหายใจของตัวเอง ช่วงมีนาคมถึงพฤษภาคมมีลุ้นพบฉลามวาฬและฝูงแมนต้าตามฤดูกาล</p>
+            <p class="s-note">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#1d8ec4" stroke-width="1.4"/><path d="M8 5v3.2l2.2 1.4" stroke="#1d8ec4" stroke-width="1.4" stroke-linecap="round"/></svg>
+              เงื่อนไข: สำหรับ Advanced Open Water ขึ้นไป — ลงลึกสูงสุด 40 เมตรตามมาตรฐานสันทนาการ
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COURSES ================= -->
+<section class="courses" id="courses">
+  <div class="wrap">
+    <p class="eyebrow rv">Courses &amp; Training</p>
+    <h2 class="sec-title rv">คอร์สเรียนดำน้ำ 3 ระดับ</h2>
+    <p class="sec-sub rv">เริ่มต้นได้ทุกระดับ ราคารวมอุปกรณ์ เรือ อาหารกลางวัน และประกันอุบัติเหตุทางทะเลแล้ว ไม่มีค่าใช้จ่ายแอบแฝง</p>
+
+    <div class="course-grid">
+      <article class="course-card rv">
+        <p class="c-en">Snorkel</p>
+        <h3 class="c-name">สนอร์เกิ้ลเดย์ทริป</h3>
+        <p class="c-time">1 วันเต็ม · ไม่ต้องมีประสบการณ์</p>
+        <p class="c-price">฿2,900<small>/ ท่าน</small></p>
+        <ul class="c-list">
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>อุปกรณ์สนอร์เกิ้ลและเสื้อชูชีพครบชุด</li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>เรือทริป 2 จุดดำน้ำตื้นรอบเกาะง่าม</li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>อาหารกลางวัน ผลไม้ และน้ำดื่มบนเรือ</li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>ไกด์ดูแลใกล้ชิด ถ่ายรูปใต้น้ำให้ฟรี</li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>ประกันอุบัติเหตุทางทะเล</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">จองทริปนี้</a>
+      </article>
+
+      <article class="course-card featured rv">
+        <span class="c-flag">เรียนมากที่สุด</span>
+        <p class="c-en">Open Water</p>
+        <h3 class="c-name">คอร์ส PADI Open Water</h3>
+        <p class="c-time">3–4 วัน · ใบอนุญาตใช้ได้ทั่วโลกตลอดชีพ</p>
+        <p class="c-price">฿14,900<small>/ ท่าน</small></p>
+        <ul class="c-list">
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>ภาคทฤษฎี e-Learning + ฝึกทักษะในสระ</li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>ดำน้ำจริงในทะเล 4 ไดฟ์ ลึกสูงสุด 18 เมตร</li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>อุปกรณ์ครบชุดตลอดคอร์ส ไม่ต้องซื้อเอง</li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>ครู 1 คนดูแลนักเรียนสูงสุด 4 คน</li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>บัตรรับรอง PADI ดำน้ำได้ทั่วโลก</li>
+        </ul>
+        <a class="btn btn-foam" href="#contact">จองคอร์สนี้</a>
+      </article>
+
+      <article class="course-card rv">
+        <p class="c-en">Advanced</p>
+        <h3 class="c-name">คอร์ส PADI Advanced</h3>
+        <p class="c-time">2 วัน 5 ไดฟ์ · สำหรับผู้มีใบ Open Water</p>
+        <p class="c-price">฿12,900<small>/ ท่าน</small></p>
+        <ul class="c-list">
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>ไดฟ์ลึก 30 เมตร + ไดฟ์นำทางใต้น้ำ (บังคับ)</li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>เลือกสเปเชียลตี้เพิ่มอีก 3 หัวข้อ: เรือจม / ดริฟท์ / กลางคืน</li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>เรือ อุปกรณ์ และอาหารครบทุกมื้อ</li>
+          <li><svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="m3 8 3 3 6-6.5" stroke="#1d8ec4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>ต่อยอดสู่ Rescue Diver และ Divemaster ได้ทันที</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">จองคอร์สนี้</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRIPS ================= -->
+<section class="trips" id="trips">
+  <div class="wrap">
+    <p class="eyebrow rv">Monthly Trips</p>
+    <h2 class="sec-title rv">ทริปเดือนนี้</h2>
+    <p class="sec-sub rv">เรือออกจากท่าเรือปากน้ำชุมพร ราคารวมที่พัก อุปกรณ์ และมื้ออาหารบนเรือแล้ว จ่ายเพิ่มเฉพาะค่าเดินทางมาชุมพร</p>
+
+    <div class="trip-grid">
+      <article class="trip-card rv">
+        <div class="trip-head">
+          <span class="t-date">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1.5" y="2.5" width="11" height="10" rx="2" stroke="#e8f4fa" stroke-width="1.3"/><path d="M1.5 5.5h11M4.5 1v2.5M9.5 1v2.5" stroke="#e8f4fa" stroke-width="1.3" stroke-linecap="round"/></svg>
+            30–31 ส.ค. 2569
+          </span>
+          <h3>เกาะเต่า</h3>
+          <p class="t-trip-en">Koh Tao — Gulf of Thailand</p>
+        </div>
+        <div class="trip-body">
+          <div class="t-row"><span class="k">ระยะเวลา</span><span class="v">2 วัน 1 คืน</span></div>
+          <div class="t-row"><span class="k">จำนวนไดฟ์</span><span class="v">4 ไดฟ์</span></div>
+          <div class="t-row"><span class="k">จุดดำน้ำ</span><span class="v">จุ่มสุรินทร์ + หินขาว</span></div>
+          <div class="t-price">
+            <span class="p">฿6,900</span>
+            <span class="left">เหลือ 4 ที่สุดท้าย</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="trip-card rv">
+        <div class="trip-head">
+          <span class="t-date">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1.5" y="2.5" width="11" height="10" rx="2" stroke="#e8f4fa" stroke-width="1.3"/><path d="M1.5 5.5h11M4.5 1v2.5M9.5 1v2.5" stroke="#e8f4fa" stroke-width="1.3" stroke-linecap="round"/></svg>
+            ทริปแรก 24–26 ต.ค. 2569
+          </span>
+          <h3>สิมิลัน</h3>
+          <p class="t-trip-en">Similan Islands — Liveaboard</p>
+        </div>
+        <div class="trip-body">
+          <div class="t-row"><span class="k">ระยะเวลา</span><span class="v">ลีฟอะบอร์ด 3 วัน 2 คืน</span></div>
+          <div class="t-row"><span class="k">จำนวนไดฟ์</span><span class="v">8 ไดฟ์</span></div>
+          <div class="t-row"><span class="k">จุดดำน้ำ</span><span class="v">เกาะบอน + ริเชอลิวร็อค</span></div>
+          <div class="t-price">
+            <span class="p">฿18,900</span>
+            <span class="left soon">เปิดจองฤดูกาลใหม่ ลด 10%</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="trip-card rv">
+        <div class="trip-head">
+          <span class="t-date">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1.5" y="2.5" width="11" height="10" rx="2" stroke="#e8f4fa" stroke-width="1.3"/><path d="M1.5 5.5h11M4.5 1v2.5M9.5 1v2.5" stroke="#e8f4fa" stroke-width="1.3" stroke-linecap="round"/></svg>
+            12–14 ก.ย. 2569
+          </span>
+          <h3>หลีเป๊ะ</h3>
+          <p class="t-trip-en">Koh Lipe — Andaman Sea</p>
+        </div>
+        <div class="trip-body">
+          <div class="t-row"><span class="k">ระยะเวลา</span><span class="v">3 วัน 2 คืน</span></div>
+          <div class="t-row"><span class="k">จำนวนไดฟ์</span><span class="v">5 ไดฟ์</span></div>
+          <div class="t-row"><span class="k">จุดดำน้ำ</span><span class="v">หินงั่ม + 8 ไมล์</span></div>
+          <div class="t-price">
+            <span class="p">฿12,900</span>
+            <span class="left">เหลือ 6 ที่</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEAM ================= -->
+<section class="team" id="team">
+  <div class="wrap">
+    <p class="eyebrow rv">Our Instructors</p>
+    <h2 class="sec-title rv">ทีมครูของเรา</h2>
+    <p class="sec-sub rv">ครู PADI ประจำศูนย์ทุกคน ดำน้ำในอ่าวไทยและอันดามันมารวมกันกว่า 8,000 ไดฟ์</p>
+
+    <div class="team-grid">
+      <article class="member rv">
+        <div class="avatar" aria-hidden="true">ป</div>
+        <h3>ครูเป้</h3>
+        <p class="m-name-th">สมชาย วงศ์ทะเล</p>
+        <span class="m-cert">PADI IDC Staff Instructor</span>
+        <p class="m-stats">12 ปี · 3,500+ ไดฟ์</p>
+        <p>หัวหน้าครูฝึกสอน เชี่ยวชาญคอร์สเริ่มต้นและนักเรียนเด็ก คนกลัวน้ำจบคอร์สกับครูเป้มาแล้วนับร้อย</p>
+      </article>
+
+      <article class="member rv">
+        <div class="avatar" aria-hidden="true">น</div>
+        <h3>ครูนิว</h3>
+        <p class="m-name-th">ธนนิว พรหมลึก</p>
+        <span class="m-cert">PADI Master Scuba Diver Trainer</span>
+        <p class="m-stats">10 ปี · 2,800+ ไดฟ์</p>
+        <p>เจ้าของเส้นทางจุดลึก เรือจม และดริฟท์ไดฟ์ ดูแลคอร์ส Advanced และทริปลีฟอะบอร์ดสิมิลัน</p>
+      </article>
+
+      <article class="member rv">
+        <div class="avatar" aria-hidden="true">ฟ</div>
+        <h3>ครูฟ้า</h3>
+        <p class="m-name-th">ชญาฟ้า ใจดี</p>
+        <span class="m-cert">PADI Open Water Scuba Instructor</span>
+        <p class="m-stats">8 ปี · 2,100+ ไดฟ์</p>
+        <p>ดูแลนักเรียนใหม่และทริปครอบครัว สายถ่ายภาพใต้น้ำ เก็บโมเมนต์ไดฟ์แรกให้ทุกคนกลับบ้าน</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA BAND ================= -->
+<div class="cta-band">
+  <div class="cta-box rv">
+    <div>
+      <p class="eyebrow">Start Diving</p>
+      <h2>พร้อมออกไปหาโลกใบใหม่ด้วยกันไหม</h2>
+      <p>ทักมาคุยกับครูก่อนได้ ไม่ต้องตัดสินใจทันที เราแนะนำคอร์สที่เหมาะกับคุณให้ฟรี</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-foam" href="tel:0812345678">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 2.5h2.6l1.2 3-1.7 1.3a10.6 10.6 0 0 0 3.6 3.6l1.3-1.7 3 1.2v2.6c0 .8-.7 1.5-1.5 1.4C6.6 13.4 2.6 9.4 2.1 4c-.1-.8.6-1.5 1.4-1.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        081-234-5678
+      </a>
+      <a class="btn btn-ghost" href="#contact">LINE @deepbluedive</a>
+    </div>
+  </div>
+</div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-brand">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3c3.4 3.1 5.5 6.4 5.5 9.6a5.5 5.5 0 1 1-11 0C6.5 9.4 8.6 6.1 12 3Z" stroke="#1d8ec4" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M12 10.2c1.4 1.3 2.3 2.7 2.3 4a2.3 2.3 0 1 1-4.6 0c0-1.3.9-2.7 2.3-4Z" fill="#e8f4fa"/>
+          </svg>
+          DEEP&nbsp;BLUE
+        </p>
+        <p>ศูนย์ดำน้ำและทริปเกาะ จังหวัดชุมพร<br>88/8 หมู่ 4 ตำบลปากน้ำ อำเภอเมือง<br>จังหวัดชุมพร 86120<br>(ติดท่าเรือปากน้ำชุมพร)</p>
+      </div>
+      <div>
+        <h4>ติดต่อเรา</h4>
+        <ul class="foot-list">
+          <li>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 2.5h2.6l1.2 3-1.7 1.3a10.6 10.6 0 0 0 3.6 3.6l1.3-1.7 3 1.2v2.6c0 .8-.7 1.5-1.5 1.4C6.6 13.4 2.6 9.4 2.1 4c-.1-.8.6-1.5 1.4-1.5Z" stroke="#7aa7bf" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            <a href="tel:0812345678">081-234-5678 (ครูเป้)</a>
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="2" stroke="#7aa7bf" stroke-width="1.3"/><path d="m3 5 5 3.5L13 5" stroke="#7aa7bf" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <a href="mailto:hello@deepbluedive.co">hello@deepbluedive.co</a>
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2a5 5 0 0 1 5 5c0 3.4-5 7-5 7S3 10.4 3 7a5 5 0 0 1 5-5Z" stroke="#7aa7bf" stroke-width="1.3"/><circle cx="8" cy="7" r="1.8" stroke="#7aa7bf" stroke-width="1.3"/></svg>
+            LINE Official: @deepbluedive
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4>เวลาทำการ</h4>
+        <ul class="foot-list">
+          <li>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="#7aa7bf" stroke-width="1.3"/><path d="M8 5v3.2l2 1.3" stroke="#7aa7bf" stroke-width="1.3" stroke-linecap="round"/></svg>
+            เปิดทุกวัน 08:00–19:00 น.
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 11c2 1.4 4 1.4 6 0s4-1.4 6 0M3 7.5 5 3h6l2 4.5M8 3V1.8" stroke="#7aa7bf" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            ทริปออกทุกสัปดาห์ ศุกร์–อาทิตย์
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M12 3c3.4 3.1 5.5 6.4 5.5 9.6a5.5 5.5 0 1 1-11 0C6.5 9.4 8.6 6.1 12 3Z" transform="translate(-4 0)" stroke="#7aa7bf" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            คอร์สเปิดใหม่ทุกวันจันทร์และวันพฤหัสบดี
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2569</span> DEEP BLUE DIVE CENTER — CHUMPHON, THAILAND</span>
+      <span>PADI DIVE RESORT · S-26789</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- nav state ---------- */
+  var nav = document.getElementById("nav");
+  var menuBtn = document.getElementById("menuBtn");
+  var navLinks = document.getElementById("navLinks");
+
+  function onNavScroll(){
+    if (window.scrollY > 40) { nav.classList.add("scrolled"); }
+    else { nav.classList.remove("scrolled"); }
+  }
+  window.addEventListener("scroll", onNavScroll, { passive: true });
+  onNavScroll();
+
+  menuBtn.addEventListener("click", function(){
+    var open = navLinks.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    menuBtn.setAttribute("aria-label", open ? "ปิดเมนู" : "เปิดเมนู");
+  });
+  navLinks.addEventListener("click", function(e){
+    if (e.target.closest("a")) {
+      navLinks.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  /* ---------- depth gauge ---------- */
+  var depthSection = document.getElementById("depth");
+  var depthNum = document.getElementById("depthNum");
+  var gaugeFill = document.getElementById("gaugeFill");
+  var gaugeZone = document.getElementById("gaugeZone");
+  var ticks = Array.prototype.slice.call(depthSection.querySelectorAll(".tick"));
+  var bubbles = Array.prototype.slice.call(depthSection.querySelectorAll(".bubble"));
+  var MAX_DEPTH = 40;
+  var ticking = false;
+  var lastZone = "";
+
+  function zoneLabel(d){
+    if (d < 8)  return "โซนผิวน้ำ — สนอร์เกิ้ล";
+    if (d < 16) return "โซนสวนปะการัง";
+    if (d < 26) return "โซนซากเรือจม";
+    return "โซนจุดลึก — Advanced";
+  }
+
+  function updateGauge(){
+    ticking = false;
+    var rect = depthSection.getBoundingClientRect();
+    var total = depthSection.offsetHeight - window.innerHeight;
+    if (total <= 0) { total = 1; }
+    var scrolled = Math.min(Math.max(-rect.top, 0), total);
+    var p = scrolled / total;
+    var d = p * MAX_DEPTH;
+    var pct = (p * 100).toFixed(2) + "%";
+
+    depthNum.textContent = d < 10 ? d.toFixed(1) : String(Math.round(d));
+    gaugeFill.style.height = pct;
+    gaugeFill.style.width = pct;
+
+    var z = zoneLabel(d);
+    if (z !== lastZone) { gaugeZone.textContent = z; lastZone = z; }
+
+    ticks.forEach(function(t){
+      var m = parseFloat(t.getAttribute("data-m"));
+      if (d + 0.001 >= m) { t.classList.add("on"); } else { t.classList.remove("on"); }
+    });
+
+    if (!reduceMotion) {
+      bubbles.forEach(function(b){
+        var speed = parseFloat(b.getAttribute("data-speed")) || 200;
+        var y = -(p * speed);
+        var fade = Math.max(0, 1 - (p * speed) / 560);
+        b.style.transform = "translateY(" + y.toFixed(1) + "px)";
+        b.style.opacity = (0.15 + 0.55 * fade).toFixed(2);
+      });
+    }
+  }
+  function requestGauge(){
+    if (!ticking) { ticking = true; window.requestAnimationFrame(updateGauge); }
+  }
+  window.addEventListener("scroll", requestGauge, { passive: true });
+  window.addEventListener("resize", requestGauge);
+  updateGauge();
+
+  /* ---------- reveal on scroll ---------- */
+  var revealEls = document.querySelectorAll(".rv");
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) {
+          en.target.classList.add("in");
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -6% 0px" });
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- footer year (Buddhist calendar) ---------- */
+  var yearEl = document.getElementById("year");
+  if (yearEl) { yearEl.textContent = String(new Date().getFullYear() + 543); }
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

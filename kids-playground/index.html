@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOING LAND — สนามเด็กเล่นในร่ม &amp; คาเฟ่พ่อแม่ | เดอะมอลล์บางกะปิ ชั้น 3</title>
+<meta name="description" content="BOING LAND สนามเด็กเล่นในร่มสีพาสเทล 4 โซนสุดมัน พร้อมคาเฟ่กาแฟดริปสำหรับพ่อแม่ มองเห็นเด็กทุกมุม เช็คความสูงน้องก่อนมาได้เลย — เดอะมอลล์บางกะปิ ชั้น 3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&amp;family=Mali:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fdfbf7; --card:#fff; --coral:#ff8b7b; --sky:#5ec8e8; --sun:#ffd24b; --grape:#9b7ede;
+  --ink:#33302b; --muted:#7c7568; --line:#eee6d8;
+  --coral-p:#ffe4df; --sky-p:#def4fb; --sun-p:#fff4d2; --grape-p:#ebe3fa;
+  --r:22px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Mali','Fredoka',system-ui,sans-serif;
+  font-size:16px;line-height:1.7;color:var(--ink);
+  background:var(--bg);
+  background-image:radial-gradient(#f2e9d6 1.5px,transparent 1.6px);
+  background-size:26px 26px;
+  overflow-x:hidden;
+}
+h1,h2,h3,.en{font-family:'Fredoka','Mali',system-ui,sans-serif;font-weight:600;line-height:1.25}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+section{padding:86px 0}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:8px}
+
+/* ---------- buttons / chips ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:50px;padding:12px 26px;border-radius:99px;
+  border:3px solid var(--ink);font-family:'Fredoka','Mali',sans-serif;
+  font-weight:600;font-size:17px;text-decoration:none;cursor:pointer;
+  box-shadow:4px 4px 0 var(--ink);transition:transform .18s ease,box-shadow .18s ease;
+  background:#fff;color:var(--ink);
+}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn-coral{background:var(--coral)}
+.btn-sky{background:var(--sky)}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;border:3px solid var(--ink);border-radius:99px;
+  padding:7px 18px;font-family:'Fredoka','Mali',sans-serif;font-weight:600;
+  font-size:15px;box-shadow:3px 3px 0 var(--ink);margin-bottom:18px;
+}
+.kicker .dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--ink)}
+h2{font-size:clamp(27px,4vw,40px);margin-bottom:12px}
+.lead{color:var(--muted);max-width:640px;font-size:17px}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(253,251,247,.94);backdrop-filter:blur(8px);
+  border-bottom:3px solid var(--ink);
+}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:'Fredoka',sans-serif;font-weight:600;font-size:24px;letter-spacing:.5px}
+.logo svg{flex:none}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links a{
+  display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;
+  border-radius:14px;text-decoration:none;font-weight:500;font-size:16px;
+  transition:background .15s ease;
+}
+.nav-links a:hover{background:var(--sun-p)}
+.nav .btn{min-height:46px;padding:9px 20px;font-size:16px}
+
+/* ---------- hero ---------- */
+.hero{padding:64px 0 76px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:52px;align-items:center}
+.hero h1{font-size:clamp(38px,5.6vw,62px);margin-bottom:18px}
+.hl{background:linear-gradient(transparent 58%,var(--sun) 58%,var(--sun) 92%,transparent 92%)}
+.hero p{color:var(--muted);font-size:18px;max-width:520px;margin-bottom:26px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:30px}
+.pricebar{
+  display:flex;flex-wrap:wrap;gap:0;background:var(--card);
+  border:3px solid var(--ink);border-radius:18px;overflow:hidden;
+  box-shadow:6px 6px 0 var(--line);max-width:560px;
+}
+.pricebar>div{padding:14px 20px;flex:1 1 150px;border-right:3px solid var(--ink)}
+.pricebar>div:last-child{border-right:none}
+.pricebar small{display:block;color:var(--muted);font-size:15px}
+.pricebar strong{font-family:'Fredoka','Mali',sans-serif;font-size:21px;font-weight:600}
+.hero-art{position:relative}
+.hero-art figure{
+  border:3px solid var(--ink);border-radius:34px;overflow:hidden;
+  box-shadow:12px 12px 0 var(--sun);aspect-ratio:5/4;background:var(--sky-p);
+}
+.hero-art img{width:100%;height:100%;object-fit:cover}
+.float-chip{
+  position:absolute;display:flex;align-items:center;gap:9px;
+  background:#fff;border:3px solid var(--ink);border-radius:16px;
+  padding:10px 16px;font-weight:500;font-size:15px;box-shadow:4px 4px 0 var(--ink);
+}
+.float-chip b{font-family:'Fredoka','Mali',sans-serif;font-weight:600}
+.fc1{top:22px;left:-26px}
+.fc2{bottom:26px;right:-20px}
+.float-chip .ic{width:30px;height:30px;border-radius:10px;border:2px solid var(--ink);display:grid;place-items:center;flex:none}
+
+/* ---------- height checker ---------- */
+.checker{background:linear-gradient(180deg,#fff 0%,var(--bg) 100%);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+.check-grid{display:grid;grid-template-columns:1.15fr .95fr;gap:36px;margin-top:36px;align-items:stretch}
+.panel{
+  background:var(--card);border:3px solid var(--ink);border-radius:var(--r);
+  box-shadow:8px 8px 0 var(--line);padding:26px;
+}
+.map-panel svg{width:100%;height:auto;display:block}
+.zone .z-body{fill:var(--zp);stroke:#ddd2bf;stroke-width:3;transition:fill .5s ease,stroke .5s ease}
+.zone .z-ico{stroke:var(--ink);transition:opacity .5s ease}
+.zone text{font-family:'Mali',sans-serif;fill:var(--ink)}
+.zone .z-name{font-size:21px;font-weight:500}
+.zone .z-req{font-size:15px;fill:var(--muted)}
+.zone .z-pill{fill:#fff;stroke:var(--ink);stroke-width:2.5}
+.zone .ic-lock,.zone.open .ic-lock{display:none}
+.zone .ic-ok{display:none}
+.zone.open .ic-ok{display:block}
+.zone.locked{opacity:.42}
+.zone.open .z-body{fill:var(--zc);stroke:var(--ink);stroke-width:4}
+.zone,.zone .z-ico,.zone text{transition:opacity .5s ease}
+.ctrl-panel{display:grid;grid-template-columns:200px 1fr;gap:24px}
+.ruler-box{display:flex;align-items:center;justify-content:center;background:var(--sun-p);border:3px solid var(--ink);border-radius:18px;padding:12px 4px}
+#rulerMarker{transition:transform .35s cubic-bezier(.34,1.4,.5,1)}
+.ctrl{display:flex;flex-direction:column;gap:16px;min-width:0}
+.h-out{display:flex;align-items:baseline;gap:8px}
+.h-out output{font-family:'Fredoka',sans-serif;font-weight:600;font-size:52px;line-height:1;color:var(--coral);-webkit-text-stroke:1.5px var(--ink)}
+.h-out span{font-weight:500;color:var(--muted)}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:46px;
+  background:transparent;cursor:pointer;--p:50%;
+}
+input[type=range]::-webkit-slider-runnable-track{
+  height:16px;border:3px solid var(--ink);border-radius:99px;
+  background:linear-gradient(90deg,var(--sun) var(--p),#fff var(--p));
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:32px;height:32px;margin-top:-11px;
+  background:var(--coral);border:3px solid var(--ink);border-radius:50%;
+  box-shadow:3px 3px 0 rgba(51,48,43,.3);
+}
+input[type=range]::-moz-range-track{
+  height:16px;border:3px solid var(--ink);border-radius:99px;
+  background:linear-gradient(90deg,var(--sun) var(--p),#fff var(--p));
+}
+input[type=range]::-moz-range-thumb{
+  width:26px;height:26px;background:var(--coral);border:3px solid var(--ink);
+  border-radius:50%;box-shadow:3px 3px 0 rgba(51,48,43,.3);
+}
+.range-ends{display:flex;justify-content:space-between;color:var(--muted);font-family:'Fredoka','Mali',sans-serif;font-size:15px;margin-top:-8px}
+.summary{
+  background:var(--sun);border:3px solid var(--ink);border-radius:16px;
+  padding:13px 18px;font-family:'Fredoka','Mali',sans-serif;font-weight:600;
+  font-size:18px;box-shadow:4px 4px 0 var(--ink);
+}
+.zlist{list-style:none;display:flex;flex-direction:column;gap:10px}
+.zlist li{
+  display:flex;align-items:center;gap:12px;background:#fff;
+  border:2.5px solid var(--ink);border-radius:14px;padding:10px 14px;
+  transition:opacity .4s ease,background .4s ease;
+}
+.zlist li:not(.ok){opacity:.55;background:#f6f1e7}
+.zlist .cdot{width:16px;height:16px;border-radius:50%;border:2.5px solid var(--ink);flex:none;background:var(--dc)}
+.zlist .ztx{flex:1;min-width:0}
+.zlist strong{display:block;font-size:16px;font-weight:500;line-height:1.35}
+.zlist small{color:var(--muted);font-size:15px;line-height:1.4;display:block}
+.zlist .st{
+  flex:none;font-family:'Fredoka','Mali',sans-serif;font-weight:600;font-size:15px;
+  border:2.5px solid var(--ink);border-radius:99px;padding:5px 13px;background:#efe9db;color:var(--muted);
+}
+.zlist li.ok .st{background:var(--coral);color:var(--ink)}
+.guide{display:flex;gap:10px;color:var(--muted);font-size:15px;background:var(--sky-p);border:2.5px dashed var(--ink);border-radius:14px;padding:12px 16px}
+.guide svg{flex:none;margin-top:2px}
+
+/* ---------- zones ---------- */
+.zone-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:40px}
+.zcard{
+  background:var(--card);border:3px solid var(--ink);border-radius:var(--r);
+  overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:7px 7px 0 var(--sh,#f0e8d6);transition:transform .2s ease,box-shadow .2s ease;
+}
+.zcard:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 var(--sh,#f0e8d6)}
+.zcard figure{aspect-ratio:4/3;overflow:hidden;border-bottom:3px solid var(--ink);background:var(--line)}
+.zcard img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.zcard:hover img{transform:scale(1.05)}
+.zcard .zb{padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.zcard h3{font-size:21px}
+.badge-h{
+  align-self:flex-start;font-family:'Fredoka','Mali',sans-serif;font-weight:600;font-size:15px;
+  background:var(--bc);border:2.5px solid var(--ink);border-radius:99px;padding:4px 13px;
+}
+.zcard p{color:var(--muted);font-size:15px;line-height:1.65}
+.zc-coral{--sh:#ffd9d3}.zc-sky{--sh:#cdeef8}.zc-sun{--sh:#ffeab0}.zc-grape{--sh:#ded1f6}
+
+/* ---------- cafe ---------- */
+.cafe-card{
+  display:grid;grid-template-columns:1.1fr .9fr;margin-top:40px;
+  background:var(--card);border:3px solid var(--ink);border-radius:28px;
+  overflow:hidden;box-shadow:10px 10px 0 var(--sky-p);
+}
+.cafe-tx{padding:40px}
+.cafe-tx h3{font-size:clamp(23px,2.6vw,30px);margin-bottom:10px}
+.cafe-tx>p{color:var(--muted);margin-bottom:22px}
+.menu{list-style:none;display:flex;flex-direction:column;gap:2px;margin-bottom:24px}
+.menu li{display:flex;align-items:baseline;gap:10px;padding:8px 0;font-size:16px}
+.menu li+li{border-top:2px dotted var(--line)}
+.menu .pr{margin-left:auto;font-family:'Fredoka','Mali',sans-serif;font-weight:600;font-size:17px;white-space:nowrap}
+.perks{display:flex;flex-wrap:wrap;gap:10px}
+.perks span{
+  display:inline-flex;align-items:center;gap:7px;background:var(--bg);
+  border:2.5px solid var(--ink);border-radius:99px;padding:7px 15px;font-size:15px;font-weight:500;
+}
+.cafe-art{background:linear-gradient(160deg,var(--sky-p),var(--sun-p));border-left:3px solid var(--ink);display:grid;place-items:center;padding:30px}
+.cafe-art svg{width:100%;max-width:340px;height:auto}
+
+/* ---------- party ---------- */
+.party{background:linear-gradient(180deg,var(--bg),#fff 60%);border-top:3px solid var(--ink)}
+.pack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:42px;align-items:stretch}
+.pack{
+  background:var(--card);border:3px solid var(--ink);border-radius:26px;
+  padding:30px 26px;display:flex;flex-direction:column;gap:16px;position:relative;
+  box-shadow:8px 8px 0 var(--line);
+}
+.pack.hot{box-shadow:8px 8px 0 var(--coral);transform:translateY(-8px)}
+.pack .tag{
+  position:absolute;top:-17px;left:50%;transform:translateX(-50%);
+  background:var(--coral);border:3px solid var(--ink);border-radius:99px;
+  padding:5px 18px;font-family:'Fredoka','Mali',sans-serif;font-weight:600;font-size:15px;white-space:nowrap;
+}
+.pack h3{font-size:23px;letter-spacing:.5px}
+.pack .pr{font-family:'Fredoka','Mali',sans-serif;font-weight:600;font-size:38px;line-height:1}
+.pack .pr small{font-size:16px;color:var(--muted);font-weight:500;font-family:'Mali',sans-serif}
+.pack ul{list-style:none;display:flex;flex-direction:column;gap:9px;flex:1}
+.pack li{display:flex;gap:10px;font-size:15px;color:var(--ink);line-height:1.55}
+.pack li svg{flex:none;margin-top:4px}
+.pack .btn{margin-top:6px}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px}
+.rule{
+  display:flex;gap:16px;align-items:flex-start;background:#fff;
+  border:3px solid var(--ink);border-radius:20px;padding:20px;box-shadow:6px 6px 0 var(--line);
+}
+.rule .ric{width:48px;height:48px;flex:none;border-radius:14px;border:3px solid var(--ink);display:grid;place-items:center}
+.rule strong{display:block;font-size:17px;font-weight:500;margin-bottom:3px}
+.rule p{color:var(--muted);font-size:15px;line-height:1.6}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:#f5efe2;padding:56px 0 34px}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px}
+.foot-grid h4{font-family:'Fredoka','Mali',sans-serif;font-weight:600;font-size:18px;margin-bottom:14px;color:var(--sun)}
+.foot-grid p,.foot-grid li{font-size:15px;color:#cfc6b4;line-height:1.8}
+.foot-grid ul{list-style:none}
+.foot-logo{font-family:'Fredoka',sans-serif;font-weight:600;font-size:26px;color:#fff;display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.foot-bar{border-top:2px solid #4a463e;margin-top:40px;padding-top:20px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:15px;color:#a89f8d}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:1020px){
+  .zone-grid{grid-template-columns:repeat(2,1fr)}
+  .check-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero-art{max-width:560px}
+  .fc1{left:6px}.fc2{right:6px}
+  .pack-grid{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto}
+  .pack.hot{transform:none}
+  .rules{grid-template-columns:1fr}
+  .cafe-card{grid-template-columns:1fr}
+  .cafe-art{border-left:none;border-top:3px solid var(--ink)}
+}
+@media (max-width:760px){
+  .nav-links{display:none}
+  section{padding:64px 0}
+  .ctrl-panel{grid-template-columns:1fr}
+  .ruler-box{padding:14px}
+  .ruler-box svg{max-width:230px}
+}
+@media (max-width:560px){
+  .zone-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .pricebar>div{flex:1 1 100%;border-right:none;border-bottom:3px solid var(--ink)}
+  .pricebar>div:last-child{border-bottom:none}
+  .panel{padding:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .reveal{opacity:1;transform:none}
+  #rulerMarker{transition:none}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#top" aria-label="BOING LAND กลับขึ้นด้านบน">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+        <circle cx="17" cy="17" r="14" fill="#ff8b7b" stroke="#33302b" stroke-width="3"/>
+        <path d="M8 15c3-4 7-6 9-6s6 2 9 6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="13" cy="20" r="1.8" fill="#33302b"/><circle cx="21" cy="20" r="1.8" fill="#33302b"/>
+      </svg>
+      BOING&nbsp;LAND
+    </a>
+    <nav aria-label="เมนูหลัก">
+      <ul class="nav-links">
+        <li><a href="#check">เช็คความสูง</a></li>
+        <li><a href="#zones">โซนเล่น</a></li>
+        <li><a href="#cafe">คาเฟ่พ่อแม่</a></li>
+        <li><a href="#party">วันเกิด</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-coral" href="#party">จองวันเกิด</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker"><span class="dot" style="background:var(--coral)"></span>สนามเด็กเล่นในร่ม + คาเฟ่พ่อแม่</span>
+      <h1>ปล่อยพลัง<br>ให้<span class="hl">เต็มที่!</span></h1>
+      <p>สนามเด็กเล่นในร่มสีพาสเทล 4 โซนสุดมัน ปลอดภัยทุกจุด เด็กว้าวทั้งวัน ส่วนพ่อแม่จิบกาแฟดริปที่คาเฟ่ มองเห็นน้องได้ทุกมุมผ่านกระจกรอบสนาม</p>
+      <div class="hero-cta">
+        <a class="btn btn-coral" href="#check">
+          <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 17V7m0 10h14M7 17v-6m4 6V4m4 13v-9" fill="none" stroke="#33302b" stroke-width="2.4" stroke-linecap="round"/></svg>
+          เช็คความสูงน้องก่อนมา
+        </a>
+        <a class="btn" href="#party">ดูแพ็กเกจวันเกิด</a>
+      </div>
+      <div class="pricebar" role="group" aria-label="ราคาเข้าเล่นแบบเร็ว">
+        <div><small>เด็ก 2 ชม. (จันทร์–พฤหัส)</small><strong>฿290</strong></div>
+        <div><small>เด็ก 2 ชม. (ศุกร์–อาทิตย์)</small><strong>฿350</strong></div>
+        <div><small>ผู้ปกครอง / ถุงเท้า</small><strong>฿90 / ฿50</strong></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <figure>
+        <img src="../assets/play-hero.jpg" alt="บ่อบอลสีพาสเทลขนาดใหญ่ของ BOING LAND ที่เด็ก ๆ กำลังเล่นอย่างสนุก" fetchpriority="high">
+      </figure>
+      <div class="float-chip fc1">
+        <span class="ic" style="background:var(--sun)">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2" fill="none" stroke="#33302b" stroke-width="2"/><path d="M8 4.5V8l2.4 1.6" fill="none" stroke="#33302b" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+        เปิดทุกวัน <b>10:00–21:00</b>
+      </div>
+      <div class="float-chip fc2">
+        <span class="ic" style="background:var(--sky)">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8l5.2 2v4c0 3.4-2.2 5.6-5.2 6.4-3-.8-5.2-3-5.2-6.4v-4z" fill="none" stroke="#33302b" stroke-width="1.8" stroke-linejoin="round"/><path d="M5.6 8l1.7 1.7 3-3.2" fill="none" stroke="#33302b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        ฆ่าเชื้อทุก <b>2 ชม.</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HEIGHT CHECKER ================= -->
+<section class="checker" id="check">
+  <div class="wrap">
+    <span class="kicker reveal"><span class="dot" style="background:var(--sky)"></span>เช็คก่อนมา ไม่ต้องลุ้นหน้างาน</span>
+    <h2 class="reveal">น้องสูงเท่านี้ เล่นอะไรได้บ้าง?</h2>
+    <p class="lead reveal">เลื่อนไม้บรรทัดตามความสูงของน้อง แผนผังจะไฟสว่างขึ้นที่โซนที่เล่นได้ทันที โซนที่ยังไม่ถึงจะหม่นลง — วัดความสูงที่บ้านแล้วมาอุ่นเครื่องกันก่อนเลย</p>
+
+    <div class="check-grid">
+      <!-- SVG zone map -->
+      <div class="panel map-panel reveal">
+        <svg viewBox="0 0 660 470" role="img" aria-label="แผนผังสนามเด็กเล่น 4 โซน: บ่อบอลพาสเทล เล่นได้ทุกขนาด, สไลเดอร์ยักษ์ สูง 90 เซนติเมตรขึ้นไป, ปีนผาเด็ก สูง 100 เซนติเมตรขึ้นไป, โซนผาดโผน สูง 120 เซนติเมตรขึ้นไป">
+          <!-- บ่อบอล -->
+          <g class="zone open" id="zBall" style="--zc:#ff8b7b;--zp:#ffe4df">
+            <rect class="z-body" x="20" y="20" width="300" height="210" rx="26"/>
+            <g class="z-ico" fill="#fff" stroke-width="3.5">
+              <circle cx="130" cy="95" r="26"/>
+              <circle cx="180" cy="82" r="20"/>
+              <circle cx="196" cy="125" r="23"/>
+              <circle cx="148" cy="140" r="17"/>
+            </g>
+            <rect class="z-pill" x="36" y="168" width="220" height="46" rx="14"/>
+            <text class="z-name" x="52" y="190">บ่อบอลพาสเทล</text>
+            <text class="z-req" x="52" y="207">ทุกขนาด เด็กเล็กมีผู้ปกครองเฝ้า</text>
+            <g class="ic-ok"><circle cx="292" cy="48" r="17" fill="#fff" stroke="#33302b" stroke-width="3"/><path d="M284 48l6 6 11-12" fill="none" stroke="#33302b" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+            <g class="ic-lock"><circle cx="292" cy="48" r="17" fill="#efe9db" stroke="#33302b" stroke-width="3"/><rect x="285" y="47" width="14" height="10" rx="2.5" fill="none" stroke="#33302b" stroke-width="2.4"/><path d="M287.5 47v-3.5a4.5 4.5 0 0 1 9 0V47" fill="none" stroke="#33302b" stroke-width="2.4"/></g>
+          </g>
+          <!-- สไลเดอร์ -->
+          <g class="zone open" id="zSlide" style="--zc:#5ec8e8;--zp:#def4fb">
+            <rect class="z-body" x="340" y="20" width="300" height="210" rx="26"/>
+            <g class="z-ico" fill="none" stroke-width="4" stroke-linecap="round">
+              <path d="M430 60v88"/>
+              <path d="M430 74h18M430 94h18M430 114h18M430 134h18"/>
+              <path d="M452 148c30 0 24-44 62-44 20 0 26 14 26 26" stroke="#fff" stroke-width="14"/>
+              <path d="M452 148c30 0 24-44 62-44 20 0 26 14 26 26"/>
+            </g>
+            <rect class="z-pill" x="356" y="168" width="220" height="46" rx="14"/>
+            <text class="z-name" x="372" y="190">สไลเดอร์ยักษ์</text>
+            <text class="z-req" x="372" y="207">สูง 90 ซม. ขึ้นไป</text>
+            <g class="ic-ok"><circle cx="612" cy="48" r="17" fill="#fff" stroke="#33302b" stroke-width="3"/><path d="M604 48l6 6 11-12" fill="none" stroke="#33302b" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+            <g class="ic-lock"><circle cx="612" cy="48" r="17" fill="#efe9db" stroke="#33302b" stroke-width="3"/><rect x="605" y="47" width="14" height="10" rx="2.5" fill="none" stroke="#33302b" stroke-width="2.4"/><path d="M607.5 47v-3.5a4.5 4.5 0 0 1 9 0V47" fill="none" stroke="#33302b" stroke-width="2.4"/></g>
+          </g>
+          <!-- ปีนผา -->
+          <g class="zone open" id="zClimb" style="--zc:#ffd24b;--zp:#fff4d2">
+            <rect class="z-body" x="20" y="250" width="300" height="200" rx="26"/>
+            <g class="z-ico" stroke-width="3.5">
+              <rect x="120" y="285" width="110" height="80" rx="14" fill="#fff"/>
+              <circle cx="145" cy="305" r="6" fill="#ff8b7b" stroke="none"/>
+              <circle cx="178" cy="322" r="6" fill="#5ec8e8" stroke="none"/>
+              <circle cx="205" cy="300" r="6" fill="#9b7ede" stroke="none"/>
+              <circle cx="152" cy="342" r="6" fill="#5ec8e8" stroke="none"/>
+              <circle cx="200" cy="345" r="6" fill="#ff8b7b" stroke="none"/>
+              <circle cx="178" cy="296" r="6" fill="#ffd24b" stroke="none"/>
+            </g>
+            <rect class="z-pill" x="36" y="388" width="220" height="46" rx="14"/>
+            <text class="z-name" x="52" y="410">ปีนผาเด็ก</text>
+            <text class="z-req" x="52" y="427">สูง 100 ซม. ขึ้นไป</text>
+            <g class="ic-ok"><circle cx="292" cy="278" r="17" fill="#fff" stroke="#33302b" stroke-width="3"/><path d="M284 278l6 6 11-12" fill="none" stroke="#33302b" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+            <g class="ic-lock"><circle cx="292" cy="278" r="17" fill="#efe9db" stroke="#33302b" stroke-width="3"/><rect x="285" y="277" width="14" height="10" rx="2.5" fill="none" stroke="#33302b" stroke-width="2.4"/><path d="M287.5 277v-3.5a4.5 4.5 0 0 1 9 0V277" fill="none" stroke="#33302b" stroke-width="2.4"/></g>
+          </g>
+          <!-- ผาดโผน -->
+          <g class="zone locked" id="zAdv" style="--zc:#9b7ede;--zp:#ebe3fa">
+            <rect class="z-body" x="340" y="250" width="300" height="200" rx="26"/>
+            <g class="z-ico" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M452 300l22-34 22 34" />
+              <path d="M474 266v96"/>
+              <path d="M474 286l40-12-40-12" fill="#fff"/>
+              <path d="M438 362h72"/>
+              <circle cx="530" cy="330" r="14" fill="#fff"/>
+            </g>
+            <rect class="z-pill" x="356" y="388" width="220" height="46" rx="14"/>
+            <text class="z-name" x="372" y="410">โซนผาดโผน</text>
+            <text class="z-req" x="372" y="427">สูง 120 ซม. ขึ้นไป</text>
+            <g class="ic-ok"><circle cx="612" cy="278" r="17" fill="#fff" stroke="#33302b" stroke-width="3"/><path d="M604 278l6 6 11-12" fill="none" stroke="#33302b" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+            <g class="ic-lock"><circle cx="612" cy="278" r="17" fill="#efe9db" stroke="#33302b" stroke-width="3"/><rect x="605" y="277" width="14" height="10" rx="2.5" fill="none" stroke="#33302b" stroke-width="2.4"/><path d="M607.5 277v-3.5a4.5 4.5 0 0 1 9 0V277" fill="none" stroke="#33302b" stroke-width="2.4"/></g>
+          </g>
+        </svg>
+      </div>
+
+      <!-- controls -->
+      <div class="panel ctrl-panel reveal">
+        <div class="ruler-box" aria-hidden="true">
+          <svg viewBox="0 0 200 380" width="200">
+            <!-- ruler body -->
+            <rect x="18" y="18" width="54" height="344" rx="16" fill="#fff" stroke="#33302b" stroke-width="4"/>
+            <!-- face -->
+            <circle cx="38" cy="42" r="2.6" fill="#33302b"/>
+            <circle cx="52" cy="42" r="2.6" fill="#33302b"/>
+            <path d="M38 52c2.5 3 9.5 3 12 0" fill="none" stroke="#33302b" stroke-width="2.4" stroke-linecap="round"/>
+            <!-- arms -->
+            <path d="M18 120l-10 8M72 120l10 8" fill="none" stroke="#33302b" stroke-width="3.5" stroke-linecap="round"/>
+            <!-- ticks 60..140 -->
+            <g stroke="#33302b" stroke-width="2.6" stroke-linecap="round">
+              <line x1="30" y1="30"  x2="58" y2="30"/>
+              <line x1="38" y1="67.5" x2="58" y2="67.5"/>
+              <line x1="30" y1="105" x2="58" y2="105"/>
+              <line x1="38" y1="142.5" x2="58" y2="142.5"/>
+              <line x1="30" y1="180" x2="58" y2="180"/>
+              <line x1="38" y1="217.5" x2="58" y2="217.5"/>
+              <line x1="30" y1="255" x2="58" y2="255"/>
+              <line x1="38" y1="292.5" x2="58" y2="292.5"/>
+              <line x1="30" y1="330" x2="58" y2="330"/>
+            </g>
+            <g font-family="'Fredoka','Mali',sans-serif" font-size="13" fill="#7c7568" font-weight="500">
+              <text x="66" y="35">140</text>
+              <text x="66" y="110">120</text>
+              <text x="66" y="185">100</text>
+              <text x="66" y="260">80</text>
+              <text x="66" y="335">60</text>
+            </g>
+            <!-- marker -->
+            <g id="rulerMarker">
+              <path d="M78 0l-14-10v20z" fill="#ff8b7b" stroke="#33302b" stroke-width="3" stroke-linejoin="round"/>
+              <rect x="82" y="-17" width="66" height="34" rx="17" fill="#ff8b7b" stroke="#33302b" stroke-width="3"/>
+              <text id="markerLabel" x="115" y="6" text-anchor="middle" font-family="'Fredoka',sans-serif" font-weight="600" font-size="17" fill="#33302b">100</text>
+            </g>
+          </svg>
+        </div>
+        <div class="ctrl">
+          <div>
+            <label for="hRange" style="font-weight:500">ความสูงของน้อง</label>
+            <div class="h-out"><output id="hVal" for="hRange">100</output><span>เซนติเมตร</span></div>
+          </div>
+          <div>
+            <input type="range" id="hRange" min="60" max="140" value="100" step="1" aria-label="เลื่อนเพื่อเลือกความสูงของน้อง 60 ถึง 140 เซนติเมตร">
+            <div class="range-ends"><span>60 ซม.</span><span>140 ซม.</span></div>
+          </div>
+          <p class="summary" id="summary" aria-live="polite">น้องสูง 100 ซม. — เล่นได้ 3 จาก 4 โซน</p>
+          <ul class="zlist">
+            <li id="liBall" class="ok"><span class="cdot" style="--dc:#ff8b7b"></span><span class="ztx"><strong>บ่อบอลพาสเทล</strong><small>ทุกขนาด — เด็กเล็กมีผู้ปกครองเฝ้าใกล้ชิด</small></span><span class="st">เล่นได้</span></li>
+            <li id="liSlide" class="ok"><span class="cdot" style="--dc:#5ec8e8"></span><span class="ztx"><strong>สไลเดอร์ยักษ์ 7 เมตร</strong><small>สูง 90 ซม. ขึ้นไป</small></span><span class="st">เล่นได้</span></li>
+            <li id="liClimb" class="ok"><span class="cdot" style="--dc:#ffd24b"></span><span class="ztx"><strong>ปีนผาเด็ก</strong><small>สูง 100 ซม. ขึ้นไป มีสายเซฟตี้</small></span><span class="st">เล่นได้</span></li>
+            <li id="liAdv"><span class="cdot" style="--dc:#9b7ede"></span><span class="ztx"><strong>โซนผาดโผน</strong><small>สูง 120 ซม. ขึ้นไป โซนโตสุดของสนาม</small></span><span class="st">อีก 20 ซม.</span></li>
+          </ul>
+          <p class="guide">
+            <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="none" stroke="#7c7568" stroke-width="2"/><path d="M11 10v5" stroke="#7c7568" stroke-width="2.2" stroke-linecap="round"/><circle cx="11" cy="7" r="1.4" fill="#7c7568"/></svg>
+            <span id="guide">เหลืออีกแค่ 20 ซม. น้องจะเข้าโซนผาดโผนได้ — วันนี้อุ่นเครื่องที่สไลเดอร์ยักษ์และปีนผาได้เต็มที่เลย ผู้ปกครองนั่งชมใกล้ ๆ ได้ที่ริมกระจกทุกโซน</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ZONES ================= -->
+<section id="zones">
+  <div class="wrap">
+    <span class="kicker reveal"><span class="dot" style="background:var(--sun)"></span>4 โซนสุดมันในที่เดียว</span>
+    <h2 class="reveal">เล่นใหญ่ได้ทั้งวัน ปลอดภัยทุกโซน</h2>
+    <p class="lead reveal">ทุกโซนบุฟองน้ำหนา มุมโค้งมนทั้งสนาม มี Play Coach ประจำทุกจุด</p>
+    <div class="zone-grid">
+      <article class="zcard zc-coral reveal">
+        <figure><img src="../assets/play-hero.jpg" alt="เด็ก ๆ กระโดดเล่นในบ่อบอลลูกบอลสีพาสเทลหลายพันลูก" loading="lazy"></figure>
+        <div class="zb">
+          <span class="badge-h" style="--bc:var(--coral)">ทุกขนาด</span>
+          <h3>บ่อบอลพาสเทล</h3>
+          <p>ลูกบอลกว่า 80,000 ลูก พร้อมปืนยิงบอลและเครื่องดูดบอลวนลูป โซนฮิตของน้อง ๆ ทุกวัย</p>
+        </div>
+      </article>
+      <article class="zcard zc-sky reveal">
+        <figure><img src="https://images.unsplash.com/photo-1566140967404-b8b3932483f5?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="โครงสร้างสนามเด็กเล่นในร่มสีสันสดใสพร้อมสไลเดอร์ขนาดใหญ่" loading="lazy"></figure>
+        <div class="zb">
+          <span class="badge-h" style="--bc:var(--sky)">สูง 90 ซม.+</span>
+          <h3>สไลเดอร์ยักษ์ 7 เมตร</h3>
+          <p>สไลเดอร์โค้ง 3 เลน พร้อมท่อลอดและเนินโดนัท ไหลลงสู่บ่อบอลนุ่ม ๆ ท้าทายแต่ปลอดภัย</p>
+        </div>
+      </article>
+      <article class="zcard zc-sun reveal">
+        <figure><img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="เด็กกำลังปีนป่ายเล่นอย่างกระฉับกระเฉงบนอุปกรณ์สนามเด็กเล่น" loading="lazy"></figure>
+        <div class="zb">
+          <span class="badge-h" style="--bc:var(--sun)">สูง 100 ซม.+</span>
+          <h3>ปีนผาเด็ก</h3>
+          <p>หน้าผาจำลองสีสดใส 6 เส้นทาง มีสายเซฟตี้อัตโนมัติและ Play Coach คอยประกบทุกเส้น</p>
+        </div>
+      </article>
+      <article class="zcard zc-grape reveal">
+        <figure><img src="https://images.unsplash.com/photo-1566140967404-b8b3932483f5?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="อุปกรณ์สนามเด็กเล่นชั้นบนสำหรับเด็กโตในโซนผาดโผน" loading="lazy" style="object-position:bottom"></figure>
+        <div class="zb">
+          <span class="badge-h" style="--bc:var(--grape)">สูง 120 ซม.+</span>
+          <h3>โซนผาดโผน</h3>
+          <p>สะพานเชือก ซิปไลน์ในร่ม และแทรมโพลีนดักลม สำหรับน้องโตที่อยากท้าทายแรงโน้มถ่วง</p>
+        </div>
+      </article>
+    </div>
+
+    <!-- cafe -->
+    <div class="cafe-card reveal" id="cafe">
+      <div class="cafe-tx">
+        <span class="kicker"><span class="dot" style="background:var(--grape)"></span>BOING CAFÉ</span>
+        <h3>พ่อแม่พักสบาย มองเห็นน้องทุกมุม</h3>
+        <p>คาเฟ่กาแฟดริปริมกระจกใสรอบสนาม นั่งทำงานหรือพักผ่อนได้เต็มที่ น้องเล่นอยู่ในสายตาตลอดเวลา</p>
+        <ul class="menu" aria-label="เมนูคาเฟ่ยอดนิยม">
+          <li>ดริปกาแฟสเปเชียลตี้<span class="pr">฿85</span></li>
+          <li>ลาเต้ร้อน / เย็น<span class="pr">฿95</span></li>
+          <li>ชาไทยมะนาวนมสด<span class="pr">฿75</span></li>
+          <li>เค้กมะพร้าวอ่อน<span class="pr">฿95</span></li>
+          <li>เฟรนช์ฟรายส์ชีส (จานแชร์)<span class="pr">฿75</span></li>
+        </ul>
+        <div class="perks">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h12M4 6l1 7h6l1-7M6 6V4.5A2 2 0 0 1 8 2.5h0A2 2 0 0 1 10 4.5V6" fill="none" stroke="#33302b" stroke-width="1.8" stroke-linecap="round"/></svg>
+            ที่นั่ง 120 ที่
+          </span>
+          <span>
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="2" fill="none" stroke="#33302b" stroke-width="1.8"/><circle cx="8" cy="8" r="2.4" fill="none" stroke="#33302b" stroke-width="1.8"/></svg>
+            จอ CCTV สดทุกโต๊ะ
+          </span>
+          <span>
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6.5a8 8 0 0 1 11 0M5 9.5a4.5 4.5 0 0 1 6 0" fill="none" stroke="#33302b" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="12.3" r="1.4" fill="#33302b"/></svg>
+            Wi-Fi + ปลั๊กทุกโต๊ะ
+          </span>
+        </div>
+      </div>
+      <div class="cafe-art" aria-hidden="true">
+        <svg viewBox="0 0 340 300">
+          <!-- window to playground -->
+          <rect x="20" y="20" width="300" height="150" rx="22" fill="#fdfbf7" stroke="#33302b" stroke-width="4"/>
+          <circle cx="80" cy="120" r="16" fill="#ff8b7b" stroke="#33302b" stroke-width="3"/>
+          <circle cx="130" cy="130" r="13" fill="#ffd24b" stroke="#33302b" stroke-width="3"/>
+          <circle cx="180" cy="118" r="15" fill="#5ec8e8" stroke="#33302b" stroke-width="3"/>
+          <circle cx="230" cy="132" r="12" fill="#9b7ede" stroke="#33302b" stroke-width="3"/>
+          <path d="M30 60h280M30 90h280" stroke="#eee6d8" stroke-width="3"/>
+          <path d="M255 45l30 30M270 40l25 25" stroke="#5ec8e8" stroke-width="4" stroke-linecap="round"/>
+          <!-- table -->
+          <rect x="40" y="245" width="260" height="14" rx="7" fill="#ffd24b" stroke="#33302b" stroke-width="4"/>
+          <!-- cup -->
+          <path d="M120 200h90l-8 45h-74z" fill="#fff" stroke="#33302b" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M210 208h14a12 12 0 0 1 0 24h-16" fill="none" stroke="#33302b" stroke-width="4"/>
+          <ellipse cx="165" cy="200" rx="45" ry="9" fill="#ff8b7b" stroke="#33302b" stroke-width="4"/>
+          <!-- steam -->
+          <path d="M150 178c-4-8 4-12 0-20M168 178c-4-8 4-12 0-20M186 178c-4-8 4-12 0-20" fill="none" stroke="#7c7568" stroke-width="3.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PARTY ================= -->
+<section class="party" id="party">
+  <div class="wrap">
+    <span class="kicker reveal"><span class="dot" style="background:var(--coral)"></span>ปาร์ตี้วันเกิดครบวงจร</span>
+    <h2 class="reveal">วันเกิดปีนี้ ให้ BOING จัดให้</h2>
+    <p class="lead reveal">ห้องปาร์ตี้ส่วนตัว ธีมตกแต่ง พิธีกร และเค้ก — พ่อแม่แค่พาน้องมา ที่เหลือเราจัดการ</p>
+
+    <div class="pack-grid">
+      <article class="pack reveal">
+        <h3 class="en">MINI BOING</h3>
+        <p class="pr">฿6,900 <small>/ ปาร์ตี้</small></p>
+        <ul>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M3 9l4 4 7-9" fill="none" stroke="#ff8b7b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>เด็ก 10 คน เล่น 2 ชม. (จันทร์–พฤหัส)</li>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M3 9l4 4 7-9" fill="none" stroke="#ff8b7b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>ห้องปาร์ตี้ส่วนตัว 1 ชม.</li>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M3 9l4 4 7-9" fill="none" stroke="#ff8b7b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>เค้กวันเกิด 1 ปอนด์ + น้ำผลไม้</li>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M3 9l4 4 7-9" fill="none" stroke="#ff8b7b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>การ์ดเชิญดิจิทัล + ป้ายชื่อเจ้าของวันเกิด</li>
+        </ul>
+        <a class="btn" href="tel:021734567">จองแพ็กเกจนี้</a>
+      </article>
+
+      <article class="pack hot reveal">
+        <span class="tag">ครอบครัวนิยมสุด</span>
+        <h3 class="en">PARTY POP</h3>
+        <p class="pr">฿9,900 <small>/ ปาร์ตี้</small></p>
+        <ul>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M3 9l4 4 7-9" fill="none" stroke="#9b7ede" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>เด็ก 15 คน เล่น 3 ชม. (ได้ทุกวัน)</li>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M3 9l4 4 7-9" fill="none" stroke="#9b7ede" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>ห้องปาร์ตี้ส่วนตัว 2 ชม. + พิธีกรเกม</li>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M3 9l4 4 7-9" fill="none" stroke="#9b7ede" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>เค้ก 2 ปอนด์ + ชุดขนมเด็กและผู้ปกครอง 15 ชุด</li>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M3 9l4 4 7-9" fill="none" stroke="#9b7ede" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>มาสคอตน้อง BOING ร่วมเซอร์ไพรส์</li>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M3 9l4 4 7-9" fill="none" stroke="#9b7ede" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>ของที่ระลึกเด็กทุกคน</li>
+        </ul>
+        <a class="btn btn-coral" href="tel:021734567">จองแพ็กเกจนี้</a>
+      </article>
+
+      <article class="pack reveal">
+        <h3 class="en">GRAND BOING</h3>
+        <p class="pr">฿14,900 <small>/ ปาร์ตี้</small></p>
+        <ul>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M3 9l4 4 7-9" fill="none" stroke="#5ec8e8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>เด็ก 25 คน เหมาช่วงเช้า 3 ชม. ทั้งสนาม</li>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M3 9l4 4 7-9" fill="none" stroke="#5ec8e8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>บุฟเฟ่ต์ผู้ปกครอง + กาแฟดริปไม่จำกัด</li>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M3 9l4 4 7-9" fill="none" stroke="#5ec8e8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>ช่างภาพมืออาชีพ ส่งไฟล์ 30 รูป</li>
+          <li><svg width="17" height="17" viewBox="0 0 17 17" aria-hidden="true"><path d="M3 9l4 4 7-9" fill="none" stroke="#5ec8e8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>เลือกธีมตกแต่งได้ 6 ธีม + ลูกโป่งอาร์ช</li>
+        </ul>
+        <a class="btn btn-sky" href="tel:021734567">จองแพ็กเกจนี้</a>
+      </article>
+    </div>
+
+    <div class="rules">
+      <div class="rule reveal">
+        <span class="ric" style="background:var(--coral-p)">
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h9l3 4v9a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z" fill="none" stroke="#33302b" stroke-width="2.2" stroke-linejoin="round"/><path d="M6 12c3 2 6 2 9 0" fill="none" stroke="#33302b" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </span>
+        <div><strong>ถุงเท้ากันลื่นทุกคน</strong><p>เด็กและผู้ปกครองต้องสวมถุงเท้ากันลื่นตลอดเวลาในสนาม (มีจำหน่ายหน้างาน ฿50) งดรองเท้าและเท้าเปล่าเด็ดขาด</p></div>
+      </div>
+      <div class="rule reveal">
+        <span class="ric" style="background:var(--sky-p)">
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 2.8v5.4c0 4.6-3 7.6-7 8.8-4-1.2-7-4.2-7-8.8V5.8z" fill="none" stroke="#33302b" stroke-width="2.2" stroke-linejoin="round"/><path d="M8.5 11.5l2.5 2.5 4.5-5" fill="none" stroke="#33302b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div><strong>Play Coach ทุกโซน</strong><p>เจ้าหน้าที่ผ่านอบรมปฐมพยาบาลเด็กประจำทุกโซนตลอดเวลา พร้อมกล้อง CCTV รอบสนามและจุดพักเด็กหลง</p></div>
+      </div>
+      <div class="rule reveal">
+        <span class="ric" style="background:var(--sun-p)">
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.2 5.3L20 10l-4.5 3.8L17 20l-5-3-5 3 1.5-6.2L4 10l5.8-1.7z" fill="none" stroke="#33302b" stroke-width="2.2" stroke-linejoin="round"/></svg>
+        </span>
+        <div><strong>สะอาดทุก 2 ชั่วโมง</strong><p>พ่นฆ่าเชื้อลูกบอลและอุปกรณ์ทุก 2 ชม. ทำความสะอาดลึกทุกคืน เด็กมีไข้หรือไอ งดใช้บริการชั่วคราวเพื่อความปลอดภัยของทุกครอบครัว</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <span class="foot-logo">
+          <svg width="30" height="30" viewBox="0 0 34 34" aria-hidden="true">
+            <circle cx="17" cy="17" r="14" fill="#ff8b7b" stroke="#fdfbf7" stroke-width="3"/>
+            <path d="M8 15c3-4 7-6 9-6s6 2 9 6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="13" cy="20" r="1.8" fill="#33302b"/><circle cx="21" cy="20" r="1.8" fill="#33302b"/>
+          </svg>
+          BOING LAND
+        </span>
+        <p>สนามเด็กเล่นในร่มและคาเฟ่พ่อแม่ สนุกปลอดภัยทุกวัน เด็กเผาพลัง พ่อแม่เติมพลัง</p>
+      </div>
+      <div>
+        <h4>มาเล่นกัน</h4>
+        <ul>
+          <li>เดอะมอลล์บางกะปิ ชั้น 3 (โซนศูนย์การเรียนรู้)</li>
+          <li>เปิดทุกวัน 10:00–21:00 น.</li>
+          <li>รอบทำความสะอาด 13:00 / 17:00 (15 นาที)</li>
+        </ul>
+      </div>
+      <div>
+        <h4>ติดต่อจอง</h4>
+        <ul>
+          <li>โทร <a href="tel:021734567" style="text-decoration:none">02-173-4567</a></li>
+          <li>LINE: @boingland</li>
+          <li>จองวันเกิดล่วงหน้าอย่างน้อย 7 วัน</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bar">
+      <span>© <span id="yr">2569</span> BOING LAND — เว็บตัวอย่างสำหรับนำเสนอ</span>
+      <span>สวมถุงเท้ากันลื่นก่อนเข้าสนามทุกครั้ง</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- height checker ---------- */
+  var range   = document.getElementById("hRange");
+  var hVal    = document.getElementById("hVal");
+  var summary = document.getElementById("summary");
+  var guideEl = document.getElementById("guide");
+  var marker  = document.getElementById("rulerMarker");
+  var mLabel  = document.getElementById("markerLabel");
+
+  var zones = [
+    {g:"zBall",  li:"liBall",  min:0},
+    {g:"zSlide", li:"liSlide", min:90},
+    {g:"zClimb", li:"liClimb", min:100},
+    {g:"zAdv",   li:"liAdv",   min:120}
+  ].map(function(z){
+    z.gEl  = document.getElementById(z.g);
+    z.liEl = document.getElementById(z.li);
+    z.stEl = z.liEl.querySelector(".st");
+    return z;
+  });
+
+  function rulerY(h){
+    return 330 - ((h - 60) / 80) * 300; /* 140cm -> y30, 60cm -> y330 */
+  }
+
+  function update(h){
+    hVal.textContent = h;
+    range.style.setProperty("--p", ((h - 60) / 80 * 100) + "%");
+    marker.style.transform = "translateY(" + rulerY(h) + "px)";
+    mLabel.textContent = h;
+
+    var count = 0;
+    zones.forEach(function(z){
+      var ok = h >= z.min;
+      if (ok) count++;
+      z.gEl.classList.toggle("open", ok);
+      z.gEl.classList.toggle("locked", !ok);
+      z.liEl.classList.toggle("ok", ok);
+      z.stEl.textContent = ok ? "เล่นได้" : ("อีก " + (z.min - h) + " ซม.");
+    });
+
+    summary.textContent = "น้องสูง " + h + " ซม. — เล่นได้ " + count + " จาก 4 โซน";
+
+    if (h >= 120){
+      guideEl.textContent = "ครบทุกโซน! น้องเล่นได้ทั้งสนามตั้งแต่บ่อบอลถึงโซนผาดโผน — ผู้ปกครองนั่งจิบกาแฟชมได้ที่ BOING CAFÉ มองเห็นทุกมุมผ่านกระจกรอบสนาม";
+    } else if (h >= 100){
+      guideEl.textContent = "เหลืออีกแค่ " + (120 - h) + " ซม. น้องจะเข้าโซนผาดโผนได้ — วันนี้อุ่นเครื่องที่สไลเดอร์ยักษ์และปีนผาได้เต็มที่เลย ผู้ปกครองนั่งชมใกล้ ๆ ได้ที่ริมกระจกทุกโซน";
+    } else if (h >= 90){
+      guideEl.textContent = "น้องเล่นบ่อบอลและสไลเดอร์ยักษ์ได้แล้ว — โซนปีนผารอสูงถึง 100 ซม. (อีก " + (100 - h) + " ซม.) แนะนำให้ผู้ปกครองลงเล่นเป็นเพื่อนในบ่อบอล";
+    } else {
+      guideEl.textContent = "น้องเล็กสนุกได้เต็มที่ที่บ่อบอลพาสเทล (เปิดทุกขนาด) ช่วงเช้าวันธรรมดาคนน้อย เหมาะกับเด็กเล็กที่สุด — ผู้ปกครองต้องลงเฝ้าใกล้ชิดตลอดเวลา";
+    }
+  }
+
+  range.addEventListener("input", function(){ update(parseInt(range.value, 10)); });
+  update(parseInt(range.value, 10));
+
+  /* ---------- reveal on scroll ---------- */
+  var items = document.querySelectorAll(".reveal");
+  if (reduced || !("IntersectionObserver" in window)){
+    items.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, {threshold: 0.12});
+    items.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- footer year (B.E.) ---------- */
+  document.getElementById("yr").textContent = new Date().getFullYear() + 543;
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

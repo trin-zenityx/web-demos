@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FRAME &amp; LIGHT — สตูดิโอถ่ายภาพให้เช่า ลาดพร้าว</title>
+<meta name="description" content="FRAME & LIGHT สตูดิโอถ่ายภาพให้เช่าพร้อมอุปกรณ์ไฟครบและทีมช่างภาพมืออาชีพ ย่านลาดพร้าว เปิด จันทร์–อาทิตย์">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@200;300;400&family=Italiana&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c0e;
+    --panel:#141416;
+    --amber:#e8b04b;
+    --ink:#f2f0ea;
+    --muted:#8a887f;
+    --line:rgba(242,240,234,.1);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Anuphan',sans-serif;
+    font-weight:300;
+    font-size:16px;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none}
+  .en{font-family:'Italiana',serif;font-weight:400}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:2px}
+  ::selection{background:var(--amber);color:#0c0c0e}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:0 clamp(16px,4vw,48px);
+    height:72px;
+    background:rgba(12,12,14,.72);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-logo{font-size:22px;letter-spacing:.14em;white-space:nowrap}
+  .nav-logo em{font-style:normal;color:var(--amber)}
+  .nav-links{display:flex;gap:clamp(14px,2.4vw,34px);overflow-x:auto;scrollbar-width:none}
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a{
+    font-size:14px;font-weight:300;color:var(--muted);
+    padding:12px 2px;min-height:44px;display:inline-flex;align-items:center;
+    white-space:nowrap;transition:color .25s;
+  }
+  .nav-links a:hover{color:var(--ink)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    min-height:44px;padding:12px 26px;
+    font-size:15px;font-weight:300;letter-spacing:.04em;
+    border:1px solid var(--amber);border-radius:999px;
+    color:var(--amber);background:transparent;cursor:pointer;
+    transition:background .25s,color .25s,transform .25s;
+    white-space:nowrap;
+  }
+  .btn:hover{background:rgba(232,176,75,.12)}
+  .btn-solid{background:var(--amber);color:#0c0c0e}
+  .btn-solid:hover{background:#f4c470;color:#0c0c0e}
+  .btn-sm{padding:8px 20px;min-height:44px;font-size:14px}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;min-height:100svh;
+    display:flex;align-items:flex-end;
+    padding:120px clamp(16px,5vw,64px) clamp(40px,7vh,80px);
+    isolation:isolate;overflow:hidden;
+  }
+  .hero-media{position:absolute;inset:0;z-index:-2}
+  .hero-media img{width:100%;height:100%;object-fit:cover}
+  .hero::after{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(180deg,rgba(12,12,14,.55) 0%,rgba(12,12,14,.15) 40%,rgba(12,12,14,.92) 100%);
+  }
+  .hero-inner{max-width:880px}
+  .kicker{
+    display:flex;align-items:center;gap:14px;
+    font-size:13px;letter-spacing:.32em;color:var(--amber);
+    text-transform:uppercase;font-weight:300;margin-bottom:22px;
+  }
+  .kicker::before{content:"";width:44px;height:1px;background:var(--amber)}
+  .hero h1{
+    font-size:clamp(38px,6.4vw,84px);
+    font-weight:200;line-height:1.18;letter-spacing:.01em;
+    margin-bottom:20px;
+  }
+  .hero h1 .amber{color:var(--amber)}
+  .hero p{max-width:560px;color:var(--muted);font-size:clamp(15px,1.4vw,18px);margin-bottom:34px}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px}
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:12px 36px;
+    margin-top:52px;padding-top:22px;border-top:1px solid var(--line);
+    font-size:14px;color:var(--muted);
+  }
+  .hero-meta strong{font-weight:400;color:var(--ink)}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:clamp(72px,10vw,128px) clamp(16px,5vw,64px)}
+  .wrap{max-width:1180px;margin:0 auto}
+  .sec-head{margin-bottom:clamp(36px,5vw,60px)}
+  .sec-head h2{font-size:clamp(28px,3.6vw,48px);font-weight:200;line-height:1.25;margin-top:14px}
+  .sec-head p{color:var(--muted);max-width:600px;margin-top:12px}
+  .sec-tag{
+    display:inline-flex;align-items:center;gap:12px;
+    font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);
+  }
+  .sec-tag::before{content:"";width:32px;height:1px;background:var(--amber)}
+
+  /* ---------- APERTURE SIMULATOR ---------- */
+  .sim-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:clamp(24px,4vw,56px);
+    display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);
+    align-items:center;
+  }
+  .sim-left h3{font-size:clamp(22px,2.4vw,30px);font-weight:200;margin-bottom:6px}
+  .sim-left .sub{color:var(--muted);font-size:15px;margin-bottom:26px}
+  .ap-frame{
+    position:relative;max-width:380px;margin:0 auto 8px;
+    aspect-ratio:1/1;
+  }
+  .ap-frame svg{width:100%;height:100%;display:block}
+  .freadout{
+    text-align:center;margin:6px 0 22px;
+  }
+  .freadout .fnum{
+    font-family:'Italiana',serif;font-size:clamp(40px,5vw,58px);
+    line-height:1;color:var(--amber);letter-spacing:.04em;
+  }
+  .freadout .fdesc{font-size:15px;color:var(--ink);margin-top:8px;min-height:1.6em}
+  .freadout .fhint{font-size:13px;color:var(--muted)}
+  .fslider{display:block}
+  .fslider input[type=range]{
+    -webkit-appearance:none;appearance:none;
+    width:100%;height:44px;background:transparent;cursor:pointer;
+  }
+  .fslider input[type=range]::-webkit-slider-runnable-track{
+    height:2px;background:linear-gradient(90deg,var(--amber) var(--fill,20%),var(--line) var(--fill,20%));
+    border-radius:2px;
+  }
+  .fslider input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;
+    width:22px;height:22px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--amber);
+    margin-top:-10px;
+  }
+  .fslider input[type=range]::-moz-range-track{height:2px;background:var(--line)}
+  .fslider input[type=range]::-moz-range-progress{height:2px;background:var(--amber)}
+  .fslider input[type=range]::-moz-range-thumb{
+    width:18px;height:18px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--amber);
+  }
+  .fticks{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);padding:0 4px;margin-top:2px}
+  .fticks span{font-family:'Italiana',serif;letter-spacing:.05em}
+
+  .dof-frame{
+    position:relative;border-radius:14px;overflow:hidden;
+    border:1px solid var(--line);aspect-ratio:4/3;
+    background:#000;
+  }
+  .dof-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .dof-blur{filter:blur(13px) brightness(.85);transform:scale(1.06)}
+  .dof-sharp{clip-path:circle(30% at 50% 46%)}
+  .dof-ring{
+    position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);
+    width:60%;aspect-ratio:1/1;border:1px solid rgba(232,176,75,.65);
+    border-radius:50%;pointer-events:none;
+  }
+  .dof-tag{
+    position:absolute;padding:5px 12px;border-radius:999px;
+    font-size:12px;letter-spacing:.06em;
+    background:rgba(12,12,14,.72);backdrop-filter:blur(6px);
+    border:1px solid var(--line);pointer-events:none;
+  }
+  .dof-tag.sharp-tag{left:14px;bottom:14px;color:var(--amber);border-color:rgba(232,176,75,.4)}
+  .dof-tag.blur-tag{right:14px;top:14px;color:var(--muted)}
+  .dof-note{margin-top:16px;font-size:14px;color:var(--muted);text-align:center}
+
+  /* ---------- STUDIOS ---------- */
+  .studios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.4vw,30px)}
+  .studio-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:border-color .3s,transform .3s;
+  }
+  .studio-card:hover{border-color:rgba(232,176,75,.45);transform:translateY(-4px)}
+  .studio-card .ph{aspect-ratio:4/3;overflow:hidden}
+  .studio-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .studio-card:hover .ph img{transform:scale(1.05)}
+  .studio-body{padding:24px;display:flex;flex-direction:column;flex:1}
+  .studio-code{font-family:'Italiana',serif;font-size:13px;letter-spacing:.3em;color:var(--amber)}
+  .studio-body h3{font-size:21px;font-weight:300;margin:8px 0 4px}
+  .studio-spec{font-size:14px;color:var(--muted);margin-bottom:16px}
+  .studio-price{
+    margin-top:auto;padding-top:16px;border-top:1px solid var(--line);
+    display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+  }
+  .studio-price .p{font-size:22px;font-weight:300;color:var(--ink)}
+  .studio-price .p span{font-size:14px;color:var(--muted)}
+  .studio-price .min{font-size:12px;color:var(--muted)}
+  .studio-book{margin-top:16px}
+
+  /* ---------- EQUIPMENT / TEAM ---------- */
+  .split{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(28px,5vw,72px);align-items:start}
+  .equip-list li{
+    display:flex;justify-content:space-between;align-items:baseline;gap:18px;
+    padding:15px 2px;border-bottom:1px solid var(--line);font-size:15px;
+  }
+  .equip-list li:first-child{border-top:1px solid var(--line)}
+  .equip-list .q{color:var(--muted);font-size:13px;white-space:nowrap;text-align:right}
+  .free-pill{
+    display:inline-flex;align-items:center;gap:8px;margin-top:20px;
+    font-size:13px;color:var(--amber);border:1px solid rgba(232,176,75,.4);
+    padding:7px 16px;border-radius:999px;
+  }
+  .team-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:24px;display:flex;gap:18px;align-items:flex-start;margin-bottom:16px;
+  }
+  .team-ava{
+    flex:0 0 56px;width:56px;height:56px;border-radius:50%;
+    border:1px solid rgba(232,176,75,.5);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .team-ava svg{width:26px;height:26px;stroke:var(--amber);fill:none;stroke-width:1.4}
+  .team-card h4{font-size:17px;font-weight:400}
+  .team-card .role{font-size:13px;color:var(--amber);letter-spacing:.08em;margin-bottom:6px}
+  .team-card p{font-size:14px;color:var(--muted)}
+  .team-card .rate{margin-top:8px;font-size:15px;color:var(--ink)}
+  .team-card .rate span{font-size:13px;color:var(--muted)}
+
+  /* ---------- REVIEWS ---------- */
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.4vw,30px)}
+  .review{
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:28px;display:flex;flex-direction:column;gap:18px;
+  }
+  .review .mark{font-family:'Italiana',serif;font-size:52px;line-height:.6;color:var(--amber)}
+  .review p{font-size:15px;color:var(--ink);flex:1}
+  .review .who{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+  .review .who strong{display:block;font-weight:400;color:var(--ink);font-size:14px}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact-card{
+    border:1px solid var(--line);border-radius:20px;background:var(--panel);
+    display:grid;grid-template-columns:1.2fr 1fr;overflow:hidden;
+  }
+  .contact-info{padding:clamp(28px,4vw,52px)}
+  .contact-info h2{font-size:clamp(26px,3vw,40px);font-weight:200;margin:14px 0 10px}
+  .contact-info>p{color:var(--muted);font-size:15px;margin-bottom:28px}
+  .contact-rows{display:grid;gap:0}
+  .contact-rows>div{
+    display:grid;grid-template-columns:110px 1fr;gap:14px;
+    padding:14px 0;border-top:1px solid var(--line);font-size:15px;
+  }
+  .contact-rows dt{color:var(--muted);font-size:13px;letter-spacing:.1em;padding-top:3px}
+  .contact-rows dd{font-weight:300}
+  .contact-cta{
+    background:
+      linear-gradient(180deg,rgba(12,12,14,.35),rgba(12,12,14,.85)),
+      url('https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=1000&auto=format&fit=crop') center/cover;
+    padding:clamp(28px,4vw,52px);
+    display:flex;flex-direction:column;justify-content:flex-end;gap:14px;min-height:340px;
+  }
+  .contact-cta .en{font-size:clamp(24px,2.6vw,34px);letter-spacing:.08em;line-height:1.3}
+  footer{
+    border-top:1px solid var(--line);
+    padding:34px clamp(16px,5vw,64px);
+    display:flex;flex-wrap:wrap;gap:12px 32px;align-items:center;justify-content:space-between;
+    font-size:13px;color:var(--muted);
+  }
+  footer .en{letter-spacing:.16em;font-size:15px;color:var(--ink)}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:960px){
+    .sim-card{grid-template-columns:1fr}
+    .studios-grid,.reviews-grid{grid-template-columns:1fr 1fr}
+    .split{grid-template-columns:1fr}
+    .contact-card{grid-template-columns:1fr}
+  }
+  @media (max-width:640px){
+    .nav{height:64px}
+    .nav-links{display:none}
+    .studios-grid,.reviews-grid{grid-template-columns:1fr}
+    .hero-meta{gap:10px 22px}
+    .contact-rows>div{grid-template-columns:1fr;gap:2px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition:none!important;animation:none!important}
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <a class="nav-logo en" href="#top">FRAME <em>&amp;</em> LIGHT</a>
+  <nav class="nav-links" aria-label="เมนูหลัก">
+    <a href="#aperture">รูรับแสง</a>
+    <a href="#studios">ห้องสตูดิโอ</a>
+    <a href="#equipment">อุปกรณ์</a>
+    <a href="#team">ทีมช่างภาพ</a>
+    <a href="#reviews">รีวิว</a>
+    <a href="#contact">ติดต่อ</a>
+  </nav>
+  <a class="btn btn-sm" href="#contact">จองสตูดิโอ</a>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <img src="../assets/photo-hero.jpg" alt="สตูดิโอถ่ายภาพ FRAME & LIGHT พร้อมชุดไฟสตูดิโอมืออาชีพ" fetchpriority="high">
+  </div>
+  <div class="hero-inner">
+    <p class="kicker">Photo Studio Rental — Ladprao</p>
+    <h1>แสงที่ถูกต้อง<br>เปลี่ยน<span class="amber">ทุกภาพ</span></h1>
+    <p>สตูดิโอให้เช่าพร้อมอุปกรณ์ไฟครบทุกการจอง และทีมช่างภาพมืออาชีพที่พร้อมจ้าง — ตั้งแต่พอร์ตเทรตแฟชั่นจนถึงภาพสินค้าระดับแคตตาล็อก</p>
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="#contact">จองสตูดิโอ</a>
+      <a class="btn" href="#studios">ดูห้องสตูดิโอ</a>
+    </div>
+    <div class="hero-meta">
+      <span>เปิด <strong>จันทร์–อาทิตย์ 09:00–21:00</strong></span>
+      <span>ซอยลาดพร้าว 101 กรุงเทพฯ</span>
+      <span>เริ่มต้น <strong>฿690 / ชั่วโมง</strong></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APERTURE SIMULATOR ============ -->
+<section id="aperture">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">Aperture Simulator</span>
+      <h2>เข้าใจรูรับแสงใน 10 วินาที</h2>
+      <p>ลากแถบ f-stop แล้วดูใบมีดรูรับแสงหุบ–เปิดจริง พร้อมผลลัพธ์ระดับความชัดของภาพที่เปลี่ยนตาม — เหตุผลที่สตูดิโอของเราคุมแสงได้ทุกค่า</p>
+    </div>
+    <div class="sim-card">
+      <div class="sim-left">
+        <div class="ap-frame" aria-hidden="true">
+          <svg viewBox="0 0 400 400" role="img" aria-label="แผนภาพใบมีดรูรับแสงกล้อง">
+            <defs>
+              <clipPath id="apClip"><circle cx="200" cy="200" r="186"></circle></clipPath>
+            </defs>
+            <circle cx="200" cy="200" r="192" fill="#0a0a0c" stroke="rgba(232,176,75,.5)" stroke-width="1.5"></circle>
+            <circle cx="200" cy="200" r="186" fill="#101013"></circle>
+            <g id="blades" clip-path="url(#apClip)"></g>
+            <circle id="apRing" cx="200" cy="200" r="120" fill="none" stroke="rgba(232,176,75,.55)" stroke-width="1" stroke-dasharray="3 5"></circle>
+          </svg>
+        </div>
+        <div class="freadout">
+          <div class="fnum en" id="fnum">f/2.8</div>
+          <div class="fdesc" id="fdesc">โบเก้ละลายหลัง — เหมาะกับพอร์ตเทรต</div>
+          <div class="fhint" id="fhint">ใบมีด 7 ใบ เปิดกว้าง แสงเข้ามาก พื้นหลังนุ่ม</div>
+        </div>
+        <div class="fslider">
+          <label for="frange" class="fhint" style="display:block;margin-bottom:4px">เลือกค่ารูรับแสง</label>
+          <input type="range" id="frange" min="1.4" max="16" step="0.05" value="2.8" aria-describedby="fdesc">
+          <div class="fticks" aria-hidden="true">
+            <span>f/1.4</span><span>f/2.8</span><span>f/4</span><span>f/8</span><span>f/16</span>
+          </div>
+        </div>
+      </div>
+      <div class="sim-right">
+        <div class="dof-frame">
+          <img class="dof-blur" id="dofBlur" src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop" alt="กล้องฟิล์มวินเทจ — ชั้นภาพจำลองพื้นหลังละลาย" loading="lazy">
+          <img class="dof-sharp" id="dofSharp" src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop" alt="กล้องฟิล์มวินเทจ — ชั้นภาพจำลองบริเวณที่ชัด" loading="lazy">
+          <div class="dof-ring" id="dofRing" aria-hidden="true"></div>
+          <span class="dof-tag blur-tag">พื้นหลังละลาย</span>
+          <span class="dof-tag sharp-tag">โซนชัด</span>
+        </div>
+        <p class="dof-note" id="dofNote">ที่ f/2.8 โซนความชัดแคบ — วัตถุเด่นจากพื้นหลัง</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STUDIOS ============ -->
+<section id="studios" style="background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">Our Studios</span>
+      <h2>สามห้อง สามคาแรกเตอร์</h2>
+      <p>ทุกห้องรวมชุดไฟและอุปกรณ์มาตรฐานในราคาเช่า ไม่มีค่าใช้จ่ายแอบแฝง จองขั้นต่ำ 2 ชั่วโมง</p>
+    </div>
+    <div class="studios-grid">
+      <article class="studio-card">
+        <div class="ph">
+          <img src="https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?q=80&w=1000&auto=format&fit=crop" alt="ห้องสตูดิโอ A พื้นหลังไซคลอรามาสีขาวไร้ขอบ" loading="lazy">
+        </div>
+        <div class="studio-body">
+          <span class="studio-code">STUDIO A</span>
+          <h3>ไซคลอรามาขาว</h3>
+          <p class="studio-spec">8 × 10 เมตร · เพดานสูง 4.5 เมตร · ผนังโค้งไร้ขอบ เหมาะกับแฟชั่น ตัวเต็ม และงานวิดีโอ</p>
+          <div class="studio-price">
+            <span class="p">฿950 <span>/ ชั่วโมง</span></span>
+            <span class="min">ขั้นต่ำ 2 ชม.</span>
+          </div>
+          <a class="btn studio-book" href="#contact">จองห้องนี้</a>
+        </div>
+      </article>
+      <article class="studio-card">
+        <div class="ph">
+          <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000&auto=format&fit=crop" alt="ห้องสตูดิโอ B ธีมวินเทจ พร้อมกล้องฟิล์มและพร็อพย้อนยุค" loading="lazy">
+        </div>
+        <div class="studio-body">
+          <span class="studio-code">STUDIO B</span>
+          <h3>ธีมวินเทจ</h3>
+          <p class="studio-spec">6 × 8 เมตร · ผนังอิฐ ไม้เก่า เฟอร์นิเจอร์ย้อนยุค และพร็อพกว่า 100 ชิ้น เหมาะกับพอร์ตเทรตและพรีเวดดิ้ง</p>
+          <div class="studio-price">
+            <span class="p">฿790 <span>/ ชั่วโมง</span></span>
+            <span class="min">ขั้นต่ำ 2 ชม.</span>
+          </div>
+          <a class="btn studio-book" href="#contact">จองห้องนี้</a>
+        </div>
+      </article>
+      <article class="studio-card">
+        <div class="ph">
+          <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=1000&auto=format&fit=crop" alt="ห้องสตูดิโอ C สำหรับถ่ายภาพสินค้า พร้อมชุดไฟสตูดิโอ" loading="lazy">
+        </div>
+        <div class="studio-body">
+          <span class="studio-code">STUDIO C</span>
+          <h3>ถ่ายภาพสินค้า</h3>
+          <p class="studio-spec">5 × 6 เมตร · โต๊ะถ่ายสินค้า กล่องไฟ ฉากกระดาษ 6 สี และขาตั้งกล้องแนวดิ่ง สำหรับงานอีคอมเมิร์ซ</p>
+          <div class="studio-price">
+            <span class="p">฿690 <span>/ ชั่วโมง</span></span>
+            <span class="min">ขั้นต่ำ 2 ชม.</span>
+          </div>
+          <a class="btn studio-book" href="#contact">จองห้องนี้</a>
+        </div>
+      </article>
+    </div>
+    <p style="margin-top:26px;font-size:14px;color:var(--muted)">เหมาวัน 8 ชั่วโมง ลด 15% ทุกห้อง · นักศึกษาสาขาถ่ายภาพลดเพิ่ม 10% เมื่อแสดงบัตร</p>
+  </div>
+</section>
+
+<!-- ============ EQUIPMENT + TEAM ============ -->
+<section id="equipment">
+  <div class="wrap split">
+    <div>
+      <div class="sec-head" style="margin-bottom:28px">
+        <span class="sec-tag">Included Gear</span>
+        <h2>อุปกรณ์ใช้ฟรีทุกการจอง</h2>
+      </div>
+      <ul class="equip-list">
+        <li><span>ชุดไฟสตรอบ Godox AD / QT Series</span><span class="q">6 ชุด</span></li>
+        <li><span>ซอฟต์บ็อกซ์ ออกต้าบ็อกซ์ บิวตี้ดิช สไนเวอร์</span><span class="q">14 ชิ้น</span></li>
+        <li><span>ไฟ LED ต่อเนื่องสำหรับงานวิดีโอ</span><span class="q">4 ดวง</span></li>
+        <li><span>เลนส์ 24–70mm f/2.8 และ 85mm f/1.4</span><span class="q">เช่าใช้ในสตูดิโอ</span></li>
+        <li><span>ขาตั้งกล้อง ขาตั้งไฟ C-Stand บูมอาร์ม</span><span class="q">ครบทุกห้อง</span></li>
+        <li><span>ฉากกระดาษ 6 สี + ผ้ากรีนสกรีน</span><span class="q">เปลี่ยนไม่จำกัด</span></li>
+        <li><span>พร็อพวินเทจ เก้าอี้ โซฟา กรอบรูป</span><span class="q">100+ ชิ้น</span></li>
+        <li><span>สถานี Tether + จอตรวจภาพ 27 นิ้ว</span><span class="q">ห้อง A และ C</span></li>
+      </ul>
+      <span class="free-pill">รวมในราคาเช่าห้องแล้วทั้งหมด ไม่มีค่าเช่าเพิ่ม</span>
+    </div>
+    <div id="team">
+      <div class="sec-head" style="margin-bottom:28px">
+        <span class="sec-tag">Hire a Pro</span>
+        <h2>จ้างทีมช่างภาพของเรา</h2>
+      </div>
+      <div class="team-card">
+        <div class="team-ava" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M21 12h-2M12 21v-2M3 12h2"></path></svg>
+        </div>
+        <div>
+          <h4>คุณต้น — พอร์ตเทรต / แฟชั่น</h4>
+          <p class="role">PORTRAIT &amp; FASHION</p>
+          <p>ประสบการณ์ 9 ปี ถ่ายปกนิตยสารและแคมเปญแบรนด์เสื้อผ้า ควบคุมแสงและโพสนางแบบเก่ง</p>
+          <p class="rate">฿3,900 <span>/ ครึ่งวัน (4 ชม.) รวมปรับแสงและเลือกภาพ</span></p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-ava" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"></rect><circle cx="12" cy="13.5" r="4"></circle><path d="M8 7l1.5-3h5L16 7"></path></svg>
+        </div>
+        <div>
+          <h4>คุณมายด์ — ภาพสินค้า / อาหาร</h4>
+          <p class="role">PRODUCT &amp; FOOD</p>
+          <p>เชี่ยวชาญไฟสินค้า ผิวสัมผัส และการจัดวาง พร้อมรีทัชภาพคมชัดระดับแคตตาล็อก 10 ภาพ</p>
+          <p class="rate">฿4,500 <span>/ ครึ่งวัน (4 ชม.) รวมรีทัช 10 ภาพ</span></p>
+        </div>
+      </div>
+      <p style="font-size:14px;color:var(--muted)">นักจัดแสง (Gaffer) ผู้ช่วยไฟ ฿1,200 / ครึ่งวัน · สอบถามตารางว่างล่วงหน้า 3 วัน</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section id="reviews" style="background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">Client Words</span>
+      <h2>สิ่งที่ลูกค้าบอกกลับมา</h2>
+    </div>
+    <div class="reviews-grid">
+      <figure class="review">
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <p>ถ่ายลุคบุ๊กคอลเลกชันใหม่ที่ห้อง A ไฟคุมง่ายมาก ผนังไซคลอรามาสะอาดจนไม่ต้องรีทัชพื้นเลย ประหยัดเวลาหลังงานไปเป็นวัน</p>
+        <figcaption class="who"><strong>พลอย — แบรนด์เสื้อผ้า MAYA STUDIO</strong>เช่าห้อง A เหมาวัน 2 ครั้งต่อเดือน</figcaption>
+      </figure>
+      <figure class="review">
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <p>เป็นฟรีแลนซ์ที่ไม่มีไฟเป็นของตัวเอง ที่นี่ให้ใช้ครบทุกอย่างในราคาห้อง ลูกค้าผมนึกว่าผมลงทุนอุปกรณ์เองทั้งสตูดิโอ</p>
+        <figcaption class="who"><strong>บอส — ช่างภาพอิสระ</strong>ใช้บริการมากว่า 30 ครั้ง</figcaption>
+      </figure>
+      <figure class="review">
+        <span class="mark" aria-hidden="true">&ldquo;</span>
+        <p>จ้างคุณมายด์ถ่ายเครื่องประดับ 120 ชิ้น ไฟเก็บรายละเอียดเพชรได้ทุกเม็ด ยอดขายออนไลน์เพิ่มขึ้นชัดเจนหลังเปลี่ยนรูป</p>
+        <figcaption class="who"><strong>คุณนิด — ร้านเครื่องประดับ NIDA GEM</strong>แพ็กเกจภาพสินค้าห้อง C</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT / BOOKING ============ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-card">
+      <div class="contact-info">
+        <span class="sec-tag">Book a Session</span>
+        <h2>จองสตูดิโอหรือสอบถามคิวว่าง</h2>
+        <p>ตอบไวใน 15 นาทีช่วงเวลาทำการ ยืนยันการจองด้วยมัดจำ 50% ย้ายวันได้ฟรี 1 ครั้งล่วงหน้า 48 ชั่วโมง</p>
+        <dl class="contact-rows">
+          <div><dt>ที่ตั้ง</dt><dd>88/2 ซอยลาดพร้าว 101 แขวงคลองจั่น เขตบางกะปิ กรุงเทพฯ 10240 (มีที่จอดรถ 6 คัน)</dd></div>
+          <div><dt>เวลาเปิด</dt><dd>จันทร์–อาทิตย์ 09:00–21:00 น.</dd></div>
+          <div><dt>โทรศัพท์</dt><dd><a href="tel:+66912345678" style="border-bottom:1px solid rgba(232,176,75,.5)">091-234-5678</a></dd></div>
+          <div><dt>LINE</dt><dd>@frameandlight</dd></div>
+          <div><dt>อีเมล</dt><dd>booking@frameandlight.studio</dd></div>
+        </dl>
+      </div>
+      <div class="contact-cta">
+        <span class="en">EVERY FRAME<br>DESERVES GOOD LIGHT</span>
+        <a class="btn btn-solid" href="tel:+66912345678">โทรจองเลย 091-234-5678</a>
+        <a class="btn" href="#studios">กลับไปดูห้องสตูดิโอ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="en">FRAME &amp; LIGHT</span>
+  <span>สตูดิโอถ่ายภาพให้เช่า · ลาดพร้าว กรุงเทพฯ · เปิด จันทร์–อาทิตย์ 09:00–21:00</span>
+  <span>© 2026 FRAME &amp; LIGHT STUDIO</span>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- APERTURE SIMULATOR ---------- */
+  var N = 7;                       // blade count
+  var CX = 200, CY = 200;          // svg center
+  var R_OUT = 205;                 // blade outer anchor radius
+  var R_MIN = 16, R_MAX = 168;     // inner hole radius closed..open
+  var MAX_OFF = 1.95;              // inner rotation offset (rad) at f/16
+  var STEP = (Math.PI * 2) / N;
+
+  var gBlades = document.getElementById('blades');
+  var ring = document.getElementById('apRing');
+  var fnum = document.getElementById('fnum');
+  var fdesc = document.getElementById('fdesc');
+  var fhint = document.getElementById('fhint');
+  var range = document.getElementById('frange');
+  var dofBlur = document.getElementById('dofBlur');
+  var dofSharp = document.getElementById('dofSharp');
+  var dofRing = document.getElementById('dofRing');
+  var dofNote = document.getElementById('dofNote');
+
+  // create blade polygons once
+  var blades = [];
+  var NS = 'http://www.w3.org/2000/svg';
+  for (var i = 0; i < N; i++) {
+    var p = document.createElementNS(NS, 'polygon');
+    p.setAttribute('fill', i % 2 ? '#1a1a1e' : '#16161a');
+    p.setAttribute('stroke', 'rgba(232,176,75,.38)');
+    p.setAttribute('stroke-width', '1');
+    p.setAttribute('stroke-linejoin', 'round');
+    gBlades.appendChild(p);
+    blades.push(p);
+  }
+
+  function pt(r, a) {
+    return (CX + r * Math.cos(a)).toFixed(1) + ',' + (CY + r * Math.sin(a)).toFixed(1);
+  }
+
+  function fmtF(f) {
+    var stops = [1.4, 1.8, 2, 2.8, 4, 5.6, 8, 11, 16];
+    for (var i = 0; i < stops.length; i++) {
+      if (Math.abs(f - stops[i]) < 0.12) return 'f/' + stops[i];
+    }
+    return 'f/' + f.toFixed(1);
+  }
+
+  function update() {
+    var f = parseFloat(range.value);
+    // perceptual t across stops: f/1.4 -> 0 (open), f/16 -> 1 (closed)
+    var t = (Math.log2(f) - Math.log2(1.4)) / (Math.log2(16) - Math.log2(1.4));
+
+    // blades
+    var r = R_MAX + (R_MIN - R_MAX) * t;
+    var off = t * MAX_OFF;
+    for (var i = 0; i < N; i++) {
+      var a = i * STEP;
+      var b = a + off;
+      blades[i].setAttribute('points',
+        pt(R_OUT, a) + ' ' +
+        pt(r, b) + ' ' +
+        pt(r, b + STEP) + ' ' +
+        pt(R_OUT, a + STEP * 0.4)
+      );
+    }
+    ring.setAttribute('r', Math.max(r - 4, 6).toFixed(1));
+
+    // readout
+    fnum.textContent = fmtF(f);
+    var d, h, note;
+    if (f < 2.8) {
+      d = 'โบเก้ละลายสุด — แยกตัวแบบจากพื้นหลัง';
+      h = 'ใบมีด 7 ใบ เปิดเต็มที่ แสงเข้ามากที่สุด';
+      note = 'ที่ ' + fmtF(f) + ' โซนความชัดแคบมาก — ตาเดียวชัด ข้างหลังละลายหมด';
+    } else if (f < 8) {
+      d = 'โบเก้ละลายหลัง — เหมาะกับพอร์ตเทรต';
+      h = 'ใบมีดหุบเล็กน้อย ความชัดเริ่มกว้างขึ้น';
+      note = 'ที่ ' + fmtF(f) + ' โซนความชัดแคบ — วัตถุเด่นจากพื้นหลัง';
+    } else if (f < 12) {
+      d = 'ชัดครึ่งเฟรม — สมดุลระหว่างตัวแบบและฉาก';
+      h = 'ใบมีดหุบครึ่งทาง แสงเข้าปานกลาง';
+      note = 'ที่ ' + fmtF(f) + ' ชัดครึ่งเฟรม — เหมาะกับภาพกลุ่มเล็กและสินค้า';
+    } else {
+      d = 'ชัดทั้งเฟรม — เหมาะกับภาพสินค้าและงานกลุ่ม';
+      h = 'ใบมีดหุบเกือบสุด แสงเข้าน้อย ต้องเพิ่มกำลังไฟ';
+      note = 'ที่ ' + fmtF(f) + ' เกือบทั้งภาพชัด — มาตรฐานงานสินค้าแคตตาล็อก';
+    }
+    fdesc.textContent = d;
+    fhint.textContent = h;
+    dofNote.textContent = note;
+
+    // depth-of-field preview
+    var blurPx = (1 + 13 * (1 - t)).toFixed(1);
+    dofBlur.style.filter = 'blur(' + blurPx + 'px) brightness(.85)';
+    var radius = 16 + 62 * t; // percent
+    dofSharp.style.clipPath = 'circle(' + radius.toFixed(1) + '% at 50% 46%)';
+    dofRing.style.width = (radius * 2).toFixed(1) + '%';
+    dofRing.style.opacity = t > 0.92 ? '0' : '1';
+
+    // slider track fill
+    var fill = ((f - 1.4) / (16 - 1.4) * 100).toFixed(1) + '%';
+    range.style.setProperty('--fill', fill);
+  }
+
+  range.addEventListener('input', update);
+  update();
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

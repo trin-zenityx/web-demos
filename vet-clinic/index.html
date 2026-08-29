@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ใจดีสัตวแพทย์ — คลินิกสัตว์ 24 ชม. รัชดา | JAIDEE VET</title>
+<meta name="description" content="คลินิกสัตว์ใจดีสัตวแพทย์ เปิด 24 ชั่วโมง ย่านรัชดา ทีมสัตวแพทย์ 6 ท่าน ห้องผ่าตัดมาตรฐาน แล็บในที่เดียว ดูแลน้องเหมือนคนในครอบครัว">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4faf9;
+    --card:#ffffff;
+    --teal:#2a9d8f;
+    --teal-deep:#1f7268;
+    --cream:#fff4d6;
+    --ink:#1e3a36;
+    --muted:#5f7a75;
+    --line:#dcebe8;
+    --teal-soft:#e3f4f1;
+    --shadow:0 12px 32px rgba(31,114,104,.10);
+    --shadow-sm:0 4px 14px rgba(31,114,104,.08);
+    --radius:22px;
+    --radius-lg:28px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Bai Jamjuree',sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    color:var(--ink);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  .en, .num{font-family:'Nunito',sans-serif}
+  img{max-width:100%;display:block}
+  a{color:var(--teal-deep);text-decoration:none}
+  :focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:6px}
+  .skip-link{
+    position:absolute;left:-999px;top:0;background:var(--teal-deep);color:#fff;
+    padding:12px 20px;z-index:200;border-radius:0 0 12px 0;font-weight:600;
+  }
+  .skip-link:focus{left:0}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  section{padding:84px 0}
+  .kicker{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:14px;font-weight:600;letter-spacing:.04em;color:var(--teal-deep);
+    background:var(--teal-soft);border:1px solid var(--line);
+    padding:7px 16px;border-radius:999px;margin-bottom:18px;
+  }
+  .kicker svg{width:16px;height:16px}
+  h1,h2,h3{font-weight:600;line-height:1.25}
+  .sec-title{font-size:clamp(26px,3.4vw,38px);margin-bottom:14px}
+  .sec-sub{color:var(--muted);font-size:17px;max-width:620px;margin-bottom:44px}
+  .sec-head.center{text-align:center}
+  .sec-head.center .sec-sub{margin-left:auto;margin-right:auto}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;gap:20px;min-height:72px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:600;font-size:19px;color:var(--ink)}
+  .brand-mark{
+    width:42px;height:42px;border-radius:14px;background:var(--teal);
+    display:flex;align-items:center;justify-content:center;flex:none;
+  }
+  .brand-mark svg{width:24px;height:24px;stroke:#fff;fill:none}
+  .brand small{display:block;font-size:11px;font-weight:400;color:var(--muted);letter-spacing:.14em}
+  .nav-links{display:flex;gap:4px;margin-left:auto;list-style:none}
+  .nav-links a{
+    display:inline-flex;align-items:center;min-height:44px;padding:0 15px;
+    color:var(--ink);font-weight:500;font-size:15.5px;border-radius:12px;
+    transition:background .2s,color .2s;
+  }
+  .nav-links a:hover{background:var(--teal-soft);color:var(--teal-deep)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    min-height:48px;padding:0 24px;border-radius:999px;border:0;cursor:pointer;
+    font-family:'Bai Jamjuree',sans-serif;font-size:16px;font-weight:600;
+    transition:transform .2s,box-shadow .2s,background .2s;
+  }
+  .btn svg{width:19px;height:19px;stroke:currentColor;fill:none;flex:none}
+  .btn-teal{background:var(--teal);color:#fff;box-shadow:0 6px 18px rgba(42,157,143,.32)}
+  .btn-teal:hover{background:var(--teal-deep);transform:translateY(-2px)}
+  .btn-ghost{background:#fff;color:var(--teal-deep);border:1.5px solid var(--teal)}
+  .btn-ghost:hover{background:var(--teal-soft)}
+  .nav-cta{margin-left:14px;min-height:44px;padding:0 20px;font-size:15px}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(620px 420px at 88% -10%, rgba(255,244,214,.85), transparent 65%),
+      radial-gradient(700px 520px at -12% 8%, rgba(42,157,143,.10), transparent 60%),
+      var(--bg);
+    padding:72px 0 88px;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(34px,4.6vw,54px);font-weight:600;letter-spacing:-.01em;margin-bottom:20px}
+  .hero h1 .hl{color:var(--teal-deep);position:relative;white-space:nowrap}
+  .hero h1 .hl::after{
+    content:"";position:absolute;left:0;right:0;bottom:6px;height:12px;
+    background:var(--cream);z-index:-1;border-radius:6px;
+  }
+  .hero p.lead{font-size:18.5px;color:var(--muted);max-width:520px;margin-bottom:30px}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+  .trust{display:flex;gap:12px;flex-wrap:wrap}
+  .trust-item{
+    display:flex;align-items:center;gap:11px;background:var(--card);
+    border:1px solid var(--line);border-radius:16px;padding:12px 18px 12px 13px;
+    box-shadow:var(--shadow-sm);
+  }
+  .trust-item .ic{
+    width:38px;height:38px;border-radius:12px;background:var(--teal-soft);
+    display:flex;align-items:center;justify-content:center;flex:none;
+  }
+  .trust-item .ic svg{width:21px;height:21px;stroke:var(--teal-deep);fill:none}
+  .trust-item b{display:block;font-size:15.5px;font-weight:600;line-height:1.3}
+  .trust-item span{font-size:13px;color:var(--muted)}
+  .hero-media{position:relative}
+  .hero-media img{
+    width:100%;aspect-ratio:5/4;object-fit:cover;border-radius:var(--radius-lg);
+    box-shadow:0 24px 60px rgba(31,114,104,.20);
+  }
+  .hero-badge{
+    position:absolute;left:-18px;bottom:26px;background:#fff;border-radius:18px;
+    box-shadow:var(--shadow);padding:14px 20px;display:flex;align-items:center;gap:12px;
+    border:1px solid var(--line);
+  }
+  .hero-badge .dot{
+    width:11px;height:11px;border-radius:50%;background:#3ecf8e;flex:none;
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(62,207,142,.5)}
+    70%{box-shadow:0 0 0 9px rgba(62,207,142,0)}
+    100%{box-shadow:0 0 0 0 rgba(62,207,142,0)}
+  }
+  .hero-badge b{font-size:15px;display:block;line-height:1.3}
+  .hero-badge span{font-size:13px;color:var(--muted)}
+
+  /* ---------- AGE CONVERTER ---------- */
+  .converter-sec{background:linear-gradient(180deg,var(--bg) 0%,#eef7f5 100%)}
+  .converter{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);
+    box-shadow:var(--shadow);overflow:hidden;
+    display:grid;grid-template-columns:1.05fr .95fr;
+  }
+  .cv-controls{padding:44px 42px}
+  .cv-controls h3{font-size:23px;margin-bottom:6px}
+  .cv-controls .hint{color:var(--muted);font-size:15px;margin-bottom:28px}
+  .ctrl-label{display:block;font-weight:600;font-size:15.5px;margin-bottom:12px}
+  .animal-chips{display:flex;gap:12px;margin-bottom:30px}
+  .chip{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:10px;
+    min-height:52px;border-radius:16px;border:1.5px solid var(--line);background:#fff;
+    font-family:'Bai Jamjuree',sans-serif;font-size:16.5px;font-weight:600;color:var(--muted);
+    cursor:pointer;transition:all .2s;
+  }
+  .chip svg{width:24px;height:24px;stroke:currentColor;fill:none}
+  .chip[aria-pressed="true"]{
+    border-color:var(--teal);background:var(--teal-soft);color:var(--teal-deep);
+    box-shadow:0 4px 14px rgba(42,157,143,.18);
+  }
+  .slider-block{margin-bottom:28px}
+  .slider-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+  .slider-val{
+    font-family:'Nunito',sans-serif;font-weight:800;font-size:19px;color:var(--teal-deep);
+    background:var(--cream);padding:3px 14px;border-radius:999px;
+  }
+  input[type="range"]{
+    -webkit-appearance:none;appearance:none;width:100%;height:34px;background:transparent;cursor:pointer;
+  }
+  input[type="range"]::-webkit-slider-runnable-track{
+    height:10px;border-radius:999px;
+    background:linear-gradient(to right,var(--teal) 0%,var(--teal) var(--fill,50%),var(--line) var(--fill,50%),var(--line) 100%);
+  }
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:28px;height:28px;margin-top:-9px;
+    border-radius:50%;background:#fff;border:4px solid var(--teal);
+    box-shadow:0 3px 10px rgba(31,114,104,.3);transition:transform .15s;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.12)}
+  input[type="range"]::-moz-range-track{
+    height:10px;border-radius:999px;
+    background:linear-gradient(to right,var(--teal) 0%,var(--teal) var(--fill,50%),var(--line) var(--fill,50%),var(--line) 100%);
+  }
+  input[type="range"]::-moz-range-thumb{
+    width:22px;height:22px;border-radius:50%;background:#fff;border:4px solid var(--teal);
+    box-shadow:0 3px 10px rgba(31,114,104,.3);
+  }
+  .size-labels{display:flex;justify-content:space-between;margin-top:2px}
+  .size-labels span{font-size:13.5px;color:var(--muted)}
+  .size-labels span.on{color:var(--teal-deep);font-weight:600}
+  .size-wrap{overflow:hidden;max-height:150px;opacity:1;transition:max-height .35s ease,opacity .3s ease}
+  .size-wrap.hide{max-height:0;opacity:0;pointer-events:none}
+  .cv-note{font-size:13px;color:var(--muted);line-height:1.6;border-top:1px dashed var(--line);padding-top:16px;margin-top:6px}
+
+  .cv-result{
+    background:linear-gradient(160deg,var(--teal) 0%,var(--teal-deep) 100%);
+    color:#fff;padding:44px 42px;display:flex;flex-direction:column;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .cv-result::before{
+    content:"";position:absolute;width:340px;height:340px;border-radius:50%;
+    background:rgba(255,255,255,.07);top:-130px;right:-110px;
+  }
+  .cv-result::after{
+    content:"";position:absolute;width:220px;height:220px;border-radius:50%;
+    background:rgba(255,244,214,.12);bottom:-90px;left:-70px;
+  }
+  .cv-result > *{position:relative;z-index:1}
+  .cv-q{font-size:16px;opacity:.92;margin-bottom:8px}
+  .cv-big{
+    font-family:'Nunito',sans-serif;font-weight:800;
+    font-size:clamp(72px,9vw,110px);line-height:1;letter-spacing:-.02em;
+  }
+  .cv-big small{font-size:.32em;font-weight:600;margin-left:8px;opacity:.9;letter-spacing:0}
+  .stage-chip{
+    display:inline-flex;align-items:center;gap:10px;align-self:flex-start;
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);
+    border-radius:999px;padding:9px 20px 9px 12px;margin:20px 0 8px;font-weight:600;font-size:16.5px;
+  }
+  .stage-chip .ic{
+    width:32px;height:32px;border-radius:50%;background:var(--cream);
+    display:flex;align-items:center;justify-content:center;flex:none;
+  }
+  .stage-chip .ic svg{width:18px;height:18px;stroke:var(--teal-deep);fill:none}
+  .cv-stage-desc{font-size:15px;opacity:.92;margin-bottom:22px}
+  .cv-advice{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:18px 20px}
+  .cv-advice h4{font-size:15px;font-weight:600;margin-bottom:10px;opacity:.95}
+  .cv-advice ul{list-style:none}
+  .cv-advice li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;padding:5px 0}
+  .cv-advice li svg{width:17px;height:17px;stroke:#ffe9a8;fill:none;flex:none;margin-top:4px}
+
+  /* ---------- SERVICES ---------- */
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .svc-card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px 28px;box-shadow:var(--shadow-sm);
+    transition:transform .25s,box-shadow .25s,border-color .25s;
+  }
+  .svc-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--teal)}
+  .svc-ic{
+    width:56px;height:56px;border-radius:18px;background:var(--teal-soft);
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+  }
+  .svc-ic svg{width:29px;height:29px;stroke:var(--teal-deep);fill:none}
+  .svc-card h3{font-size:19.5px;margin-bottom:8px}
+  .svc-card p{font-size:15px;color:var(--muted);margin-bottom:18px;min-height:50px}
+  .svc-price{
+    font-family:'Nunito',sans-serif;font-weight:800;font-size:23px;color:var(--teal-deep);
+    display:flex;align-items:baseline;gap:7px;border-top:1px dashed var(--line);padding-top:16px;
+  }
+  .svc-price small{font-family:'Bai Jamjuree',sans-serif;font-weight:400;font-size:13px;color:var(--muted)}
+
+  /* ---------- TEAM ---------- */
+  .team-sec{background:linear-gradient(180deg,#eef7f5 0%,var(--bg) 100%)}
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .vet-card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s;
+  }
+  .vet-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .vet-card img{width:100%;aspect-ratio:4/3;object-fit:cover}
+  .vet-body{padding:22px 24px 26px}
+  .vet-body h3{font-size:18.5px;margin-bottom:3px}
+  .vet-role{font-size:14px;color:var(--teal-deep);font-weight:600;margin-bottom:12px}
+  .vet-body p{font-size:14.5px;color:var(--muted);margin-bottom:14px}
+  .vet-tags{display:flex;gap:8px;flex-wrap:wrap}
+  .vet-tags span{
+    font-size:12.5px;font-weight:600;color:var(--teal-deep);background:var(--teal-soft);
+    border-radius:999px;padding:4px 12px;
+  }
+
+  /* ---------- QUEUE ---------- */
+  .queue-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:center}
+  .queue-media{position:relative}
+  .queue-media img{
+    width:100%;aspect-ratio:4/3.4;object-fit:cover;border-radius:var(--radius-lg);
+    box-shadow:0 20px 48px rgba(31,114,104,.16);
+  }
+  .queue-card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);
+    box-shadow:var(--shadow);padding:32px 30px;
+  }
+  .queue-head{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+  .queue-head h3{font-size:20px}
+  .queue-time{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:7px}
+  .queue-time .dot{width:9px;height:9px;border-radius:50%;background:#3ecf8e;animation:pulse 2s infinite}
+  .queue-list{list-style:none}
+  .queue-list li{
+    display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;
+    padding:14px 6px;border-bottom:1px solid var(--line);
+  }
+  .queue-list li:last-child{border-bottom:0}
+  .q-time{font-family:'Nunito',sans-serif;font-weight:800;font-size:15.5px;color:var(--teal-deep)}
+  .q-name{font-weight:600;font-size:15.5px}
+  .q-detail{font-size:13.5px;color:var(--muted)}
+  .q-status{
+    font-size:13px;font-weight:600;border-radius:999px;padding:5px 14px;white-space:nowrap;
+  }
+  .st-done{background:#eef3f2;color:var(--muted)}
+  .st-now{background:var(--teal);color:#fff;display:inline-flex;align-items:center;gap:7px}
+  .st-now::before{content:"";width:7px;height:7px;border-radius:50%;background:#fff;animation:pulse 1.6s infinite}
+  .st-wait{background:var(--cream);color:#8a6d1a}
+  .queue-foot{margin-top:16px;font-size:13.5px;color:var(--muted);text-align:center}
+  .queue-foot b{color:var(--teal-deep)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--teal-deep);color:#d8efec;padding:64px 0 0}
+  .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:44px;padding-bottom:48px}
+  .foot-brand{display:flex;align-items:center;gap:11px;color:#fff;font-weight:600;font-size:20px;margin-bottom:16px}
+  .foot-brand .brand-mark{background:rgba(255,255,255,.14)}
+  .foot-brand .brand-mark svg{stroke:#fff}
+  footer p{font-size:14.5px;line-height:1.75;opacity:.85}
+  .foot-h{font-size:16px;font-weight:600;color:#fff;margin-bottom:16px}
+  .foot-list{list-style:none}
+  .foot-list li{margin-bottom:12px;font-size:14.5px;display:flex;gap:11px;align-items:flex-start}
+  .foot-list svg{width:18px;height:18px;stroke:#ffd980;fill:none;flex:none;margin-top:3px}
+  .foot-list a{color:#d8efec}
+  .foot-list a:hover{color:#fff;text-decoration:underline}
+  .foot-emergency{
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+    border-radius:18px;padding:20px 22px;margin-top:6px;
+  }
+  .foot-emergency .t{font-size:14px;opacity:.9;margin-bottom:4px}
+  .foot-emergency .n{
+    font-family:'Nunito',sans-serif;font-weight:800;font-size:27px;color:#ffd980;letter-spacing:.01em;
+  }
+  .foot-emergency .s{font-size:13px;opacity:.8;margin-top:4px}
+  .foot-bottom{
+    border-top:1px solid rgba(255,255,255,.15);padding:20px 0;
+    display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    font-size:13px;opacity:.75;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:1020px){
+    .hero-grid{gap:40px}
+    .svc-grid{grid-template-columns:repeat(2,1fr)}
+    .team-grid{grid-template-columns:repeat(2,1fr)}
+    .queue-grid{grid-template-columns:1fr;gap:30px}
+    .queue-media{max-width:520px}
+  }
+  @media (max-width:860px){
+    .nav-links{display:none}
+    .converter{grid-template-columns:1fr}
+    .cv-controls{padding:34px 26px}
+    .cv-result{padding:36px 26px}
+    .hero-grid{grid-template-columns:1fr}
+    .hero-media{max-width:560px}
+    .hero-badge{left:12px}
+    section{padding:64px 0}
+  }
+  @media (max-width:600px){
+    .svc-grid,.team-grid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr;gap:34px}
+    .hero-actions .btn{width:100%}
+    .trust-item{flex:1 1 100%}
+    .nav-cta{font-size:13.5px;padding:0 14px}
+    .brand small{display:none}
+    .queue-list li{grid-template-columns:56px 1fr;gap:10px}
+    .q-status{grid-column:2;justify-self:start}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="ใจดีสัตวแพทย์ กลับขึ้นด้านบน">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6.2" cy="9.2" r="1.7"/><circle cx="10" cy="5.6" r="1.7"/>
+          <circle cx="14.4" cy="5.6" r="1.7"/><circle cx="18.2" cy="9.2" r="1.7"/>
+          <path d="M12.2 11.2c-2.6 0-5 2.3-5 4.6 0 1.5 1.1 2.6 2.6 2.6 1 0 1.6-.5 2.4-.5s1.4.5 2.4.5c1.5 0 2.6-1.1 2.6-2.6 0-2.3-2.4-4.6-5-4.6z"/>
+        </svg>
+      </span>
+      <span>ใจดีสัตวแพทย์<small class="en">JAIDEE VET 24 HRS</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#converter">คำนวณวัยน้อง</a></li>
+      <li><a href="#services">บริการและราคา</a></li>
+      <li><a href="#team">ทีมสัตวแพทย์</a></li>
+      <li><a href="#queue">คิววันนี้</a></li>
+      <li><a href="#contact">ติดต่อเรา</a></li>
+    </ul>
+    <a class="btn btn-teal nav-cta" href="tel:021234567">
+      <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/>
+      </svg>
+      ฉุกเฉิน 24 ชม.
+    </a>
+  </div>
+</header>
+
+<main id="main">
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor">
+          <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+        </svg>
+        คลินิกสัตว์เปิด 24 ชั่วโมง ย่านรัชดา
+      </span>
+      <h1>ดูแลน้องเหมือน<br><span class="hl">คนในครอบครัว</span></h1>
+      <p class="lead">ทีมสัตวแพทย์ใจดีพร้อมดูแลน้องหมาน้องแมวของคุณตลอด 24 ชั่วโมง ด้วยความอ่อนโยน อุปกรณ์ทันสมัย และบรรยากาศอบอุ่นที่น้องไม่ต้องกลัวหมอ</p>
+      <div class="hero-actions">
+        <a class="btn btn-teal" href="#converter">
+          <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/>
+          </svg>
+          คำนวณวัยน้อง
+        </a>
+        <a class="btn btn-ghost" href="#services">ดูบริการและราคา</a>
+      </div>
+      <div class="trust">
+        <div class="trust-item">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7.5" r="3.5"/>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.9M15.5 4.1a3.5 3.5 0 0 1 0 6.8"/>
+            </svg>
+          </span>
+          <div><b>สัตวแพทย์ 6 ท่าน</b><span>เวรกะสึก 24 ชม.</span></div>
+        </div>
+        <div class="trust-item">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 9v6M9 12h6"/>
+            </svg>
+          </span>
+          <div><b>ห้องผ่าตัดมาตรฐาน</b><span>ระบบลมกรองเชื้อ</span></div>
+        </div>
+        <div class="trust-item">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 3h6M10 3v5.5L4.7 17.8A2.4 2.4 0 0 0 6.8 21h10.4a2.4 2.4 0 0 0 2.1-3.2L14 8.5V3"/>
+              <path d="M7.5 14h9"/>
+            </svg>
+          </span>
+          <div><b>แล็บในที่เดียว</b><span>รู้ผลเลือดใน 30 นาที</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="../assets/vet-hero.jpg" alt="ห้องตรวจสัตว์บรรยากาศอบอุ่น สัตวแพทย์กำลังตรวจน้องหมาด้วยรอยยิ้ม" width="900" height="720" fetchpriority="high">
+      <div class="hero-badge">
+        <span class="dot" aria-hidden="true"></span>
+        <div><b>เปิดอยู่ตอนนี้</b><span>รับเคสฉุกเฉินตลอดคืน</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AGE CONVERTER ============ -->
+<section class="converter-sec" id="converter">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="kicker">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>
+        </svg>
+        เครื่องมือประจำคลินิก
+      </span>
+      <h2 class="sec-title">น้องอายุเท่าไหร่ในวัยคน?</h2>
+      <p class="sec-sub">เลื่อนดูอายุน้องเทียบวัยคน พร้อมคำแนะนำการดูแลสุขภาพที่เหมาะกับแต่ละช่วงวัย คำนวณสดทันที</p>
+    </div>
+
+    <div class="converter reveal">
+      <div class="cv-controls">
+        <h3>บอกเราหน่อยว่าน้องเป็นใคร</h3>
+        <p class="hint">เลือกชนิดสัตว์ อายุ และขนาดตัว ผลลัพธ์จะอัปเดตทันที</p>
+
+        <span class="ctrl-label" id="animalLabel">ชนิดสัตว์</span>
+        <div class="animal-chips" role="group" aria-labelledby="animalLabel">
+          <button type="button" class="chip" id="chipDog" aria-pressed="true">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 13c0-4 3-7 8-7s8 3 8 7c0 2.6-1.8 4-3.5 4.5V19a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2v-1.5C5.8 17 4 15.6 4 13z"/>
+              <path d="M8.5 3.5 7 7M15.5 3.5 17 7M10 12h.01M14 12h.01"/>
+            </svg>
+            น้องหมา
+          </button>
+          <button type="button" class="chip" id="chipCat" aria-pressed="false">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 4l1.2 3.5A7.5 7.5 0 0 1 17.8 7.5L19 4l1 4.2c.4 1 .6 2 .6 3.1 0 4.7-3.6 8.7-8.6 8.7s-8.6-4-8.6-8.7c0-1.1.2-2.1.6-3.1L5 4z"/>
+              <path d="M9.5 12h.01M14.5 12h.01M10.5 15.5c.9.7 2.1.7 3 0"/>
+            </svg>
+            น้องแมว
+          </button>
+        </div>
+
+        <div class="slider-block">
+          <div class="slider-head">
+            <label class="ctrl-label" for="ageRange" style="margin-bottom:0">อายุน้อง</label>
+            <span class="slider-val num" id="ageVal">3 ปี</span>
+          </div>
+          <input type="range" id="ageRange" min="0" max="20" step="1" value="3" aria-describedby="ageVal">
+        </div>
+
+        <div class="size-wrap" id="sizeWrap">
+          <div class="slider-block" style="margin-bottom:14px">
+            <div class="slider-head">
+              <label class="ctrl-label" for="sizeRange" style="margin-bottom:0">ขนาดตัวน้องหมา</label>
+              <span class="slider-val num" id="sizeVal">กลาง</span>
+            </div>
+            <input type="range" id="sizeRange" min="0" max="2" step="1" value="1" aria-describedby="sizeVal">
+            <div class="size-labels" aria-hidden="true">
+              <span id="sz0">เล็ก · ต่ำกว่า 10 กก.</span>
+              <span id="sz1" class="on">กลาง · 10–25 กก.</span>
+              <span id="sz2">ใหญ่ · มากกว่า 25 กก.</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="cv-note">สูตรโดยประมาณตามหลักวิชาการ: ปีแรกเทียบเท่าคนอายุราว 15 ปี ปีที่สองราว 24 ปี หลังจากนั้นเพิ่มขึ้นตามขนาดพันธุ์ — ตัวเลขจริงอาจต่างกันตามสายพันธุ์และสุขภาพของน้องแต่ละตัว</p>
+      </div>
+
+      <div class="cv-result" aria-live="polite">
+        <p class="cv-q" id="cvQuestion">น้องหมาอายุ 3 ปี เทียบวัยคนอยู่ที่</p>
+        <div class="cv-big num"><span id="humanAge">28</span><small>ปีวัยคน</small></div>
+        <span class="stage-chip">
+          <span class="ic" id="stageIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/>
+            </svg>
+          </span>
+          <span id="stageName">วัยทำงาน</span>
+        </span>
+        <p class="cv-stage-desc" id="stageDesc">พลังงานกำลังดี สุขภาพแข็งแรงเต็มที่ เหมาะกับกิจกรรมและการฝึก</p>
+        <div class="cv-advice">
+          <h4>คำแนะนำดูแลช่วงวัยนี้</h4>
+          <ul id="adviceList"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="kicker">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor">
+          <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+        </svg>
+        บริการและราคามาตรฐาน
+      </span>
+      <h2 class="sec-title">ดูแลครบ จบที่เดียว</h2>
+      <p class="sec-sub">ราคาแจ้งตรงไม่มีบวกเพิ่ม ทุกบริการมีสัตวแพทย์ดูแลใกล้ชิด พร้อมอธิบายทุกขั้นตอนให้เจ้าของฟัง</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc-card reveal">
+        <span class="svc-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 3v6a5.5 5.5 0 0 0 11 0V3M4.5 3H6M4.5 3H3M15.5 3H17M15.5 3H14"/>
+            <path d="M10 14.6V17a4.5 4.5 0 0 0 9 0v-2.6"/>
+            <circle cx="19" cy="12" r="2.4"/>
+          </svg>
+        </span>
+        <h3>ตรวจสุขภาพทั่วไป</h3>
+        <p>ตรวจร่างกาย 12 รายการ ฟังหัวใจ วัดไข้ เช็กผิวหนังและช่องปาก พร้อมสรุปผลให้เจ้าของ</p>
+        <div class="svc-price num">฿500 <small>/ ครั้ง</small></div>
+      </article>
+      <article class="svc-card reveal">
+        <span class="svc-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 2 4 4M17 7l3-3M14 6l4 4-8.5 8.5a2.1 2.1 0 0 1-3 0L4 16a2.1 2.1 0 0 1 0-3L12.5 4.5z"/>
+            <path d="m8 10 6 6M5 15l-2.5 2.5M3 21l2.5-2.5"/>
+          </svg>
+        </span>
+        <h3>วัคซีนป้องกันโรค</h3>
+        <p>วัคซีนพิษสุนัขบ้า โรคหัด ไข้หวัดแมว และโปรแกรมกระตุ้นประจำปี มีสมุดวัคซีนให้ทุกตัว</p>
+        <div class="svc-price num">฿450 <small>/ เข็ม</small></div>
+      </article>
+      <article class="svc-card reveal">
+        <span class="svc-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+            <path d="M8.1 7.6 20 19M8.1 16.4 20 5M14.5 11 12 13.5"/>
+          </svg>
+        </span>
+        <h3>ทำหมัน</h3>
+        <p>ผ่าตัดโดยสัตวแพทย์ชำนาญการ ดมยาสลบระบบท่อ ดูแลฟื้นตัวจนตื่นดีก่อนกลับบ้าน</p>
+        <div class="svc-price num">฿2,500 <small>/ ตัว</small></div>
+      </article>
+      <article class="svc-card reveal">
+        <span class="svc-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3c-2.5-1.5-6-1-7.5 2C3 8 4 11 5 14c.8 2.5 1 7 3 7 1.6 0 1.5-3.5 4-3.5s2.4 3.5 4 3.5c2 0 2.2-4.5 3-7 1-3 2-6 .5-9-1.5-3-5-3.5-7.5-2z"/>
+          </svg>
+        </span>
+        <h3>ขูดหินปูน</h3>
+        <p>ขูดหินปูนด้วยอัลตราโซนิก ขัดฟันเงา ตรวจเหงือก ลดกลิ่นปากและป้องกันโรคปริทันต์</p>
+        <div class="svc-price num">฿1,800 <small>/ ครั้ง</small></div>
+      </article>
+      <article class="svc-card reveal">
+        <span class="svc-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="16" rx="3"/>
+            <path d="M12 8.5v7M8.5 12h7"/>
+          </svg>
+        </span>
+        <h3>ผ่าตัดทั่วไป</h3>
+        <p>ผ่าตัดเนื้องอก ทำแผล คลอดผ่าตัด และศัลยกรรมกระดูก ในห้องผ่าตัดระบบลมกรองเชื้อ</p>
+        <div class="svc-price num">฿3,500<small>+ ประเมินหน้างาน</small></div>
+      </article>
+      <article class="svc-card reveal">
+        <span class="svc-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 10.5 12 3l9 7.5M5 9.5V21h14V9.5"/>
+            <path d="M9 21v-6h6v6"/>
+          </svg>
+        </span>
+        <h3>พักฟื้นและฝากเลี้ยง</h3>
+        <p>ห้องพักแยกหมาแมว แอร์ 24 ชม. พี่เลี้ยงดูแลใกล้ชิด ส่งรูปอัปเดตให้เจ้าของทุกเช้าเย็น</p>
+        <div class="svc-price num">฿350 <small>/ คืน</small></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section class="team-sec" id="team">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="kicker">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7.5" r="3.5"/>
+        </svg>
+        ทีมของเรา
+      </span>
+      <h2 class="sec-title">สัตวแพทย์ที่น้องไว้ใจ</h2>
+      <p class="sec-sub">ทีมสัตวแพทย์ใจดี 6 ท่าน หมุนเวรดูแลตลอด 24 ชั่วโมง ทุกท่านผ่านการฝึกดูแลสัตว์ด้วยความอ่อนโยน</p>
+    </div>
+    <div class="team-grid">
+      <article class="vet-card reveal">
+        <img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?q=80&w=1000&auto=format&fit=crop" alt="สัตวแพทย์หญิงกอดน้องหมาพันธุ์โกลเด้นรีทรีฟเวอร์อย่างอบอุ่น" loading="lazy" width="1000" height="750">
+        <div class="vet-body">
+          <h3>สพ.ญ. มินตรา ใจดี</h3>
+          <div class="vet-role">หัวหน้าสัตวแพทย์ · อายุรศาสตร์</div>
+          <p>ประสบการณ์ 12 ปี ดูแลเคสโรคเรื้อรัง ไต และหัวใจ เจ้าของมืออาชีพด้านการคลายเครียดน้องกลัวหมอ</p>
+          <div class="vet-tags"><span>โรคไต</span><span>หัวใจ</span><span>ผู้สูงวัยสี่ขา</span></div>
+        </div>
+      </article>
+      <article class="vet-card reveal">
+        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=1000&auto=format&fit=crop" alt="สัตวแพทย์ชายกำลังใช้หูฟังเสียงหัวใจตรวจน้องหมาบนโต๊ะตรวจ" loading="lazy" width="1000" height="750">
+        <div class="vet-body">
+          <h3>สพ.บ. ธนกร รักษ์สัตว์</h3>
+          <div class="vet-role">สัตวแพทย์ศัลยศาสตร์</div>
+          <p>ชำนาญการผ่าตัดช่องท้องและกระดูก ดูแลเคสทำหมันและผ่าตัดมากกว่า 2,000 เคส มือเบาที่สุดในคลินิก</p>
+          <div class="vet-tags"><span>ผ่าตัด</span><span>ทำหมัน</span><span>กระดูกและข้อ</span></div>
+        </div>
+      </article>
+      <article class="vet-card reveal">
+        <img src="https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?q=80&w=1000&auto=format&fit=crop" alt="น้องแมวขนสีเทานอนสบายในห้องตรวจของคลินิก" loading="lazy" width="1000" height="750">
+        <div class="vet-body">
+          <h3>สพ.ญ. ปวีณา นุ่มนวล</h3>
+          <div class="vet-role">สัตวแพทย์ผู้เชี่ยวชาญแมว</div>
+          <p>จบหลักสูตรเวชศาสตร์แมวโดยเฉพาะ ดูแลน้องแมวใจเย็นไม่บังคับจับ เจ้าของแมวทั่วรัชดาแนะนำกันปากต่อปาก</p>
+          <div class="vet-tags"><span>เวชศาสตร์แมว</span><span>พฤติกรรม</span><span>ผิวหนัง</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUEUE ============ -->
+<section id="queue">
+  <div class="wrap queue-grid">
+    <div class="queue-media reveal">
+      <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1000&auto=format&fit=crop" alt="น้องหมาสองตัววิ่งเล่นอย่างร่าเริงที่สนามหน้าคลินิก" loading="lazy" width="1000" height="850">
+    </div>
+    <div class="queue-card reveal">
+      <div class="queue-head">
+        <h3>คิวตรวจวันนี้</h3>
+        <span class="queue-time"><span class="dot" aria-hidden="true"></span>อัปเดตล่าสุด <span class="num">14:35</span> น.</span>
+      </div>
+      <ul class="queue-list">
+        <li>
+          <span class="q-time num">14:00</span>
+          <div><div class="q-name">น้องโมจิ <span class="q-detail">· แมว</span></div><div class="q-detail">ตรวจสุขภาพประจำปี</div></div>
+          <span class="q-status st-done">เสร็จแล้ว</span>
+        </li>
+        <li>
+          <span class="q-time num">14:20</span>
+          <div><div class="q-name">น้องบัวบูม <span class="q-detail">· หมา</span></div><div class="q-detail">ฉีดวัคซีนกระตุ้น</div></div>
+          <span class="q-status st-done">เสร็จแล้ว</span>
+        </li>
+        <li>
+          <span class="q-time num">14:40</span>
+          <div><div class="q-name">น้องทองกวาว <span class="q-detail">· หมา</span></div><div class="q-detail">ขูดหินปูน</div></div>
+          <span class="q-status st-now">กำลังตรวจ</span>
+        </li>
+        <li>
+          <span class="q-time num">15:10</span>
+          <div><div class="q-name">น้องซูชิ <span class="q-detail">· แมว</span></div><div class="q-detail">ทำแผลติดตามอาการ</div></div>
+          <span class="q-status st-wait">รอคิว</span>
+        </li>
+        <li>
+          <span class="q-time num">15:30</span>
+          <div><div class="q-name">น้องฮานะ <span class="q-detail">· แมว</span></div><div class="q-detail">ตรวจผิวหนัง</div></div>
+          <span class="q-status st-wait">รอคิว</span>
+        </li>
+      </ul>
+      <p class="queue-foot">รอไม่นานแน่นอน — จองคิวล่วงหน้าทาง LINE <b>@jaideevet</b> หรือโทร <b class="num">02-123-4567</b></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="6.2" cy="9.2" r="1.7"/><circle cx="10" cy="5.6" r="1.7"/>
+              <circle cx="14.4" cy="5.6" r="1.7"/><circle cx="18.2" cy="9.2" r="1.7"/>
+              <path d="M12.2 11.2c-2.6 0-5 2.3-5 4.6 0 1.5 1.1 2.6 2.6 2.6 1 0 1.6-.5 2.4-.5s1.4.5 2.4.5c1.5 0 2.6-1.1 2.6-2.6 0-2.3-2.4-4.6-5-4.6z"/>
+            </svg>
+          </span>
+          ใจดีสัตวแพทย์
+        </div>
+        <p>คลินิกสัตว์เล็กเปิด 24 ชั่วโมง ดูแลน้องหมาน้องแมวเหมือนคนในครอบครัว ด้วยทีมสัตวแพทย์ 6 ท่าน ห้องผ่าตัดมาตรฐาน และแล็บวิเคราะห์ในที่เดียว ไม่ต้องรอผลข้ามวัน</p>
+      </div>
+      <div>
+        <h4 class="foot-h">ที่ตั้งและเวลาทำการ</h4>
+        <ul class="foot-list">
+          <li>
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>88/12 ถนนรัชดาภิเษก แขวงดินแดง เขตดินแดง กรุงเทพมหานคร 10400 (ใกล้ MRT สุทธิสาร ทางออก 2)</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>
+            </svg>
+            <span>เปิดทุกวัน 24 ชั่วโมง ไม่มีวันหยุด</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.4 8.7 8.7 0 0 1-3.8-.85L3 21l1.95-5.7a8.3 8.3 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.5 3a8.4 8.4 0 0 1 8.5 8.5z"/>
+            </svg>
+            <span>LINE <a href="#" class="en">@jaideevet</a> · จองคิวล่วงหน้าได้</span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="foot-h">ติดต่อเรา</h4>
+        <ul class="foot-list">
+          <li>
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/>
+            </svg>
+            <span>โทร <a href="tel:021234567" class="num">02-123-4567</a></span>
+          </li>
+        </ul>
+        <div class="foot-emergency">
+          <div class="t">สายด่วนฉุกเฉิน 24 ชม.</div>
+          <a href="tel:0812345678" class="n num">081-234-5678</a>
+          <div class="s">น้องหายใจไม่ออก ชัก หรืออุบัติเหตุ โทรก่อนมาได้เลย เราเตรียมทีมรอรับ</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span class="num" id="year">2569</span> ใจดีสัตวแพทย์ JAIDEE VET — ดูแลน้องเหมือนคนในครอบครัว</span>
+      <span class="en">Demo website for presentation</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- PET AGE CONVERTER ---------- */
+  var chipDog = document.getElementById('chipDog');
+  var chipCat = document.getElementById('chipCat');
+  var ageRange = document.getElementById('ageRange');
+  var sizeRange = document.getElementById('sizeRange');
+  var sizeWrap = document.getElementById('sizeWrap');
+  var ageVal = document.getElementById('ageVal');
+  var sizeVal = document.getElementById('sizeVal');
+  var humanAgeEl = document.getElementById('humanAge');
+  var cvQuestion = document.getElementById('cvQuestion');
+  var stageName = document.getElementById('stageName');
+  var stageDesc = document.getElementById('stageDesc');
+  var stageIcon = document.getElementById('stageIcon');
+  var adviceList = document.getElementById('adviceList');
+  var sizeLabels = [document.getElementById('sz0'), document.getElementById('sz1'), document.getElementById('sz2')];
+
+  var state = { animal: 'dog', age: 3, size: 1 };
+
+  var SIZE_NAMES = ['เล็ก', 'กลาง', 'ใหญ่'];
+  var ICON_CHECK = '<svg viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+
+  var STAGES = [
+    {
+      max: 13,
+      name: 'วัยเด็ก',
+      desc: 'ช่วงซนและซึมซับโลก เหมือนเด็กอนุบาล ต้องปูพื้นฐานสุขภาพให้แน่น',
+      icon: '<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.5 9.5c5 1.5 12 1.5 17 0M3.5 14.5c5-1.5 12-1.5 17 0"/></svg>',
+      advice: [
+        'วัคซีนพื้นฐานให้ครบทุกเข็ม และถ่ายพยาธิตามนัด',
+        'เริ่มฝึกขับถ่ายและปรับตัวกับคนแปลกหน้าตั้งแต่เล็ก',
+        'อาหารสูตรลูกสัตว์โปรตีนสูง แบ่งมื้อเล็กวันละ 3–4 มื้อ'
+      ]
+    },
+    {
+      max: 20,
+      name: 'วัยรุ่น',
+      desc: 'พลังล้นเหลือ ดื้อนิดหน่อย เหมือนเด็กมัธยม ต้องวางกรอบพฤติกรรม',
+      icon: '<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12L13 2z"/></svg>',
+      advice: [
+        'วัคซีนกระตุ้นประจำปี พร้อมตรวจสุขภาพครั้งแรกของวัยโต',
+        'ช่วงเหมาะที่สุดสำหรับทำหมัน ปรึกษาสัตวแพทย์ได้เลย',
+        'เปลี่ยนเป็นอาหารสูตรโต คุมพลังงานไม่ให้อ้วนเกิน'
+      ]
+    },
+    {
+      max: 60,
+      name: 'วัยทำงาน',
+      desc: 'สุขภาพแข็งแรงเต็มที่ เหมือนคนวัยทำงาน ดูแลป้องกันไว้ก่อนเป็นดี',
+      icon: '<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2M3 13h18"/></svg>',
+      advice: [
+        'ตรวจสุขภาพประจำปีปีละ 1 ครั้ง พร้อมฉีดวัคซีนกระตุ้น',
+        'ขูดหินปูนปีละครั้ง ป้องกันโรคปริทันต์และกลิ่นปาก',
+        'คุมน้ำหนักให้อยู่ในเกณฑ์ พาไปเดินเล่นสม่ำเสมอ'
+      ]
+    },
+    {
+      max: Infinity,
+      name: 'วัยเกษียณ',
+      desc: 'ช่วงวัยทองที่ต้องการความใส่ใจพิเศษ เหมือนคุณตาคุณยายของบ้าน',
+      icon: '<svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>',
+      advice: [
+        'ตรวจสุขภาพทุก 6 เดือน เจาะเลือดเช็กไต ตับ และหัวใจ',
+        'อาหารสูตรสูงวัยย่อยง่าย โปรตีนคุณภาพดี ฟอสฟอรัสต่ำ',
+        'เตียงนุ่มรองข้อ ทางเดินไม่ลื่น และพามาเยี่ยมหมอบ่อยขึ้น'
+      ]
+    }
+  ];
+
+  function humanAge(){
+    var a = state.age;
+    if (a <= 0) return 0;
+    if (a <= 1) return Math.round(a * 15);
+    if (a <= 2) return Math.round(15 + (a - 1) * 9);
+    var rate = 4;
+    if (state.animal === 'dog') rate = state.size === 0 ? 4 : (state.size === 1 ? 5 : 6);
+    return Math.round(24 + (a - 2) * rate);
+  }
+
+  function stageOf(h){
+    for (var i = 0; i < STAGES.length; i++) {
+      if (h < STAGES[i].max) return STAGES[i];
+    }
+    return STAGES[STAGES.length - 1];
+  }
+
+  function paintRange(el){
+    var min = parseFloat(el.min), max = parseFloat(el.max), v = parseFloat(el.value);
+    var pct = ((v - min) / (max - min)) * 100;
+    el.style.setProperty('--fill', pct + '%');
+  }
+
+  function update(){
+    var h = humanAge();
+    var st = stageOf(h);
+    var animalName = state.animal === 'dog' ? 'น้องหมา' : 'น้องแมว';
+
+    ageVal.textContent = state.age + ' ปี';
+    sizeVal.textContent = SIZE_NAMES[state.size];
+    humanAgeEl.textContent = h;
+    cvQuestion.textContent = animalName + 'อายุ ' + state.age + ' ปี เทียบวัยคนอยู่ที่';
+    stageName.textContent = st.name;
+    stageDesc.textContent = st.desc;
+    stageIcon.innerHTML = st.icon;
+
+    adviceList.innerHTML = '';
+    st.advice.forEach(function(text){
+      var li = document.createElement('li');
+      li.innerHTML = ICON_CHECK + '<span></span>';
+      li.querySelector('span').textContent = text;
+      adviceList.appendChild(li);
+    });
+
+    sizeLabels.forEach(function(el, i){
+      el.classList.toggle('on', i === state.size);
+    });
+
+    paintRange(ageRange);
+    paintRange(sizeRange);
+  }
+
+  function setAnimal(animal){
+    state.animal = animal;
+    var isDog = animal === 'dog';
+    chipDog.setAttribute('aria-pressed', String(isDog));
+    chipCat.setAttribute('aria-pressed', String(!isDog));
+    sizeWrap.classList.toggle('hide', !isDog);
+    sizeRange.disabled = !isDog;
+    update();
+  }
+
+  chipDog.addEventListener('click', function(){ setAnimal('dog'); });
+  chipCat.addEventListener('click', function(){ setAnimal('cat'); });
+  ageRange.addEventListener('input', function(){
+    state.age = parseInt(ageRange.value, 10);
+    update();
+  });
+  sizeRange.addEventListener('input', function(){
+    state.size = parseInt(sizeRange.value, 10);
+    update();
+  });
+  update();
+
+  /* ---------- REVEAL ON SCROLL ---------- */
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------- FOOTER YEAR (Buddhist era) ---------- */
+  var yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear() + 543);
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>
