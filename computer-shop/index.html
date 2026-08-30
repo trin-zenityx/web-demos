@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPEC DEE — ร้านคอมประกอบเอง จัดสเปกออนไลน์ ประกัน 3 ปี</title>
+<meta name="description" content="SPEC DEE — ร้านคอมพิวเตอร์ ประกอบ PC ตามงบ จัดสเปกเองออนไลน์ รู้ราคาและ FPS ก่อนซื้อ ประกันทั้งเครื่อง 3 ปี">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6fb; --card:#ffffff; --blue:#2f6ff2; --violet:#7c5cf0; --neon:#22d3ee;
+  --ink:#17203a; --muted:#62708e; --line:#dfe5f2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Chakra Petch',sans-serif;font-weight:400;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+::selection{background:#cfdcff;color:var(--ink)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+section{padding:clamp(3.5rem,8vh,5.5rem) 0}
+.en{font-family:'Space Grotesk',sans-serif}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(23,32,58,.96);backdrop-filter:blur(10px);color:#e8edfa}
+.nav-in{max-width:1180px;margin:0 auto;padding:.95rem clamp(1.25rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{font-family:'Space Grotesk';font-weight:700;font-size:1.5rem;letter-spacing:.02em}
+.logo em{font-style:normal;color:var(--neon)}
+.nav-links{display:flex;gap:1.6rem;font-size:.95rem}
+.nav-links a{opacity:.7;transition:opacity .3s}
+.nav-links a:hover{opacity:1;color:var(--neon)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:600;border-radius:12px;padding:.85rem 1.6rem;transition:transform .25s,box-shadow .25s;min-height:44px}
+.btn-b{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;box-shadow:0 8px 20px -8px rgba(47,111,242,.5)}
+.btn-b:hover{transform:translateY(-2px)}
+.btn-n{background:var(--neon);color:#082430}
+.btn-n:hover{transform:translateY(-2px)}
+@media(max-width:760px){.nav-links{display:none}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,4vw,3.5rem);align-items:center;padding:clamp(3rem,7vh,5rem) 0}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.kicker{display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Grotesk';font-weight:700;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);background:#e4ebfd;padding:.45rem 1rem;border-radius:99px}
+h1{font-weight:700;font-size:clamp(2.1rem,5.4vw,3.6rem);line-height:1.18;margin:1.2rem 0 1rem}
+h1 .hl{background:linear-gradient(90deg,var(--blue),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:46ch}
+.hero-cta{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:1.7rem}
+.hero-media{position:relative}
+.hero-media img{border-radius:20px;box-shadow:0 28px 56px -28px rgba(23,32,58,.4)}
+.hero-chip{position:absolute;bottom:1rem;left:1rem;background:var(--ink);color:#fff;border-radius:14px;padding:.7rem 1.1rem;font-family:'Space Grotesk';font-size:.85rem}
+.hero-chip b{color:var(--neon)}
+
+/* builder */
+.sec-kick{font-family:'Space Grotesk';font-weight:700;font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--blue);margin-bottom:.6rem}
+h2{font-weight:700;font-size:clamp(1.7rem,3.8vw,2.6rem)}
+.sec-sub{color:var(--muted);margin-top:.5rem;max-width:56ch}
+.builder{display:grid;grid-template-columns:1fr 400px;gap:clamp(1.5rem,3vw,2.5rem);margin-top:2.2rem;align-items:start}
+@media(max-width:1000px){.builder{grid-template-columns:1fr}}
+.parts{display:grid;gap:1.4rem}
+.part-group{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.3rem 1.4rem}
+.part-group>h3{font-weight:600;font-size:1rem;margin-bottom:.8rem;display:flex;justify-content:space-between;align-items:center}
+.part-group>h3 small{font-weight:400;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem}
+.opt{border:2px solid var(--line);border-radius:14px;padding:.9rem 1rem;text-align:left;transition:all .2s;min-height:44px}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--blue);background:#f0f5ff;box-shadow:0 6px 16px -8px rgba(47,111,242,.35)}
+.opt b{display:block;font-weight:600;font-size:.92rem}
+.opt small{display:block;color:var(--muted);font-size:.78rem;margin:.15rem 0 .3rem}
+.opt .op{font-family:'Space Grotesk';font-weight:700;color:var(--blue);font-size:.95rem}
+/* summary */
+.sum{background:var(--ink);color:#e8edfa;border-radius:20px;padding:1.5rem;position:sticky;top:90px}
+.sum h3{font-family:'Space Grotesk';font-weight:700;font-size:1.05rem;margin-bottom:1rem}
+.sum-list{display:grid;gap:.45rem;padding-bottom:1rem;border-bottom:1px solid rgba(232,237,250,.15);margin-bottom:1rem}
+.sum-list .row{display:flex;justify-content:space-between;font-size:.86rem;color:#aab4cf}
+.sum-list .row b{color:#fff;font-weight:500}
+.sum-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1rem}
+.sum-total b{font-family:'Space Grotesk';font-size:2rem;font-weight:700;color:var(--neon);font-variant-numeric:tabular-nums}
+.fps-block{margin-bottom:1rem}
+.fps-row{display:grid;grid-template-columns:110px 1fr 52px;align-items:center;gap:.6rem;font-size:.8rem;margin-bottom:.45rem}
+.fps-row .fname{color:#aab4cf}
+.fps-row .track{height:8px;background:rgba(232,237,250,.12);border-radius:99px;overflow:hidden}
+.fps-row .fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--neon));transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.fps-row .fv{font-family:'Space Grotesk';font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.warn{background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.4);color:#f5c668;border-radius:12px;padding:.7rem .9rem;font-size:.82rem;margin-bottom:1rem;display:none}
+.warn.show{display:block}
+.presets{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.preset{flex:1;border:1.5px solid rgba(232,237,250,.25);border-radius:10px;padding:.55rem .4rem;font-size:.78rem;text-align:center;color:#aab4cf;transition:all .2s;min-height:44px}
+.preset:hover{border-color:var(--neon);color:var(--neon)}
+
+/* services */
+.serv{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:2rem}
+@media(max-width:900px){.serv{grid-template-columns:repeat(2,1fr)}}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.3rem;text-align:center}
+.svc .ic{width:46px;height:46px;border-radius:12px;background:#eaf0fd;display:grid;place-items:center;margin:0 auto .6rem}
+.svc b{display:block;font-weight:600;font-size:.95rem}
+.svc span{color:var(--muted);font-size:.82rem}
+footer{background:var(--ink);color:#8a94b0;padding:2.2rem 0;font-size:.88rem;margin-top:clamp(3rem,6vh,4rem)}
+.foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+.foot-grid b{color:#fff;font-family:'Space Grotesk'}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top">SPEC<em>DEE</em></a>
+    <div class="nav-links"><a href="#builder">จัดสเปกเอง</a><a href="#services">บริการ</a></div>
+    <a class="btn btn-n" href="#builder">จัดสเปกเลย</a>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero wrap">
+    <div>
+      <span class="kicker">ประกอบฟรี · ประกัน 3 ปี</span>
+      <h1>จัดคอมในฝัน<br><span class="hl">รู้ราคา+FPS</span> ก่อนซื้อ</h1>
+      <p>เลือกชิ้นส่วนเองได้ทุกชิ้น ระบบคำนวณราคาและประมาณ FPS ในเกมที่คุณเล่นทันที — ไม่มีบวกเพิ่ม ประกอบเทสให้ฟรีก่อนส่ง</p>
+      <div class="hero-cta">
+        <a class="btn btn-b" href="#builder">จัดสเปกเองเลย</a>
+        <a class="btn btn-n" href="#services">บริการของร้าน</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="../assets/pc-hero.jpg" alt="เครื่องคอมพิวเตอร์ RGB เรืองแสงจัดแสดงในร้าน" fetchpriority="high">
+      <span class="hero-chip">สเปกยอดนิยมเดือนนี้ · <b>฿34,990</b></span>
+    </div>
+  </section>
+
+  <section class="wrap" id="builder">
+    <p class="sec-kick">PC Builder</p>
+    <h2>จัดสเปกเอง — เห็นราคาและ FPS สดๆ</h2>
+    <p class="sec-sub">เลือก CPU / GPU / RAM ระบบจะรวมราคา ประมาณเฟรมเรตในเกมยอดนิยม และเตือนถ้าชิ้นส่วนไม่สมดุล (คอขวด)</p>
+
+    <div class="builder">
+      <div class="parts" id="parts"></div>
+
+      <div class="sum">
+        <h3>สรุปสเปกของคุณ</h3>
+        <div class="presets">
+          <button class="preset" data-p="budget">ประหยัด<br><b>฿20k</b></button>
+          <button class="preset" data-p="mid">คุ้มสุด<br><b>฿35k</b></button>
+          <button class="preset" data-p="pro">จัดเต็ม<br><b>฿55k</b></button>
+        </div>
+        <div class="sum-list" id="sumList"></div>
+        <div class="sum-total"><span>ราคารวม (ประกอบฟรี)</span><b id="sumPrice">—</b></div>
+        <div class="fps-block">
+          <div class="fps-row"><span class="fname">Esports 1080p</span><div class="track"><div class="fill" id="fps1" style="width:0%"></div></div><span class="fv" id="fpsv1">—</span></div>
+          <div class="fps-row"><span class="fname">AAA 1080p</span><div class="track"><div class="fill" id="fps2" style="width:0%"></div></div><span class="fv" id="fpsv2">—</span></div>
+          <div class="fps-row"><span class="fname">AAA 1440p</span><div class="track"><div class="fill" id="fps3" style="width:0%"></div></div><span class="fv" id="fpsv3">—</span></div>
+        </div>
+        <div class="warn" id="warn"></div>
+        <button class="btn btn-n" id="orderBtn" style="width:100%">ขอใบเสนอสเปกนี้ →</button>
+        <p id="orderOk" hidden style="margin-top:.9rem;color:#7ee2a8;font-size:.9rem">รับสเปกแล้ว! เลข SD-<span id="orderRef"></span> — ทีมงานส่งใบเสนอพร้อมราคาอัปเดตให้ทาง LINE ภายใน 1 ชม.ครับ</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="services" style="padding-top:0">
+    <p class="sec-kick">Services</p>
+    <h2>ทำไมต้อง SPEC DEE</h2>
+    <div class="serv">
+      <div class="svc">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2f6ff2" stroke-width="2" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2.1-2.1z"/></svg></div>
+        <b>ประกอบ+เทสฟรี</b><span>เบิร์นเทส 12 ชม. ก่อนส่งทุกเครื่อง</span>
+      </div>
+      <div class="svc">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2f6ff2" stroke-width="2" stroke-linecap="round"><path d="M12 22c6-3 8-8 8-13V5l-8-3-8 3v4c0 5 2 10 8 13z"/></svg></div>
+        <b>ประกันทั้งเครื่อง 3 ปี</b><span>เคลมที่ร้านได้เลย ไม่ต้องส่งศูนย์</span>
+      </div>
+      <div class="svc">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2f6ff2" stroke-width="2" stroke-linecap="round"><path d="M12 8v4l3 3M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg></div>
+        <b>อัพเกรดรุ่นเก่า</b><span>ประเมินเครื่องเดิมฟรี อัพเฉพาะจุดคุ้ม</span>
+      </div>
+      <div class="svc">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2f6ff2" stroke-width="2" stroke-linecap="round"><path d="M20 12v8H4v-8M2 7h20v5H2z"/></svg></div>
+        <b>ส่งทั่วประเทศ</b><span>แพ็คกันกระแทก 3 ชั้น มีประกันขนส่ง</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span><b>SPEC DEE</b> · ซอฟต์แวร์ซิตี้ บางรัก ชั้น 2</span>
+    <span>เปิด จ–ส 10:00–19:00 · โทร 08x-xxx-xxxx · LINE @specdee</span>
+    <span>© 2569 SPEC DEE Computer</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var PARTS = {
+    cpu: { name:'CPU', items:[
+      { id:'r5',  n:'Ryzen 5 7600',   d:'6 คอร์ · เกมแรงคุ้ม',      p:6900,  perf:62 },
+      { id:'r7',  n:'Ryzen 7 7800X3D', d:'8 คอร์ + 3D Cache ราชาเกม', p:13900, perf:88 },
+      { id:'i7',  n:'Core i7-14700K',  d:'20 คอร์ · เกม+งานหนัก',     p:15500, perf:90 }
+    ]},
+    gpu: { name:'การ์ดจอ', items:[
+      { id:'4060', n:'RTX 4060',        d:'8GB · เล่นได้ทุกเกม 1080p', p:10900, perf:60 },
+      { id:'4070s',n:'RTX 4070 Super',  d:'12GB · 1440p ลื่นๆ',        p:21900, perf:80 },
+      { id:'4070ts',n:'RTX 4070 Ti S',  d:'16GB · จัดเต็มระดับโปร',    p:31900, perf:92 },
+      { id:'7600xt',n:'RX 7600 XT',     d:'16GB · ประหยัดคุ้มสุด',     p:9900,  perf:58 }
+    ]},
+    ram: { name:'RAM', items:[
+      { id:'16', n:'DDR5 16GB (2x8)',  d:'5600MHz · พอสำหรับเกมเมอร์', p:1900, perf:60 },
+      { id:'32', n:'DDR5 32GB (2x16)', d:'6000MHz · สตรีม+งานด้วยได้',  p:3400, perf:85 }
+    ]},
+    ssd: { name:'SSD', items:[
+      { id:'1t', n:'NVMe 1TB Gen4', d:'7,000MB/s โหลดไว', p:2400, perf:70 },
+      { id:'2t', n:'NVMe 2TB Gen4', d:'เก็บเกมได้เยอะขึ้น', p:4300, perf:78 }
+    ]}
+  };
+  /* base parts (mainboard/psu/case/cooler) bundled by cpu tier */
+  var BASE = [
+    { maxPerf: 70, n:'B650 + 650W Bronze + เคสลมดี + พัดลมทาวเวอร์', p:6500 },
+    { maxPerf: 85, n:'B650M WiFi + 750W Gold + เคสแอร์โฟลว์ + พัดลมหล่อเย็น', p:8900 },
+    { maxPerf: 101, n:'X670E + 850W Gold + เคสฟูลทาวเวอร์ + ชุดน้ำ 240', p:12900 }
+  ];
+  var state = { cpu:'r5', gpu:'4060', ram:'16', ssd:'1t' };
+
+  /* FPS model: min(cpuPerf, gpuPerf) weighted + ram bonus */
+  function fpsFor(game){
+    var cpu = PARTS.cpu.items.find(function(i){return i.id===state.cpu;}).perf;
+    var gpu = PARTS.gpu.items.find(function(i){return i.id===state.gpu;}).perf;
+    var ram = PARTS.ram.items.find(function(i){return i.id===state.ram;}).perf;
+    var base = Math.min(cpu * 0.85 + gpu * 0.15, gpu * 0.85 + cpu * 0.15);
+    if (ram < 70) base *= 0.94;
+    var mult = { esports: 3.4, aaa1080: 1.55, aaa1440: 1.05 }[game];
+    return Math.round(base * mult);
+  }
+  function price(){
+    var t = PARTS.cpu.items.find(i=>i.id===state.cpu).p + PARTS.gpu.items.find(i=>i.id===state.gpu).p +
+            PARTS.ram.items.find(i=>i.id===state.ram).p + PARTS.ssd.items.find(i=>i.id===state.ssd).p;
+    var cpuPerf = PARTS.cpu.items.find(i=>i.id===state.cpu).perf;
+    var base = BASE.find(function(b){ return cpuPerf < b.maxPerf; }) || BASE[BASE.length-1];
+    return { total: t + base.p, base: base };
+  }
+
+  function renderParts(){
+    document.getElementById('parts').innerHTML = Object.keys(PARTS).map(function(k){
+      var g = PARTS[k];
+      return '<div class="part-group"><h3>' + g.name + '<small>เลือก 1 ชิ้น</small></h3><div class="opts" data-g="' + k + '">' +
+        g.items.map(function(i){
+          return '<button class="opt' + (state[k]===i.id?' sel':'') + '" data-id="' + i.id + '"><b>' + i.n + '</b><small>' + i.d + '</small><span class="op">฿' + i.p.toLocaleString('th-TH') + '</span></button>';
+        }).join('') + '</div></div>';
+    }).join('');
+  }
+
+  function render(){
+    var pr = price();
+    document.getElementById('sumList').innerHTML =
+      ['cpu','gpu','ram','ssd'].map(function(k){
+        var it = PARTS[k].items.find(function(i){return i.id===state[k];});
+        return '<div class="row"><span>' + PARTS[k].name + '</span><b>' + it.n + '</b></div>';
+      }).join('') +
+      '<div class="row"><span>เมนบอร์ด/PSU/เคส/ชุดระบาย</span><b>' + pr.base.n.split(' + ')[0] + ' …</b></div>';
+    document.getElementById('sumPrice').textContent = '฿' + pr.total.toLocaleString('th-TH');
+
+    var games = [['fps1','fpsv1','esports'],['fps2','fpsv2','aaa1080'],['fps3','fpsv3','aaa1440']];
+    games.forEach(function(g){
+      var v = fpsFor(g[2]);
+      document.getElementById(g[0]).style.width = Math.min(100, v / 3.2) + '%';
+      document.getElementById(g[1]).textContent = v + ' fps';
+    });
+
+    /* bottleneck warning */
+    var cpuPerf = PARTS.cpu.items.find(i=>i.id===state.cpu).perf;
+    var gpuPerf = PARTS.gpu.items.find(i=>i.id===state.gpu).perf;
+    var warn = document.getElementById('warn');
+    if (gpuPerf - cpuPerf >= 20) { warn.textContent = 'CPU อาจเป็นคอขวดกับการ์ดจอระดับนี้ — ลองอัพ CPU ขึ้นอีกขั้นเพื่อปลด FPS เต็มที่'; warn.classList.add('show'); }
+    else if (cpuPerf - gpuPerf >= 25) { warn.textContent = 'CPU แรงเกินการ์ดจอมาก — ถ้าเล่นเกมเป็นหลัก เอางบส่วนต่างไปอัพการ์ดจอคุ้มกว่า'; warn.classList.add('show'); }
+    else warn.classList.remove('show');
+  }
+
+  document.getElementById('parts').addEventListener('click', function(e){
+    var b = e.target.closest('.opt'); if (!b) return;
+    var g = b.parentElement.dataset.g;
+    state[g] = b.dataset.id;
+    b.parentElement.querySelectorAll('.opt').forEach(function(x){ x.classList.remove('sel'); });
+    b.classList.add('sel');
+    render();
+  });
+
+  document.querySelectorAll('.preset').forEach(function(b){
+    b.addEventListener('click', function(){
+      var p = b.dataset.p;
+      if (p === 'budget') state = { cpu:'r5', gpu:'7600xt', ram:'16', ssd:'1t' };
+      else if (p === 'mid') state = { cpu:'r7', gpu:'4060', ram:'32', ssd:'1t' };
+      else state = { cpu:'r7', gpu:'4070s', ram:'32', ssd:'2t' };
+      renderParts(); render();
+    });
+  });
+
+  document.getElementById('orderBtn').addEventListener('click', function(){
+    var ok = document.getElementById('orderOk');
+    document.getElementById('orderRef').textContent = Math.floor(1000 + Math.random() * 9000);
+    ok.hidden = false;
+  });
+
+  renderParts(); render();
+  document.documentElement.style.scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

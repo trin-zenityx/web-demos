@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ขับดี DRIVEDEE — โรงเรียนสอนขับรถ สอบผ่าน 97% | ลองเกมจอดรถเลย</title>
+<meta name="description" content="ขับดี — โรงเรียนสอนขับรถใบอนุญาต กทม. สอนจนจบพร้อมสอบ อบรม 15 ชม. ครบตามกฎกรมการขนส่ง">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f7f4; --card:#ffffff; --green:#1f9d55; --green-deep:#157347; --amber:#f5a623;
+  --ink:#1e2b22; --muted:#64756a; --line:#dce6dd; --asphalt:#3d4448;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Sarabun',sans-serif;font-weight:300;font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+::selection{background:#cdeed9;color:var(--ink)}
+.wrap{max-width:1140px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+section{padding:clamp(3.5rem,8vh,5.5rem) 0}
+.disp{font-family:'Fredoka',sans-serif;font-weight:500}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(245,247,244,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1140px;margin:0 auto;padding:.95rem clamp(1.25rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{font-family:'Fredoka';font-weight:600;font-size:1.55rem;color:var(--green-deep)}
+.logo small{display:block;font-size:.66rem;letter-spacing:.2em;color:var(--muted)}
+.nav-links{display:flex;gap:1.6rem;font-size:.95rem}
+.nav-links a{color:var(--muted);transition:color .3s}
+.nav-links a:hover{color:var(--green)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:600;border-radius:99px;padding:.85rem 1.7rem;transition:transform .25s,box-shadow .25s;min-height:44px}
+.btn-g{background:var(--green);color:#fff;box-shadow:0 8px 20px -8px rgba(31,157,85,.5)}
+.btn-g:hover{background:var(--green-deep);transform:translateY(-2px)}
+.btn-o{border:2px solid var(--green);color:var(--green)}
+.btn-o:hover{background:var(--green);color:#fff}
+@media(max-width:760px){.nav-links{display:none}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,4vw,3.5rem);align-items:center;padding:clamp(3rem,7vh,5rem) 0}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.kicker{display:inline-flex;align-items:center;gap:.5rem;font-family:'Fredoka';font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);background:#dff0e3;padding:.45rem 1rem;border-radius:99px}
+h1{font-family:'Fredoka';font-weight:600;font-size:clamp(2.2rem,5.6vw,3.7rem);line-height:1.2;margin:1.2rem 0 1rem}
+h1 .hl{color:var(--green)}
+.hero p{color:var(--muted);max-width:46ch}
+.hero-cta{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:1.7rem}
+.hero-media{position:relative}
+.hero-media img{border-radius:24px;box-shadow:0 28px 56px -28px rgba(30,43,34,.35)}
+.pass-badge{position:absolute;bottom:1rem;right:1rem;background:var(--ink);color:#fff;border-radius:16px;padding:.7rem 1.1rem;font-family:'Fredoka'}
+.pass-badge b{color:#7ee2a8;font-size:1.3rem}
+
+/* game */
+.game-sec{background:var(--ink);color:#eef4ec;border-radius:32px;margin:0 clamp(1.25rem,4vw,2.5rem);padding:clamp(2.5rem,5vh,4rem) clamp(1.5rem,4vw,3rem)}
+.sec-kick{font-family:'Fredoka';font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--green);margin-bottom:.6rem}
+h2{font-family:'Fredoka';font-weight:600;font-size:clamp(1.6rem,3.6vw,2.4rem)}
+.sec-sub{color:#a9bfa9;margin-top:.5rem;max-width:56ch}
+.game-grid{display:grid;grid-template-columns:1fr 300px;gap:1.5rem;margin-top:1.8rem;align-items:start}
+@media(max-width:900px){.game-grid{grid-template-columns:1fr}}
+.game-stage{background:var(--asphalt);border-radius:20px;overflow:hidden;position:relative}
+#gameSvg{display:block;width:100%;height:auto}
+.game-side{background:#263028;border:1px solid #3a4a3c;border-radius:20px;padding:1.4rem}
+.game-side h3{font-family:'Fredoka';font-weight:500;font-size:1.05rem;margin-bottom:.8rem}
+.stat{display:flex;justify-content:space-between;font-size:.9rem;padding:.45rem 0;border-bottom:1px dashed #3a4a3c;color:#a9bfa9}
+.stat b{color:#fff;font-variant-numeric:tabular-nums}
+.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:1rem}
+.cbtn{background:#33463a;border:2px solid #4a6a52;border-radius:14px;min-height:56px;font-family:'Fredoka';font-size:1.25rem;color:#dff0e3;display:grid;place-items:center;transition:all .15s;user-select:none;touch-action:manipulation}
+.cbtn:active,.cbtn.hold{background:var(--green);border-color:var(--green);color:#fff;transform:scale(.96)}
+.cbtn.small{font-size:.9rem;font-weight:500;padding:.4rem}
+.game-msg{margin-top:1rem;padding:1rem;border-radius:14px;background:#33463a;font-size:.92rem;color:#dff0e3;min-height:3.2rem}
+.game-msg.win{background:var(--green);color:#fff;font-weight:600}
+.game-msg.hit{background:#c1422f;color:#fff}
+.legend{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.8rem;font-size:.78rem;color:#8fae90}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:.3rem;vertical-align:-2px}
+
+/* courses */
+.sec-kick-l{font-family:'Fredoka';font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--green);margin-bottom:.6rem}
+.courses{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2rem}
+@media(max-width:860px){.courses{grid-template-columns:1fr}}
+.course{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:1.6rem;transition:transform .3s,box-shadow .3s}
+.course:hover{transform:translateY(-5px);box-shadow:0 20px 40px -22px rgba(30,43,34,.25)}
+.course.feat{border:2px solid var(--green);position:relative}
+.course.feat::before{content:'สมัครเยอะสุด';position:absolute;top:-13px;left:1.4rem;background:var(--green);color:#fff;font-size:.72rem;font-weight:600;padding:.25rem .8rem;border-radius:99px;font-family:'Fredoka'}
+.course .price{font-family:'Fredoka';font-size:2rem;font-weight:600;color:var(--green-deep)}
+.course b.t{font-weight:600;font-size:1.1rem;display:block;margin:.2rem 0 .4rem}
+.course ul{list-style:none;margin:.8rem 0 1.2rem}
+.course li{padding:.3rem 0 .3rem 1.4rem;position:relative;font-size:.92rem;color:var(--muted)}
+.course li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:600}
+footer{background:var(--ink);color:#a9bfa9;padding:2.2rem 0;font-size:.88rem;margin-top:clamp(3rem,6vh,4rem)}
+.foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+.foot-grid b{color:#fff;font-family:'Fredoka'}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top">ขับดี<small>DRIVEDEE DRIVING SCHOOL</small></a>
+    <div class="nav-links"><a href="#game">เกมจอดรถ</a><a href="#courses">คอร์สเรียน</a></div>
+    <a class="btn btn-g" href="#courses">สมัครเรียน</a>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero wrap">
+    <div>
+      <span class="kicker">ใบอนุญาตกรมการขนส่งฯ</span>
+      <h1>สอนขับจนกว่าจะ<span class="hl">ขับเป็น</span><br>ไม่ใช่แค่สอบผ่าน</h1>
+      <p>ครูขับใจเย็น รถฝึกใหม่ปี 2568 สนามฝึกมาตรฐาน — เรียนจบพร้อมยื่นสอบใบขับขี่ได้ทันที ไม่ต้องไปต่อคิวที่ขนส่ง</p>
+      <div class="hero-cta">
+        <a class="btn btn-g" href="#game">ลองเกมจอดรถก่อนเลย</a>
+        <a class="btn btn-o" href="#courses">ดูคอร์สเรียน</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="../assets/drive-hero.jpg" alt="รถฝึกขับสีขาวในสนามฝึก กรวยส้มเรียงราย" fetchpriority="high">
+      <span class="pass-badge">สอบผ่านรวม <b>97%</b></span>
+    </div>
+  </section>
+
+  <section class="game-sec" id="game">
+    <p class="sec-kick">Mini Game</p>
+    <h2>ลองจอดข้างทางดูสิ — ยากกว่าที่คิดไหม?</h2>
+    <p class="sec-sub">บังคับรถฝึกด้วยปุ่ม (หรือคีย์บอร์ด ↑ ↓ ← →) ให้จอดลงในช่องสีเขียวโดยไม่ชนกรวยหรือรถคันอื่น — ระวัง! ชนแล้วเริ่มใหม่นะ</p>
+
+    <div class="game-grid">
+      <div class="game-stage">
+        <svg id="gameSvg" viewBox="0 0 800 460" role="application" aria-label="เกมจอดรถข้างทาง">
+          <!-- road markings -->
+          <g stroke="#5a646a" stroke-width="3" stroke-dasharray="24 18"><line x1="40" y1="230" x2="760" y2="230"/></g>
+          <!-- parking bay (target) -->
+          <rect id="bay" x="430" y="60" width="130" height="200" fill="rgba(31,157,85,.18)" stroke="#1f9d55" stroke-width="3" stroke-dasharray="10 8" rx="8"/>
+          <text x="495" y="170" text-anchor="middle" font-family="Fredoka" font-size="18" fill="#7ee2a8">ช่องจอด</text>
+          <!-- parked cars (obstacles) -->
+          <g id="obsCar1"><rect x="240" y="70" width="150" height="76" rx="16" fill="#7a8899"/><rect x="258" y="82" width="50" height="24" rx="6" fill="#3d4448"/><rect x="322" y="82" width="50" height="24" rx="6" fill="#3d4448"/></g>
+          <g id="obsCar2"><rect x="610" y="70" width="150" height="76" rx="16" fill="#a3665a"/><rect x="628" y="82" width="50" height="24" rx="6" fill="#3d4448"/><rect x="692" y="82" width="50" height="24" rx="6" fill="#3d4448"/></g>
+          <!-- cones -->
+          <g id="cones" fill="#f5a623"></g>
+          <!-- player car -->
+          <g id="player" transform="translate(120,330) rotate(-90)">
+            <rect x="-60" y="-30" width="120" height="60" rx="14" fill="#ffffff" stroke="#1f9d55" stroke-width="3"/>
+            <rect x="-44" y="-22" width="34" height="20" rx="5" fill="#9fc7de"/>
+            <rect x="8" y="-22" width="34" height="20" rx="5" fill="#9fc7de"/>
+            <rect x="46" y="-14" width="12" height="28" rx="4" fill="#1f9d55"/>
+            <text x="0" y="8" text-anchor="middle" font-family="Fredoka" font-size="16" fill="#157347" transform="rotate(90)">ขับดี</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="game-side">
+        <h3>คอกุมรถ</h3>
+        <div class="stat"><span>เวลา</span><b id="stTime">0.0 วิ</b></div>
+        <div class="stat"><span>ชน</span><b id="stHit">0 ครั้ง</b></div>
+        <div class="stat"><span>ดีที่สุดของคุณ</span><b id="stBest">—</b></div>
+        <div class="controls">
+          <span></span><button class="cbtn" id="btnFwd" aria-label="เดินหน้า">▲</button><span></span>
+          <button class="cbtn" id="btnLeft" aria-label="เลี้ยวซ้าย">◀</button>
+          <button class="cbtn" id="btnBack" aria-label="ถอยหลัง">▼</button>
+          <button class="cbtn" id="btnRight" aria-label="เลี้ยวขวา">▶</button>
+        </div>
+        <button class="btn btn-o" id="btnReset" style="width:100%;margin-top:.9rem;border-color:#7ee2a8;color:#7ee2a8">เริ่มใหม่</button>
+        <div class="game-msg" id="gameMsg">กดปุ่มลูกศรเพื่อเริ่มขับ — เป้าหมายคือช่องสีเขียว!</div>
+        <div class="legend">
+          <span><i style="background:rgba(31,157,85,.5)"></i>ช่องจอด</span>
+          <span><i style="background:#f5a623"></i>กรวย</span>
+          <span><i style="background:#7a8899"></i>รถคันอื่น</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="courses">
+    <p class="sec-kick-l">Courses</p>
+    <h2 style="color:var(--ink)">คอร์สเรียนของเรา</h2>
+    <div class="courses">
+      <div class="course">
+        <span class="price">฿5,900</span>
+        <b class="t">ใบขับขี่รถยนต์ (15 ชม.)</b>
+        <ul><li>อบรมภาคทฤษฎีครบตามกฎหมาย</li><li>ฝึกขับในสนาม + ถนนจริง</li><li>สอบที่สนามเราได้เลย</li><li>รถฝึกเกียร์ออโต้</li></ul>
+        <a class="btn btn-g" href="#game" style="width:100%">สมัครคอร์สนี้</a>
+      </div>
+      <div class="course feat">
+        <span class="price">฿7,900</span>
+        <b class="t">เร่งรัด 7 วัน จบพร้อมสอบ</b>
+        <ul><li>ทุกอย่างในคอร์สมาตรฐาน</li><li>ครูติดตามตัวต่อตัว</li><li>ติวจุดที่คนตกบ่อยสุด</li><li>สอบซ้ำฟรีถ้าไม่ผ่าน</li></ul>
+        <a class="btn btn-g" href="#game" style="width:100%">สมัครคอร์สนี้</a>
+      </div>
+      <div class="course">
+        <span class="price">฿2,500</span>
+        <b class="t">รีเฟรชคนขับไม่นาน (3 ชม.)</b>
+        <ul><li>ทบทวนกฎจราจรล่าสุด</li><li>ฝึกจอดข้างทาง+ถอยเทียง</li><li>ขับทางไกลครั้งแรกกับครู</li><li>ปรับตามจุดที่ไม่มั่นใจ</li></ul>
+        <a class="btn btn-g" href="#game" style="width:100%">สมัครคอร์สนี้</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span><b>ขับดี DRIVEDEE</b> · สนามฝึกรามคำแหง 164</span>
+    <span>เปิด จ–อา 8:00–18:00 · โทร 08x-xxx-xxxx · LINE @drivedee</span>
+    <span>© 2569 โรงเรียนสอนขับรถขับดี</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- cones ---------- */
+  var CONES = [[180,190],[230,300],[360,240],[560,300],[660,200],[430,320],[300,120],[700,330]];
+  document.getElementById('cones').innerHTML = CONES.map(function(c){
+    return '<path d="M' + c[0] + ',' + c[1] + ' l-9,18 h18 z"/><rect x="' + (c[0]-5) + '" y="' + (c[1]+8) + '" width="10" height="4" fill="#fff" opacity=".8"/>';
+  }).join('');
+
+  /* ---------- game state ---------- */
+  var START = { x: 120, y: 330, a: -90 };
+  var BAY = { x: 430, y: 60, w: 130, h: 200 };
+  var OBS = [
+    { x: 240, y: 70, w: 150, h: 76 },
+    { x: 610, y: 70, w: 150, h: 76 }
+  ].concat(CONES.map(function(c){ return { x: c[0]-9, y: c[1]-4, w: 18, h: 22 }; }));
+
+  var car, keys, hits, startT, best, done, raf;
+  best = parseFloat(localStorage.getItem('ddParkBest')) || null;
+  if (best) document.getElementById('stBest').textContent = best.toFixed(1) + ' วิ';
+
+  function reset(){
+    car = { x: START.x, y: START.y, a: START.a };
+    keys = { f: false, b: false, l: false, r: false };
+    done = false; startT = null;
+    hits = 0;
+    document.getElementById('stHit').textContent = '0 ครั้ง';
+    var m = document.getElementById('gameMsg');
+    m.textContent = 'กดปุ่มลูกศรเพื่อเริ่มขับ — เป้าหมายคือช่องสีเขียว!';
+    m.className = 'game-msg';
+    draw();
+  }
+
+  function corners(c){
+    var pts = [[-60,-30],[60,-30],[60,30],[-60,30]];
+    var rad = c.a * Math.PI / 180, cos = Math.cos(rad), sin = Math.sin(rad);
+    return pts.map(function(p){
+      return { x: c.x + p[0]*cos - p[1]*sin, y: c.y + p[0]*sin + p[1]*cos };
+    });
+  }
+  function rectHit(cs, r){
+    return cs.some(function(p){ return p.x >= r.x && p.x <= r.x + r.w && p.y >= r.y && p.y <= r.y + r.h; }) ||
+      /* rect center inside car? coarse: also check rect corners vs car bbox */
+      (function(){
+        var xs = cs.map(function(p){return p.x;}), ys = cs.map(function(p){return p.y;});
+        var bx1 = Math.min.apply(null,xs), bx2 = Math.max.apply(null,xs);
+        var by1 = Math.min.apply(null,ys), by2 = Math.max.apply(null,ys);
+        return !(bx2 < r.x || bx1 > r.x + r.w || by2 < r.y || by1 > r.y + r.h);
+      })();
+  }
+  function inBay(cs){
+    return cs.every(function(p){ return p.x >= BAY.x && p.x <= BAY.x + BAY.w && p.y >= BAY.y && p.y <= BAY.y + BAY.h; });
+  }
+
+  function crash(){
+    hits++;
+    document.getElementById('stHit').textContent = hits + ' ครั้ง';
+    var m = document.getElementById('gameMsg');
+    m.textContent = 'ชนแล้ว! ครูขับบอกว่าหยุดก่อนนะ — กลับไปจุดเริ่ม';
+    m.className = 'game-msg hit';
+    car = { x: START.x, y: START.y, a: START.a };
+  }
+
+  function win(){
+    done = true;
+    var t = (performance.now() - startT) / 1000;
+    document.getElementById('stTime').textContent = t.toFixed(1) + ' วิ';
+    var m = document.getElementById('gameMsg');
+    m.textContent = 'จอดสำเร็จใน ' + t.toFixed(1) + ' วินาที! ' + (t < 15 ? 'ระดับครูขับเลยนะเนี่ย' : t < 30 ? 'ผ่านเกณฑ์สอบจริงแล้ว' : 'ผ่าน แต่ครูแนะนำซ้อมอีกนิด');
+    m.className = 'game-msg win';
+    if (!best || t < best) {
+      best = t;
+      localStorage.setItem('ddParkBest', String(t));
+      document.getElementById('stBest').textContent = t.toFixed(1) + ' วิ';
+    }
+  }
+
+  function draw(){
+    document.getElementById('player').setAttribute('transform',
+      'translate(' + car.x + ',' + car.y + ') rotate(' + car.a + ')');
+  }
+
+  var last = 0;
+  function loop(ts){
+    raf = requestAnimationFrame(loop);
+    if (reduced) return;
+    var dt = Math.min(0.05, (ts - last) / 1000) || 0; last = ts;
+    if (done) return;
+    var moved = false;
+    if (keys.f || keys.b) {
+      var sp = keys.f ? 110 : -80;
+      var rad = car.a * Math.PI / 180;
+      car.x += Math.cos(rad) * sp * dt;
+      car.y += Math.sin(rad) * sp * dt;
+      moved = true;
+    }
+    if (keys.l || keys.r) {
+      car.a += (keys.r ? 1 : -1) * 90 * dt;
+      moved = true;
+    }
+    if (moved) {
+      if (!startT) startT = performance.now();
+      /* walls */
+      car.x = Math.max(70, Math.min(730, car.x));
+      car.y = Math.max(45, Math.min(415, car.y));
+      var cs = corners(car);
+      for (var i = 0; i < OBS.length; i++) {
+        if (rectHit(cs, OBS[i])) { crash(); break; }
+      }
+      if (inBay(corners(car))) { win(); }
+      if (startT && !done) document.getElementById('stTime').textContent = ((performance.now() - startT) / 1000).toFixed(1) + ' วิ';
+      draw();
+    }
+  }
+
+  /* input: buttons + keyboard */
+  function bind(id, k){
+    var el = document.getElementById(id);
+    var on = function(e){ e.preventDefault(); keys[k] = true; el.classList.add('hold'); };
+    var off = function(){ keys[k] = false; el.classList.remove('hold'); };
+    el.addEventListener('pointerdown', on);
+    el.addEventListener('pointerup', off);
+    el.addEventListener('pointerleave', off);
+  }
+  bind('btnFwd','f'); bind('btnBack','b'); bind('btnLeft','l'); bind('btnRight','r');
+  document.getElementById('btnReset').addEventListener('click', reset);
+
+  var KEYMAP = { ArrowUp:'f', ArrowDown:'b', ArrowLeft:'l', ArrowRight:'r' };
+  document.addEventListener('keydown', function(e){
+    if (KEYMAP[e.key] !== undefined) { e.preventDefault(); keys[KEYMAP[e.key]] = true; }
+  });
+  document.addEventListener('keyup', function(e){
+    if (KEYMAP[e.key] !== undefined) keys[KEYMAP[e.key]] = false;
+  });
+
+  reset();
+  raf = requestAnimationFrame(loop);
+  document.documentElement.style.scrollBehavior = reduced ? 'auto' : 'smooth';
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>
