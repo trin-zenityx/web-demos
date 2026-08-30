@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สเปซดี SPACEDEE — ออกแบบตกแต่งภายในครบวงจร | วางงบให้เห็นภาพชัด</title>
+<meta name="description" content="สเปซดี — สตูดิโอออกแบบภายใน บ้าน คอนโด ออฟฟิศ วางงบประมาณให้เห็นภาพก่อนเริ่มจริง">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Sarabun:wght@300;400;500&family=Trirong:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f4ef; --card:#ffffff; --oak:#a4713b; --ink:#242019; --taupe:#8a7f70;
+  --green:#5d7d5a; --line:#e4dfd3;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Sarabun',sans-serif;font-weight:300;font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input[type=range]{width:100%;accent-color:var(--oak);height:32px}
+:focus-visible{outline:2px solid var(--oak);outline-offset:3px}
+::selection{background:#e8d9c0;color:var(--ink)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+section{padding:clamp(3.5rem,8vh,5.5rem) 0}
+.th{font-family:'Trirong',serif}
+.en{font-family:'Cormorant Garamond',serif}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(246,244,239,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1160px;margin:0 auto;padding:1rem clamp(1.25rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{font-family:'Cormorant Garamond';font-weight:600;font-size:1.6rem;letter-spacing:.04em}
+.logo small{display:block;font-family:'Trirong';font-size:.7rem;color:var(--taupe);letter-spacing:.2em}
+.nav-links{display:flex;gap:1.6rem;font-size:.95rem}
+.nav-links a{color:var(--taupe);transition:color .3s}
+.nav-links a:hover{color:var(--oak)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:500;border-radius:99px;padding:.85rem 1.7rem;transition:transform .25s,box-shadow .25s;min-height:44px}
+.btn-oak{background:var(--oak);color:#fff;box-shadow:0 8px 20px -8px rgba(164,113,59,.5)}
+.btn-oak:hover{transform:translateY(-2px)}
+.btn-l{border:1.5px solid var(--oak);color:var(--oak)}
+.btn-l:hover{background:var(--oak);color:#fff}
+@media(max-width:760px){.nav-links{display:none}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(2rem,4vw,3.5rem);align-items:center;padding:clamp(3rem,7vh,5rem) 0}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.kicker{font-family:'Cormorant Garamond';font-style:italic;font-size:1.05rem;color:var(--oak)}
+h1{font-family:'Trirong';font-weight:600;font-size:clamp(2.1rem,5.2vw,3.6rem);line-height:1.3;margin:.8rem 0 1rem}
+.hero p{color:var(--taupe);max-width:46ch}
+.hero-cta{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:1.7rem}
+.hero-media img{border-radius:4px;box-shadow:16px 16px 0 -4px var(--line),0 30px 60px -30px rgba(36,32,25,.35)}
+
+/* budget lab */
+.sec-kick{font-family:'Cormorant Garamond';font-style:italic;font-size:1.05rem;color:var(--oak);margin-bottom:.3rem}
+h2{font-family:'Trirong';font-weight:600;font-size:clamp(1.7rem,3.8vw,2.6rem)}
+.sec-sub{color:var(--taupe);margin-top:.5rem;max-width:56ch}
+.lab{display:grid;grid-template-columns:420px 1fr;gap:clamp(1.5rem,3vw,3rem);margin-top:2.2rem;align-items:start}
+@media(max-width:980px){.lab{grid-template-columns:1fr}}
+.lab-left{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(1.4rem,3vw,2rem)}
+.budget-total{text-align:center;padding-bottom:1.2rem;border-bottom:1px dashed var(--line);margin-bottom:1.2rem}
+.budget-total span{font-size:.85rem;color:var(--taupe);display:block}
+.budget-total b{font-family:'Cormorant Garamond';font-size:2.4rem;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.room-slider{margin-bottom:1.1rem}
+.room-slider label{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.15rem}
+.room-slider label b{font-weight:500}
+.room-slider label span{font-variant-numeric:tabular-nums;color:var(--taupe)}
+.pct-line{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--line);padding-top:1rem;font-size:.9rem}
+.pct-line b{font-variant-numeric:tabular-nums;font-size:1.1rem}
+.pct-line b.ok{color:var(--green)}
+.pct-line b.over{color:#c1422f}
+.room-bars{display:grid;gap:1rem}
+.rbar{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.1rem 1.3rem}
+.rbar .rh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}
+.rbar b{font-weight:500}
+.rbar .amt{font-family:'Cormorant Garamond';font-weight:600;font-size:1.25rem;color:var(--oak);font-variant-numeric:tabular-nums}
+.rbar .track{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.rbar .fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#c89b66,var(--oak));transition:width .45s cubic-bezier(.2,.7,.2,1)}
+.rbar .hint{font-size:.8rem;color:var(--taupe);margin-top:.4rem;display:block}
+.summary-card{margin-top:1.2rem;background:var(--ink);color:#f0ead9;border-radius:18px;padding:1.2rem 1.4rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.summary-card .sc-l b{font-family:'Trirong';font-weight:600;font-size:1.05rem;display:block}
+.summary-card .sc-l span{font-size:.85rem;color:#b8ac93}
+
+/* portfolio */
+.port{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2rem}
+@media(max-width:860px){.port{grid-template-columns:1fr}}
+.pj{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3}
+.pj img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.pj:hover img{transform:scale(1.06)}
+.pj .cap{position:absolute;inset:auto 0 0;padding:2rem 1.2rem .9rem;background:linear-gradient(transparent,rgba(20,17,12,.75));color:#fff}
+.pj .cap b{font-family:'Trirong';font-weight:600;display:block}
+.pj .cap span{font-size:.82rem;opacity:.85}
+footer{background:var(--ink);color:#b8ac93;padding:2.2rem 0;font-size:.88rem;margin-top:clamp(3rem,6vh,4rem)}
+.foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+.foot-grid b{color:#fff;font-family:'Trirong'}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top">SPACEDEE<small>สตูดิโอออกแบบภายใน</small></a>
+    <div class="nav-links"><a href="#lab">วางงบเอง</a><a href="#work">ผลงาน</a></div>
+    <a class="btn btn-oak" href="#lab">ปรึกษาฟรี</a>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero wrap">
+    <div>
+      <p class="kicker">Interior Design Studio</p>
+      <h1>บ้านที่ออกแบบดี<br>อยู่แล้วไม่อยากออกไปไหน</h1>
+      <p>ทีมออกแบบภายในบ้าน คอนโด และออฟฟิศ 12 ปี — เราไม่ขายความหรู เราออกแบบให้ทุกบาทของคุณทำงานหนักที่สุด</p>
+      <div class="hero-cta">
+        <a class="btn btn-oak" href="#lab">ลองวางงบตัวเอง</a>
+        <a class="btn btn-l" href="#work">ดูผลงานจริง</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="../assets/interior-hero.jpg" alt="ห้องนั่งเล่นออกแบบสวย ไม้อุ่น โทนครีม" fetchpriority="high">
+    </div>
+  </section>
+
+  <section class="wrap" id="lab">
+    <p class="sec-kick">Budget Lab</p>
+    <h2>งบเท่านี้ ควรลงห้องไหนเท่าไหร่?</h2>
+    <p class="sec-sub">ตั้งงบรวมแล้วลากสไลเดอร์แบ่งให้แต่ละห้อง — ระบบช่วยกันให้รวมไม่เกิน 100% พร้อมแนะนำสัดส่วนที่คุ้ม</p>
+
+    <div class="lab">
+      <div class="lab-left">
+        <div class="budget-total">
+          <span>งบตกแต่งรวมของคุณ</span>
+          <b>฿<span id="budgetVal">600,000</span></b>
+        </div>
+        <div class="room-slider">
+          <label><b>งบรวม</b><span>฿100k – ฿3M</span></label>
+          <input type="range" id="budget" min="100000" max="3000000" step="50000" value="600000" aria-label="งบรวม">
+        </div>
+        <div id="sliders"></div>
+        <div class="pct-line">
+          <span>สัดส่วนรวมทั้งหมด</span>
+          <b id="pctOut">100%</b>
+        </div>
+        <button class="btn btn-oak" id="recommend" style="width:100%;margin-top:1rem">ใช้สัดส่วนแนะนำของสถาปนิก</button>
+      </div>
+
+      <div>
+        <div class="room-bars" id="bars"></div>
+        <div class="summary-card">
+          <div class="sc-l"><b id="sumTitle">พร้อมคุยต่อแล้ว</b><span id="sumText">แผนงบนี้สมดุลดี — ส่งให้ทีมประเมินได้เลย</span></div>
+          <button class="btn btn-l" id="sendBtn" style="border-color:#f0ead9;color:#f0ead9">ส่งแผนให้ทีมประเมิน →</button>
+        </div>
+        <p id="sentOk" hidden style="margin-top:1rem;color:var(--green);font-weight:500">ส่งแผนแล้ว! เลขอ้างอิง <b id="sentRef"></b> — ทีมสถาปนิกจะติดต่อกลับภายใน 1 วันทำการครับ</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="work" style="padding-top:0">
+    <p class="sec-kick">Selected Work</p>
+    <h2>ผลงานจริงล่าสุด</h2>
+    <div class="port">
+      <div class="pj"><img loading="lazy" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000&auto=format&fit=crop" alt="ห้องนั่งเล่นสมัยใหม่"><div class="cap"><b>บ้านเดี่ยว รามอินทรา</b><span>180 ตร.ม. · งบ ฿1.2M</span></div></div>
+      <div class="pj"><img loading="lazy" src="https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1000&auto=format&fit=crop" alt="ห้องนอนโทนอบอุ่น"><div class="cap"><b>คอนโด อารีย์</b><span>45 ตร.ม. · งบ ฿380k</span></div></div>
+      <div class="pj"><img loading="lazy" src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?q=80&w=1000&auto=format&fit=crop" alt="ครัวสมัยใหม่"><div class="cap"><b>ทาวน์โฮม บางนา</b><span>ครัว+รับรอง · งบ ฿520k</span></div></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span><b>สเปซดี SPACEDEE</b> · ทองหล่อ 10 (BTS ทองหล่อ)</span>
+    <span>นัดเยี่ยมชมสตูดิโอ จ–ส 10:00–18:00 · โทร 08x-xxx-xxxx</span>
+    <span>© 2569 สเปซดี อินทีเรีย</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var ROOMS = [
+    { id:'living',  name:'ห้องนั่งเล่นและรับแขก', hint:'โซฟา+บิ้วอิน TV คือหน้าตาของบ้าน', rec:32 },
+    { id:'kitchen', name:'ครัวและมุมทานข้าว',      hint:'เคาน์เตอร์+หน้าบาน คุ้มสุดในระยะยาว', rec:26 },
+    { id:'bed',     name:'ห้องนอนใหญ่',            hint:'ตู้เสื้อผ้าบิ้วอิน + ผ้าม่านทึบ',    rec:18 },
+    { id:'bath',    name:'ห้องน้ำ 2 ห้อง',          hint:'สุขภัณฑ์+กระเบื้อง อย่าประหยัด',      rec:14 },
+    { id:'extra',   name:'ห้องทำงาน/เด็กเล็ก',      hint:'เฟอร์นิเจอร์ลอยตัว ปรับตามวัย',      rec:10 }
+  ];
+  var state = { budget: 600000, pct: {} };
+  ROOMS.forEach(function(r){ state.pct[r.id] = r.rec; });
+
+  var fmt = function(n){ return Math.round(n).toLocaleString('th-TH'); };
+
+  function renderSliders(){
+    var host = document.getElementById('sliders');
+    host.innerHTML = ROOMS.map(function(r){
+      return '<div class="room-slider"><label><b>' + r.name + '</b><span><span class="pv" data-r="' + r.id + '">' + state.pct[r.id] + '</span>%</span></label>' +
+        '<input type="range" min="0" max="60" value="' + state.pct[r.id] + '" data-r="' + r.id + '" aria-label="สัดส่วน ' + r.name + '"></div>';
+    }).join('');
+  }
+
+  function renderBars(){
+    document.getElementById('bars').innerHTML = ROOMS.map(function(r){
+      var pct = state.pct[r.id];
+      var amt = state.budget * pct / 100;
+      return '<div class="rbar"><div class="rh"><b>' + r.name + '</b><span class="amt">฿' + fmt(amt) + '</span></div>' +
+        '<div class="track"><div class="fill" style="width:' + pct + '%"></div></div>' +
+        '<span class="hint">' + r.hint + ' · ' + pct + '%</span></div>';
+    }).join('');
+  }
+
+  function renderTotal(){
+    var total = ROOMS.reduce(function(s, r){ return s + state.pct[r.id]; }, 0);
+    var el = document.getElementById('pctOut');
+    el.textContent = total + '%';
+    el.className = total === 100 ? 'ok' : 'over';
+    var st = document.getElementById('sumText');
+    var title = document.getElementById('sumTitle');
+    if (total === 100) { title.textContent = 'พร้อมคุยต่อแล้ว'; st.textContent = 'แผนงบนี้สมดุลดี — ส่งให้ทีมประเมินได้เลย'; }
+    else if (total < 100) { title.textContent = 'ยังเหลือส่วนต่าง ' + (100 - total) + '%'; st.textContent = 'เผื่อไว้กันค่างวดเพิ่มก็ได้ หรือเพิ่มห้องที่อยากได้สุด'; }
+    else { title.textContent = 'เกินมา ' + (total - 100) + '%'; st.textContent = 'ลดห้องที่สำคัญรองลงมาหน่อย ให้รวมพอดี 100%'; }
+  }
+
+  function render(){
+    document.getElementById('budgetVal').textContent = fmt(state.budget);
+    document.querySelectorAll('.pv').forEach(function(el){
+      el.textContent = state.pct[el.dataset.r];
+    });
+    document.querySelectorAll('#sliders input').forEach(function(inp){
+      inp.value = state.pct[inp.dataset.r];
+    });
+    renderBars(); renderTotal();
+  }
+
+  /* rebalance: changing one slider scales others proportionally */
+  document.getElementById('sliders').addEventListener('input', function(e){
+    if (!e.target.matches('input[type=range]')) return;
+    var id = e.target.dataset.r;
+    var v = +e.target.value;
+    var others = ROOMS.filter(function(r){ return r.id !== id; });
+    var otherTotal = others.reduce(function(s, r){ return s + state.pct[r.id]; }, 0);
+    state.pct[id] = v;
+    if (otherTotal > 0) {
+      var remain = Math.max(0, 100 - v);
+      var sum = 0;
+      others.forEach(function(r, i){
+        var scaled = Math.round(state.pct[r.id] * remain / otherTotal);
+        state.pct[r.id] = scaled;
+        sum += scaled;
+      });
+      /* fix rounding on the biggest other */
+      var diff = 100 - v - sum;
+      if (diff !== 0) {
+        var biggest = others.reduce(function(a, b){ return state.pct[a.id] >= state.pct[b.id] ? a : b; });
+        state.pct[biggest.id] = Math.max(0, state.pct[biggest.id] + diff);
+      }
+    }
+    render();
+  });
+
+  document.getElementById('budget').addEventListener('input', function(e){
+    state.budget = +e.target.value;
+    render();
+  });
+
+  document.getElementById('recommend').addEventListener('click', function(){
+    ROOMS.forEach(function(r){ state.pct[r.id] = r.rec; });
+    render();
+  });
+
+  document.getElementById('sendBtn').addEventListener('click', function(){
+    var ok = document.getElementById('sentOk');
+    document.getElementById('sentRef').textContent = 'SD-' + Math.floor(1000 + Math.random() * 9000);
+    ok.hidden = false;
+    ok.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  renderSliders();
+  render();
+  document.documentElement.style.scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

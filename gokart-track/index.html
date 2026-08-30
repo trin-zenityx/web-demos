@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEX KART — สนามโกคาร์ทกลางแจ้ง ปทุมธานี | เร็วกว่าเพื่อน พิสูจน์ที่นี่</title>
+<meta name="description" content="APEX KART สนามโกคาร์ทกลางแจ้ง 800 เมตร 10 โค้ง ปทุมธานี เริ่ม ฿450/8 นาที ลงเวลาลงบอร์ดอันดับสนาม จองรอบแข่งได้ทุกวัน">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0f0f;
+  --panel:#181818;
+  --yellow:#ffd400;
+  --red:#e01e26;
+  --ink:#f5f2ea;
+  --muted:#9a948a;
+  --line:rgba(245,242,234,.12);
+  --f-en:'Anton',Impact,sans-serif;
+  --f-th:'Kanit',sans-serif;
+  --f-mono:ui-monospace,'SF Mono',Menlo,Consolas,'Courier New',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--f-th);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+input{font-family:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+.skip{position:absolute;left:-9999px;top:0;background:var(--yellow);color:#0f0f0f;padding:12px 20px;font-weight:700;z-index:200}
+.skip:focus{left:8px;top:8px}
+
+/* ---------- checker strip ---------- */
+.checker{height:12px;background:repeating-conic-gradient(var(--ink) 0 25%,#000 0 50%);background-size:22px 22px}
+.checker--thin{height:8px;background-size:16px 16px}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:100;background:rgba(15,15,15,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;gap:18px;min-height:64px}
+.nav__logo{font-family:var(--f-en);font-size:1.5rem;letter-spacing:.06em;line-height:1}
+.nav__logo b{color:var(--yellow);font-weight:400}
+.nav__links{display:flex;gap:4px;margin-left:auto;align-items:center;flex-wrap:wrap}
+.nav__links a{padding:12px 14px;min-height:44px;display:inline-flex;align-items:center;font-size:.95rem;color:var(--muted);font-weight:500}
+.nav__links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 26px;font-weight:700;font-size:1rem;border:2px solid transparent;border-radius:4px;transition:transform .15s ease,background .15s ease,color .15s ease}
+.btn--yellow{background:var(--yellow);color:#0f0f0f}
+.btn--yellow:hover{background:#ffe14d;transform:translateY(-1px)}
+.btn--ghost{border-color:var(--line);color:var(--ink);background:transparent}
+.btn--ghost:hover{border-color:var(--yellow);color:var(--yellow)}
+.btn--red{border-color:var(--red);color:var(--red);background:transparent}
+.btn--red:hover{background:var(--red);color:#fff}
+.btn[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+.nav .btn{min-height:44px;padding:10px 20px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+.hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.05)}
+.hero__shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,15,15,.55) 0%,rgba(15,15,15,.25) 40%,rgba(15,15,15,.92) 100%)}
+.hero__in{position:relative;width:100%;padding:120px 0 64px}
+.eyebrow{font-family:var(--f-en);letter-spacing:.28em;font-size:.85rem;color:var(--yellow);text-transform:uppercase}
+.hero h1{font-size:clamp(2.4rem,6.5vw,4.6rem);font-weight:700;line-height:1.15;margin:14px 0 10px;max-width:14em}
+.hero h1 .hl{color:var(--yellow)}
+.hero__sub{color:var(--ink);opacity:.85;max-width:34em;font-size:1.1rem;font-weight:300}
+.hero__row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:28px}
+.pricechip{display:inline-flex;align-items:baseline;gap:10px;background:var(--yellow);color:#0f0f0f;border-radius:4px;padding:12px 20px;min-height:48px}
+.pricechip small{font-weight:500;font-size:.85rem}
+.pricechip b{font-family:var(--f-en);font-size:1.5rem;letter-spacing:.02em;font-weight:400}
+.hero__stats{display:flex;flex-wrap:wrap;gap:0;margin-top:42px;border-top:1px solid var(--line)}
+.hero__stats div{padding:16px 28px 0 0;margin-right:28px}
+.hero__stats b{display:block;font-family:var(--f-en);font-size:1.6rem;color:var(--yellow);font-weight:400;letter-spacing:.03em}
+.hero__stats span{color:var(--muted);font-size:.9rem}
+
+/* ---------- sections ---------- */
+section{padding:84px 0}
+.sec-head{margin-bottom:40px}
+.sec-head h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;line-height:1.2;margin-top:8px}
+.sec-head p{color:var(--muted);max-width:44em;margin-top:8px}
+.sec-head .eyebrow{display:block}
+
+/* ---------- leaderboard ---------- */
+.board{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.board__head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 22px;border-bottom:1px solid var(--line);background:#101010;flex-wrap:wrap}
+.board__head .live{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:.9rem}
+.board__head .live i{width:10px;height:10px;border-radius:50%;background:var(--red);display:inline-block}
+.board__cols,.row{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding:0 22px}
+.board__cols{padding-top:12px;padding-bottom:12px;color:var(--muted);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--line)}
+.row{min-height:58px;border-bottom:1px solid var(--line);background:#131313}
+.row:last-child{border-bottom:none}
+.row .rank{font-family:var(--f-mono);color:var(--muted);font-size:1.05rem;display:flex;align-items:center;min-height:44px}
+.row .who{font-weight:500;font-size:1.05rem;display:flex;align-items:center;gap:10px;min-width:0;flex-wrap:wrap}
+.row .who .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .time{font-family:var(--f-mono);color:var(--yellow);font-size:1.25rem;letter-spacing:.03em}
+.row .time small{font-size:.75rem;color:var(--muted);margin-left:6px;letter-spacing:.05em}
+.row.mine{background:rgba(255,212,0,.10);box-shadow:inset 5px 0 0 var(--yellow)}
+.row.mine .who .nm{color:var(--yellow)}
+.tag{display:inline-flex;align-items:center;font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.06em}
+.tag--you{background:var(--yellow);color:#0f0f0f}
+.tag--rec{background:var(--red);color:#fff;font-family:var(--f-en);font-weight:400;letter-spacing:.1em}
+.row .medal{width:30px;height:30px;flex:none}
+.board__empty{padding:22px;color:var(--muted);text-align:center}
+
+.lapform{margin-top:26px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:24px}
+.lapform h3{font-size:1.25rem;font-weight:700;margin-bottom:4px}
+.lapform .hint{color:var(--muted);font-size:.9rem;margin-bottom:18px}
+.lapform__grid{display:grid;grid-template-columns:1fr 1fr auto;gap:14px;align-items:end}
+.field label{display:block;font-size:.9rem;font-weight:500;margin-bottom:8px;color:var(--ink)}
+.field input{width:100%;min-height:48px;background:#101010;border:1px solid var(--line);border-radius:4px;color:var(--ink);padding:10px 14px;font-size:1rem}
+.field input:focus{border-color:var(--yellow);outline:none}
+.field input::placeholder{color:#5c584f}
+.lapform__foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:16px}
+#formMsg{color:var(--red);font-size:.9rem;min-height:1.4em}
+#boardMsg{color:var(--muted);font-size:.9rem}
+
+/* ---------- karts ---------- */
+.karts{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.kart{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.kart__media{position:relative;aspect-ratio:16/9;background:#101010;overflow:hidden}
+.kart__media img{width:100%;height:100%;object-fit:cover}
+.kart__media .kart__class{position:absolute;left:16px;top:16px;background:var(--yellow);color:#0f0f0f;font-family:var(--f-en);letter-spacing:.1em;padding:8px 14px;font-size:.95rem;border-radius:3px}
+.kart__media--pro{background:
+  linear-gradient(135deg,#1c1c1c 0%,#111 55%,#1a0505 100%)}
+.kart__flag{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.kart__flag svg{width:72%;max-width:340px;opacity:.95}
+.kart__body{padding:26px;display:flex;flex-direction:column;gap:16px;flex:1}
+.kart__name{font-family:var(--f-en);font-size:1.7rem;letter-spacing:.04em;font-weight:400}
+.kart__name b{color:var(--yellow);font-weight:400}
+.specs{list-style:none;display:grid;gap:10px}
+.specs li{display:flex;gap:12px;align-items:flex-start;color:var(--muted);font-size:.98rem}
+.specs li b{color:var(--ink);font-weight:500}
+.specs svg{flex:none;width:20px;height:20px;margin-top:3px;stroke:var(--yellow)}
+.kart__price{display:flex;align-items:baseline;gap:10px;border-top:1px solid var(--line);padding-top:16px;margin-top:auto}
+.kart__price b{font-family:var(--f-en);font-size:2rem;color:var(--yellow);font-weight:400}
+.kart__price span{color:var(--muted);font-size:.9rem}
+
+/* ---------- rules ---------- */
+.rules{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.rule{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:24px}
+.rule svg{width:34px;height:34px;stroke:var(--yellow);margin-bottom:14px}
+.rule h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
+.rule p{color:var(--muted);font-size:.95rem}
+.rule .no{font-family:var(--f-en);color:var(--red);font-size:.9rem;letter-spacing:.15em;display:block;margin-bottom:10px}
+
+/* ---------- track ---------- */
+.trackgrid{display:grid;grid-template-columns:1.4fr 1fr;gap:36px;align-items:center}
+.trackmap{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px}
+.trackmap svg{width:100%;height:auto;display:block}
+.trackstats{display:grid;gap:0}
+.trackstats .ts{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.trackstats .ts:last-child{border-bottom:none}
+.trackstats .ts b{font-family:var(--f-en);color:var(--yellow);font-size:1.9rem;font-weight:400;letter-spacing:.03em;white-space:nowrap}
+.trackstats .ts span{color:var(--muted)}
+
+/* ---------- booking ---------- */
+.booking{background:var(--yellow);color:#0f0f0f;padding:64px 0}
+.booking__in{display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between}
+.booking h2{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:700;line-height:1.2}
+.booking p{font-weight:500;opacity:.85;margin-top:6px}
+.booking .actions{display:flex;flex-wrap:wrap;gap:14px}
+.btn--dark{background:#0f0f0f;color:var(--yellow)}
+.btn--dark:hover{background:#242424}
+.btn--line{border-color:#0f0f0f;color:#0f0f0f;background:transparent}
+.btn--line:hover{background:#0f0f0f;color:var(--yellow)}
+
+/* ---------- footer ---------- */
+footer{padding:56px 0 40px;border-top:1px solid var(--line)}
+.foot{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:32px}
+.foot h3{font-family:var(--f-en);font-weight:400;font-size:1.3rem;letter-spacing:.06em;margin-bottom:14px}
+.foot h3 b{color:var(--yellow);font-weight:400}
+.foot p,.foot li{color:var(--muted);font-size:.95rem}
+.foot ul{list-style:none;display:grid;gap:10px}
+.foot a:hover{color:var(--yellow)}
+.copy{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+/* ---------- responsive ---------- */
+@media (max-width:960px){
+  .karts{grid-template-columns:1fr}
+  .rules{grid-template-columns:1fr 1fr}
+  .trackgrid{grid-template-columns:1fr}
+  .foot{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .nav__links a:not(.btn){display:none}
+  .lapform__grid{grid-template-columns:1fr}
+  .lapform__grid .btn{width:100%}
+  section{padding:64px 0}
+  .board__cols,.row{grid-template-columns:44px 1fr auto;padding:0 14px}
+}
+@media (max-width:480px){
+  .rules{grid-template-columns:1fr}
+  .foot{grid-template-columns:1fr}
+  .hero__stats div{padding-right:18px;margin-right:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+<a class="skip" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="nav__logo" href="#top">APEX <b>KART</b></a>
+    <nav class="nav__links" aria-label="เมนูหลัก">
+      <a href="#leaderboard">ลีดเดอร์บอร์ด</a>
+      <a href="#karts">รถโกคาร์ท</a>
+      <a href="#rules">กฎความปลอดภัย</a>
+      <a href="#track">สนาม</a>
+      <a class="btn btn--yellow" href="#booking">จองรอบ</a>
+    </nav>
+  </div>
+  <div class="checker checker--thin" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+<!-- ============ HERO ============ -->
+<section class="hero" id="top" style="padding:0">
+  <img class="hero__img" src="../assets/gokart-hero.jpg" alt="สนามโกคาร์ทกลางแจ้งยามพลบค่ำ ไฟสนามส่องเส้นทางแข่งพร้อมรถโกคาร์ทจอดเรียงที่เส้นสตาร์ท" fetchpriority="high">
+  <div class="hero__shade" aria-hidden="true"></div>
+  <div class="wrap hero__in">
+    <span class="eyebrow">Pathum Thani Outdoor Kart Circuit</span>
+    <h1>เร็วกว่าเพื่อน<br><span class="hl">พิสูจน์ที่นี่</span></h1>
+    <p class="hero__sub">สนามโกคาร์ทกลางแจ้งมาตรฐาน 800 เมตร 10 โค้ง ระบบจับเวลาดิจิทัลทุกคัน เวลาของคุณขึ้นบอร์ดอันดับสนามทันที</p>
+    <div class="hero__row">
+      <span class="pricechip"><small>เริ่มต้น</small><b>฿450</b><small>/ 8 นาทีเต็มสนาม</small></span>
+      <a class="btn btn--yellow" href="#booking">จองรอบแข่ง</a>
+      <a class="btn btn--ghost" href="#leaderboard">ดูลีดเดอร์บอร์ด</a>
+    </div>
+    <div class="hero__stats">
+      <div><b>800 ม.</b><span>ความยาวสนาม</span></div>
+      <div><b>10</b><span>โค้งท้าทาย</span></div>
+      <div><b>390 cc</b><span>รถรุ่นโปร</span></div>
+      <div><b>10:00–22:00</b><span>เปิดทุกวัน</span></div>
+    </div>
+  </div>
+</section>
+<div class="checker" aria-hidden="true"></div>
+
+<!-- ============ LEADERBOARD ============ -->
+<section id="leaderboard">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Lap Leaderboard</span>
+      <h2>บอร์ดเวลาประจำสนาม</h2>
+      <p>เวลาดีสุดต่อ 1 รอบสนามจากนักขับจริง ลงเวลาของคุณแล้วดูว่าเข้าอันดับที่เท่าไหร่ — ทำลายสถิติสนามได้ รับป้าย NEW RECORD ทันที</p>
+    </div>
+
+    <div class="board" role="table" aria-label="บอร์ดอันดับเวลาต่อรอบ">
+      <div class="board__head">
+        <span class="eyebrow" style="font-size:.8rem">APEX KART · Official Timing</span>
+        <span class="live"><i aria-hidden="true"></i> อัปเดตสดจากเส้นจับเวลา</span>
+      </div>
+      <div class="board__cols" role="row">
+        <span role="columnheader">อันดับ</span>
+        <span role="columnheader">นักขับ</span>
+        <span role="columnheader">เวลา/รอบ</span>
+      </div>
+      <ol id="boardList" style="list-style:none"></ol>
+    </div>
+    <p id="boardMsg" role="status" aria-live="polite" style="margin-top:12px"></p>
+
+    <form class="lapform" id="lapForm" novalidate>
+      <h3>ลงเวลาของคุณ</h3>
+      <p class="hint">กรอกเวลาจากใบจับเวลาหน้าสนาม (ทศนิยม 2 ตำแหน่ง เช่น 48.73) — ระบบจะแทรงอันดับให้อัตโนมัติและจำไว้ในเครื่องของคุณ</p>
+      <div class="lapform__grid">
+        <div class="field">
+          <label for="fName">ชื่อเล่นนักขับ</label>
+          <input id="fName" name="driver" type="text" maxlength="14" autocomplete="off" placeholder="เช่น โบ๊ท">
+        </div>
+        <div class="field">
+          <label for="fTime">เวลาต่อรอบ (วินาที)</label>
+          <input id="fTime" name="lap" type="text" inputmode="decimal" autocomplete="off" placeholder="48.73">
+        </div>
+        <button class="btn btn--yellow" type="submit">ลงเวลา</button>
+      </div>
+      <div class="lapform__foot">
+        <p id="formMsg" role="alert"></p>
+        <button class="btn btn--red" id="clearMine" type="button" style="margin-left:auto;min-height:44px" disabled>ล้างเวลาของฉัน</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ============ KARTS ============ -->
+<section id="karts" style="background:#131313;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The Karts</span>
+      <h2>เลือกรถให้เหมาะกับมือคุณ</h2>
+      <p>รถทุกคันผ่านการเช็กสภาพก่อนเปิดสนามทุกวัน เบรก ยาง และระบบเซฟตี้พร้อมใช้งาน มือใหม่เริ่มรุ่น 270 ก่อนขยับขึ้นรุ่นโปร</p>
+    </div>
+    <div class="karts">
+      <!-- 270 -->
+      <article class="kart">
+        <div class="kart__media">
+          <img src="https://images.unsplash.com/photo-1531040630173-7cfb894c8eaa?q=80&w=1000&auto=format&fit=crop" alt="รถโกคาร์ท 270 ซีซี สำหรับมือใหม่ จอดอยู่ข้างเส้นทางแข่งในสนาม" loading="lazy">
+          <span class="kart__class">ROOKIE 270</span>
+        </div>
+        <div class="kart__body">
+          <h3 class="kart__name">KART <b>270 cc</b> มือใหม่</h3>
+          <ul class="specs">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg><span><b>เครื่องยนต์</b> Honda GX270 สี่จังหวะ แรงบิดนุ่ม ควบคุมง่าย</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span><b>ความเร็วสูงสุด</b> ประมาณ 60 กม./ชม. เหมาะเรียนรู้เส้นทาง</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg><span><b>ผู้ขับ</b> อายุ 12 ปีขึ้นไป ส่วนสูง 140 ซม. ขึ้นไป</span></li>
+          </ul>
+          <div class="kart__price"><b>฿450</b><span>/ 8 นาที · รวมหมวกกันน็อกและถุงมือ</span></div>
+          <a class="btn btn--ghost" href="#booking">จองรุ่น ROOKIE</a>
+        </div>
+      </article>
+      <!-- 390 -->
+      <article class="kart">
+        <div class="kart__media kart__media--pro">
+          <span class="kart__class" style="background:var(--red);color:#fff">PRO 390</span>
+          <div class="kart__flag" aria-hidden="true">
+            <svg viewBox="0 0 320 180" fill="none">
+              <path d="M20 140 C60 60 120 40 170 60 C220 80 240 40 300 30" stroke="#ffd400" stroke-width="3" stroke-dasharray="10 8"/>
+              <circle cx="20" cy="140" r="7" fill="#e01e26"/>
+              <circle cx="300" cy="30" r="7" fill="#ffd400"/>
+              <text x="36" y="152" fill="#9a948a" font-family="Kanit" font-size="13">APEX 390</text>
+            </svg>
+          </div>
+        </div>
+        <div class="kart__body">
+          <h3 class="kart__name">KART <b>390 cc</b> โปร</h3>
+          <ul class="specs">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg><span><b>เครื่องยนต์</b> 390 ซีซี อัตราเร่งพุ่ง เกียร์ตอบสนองไว</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span><b>ความเร็วสูงสุด</b> ประมาณ 80 กม./ชม. เข้าโค้งหนัก ไหลยาว</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg><span><b>ผู้ขับ</b> อายุ 16 ปีขึ้นไป และทำเวลารุ่น 270 ต่ำกว่า 55 วินาที</span></li>
+          </ul>
+          <div class="kart__price"><b>฿650</b><span>/ 8 นาที · รวมชุดแข่งและหมวกแบบเต็มใบ</span></div>
+          <a class="btn btn--yellow" href="#booking" style="color:#0f0f0f">จองรุ่น PRO</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RULES ============ -->
+<section id="rules">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Safety First</span>
+      <h2>กฎความปลอดภัย 4 ข้อ ห้ามละเมิด</h2>
+      <p>สนุกได้เต็มที่ แต่ต้องปลอดภัยทุกรอบ มาร์แชลประจำสนามมีสิทธิ์หยุดการขับทันทีหากฝ่าฝืน</p>
+    </div>
+    <div class="rules">
+      <article class="rule">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0v3H4v-3z"/><path d="M4 16h16v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2z"/><path d="M12 5v3"/></svg>
+        <span class="no">RULE 01</span>
+        <h3>หมวกกันน็อกตลอดเวลา</h3>
+        <p>สวมหมวก ถุงมือ และคาดเข็มขัดนิรภัยก่อนออกรถทุกครั้ง อุปกรณ์ยืมฟรีที่จุดจ่าย</p>
+      </article>
+      <article class="rule">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h18v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2z"/><path d="M3 17c0-4 3-7 6-7h3l4 4h5"/><path d="M9 10l1-3h4l1 3"/></svg>
+        <span class="no">RULE 02</span>
+        <h3>เครื่องแต่งกายรัดกุม</h3>
+        <p>รองเท้ารัดส้นเท่านั้น ห้ามรองเท้าแตะ ผมยาวต้องรวบเก็บในหมวก ไม่ใส่ผ้าพันคอหรือเครื่องประดับห้อย</p>
+      </article>
+      <article class="rule">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4h13l-3 4 3 4H5"/></svg>
+        <span class="no">RULE 03</span>
+        <h3>เชื่อฟังสัญญาณธง</h3>
+        <p>ธงเหลือง = ชะลอความเร็ว ธงแดง = หยุดทันที ธงหมากรุก = จบรอบ ทำตามสัญญาณมาร์แชลทุกจุด</p>
+      </article>
+      <article class="rule">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5.5 5.5l13 13"/></svg>
+        <span class="no">RULE 04</span>
+        <h3>ห้ามชนโดยเจตนา</h3>
+        <p>ห้ามปะทะ บล็อก หรือดันรถคู่แข่งออกนอกเส้นทาง ผู้ฝ่าฝืนถูกเชิญออกจากสนามโดยไม่คืนค่าบริการ</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRACK ============ -->
+<section id="track" style="background:#131313;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Track Layout</span>
+      <h2>สนาม 800 เมตร 10 โค้ง</h2>
+      <p>เลย์เอาต์วนตามเข็มนาฬิกา ทางตรงยาว 120 เมตรเปิดโอกาสแซง ปิดท้ายด้วยชิคเคนโค้ง 9–10 ที่แยกมือเก๋าออกจากมือใหม่</p>
+    </div>
+    <div class="trackgrid">
+      <div class="trackmap">
+        <svg viewBox="0 0 760 480" role="img" aria-label="แผนผังสนามโกคาร์ท 800 เมตร วนตามเข็มนาฬิกา มี 10 โค้ง และเส้นสตาร์ทที่ทางตรงหน้าอัฒจันทร์">
+          <defs>
+            <pattern id="chk" width="10" height="10" patternUnits="userSpaceOnUse">
+              <rect width="10" height="10" fill="#f5f2ea"/>
+              <rect width="5" height="5" fill="#0f0f0f"/>
+              <rect x="5" y="5" width="5" height="5" fill="#0f0f0f"/>
+            </pattern>
+          </defs>
+          <!-- asphalt -->
+          <path d="M150 360 C110 300 120 230 180 195 C235 163 265 200 330 172 C395 144 395 105 470 98 C545 91 590 132 645 152 C700 172 712 245 678 300 C644 355 556 338 520 382 C484 426 392 436 316 418 C240 400 190 420 150 360 Z"
+                fill="none" stroke="#2b2b2b" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- centre line -->
+          <path d="M150 360 C110 300 120 230 180 195 C235 163 265 200 330 172 C395 144 395 105 470 98 C545 91 590 132 645 152 C700 172 712 245 678 300 C644 355 556 338 520 382 C484 426 392 436 316 418 C240 400 190 420 150 360 Z"
+                fill="none" stroke="#ffd400" stroke-width="2.5" stroke-dasharray="10 12" stroke-linecap="round"/>
+          <!-- direction arrow on main straight -->
+          <polygon points="300,415 322,406 322,424" fill="#ffd400"/>
+          <!-- start/finish -->
+          <g transform="rotate(74 147 358)">
+            <rect x="128" y="351" width="38" height="14" fill="url(#chk)" stroke="#0f0f0f" stroke-width="1"/>
+          </g>
+          <text x="98" y="345" fill="#9a948a" font-family="Anton" font-size="13" letter-spacing="2">START</text>
+          <!-- corners -->
+          <g font-family="Anton" font-size="11" text-anchor="middle">
+            <g><circle cx="150" cy="300" r="12" fill="#e01e26"/><text x="150" y="304" fill="#fff">1</text></g>
+            <g><circle cx="148" cy="232" r="12" fill="#e01e26"/><text x="148" y="236" fill="#fff">2</text></g>
+            <g><circle cx="196" cy="188" r="12" fill="#e01e26"/><text x="196" y="192" fill="#fff">3</text></g>
+            <g><circle cx="288" cy="184" r="12" fill="#e01e26"/><text x="288" y="188" fill="#fff">4</text></g>
+            <g><circle cx="392" cy="140" r="12" fill="#e01e26"/><text x="392" y="144" fill="#fff">5</text></g>
+            <g><circle cx="466" cy="98" r="12" fill="#e01e26"/><text x="466" y="102" fill="#fff">6</text></g>
+            <g><circle cx="590" cy="130" r="12" fill="#e01e26"/><text x="590" y="134" fill="#fff">7</text></g>
+            <g><circle cx="700" cy="228" r="12" fill="#e01e26"/><text x="700" y="232" fill="#fff">8</text></g>
+            <g><circle cx="652" cy="332" r="12" fill="#e01e26"/><text x="652" y="336" fill="#fff">9</text></g>
+            <g><circle cx="430" cy="428" r="12" fill="#e01e26"/><text x="430" y="432" fill="#fff">10</text></g>
+          </g>
+        </svg>
+      </div>
+      <div class="trackstats">
+        <div class="ts"><span>ความยาวรอบสนาม</span><b>800 ม.</b></div>
+        <div class="ts"><span>จำนวนโค้ง</span><b>10 โค้ง</b></div>
+        <div class="ts"><span>ทางตรงยาวสุด</span><b>120 ม.</b></div>
+        <div class="ts"><span>ความกว้างผิวแข่ง</span><b>8 ม.</b></div>
+        <div class="ts"><span>ทิศทางการวิ่ง</span><b>ตามเข็ม</b></div>
+        <div class="ts"><span>สถิติสนามปัจจุบัน</span><b id="trackRecord">47.82</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOKING ============ -->
+<section class="booking" id="booking" style="padding:64px 0">
+  <div class="wrap booking__in">
+    <div>
+      <span class="eyebrow" style="color:#0f0f0f;letter-spacing:.3em">Grid Slot Open</span>
+      <h2>พร้อมออกสตาร์ทหรือยัง</h2>
+      <p>เปิดทุกวัน จันทร์–อาทิตย์ 10:00–22:00 · รับ walk-in · กลุ่ม 6 คันขึ้นไปจองล่วงหน้าเท่านั้น</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn--dark" href="tel:0634928817">โทร 063-492-8817</a>
+      <a class="btn btn--line" href="#top">LINE: @apexkart</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<div class="checker" aria-hidden="true"></div>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <h3>APEX <b>KART</b></h3>
+        <p>สนามโกคาร์ทกลางแจ้งมาตรฐานแห่งปทุมธานี ระบบจับเวลาดิจิทัล มาร์แชลประจำทุกจุด และบอร์ดสถิติที่รอให้คุณมาทำลาย</p>
+      </div>
+      <div>
+        <h3>ที่ตั้งสนาม</h3>
+        <ul>
+          <li>123 ถนนรังสิต–นครนายก</li>
+          <li>ต.บึงคอไห อ.ลำลูกกา</li>
+          <li>จ.ปทุมธานี 12150</li>
+          <li>ที่จอดรถกว่า 80 คัน</li>
+        </ul>
+      </div>
+      <div>
+        <h3>เวลาเปิดสนาม</h3>
+        <ul>
+          <li>จันทร์–อาทิตย์ 10:00–22:00</li>
+          <li>รอบสุดท้าย 21:30</li>
+          <li>โทร <a href="tel:0634928817">063-492-8817</a></li>
+          <li>LINE @apexkart</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      <span>© <span id="year">2026</span> APEX KART Circuit — เว็บไซต์ตัวอย่างสำหรับนำเสนอ</span>
+      <span>สนาม 800 ม. · 10 โค้ง · ปทุมธานี</span>
+    </div>
+  </div>
+</footer>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  var LS_KEY = 'apexkart.entries.v1';
+  var SEED = [
+    { name:'โบ๊ท',  time:47.82 },
+    { name:'เจ',    time:48.15 },
+    { name:'แบงค์', time:48.73 },
+    { name:'นิว',   time:49.02 },
+    { name:'ต้น',   time:49.56 },
+    { name:'ปอนด์', time:50.11 },
+    { name:'ฟลุ๊ค', time:50.89 },
+    { name:'มิว',   time:51.34 }
+  ];
+
+  var listEl   = document.getElementById('boardList');
+  var msgEl    = document.getElementById('boardMsg');
+  var formMsg  = document.getElementById('formMsg');
+  var form     = document.getElementById('lapForm');
+  var nameIn   = document.getElementById('fName');
+  var timeIn   = document.getElementById('fTime');
+  var clearBtn = document.getElementById('clearMine');
+  var recEl    = document.getElementById('trackRecord');
+
+  function load(){
+    try{
+      var raw = localStorage.getItem(LS_KEY);
+      if(!raw) return [];
+      var arr = JSON.parse(raw);
+      if(!Array.isArray(arr)) return [];
+      return arr.filter(function(e){
+        return e && typeof e.name==='string' && typeof e.time==='number' && isFinite(e.time);
+      });
+    }catch(err){ return []; }
+  }
+  function save(entries){
+    try{ localStorage.setItem(LS_KEY, JSON.stringify(entries)); }catch(err){}
+  }
+  function medalSVG(rank){
+    var colors = {1:'#ffd400', 2:'#c9c9c9', 3:'#cd7f32'};
+    if(rank>3) return null;
+    var c = colors[rank];
+    var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('viewBox','0 0 30 30');
+    svg.setAttribute('class','medal');
+    svg.setAttribute('aria-hidden','true');
+    var circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('cx','15'); circle.setAttribute('cy','15'); circle.setAttribute('r','13');
+    circle.setAttribute('fill',c);
+    circle.setAttribute('stroke','#0f0f0f'); circle.setAttribute('stroke-width','2');
+    var txt = document.createElementNS('http://www.w3.org/2000/svg','text');
+    txt.setAttribute('x','15'); txt.setAttribute('y','20'); txt.setAttribute('text-anchor','middle');
+    txt.setAttribute('fill','#0f0f0f'); txt.setAttribute('font-family','Anton'); txt.setAttribute('font-size','13');
+    txt.textContent = String(rank);
+    svg.appendChild(circle); svg.appendChild(txt);
+    return svg;
+  }
+  function fmt(t){ return t.toFixed(2); }
+
+  function render(){
+    var mine = load();
+    var all = SEED.map(function(e){ return {name:e.name, time:e.time, mine:false, rec:false}; })
+      .concat(mine.map(function(e){ return {name:e.name, time:e.time, mine:true, rec:!!e.rec}; }));
+    all.sort(function(a,b){ return a.time - b.time; });
+    var top = all.slice(0,10);
+
+    listEl.textContent = '';
+    top.forEach(function(e,i){
+      var rank = i+1;
+      var li = document.createElement('li');
+      li.className = 'row' + (e.mine ? ' mine' : '');
+      li.setAttribute('role','row');
+
+      var r = document.createElement('span'); r.className='rank'; r.setAttribute('role','cell');
+      var medal = medalSVG(rank);
+      if(medal){ r.appendChild(medal); } else { r.textContent = String(rank); }
+
+      var who = document.createElement('span'); who.className='who'; who.setAttribute('role','cell');
+      var nm = document.createElement('span'); nm.className='nm'; nm.textContent = e.name;
+      who.appendChild(nm);
+      if(e.mine){
+        var ty = document.createElement('span'); ty.className='tag tag--you'; ty.textContent='คุณ';
+        who.appendChild(ty);
+      }
+      if(e.rec){
+        var tr = document.createElement('span'); tr.className='tag tag--rec'; tr.textContent='NEW RECORD!';
+        who.appendChild(tr);
+      }
+
+      var tm = document.createElement('span'); tm.className='time'; tm.setAttribute('role','cell');
+      tm.textContent = fmt(e.time);
+      var s = document.createElement('small'); s.textContent = 'วิ';
+      tm.appendChild(s);
+
+      li.appendChild(r); li.appendChild(who); li.appendChild(tm);
+      listEl.appendChild(li);
+    });
+
+    clearBtn.disabled = mine.length === 0;
+    var best = all.length ? all[0].time : null;
+    if(recEl && best){ recEl.textContent = fmt(best); }
+  }
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    formMsg.textContent = '';
+    var name = nameIn.value.trim();
+    var raw = timeIn.value.trim().replace(',','.');
+    if(name.length < 2 || name.length > 14){
+      formMsg.textContent = 'กรุณาใส่ชื่อเล่น 2–14 ตัวอักษร';
+      nameIn.focus();
+      return;
+    }
+    if(!/^\d{2,3}(\.\d{1,2})?$/.test(raw)){
+      formMsg.textContent = 'รูปแบบเวลาไม่ถูกต้อง ใส่เป็นวินาที เช่น 48.73';
+      timeIn.focus();
+      return;
+    }
+    var t = Math.round(parseFloat(raw)*100)/100;
+    if(t < 30 || t > 120){
+      formMsg.textContent = 'เวลาต้องอยู่ระหว่าง 30.00 – 120.00 วินาที ตามจับเวลาหน้าสนาม';
+      timeIn.focus();
+      return;
+    }
+    var mine = load();
+    var all = SEED.map(function(e){return e.time;}).concat(mine.map(function(e){return e.time;}));
+    var bestBefore = Math.min.apply(null, all);
+    var entry = { id: Date.now(), name: name, time: t, rec: t < bestBefore };
+    mine.push(entry);
+    save(mine);
+    render();
+
+    var merged = SEED.map(function(e){return e.time;}).concat(mine.map(function(e){return e.time;}));
+    merged.sort(function(a,b){return a-b;});
+    var rank = merged.indexOf(t) + 1;
+    msgEl.textContent = entry.rec
+      ? 'สถิติใหม่ของสนาม! ' + name + ' ขึ้นอันดับ 1 ด้วยเวลา ' + fmt(t) + ' วินาที'
+      : 'บันทึกแล้ว — ' + name + ' เข้าอันดับที่ ' + rank + ' ด้วยเวลา ' + fmt(t) + ' วินาที';
+    form.reset();
+    nameIn.focus();
+  });
+
+  clearBtn.addEventListener('click', function(){
+    try{ localStorage.removeItem(LS_KEY); }catch(err){}
+    render();
+    msgEl.textContent = 'ล้างเวลาของคุณออกจากบอร์ดแล้ว (เวลาสถิติสนามยังอยู่ครบ)';
+  });
+
+  document.getElementById('year').textContent = String(new Date().getFullYear());
+  render();
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

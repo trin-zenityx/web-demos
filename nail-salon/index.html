@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สีสัน SEESAN — ร้านเล็บเจลและต่อขนตา เอกมัย</title>
+<meta name="description" content="สีสัน SEESAN สตูดิโอเล็บเจลและต่อขนตาโทนพาสเทลใจกลางเอกมัย ออกแบบลายเล็บของคุณเองก่อนจอง เจลมือเริ่มต้น ฿350">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fdf5f2;--card:#fff;--pink:#e8899c;--gold:#c9a05f;--ink:#3d2a2e;--muted:#93757c;--line:#f2ddd8;
+  --pink-deep:#d06a82;--pink-soft:#fbe7ea;--gold-soft:#f5ecdc;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Mitr',sans-serif;font-weight:300;font-size:16px;line-height:1.75;color:var(--ink);background:var(--bg)}
+img{max-width:100%;display:block}
+h1,h2,h3,.charm{font-family:'Charm',cursive;font-weight:700;line-height:1.3}
+a{color:inherit}
+button{font-family:inherit;font-size:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:3px solid var(--pink);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.hidden-svg{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:12px 28px;border-radius:999px;font-weight:400;font-size:16px;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s,border-color .2s}
+.btn svg{flex:none}
+.btn-pink{background:var(--pink);color:#fff;box-shadow:0 10px 24px rgba(232,137,156,.38)}
+.btn-pink:hover{background:var(--pink-deep);transform:translateY(-2px)}
+.btn-ghost{background:var(--card);border:1.5px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--pink);color:var(--pink-deep);transform:translateY(-2px)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:60;background:rgba(253,245,242,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1180px;margin:0 auto;padding:8px 20px;min-height:66px;display:flex;align-items:center;gap:10px}
+.logo{font-family:'Charm',cursive;font-weight:700;font-size:32px;text-decoration:none;color:var(--ink);display:inline-flex;align-items:center;gap:8px;min-height:48px}
+.logo b{color:var(--pink);font-weight:700}
+.logo small{font-family:'Mitr',sans-serif;font-size:11px;font-weight:400;letter-spacing:.18em;color:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:2px 9px;margin-top:6px}
+.nav-links{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nav-links a{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border-radius:999px;text-decoration:none;color:var(--muted);font-size:15px;transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--ink);background:var(--card)}
+.nav-cta{margin-left:10px;min-height:44px;padding:9px 22px;font-size:15px}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 72px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+.hero-kicker{display:inline-flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 18px;font-size:15px;color:var(--muted);min-height:38px}
+.hero-kicker .dotg{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.hero h1{font-size:clamp(36px,5vw,56px);margin:22px 0 16px}
+.hero h1 em{font-style:normal;color:var(--pink);position:relative;white-space:nowrap}
+.hero h1 em svg{position:absolute;left:0;right:0;bottom:-8px;width:100%;height:12px;color:var(--gold);opacity:.75}
+.hero p.lead{color:var(--muted);font-size:17px;max-width:520px;margin-bottom:30px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:26px}
+.hero-prices{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.price-chip{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 16px;min-height:44px;font-size:15px;color:var(--muted)}
+.price-chip b{color:var(--pink-deep);font-weight:500;font-size:16px}
+.hero-trust{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--muted);font-size:15px}
+.hero-trust span{display:inline-flex;align-items:center;gap:9px}
+.hero-trust span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.hero-fig{position:relative;justify-self:center;width:100%;max-width:470px}
+.hero-fig .arch{border-radius:240px 240px 26px 26px;overflow:hidden;border:6px solid var(--card);box-shadow:0 30px 60px rgba(201,160,95,.22)}
+.hero-fig img{width:100%;height:100%;aspect-ratio:4/5;object-fit:cover}
+.hero-fig .badge-card{position:absolute;left:-18px;bottom:34px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 18px;box-shadow:0 16px 36px rgba(61,42,46,.14);display:flex;align-items:center;gap:12px}
+.badge-card .nail-ico{width:42px;height:42px;border-radius:14px;background:var(--pink-soft);display:grid;place-items:center;color:var(--pink)}
+.badge-card b{display:block;font-weight:500;font-size:15px;line-height:1.4}
+.badge-card small{color:var(--muted);font-size:14px}
+.hero-fig .spark{position:absolute;color:var(--gold)}
+
+/* ---------- section base ---------- */
+section{padding:80px 0}
+.tag{display:inline-flex;align-items:center;gap:8px;background:var(--gold-soft);color:var(--gold);font-weight:500;font-size:15px;padding:6px 16px;border-radius:999px;min-height:36px}
+.sec-head{text-align:center;max-width:660px;margin:0 auto 46px}
+.sec-head h2{font-size:clamp(30px,4vw,42px);margin:16px 0 10px}
+.sec-head p{color:var(--muted)}
+
+/* ---------- nail painter ---------- */
+.painter{background:linear-gradient(180deg,var(--card) 0%,var(--bg) 100%);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.paint-grid{display:grid;grid-template-columns:minmax(300px,450px) 1fr;gap:36px;align-items:start;max-width:1060px;margin:0 auto}
+.hand-card{background:var(--card);border:1px solid var(--line);border-radius:30px;padding:26px 22px 20px;box-shadow:0 24px 48px rgba(232,137,156,.14);text-align:center}
+.hand-card svg.hand{width:100%;max-width:380px;height:auto;margin:0 auto;display:block}
+.hand-hint{margin-top:12px;color:var(--muted);font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px}
+.hand-hint svg{color:var(--pink);flex:none}
+.finger{cursor:pointer;outline-offset:-2px}
+.finger .finger-shape{fill:#f7cfad;stroke:#e3a87f;stroke-width:2;transition:stroke .2s,filter .2s}
+.finger:hover .finger-shape{stroke:var(--pink)}
+.finger.selected .finger-shape{stroke:var(--pink);stroke-width:3.4;filter:drop-shadow(0 0 7px rgba(232,137,156,.65))}
+.nail-base{fill:var(--nail,#f6c1cc);stroke:rgba(61,42,46,.18);stroke-width:1;transition:fill .25s}
+.nail-shine{fill:#fff;opacity:.38;pointer-events:none}
+.nail-glitter{opacity:0;pointer-events:none;transition:opacity .25s}
+.nail-g[data-pattern="glitter"] .nail-glitter{opacity:.9}
+.nail-french{fill:#fffdf7;opacity:0;pointer-events:none;transition:opacity .25s}
+.nail-g[data-pattern="french"] .nail-french{opacity:1}
+.nail-g[data-pattern="french"] .nail-base{fill:#f5dcd2}
+.nail-gem{opacity:0;pointer-events:none;transition:opacity .2s}
+.nail-g[data-gem="1"] .nail-gem{opacity:1}
+@keyframes pulse-ring{0%,100%{opacity:.35}50%{opacity:.9}}
+.finger.selected .nail-base{animation:pulse-ring 1.8s ease-in-out infinite}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:30px;padding:28px;box-shadow:0 24px 48px rgba(61,42,46,.08)}
+.panel h3{font-size:26px;margin-bottom:2px}
+.cur-label{font-size:15px;color:var(--muted);margin-bottom:18px}
+.cur-label b{color:var(--pink-deep);font-weight:500}
+.dots{display:flex;gap:10px;margin-bottom:22px}
+.dot{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:2px solid transparent;transition:border-color .2s,transform .2s}
+.dot span{width:26px;height:26px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.6),0 2px 6px rgba(61,42,46,.18);transition:background .25s}
+.dot:hover{transform:translateY(-2px)}
+.dot.on{border-color:var(--pink)}
+.ctl-label{font-weight:500;font-size:15px;margin:0 0 10px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ctl-label small{color:var(--muted);font-weight:300;font-size:14px}
+.swatches{display:grid;grid-template-columns:repeat(10,1fr);gap:8px;margin-bottom:22px}
+.swatch{width:100%;min-width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:2px solid transparent;transition:border-color .2s,transform .2s}
+.swatch span{width:30px;height:30px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 2px rgba(255,255,255,.55),0 2px 6px rgba(61,42,46,.15)}
+.swatch:hover{transform:translateY(-2px)}
+.swatch.on{border-color:var(--gold);background:var(--card)}
+.pat-group{display:flex;gap:10px;margin-bottom:22px}
+.pat-btn{flex:1;min-height:52px;border:1.5px solid var(--line);border-radius:16px;background:var(--bg);padding:8px 10px;font-size:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;transition:border-color .2s,background .2s}
+.pat-btn small{font-size:14px;color:var(--muted)}
+.pat-btn:hover{border-color:var(--pink)}
+.pat-btn.on{border-color:var(--pink);background:var(--pink-soft);color:var(--pink-deep);font-weight:400}
+.toggle{display:flex;align-items:center;gap:14px;min-height:52px;width:100%;border:1.5px solid var(--line);border-radius:16px;background:var(--bg);padding:8px 16px;text-align:left;transition:border-color .2s,background .2s;margin-bottom:24px}
+.toggle:hover{border-color:var(--pink)}
+.toggle .track{flex:none;width:52px;height:30px;border-radius:999px;background:#eadcd6;position:relative;transition:background .25s}
+.toggle .knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(61,42,46,.25);transition:left .25s}
+.toggle[aria-pressed="true"]{border-color:var(--pink);background:var(--pink-soft)}
+.toggle[aria-pressed="true"] .track{background:var(--pink)}
+.toggle[aria-pressed="true"] .knob{left:25px}
+.toggle-text{font-size:15px;line-height:1.45}
+.toggle-text small{display:block;color:var(--muted);font-size:14px}
+.price-box{border:1.5px dashed var(--gold);background:#fffdf8;border-radius:20px;padding:18px 20px;margin-bottom:22px}
+.price-note{font-size:14px;color:var(--muted);margin-bottom:10px}
+.price-row{display:flex;justify-content:space-between;gap:12px;font-size:15px;padding:3px 0}
+.price-row b{font-weight:400}
+.price-row.dim{opacity:.45}
+.price-row em{font-style:normal;color:var(--pink-deep);font-weight:500}
+.price-total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-top:1px solid var(--line);margin-top:10px;padding-top:12px}
+.price-total span{font-weight:400}
+.price-total b{font-family:'Charm',cursive;font-weight:700;font-size:34px;color:var(--pink-deep);line-height:1.1}
+.paint-actions{display:flex;flex-wrap:wrap;gap:12px}
+.paint-actions .btn{flex:1;min-width:170px}
+.success{margin-top:22px;border:1.5px solid var(--gold);background:#fffdf8;border-radius:22px;padding:24px}
+.success-head{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.success-head .ok{flex:none;width:46px;height:46px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center}
+.success-head h3{font-size:24px}
+.success p{color:var(--muted);font-size:15px;margin-bottom:14px}
+#summary-list{list-style:none;margin-bottom:14px}
+#summary-list li{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:15px;flex-wrap:wrap}
+#summary-list li:last-child{border-bottom:none}
+#summary-list b{font-weight:500;min-width:110px}
+#summary-list span:last-child{color:var(--muted)}
+.dot-mini{width:18px;height:18px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 2px rgba(255,255,255,.55),0 1px 4px rgba(61,42,46,.2)}
+.success-total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:12px;margin-bottom:16px;font-size:15px}
+.success-total b{font-family:'Charm',cursive;font-size:30px;color:var(--pink-deep);line-height:1.1}
+
+/* ---------- services ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:20px}
+.svc-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px 24px;transition:transform .25s,box-shadow .25s,border-color .25s}
+.svc-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(232,137,156,.16);border-color:#f3c6cf}
+.svc-ico{width:56px;height:56px;border-radius:18px;background:var(--pink-soft);color:var(--pink-deep);display:grid;place-items:center;margin-bottom:18px}
+.svc-card h3{font-size:24px;margin-bottom:6px}
+.svc-card p{color:var(--muted);font-size:15px;margin-bottom:16px;min-height:52px}
+.svc-price{display:flex;align-items:baseline;gap:8px;border-top:1px dashed var(--line);padding-top:14px}
+.svc-price small{color:var(--muted);font-size:14px}
+.svc-price b{font-family:'Charm',cursive;font-size:30px;color:var(--gold);line-height:1}
+
+/* ---------- gallery ---------- */
+.gallery{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.gal-grid figure{border-radius:22px;overflow:hidden;border:1px solid var(--line);background:var(--bg);transition:transform .25s,box-shadow .25s}
+.gal-grid figure:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(61,42,46,.12)}
+.gal-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;transition:transform .4s}
+.gal-grid figure:hover img{transform:scale(1.05)}
+.gal-grid figcaption{padding:12px 16px;font-size:15px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.gal-grid figcaption::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--pink)}
+
+/* ---------- reviews ---------- */
+.rev-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px}
+.rev-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px 26px;display:flex;flex-direction:column;gap:14px}
+.stars{display:flex;gap:3px;color:var(--gold)}
+.stars .off{color:var(--line)}
+.rev-card p{font-size:15px;color:var(--ink);flex:1}
+.rev-who{display:flex;align-items:center;gap:12px;border-top:1px dashed var(--line);padding-top:14px}
+.avatar{flex:none;width:46px;height:46px;border-radius:50%;background:var(--pink-soft);color:var(--pink-deep);display:grid;place-items:center;font-family:'Charm',cursive;font-weight:700;font-size:22px}
+.rev-who b{display:block;font-weight:500;font-size:15px;line-height:1.4}
+.rev-who small{color:var(--muted);font-size:14px}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:#e9d5cf;padding:64px 0 0}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;padding-bottom:44px}
+.foot-brand .logo{color:#fff}
+.foot-brand p{color:#c9a9a4;font-size:15px;margin-top:12px;max-width:300px}
+footer h4{font-family:'Charm',cursive;font-size:22px;color:#fff;margin-bottom:14px;font-weight:700}
+.foot-list{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:15px;color:#c9a9a4}
+.foot-list a{color:#c9a9a4;text-decoration:none;display:inline-flex;align-items:center;min-height:32px}
+.foot-list a:hover{color:#fff}
+.foot-list li{display:flex;gap:10px;align-items:flex-start}
+.foot-list svg{flex:none;margin-top:5px;color:var(--gold)}
+.foot-bottom{border-top:1px solid rgba(233,213,207,.15);padding:20px 0;text-align:center;font-size:14px;color:#a98782}
+
+/* ---------- responsive ---------- */
+@media (max-width:1020px){
+  .paint-grid{grid-template-columns:1fr;max-width:620px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero p.lead{max-width:none}
+  .hero-fig{max-width:420px;order:-1}
+  .gal-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+  .nav-links a{display:none}
+  .nav-cta{margin-left:auto}
+  section{padding:64px 0}
+  .swatches{grid-template-columns:repeat(5,1fr)}
+}
+@media (max-width:520px){
+  .gal-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .pat-group{flex-direction:column}
+  .hero-fig .badge-card{left:0}
+  .panel,.hand-card{padding:22px 16px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<svg class="hidden-svg" aria-hidden="true">
+  <symbol id="ic-star" viewBox="0 0 24 24"><path d="M12 2.2l2.95 6.28 6.85.72-5.1 4.6 1.42 6.75L12 17.2l-6.12 3.35 1.42-6.75-5.1-4.6 6.85-.72z"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24"><path d="M20 6.5L9.5 17 4 11.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-touch" viewBox="0 0 24 24"><path d="M9 11.5V5.8a1.8 1.8 0 013.6 0v4.7m0-2.5a1.8 1.8 0 013.6 0v3m0-1a1.8 1.8 0 013.6 0v4.2c0 4-2.7 6.8-6.6 6.8-3 0-4.5-1-6.1-3.4l-2-2.9a1.7 1.7 0 012.7-2l1.2 1.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<nav class="nav" aria-label="เมนูหลัก">
+  <div class="nav-inner">
+    <a class="logo" href="#top"><b>สีสัน</b><small>SEESAN</small></a>
+    <div class="nav-links">
+      <a href="#painter">ออกแบบเล็บ</a>
+      <a href="#services">บริการ</a>
+      <a href="#gallery">ผลงาน</a>
+      <a href="#reviews">รีวิว</a>
+      <a href="#contact">ติดต่อ</a>
+    </div>
+    <a class="btn btn-pink nav-cta" href="#painter">จองคิว</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="hero-kicker"><span class="dotg"></span>สตูดิโอเล็บเจล &amp; ต่อขนตา · เอกมัย</span>
+      <h1>เล็บสวย<br><em>ในแบบที่เป็นคุณ<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 9C60 2 140 2 198 8" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></em></h1>
+      <p class="lead">ร้านเล็บโทนพาสเทลใจกลางเอกมัย ลองออกแบบลายเล็บของคุณเองก่อนจองคิว เลือกสี ลาย และเพชรได้ทีละนิ้ว รู้ราคาก่อนทำ ไม่มีบวกเพิ่ม</p>
+      <div class="hero-cta">
+        <a class="btn btn-pink" href="#painter">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-touch"/></svg>
+          ออกแบบเล็บของฉัน
+        </a>
+        <a class="btn btn-ghost" href="#services">ดูบริการและราคา</a>
+      </div>
+      <div class="hero-prices" aria-label="ราคาเริ่มต้น">
+        <span class="price-chip">เจลมือ เริ่มต้น <b>฿350</b></span>
+        <span class="price-chip">เจลเท้า <b>฿450</b></span>
+        <span class="price-chip">ต่อขนตา <b>฿690</b></span>
+      </div>
+      <div class="hero-trust">
+        <span>สีเจลเกรดพรีเมียม</span>
+        <span>ช่างประสบการณ์กว่า 8 ปี</span>
+        <span>อุปกรณ์ฆ่าเชื้อทุกครั้ง</span>
+      </div>
+    </div>
+    <figure class="hero-fig">
+      <span class="spark" style="top:-14px;right:26px" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24"><path d="M12 1l2.4 7.6L22 11l-7.6 2.4L12 21l-2.4-7.6L2 11l7.6-2.4z" fill="currentColor" opacity=".8"/></svg></span>
+      <span class="spark" style="bottom:120px;right:-12px" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 1l2.4 7.6L22 11l-7.6 2.4L12 21l-2.4-7.6L2 11l7.6-2.4z" fill="currentColor" opacity=".55"/></svg></span>
+      <div class="arch">
+        <img src="../assets/nail-hero.jpg" alt="บรรยากาศร้านเล็บสีสัน โทนชมพูพาสเทล โต๊ะทำเล็บสะอาดสบายตา" width="900" height="1125" fetchpriority="high" decoding="async">
+      </div>
+      <div class="badge-card">
+        <span class="nail-ico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="8" y="9.5" width="8" height="11" rx="3.5"/><path d="M10.5 9.5V7h3v2.5M12 3v4M12 13v4"/></svg>
+        </span>
+        <span><b>เจลมือเริ่มต้น ฿350</b><small>รวมตัดหนัง จัดทรงเล็บ</small></span>
+      </div>
+    </figure>
+  </div>
+</header>
+
+<main>
+  <!-- ================= NAIL PAINTER ================= -->
+  <section class="painter" id="painter" aria-labelledby="painter-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag">Nail Painter · ออกแบบเองก่อนจอง</span>
+        <h2 id="painter-title">ลองแต่งเล็บบนมือของคุณ</h2>
+        <p>แตะที่นิ้วเพื่อเลือก แล้วเลือกสี ลาย และเพชรได้ทีละนิ้ว ระบบคิดราคาให้ทันที ได้ลายตรงใจก่อนเข้าร้าน</p>
+      </div>
+      <div class="paint-grid">
+        <div class="hand-card">
+          <svg class="hand" viewBox="0 0 420 470" role="group" aria-label="มือสำหรับออกแบบเล็บ แตะที่นิ้วเพื่อเลือกนิ้วที่ต้องการแต่ง">
+            <defs>
+              <pattern id="glitterPattern" width="8" height="8" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.1" fill="#ffffff" opacity=".95"/>
+                <circle cx="6" cy="5.4" r=".95" fill="#ffe3a1" opacity=".95"/>
+                <circle cx="3.6" cy="7.2" r=".6" fill="#ffffff" opacity=".75"/>
+              </pattern>
+            </defs>
+            <path d="M10 0l2.2 7.8L20 10l-7.8 2.2L10 20l-2.2-7.8L0 10l7.8-2.2z" transform="translate(34,58)" fill="#f0cf9d" opacity=".8"/>
+            <path d="M10 0l2.2 7.8L20 10l-7.8 2.2L10 20l-2.2-7.8L0 10l7.8-2.2z" transform="translate(368,118) scale(.7)" fill="#f0cf9d" opacity=".6"/>
+            <path d="M10 0l2.2 7.8L20 10l-7.8 2.2L10 20l-2.2-7.8L0 10l7.8-2.2z" transform="translate(382,300) scale(.55)" fill="#e8899c" opacity=".5"/>
+
+            <!-- index finger -->
+            <g class="finger" data-f="index" tabindex="0" role="button" aria-pressed="false" aria-label="เลือกนิ้วชี้">
+              <rect class="finger-shape" x="112" y="105" width="44" height="165" rx="22"/>
+              <g class="nail-g" data-f="index" data-pattern="solid" data-gem="0" style="--nail:#f6c1cc">
+                <ellipse class="nail-base" cx="134" cy="134" rx="12.5" ry="16"/>
+                <ellipse class="nail-glitter" cx="134" cy="134" rx="12.5" ry="16" fill="url(#glitterPattern)"/>
+                <path class="nail-french" d="M122.1 129A12.5 16 0 0 1 145.9 129Q134 137 122.1 129Z"/>
+                <ellipse class="nail-shine" cx="129.5" cy="126" rx="3.2" ry="5.4" transform="rotate(-18 129.5 126)"/>
+                <g class="nail-gem"><path d="M134 138l4.5 5-4.5 5-4.5-5z" fill="#ffffff" stroke="#c9a05f" stroke-width="1.1"/><circle cx="134" cy="142.4" r=".9" fill="#c9a05f"/></g>
+              </g>
+            </g>
+            <!-- middle finger -->
+            <g class="finger" data-f="middle" tabindex="0" role="button" aria-pressed="true" aria-label="เลือกนิ้วกลาง">
+              <rect class="finger-shape" x="164" y="82" width="44" height="185" rx="22"/>
+              <g class="nail-g" data-f="middle" data-pattern="solid" data-gem="0" style="--nail:#e8899c">
+                <ellipse class="nail-base" cx="186" cy="110" rx="12.5" ry="16"/>
+                <ellipse class="nail-glitter" cx="186" cy="110" rx="12.5" ry="16" fill="url(#glitterPattern)"/>
+                <path class="nail-french" d="M174.1 105A12.5 16 0 0 1 197.9 105Q186 113 174.1 105Z"/>
+                <ellipse class="nail-shine" cx="181.5" cy="102" rx="3.2" ry="5.4" transform="rotate(-18 181.5 102)"/>
+                <g class="nail-gem"><path d="M186 114l4.5 5-4.5 5-4.5-5z" fill="#ffffff" stroke="#c9a05f" stroke-width="1.1"/><circle cx="186" cy="118.4" r=".9" fill="#c9a05f"/></g>
+              </g>
+            </g>
+            <!-- ring finger -->
+            <g class="finger" data-f="ring" tabindex="0" role="button" aria-pressed="false" aria-label="เลือกนิ้วนาง">
+              <rect class="finger-shape" x="216" y="100" width="44" height="170" rx="22"/>
+              <g class="nail-g" data-f="ring" data-pattern="solid" data-gem="0" style="--nail:#f6c1cc">
+                <ellipse class="nail-base" cx="238" cy="128" rx="12.5" ry="16"/>
+                <ellipse class="nail-glitter" cx="238" cy="128" rx="12.5" ry="16" fill="url(#glitterPattern)"/>
+                <path class="nail-french" d="M226.1 123A12.5 16 0 0 1 249.9 123Q238 131 226.1 123Z"/>
+                <ellipse class="nail-shine" cx="233.5" cy="120" rx="3.2" ry="5.4" transform="rotate(-18 233.5 120)"/>
+                <g class="nail-gem"><path d="M238 132l4.5 5-4.5 5-4.5-5z" fill="#ffffff" stroke="#c9a05f" stroke-width="1.1"/><circle cx="238" cy="136.4" r=".9" fill="#c9a05f"/></g>
+              </g>
+            </g>
+            <!-- pinky finger -->
+            <g class="finger" data-f="pinky" tabindex="0" role="button" aria-pressed="false" aria-label="เลือกนิ้วก้อย">
+              <rect class="finger-shape" x="268" y="138" width="40" height="135" rx="20"/>
+              <g class="nail-g" data-f="pinky" data-pattern="solid" data-gem="0" style="--nail:#f6c1cc">
+                <ellipse class="nail-base" cx="288" cy="164" rx="11" ry="14"/>
+                <ellipse class="nail-glitter" cx="288" cy="164" rx="11" ry="14" fill="url(#glitterPattern)"/>
+                <path class="nail-french" d="M277.6 159.5A11 14 0 0 1 298.4 159.5Q288 166.5 277.6 159.5Z"/>
+                <ellipse class="nail-shine" cx="284.2" cy="157.5" rx="2.7" ry="4.6" transform="rotate(-18 284.2 157.5)"/>
+                <g class="nail-gem"><path d="M288 172l4 4.5-4 4.5-4-4.5z" fill="#ffffff" stroke="#c9a05f" stroke-width="1.1"/><circle cx="288" cy="176" r=".8" fill="#c9a05f"/></g>
+              </g>
+            </g>
+            <!-- thumb -->
+            <g class="finger" data-f="thumb" tabindex="0" role="button" aria-pressed="false" aria-label="เลือกนิ้วหัวแม่มือ" transform="rotate(-32 90 300)">
+              <rect class="finger-shape" x="66" y="195" width="46" height="135" rx="23"/>
+              <g class="nail-g" data-f="thumb" data-pattern="solid" data-gem="0" style="--nail:#f6c1cc">
+                <ellipse class="nail-base" cx="89" cy="222" rx="12" ry="15"/>
+                <ellipse class="nail-glitter" cx="89" cy="222" rx="12" ry="15" fill="url(#glitterPattern)"/>
+                <path class="nail-french" d="M77.5 217.5A12 15 0 0 1 100.5 217.5Q89 224.5 77.5 217.5Z"/>
+                <ellipse class="nail-shine" cx="84.8" cy="214.5" rx="3" ry="5" transform="rotate(-18 84.8 214.5)"/>
+                <g class="nail-gem"><path d="M89 230l4.5 5-4.5 5-4.5-5z" fill="#ffffff" stroke="#c9a05f" stroke-width="1.1"/><circle cx="89" cy="234.4" r=".9" fill="#c9a05f"/></g>
+              </g>
+            </g>
+            <!-- palm + wrist -->
+            <rect x="96" y="245" width="228" height="165" rx="78" fill="#f7cfad" stroke="#e3a87f" stroke-width="2"/>
+            <rect x="155" y="388" width="110" height="58" rx="18" fill="#f7cfad" stroke="#e3a87f" stroke-width="2"/>
+            <rect x="148" y="400" width="124" height="16" rx="8" fill="#c9a05f"/>
+            <circle cx="210" cy="408" r="5" fill="#fffdf7" stroke="#a8823f" stroke-width="1.2"/>
+          </svg>
+          <p class="hand-hint">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-touch"/></svg>
+            แตะที่นิ้วเพื่อเลือก แล้วแต่งสี ลาย และเพชรได้ทีละนิ้ว
+          </p>
+        </div>
+
+        <div class="panel" aria-label="แผงออกแบบเล็บ">
+          <h3 class="charm">แต่งเล็บทีละนิ้ว</h3>
+          <p class="cur-label">กำลังออกแบบ: <b id="cur-finger">นิ้วกลาง</b></p>
+          <div class="dots" role="group" aria-label="เลือกนิ้วจากจุดสี">
+            <button type="button" class="dot" data-f="thumb" aria-pressed="false" aria-label="นิ้วหัวแม่มือ"><span></span></button>
+            <button type="button" class="dot" data-f="index" aria-pressed="false" aria-label="นิ้วชี้"><span></span></button>
+            <button type="button" class="dot" data-f="middle" aria-pressed="true" aria-label="นิ้วกลาง"><span></span></button>
+            <button type="button" class="dot" data-f="ring" aria-pressed="false" aria-label="นิ้วนาง"><span></span></button>
+            <button type="button" class="dot" data-f="pinky" aria-pressed="false" aria-label="นิ้วก้อย"><span></span></button>
+          </div>
+
+          <p class="ctl-label">1. เลือกสีเจล <small>10 เฉดยอดนิยม</small></p>
+          <div class="swatches" role="group" aria-label="เลือกสีเจล">
+            <button type="button" class="swatch" data-c="0" style="--c:#e8899c" aria-pressed="false" aria-label="สีชมพูหวาน"><span></span></button>
+            <button type="button" class="swatch" data-c="1" style="--c:#f6c1cc" aria-pressed="false" aria-label="สีชมพูพาสเทล"><span></span></button>
+            <button type="button" class="swatch" data-c="2" style="--c:#d94f70" aria-pressed="false" aria-label="สีฟิวเซีย"><span></span></button>
+            <button type="button" class="swatch" data-c="3" style="--c:#b8453f" aria-pressed="false" aria-label="สีแดงอิฐ"><span></span></button>
+            <button type="button" class="swatch" data-c="4" style="--c:#f2a35e" aria-pressed="false" aria-label="สีส้มพีช"><span></span></button>
+            <button type="button" class="swatch" data-c="5" style="--c:#e9c46a" aria-pressed="false" aria-label="สีเหลืองน้ำผึ้ง"><span></span></button>
+            <button type="button" class="swatch" data-c="6" style="--c:#8fc9a8" aria-pressed="false" aria-label="สีเขียวมิ้นต์"><span></span></button>
+            <button type="button" class="swatch" data-c="7" style="--c:#8fb6d9" aria-pressed="false" aria-label="สีฟ้าอ่อน"><span></span></button>
+            <button type="button" class="swatch" data-c="8" style="--c:#b39ddb" aria-pressed="false" aria-label="สีม่วงลาเวนเดอร์"><span></span></button>
+            <button type="button" class="swatch" data-c="9" style="--c:#f3e3d3" aria-pressed="false" aria-label="สีนู้ดครีม"><span></span></button>
+          </div>
+
+          <p class="ctl-label">2. เลือกลาย <small>ลายพิเศษ +฿20 ต่อนิ้ว</small></p>
+          <div class="pat-group" role="group" aria-label="เลือกลายเล็บ">
+            <button type="button" class="pat-btn on" data-p="solid" aria-pressed="true">สีทึบ<small>รวมในราคา</small></button>
+            <button type="button" class="pat-btn" data-p="glitter" aria-pressed="false">กลิตเตอร์<small>+฿20 / นิ้ว</small></button>
+            <button type="button" class="pat-btn" data-p="french" aria-pressed="false">เฟรนช์<small>+฿20 / นิ้ว</small></button>
+          </div>
+
+          <p class="ctl-label">3. เพิ่มเพชร <small>ไม่บังคับ</small></p>
+          <button type="button" id="gem-toggle" class="toggle" aria-pressed="false">
+            <span class="track" aria-hidden="true"><span class="knob"></span></span>
+            <span class="toggle-text">ติดเพชรนิ้วนี้<small>+฿15 ต่อนิ้ว เลือกได้ทีละนิ้ว</small></span>
+          </button>
+
+          <div class="price-box" aria-live="polite">
+            <p class="price-note">เจลมือ ฿350 · ลายพิเศษ +฿20/นิ้ว · เพชร +฿15/นิ้ว</p>
+            <div class="price-row"><span>เจลมือ (ตัดหนัง + จัดทรง)</span><b>฿350</b></div>
+            <div class="price-row dim" id="row-special"><span>ลายพิเศษ <em id="cnt-special">0</em> นิ้ว</span><b id="amt-special">+฿0</b></div>
+            <div class="price-row dim" id="row-gem"><span>เพชร <em id="cnt-gem">0</em> นิ้ว</span><b id="amt-gem">+฿0</b></div>
+            <div class="price-total"><span>รวมโดยประมาณ</span><b id="total">฿350</b></div>
+          </div>
+
+          <div class="paint-actions">
+            <button type="button" class="btn btn-ghost" id="btn-random">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+              สุ่มลาย
+            </button>
+            <button type="button" class="btn btn-pink" id="btn-book">
+              <svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-check"/></svg>
+              จองลายนี้
+            </button>
+          </div>
+
+          <div class="success" id="success" hidden>
+            <div class="success-head">
+              <span class="ok" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#ic-check"/></svg></span>
+              <h3>บันทึกลายของคุณแล้ว</h3>
+            </div>
+            <p>แคปหน้าจอนี้ หรือบอกลายกับช่างตอนจองคิวได้เลย ชำระเงินที่ร้าน ราคาอาจเปลี่ยนตามความยาวและทรงเล็บจริง</p>
+            <ul id="summary-list"></ul>
+            <div class="success-total"><span>ราคารวมโดยประมาณ</span><b id="summary-total">฿350</b></div>
+            <div class="paint-actions">
+              <a class="btn btn-pink" href="tel:023814567">โทรจองคิว 02-381-4567</a>
+              <button type="button" class="btn btn-ghost" id="btn-edit">แก้ไขลายอีกครั้ง</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag">Services &amp; Price</span>
+        <h2 id="services-title">บริการและราคา</h2>
+        <p>ราคารวมทุกอย่าง ไม่มีค่าใช้จ่ายแอบแฝง จองล่วงหน้ารับประกันคิวตรงเวลา</p>
+      </div>
+      <div class="svc-grid">
+        <article class="svc-card">
+          <span class="svc-ico" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="8" y="9.5" width="8" height="11" rx="3.5"/><path d="M10.5 9.5V7h3v2.5M12 3v4M12 13v4"/></svg>
+          </span>
+          <h3>เจลมือ</h3>
+          <p>ทาสีเจลมือ พร้อมตัดหนัง จัดทรงเล็บ เลือกสีได้กว่า 200 เฉด ติดทน 2–3 สัปดาห์</p>
+          <div class="svc-price"><small>เริ่มต้น</small><b>฿350</b></div>
+        </article>
+        <article class="svc-card">
+          <span class="svc-ico" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5c-4.2 0-7.3-2.6-8.3-6.2 2.1 0 4.2.9 5.4 2.1-.3-2.6.2-6.2 2.9-9.4 2.7 3.2 3.2 6.8 2.9 9.4 1.2-1.2 3.3-2.1 5.4-2.1-1 3.6-4.1 6.2-8.3 6.2z"/></svg>
+          </span>
+          <h3>เจลเท้า</h3>
+          <p>สปาเท้าเบื้องต้น ขัดส้นเท้า แช่น้ำอุ่น ทาสีเจลเงางาม อยู่ได้นาน 3–4 สัปดาห์</p>
+          <div class="svc-price"><small>เริ่มต้น</small><b>฿450</b></div>
+        </article>
+        <article class="svc-card">
+          <span class="svc-ico" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2.5" width="6" height="13" rx="3"/><path d="M9 16c0 2.6 1.3 5.5 3 5.5s3-2.9 3-5.5M12 5.5v5"/></svg>
+          </span>
+          <h3>ต่อเล็บ PVC</h3>
+          <p>ต่อเล็บทรงสี่เหลี่ยม อัลมอนด์ หรือทรงกลม ปรับความยาวได้ตามใจ เนียนเหมือนเล็บจริง</p>
+          <div class="svc-price"><small>เริ่มต้น</small><b>฿550</b></div>
+        </article>
+        <article class="svc-card">
+          <span class="svc-ico" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12C5.5 6.5 18.5 6.5 21.5 12 18.5 17.5 5.5 17.5 2.5 12z"/><circle cx="12" cy="12" r="3"/><path d="M7 6.9L5.8 4.8M12 6V3.5M17 6.9l1.2-2.1"/></svg>
+          </span>
+          <h3>ต่อขนตา</h3>
+          <p>เส้นต่อเส้นแบบธรรมชาติ หรือวอลลุ่มเข้มขึ้น น้ำหนักเบา ไม่หนักตา อยู่ได้ 3–4 สัปดาห์</p>
+          <div class="svc-price"><small>เริ่มต้น</small><b>฿690</b></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GALLERY ================= -->
+  <section class="gallery" id="gallery" aria-labelledby="gallery-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag">Our Work</span>
+        <h2 id="gallery-title">ผลงานจากช่างสีสัน</h2>
+        <p>ลายจริงหน้าร้าน ทั้งลายเรียบหรูและลายเพ้นต์ละเอียด ทำตามแบบที่ลูกค้าออกแบบมาได้ทุกแบบ</p>
+      </div>
+      <div class="gal-grid">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=1000&auto=format&fit=crop" alt="ช่างกำลังทาสีเจลให้ลูกค้าที่ร้านสีสัน" width="800" height="800" loading="lazy" decoding="async">
+          <figcaption>ดูแลทุกขั้นตอน ทีละนิ้ว</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?q=80&w=1000&auto=format&fit=crop" alt="เล็บเจลสีพาสเทลลายมินิมอล งานจริงจากร้าน" width="800" height="800" loading="lazy" decoding="async">
+          <figcaption>เจลพาสเทล ลายมินิมอล</figcaption>
+        </figure>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=1000&auto=format&fit=crop" alt="ต่อขนตาแบบเส้นต่อเส้น ดูเป็นธรรมชาติ" width="800" height="800" loading="lazy" decoding="async">
+          <figcaption>ต่อขนตาเส้นต่อเส้น</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/nail-hero.jpg" alt="มุมร้านสีสันสาขาเอกมัย โทนชมพูครีมอบอุ่น" width="900" height="1125" loading="lazy" decoding="async">
+          <figcaption>บรรยากาศร้าน สาขาเอกมัย</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REVIEWS ================= -->
+  <section id="reviews" aria-labelledby="reviews-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag">Reviews</span>
+        <h2 id="reviews-title">ลูกค้าพูดถึงสีสัน</h2>
+        <p>รีวิวจริงจากลูกค้าประจำ ทั้งงานเล็บและงานต่อขนตา</p>
+      </div>
+      <div class="rev-grid">
+        <article class="rev-card">
+          <div class="stars" aria-label="คะแนน 5 เต็ม 5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg>
+          </div>
+          <p>เล็บสวยตรงปกมาก ช่างใจเย็น เพ้นต์ลายละเอียดสุด ๆ ร้านน่ารัก กลิ่นหอม นั่งสบาย ไม่รู้สึกเหม็นสีเลย</p>
+          <div class="rev-who">
+            <span class="avatar" aria-hidden="true">ม</span>
+            <span><b>คุณมายด์</b><small>เจลมือ + ลายเพ้นต์</small></span>
+          </div>
+        </article>
+        <article class="rev-card">
+          <div class="stars" aria-label="คะแนน 5 เต็ม 5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg>
+          </div>
+          <p>ต่อขนตาที่นี่ครั้งที่สามแล้ว ติดทน เบาตา ไม่แสบเลย ช่างแนะนำทรงเข้ากับหน้าดีมาก ราคานี้ที่เอกมัยคือคุ้ม</p>
+          <div class="rev-who">
+            <span class="avatar" aria-hidden="true">ป</span>
+            <span><b>คุณปุ๋ย</b><small>ต่อขนตาวอลลุ่ม</small></span>
+          </div>
+        </article>
+        <article class="rev-card">
+          <div class="stars" aria-label="คะแนน 4 เต็ม 5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><use href="#ic-star"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="off"><use href="#ic-star"/></svg>
+          </div>
+          <p>ชอบที่ออกแบบลายในเว็บก่อนได้ ไปถึงร้านได้ลายตามที่คิดไว้เป๊ะ ไม่ต้องอธิบายยาว คิวเสาร์เต็มเร็ว แนะนำจองล่วงหน้า</p>
+          <div class="rev-who">
+            <span class="avatar" aria-hidden="true">น</span>
+            <span><b>คุณน้ำฝน</b><small>เจลเท้า + ต่อเล็บ PVC</small></span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#top"><b>สีสัน</b><small>SEESAN</small></a>
+        <p>สตูดิโอเล็บเจลและต่อขนตา โทนพาสเทลอบอุ่น ออกแบบลายของคุณเอง แล้วมาพบกันที่เอกมัย</p>
+      </div>
+      <div>
+        <h4>ติดต่อเรา</h4>
+        <ul class="foot-list">
+          <li>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            <span>123/4 ซอยเอกมัย 10 แขวงคลองตันเหนือ<br>เขตวัฒนา กรุงเทพมหานคร 10110</span>
+          </li>
+          <li>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>
+            <span><a href="tel:023814567">02-381-4567</a></span>
+          </li>
+          <li>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-5.2A8 8 0 1121 12z"/></svg>
+            <span>LINE: @seesan.nail · IG: seesan.nail</span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4>เวลาทำการ</h4>
+        <ul class="foot-list">
+          <li>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+            <span>เปิด อาทิตย์–ศุกร์ 10:00–20:00 น.<br>หยุดทุกวันเสาร์</span>
+          </li>
+          <li>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+            <span>รับจองล่วงหน้าเท่านั้น<br>walk-in ตามคิวว่าง</span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4>เมนูลัด</h4>
+        <ul class="foot-list">
+          <li><a href="#painter">ออกแบบเล็บของคุณ</a></li>
+          <li><a href="#services">บริการและราคา</a></li>
+          <li><a href="#gallery">ผลงาน</a></li>
+          <li><a href="#reviews">รีวิวลูกค้า</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2569 สีสัน SEESAN Nail &amp; Lash Studio · สงวนลิขสิทธิ์</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var FINGERS=['thumb','index','middle','ring','pinky'];
+  var FULL={thumb:'นิ้วหัวแม่มือ',index:'นิ้วชี้',middle:'นิ้วกลาง',ring:'นิ้วนาง',pinky:'นิ้วก้อย'};
+  var COLORS=[
+    {hex:'#e8899c',name:'ชมพูหวาน'},
+    {hex:'#f6c1cc',name:'ชมพูพาสเทล'},
+    {hex:'#d94f70',name:'ฟิวเซีย'},
+    {hex:'#b8453f',name:'แดงอิฐ'},
+    {hex:'#f2a35e',name:'ส้มพีช'},
+    {hex:'#e9c46a',name:'เหลืองน้ำผึ้ง'},
+    {hex:'#8fc9a8',name:'เขียวมิ้นต์'},
+    {hex:'#8fb6d9',name:'ฟ้าอ่อน'},
+    {hex:'#b39ddb',name:'ม่วงลาเวนเดอร์'},
+    {hex:'#f3e3d3',name:'นู้ดครีม'}
+  ];
+  var PATTERNS={solid:'สีทึบ',glitter:'กลิตเตอร์',french:'เฟรนช์'};
+  var BASE=350,PATTERN_FEE=20,GEM_FEE=15;
+  var state={selected:'middle',nails:{}};
+  FINGERS.forEach(function(f){state.nails[f]={color:(f==='middle'?0:1),pattern:'solid',gem:false};});
+  var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(s){return document.querySelector(s);}
+  function $$(s){return Array.prototype.slice.call(document.querySelectorAll(s));}
+  function nailG(f){return document.querySelector('.nail-g[data-f="'+f+'"]');}
+  function fingerG(f){return document.querySelector('.finger[data-f="'+f+'"]');}
+
+  function renderNail(f){
+    var n=state.nails[f],g=nailG(f);
+    g.style.setProperty('--nail',COLORS[n.color].hex);
+    g.setAttribute('data-pattern',n.pattern);
+    g.setAttribute('data-gem',n.gem?'1':'0');
+  }
+  function renderSelection(){
+    FINGERS.forEach(function(f){
+      var on=f===state.selected,fg=fingerG(f);
+      fg.classList.toggle('selected',on);
+      fg.setAttribute('aria-pressed',on?'true':'false');
+    });
+    $$('.dot').forEach(function(d){
+      var f=d.getAttribute('data-f');
+      d.classList.toggle('on',f===state.selected);
+      d.setAttribute('aria-pressed',f===state.selected?'true':'false');
+      d.querySelector('span').style.background=COLORS[state.nails[f].color].hex;
+    });
+    $('#cur-finger').textContent=FULL[state.selected];
+    var n=state.nails[state.selected];
+    $$('.swatch').forEach(function(s){
+      var on=Number(s.getAttribute('data-c'))===n.color;
+      s.classList.toggle('on',on);
+      s.setAttribute('aria-pressed',on?'true':'false');
+    });
+    $$('.pat-btn').forEach(function(b){
+      var on=b.getAttribute('data-p')===n.pattern;
+      b.classList.toggle('on',on);
+      b.setAttribute('aria-pressed',on?'true':'false');
+    });
+    $('#gem-toggle').setAttribute('aria-pressed',n.gem?'true':'false');
+  }
+  function renderPrice(){
+    var special=0,gems=0;
+    FINGERS.forEach(function(f){
+      var n=state.nails[f];
+      if(n.pattern!=='solid')special++;
+      if(n.gem)gems++;
+    });
+    $('#cnt-special').textContent=special;
+    $('#amt-special').textContent='+฿'+(special*PATTERN_FEE);
+    $('#cnt-gem').textContent=gems;
+    $('#amt-gem').textContent='+฿'+(gems*GEM_FEE);
+    $('#row-special').classList.toggle('dim',special===0);
+    $('#row-gem').classList.toggle('dim',gems===0);
+    $('#total').textContent='฿'+(BASE+special*PATTERN_FEE+gems*GEM_FEE);
+  }
+  function renderAll(){FINGERS.forEach(renderNail);renderSelection();renderPrice();}
+  function select(f){state.selected=f;renderSelection();}
+
+  FINGERS.forEach(function(f){
+    var fg=fingerG(f);
+    fg.addEventListener('click',function(){select(f);});
+    fg.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();select(f);}
+    });
+  });
+  $$('.dot').forEach(function(d){
+    d.addEventListener('click',function(){select(d.getAttribute('data-f'));});
+  });
+  $$('.swatch').forEach(function(s){
+    s.addEventListener('click',function(){
+      state.nails[state.selected].color=Number(s.getAttribute('data-c'));
+      renderNail(state.selected);renderSelection();
+    });
+  });
+  $$('.pat-btn').forEach(function(b){
+    b.addEventListener('click',function(){
+      state.nails[state.selected].pattern=b.getAttribute('data-p');
+      renderNail(state.selected);renderSelection();renderPrice();
+    });
+  });
+  $('#gem-toggle').addEventListener('click',function(){
+    var n=state.nails[state.selected];
+    n.gem=!n.gem;
+    renderNail(state.selected);renderSelection();renderPrice();
+  });
+  $('#btn-random').addEventListener('click',function(){
+    FINGERS.forEach(function(f){
+      var n=state.nails[f];
+      n.color=Math.floor(Math.random()*COLORS.length);
+      var r=Math.random();
+      n.pattern=r<0.45?'solid':(r<0.75?'glitter':'french');
+      n.gem=Math.random()<0.3;
+    });
+    renderAll();
+    $('#success').hidden=true;
+  });
+  $('#btn-book').addEventListener('click',function(){
+    var list=$('#summary-list');
+    list.innerHTML='';
+    FINGERS.forEach(function(f){
+      var n=state.nails[f];
+      var parts=[COLORS[n.color].name,PATTERNS[n.pattern]];
+      if(n.gem)parts.push('ติดเพชร');
+      var li=document.createElement('li');
+      li.innerHTML='<span class="dot-mini" style="background:'+COLORS[n.color].hex+'"></span><b>'+FULL[f]+'</b><span>'+parts.join(' · ')+'</span>';
+      list.appendChild(li);
+    });
+    $('#summary-total').textContent=$('#total').textContent;
+    var box=$('#success');
+    box.hidden=false;
+    box.scrollIntoView({behavior:reduced?'auto':'smooth',block:'nearest'});
+  });
+  $('#btn-edit').addEventListener('click',function(){$('#success').hidden=true;});
+  renderAll();
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

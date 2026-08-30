@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ปลาน้อย PLANOI — โรงเรียนสอนว่ายน้ำเด็กและผู้ใหญ่ บางนา</title>
+<meta name="description" content="โรงเรียนสอนว่ายน้ำปลาน้อย บางนา สอนเด็ก 3 ปีถึงผู้ใหญ่ ครูมีใบอนุญาต น้ำอุ่นระบบเกลือ กลุ่มเล็ก 4 คน ว่ายน้ำได้ใน 8 ครั้งแรก">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Bai+Jamjuree:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4fbfe;
+  --card:#ffffff;
+  --pool:#19a7ce;
+  --deep:#0e7490;
+  --sun:#ffd166;
+  --ink:#123a4a;
+  --muted:#5d8494;
+  --line:#d3ecf5;
+  --radius:20px;
+  --shadow:0 10px 30px rgba(14,116,144,.10);
+  --shadow-lg:0 18px 48px rgba(14,116,144,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Bai Jamjuree','Fredoka',system-ui,sans-serif;
+  font-size:16px;line-height:1.65;color:var(--ink);background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--deep)}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:6px}
+.skip-link{
+  position:absolute;left:-9999px;top:0;background:var(--deep);color:#fff;
+  padding:12px 20px;border-radius:0 0 12px 0;z-index:200;text-decoration:none;
+}
+.skip-link:focus{left:0}
+.container{max-width:1140px;margin:0 auto;padding:0 20px}
+.en{font-family:'Fredoka','Bai Jamjuree',sans-serif}
+h1,h2,h3{line-height:1.2;font-weight:600}
+.section{padding:84px 0}
+.section-head{max-width:640px;margin:0 auto 44px;text-align:center}
+.section-head .kicker{
+  display:inline-block;background:#e2f5fc;color:var(--deep);font-weight:600;font-size:14px;
+  padding:6px 16px;border-radius:999px;margin-bottom:14px;letter-spacing:.2px;
+}
+.section-head h2{font-size:clamp(1.7rem,3.4vw,2.4rem);margin-bottom:12px}
+.section-head p{color:var(--muted)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:12px 26px;border-radius:999px;border:0;cursor:pointer;
+  font-family:inherit;font-size:16px;font-weight:600;text-decoration:none;
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+}
+.btn-primary{background:var(--pool);color:#fff;box-shadow:0 8px 20px rgba(25,167,206,.35)}
+.btn-primary:hover{background:var(--deep);transform:translateY(-2px)}
+.btn-ghost{background:#fff;color:var(--deep);border:2px solid var(--line)}
+.btn-ghost:hover{border-color:var(--pool);transform:translateY(-2px)}
+.btn-sun{background:var(--sun);color:var(--ink)}
+.btn-sun:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(255,209,102,.45)}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:100;background:rgba(244,251,254,.92);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+}
+.nav-in{display:flex;align-items:center;gap:24px;min-height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand .fish{width:38px;height:38px;flex:0 0 auto}
+.brand .b-name{font-family:'Fredoka','Bai Jamjuree',sans-serif;font-weight:600;font-size:22px;letter-spacing:.3px}
+.brand .b-en{display:block;font-size:11px;letter-spacing:3px;color:var(--pool);font-weight:600;text-transform:uppercase;line-height:1}
+.nav-links{display:flex;gap:4px;margin-left:auto;list-style:none}
+.nav-links a{
+  display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border-radius:12px;
+  color:var(--ink);text-decoration:none;font-weight:500;
+}
+.nav-links a:hover{background:#e2f5fc;color:var(--deep)}
+.nav .btn{margin-left:8px;min-height:44px;padding:10px 20px}
+.menu-btn{
+  display:none;margin-left:auto;min-width:44px;min-height:44px;border:2px solid var(--line);
+  background:#fff;border-radius:12px;cursor:pointer;align-items:center;justify-content:center;
+}
+.menu-btn svg{width:22px;height:22px;stroke:var(--ink)}
+@media (max-width:860px){
+  .menu-btn{display:inline-flex}
+  .nav-links{
+    display:none;position:absolute;top:68px;left:0;right:0;background:#fff;
+    flex-direction:column;padding:12px 20px 18px;border-bottom:1px solid var(--line);gap:2px;
+    box-shadow:var(--shadow);
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{width:100%}
+  .nav .btn{margin-left:0}
+}
+
+/* ---------- Hero ---------- */
+.hero{padding:64px 0 80px;position:relative;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;right:-140px;top:-140px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,209,102,.35),rgba(255,209,102,0) 70%);
+}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(2rem,4.6vw,3.3rem);margin:14px 0 16px}
+.hero h1 .hl{color:var(--pool);position:relative;white-space:nowrap}
+.hero h1 .hl svg{position:absolute;left:0;right:0;bottom:-10px;width:100%;height:12px}
+.hero .kicker{
+  display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
+  color:var(--deep);font-weight:600;font-size:14px;padding:8px 16px;border-radius:999px;box-shadow:var(--shadow);
+}
+.hero p.lead{color:var(--muted);font-size:17px;max-width:52ch}
+.hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 26px;list-style:none}
+.hero-chips li{
+  display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
+  padding:10px 16px;border-radius:999px;font-weight:500;font-size:15px;min-height:44px;
+}
+.hero-chips svg{width:18px;height:18px;stroke:var(--pool);flex:0 0 auto}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero-img{position:relative}
+.hero-img img{
+  width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:28px;
+  box-shadow:var(--shadow-lg);background:linear-gradient(160deg,#bdeafc,#7fd3ef);
+}
+.hero-img .float-card{
+  position:absolute;left:-18px;bottom:22px;background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);
+  padding:14px 18px;display:flex;align-items:center;gap:12px;border:1px solid var(--line);
+}
+.float-card .num{font-family:'Fredoka',sans-serif;font-size:26px;font-weight:600;color:var(--pool);line-height:1}
+.float-card .lbl{font-size:13px;color:var(--muted);line-height:1.35}
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero{padding:44px 0 64px}
+  .hero-img .float-card{left:12px}
+}
+
+/* ---------- Skill tree ---------- */
+#path{background:linear-gradient(180deg,var(--bg),#e8f6fc 60%,var(--bg))}
+.tree-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:36px;align-items:start}
+.tree-stage{position:relative;aspect-ratio:1000/520}
+.tree-stage svg.water-path{position:absolute;inset:0;width:100%;height:100%}
+.water-path .track{fill:none;stroke:var(--line);stroke-width:7;stroke-linecap:round}
+.water-path .progress{
+  fill:none;stroke:var(--pool);stroke-width:7;stroke-linecap:round;
+  stroke-dasharray:100;stroke-dashoffset:100;
+  transition:stroke-dashoffset 1.1s cubic-bezier(.4,0,.2,1);
+  filter:drop-shadow(0 3px 6px rgba(25,167,206,.4));
+}
+.nodes{position:absolute;inset:0}
+.node{
+  position:absolute;transform:translate(-50%,-50%);background:none;border:0;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px;border-radius:18px;
+  font-family:inherit;min-width:64px;min-height:64px;
+}
+.node .dot{
+  width:58px;height:58px;border-radius:50%;background:var(--card);border:3px solid var(--line);
+  display:grid;place-items:center;font-family:'Fredoka','Bai Jamjuree',sans-serif;
+  font-size:22px;font-weight:600;color:var(--deep);box-shadow:var(--shadow);
+  transition:transform .25s ease,background .25s ease,border-color .25s ease;
+}
+.node .name{
+  font-size:14px;font-weight:600;color:var(--ink);background:rgba(255,255,255,.92);
+  padding:3px 12px;border-radius:999px;border:1px solid var(--line);white-space:nowrap;
+}
+.node:hover .dot{border-color:var(--pool);transform:scale(1.08)}
+.node[aria-pressed="true"] .dot{
+  background:var(--pool);color:#fff;border-color:var(--deep);transform:scale(1.28);
+  box-shadow:0 12px 26px rgba(25,167,206,.45);
+}
+.node[aria-pressed="true"] .name{background:var(--deep);color:#fff;border-color:var(--deep)}
+.tree-hint{margin-top:14px;color:var(--muted);font-size:14px;text-align:center}
+
+.tree-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow-lg);padding:26px;position:sticky;top:92px;
+}
+.tc-inner{transition:opacity .18s ease,transform .18s ease}
+.tc-inner.swap{opacity:0;transform:translateY(10px)}
+.tc-step{
+  display:inline-block;background:var(--sun);color:var(--ink);font-weight:600;font-size:13px;
+  padding:5px 14px;border-radius:999px;margin-bottom:12px;
+}
+.tree-card h3{font-size:26px}
+.tc-en{font-family:'Fredoka',sans-serif;color:var(--pool);font-weight:500;letter-spacing:.5px;margin-bottom:8px}
+.tc-tag{color:var(--muted);margin-bottom:16px}
+.tree-card h4{font-size:15px;color:var(--deep);margin-bottom:8px}
+.tc-skills{list-style:none;margin-bottom:18px}
+.tc-skills li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:15.5px}
+.tc-skills svg{width:20px;height:20px;flex:0 0 auto;margin-top:2px;stroke:var(--pool)}
+.tc-meta{border-top:1px dashed var(--line);padding-top:14px;display:grid;gap:10px;margin-bottom:20px}
+.tc-meta .row{display:flex;gap:10px;align-items:flex-start;font-size:15.5px}
+.tc-meta svg{width:20px;height:20px;flex:0 0 auto;stroke:var(--deep);margin-top:2px}
+.tc-meta .k{color:var(--muted);min-width:86px}
+.tc-meta .v{font-weight:600}
+.tc-price{font-family:'Fredoka','Bai Jamjuree',sans-serif;color:var(--pool);font-size:20px}
+@media (max-width:900px){
+  .tree-grid{grid-template-columns:1fr}
+  .tree-card{position:static}
+  .tree-stage{aspect-ratio:auto;display:block}
+  .tree-stage svg.water-path{display:none}
+  .nodes{position:relative;display:flex;flex-direction:column;gap:10px}
+  .nodes::before{
+    content:"";position:absolute;left:34px;top:30px;bottom:30px;width:5px;border-radius:4px;
+    background:var(--line);
+  }
+  .node{
+    position:relative;transform:none;flex-direction:row;gap:14px;width:100%;text-align:left;
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 14px;min-height:64px;
+  }
+  .node .name{font-size:16px;border:0;background:none;padding:0}
+  .node[aria-pressed="true"]{border-color:var(--pool);background:#f0fafe}
+  .node[aria-pressed="true"] .name{color:var(--deep)}
+  .node[aria-pressed="true"] .dot{transform:scale(1.08)}
+}
+
+/* ---------- Courses ---------- */
+.course-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.course{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow);
+  transition:transform .2s ease,box-shadow .2s ease;position:relative;
+}
+.course:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.course.hot{border:2px solid var(--sun)}
+.hot-badge{
+  position:absolute;top:-13px;left:20px;background:var(--sun);color:var(--ink);
+  font-size:13px;font-weight:600;padding:4px 14px;border-radius:999px;box-shadow:var(--shadow);
+}
+.course .c-icon{
+  width:52px;height:52px;border-radius:16px;background:#e2f5fc;display:grid;place-items:center;
+}
+.course .c-icon svg{width:26px;height:26px;stroke:var(--pool)}
+.course h3{font-size:19px}
+.course .age{font-size:14px;color:var(--deep);font-weight:600}
+.course ul{list-style:none;color:var(--muted);font-size:15px;display:grid;gap:5px;margin-bottom:4px}
+.course ul li{display:flex;gap:8px;align-items:flex-start}
+.course ul li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pool);margin-top:9px;flex:0 0 auto}
+.course .price{
+  margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);
+  display:flex;align-items:baseline;gap:6px;
+}
+.price .p-num{font-family:'Fredoka','Bai Jamjuree',sans-serif;font-size:26px;font-weight:600;color:var(--pool)}
+.price .p-per{font-size:13.5px;color:var(--muted)}
+.course .c-link{
+  display:inline-flex;align-items:center;justify-content:center;min-height:46px;margin-top:10px;
+  border-radius:12px;border:2px solid var(--line);color:var(--deep);font-weight:600;text-decoration:none;
+  transition:border-color .18s ease,background .18s ease;
+}
+.course .c-link:hover{border-color:var(--pool);background:#f0fafe}
+@media (max-width:1020px){.course-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.course-grid{grid-template-columns:1fr}}
+
+/* ---------- Place & teachers ---------- */
+#place{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.place-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+.place-photos{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:14px}
+.place-photos .ph-main{grid-column:1/-1}
+.place-photos img{
+  width:100%;height:100%;object-fit:cover;border-radius:18px;box-shadow:var(--shadow);
+  aspect-ratio:16/10;background:#dff3fb;
+}
+.place-photos .ph-main img{aspect-ratio:16/8.5}
+.place-txt h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:14px}
+.place-txt>p{color:var(--muted);margin-bottom:18px}
+.feat{list-style:none;display:grid;gap:10px;margin-bottom:26px}
+.feat li{display:flex;gap:12px;align-items:flex-start}
+.feat svg{width:22px;height:22px;stroke:var(--pool);flex:0 0 auto;margin-top:3px}
+.teachers{display:grid;gap:10px}
+.teacher{
+  display:flex;gap:14px;align-items:center;background:var(--bg);border:1px solid var(--line);
+  border-radius:16px;padding:12px 16px;
+}
+.teacher .avatar{
+  width:52px;height:52px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;
+  font-family:'Fredoka','Bai Jamjuree',sans-serif;font-weight:600;font-size:18px;color:#fff;
+}
+.teacher:nth-child(1) .avatar{background:var(--pool)}
+.teacher:nth-child(2) .avatar{background:var(--deep)}
+.teacher:nth-child(3) .avatar{background:#f4b942}
+.teacher .t-name{font-weight:600}
+.teacher .t-role{font-size:14px;color:var(--muted)}
+@media (max-width:900px){.place-grid{grid-template-columns:1fr;gap:32px}}
+
+/* ---------- Safety ---------- */
+.safe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.safe{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px;box-shadow:var(--shadow);
+}
+.safe .s-icon{
+  width:56px;height:56px;border-radius:18px;background:#fff7e0;display:grid;place-items:center;margin-bottom:16px;
+}
+.safe .s-icon svg{width:28px;height:28px;stroke:var(--deep)}
+.safe h3{font-size:18px;margin-bottom:8px}
+.safe p{color:var(--muted);font-size:15.5px}
+@media (max-width:820px){.safe-grid{grid-template-columns:1fr}}
+
+/* ---------- CTA band ---------- */
+.cta-band{
+  background:linear-gradient(120deg,var(--pool),var(--deep));border-radius:28px;color:#fff;
+  padding:52px 40px;text-align:center;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;
+}
+.cta-band::before,.cta-band::after{
+  content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.10);
+}
+.cta-band::before{width:220px;height:220px;left:-70px;top:-90px}
+.cta-band::after{width:280px;height:280px;right:-100px;bottom:-140px}
+.cta-band h2{font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:10px;position:relative}
+.cta-band p{opacity:.92;margin-bottom:26px;position:relative}
+.cta-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;position:relative}
+.cta-actions .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
+.cta-actions .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.12)}
+.cta-band{margin-bottom:84px}
+
+/* ---------- Footer ---------- */
+footer{background:var(--ink);color:#cfe6ef;padding:56px 0 0}
+.f-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px;padding-bottom:40px}
+.f-brand .b-name{color:#fff;font-size:24px}
+.f-brand p{margin-top:12px;font-size:15px;color:#9fc3d1;max-width:32ch}
+footer h3{color:#fff;font-size:16px;margin-bottom:14px}
+footer ul{list-style:none;display:grid;gap:9px;font-size:15px}
+footer a{color:#cfe6ef;text-decoration:none;min-height:24px;display:inline-block}
+footer a:hover{color:var(--sun)}
+.f-bottom{
+  border-top:1px solid rgba(255,255,255,.14);padding:18px 0;font-size:14px;color:#9fc3d1;
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;
+}
+@media (max-width:860px){.f-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.f-grid{grid-template-columns:1fr}}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+@media (max-width:520px){
+  .section{padding:64px 0}
+  .cta-band{padding:42px 22px}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<header class="nav">
+  <div class="container nav-in">
+    <a class="brand" href="#top" aria-label="ปลาน้อย กลับขึ้นด้านบน">
+      <svg class="fish" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <path d="M6 24c6-8 14-12 22-12 6 0 11 3 14 8-3 5-8 8-14 8-8 0-16-4-22-4z" fill="#19a7ce"/>
+        <path d="M6 24l-3-6c4 1 7 3 9 6-2 3-5 5-9 6l3-6z" fill="#0e7490"/>
+        <circle cx="34" cy="21" r="2.4" fill="#fff"/>
+        <path d="M20 18c2 2 2 8 0 12" stroke="#0e7490" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="12" r="2" fill="#ffd166"/>
+        <circle cx="18" cy="8" r="1.5" fill="#ffd166"/>
+      </svg>
+      <span>
+        <span class="b-name">ปลาน้อย</span>
+        <span class="b-en en">Planoi Swim School</span>
+      </span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="เปิดเมนู">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16"/>
+      </svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#path">เส้นทางการเรียน</a></li>
+      <li><a href="#courses">คอร์สเรียน</a></li>
+      <li><a href="#place">สระและครู</a></li>
+      <li><a href="#contact">ติดต่อ</a></li>
+    </ul>
+    <a class="btn btn-primary" href="#trial">ทดลองฟรี</a>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="container hero-grid">
+      <div>
+        <span class="kicker">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0e7490" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5-4.9-2.6L7.1 18.2 8 12.7 4 8.8 9.5 8z"/></svg>
+          โรงเรียนสอนว่ายน้ำเด็กและผู้ใหญ่ · บางนา
+        </span>
+        <h1>ว่ายน้ำได้ใน<br><span class="hl">8 ครั้งแรก<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9c30-6 60-6 97-3s67 3 97-3" fill="none" stroke="#ffd166" stroke-width="5" stroke-linecap="round"/></svg></span></h1>
+        <p class="lead">สอนตั้งแต่เด็ก 3 ปีจนถึงผู้ใหญ่ที่เริ่มจากศูนย์ ด้วยหลักสูตรเป็นขั้นบันได ครูผู้สอนมีใบอนุญาต สระน้ำอุ่นระบบเกลืออ่อนโยนต่อผิว และเรียนกลุ่มเล็กไม่เกิน 4 คนต่อครู 1 ท่าน</p>
+        <ul class="hero-chips">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l7 4v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+            ครูมีใบอนุญาตผู้สอน
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3a5 5 0 0 0-5 5c0 3 2 4 2 7h6c0-3 2-4 2-7a5 5 0 0 0-5-5z"/><path d="M9 19h6"/></svg>
+            น้ำอุ่น 31–32 องศา
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9.5" r="2.5"/><path d="M3 20c0-3 2.5-5 5-5s5 2 5 5M13.5 20c.3-2.4 1.9-4 3.7-4 1.5 0 2.8 1.2 2.8 4"/></svg>
+            กลุ่มเล็ก 4 คน
+          </li>
+        </ul>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#trial">จองทดลองเรียนฟรี 1 ครั้ง</a>
+          <a class="btn btn-ghost" href="#path">ดูเส้นทางการเรียน</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="../assets/swim-hero.jpg" alt="สระว่ายน้ำน้ำใสสีฟ้าของโรงเรียนปลาน้อย พร้อมอุปกรณ์ฝึกว่ายน้ำสีสันสดใสสำหรับเด็ก" width="900" height="675" fetchpriority="high">
+        <div class="float-card" aria-hidden="true">
+          <span class="num en">98%</span>
+          <span class="lbl">นักเรียนลอยตัวได้<br>ภายใน 4 ครั้งแรก</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILL TREE -->
+  <section class="section" id="path">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker en">Skill Path</span>
+        <h2>เส้นทางจากกลัวน้ำถึงว่ายได้</h2>
+        <p>5 ระดับที่ออกแบบโดยครูผู้เชี่ยวชาญ กดที่แต่ละระดับเพื่อดูว่าน้อง ๆ จะได้เรียนรู้อะไรบ้าง</p>
+      </div>
+      <div class="tree-grid">
+        <div>
+          <div class="tree-stage" id="treeStage">
+            <svg class="water-path" viewBox="0 0 1000 520" aria-hidden="true">
+              <path id="trackPath" class="track" d="M60 430 C 160 452, 205 262, 300 250 C 395 238, 420 402, 520 370 C 620 338, 640 202, 740 190 C 830 179, 865 92, 950 80"/>
+              <path id="progressPath" class="progress" pathLength="100" d="M60 430 C 160 452, 205 262, 300 250 C 395 238, 420 402, 520 370 C 620 338, 640 202, 740 190 C 830 179, 865 92, 950 80"/>
+            </svg>
+            <div class="nodes" id="nodes" role="group" aria-label="เลือกดูรายละเอียดแต่ละระดับ">
+              <button type="button" class="node" data-i="0" aria-pressed="true">
+                <span class="dot en">1</span><span class="name">น้องน้ำ</span>
+              </button>
+              <button type="button" class="node" data-i="1" aria-pressed="false">
+                <span class="dot en">2</span><span class="name">ลอยตัว</span>
+              </button>
+              <button type="button" class="node" data-i="2" aria-pressed="false">
+                <span class="dot en">3</span><span class="name">กลบเกลื่อน</span>
+              </button>
+              <button type="button" class="node" data-i="3" aria-pressed="false">
+                <span class="dot en">4</span><span class="name">ฟรีสไตล์</span>
+              </button>
+              <button type="button" class="node" data-i="4" aria-pressed="false">
+                <span class="dot en">5</span><span class="name">ผีเสื้อ</span>
+              </button>
+            </div>
+          </div>
+          <p class="tree-hint">กดเลือกแต่ละระดับ เพื่อดูทักษะ ระยะเวลา และราคาคอร์ส</p>
+        </div>
+
+        <aside class="tree-card" aria-live="polite" aria-label="รายละเอียดระดับที่เลือก">
+          <div class="tc-inner" id="tcInner">
+            <span class="tc-step" id="lvStep">ระดับ 1 จาก 5</span>
+            <h3 id="lvName">น้องน้ำ</h3>
+            <p class="tc-en" id="lvEn">Water Friend</p>
+            <p class="tc-tag" id="lvTag"></p>
+            <h4>ทักษะที่ได้เรียน</h4>
+            <ul class="tc-skills" id="lvSkills"></ul>
+            <div class="tc-meta">
+              <div class="row">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                <span class="k">ระยะเวลา</span><span class="v" id="lvTime"></span>
+              </div>
+              <div class="row">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3-6 7-6s7 2.4 7 6"/></svg>
+                <span class="k">เหมาะกับ</span><span class="v" id="lvWho"></span>
+              </div>
+              <div class="row">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 4h12M6 9h12M9 4c4 0 6 1.6 6 4s-2 4-6 4l7 8"/></svg>
+                <span class="k">ราคาคอร์ส</span><span class="v tc-price" id="lvPrice"></span>
+              </div>
+            </div>
+            <a class="btn btn-primary" href="#courses" style="width:100%">ดูคอร์สที่เกี่ยวข้อง</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="section" id="courses" style="padding-top:20px">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker en">Courses</span>
+        <h2>คอร์สเรียน 4 แบบ เลือกตามวัยและพื้นฐาน</h2>
+        <p>ทุกคอร์สเรียนกลุ่มเล็กไม่เกิน 4 คน มีครูดูแลใกล้ชิดตลอดคาบ และประเมินผลทุกสัปดาห์</p>
+      </div>
+      <div class="course-grid">
+        <article class="course reveal">
+          <div class="c-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.5 4 6 6.8 6 10a6 6 0 1 1-12 0c0-3.2 2.5-6 6-10z"/></svg>
+          </div>
+          <h3>ปลานิดหน่อย</h3>
+          <p class="age">เด็ก 3–5 ปี</p>
+          <ul>
+            <li>8 ครั้ง · ครั้งละ 30 นาที</li>
+            <li>ปูพื้นฐานคุ้นน้ำผ่านเกม</li>
+            <li>ผู้ปกครองนั่งดูได้ข้างสระ</li>
+          </ul>
+          <div class="price"><span class="p-num">3,200</span><span class="p-per">บาท / คอร์ส</span></div>
+          <a class="c-link" href="#trial">สอบถามคอร์สนี้</a>
+        </article>
+
+        <article class="course hot reveal">
+          <span class="hot-badge">ยอดนิยม</span>
+          <div class="c-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2M3 20c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2"/><circle cx="16" cy="7" r="2.4"/><path d="M4 12l7-3 3 3"/></svg>
+          </div>
+          <h3>ปลาจิ๋ว</h3>
+          <p class="age">เด็ก 6–12 ปี</p>
+          <ul>
+            <li>8 ครั้ง · ครั้งละ 45 นาที</li>
+            <li>ลอยตัว ท่ากบ ถึงฟรีสไตล์</li>
+            <li>สอนทักษะเอาตัวรอดในน้ำ</li>
+          </ul>
+          <div class="price"><span class="p-num">3,600</span><span class="p-per">บาท / คอร์ส</span></div>
+          <a class="c-link" href="#trial">สอบถามคอร์สนี้</a>
+        </article>
+
+        <article class="course reveal">
+          <div class="c-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3-6 7-6s7 2.4 7 6"/></svg>
+          </div>
+          <h3>ผู้ใหญ่เริ่มศูนย์</h3>
+          <p class="age">อายุ 13 ปีขึ้นไป</p>
+          <ul>
+            <li>8 ครั้ง · ครั้งละ 60 นาที</li>
+            <li>คลายกลัวน้ำอย่างเป็นขั้นตอน</li>
+            <li>เลือกเรียนเดี่ยวได้ (+400 บาท)</li>
+          </ul>
+          <div class="price"><span class="p-num">4,200</span><span class="p-per">บาท / คอร์ส</span></div>
+          <a class="c-link" href="#trial">สอบถามคอร์สนี้</a>
+        </article>
+
+        <article class="course reveal">
+          <div class="c-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg>
+          </div>
+          <h3>เทคนิคปรับจังหวะ</h3>
+          <p class="age">ว่ายเป็นแล้ว อยากว่ายดี</p>
+          <ul>
+            <li>6 ครั้ง · ครั้งละ 60 นาที</li>
+            <li>วิเคราะห์ท่าทีละจุด พร้อมวิดีโอ</li>
+            <li>เหมาะก่อนแข่งขันหรือออกกำลังกาย</li>
+          </ul>
+          <div class="price"><span class="p-num">3,900</span><span class="p-per">บาท / คอร์ส</span></div>
+          <a class="c-link" href="#trial">สอบถามคอร์สนี้</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLACE & TEACHERS -->
+  <section class="section" id="place">
+    <div class="container place-grid">
+      <div class="place-photos reveal">
+        <div class="ph-main">
+          <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?q=80&w=1000&auto=format&fit=crop" alt="สระว่ายน้ำมาตรฐานกว้างยาว น้ำใสสะอาดพร้อมเลนฝึกซ้อม" loading="lazy" width="1000" height="560">
+        </div>
+        <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1000&auto=format&fit=crop" alt="นักเรียนกำลังฝึกว่ายน้ำท่าฟรีสไตล์ในสระ" loading="lazy" width="1000" height="625">
+        <img src="https://images.unsplash.com/photo-1520962880247-cfaf541c8724?q=80&w=1000&auto=format&fit=crop" alt="ครูผู้สอนกำลังสอนเด็กว่ายน้ำอย่างใกล้ชิดในสระน้ำตื้น" loading="lazy" width="1000" height="625">
+      </div>
+      <div class="place-txt reveal">
+        <span class="kicker" style="display:inline-block;background:#e2f5fc;color:var(--deep);font-weight:600;font-size:14px;padding:6px 16px;border-radius:999px;margin-bottom:14px">Our Pool &amp; Coaches</span>
+        <h2>สระอบอุ่น ปลอดภัย และครูที่ใส่ใจ</h2>
+        <p>สถานที่ออกแบบมาเพื่อเด็กเล็กโดยเฉพาะ ทั้งสระตื้นสำหรับหัดเดินในน้ำ และสระฝึก 25 เมตรสำหรับระดับกลางขึ้นไป</p>
+        <ul class="feat">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 16c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2M3 20c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2M7 13V6a2 2 0 0 1 4 0M11 13V6a2 2 0 0 1 4 0"/></svg>
+            สระเด็กตื้น 0.6 เมตร และสระฝึก 25 เมตร แยกโซนชัดเจน
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3a5 5 0 0 0-5 5c0 3 2 4 2 7h6c0-3 2-4 2-7a5 5 0 0 0-5-5z"/><path d="M9 19h6"/></svg>
+            น้ำอุ่น 31–32 องศา ระบบเกลือ ไม่แสบตา อ่อนโยนต่อผิวเด็ก
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 2l7 4v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+            ห้องอาบน้ำอุ่น จุดเปลี่ยนเสื้อผ้าเด็ก และมุมรอของผู้ปกครอง
+          </li>
+        </ul>
+        <div class="teachers">
+          <div class="teacher">
+            <span class="avatar" aria-hidden="true">ฟ</span>
+            <div>
+              <p class="t-name">ครูเฟิร์น · หัวหน้าผู้สอน</p>
+              <p class="t-role">ประสบการณ์ 12 ปี · ใบรับรองผู้สอนว่ายน้ำและกู้ชีพ</p>
+            </div>
+          </div>
+          <div class="teacher">
+            <span class="avatar" aria-hidden="true">น</span>
+            <div>
+              <p class="t-name">ครูนิล · ผู้เชี่ยวชาญเด็กเล็ก</p>
+              <p class="t-role">จบการศึกษาปฐมวัย · สอนเด็ก 3–6 ปีมากกว่า 800 คน</p>
+            </div>
+          </div>
+          <div class="teacher">
+            <span class="avatar" aria-hidden="true">บ</span>
+            <div>
+              <p class="t-name">ครูบอย · โค้ชเทคนิค</p>
+              <p class="t-role">อดีตนักว่ายน้ำเยาวชนทีมชาติ · ดูแลคอร์สปรับจังหวะ</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAFETY -->
+  <section class="section" id="safety">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker en">Safety First</span>
+        <h2>ปลอดภัยในทุกคาบเรียน</h2>
+        <p>พ่อแม่วางใจได้ เราดูแลน้อง ๆ เหมือนลูกหลานของเราเอง</p>
+      </div>
+      <div class="safe-grid">
+        <article class="safe reveal">
+          <div class="s-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l7 4v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3>ครูมีใบอนุญาตทุกท่าน</h3>
+          <p>ผู้สอนทุกคนผ่านการอบรมการสอนว่ายน้ำเด็ก ปฐมพยาบาล และการช่วยชีวิตในน้ำ พร้อมต่ออายุใบรับรองทุกปี</p>
+        </article>
+        <article class="safe reveal">
+          <div class="s-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a5 5 0 0 0-5 5c0 3 2 4 2 7h6c0-3 2-4 2-7a5 5 0 0 0-5-5z"/><path d="M9 19h6"/></svg>
+          </div>
+          <h3>น้ำอุ่นระบบเกลือ</h3>
+          <p>คุมอุณหภูมิ 31–32 องศาตลอดปี เด็กไม่หนาวสั่น ระบบกรองเกลือคลอรีนต่ำ ผิวแพ้ง่ายเรียนได้</p>
+        </article>
+        <article class="safe reveal">
+          <div class="s-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9.5" r="2.5"/><path d="M3 20c0-3 2.5-5 5-5s5 2 5 5M13.5 20c.3-2.4 1.9-4 3.7-4 1.5 0 2.8 1.2 2.8 4"/></svg>
+          </div>
+          <h3>กลุ่มเล็ก มีผู้ช่วยประจำสระ</h3>
+          <p>ครู 1 ท่านดูแลไม่เกิน 4 คน และมีผู้ช่วยเฝ้าขอบสระตลอดเวลา ทุกคาบมีเช็กลิสต์ความปลอดภัยก่อนลงน้ำ</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <div class="container" id="trial">
+    <div class="cta-band reveal">
+      <h2>พร้อมลงน้ำครั้งแรกแล้วหรือยัง</h2>
+      <p>จองทดลองเรียนฟรี 1 ครั้ง (มูลค่า 550 บาท) พร้อมรับการประเมินระดับจากครูผู้สอน ไม่มีข้อผูกมัด</p>
+      <div class="cta-actions">
+        <a class="btn btn-sun" href="tel:021234567">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.5 2.9.7a2 2 0 0 1 1.6 2z"/></svg>
+          โทร 02-123-4567
+        </a>
+        <a class="btn btn-ghost" href="#contact">LINE: @planoi</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer id="contact">
+  <div class="container">
+    <div class="f-grid">
+      <div class="f-brand">
+        <span class="b-name en">ปลาน้อย PLANOI</span>
+        <p>โรงเรียนสอนว่ายน้ำสำหรับเด็กและผู้ใหญ่ สอนด้วยใจ ปลอดภัยทุกคาบ ว่ายได้จริงตั้งแต่คอร์สแรก</p>
+      </div>
+      <div>
+        <h3>ที่ตั้ง</h3>
+        <ul>
+          <li>123 ถนนบางนา-ตราด กม.5</li>
+          <li>แขวงบางนา เขตบางนา</li>
+          <li>กรุงเทพมหานคร 10260</li>
+          <li>จอดรถฟรีหน้าสถานที่</li>
+        </ul>
+      </div>
+      <div>
+        <h3>เวลาเปิดสอน</h3>
+        <ul>
+          <li>อังคาร–ศุกร์ 10:00–19:00</li>
+          <li>เสาร์–อาทิตย์ 09:00–18:00</li>
+          <li>หยุดทุกวันจันทร์</li>
+          <li>รอบเรียนทุกชั่วโมงครึ่ง</li>
+        </ul>
+      </div>
+      <div>
+        <h3>ติดต่อเรา</h3>
+        <ul>
+          <li><a href="tel:021234567">โทร 02-123-4567</a></li>
+          <li><a href="tel:0812345678">มือถือ 081-234-5678</a></li>
+          <li>LINE: @planoi</li>
+          <li><a href="mailto:hello@planoi.example">hello@planoi.example</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2569 ปลาน้อย PLANOI Swim School — เว็บไซต์ตัวอย่างเพื่อการนำเสนอ</span>
+      <span class="en">Swim happy, swim safe.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Level data ---------- */
+  var LEVELS = [
+    {
+      name:'น้องน้ำ', en:'Water Friend',
+      tag:'คุ้นชินกับน้ำแบบสนุก ผ่านเกมและเพลง ไม่บังคับหน้าจมน้ำ',
+      time:'4 ครั้ง · ครั้งละ 30 นาที',
+      who:'เด็ก 3–5 ปี หรือผู้เริ่มต้นที่ยังกลัวน้ำ',
+      price:'2,400 บาท',
+      skills:[
+        'ฝึกหายใจเป็นจังหวะและเป่าฟองใต้น้ำ',
+        'กล้าเอาหน้าแนบน้ำโดยไม่หวาดกลัว',
+        'เดิน กระโดด และทรงตัวในน้ำตื้น',
+        'จับขอบสระและปีนขึ้นลงอย่างปลอดภัย'
+      ]
+    },
+    {
+      name:'ลอยตัว', en:'Float & Balance',
+      tag:'สร้างความมั่นใจให้ร่างกายลอยบนน้ำได้ด้วยตัวเอง',
+      time:'4 ครั้ง · ครั้งละ 30–45 นาที',
+      who:'นักเรียนที่คุ้นน้ำแล้ว แต่ร่างกายยังจม',
+      price:'2,400 บาท',
+      skills:[
+        'ลอยตัวคว่ำและลอยตัวหงายได้นาน 10 วินาที',
+        'ยืนขึ้นจากท่าลอยอย่างปลอดภัย',
+        'ผลักตัวไถลออกจากขอบสระ',
+        'กลั้นหายใจใต้น้ำโดยไม่สำลัก'
+      ]
+    },
+    {
+      name:'กลบเกลื่อน', en:'Kick & Glide',
+      tag:'ท่ากบ ท่าแรกที่ว่ายได้จริงทั่วทั้งสระ',
+      time:'6 ครั้ง · ครั้งละ 45 นาที',
+      who:'เด็ก 5 ปีขึ้นไปที่ลอยตัวได้แล้ว',
+      price:'3,300 บาท',
+      skills:[
+        'เตะขากบถูกจังหวะพร้อมไถลตัว',
+        'วาดแขนประสานกับการหายใจ',
+        'ว่ายท่ากบต่อเนื่อง 10–15 เมตร',
+        'พลิกตัวจากคว่ำเป็นหงายในน้ำลึก'
+      ]
+    },
+    {
+      name:'ฟรีสไตล์', en:'Freestyle',
+      tag:'ท่าพื้นฐานของการว่ายน้ำเพื่อออกกำลังกาย',
+      time:'8 ครั้ง · ครั้งละ 45–60 นาที',
+      who:'ผู้ที่ว่ายท่ากบได้และอยากว่ายเร็วขึ้น',
+      price:'4,400 บาท',
+      skills:[
+        'ตีขาฟรีสไตล์ต่อเนื่อง 15 เมตร',
+        'วักแขนสลับพร้อมหายใจข้าง',
+        'ว่ายฟรีสไตล์ครบ 25 เมตร',
+        'กลับตัวปลายสระอย่างถูกวิธี'
+      ]
+    },
+    {
+      name:'ผีเสื้อ', en:'Butterfly',
+      tag:'ท่าสุดท้ายในเส้นทาง สวยงามและทรงพลังที่สุด',
+      time:'8 ครั้ง · ครั้งละ 60 นาที',
+      who:'นักเรียนที่ผ่านฟรีสไตล์และต้องการความท้าทาย',
+      price:'4,800 บาท',
+      skills:[
+        'จังหวะดอลฟินคิกที่ขับจากสะโพก',
+        'วักแขนพร้อมกันเหนือผิวน้ำ',
+        'ประสานแขน ขา และลมหายใจเป็นจังหวะเดียว',
+        'ว่ายผีเสื้อครบ 25 เมตรอย่างถูกเทคนิค'
+      ]
+    }
+  ];
+  var FRACTIONS = [0.05, 0.275, 0.5, 0.725, 0.95];
+
+  /* ---------- Mobile nav ---------- */
+  var menuBtn = document.getElementById('menuBtn');
+  var navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.addEventListener('click', function(e){
+    if (e.target.tagName === 'A') {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');
+    }
+  });
+
+  /* ---------- Skill tree ---------- */
+  var stage = document.getElementById('treeStage');
+  var track = document.getElementById('trackPath');
+  var progress = document.getElementById('progressPath');
+  var nodesWrap = document.getElementById('nodes');
+  var nodeBtns = Array.prototype.slice.call(nodesWrap.querySelectorAll('.node'));
+
+  var el = {
+    step: document.getElementById('lvStep'),
+    name: document.getElementById('lvName'),
+    en: document.getElementById('lvEn'),
+    tag: document.getElementById('lvTag'),
+    skills: document.getElementById('lvSkills'),
+    time: document.getElementById('lvTime'),
+    who: document.getElementById('lvWho'),
+    price: document.getElementById('lvPrice'),
+    inner: document.getElementById('tcInner')
+  };
+
+  var CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>';
+
+  function renderLevel(i){
+    var L = LEVELS[i];
+    el.step.textContent = 'ระดับ ' + (i+1) + ' จาก 5';
+    el.name.textContent = L.name;
+    el.en.textContent = L.en;
+    el.tag.textContent = L.tag;
+    el.time.textContent = L.time;
+    el.who.textContent = L.who;
+    el.price.textContent = L.price;
+    el.skills.innerHTML = L.skills.map(function(s){
+      return '<li>' + CHECK_SVG + '<span>' + s + '</span></li>';
+    }).join('');
+  }
+
+  function setProgress(i){
+    var target = 100 - FRACTIONS[i] * 100;
+    progress.style.strokeDashoffset = String(target);
+  }
+
+  var current = 0;
+  function select(i, instant){
+    if (i === current && !instant) return;
+    current = i;
+    nodeBtns.forEach(function(b, bi){
+      b.setAttribute('aria-pressed', bi === i ? 'true' : 'false');
+    });
+    setProgress(i);
+    if (reduced || instant) {
+      renderLevel(i);
+      return;
+    }
+    el.inner.classList.add('swap');
+    window.setTimeout(function(){
+      renderLevel(i);
+      el.inner.classList.remove('swap');
+    }, 180);
+  }
+
+  nodeBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      select(parseInt(btn.getAttribute('data-i'), 10), false);
+    });
+  });
+
+  /* position nodes exactly on the path (desktop SVG coordinates) */
+  function placeNodes(){
+    try {
+      var len = track.getTotalLength();
+      nodeBtns.forEach(function(btn, i){
+        var pt = track.getPointAtLength(FRACTIONS[i] * len);
+        btn.style.left = (pt.x / 1000 * 100) + '%';
+        btn.style.top = (pt.y / 520 * 100) + '%';
+      });
+    } catch (err) {
+      /* keep default flow if SVG API unavailable */
+    }
+  }
+  placeNodes();
+  window.addEventListener('resize', placeNodes);
+
+  /* initial card + draw line when scrolled into view */
+  renderLevel(0);
+  progress.style.strokeDashoffset = '100';
+  var drew = false;
+  function drawOnce(){
+    if (drew) return;
+    drew = true;
+    window.requestAnimationFrame(function(){
+      window.setTimeout(function(){ setProgress(current); }, reduced ? 0 : 150);
+    });
+  }
+  if ('IntersectionObserver' in window && !reduced) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { drawOnce(); io.disconnect(); }
+      });
+    }, { threshold: 0.35 });
+    io.observe(stage);
+  } else {
+    drawOnce();
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduced) {
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          ro.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(n){ ro.observe(n); });
+  } else {
+    revealEls.forEach(function(n){ n.classList.add('in'); });
+  }
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

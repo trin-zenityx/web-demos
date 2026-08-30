@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CODE KID — โรงเรียนโค้ดดิ้งและหุ่นยนต์สำหรับเด็ก 6–14 ปี</title>
+<meta name="description" content="CODE KID โรงเรียนสอนโค้ดดิ้ง เกม และหุ่นยนต์สำหรับเด็กอายุ 6–14 ปี ที่ปิ่นเกล้า เรียนสนุกแบบลงมือทำจริง สมัครทดลองเรียนฟรี">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf7ec;
+  --card:#fff;
+  --ink:#1f1b12;
+  --sun:#ffd400;
+  --blue:#2f6ff2;
+  --muted:#7a6f5c;
+  --line:#ece2c9;
+  --red:#ef4444;
+  --green:#22c55e;
+  --orange:#ff8c1a;
+  --pink:#ff6ec7;
+  --radius:0;
+  --pxcut: polygon(
+    0 8px,4px 8px,4px 4px,8px 4px,8px 0,
+    calc(100% - 8px) 0,calc(100% - 8px) 4px,calc(100% - 4px) 4px,calc(100% - 4px) 8px,100% 8px,
+    100% calc(100% - 8px),calc(100% - 4px) calc(100% - 8px),calc(100% - 4px) calc(100% - 4px),calc(100% - 8px) calc(100% - 4px),calc(100% - 8px) 100%,
+    8px 100%,8px calc(100% - 4px),4px calc(100% - 4px),4px calc(100% - 8px),0 calc(100% - 8px)
+  );
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{
+  font-family:'Chakra Petch',sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'Space Mono',monospace}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:2px}
+::selection{background:var(--sun);color:var(--ink)}
+.container{width:min(1120px,92%);margin:0 auto}
+section{scroll-margin-top:96px}
+
+/* ---------- pixel helpers ---------- */
+.px{clip-path:var(--pxcut)}
+.shadow-ink{box-shadow:8px 8px 0 var(--ink)}
+.shadow-sun{box-shadow:8px 8px 0 var(--sun)}
+.dshadow-ink{filter:drop-shadow(6px 6px 0 var(--ink))}
+.dshadow-sun{filter:drop-shadow(6px 6px 0 var(--sun))}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:48px;padding:12px 26px;
+  font-family:'Space Mono',monospace;font-weight:700;font-size:15px;
+  text-decoration:none;cursor:pointer;border:3px solid var(--ink);
+  background:var(--card);color:var(--ink);
+  transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;
+  user-select:none;
+}
+.btn-sun{background:var(--sun)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn.px{box-shadow:none}
+.btn.px.dshadow-ink:hover{filter:drop-shadow(8px 8px 0 var(--ink));transform:translate(-2px,-2px)}
+.btn.px.dshadow-ink:active{filter:drop-shadow(2px 2px 0 var(--ink));transform:translate(2px,2px)}
+.btn:not(.px){box-shadow:5px 5px 0 var(--ink)}
+.btn:not(.px):hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.btn:not(.px):active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+
+/* ---------- nav ---------- */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:var(--bg);
+  border-bottom:3px solid var(--ink);
+}
+.nav{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  flex-wrap:wrap;padding:14px 0;
+}
+.logo{
+  font-family:'Space Mono',monospace;font-weight:700;font-size:20px;letter-spacing:1px;
+  background:var(--card);border:3px solid var(--ink);
+  padding:8px 14px;text-decoration:none;
+  box-shadow:5px 5px 0 var(--sun);
+  display:inline-flex;align-items:center;gap:8px;min-height:44px;
+}
+.logo svg{flex:none}
+.nav-links{
+  display:flex;align-items:center;gap:4px;flex-wrap:wrap;list-style:none;
+}
+.nav-links a{
+  display:inline-flex;align-items:center;min-height:44px;
+  padding:8px 14px;text-decoration:none;font-weight:600;font-size:15px;
+  border:3px solid transparent;
+}
+.nav-links a:hover{border-color:var(--ink);background:var(--card)}
+.nav-cta{padding:10px 18px;font-size:14px}
+
+/* ---------- hero ---------- */
+.hero{padding:64px 0 72px;position:relative;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:44px 44px;opacity:.45;
+}
+.hero-grid{
+  position:relative;display:grid;grid-template-columns:1.05fr .95fr;
+  gap:48px;align-items:center;
+}
+.tag{
+  display:inline-block;font-family:'Space Mono',monospace;font-weight:700;font-size:13px;
+  background:var(--ink);color:var(--sun);padding:6px 14px;margin-bottom:20px;
+  letter-spacing:1px;
+}
+h1{
+  font-size:clamp(30px,4.6vw,52px);line-height:1.2;font-weight:700;
+  letter-spacing:-.5px;margin-bottom:20px;
+}
+h1 .hl{
+  background:var(--sun);padding:2px 14px 4px;display:inline-block;
+  clip-path:var(--pxcut);
+}
+.hero p.lead{font-size:17px;color:var(--muted);max-width:52ch;margin-bottom:28px}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:36px}
+.hero-stats{display:flex;gap:14px;flex-wrap:wrap}
+.stat{
+  background:var(--card);border:3px solid var(--ink);padding:12px 18px;
+  box-shadow:5px 5px 0 var(--line);min-width:130px;
+}
+.stat b{font-family:'Space Mono',monospace;font-size:22px;display:block;line-height:1.2}
+.stat span{font-size:13.5px;color:var(--muted)}
+.hero-media{position:relative}
+.hero-media .frame{
+  border:4px solid var(--ink);background:var(--card);
+  box-shadow:12px 12px 0 var(--sun);
+  padding:10px;
+}
+.hero-media img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+.hero-caption{
+  position:absolute;left:-14px;bottom:-16px;
+  font-family:'Space Mono',monospace;font-size:12.5px;font-weight:700;
+  background:var(--blue);color:#fff;border:3px solid var(--ink);
+  padding:8px 14px;box-shadow:4px 4px 0 var(--ink);
+}
+.pixel-deco{position:absolute;width:12px;height:12px;background:var(--sun);pointer-events:none}
+.pd1{top:8%;right:4%;box-shadow:24px 0 0 var(--blue),48px 0 0 var(--sun),0 24px 0 var(--blue),24px 24px 0 var(--sun),48px 24px 0 var(--blue)}
+.pd2{bottom:6%;left:2%;box-shadow:24px 0 0 var(--red),0 24px 0 var(--red),24px 24px 0 var(--blue)}
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .pixel-deco{display:none}
+}
+
+/* ---------- section headers ---------- */
+.sec{padding:72px 0}
+.sec-head{margin-bottom:40px;max-width:640px}
+.sec-tag{
+  display:inline-block;font-family:'Space Mono',monospace;font-weight:700;font-size:13px;
+  background:var(--card);border:3px solid var(--ink);padding:5px 12px;margin-bottom:14px;
+  box-shadow:4px 4px 0 var(--sun);letter-spacing:1px;
+}
+h2{font-size:clamp(24px,3.2vw,36px);line-height:1.25;font-weight:700;letter-spacing:-.3px}
+.sec-head p{color:var(--muted);margin-top:10px;font-size:16px}
+
+/* ---------- pixel editor ---------- */
+.editor-sec{background:var(--card);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+.editor-grid{display:grid;grid-template-columns:auto 1fr;gap:44px;align-items:start}
+.canvas-wrap{
+  border:4px solid var(--ink);background:#fff;padding:12px;
+  box-shadow:10px 10px 0 var(--sun);width:min(400px,100%);
+}
+#pxCanvas{
+  width:100%;aspect-ratio:1/1;display:block;background:#fff;
+  image-rendering:pixelated;image-rendering:crisp-edges;
+  touch-action:none;cursor:crosshair;
+}
+.canvas-label{
+  display:flex;justify-content:space-between;align-items:center;margin-top:10px;
+  font-family:'Space Mono',monospace;font-size:12.5px;color:var(--muted);
+}
+.editor-controls{display:flex;flex-direction:column;gap:22px}
+.control-label{font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;margin-bottom:8px}
+.palette{display:flex;gap:10px;flex-wrap:wrap}
+.swatch{
+  width:44px;height:44px;border:3px solid var(--ink);cursor:pointer;padding:0;
+  transition:transform .1s ease;position:relative;background:#fff;
+}
+.swatch:hover{transform:translateY(-2px)}
+.swatch[aria-pressed="true"]{transform:translateY(-4px);box-shadow:0 4px 0 var(--ink)}
+.swatch[aria-pressed="true"]::after{
+  content:"";position:absolute;inset:-9px;border:3px dashed var(--ink);pointer-events:none;
+}
+.swatch.eraser{
+  display:inline-flex;align-items:center;justify-content:center;background:var(--card);
+}
+.editor-actions{display:flex;gap:12px;flex-wrap:wrap}
+.editor-note{
+  border-left:6px solid var(--sun);background:var(--bg);padding:14px 18px;
+  font-size:15px;color:var(--muted);
+}
+.editor-note b{color:var(--ink)}
+#editorStatus{font-family:'Space Mono',monospace;font-size:13px;color:var(--muted);min-height:20px}
+@media (max-width:860px){
+  .editor-grid{grid-template-columns:1fr}
+  .canvas-wrap{margin:0 auto}
+}
+
+/* ---------- courses ---------- */
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.course{
+  background:var(--card);border:3px solid var(--ink);padding:28px 24px;
+  display:flex;flex-direction:column;gap:14px;position:relative;
+  transition:transform .15s ease,box-shadow .15s ease;
+  box-shadow:6px 6px 0 var(--line);
+}
+.course:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--sun)}
+.course .age{
+  position:absolute;top:-16px;left:20px;
+  font-family:'Space Mono',monospace;font-weight:700;font-size:13px;
+  padding:5px 12px;border:3px solid var(--ink);background:var(--sun);
+}
+.course:nth-child(2) .age{background:var(--blue);color:#fff}
+.course:nth-child(3) .age{background:var(--ink);color:var(--sun)}
+.course h3{font-size:21px;margin-top:8px}
+.course .desc{color:var(--muted);font-size:15px}
+.course ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin:4px 0 8px}
+.course ul li{display:flex;gap:10px;align-items:flex-start;font-size:15px}
+.course ul li::before{
+  content:"";width:10px;height:10px;background:var(--sun);border:2px solid var(--ink);
+  flex:none;margin-top:6px;
+}
+.price{
+  margin-top:auto;padding-top:14px;border-top:2px dashed var(--line);
+  display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+}
+.price b{font-family:'Space Mono',monospace;font-size:26px}
+.price span{color:var(--muted);font-size:14px}
+.course .btn{margin-top:14px;width:100%}
+@media (max-width:900px){.cards3{grid-template-columns:1fr}}
+
+/* ---------- works ---------- */
+.works-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.work{
+  background:var(--card);border:3px solid var(--ink);overflow:hidden;
+  box-shadow:5px 5px 0 var(--line);transition:transform .15s ease,box-shadow .15s ease;
+}
+.work:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--blue)}
+.work img{aspect-ratio:1/1;object-fit:cover;width:100%;border-bottom:3px solid var(--ink)}
+.work-body{padding:14px 16px 16px}
+.work-body b{display:block;font-size:15.5px;line-height:1.4}
+.work-body span{font-family:'Space Mono',monospace;font-size:12.5px;color:var(--muted)}
+.work .lvl{
+  display:inline-block;margin-top:8px;font-family:'Space Mono',monospace;font-size:11.5px;
+  border:2px solid var(--ink);padding:2px 8px;background:var(--sun);
+}
+@media (max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.works-grid{grid-template-columns:1fr}}
+
+/* ---------- teachers ---------- */
+.teach-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.teacher{
+  background:var(--card);border:3px solid var(--ink);padding:26px;
+  display:flex;gap:20px;align-items:flex-start;box-shadow:6px 6px 0 var(--sun);
+}
+.teacher .avatar{flex:none;border:3px solid var(--ink);background:var(--bg)}
+.teacher h3{font-size:19px;margin-bottom:4px}
+.teacher .role{font-family:'Space Mono',monospace;font-size:13px;color:var(--blue);margin-bottom:8px}
+.teacher p{font-size:15px;color:var(--muted)}
+@media (max-width:820px){.teach-grid{grid-template-columns:1fr}}
+
+/* ---------- reviews ---------- */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.review{
+  background:var(--card);border:3px solid var(--ink);padding:26px 24px;
+  box-shadow:6px 6px 0 var(--line);display:flex;flex-direction:column;gap:14px;
+}
+.review .stars{display:flex;gap:4px}
+.review blockquote{font-size:15.5px;line-height:1.7}
+.review .who{margin-top:auto;display:flex;align-items:center;gap:12px;padding-top:12px;border-top:2px dashed var(--line)}
+.review .who .chip{
+  width:42px;height:42px;flex:none;border:3px solid var(--ink);
+  font-family:'Space Mono',monospace;font-weight:700;font-size:15px;
+  display:flex;align-items:center;justify-content:center;background:var(--sun);
+}
+.review .who b{display:block;font-size:15px}
+.review .who span{font-size:13px;color:var(--muted)}
+@media (max-width:900px){.rev-grid{grid-template-columns:1fr}}
+
+/* ---------- contact cta ---------- */
+.contact-box{
+  background:var(--sun);border:4px solid var(--ink);padding:48px 40px;
+  box-shadow:12px 12px 0 var(--ink);
+  display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:center;
+}
+.contact-box h2{margin-bottom:12px}
+.contact-box p{font-size:16px;max-width:46ch}
+.contact-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+.contact-list li{display:flex;align-items:center;gap:14px;font-size:16px}
+.contact-list .ic{
+  width:46px;height:46px;flex:none;border:3px solid var(--ink);background:var(--card);
+  display:flex;align-items:center;justify-content:center;
+}
+.contact-list b{font-family:'Space Mono',monospace}
+@media (max-width:860px){.contact-box{grid-template-columns:1fr;padding:36px 26px}}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:var(--bg);padding:56px 0 32px;margin-top:0}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px;margin-bottom:36px}
+.foot-logo{
+  font-family:'Space Mono',monospace;font-weight:700;font-size:20px;
+  display:inline-block;background:var(--ink);border:3px solid var(--bg);
+  padding:8px 14px;box-shadow:5px 5px 0 var(--sun);margin-bottom:16px;
+}
+footer p,footer a{color:#cfc6b2;font-size:15px;text-decoration:none}
+footer a:hover{color:var(--sun)}
+footer h4{font-family:'Space Mono',monospace;font-size:14px;letter-spacing:1px;color:var(--sun);margin-bottom:14px}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.foot-bottom{
+  border-top:2px solid #3a342a;padding-top:20px;
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-family:'Space Mono',monospace;font-size:12.5px;color:#8f8672;
+}
+@media (max-width:820px){.foot-grid{grid-template-columns:1fr}}
+
+@media (max-width:640px){
+  .sec{padding:56px 0}
+  .hero{padding:44px 0 56px}
+  .nav{justify-content:center}
+  .nav-links{order:3;width:100%;justify-content:center}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="logo" href="#top" aria-label="CODE KID กลับขึ้นด้านบน">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><rect x="0" y="6" width="6" height="6" fill="#2f6ff2"/><rect x="6" y="0" width="6" height="6" fill="#ffd400"/><rect x="6" y="12" width="6" height="6" fill="#ffd400"/><rect x="12" y="6" width="6" height="6" fill="#2f6ff2"/></svg>
+      CODE&nbsp;KID
+    </a>
+    <ul class="nav-links">
+      <li><a href="#editor">ลองวาดพิกเซล</a></li>
+      <li><a href="#courses">คอร์สเรียน</a></li>
+      <li><a href="#works">ผลงานนักเรียน</a></li>
+      <li><a href="#teachers">ครูผู้สอน</a></li>
+      <li><a href="#reviews">รีวิว</a></li>
+    </ul>
+    <a class="btn btn-sun px dshadow-ink nav-cta" href="#contact">สมัครทดลอง</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="pixel-deco pd1" aria-hidden="true"></div>
+    <div class="pixel-deco pd2" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div>
+        <span class="tag">CODING & ROBOTICS SCHOOL · ปิ่นเกล้า</span>
+        <h1>เล่นเกมให้จบ<br><span class="hl">สร้างเกมให้เป็น</span></h1>
+        <p class="lead">โรงเรียนโค้ดดิ้งและหุ่นยนต์สำหรับเด็กอายุ 6–14 ปี เรียนสนุกแบบลงมือทำจริง ตั้งแต่เรียงบล็อกเกมแรก จนถึงเขียน Python สร้างเกมของตัวเอง</p>
+        <div class="hero-ctas">
+          <a class="btn btn-sun px dshadow-ink" href="#contact">สมัครทดลองเรียนฟรี</a>
+          <a class="btn px dshadow-ink" href="#courses">ดูคอร์สเรียน</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><b>400+</b><span>นักเรียนที่เคยเรียน</span></div>
+          <div class="stat"><b>8 ปี</b><span>ประสบการณ์สอนเด็ก</span></div>
+          <div class="stat"><b>96%</b><span>ผู้ปกครองพึงพอใจ</span></div>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="frame">
+          <img src="../assets/stem-hero.jpg" alt="เด็กๆ ในห้องเรียน CODE KID กำลังต่อหุ่นยนต์และเขียนโค้ดบนแท็บเล็ตอย่างสนุก" width="800" height="600">
+        </div>
+        <span class="hero-caption">ห้องเรียนจริง · สาขาปิ่นเกล้า</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIXEL ART EDITOR -->
+  <section class="sec editor-sec" id="editor">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-tag">[ ลองเลย ]</span>
+        <h2>ลองวาดตัวละครของคุณ</h2>
+        <p>เครื่องมือวาดพิกเซลอาร์ตแบบเดียวกับที่นักเรียนใช้ในคลาส — คลิกหรือลากเพื่อวาด แล้วดาวน์โหลดผลงานกลับบ้านได้เลย</p>
+      </div>
+      <div class="editor-grid">
+        <div class="canvas-wrap">
+          <canvas id="pxCanvas" width="16" height="16" tabindex="0" aria-label="ผืนผ้าใบวาดพิกเซลอาร์ต 16 คูณ 16 ช่อง ใช้ปุ่มลูกศรเพื่อเลื่อนและปุ่ม Space เพื่อวาด"></canvas>
+          <div class="canvas-label"><span>GRID 16×16</span><span id="editorStatus">สีที่เลือก: ดำ</span></div>
+        </div>
+        <div class="editor-controls">
+          <div>
+            <div class="control-label">พาเลตสี</div>
+            <div class="palette" id="palette" role="group" aria-label="เลือกสีสำหรับวาด">
+              <button class="swatch" data-color="#1f1b12" data-name="ดำ" aria-pressed="true" aria-label="สีดำ" style="background:#1f1b12"></button>
+              <button class="swatch" data-color="#ffffff" data-name="ขาว" aria-pressed="false" aria-label="สีขาว" style="background:#ffffff"></button>
+              <button class="swatch" data-color="#ffd400" data-name="เหลือง" aria-pressed="false" aria-label="สีเหลือง" style="background:#ffd400"></button>
+              <button class="swatch" data-color="#2f6ff2" data-name="น้ำเงิน" aria-pressed="false" aria-label="สีน้ำเงิน" style="background:#2f6ff2"></button>
+              <button class="swatch" data-color="#ef4444" data-name="แดง" aria-pressed="false" aria-label="สีแดง" style="background:#ef4444"></button>
+              <button class="swatch" data-color="#22c55e" data-name="เขียว" aria-pressed="false" aria-label="สีเขียว" style="background:#22c55e"></button>
+              <button class="swatch" data-color="#ff8c1a" data-name="ส้ม" aria-pressed="false" aria-label="สีส้ม" style="background:#ff8c1a"></button>
+              <button class="swatch" data-color="#ff6ec7" data-name="ชมพู" aria-pressed="false" aria-label="สีชมพู" style="background:#ff6ec7"></button>
+              <button class="swatch eraser" id="eraserBtn" data-name="ยางลบ" aria-pressed="false" aria-label="ยางลบ">
+                <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="11" width="14" height="6" fill="#ff6ec7" stroke="#1f1b12" stroke-width="2"/><rect x="6" y="5" width="11" height="6" fill="#fff" stroke="#1f1b12" stroke-width="2" transform="rotate(-45 11.5 8)"/></svg>
+              </button>
+            </div>
+          </div>
+          <div>
+            <div class="control-label">เครื่องมือ</div>
+            <div class="editor-actions">
+              <button class="btn" id="clearBtn" type="button">ล้างผืนผ้าใบ</button>
+              <button class="btn btn-blue" id="randomBtn" type="button">สุ่มตัวอย่าง</button>
+              <button class="btn btn-sun" id="downloadBtn" type="button">
+                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="7" y="1" width="2" height="8" fill="currentColor"/><rect x="4" y="7" width="2" height="2" fill="currentColor"/><rect x="10" y="7" width="2" height="2" fill="currentColor"/><rect x="5" y="9" width="6" height="2" fill="currentColor"/><rect x="2" y="13" width="12" height="2" fill="currentColor"/></svg>
+                ดาวน์โหลด PNG
+              </button>
+            </div>
+          </div>
+          <p class="editor-note"><b>รู้ไหม?</b> เด็กๆ เรียนวาดสไปรท์แบบนี้ตั้งแต่คลาสแรกในคอร์ส <b>Game Maker</b> ก่อนเอาตัวละครไปใส่ในเกมที่ตัวเองเขียนขึ้น</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="sec" id="courses">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-tag">[ คอร์สเรียน ]</span>
+        <h2>เลือกคอร์สตามวัย</h2>
+        <p>หลักสูตรออกแบบตามพัฒนาการของเด็กแต่ละช่วงวัย เทอมละ 16 ชั่วโมง เรียนเสาร์–อาทิตย์ กลุ่มละไม่เกิน 8 คน</p>
+      </div>
+      <div class="cards3">
+        <article class="course">
+          <span class="age">6–8 ปี</span>
+          <h3>Scratch Jr จิ๋วโค้ดเดอร์</h3>
+          <p class="desc">ปูพื้นฐานตรรกะการเขียนโปรแกรมผ่านการเรียงบล็อกสีสันสดใส ไม่ต้องอ่านออกก็เรียนได้</p>
+          <ul>
+            <li>สร้างการ์ตูนและเกมง่ายๆ เกมแรกของตัวเอง</li>
+            <li>ฝึกการคิดเป็นขั้นตอนและแก้ปัญหา</li>
+            <li>กิจกรรม Unplugged เสริมทุกสัปดาห์</li>
+          </ul>
+          <div class="price"><b>฿3,900</b><span>/ เทอม (16 ชม.)</span></div>
+          <a class="btn btn-sun" href="#contact">จองที่เรียน</a>
+        </article>
+        <article class="course">
+          <span class="age">9–11 ปี</span>
+          <h3>Scratch + หุ่นยนต์</h3>
+          <p class="desc">พัฒนาเกม 2D แบบมีด่านและระบบคะแนน พร้อมสั่งการหุ่นยนต์ mBot ให้เคลื่อนที่จริง</p>
+          <ul>
+            <li>ออกแบบเกม ตัวละคร และระบบเล่นเองทั้งหมด</li>
+            <li>ต่อและเขียนโปรแกรมหุ่นยนต์เซนเซอร์จริง</li>
+            <li>มีวันนำเสนอผลงานปิดท้ายเทอม</li>
+          </ul>
+          <div class="price"><b>฿4,900</b><span>/ เทอม (16 ชม.)</span></div>
+          <a class="btn btn-sun" href="#contact">จองที่เรียน</a>
+        </article>
+        <article class="course">
+          <span class="age">12–14 ปี</span>
+          <h3>Python + สร้างเกม</h3>
+          <p class="desc">ก้าวสู่การเขียนโค้ดจริงด้วย Python และไลบรารี Pygame สร้างเกมที่เล่นได้บนคอมพิวเตอร์</p>
+          <ul>
+            <li>พื้นฐาน Python ตัวแปร ลูป และฟังก์ชัน</li>
+            <li>สร้างเกมยิงอวกาศฉบับสมบูรณ์ 1 เกม</li>
+            <li>เตรียมพื้นฐานสอบแข่งขันโค้ดดิ้ง</li>
+          </ul>
+          <div class="price"><b>฿5,900</b><span>/ เทอม (16 ชม.)</span></div>
+          <a class="btn btn-sun" href="#contact">จองที่เรียน</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section class="sec" id="works" style="padding-top:0">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-tag">[ ผลงานนักเรียน ]</span>
+        <h2>โปรเจกต์ที่เด็กๆ ทำจริง</h2>
+        <p>ทุกเทอมนักเรียนจะได้ผลงานชิ้นสุดท้ายกลับบ้าน ตั้งแต่เกม แอป ไปจนถึงหุ่นยนต์ที่เคลื่อนไหวได้</p>
+      </div>
+      <div class="works-grid">
+        <article class="work">
+          <img src="https://images.unsplash.com/photo-1580584126903-c17d41830450?q=80&w=1000&auto=format&fit=crop" alt="หุ่นยนต์ต้นแบบของนักเรียน CODE KID ที่ต่อและเขียนโปรแกรมเอง" loading="lazy" width="500" height="500">
+          <div class="work-body">
+            <b>หุ่นยนต์เดินตามเส้น</b>
+            <span>น้องมิก · 9 ขวบ</span><br>
+            <span class="lvl">Scratch + Robot</span>
+          </div>
+        </article>
+        <article class="work">
+          <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=1000&auto=format&fit=crop" alt="โค้ดเกมผจญภัยอวกาศที่นักเรียนเขียนด้วย Python บนหน้าจอคอมพิวเตอร์" loading="lazy" width="500" height="500">
+          <div class="work-body">
+            <b>เกมยิงยานอวกาศ</b>
+            <span>น้องต้น · 13 ขวบ</span><br>
+            <span class="lvl">Python</span>
+          </div>
+        </article>
+        <article class="work">
+          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1000&auto=format&fit=crop" alt="นักเรียนกลุ่มเล็กในห้องเรียนกำลังนำเสนอเกมรักษ์โลกที่สร้างด้วย Scratch" loading="lazy" width="500" height="500">
+          <div class="work-body">
+            <b>เกมแยกขยะรักษ์โลก</b>
+            <span>น้องอะตอม · 10 ขวบ</span><br>
+            <span class="lvl">Scratch</span>
+          </div>
+        </article>
+        <article class="work">
+          <img src="https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=1000&auto=format&fit=crop" alt="เด็กผู้หญิงกำลังทดสอบแอปท่องตารางคูณที่เขียนขึ้นเองบนแท็บเล็ต" loading="lazy" width="500" height="500">
+          <div class="work-body">
+            <b>แอปท่องตารางคูณ</b>
+            <span>น้องพลอย · 11 ขวบ</span><br>
+            <span class="lvl">Scratch + Robot</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEACHERS -->
+  <section class="sec" id="teachers" style="padding-top:0">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-tag">[ ครูผู้สอน ]</span>
+        <h2>ครูที่เข้าใจเด็กและเข้าใจโค้ด</h2>
+        <p>ครูทุกท่านผ่านการอบรมการสอนเด็กโดยเฉพาะ และเคยทำงานสายพัฒนาซอฟต์แวร์หรือเกมมาก่อน</p>
+      </div>
+      <div class="teach-grid">
+        <article class="teacher">
+          <svg class="avatar" width="72" height="72" viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges">
+            <rect width="12" height="12" fill="#ffd400"/>
+            <rect x="2" y="1" width="8" height="2" fill="#1f1b12"/>
+            <rect x="2" y="3" width="1" height="1" fill="#1f1b12"/>
+            <rect x="3" y="4" width="2" height="2" fill="#fff"/><rect x="7" y="4" width="2" height="2" fill="#fff"/>
+            <rect x="4" y="5" width="1" height="1" fill="#1f1b12"/><rect x="8" y="5" width="1" height="1" fill="#1f1b12"/>
+            <rect x="4" y="8" width="4" height="1" fill="#1f1b12"/>
+            <rect x="2" y="10" width="8" height="2" fill="#2f6ff2"/>
+          </svg>
+          <div>
+            <h3>ครูโจ้</h3>
+            <div class="role">SCRATCH · ROBOTICS · 8 ปีประสบการณ์</div>
+            <p>วิศวะคอมพิวเตอร์ จุฬาฯ เคยพาทีมนักเรียนคว้ารางวัลหุ่นยนต์ระดับประเทศ เชื่อว่าเด็กทุกคนเรียนโค้ดได้ถ้าได้ลงมือทำ</p>
+          </div>
+        </article>
+        <article class="teacher">
+          <svg class="avatar" width="72" height="72" viewBox="0 0 12 12" aria-hidden="true" shape-rendering="crispEdges">
+            <rect width="12" height="12" fill="#2f6ff2"/>
+            <rect x="2" y="1" width="8" height="3" fill="#1f1b12"/>
+            <rect x="1" y="2" width="1" height="6" fill="#1f1b12"/><rect x="10" y="2" width="1" height="6" fill="#1f1b12"/>
+            <rect x="3" y="4" width="2" height="2" fill="#fff"/><rect x="7" y="4" width="2" height="2" fill="#fff"/>
+            <rect x="4" y="5" width="1" height="1" fill="#1f1b12"/><rect x="8" y="5" width="1" height="1" fill="#1f1b12"/>
+            <rect x="4" y="8" width="4" height="1" fill="#ffd400"/>
+            <rect x="2" y="10" width="8" height="2" fill="#ffd400"/>
+          </svg>
+          <div>
+            <h3>ครูเฟิร์น</h3>
+            <div class="role">PYTHON · GAME DEV · อดีตนักพัฒนาเกม</div>
+            <p>เคยอยู่ทีมพัฒนาเกมมือถือยอดดาวน์โหลดล้านครั้ง สอนให้เด็กคิดแบบนักพัฒนา ตั้งแต่ออกแบบเกมจนถึงปล่อยให้เพื่อนเล่นจริง</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="sec" id="reviews" style="padding-top:0">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-tag">[ รีวิวผู้ปกครอง ]</span>
+        <h2>เสียงจากบ้านนักเรียน</h2>
+      </div>
+      <div class="rev-grid">
+        <article class="review">
+          <div class="stars" aria-label="คะแนน 5 จาก 5">
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+          </div>
+          <blockquote>“ลูกชายเคยติดเกมมาก ตอนนี้กลายเป็นนั่งออกแบบเกมของตัวเอง เล่าให้ฟังทุกวันเลยว่าจะทำด่านใหม่ยังไง คุ้มค่ามากค่ะ”</blockquote>
+          <div class="who"><span class="chip">ม</span><div><b>คุณแม่น้องมิก</b><span>นักเรียนคอร์ส Scratch + หุ่นยนต์</span></div></div>
+        </article>
+        <article class="review">
+          <div class="stars" aria-label="คะแนน 5 จาก 5">
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+          </div>
+          <blockquote>“ครูสอนดีมาก ใจเย็นกับเด็กสุดๆ ห้องเรียนเล็กทำให้ลูกได้ถามได้ลองตลอด ปลายเทอมมีวันโชว์ผลงาน ลูกภูมิใจในตัวเองมากครับ”</blockquote>
+          <div class="who"><span class="chip" style="background:#2f6ff2;color:#fff">พ</span><div><b>คุณพ่อน้องพลอย</b><span>นักเรียนคอร์ส Scratch + หุ่นยนต์</span></div></div>
+        </article>
+        <article class="review">
+          <div class="stars" aria-label="คะแนน 5 จาก 5">
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1l2.2 4.9 5.3.5-4 3.6 1.2 5.2L9 12.4 4.3 15.2 5.5 10l-4-3.6 5.3-.5z" fill="#ffd400" stroke="#1f1b12" stroke-width="1.4"/></svg>
+          </div>
+          <blockquote>“น้องเรียนคอร์ส Python ตอน 13 ครูเฟิร์นปูพื้นฐานดีมาก ตอนนี้เขียนโปรแกรมช่วยตัวเองทำการบ้านคณิตได้แล้ว เกินคาดจริงๆ ค่ะ”</blockquote>
+          <div class="who"><span class="chip" style="background:#1f1b12;color:#ffd400">ต</span><div><b>คุณแม่น้องต้น</b><span>นักเรียนคอร์ส Python + สร้างเกม</span></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sec" id="contact" style="padding-top:0">
+    <div class="container">
+      <div class="contact-box px dshadow-ink">
+        <div>
+          <h2>จองทดลองเรียนฟรี 1 ครั้ง</h2>
+          <p>พาน้องๆ มาลองเรียนจริง 90 นาที ไม่มีค่าใช้จ่าย ทีมงานจะแนะนำคอร์สที่เหมาะกับวัยและความสนใจของเด็กแต่ละคน — คิววันเสาร์–อาทิตย์เต็มเร็ว จองล่วงหน้าได้เลย</p>
+        </div>
+        <ul class="contact-list">
+          <li>
+            <span class="ic"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="6" y="1" width="8" height="18" rx="1" fill="#fff" stroke="#1f1b12" stroke-width="2"/><rect x="8" y="15" width="4" height="2" fill="#1f1b12"/></svg></span>
+            <div><b>02-455-8899</b><br><span>ทุกวัน 9:00–18:00</span></div>
+          </li>
+          <li>
+            <span class="ic"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="4" width="16" height="12" rx="2" fill="#22c55e" stroke="#1f1b12" stroke-width="2"/><text x="10" y="13" text-anchor="middle" font-family="Space Mono, monospace" font-weight="700" font-size="7" fill="#fff">LINE</text></svg></span>
+            <div><b>@codekid</b><br><span>ตอบไวในเวลาทำการ</span></div>
+          </li>
+          <li>
+            <span class="ic"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1a6 6 0 0 0-6 6c0 4.5 6 12 6 12s6-7.5 6-12a6 6 0 0 0-6-6z" fill="#ef4444" stroke="#1f1b12" stroke-width="2"/><circle cx="10" cy="7" r="2.2" fill="#fff"/></svg></span>
+            <div><b>ชั้น 2 อาคารปิ่นเกล้าเซ็นเตอร์</b><br><span>ถนนราชพฤกษ์ ปิ่นเกล้า กรุงเทพฯ</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <span class="foot-logo">CODE KID</span>
+        <p>โรงเรียนโค้ดดิ้งและหุ่นยนต์สำหรับเด็ก 6–14 ปี<br>ชั้น 2 อาคารปิ่นเกล้าเซ็นเตอร์ ถนนราชพฤกษ์<br>เขตบางกอกน้อย กรุงเทพฯ 10700</p>
+      </div>
+      <div>
+        <h4>เวลาเปิดสอน</h4>
+        <ul>
+          <li><p>เสาร์–อาทิตย์ 9:00–18:00</p></li>
+          <li><p>จันทร์–ศุกร์ (คอร์สเย็น) 16:00–19:00</p></li>
+          <li><p>โทร 02-455-8899</p></li>
+        </ul>
+      </div>
+      <div>
+        <h4>เมนูลัด</h4>
+        <ul>
+          <li><a href="#editor">ลองวาดพิกเซล</a></li>
+          <li><a href="#courses">คอร์สเรียน</a></li>
+          <li><a href="#works">ผลงานนักเรียน</a></li>
+          <li><a href="#contact">สมัครทดลอง</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CODE KID CO., LTD.</span>
+      <span>PLAY · LEARN · BUILD</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var SIZE = 16, BG = "#ffffff";
+  var canvas = document.getElementById('pxCanvas');
+  var ctx = canvas.getContext('2d');
+  var statusEl = document.getElementById('editorStatus');
+
+  var grid = [];
+  function resetGrid(){
+    grid = [];
+    for(var r=0;r<SIZE;r++){ var row=[]; for(var c=0;c<SIZE;c++){ row.push(BG); } grid.push(row); }
+  }
+  resetGrid();
+
+  var currentColor = '#1f1b12';
+  var currentName = 'ดำ';
+  var drawing = false;
+  var showCursor = false;
+  var kx = 0, ky = 0;
+
+  function render(){
+    for(var r=0;r<SIZE;r++){
+      for(var c=0;c<SIZE;c++){
+        ctx.fillStyle = grid[r][c];
+        ctx.fillRect(c,r,1,1);
+      }
+    }
+    ctx.strokeStyle = 'rgba(31,27,18,.09)';
+    ctx.lineWidth = 0.05;
+    ctx.beginPath();
+    for(var i=1;i<SIZE;i++){
+      ctx.moveTo(i,0); ctx.lineTo(i,SIZE);
+      ctx.moveTo(0,i); ctx.lineTo(SIZE,i);
+    }
+    ctx.stroke();
+    if(showCursor){
+      ctx.strokeStyle = '#2f6ff2';
+      ctx.lineWidth = 0.18;
+      ctx.strokeRect(kx+0.09, ky+0.09, 0.82, 0.82);
+    }
+  }
+
+  function paint(c,r){
+    if(c<0||r<0||c>=SIZE||r>=SIZE) return;
+    grid[r][c] = currentColor;
+  }
+
+  function cellFromEvent(e){
+    var rect = canvas.getBoundingClientRect();
+    var cx = Math.floor((e.clientX-rect.left)/rect.width*SIZE);
+    var cy = Math.floor((e.clientY-rect.top)/rect.height*SIZE);
+    return {x:Math.max(0,Math.min(SIZE-1,cx)), y:Math.max(0,Math.min(SIZE-1,cy))};
+  }
+
+  canvas.addEventListener('pointerdown', function(e){
+    e.preventDefault();
+    canvas.setPointerCapture(e.pointerId);
+    drawing = true; showCursor = false;
+    var p = cellFromEvent(e);
+    paint(p.x,p.y); render();
+  });
+  canvas.addEventListener('pointermove', function(e){
+    if(!drawing) return;
+    var p = cellFromEvent(e);
+    paint(p.x,p.y); render();
+  });
+  canvas.addEventListener('pointerup', function(){ drawing=false; });
+  canvas.addEventListener('pointercancel', function(){ drawing=false; });
+
+  canvas.addEventListener('keydown', function(e){
+    var handled = true;
+    if(e.key==='ArrowLeft' && kx>0){ kx--; }
+    else if(e.key==='ArrowRight' && kx<SIZE-1){ kx++; }
+    else if(e.key==='ArrowUp' && ky>0){ ky--; }
+    else if(e.key==='ArrowDown' && ky<SIZE-1){ ky++; }
+    else if(e.key===' '||e.key==='Enter'){ paint(kx,ky); }
+    else { handled = false; }
+    if(handled){ e.preventDefault(); showCursor = true; render(); }
+  });
+  canvas.addEventListener('focus', function(){ showCursor = true; render(); });
+  canvas.addEventListener('blur', function(){ showCursor = false; render(); });
+
+  /* palette */
+  var swatches = document.querySelectorAll('.swatch');
+  function selectSwatch(btn, color, name){
+    swatches.forEach(function(s){ s.setAttribute('aria-pressed','false'); });
+    btn.setAttribute('aria-pressed','true');
+    currentColor = color;
+    currentName = name;
+    statusEl.textContent = 'สีที่เลือก: ' + name;
+  }
+  swatches.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      selectSwatch(btn, btn.getAttribute('data-color') || BG, btn.getAttribute('data-name'));
+    });
+  });
+  document.getElementById('eraserBtn').addEventListener('click', function(){
+    selectSwatch(this, BG, 'ยางลบ');
+  });
+
+  /* clear */
+  document.getElementById('clearBtn').addEventListener('click', function(){
+    resetGrid(); render();
+    statusEl.textContent = 'ล้างผืนผ้าใบแล้ว — เริ่มวาดใหม่ได้เลย';
+    setTimeout(function(){ statusEl.textContent = 'สีที่เลือก: ' + currentName; }, 2000);
+  });
+
+  /* sprites */
+  var CHARS = {k:'#1f1b12', w:'#ffffff', y:'#ffd400', b:'#2f6ff2', r:'#ef4444', g:'#22c55e', o:'#ff8c1a', p:'#ff6ec7', '.':BG};
+  var SPRITES = [
+    {name:'ยานอวกาศ', map:[
+      "................",
+      ".......ww.......",
+      "......wbbw......",
+      "......wbbw......",
+      ".....wbbbbw.....",
+      "....kwbbbbwk....",
+      "....kwbwwbwk....",
+      "...kwwbwwbwwk...",
+      "...kwbbbbbbwk...",
+      "..kkkkkkkkkkkk..",
+      "....rr.kk.rr....",
+      "....r......r....",
+      "................",
+      "................",
+      "................",
+      "................"
+    ]},
+    {name:'แมวส้ม', map:[
+      "................",
+      ".kk..........kk.",
+      ".kpk........kpk.",
+      ".kook......kook.",
+      ".kooooooooooook.",
+      ".kooooooooooook.",
+      ".kookkooookkook.",
+      ".kooooooooooook.",
+      ".koooopkkpoooook.",
+      ".kooooooooooook.",
+      "..kkkkkkkkkkkk..",
+      "................",
+      "................",
+      "................",
+      "................",
+      "................"
+    ]},
+    {name:'อินเวเดอร์', map:[
+      "................",
+      "................",
+      "...gg......gg...",
+      "....gg....gg....",
+      "...gggggggggg...",
+      "..gg.gggggg.gg..",
+      ".gggggggggggggg.",
+      ".g.gggggggggg.g.",
+      "..g.g......g.g..",
+      ".....gg..gg.....",
+      "....gg....gg....",
+      "................",
+      "................",
+      "................",
+      "................",
+      "................"
+    ]}
+  ];
+  function drawSprite(sp){
+    resetGrid();
+    for(var r=0;r<SIZE && r<sp.map.length;r++){
+      var row = sp.map[r];
+      for(var c=0;c<SIZE && c<row.length;c++){
+        var ch = row.charAt(c);
+        if(CHARS[ch]){ grid[r][c] = CHARS[ch]; }
+      }
+    }
+    render();
+  }
+  var lastSprite = -1;
+  document.getElementById('randomBtn').addEventListener('click', function(){
+    var idx;
+    do { idx = Math.floor(Math.random()*SPRITES.length); } while(idx===lastSprite && SPRITES.length>1);
+    lastSprite = idx;
+    drawSprite(SPRITES[idx]);
+    statusEl.textContent = 'ตัวอย่าง: ' + SPRITES[idx].name + ' — วาดต่อหรือแก้ไขได้เลย';
+  });
+
+  /* download PNG x16 */
+  document.getElementById('downloadBtn').addEventListener('click', function(){
+    var scale = 16;
+    var out = document.createElement('canvas');
+    out.width = SIZE*scale; out.height = SIZE*scale;
+    var octx = out.getContext('2d');
+    octx.imageSmoothingEnabled = false;
+    octx.drawImage(canvas, 0, 0, SIZE, SIZE, 0, 0, out.width, out.height);
+    /* paint over grid lines: redraw cells cleanly at scale for crisp output */
+    for(var r=0;r<SIZE;r++){
+      for(var c=0;c<SIZE;c++){
+        octx.fillStyle = grid[r][c];
+        octx.fillRect(c*scale, r*scale, scale, scale);
+      }
+    }
+    var a = document.createElement('a');
+    a.href = out.toDataURL('image/png');
+    a.download = 'codekid-pixel-art.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    statusEl.textContent = 'ดาวน์โหลด PNG เรียบร้อย';
+    setTimeout(function(){ statusEl.textContent = 'สีที่เลือก: ' + currentName; }, 2500);
+  });
+
+  render();
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

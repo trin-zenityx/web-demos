@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STRIKE CLUB — โบว์ลิ่ง &amp; บาร์ เซ็นทรัลลาดพร้าว ชั้น 4</title>
+<meta name="description" content="STRIKE CLUB โบว์ลิ่งและบาร์สไตล์ยุค 70s ใจกลางเซ็นทรัลลาดพร้าว ชั้น 4 — เกมละ ฿180 เหมาเลน ฿690/ชม. เปิดทุกวัน 10:00–24:00">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Chonburi&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f4ead8; --brick:#c1422f; --navy:#1e3a5c; --gold:#d4a73c;
+  --ink:#2a2118; --muted:#8a7a64; --line:rgba(42,33,24,.14);
+  --cream-2:#efe1c8; --navy-deep:#152a44; --ink-soft:rgba(42,33,24,.72);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Sarabun',sans-serif;font-size:16px;line-height:1.75;color:var(--ink);
+  background-color:var(--cream);
+  background-image:repeating-linear-gradient(45deg,rgba(42,33,24,.018) 0 2px,transparent 2px 14px);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+.en{font-family:'Alfa Slab One',serif;font-weight:400;letter-spacing:.02em}
+h1,h2,h3{font-family:'Chonburi',serif;font-weight:400;line-height:1.35}
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:4px}
+section{position:relative}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  min-height:48px;padding:.7rem 1.6rem;border:2px solid var(--ink);border-radius:999px;
+  font-family:'Sarabun',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;text-decoration:none;
+  box-shadow:4px 4px 0 var(--ink);transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s ease;
+}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn-brick{background:var(--brick);color:var(--cream)}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-ghost{background:transparent;color:var(--cream);border-color:var(--cream);box-shadow:4px 4px 0 rgba(244,234,216,.35)}
+.btn-ghost:hover{box-shadow:6px 6px 0 rgba(244,234,216,.35)}
+.btn-ghost:active{box-shadow:1px 1px 0 rgba(244,234,216,.35)}
+.btn-line{background:var(--cream);color:var(--ink)}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:2px solid var(--ink);
+  transition:box-shadow .25s ease;
+}
+.nav.scrolled{box-shadow:0 4px 0 rgba(42,33,24,.12)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:68px}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;min-height:44px}
+.brand .pinball{width:30px;height:30px;flex:none}
+.brand-name{font-family:'Alfa Slab One',serif;font-size:1.28rem;color:var(--brick);letter-spacing:.04em}
+.brand-name span{color:var(--navy)}
+.nav-links{display:flex;align-items:center;gap:.25rem;list-style:none}
+.nav-links a{
+  display:inline-flex;align-items:center;min-height:44px;padding:.4rem .85rem;border-radius:999px;
+  text-decoration:none;font-weight:500;font-size:.98rem;transition:background .18s ease,color .18s ease;
+}
+.nav-links a:hover{background:var(--navy);color:var(--cream)}
+.nav-cta{margin-left:.4rem}
+.menu-btn{
+  display:none;align-items:center;justify-content:center;width:48px;height:48px;
+  background:var(--cream);border:2px solid var(--ink);border-radius:12px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);
+}
+.menu-btn svg{width:22px;height:22px}
+@media(max-width:900px){
+  .menu-btn{display:inline-flex}
+  .nav-links{
+    position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:.35rem;
+    background:var(--cream);border-bottom:2px solid var(--ink);padding:1rem clamp(18px,4vw,40px) 1.2rem;
+    display:none;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{justify-content:center;border:2px solid var(--line)}
+  .nav-cta{margin:0}
+  .nav-cta .btn{width:100%}
+}
+
+/* ---------- hero ---------- */
+.hero{
+  min-height:100vh;min-height:100svh;display:flex;align-items:center;
+  background:
+    linear-gradient(115deg,rgba(30,58,92,.82) 0%,rgba(30,58,92,.55) 45%,rgba(42,33,24,.88) 100%),
+    url('../assets/bowling-hero.jpg') center/cover no-repeat var(--navy);
+  color:var(--cream);overflow:hidden;
+}
+.hero-content{position:relative;z-index:2;padding:6.5rem 0 7rem;max-width:760px}
+.kicker{
+  display:inline-flex;align-items:center;gap:.7rem;font-family:'Alfa Slab One',serif;
+  color:var(--gold);font-size:clamp(.8rem,1.6vw,.95rem);letter-spacing:.28em;text-transform:uppercase;
+}
+.kicker::before{content:"";width:38px;height:3px;background:var(--gold);border-radius:2px}
+.hero h1{
+  font-size:clamp(2.5rem,7.4vw,4.7rem);margin:1.1rem 0 .9rem;color:var(--cream);
+  text-shadow:5px 5px 0 var(--brick);
+}
+.hero-sub{font-size:clamp(1.02rem,2vw,1.2rem);font-weight:300;max-width:34em;color:rgba(244,234,216,.92)}
+.hero-price{
+  display:inline-flex;align-items:baseline;gap:.5rem;margin:1.6rem 0 .4rem;
+  border:2px solid var(--gold);border-radius:14px;padding:.55rem 1.15rem;background:rgba(42,33,24,.45);
+}
+.hero-price .num{font-family:'Alfa Slab One',serif;font-size:clamp(1.6rem,3.4vw,2.2rem);color:var(--gold)}
+.hero-price .per{font-size:.95rem;color:rgba(244,234,216,.85)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:1.4rem}
+.hero-arcs{position:absolute;right:-70px;bottom:-60px;width:clamp(240px,32vw,430px);z-index:1;opacity:.9;pointer-events:none}
+.hero-balls{position:absolute;left:-90px;top:-80px;width:clamp(180px,22vw,300px);z-index:1;opacity:.55;pointer-events:none}
+
+/* ---------- waves divider ---------- */
+.waves{display:block;width:100%;height:52px;pointer-events:none}
+.waves svg{display:block;width:100%;height:100%}
+
+/* ---------- section heads ---------- */
+.sec{padding:clamp(4rem,8vw,6.5rem) 0}
+.sec-head{position:relative;margin-bottom:clamp(2.2rem,5vw,3.4rem)}
+.sec-head .ghost{
+  position:absolute;top:-.55em;left:-.04em;z-index:0;pointer-events:none;user-select:none;
+  font-size:clamp(3.4rem,10vw,7rem);line-height:1;color:transparent;
+  -webkit-text-stroke:1.5px rgba(42,33,24,.16);text-stroke:1.5px rgba(42,33,24,.16);
+}
+.on-dark .ghost{-webkit-text-stroke:1.5px rgba(244,234,216,.18)}
+.sec-head .over{position:relative;z-index:1}
+.sec-kicker{font-family:'Alfa Slab One',serif;color:var(--brick);letter-spacing:.24em;font-size:.85rem;text-transform:uppercase}
+.on-dark .sec-kicker{color:var(--gold)}
+.sec-head h2{font-size:clamp(1.7rem,4.2vw,2.7rem);margin:.35rem 0 .5rem}
+.sec-sub{color:var(--ink-soft);max-width:44em;font-size:1.02rem}
+.on-dark .sec-sub{color:rgba(244,234,216,.82)}
+
+/* ---------- score calculator ---------- */
+#score{background:var(--navy);color:var(--cream)}
+.sheet-scroll{overflow-x:auto;padding:.4rem .2rem 1rem;-webkit-overflow-scrolling:touch}
+.sheet{
+  display:grid;grid-template-columns:repeat(9,minmax(72px,1fr)) minmax(118px,1.35fr);
+  min-width:820px;border:2.5px solid var(--ink);border-radius:16px;overflow:hidden;
+  background:var(--cream);color:var(--ink);box-shadow:10px 10px 0 var(--brick);
+}
+.frame{display:flex;flex-direction:column;border-right:2px solid var(--ink);min-width:0}
+.frame:last-child{border-right:0}
+.frame-no{
+  font-family:'Alfa Slab One',serif;text-align:center;background:var(--navy);color:var(--cream);
+  font-size:.85rem;letter-spacing:.1em;padding:.32rem 0;border-bottom:2px solid var(--ink);
+}
+.frame.tenth .frame-no{background:var(--brick)}
+.throws{display:flex;border-bottom:2px solid var(--ink)}
+.throws input{
+  flex:1 1 0;width:100%;min-height:52px;border:0;border-left:1.5px solid var(--ink);
+  background:transparent;text-align:center;font-family:'Alfa Slab One',serif;font-size:1.15rem;color:var(--ink);
+  -moz-appearance:textfield;appearance:textfield;
+}
+.throws input:first-child{border-left:0}
+.throws input::placeholder{color:rgba(42,33,24,.28)}
+.throws input:disabled{background:rgba(30,58,92,.1);color:var(--muted);cursor:not-allowed}
+.throws input:focus-visible{outline:3px solid var(--gold);outline-offset:-3px;border-radius:0}
+.marks{display:flex;border-bottom:2px solid var(--ink);background:var(--cream-2)}
+.marks .mark{
+  flex:1 1 0;min-height:20px;display:flex;align-items:center;justify-content:center;
+  border-left:1.5px solid var(--line);font-family:'Alfa Slab One',serif;font-size:.72rem;color:var(--brick);
+}
+.marks .mark:first-child{border-left:0}
+.cum{
+  min-height:48px;display:flex;align-items:center;justify-content:center;
+  font-family:'Alfa Slab One',serif;font-size:1.2rem;color:var(--brick);
+}
+.cum:empty::after{content:"·";color:rgba(42,33,24,.25)}
+.scroll-hint{display:none;font-size:.88rem;color:rgba(244,234,216,.7);margin-top:.35rem}
+@media(max-width:880px){.scroll-hint{display:block}}
+
+.score-tools{
+  display:grid;grid-template-columns:auto 1fr auto;gap:1.2rem;align-items:stretch;margin-top:2rem;
+}
+@media(max-width:880px){.score-tools{grid-template-columns:1fr}}
+.total-box{
+  display:flex;align-items:center;gap:1rem;background:var(--cream);color:var(--ink);
+  border:2.5px solid var(--ink);border-radius:16px;padding:.9rem 1.4rem;box-shadow:7px 7px 0 var(--gold);
+}
+.total-box .lbl{font-size:.92rem;font-weight:500;color:var(--ink-soft)}
+.total-box .num{font-family:'Alfa Slab One',serif;font-size:clamp(2.2rem,5vw,3rem);color:var(--brick);line-height:1;min-width:2.2ch;text-align:right}
+.rating{
+  display:flex;flex-direction:column;justify-content:center;gap:.15rem;
+  border:2px dashed rgba(244,234,216,.45);border-radius:16px;padding:.8rem 1.3rem;min-height:76px;
+}
+.rating .tag{font-family:'Chonburi',serif;font-size:1.25rem;color:var(--gold)}
+.rating .tag.t1{color:#e8c9a8}.rating .tag.t2{color:var(--gold)}.rating .tag.t3{color:#f08a4b}
+.rating p{font-size:.95rem;color:rgba(244,234,216,.85);line-height:1.55}
+.sheet-actions{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+.legend{
+  margin-top:1.4rem;font-size:.94rem;color:rgba(244,234,216,.85);
+  display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;
+}
+.legend b{font-family:'Alfa Slab One',serif;font-weight:400;color:var(--gold);margin-right:.3rem}
+
+/* ---------- pricing ---------- */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;align-items:stretch}
+@media(max-width:920px){.price-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
+.price-card{
+  position:relative;display:flex;flex-direction:column;background:var(--cream);
+  border:2.5px solid var(--ink);border-radius:20px;padding:1.9rem 1.7rem 1.7rem;
+  box-shadow:7px 7px 0 rgba(30,58,92,.85);transition:transform .2s ease,box-shadow .2s ease;
+}
+.price-card:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 rgba(30,58,92,.85)}
+.price-card.featured{background:var(--brick);color:var(--cream);box-shadow:7px 7px 0 var(--navy)}
+.price-card.featured:hover{box-shadow:10px 10px 0 var(--navy)}
+.plan-tag{
+  align-self:flex-start;font-family:'Alfa Slab One',serif;font-size:.75rem;letter-spacing:.2em;
+  border:2px solid currentColor;border-radius:999px;padding:.2rem .8rem;margin-bottom:1.1rem;
+}
+.plan-name{font-size:1.45rem;margin-bottom:.2rem}
+.plan-price{display:flex;align-items:baseline;gap:.45rem;margin:.5rem 0 .2rem}
+.plan-price .num{font-family:'Alfa Slab One',serif;font-size:clamp(2.3rem,4.5vw,2.9rem);line-height:1;color:var(--brick)}
+.plan-price .unit{font-size:.95rem;color:var(--muted)}
+.featured .plan-price .num{color:var(--gold)}
+.featured .plan-price .unit{color:rgba(244,234,216,.8)}
+.plan-desc{font-size:.95rem;color:var(--ink-soft);margin-bottom:1rem}
+.featured .plan-desc{color:rgba(244,234,216,.88)}
+.plan-list{list-style:none;margin:.4rem 0 1.4rem;flex:1}
+.plan-list li{
+  display:flex;gap:.6rem;align-items:flex-start;padding:.42rem 0;font-size:.98rem;
+  border-bottom:1px dashed var(--line);
+}
+.featured .plan-list li{border-bottom-color:rgba(244,234,216,.25)}
+.plan-list li:last-child{border-bottom:0}
+.plan-list svg{width:17px;height:17px;flex:none;margin-top:.35rem;color:var(--brick)}
+.featured .plan-list svg{color:var(--gold)}
+.price-note{margin-top:1.6rem;text-align:center;color:var(--muted);font-size:.93rem}
+
+/* ---------- bar ---------- */
+.bar-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(1.6rem,4vw,3.2rem);align-items:center}
+@media(max-width:880px){.bar-grid{grid-template-columns:1fr}}
+.photo-card{
+  border:2.5px solid var(--ink);border-radius:20px;overflow:hidden;box-shadow:8px 8px 0 var(--brick);
+}
+.photo-card img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+.menu-list{list-style:none;margin-top:1.4rem}
+.menu-list li{
+  display:flex;align-items:baseline;gap:.7rem;padding:.62rem 0;border-bottom:1px dashed var(--line);
+}
+.menu-list li:last-child{border-bottom:0}
+.menu-list .name{font-weight:500;font-size:1.03rem}
+.menu-list .desc{display:block;font-size:.88rem;color:var(--muted);font-weight:400}
+.menu-list .dots{flex:1;border-bottom:2px dotted rgba(42,33,24,.3);transform:translateY(-4px)}
+.menu-list .price{font-family:'Alfa Slab One',serif;color:var(--brick);white-space:nowrap}
+
+/* ---------- vip ---------- */
+#vip{background:var(--navy);color:var(--cream)}
+.vip-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(1.6rem,4vw,3.2rem);align-items:center}
+@media(max-width:880px){.vip-grid{grid-template-columns:1fr}}
+#vip .photo-card{box-shadow:8px 8px 0 var(--gold)}
+.vip-list{list-style:none;margin:1.4rem 0 1.6rem}
+.vip-list li{display:flex;gap:.8rem;align-items:flex-start;padding:.5rem 0;font-size:1.01rem}
+.vip-list svg{width:20px;height:20px;flex:none;margin-top:.28rem;color:var(--gold)}
+.vip-price{
+  display:inline-flex;align-items:baseline;gap:.55rem;border:2px solid var(--gold);border-radius:14px;
+  padding:.6rem 1.2rem;margin-bottom:1.5rem;background:rgba(21,42,68,.6);
+}
+.vip-price .num{font-family:'Alfa Slab One',serif;font-size:2rem;color:var(--gold);line-height:1}
+.vip-price .unit{font-size:.92rem;color:rgba(244,234,216,.8)}
+
+/* ---------- booking ---------- */
+#booking{background:var(--brick);color:var(--cream);text-align:center}
+#booking h2{font-size:clamp(1.9rem,5vw,3rem);text-shadow:4px 4px 0 var(--ink)}
+#booking .lead{margin:.8rem auto 2rem;max-width:34em;color:rgba(244,234,216,.92)}
+.booking-cards{display:flex;flex-wrap:wrap;justify-content:center;gap:1.1rem}
+.booking-card{
+  display:flex;align-items:center;gap:.9rem;background:var(--cream);color:var(--ink);
+  border:2.5px solid var(--ink);border-radius:16px;padding:1rem 1.4rem;min-height:64px;
+  box-shadow:5px 5px 0 var(--ink);text-decoration:none;transition:transform .18s ease,box-shadow .18s ease;
+}
+.booking-card:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.booking-card svg{width:24px;height:24px;flex:none;color:var(--brick)}
+.booking-card .big{font-family:'Alfa Slab One',serif;font-size:1.25rem;line-height:1.2;text-align:left}
+.booking-card .small{display:block;font-family:'Sarabun',sans-serif;font-size:.85rem;color:var(--muted)}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink);color:var(--cream);padding:clamp(3rem,6vw,4.5rem) 0 0}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:2.2rem}
+@media(max-width:820px){.foot-grid{grid-template-columns:1fr}}
+.foot-brand{font-family:'Alfa Slab One',serif;font-size:1.6rem;color:var(--brick)}
+.foot-brand span{color:var(--gold)}
+footer p,footer li{font-size:.96rem;color:rgba(244,234,216,.8)}
+footer ul{list-style:none;margin-top:.7rem}
+footer li{display:flex;gap:.6rem;align-items:flex-start;padding:.3rem 0}
+footer li svg{width:17px;height:17px;flex:none;margin-top:.32rem;color:var(--gold)}
+footer h3{font-size:1.08rem;color:var(--gold);margin-bottom:.2rem}
+.foot-links a{display:inline-flex;align-items:center;min-height:40px;color:rgba(244,234,216,.85);text-decoration:none;padding:.15rem 0}
+.foot-links a:hover{color:var(--gold)}
+.foot-bottom{
+  margin-top:2.6rem;border-top:1px solid rgba(244,234,216,.16);padding:1.2rem 0 1.4rem;
+  display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;justify-content:space-between;font-size:.85rem;color:rgba(244,234,216,.55);
+}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:560px){
+  .hero-ctas .btn{width:100%}
+  .total-box{justify-content:space-between}
+  .sheet-actions .btn{flex:1 1 100%}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important;animation:none !important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="STRIKE CLUB กลับขึ้นด้านบน">
+      <svg class="pinball" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#c1422f"/><circle cx="12" cy="11" r="3" fill="#f4ead8"/><circle cx="20" cy="10" r="2.4" fill="#f4ead8"/><circle cx="15" cy="18" r="2.2" fill="#1e3a5c"/></svg>
+      <span class="brand-name">STRIKE <span>CLUB</span></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="เปิดเมนู">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#score">ตารางคะแนน</a></li>
+      <li><a href="#price">ราคา</a></li>
+      <li><a href="#bar">บาร์ &amp; ของทานเล่น</a></li>
+      <li><a href="#vip">เลน VIP</a></li>
+      <li class="nav-cta"><a class="btn btn-brick" href="#booking">จองเลน</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <svg class="hero-balls" viewBox="0 0 200 200" aria-hidden="true">
+    <circle cx="100" cy="100" r="88" fill="none" stroke="#d4a73c" stroke-width="10"/>
+    <circle cx="100" cy="100" r="58" fill="none" stroke="#c1422f" stroke-width="10"/>
+    <circle cx="100" cy="100" r="28" fill="none" stroke="#f4ead8" stroke-width="10"/>
+  </svg>
+  <svg class="hero-arcs" viewBox="0 0 300 220" aria-hidden="true">
+    <path d="M300 220 A210 210 0 0 0 90 10" fill="none" stroke="#c1422f" stroke-width="16"/>
+    <path d="M300 220 A160 160 0 0 0 140 60" fill="none" stroke="#d4a73c" stroke-width="16"/>
+    <path d="M300 220 A110 110 0 0 0 190 110" fill="none" stroke="#f4ead8" stroke-width="16"/>
+  </svg>
+  <div class="wrap hero-content">
+    <span class="kicker">Bowling &amp; Bar — Ladprao</span>
+    <h1>โยนให้สุด<br>กินให้ฟิน</h1>
+    <p class="hero-sub">โบว์ลิ่งสไตล์ยุค 70s กลางเมือง — เลนนีออน 12 เลน บาร์คราฟต์เบียร์ และของทานเล่นเตาอบ เปิดยาวถึงเที่ยงคืนทุกวัน</p>
+    <div class="hero-price" role="text">
+      <span class="num en">฿180</span><span class="per">/ เกม ต่อคน · รองเท้าเช่า ฿40</span>
+    </div>
+    <div class="hero-ctas">
+      <a class="btn btn-brick" href="#booking">จองเลนเลย</a>
+      <a class="btn btn-ghost" href="#score">ลองคำนวณคะแนน</a>
+    </div>
+  </div>
+</section>
+
+<div class="waves" style="background:var(--navy)" aria-hidden="true">
+  <svg viewBox="0 0 1200 52" preserveAspectRatio="none">
+    <path d="M0,30 C100,6 200,54 300,30 C400,6 500,54 600,30 C700,6 800,54 900,30 C1000,6 1100,54 1200,30" fill="none" stroke="#c1422f" stroke-width="7"/>
+    <path d="M0,38 C100,16 200,60 300,38 C400,16 500,60 600,38 C700,16 800,60 900,38 C1000,16 1100,60 1200,38" fill="none" stroke="#d4a73c" stroke-width="5"/>
+    <path d="M0,45 C100,26 200,64 300,45 C400,26 500,64 600,45 C700,26 800,64 900,45 C1000,26 1100,64 1200,45" fill="none" stroke="#f4ead8" stroke-width="3"/>
+  </svg>
+</div>
+
+<!-- ================= SCORE CALCULATOR ================= -->
+<section class="sec on-dark" id="score">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ghost en" aria-hidden="true">SCORE</span>
+      <div class="over">
+        <p class="sec-kicker en">Signature — Real Bowling Rules</p>
+        <h2>ตารางคะแนนโบว์ลิ่ง 10 เฟรม</h2>
+        <p class="sec-sub">กรอกจำนวนพินที่โยนลงได้ในแต่ละโยน ระบบคำนวณตามกฎโบว์ลิ่งจริง — สตริกได้โบนัส 2 โยนถัดไป สแปร์ได้โบนัส 1 โยน และเฟรม 10 มีโยนเสริมครบถ้วน</p>
+      </div>
+    </div>
+
+    <div class="sheet-scroll reveal">
+      <div class="sheet" id="sheet" role="group" aria-label="ตารางกรอกคะแนนโบว์ลิ่ง 10 เฟรม"></div>
+    </div>
+    <p class="scroll-hint">ตารางกว้างกว่าจอ — เลื่อนซ้ายขวาเพื่อดูครบ 10 เฟรม</p>
+
+    <div class="score-tools reveal">
+      <div class="total-box">
+        <span class="lbl">คะแนนรวม<br><span id="progress-note">เริ่มกรอกได้เลย</span></span>
+        <span class="num" id="total-num" aria-live="polite">0</span>
+      </div>
+      <div class="rating" aria-live="polite">
+        <span class="tag" id="rating-label">รอคะแนน</span>
+        <p id="rating-note">กรอกพินแต่ละโยนในตารางด้านบน ระบบจะประเมินระดับฝีมือให้เมื่อครบเกม</p>
+      </div>
+      <div class="sheet-actions">
+        <button class="btn btn-gold" id="btn-random" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="M4 4l5 5"/></svg>
+          โยนสุ่มทั้งเกม
+        </button>
+        <button class="btn btn-line" id="btn-clear" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+          ล้างคะแนน
+        </button>
+      </div>
+    </div>
+
+    <div class="legend reveal">
+      <span><b class="en">X</b> สตริก — 10 + โบนัส 2 โยนถัดไป</span>
+      <span><b class="en">/</b> สแปร์ — 10 + โบนัส 1 โยนถัดไป</span>
+      <span><b class="en">–</b> โยนไม่โดนพิน</span>
+      <span>เฟรม 10: สตริกหรือสแปร์ ได้โยนลูกเสริม</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICE ================= -->
+<section class="sec" id="price">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ghost en" aria-hidden="true">PRICE</span>
+      <div class="over">
+        <p class="sec-kicker en">Rates</p>
+        <h2>ราคาเล่น — จ่ายแล้วโยนได้เลย</h2>
+        <p class="sec-sub">ทุกแพ็กเกจรวมบอลทุกน้ำหนักและโต๊ะพักเชียร์ ไม่มีค่าแรกเข้า จ่ายตามจริงที่เล่น</p>
+      </div>
+    </div>
+
+    <div class="price-grid">
+      <article class="price-card reveal">
+        <span class="plan-tag en">PAY PER GAME</span>
+        <h3 class="plan-name">เกมต่อเกม</h3>
+        <div class="plan-price"><span class="num en">฿180</span><span class="unit">/ เกม · ต่อคน</span></div>
+        <p class="plan-desc">มาคนเดียวหรือสองคน อยากโยนคลายเส้นสักเกมสองเกม</p>
+        <ul class="plan-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>รองเท้าเช่า ฿40 พร้อมถุงเท้าใหม่</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>บอล 8–16 ปอนด์ เลือกตามถนัด</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>จอสกอร์อัตโนมัติทุกเลน</li>
+        </ul>
+        <a class="btn btn-brick" href="#booking">จองแบบเกมต่อเกม</a>
+      </article>
+
+      <article class="price-card featured reveal">
+        <span class="plan-tag en">LANE HOUR — คุ้มสุด</span>
+        <h3 class="plan-name">เหมาเลนต่อชั่วโมง</h3>
+        <div class="plan-price"><span class="num en">฿690</span><span class="unit">/ ชม. · สูงสุด 6 คน</span></div>
+        <p class="plan-desc">แก๊งเพื่อนมาครบ เหมาทั้งเลน โยนกันไม่หยุดทั้งชั่วโมง</p>
+        <ul class="plan-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>เล่นได้ไม่จำกัดเกมใน 1 ชั่วโมง</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>สูงสุด 6 คนต่อเลน ผลัดกันโยนสนุก</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>ต่อชั่วโมงถัดไปลด 10%</li>
+        </ul>
+        <a class="btn btn-gold" href="#booking">จองเหมาเลน</a>
+      </article>
+
+      <article class="price-card reveal">
+        <span class="plan-tag en">PARTY PACK</span>
+        <h3 class="plan-name">กลุ่ม 4 คน + พิซซ่า</h3>
+        <div class="plan-price"><span class="num en">฿1,290</span><span class="unit">/ เซ็ต</span></div>
+        <p class="plan-desc">โบว์ลิ่งคนละ 2 เกม พร้อมของกินจัดเต็มเสิร์ฟถึงโต๊ะ</p>
+        <ul class="plan-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>โบว์ลิ่ง 4 คน คนละ 2 เกม รวมรองเท้า</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>พิซซ่าเตาอบ 16 นิ้ว 1 ถาด</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>ซอฟต์ดริงก์ 4 แก้ว รีฟิลน้ำแข็ง</li>
+        </ul>
+        <a class="btn btn-brick" href="#booking">จองแพ็กปาร์ตี้</a>
+      </article>
+    </div>
+    <p class="price-note">ราคารวมภาษีมูลค่าเพิ่มแล้ว · เด็กอายุต่ำกว่า 12 ปี เล่นเกมละ ฿120 (วันจันทร์–พฤหัสบดี ก่อน 18:00)</p>
+  </div>
+</section>
+
+<div class="waves" style="background:var(--cream)" aria-hidden="true">
+  <svg viewBox="0 0 1200 52" preserveAspectRatio="none">
+    <path d="M0,30 C100,6 200,54 300,30 C400,6 500,54 600,30 C700,6 800,54 900,30 C1000,6 1100,54 1200,30" fill="none" stroke="#1e3a5c" stroke-width="7"/>
+    <path d="M0,38 C100,16 200,60 300,38 C400,16 500,60 600,38 C700,16 800,60 900,38 C1000,16 1100,60 1200,38" fill="none" stroke="#c1422f" stroke-width="5"/>
+    <path d="M0,45 C100,26 200,64 300,45 C400,26 500,64 600,45 C700,26 800,64 900,45 C1000,26 1100,64 1200,45" fill="none" stroke="#d4a73c" stroke-width="3"/>
+  </svg>
+</div>
+
+<!-- ================= BAR ================= -->
+<section class="sec" id="bar">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ghost en" aria-hidden="true">BAR</span>
+      <div class="over">
+        <p class="sec-kicker en">Bar &amp; Bites</p>
+        <h2>บาร์และของทานเล่น</h2>
+        <p class="sec-sub">โยนเสร็จแล้วชนแก้ว — เคาน์เตอร์บาร์ยาว 12 เมตร เสิร์ฟทั้งที่โต๊ะและถึงข้างเลน</p>
+      </div>
+    </div>
+    <div class="bar-grid">
+      <figure class="photo-card reveal">
+        <img src="https://images.unsplash.com/photo-1615671524827-c1fe3973b648?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="พินโบว์ลิ่งสีขาวแถบแดงเรียงกันปลายเลน" loading="lazy" width="1000" height="750">
+      </figure>
+      <div class="reveal">
+        <ul class="menu-list">
+          <li><span class="name">สตริกพั้นช์<span class="desc">ม็อกเทลสูตรของร้าน — ส้มยูสุ มะนาว โซดา</span></span><span class="dots"></span><span class="price en">฿140</span></li>
+          <li><span class="name">เบียร์สดช้าง (เหยือก)<span class="desc">เย็นจัด เสิร์ฟพร้อมแก้วแช่แข็ง</span></span><span class="dots"></span><span class="price en">฿220</span></li>
+          <li><span class="name">คราฟต์เบียร์ไทย<span class="desc">หมุนเวียนสายแท็ปทุกเดือน ถามที่บาร์</span></span><span class="dots"></span><span class="price en">฿180</span></li>
+          <li><span class="name">ปีกไก่ทอดซอสบาร์บีคิว<span class="desc">6 ชิ้น เคลือบซอสรมควันสูตรเฉพาะ</span></span><span class="dots"></span><span class="price en">฿150</span></li>
+          <li><span class="name">นาโชส์ชีสลาวา<span class="desc">ชีสเยิ้ม ซัลซ่าแห้ง และซาวครีม</span></span><span class="dots"></span><span class="price en">฿160</span></li>
+          <li><span class="name">เฟรนช์ฟรายส์ทรัฟเฟิล<span class="desc">โรยพาร์เมซานและน้ำมันทรัฟเฟิล</span></span><span class="dots"></span><span class="price en">฿120</span></li>
+          <li><span class="name">พิซซ่าเตาอบ 16 นิ้ว<span class="desc">แป้งหมัก 48 ชม. เลือกได้ 4 หน้า</span></span><span class="dots"></span><span class="price en">฿320</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VIP ================= -->
+<section class="sec on-dark" id="vip">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="ghost en" aria-hidden="true">VIP</span>
+      <div class="over">
+        <p class="sec-kicker en">Private Lanes</p>
+        <h2>เลน VIP — โซนส่วนตัวของแก๊งคุณ</h2>
+        <p class="sec-sub">2 เลนท้ายสุดปิดม่านกั้นเป็นสัดส่วน เหมาะกับวันเกิด ปาร์ตี้บริษัท หรือแข่งกันเองแบบไม่ต้องแคร์สายตาใคร</p>
+      </div>
+    </div>
+    <div class="vip-grid">
+      <div class="reveal">
+        <ul class="vip-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 6.2 6.7.5-5.1 4.4 1.6 6.5L12 16l-5.8 3.6 1.6-6.5L2.7 8.7l6.7-.5z"/></svg>เลนส่วนตัว 2 เลน ม่านกั้น + ไฟนีออนเฉพาะโซน</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 6.2 6.7.5-5.1 4.4 1.6 6.5L12 16l-5.8 3.6 1.6-6.5L2.7 8.7l6.7-.5z"/></svg>โซฟาเชียร์ส่วนตัว รองรับได้ถึง 8 คน</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 6.2 6.7.5-5.1 4.4 1.6 6.5L12 16l-5.8 3.6 1.6-6.5L2.7 8.7l6.7-.5z"/></svg>พนักงานเสิร์ฟอาหารและเครื่องดื่มถึงเลน</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 6.2 6.7.5-5.1 4.4 1.6 6.5L12 16l-5.8 3.6 1.6-6.5L2.7 8.7l6.7-.5z"/></svg>จอสกอร์แยกเฉพาะทีม + ลำโพงเลือกเพลงเอง</li>
+        </ul>
+        <div class="vip-price"><span class="num en">฿1,590</span><span class="unit">/ ชม. · สูงสุด 8 คน · รวมรองเท้า</span></div>
+        <br>
+        <a class="btn btn-gold" href="#booking">จองเลน VIP</a>
+      </div>
+      <figure class="photo-card reveal">
+        <img src="https://images.unsplash.com/photo-1593341646782-e0b495cff86d?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" alt="ผู้เล่นกำลังปล่อยลูกโบว์ลิ่งลงเลนที่มีแสงไฟสีสันสะท้อน" loading="lazy" width="1000" height="750">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOOKING ================= -->
+<section class="sec" id="booking">
+  <div class="wrap">
+    <h2 class="reveal">พร้อมโยนแล้วหรือยัง</h2>
+    <p class="lead reveal">จองล่วงหน้าได้ทุกวัน — วันศุกร์เสาร์แนะนำจองก่อน 1 วัน ทีมงานยืนยันกลับภายใน 15 นาที</p>
+    <div class="booking-cards reveal">
+      <a class="booking-card" href="tel:025418899">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.9z"/></svg>
+        <span class="big en">02-541-8899<span class="small">โทรจองเลน 10:00–24:00</span></span>
+      </a>
+      <a class="booking-card" href="#booking">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.5 0-2.9-.37-4.1-1.02L3 20l1.02-5.4A8.5 8.5 0 1 1 21 11.5z"/></svg>
+        <span class="big en">@strikeclub<span class="small">LINE OA — ทักจองหรือสอบถาม</span></span>
+      </a>
+      <div class="booking-card" role="text">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="big en">10:00 – 24:00<span class="small">เปิดทุกวัน จันทร์–อาทิตย์</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-brand">STRIKE <span>CLUB</span></p>
+        <p style="margin-top:.7rem;max-width:30em">โบว์ลิ่งและบาร์สไตล์เรโทรยุค 70s — 12 เลนมาตรฐาน ไฟนีออน เพลงฟังก์ และพิซซ่าเตาอบ ครบจบในที่เดียว</p>
+      </div>
+      <div>
+        <h3>ที่ตั้ง</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>เซ็นทรัลลาดพร้าว ชั้น 4 (โซนเอนเตอร์เทนเมนต์) ถนนพหลโยธิน แขวงจอมพล เขตจตุจักร กรุงเทพฯ 10900</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>เปิดทุกวัน จันทร์–อาทิตย์ 10:00–24:00</li>
+        </ul>
+      </div>
+      <div>
+        <h3>ทางลัด</h3>
+        <ul class="foot-links">
+          <li><a href="#score">ตารางคะแนนโบว์ลิ่ง</a></li>
+          <li><a href="#price">ราคาและแพ็กเกจ</a></li>
+          <li><a href="#bar">บาร์ &amp; ของทานเล่น</a></li>
+          <li><a href="#vip">เลน VIP</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2569 STRIKE CLUB — เว็บไซต์ตัวอย่างเพื่อการนำเสนอ ข้อมูลราคาและบริการเป็นการสมมติ</span>
+      <span class="en">ROLL HARD · EAT WELL</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- nav ---------- */
+  var nav = document.getElementById('nav');
+  var menuBtn = document.getElementById('menuBtn');
+  var navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'ปิดเมนู' : 'เปิดเมนู');
+  });
+  navLinks.addEventListener('click', function(e){
+    if (e.target.closest('a')) {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 12);
+  }, {passive:true});
+
+  /* ---------- reveal on scroll ---------- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if (prefersReduced || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold: .12});
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- bowling score calculator ---------- */
+  var state = [];
+  function resetState(){
+    state = [];
+    for (var i = 0; i < 10; i++) state.push(i < 9 ? [null, null] : [null, null, null]);
+  }
+  resetState();
+
+  var sheet = document.getElementById('sheet');
+  var html = '';
+  for (var f = 0; f < 10; f++) {
+    var nThrows = (f === 9) ? 3 : 2;
+    var inputs = '', marks = '';
+    for (var t = 0; t < nThrows; t++) {
+      inputs += '<input class="throw" type="text" inputmode="numeric" autocomplete="off" maxlength="2" '
+        + 'data-frame="' + f + '" data-throw="' + t + '" '
+        + 'aria-label="เฟรม ' + (f + 1) + ' การโยนที่ ' + (t + 1) + '" placeholder="·">';
+      marks += '<span class="mark" data-mark="' + t + '" aria-hidden="true"></span>';
+    }
+    html += '<div class="frame' + (f === 9 ? ' tenth' : '') + '" data-f="' + f + '">'
+      + '<div class="frame-no en">' + (f + 1) + '</div>'
+      + '<div class="throws">' + inputs + '</div>'
+      + '<div class="marks">' + marks + '</div>'
+      + '<div class="cum en" data-cum="' + f + '"></div>'
+      + '</div>';
+  }
+  sheet.innerHTML = html;
+
+  var inputs = Array.prototype.slice.call(sheet.querySelectorAll('input.throw'));
+  var cumCells = sheet.querySelectorAll('[data-cum]');
+  var totalEl = document.getElementById('total-num');
+  var progressEl = document.getElementById('progress-note');
+  var ratingLabel = document.getElementById('rating-label');
+  var ratingNote = document.getElementById('rating-note');
+
+  function maxFor(fr, th) {
+    if (fr < 9) {
+      if (th === 0) return 10;
+      var a = state[fr][0];
+      return a == null ? 10 : 10 - a;
+    }
+    var a10 = state[9][0], b10 = state[9][1];
+    if (th === 0) return 10;
+    if (th === 1) {
+      if (a10 == null) return 10;
+      return a10 === 10 ? 10 : 10 - a10;
+    }
+    if (a10 === 10) {
+      if (b10 == null) return 10;
+      return b10 === 10 ? 10 : 10 - b10;
+    }
+    return 10;
+  }
+
+  function isEnabled(fr, th) {
+    if (fr < 9) {
+      if (th === 0) return true;
+      var a = state[fr][0];
+      return a != null && a < 10;
+    }
+    var a10 = state[9][0], b10 = state[9][1];
+    if (th === 0) return true;
+    if (th === 1) return a10 != null;
+    if (a10 == null || b10 == null) return false;
+    return a10 === 10 || a10 + b10 === 10;
+  }
+
+  function markFor(fr, th) {
+    var r = state[fr], a = r[0], b = r[1], c = r[2];
+    function pin(v){ return v === 0 ? '–' : String(v); }
+    if (fr < 9) {
+      if (th === 0) { if (a == null || a === 10) return ''; return pin(a); }
+      if (a == null) return '';
+      if (a === 10) return 'X';
+      if (b == null) return '';
+      if (a + b === 10) return '/';
+      return pin(b);
+    }
+    if (th === 0) { if (a == null) return ''; return a === 10 ? 'X' : pin(a); }
+    if (th === 1) {
+      if (a == null || b == null) return '';
+      if (a === 10) return b === 10 ? 'X' : pin(b);
+      if (a + b === 10) return '/';
+      return pin(b);
+    }
+    if (a == null || b == null || c == null) return '';
+    if (a === 10 && b !== 10 && b + c === 10) return '/';
+    return c === 10 ? 'X' : pin(c);
+  }
+
+  function normalize(fr, th) {
+    if (fr < 9) {
+      var a = state[fr][0];
+      if (a === 10) state[fr][1] = null;
+      else if (a != null && state[fr][1] != null && a + state[fr][1] > 10) state[fr][1] = null;
+    } else {
+      var r = state[9];
+      if (r[0] == null) { r[1] = null; r[2] = null; return; }
+      if (r[1] != null && r[1] > maxFor(9, 1)) r[1] = null;
+      if (!thirdAllowed()) r[2] = null;
+      else if (r[2] != null && r[2] > maxFor(9, 2)) r[2] = maxFor(9, 2);
+    }
+  }
+  function thirdAllowed() {
+    var a = state[9][0], b = state[9][1];
+    if (a == null || b == null) return false;
+    return a === 10 || a + b === 10;
+  }
+
+  function compute() {
+    var flat = [], base = [], idx = 0;
+    for (var i = 0; i < 10; i++) {
+      base[i] = idx;
+      for (var j = 0; j < state[i].length; j++) {
+        if (state[i][j] != null) { flat.push(state[i][j]); idx++; }
+      }
+    }
+    var fs = new Array(10).fill(null);
+    for (var f = 0; f < 10; f++) {
+      var r = state[f];
+      if (f < 9) {
+        var a = r[0], b = r[1];
+        if (a == null) break;
+        if (a === 10) {
+          if (flat[base[f] + 1] != null && flat[base[f] + 2] != null) fs[f] = 10 + flat[base[f] + 1] + flat[base[f] + 2];
+          else break;
+        } else if (b == null) break;
+        else if (a + b === 10) {
+          if (flat[base[f] + 2] != null) fs[f] = 10 + flat[base[f] + 2];
+          else break;
+        } else fs[f] = a + b;
+      } else {
+        var x = r[0], y = r[1], z = r[2];
+        if (x == null) break;
+        if (x === 10) { if (y == null || z == null) break; fs[9] = x + y + z; }
+        else if (y == null) break;
+        else if (x + y === 10) { if (z == null) break; fs[9] = x + y + z; }
+        else fs[9] = x + y;
+      }
+    }
+    var cum = new Array(10).fill(null), run = 0;
+    for (f = 0; f < 10; f++) {
+      if (fs[f] == null) break;
+      run += fs[f]; cum[f] = run;
+    }
+    return { cum: cum, complete: fs[9] != null };
+  }
+
+  function refresh() {
+    inputs.forEach(function(el){
+      var fr = +el.dataset.frame, th = +el.dataset.throw;
+      el.value = state[fr][th] == null ? '' : String(state[fr][th]);
+      el.disabled = !isEnabled(fr, th);
+    });
+    for (var f = 0; f < 10; f++) {
+      var frameEl = sheet.querySelector('.frame[data-f="' + f + '"]');
+      var marks = frameEl.querySelectorAll('.mark');
+      for (var m = 0; m < marks.length; m++) marks[m].textContent = markFor(f, m);
+    }
+    var res = compute();
+    var last = 0, doneFrames = 0;
+    for (f = 0; f < 10; f++) {
+      cumCells[f].textContent = res.cum[f] == null ? '' : String(res.cum[f]);
+      if (res.cum[f] != null) { last = res.cum[f]; doneFrames = f + 1; }
+    }
+    totalEl.textContent = String(last);
+    if (res.complete) {
+      progressEl.textContent = 'เกมสมบูรณ์';
+      var tier;
+      if (last < 80) tier = { t: 'มือใหม่', n: 'ฝึกฟอร์มอีกนิด — สตริกแรกอยู่ไม่ไกลแล้ว ลองเหมาเลนชั่วโมงมาซ้อมยาวๆ', c: 't1' };
+      else if (last < 140) tier = { t: 'ระดับกลาง', n: 'คุมเลนได้ดี เก็บสแปร์สม่ำเสมอ — อีกนิดจะแตะระดับโปร', c: 't2' };
+      else tier = { t: 'โปร', n: 'ฟอร์มระดับลีกแข่ง — เลน VIP พร้อม เกมต่อไปลุ้น 200 แต้ม', c: 't3' };
+      ratingLabel.textContent = tier.t;
+      ratingLabel.className = 'tag ' + tier.c;
+      ratingNote.textContent = tier.n;
+    } else {
+      progressEl.textContent = doneFrames === 0 ? 'เริ่มกรอกได้เลย' : 'ผ่าน ' + doneFrames + ' เฟรม';
+      ratingLabel.textContent = 'รอคะแนน';
+      ratingLabel.className = 'tag';
+      ratingNote.textContent = doneFrames === 0
+        ? 'กรอกพินแต่ละโยนในตารางด้านบน ระบบจะประเมินระดับฝีมือให้เมื่อครบเกม'
+        : 'กรอกต่อให้ครบ 10 เฟรมเพื่อดูการประเมินระดับฝีมือ';
+    }
+  }
+
+  function focusNext(fr, th) {
+    var start = -1;
+    for (var i = 0; i < inputs.length; i++) {
+      if (+inputs[i].dataset.frame === fr && +inputs[i].dataset.throw === th) { start = i; break; }
+    }
+    for (i = start + 1; i < inputs.length; i++) {
+      if (!inputs[i].disabled) { inputs[i].focus(); inputs[i].select(); return; }
+    }
+  }
+
+  sheet.addEventListener('input', function(e){
+    var el = e.target;
+    if (!el.classList.contains('throw')) return;
+    var fr = +el.dataset.frame, th = +el.dataset.throw;
+    var raw = el.value.replace(/[^0-9]/g, '').slice(0, 2);
+    if (raw === '') { state[fr][th] = null; el.value = ''; normalize(fr, th); refresh(); return; }
+    var v = parseInt(raw, 10);
+    var max = maxFor(fr, th);
+    if (v > max) v = max;
+    state[fr][th] = v;
+    el.value = String(v);
+    normalize(fr, th);
+    refresh();
+    if (v === max || String(v).length === 2 || (th === 0 && v === 10)) focusNext(fr, th);
+  });
+
+  function randPins(max) {
+    if (max <= 0) return 0;
+    if (Math.random() < 0.16) return max;
+    return Math.floor(Math.random() * (max + 1));
+  }
+  document.getElementById('btn-random').addEventListener('click', function(){
+    resetState();
+    for (var f = 0; f < 9; f++) {
+      var a = randPins(10);
+      if (a === 10) state[f][0] = 10;
+      else { state[f][0] = a; state[f][1] = randPins(10 - a); }
+    }
+    var x = randPins(10);
+    state[9][0] = x;
+    if (x === 10) {
+      var y = randPins(10);
+      state[9][1] = y;
+      state[9][2] = y === 10 ? randPins(10) : randPins(10 - y);
+    } else {
+      var b = randPins(10 - x);
+      state[9][1] = b;
+      if (x + b === 10) state[9][2] = randPins(10);
+    }
+    refresh();
+  });
+  document.getElementById('btn-clear').addEventListener('click', function(){
+    resetState();
+    refresh();
+    if (inputs.length) inputs[0].focus();
+  });
+
+  refresh();
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

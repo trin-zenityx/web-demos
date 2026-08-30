@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ดอกดี DOKDEE — ร้านดอกไม้สดจัดช่อตามความหมาย | ส่งภายใน 3 ชม.</title>
+<meta name="description" content="ดอกดี — ร้านดอกไม้สด จัดช่อตามโอกาสและความหมาย ส่งด่วน กทม. ภายใน 3 ชม.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf6f2; --card:#ffffff; --rose:#c96a80; --sage:#7d9274; --gold:#c2a35c;
+  --ink:#3d2f33; --muted:#957f85; --line:#ecdcd8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Prompt',sans-serif;font-weight:300;font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+::selection{background:#f2d5dc;color:var(--ink)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+section{padding:clamp(3.5rem,8vh,5.5rem) 0}
+.hand{font-family:'Charmonman',cursive}
+.serif{font-family:'EB Garamond',serif}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(250,246,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1120px;margin:0 auto;padding:.95rem clamp(1.25rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{font-family:'Charmonman';font-weight:700;font-size:1.9rem;color:var(--rose)}
+.logo small{display:block;font-family:'EB Garamond';font-size:.68rem;letter-spacing:.25em;color:var(--muted)}
+.nav-links{display:flex;gap:1.6rem;font-size:.95rem}
+.nav-links a{color:var(--muted);transition:color .3s}
+.nav-links a:hover{color:var(--rose)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:500;border-radius:99px;padding:.85rem 1.7rem;transition:transform .25s,box-shadow .25s;min-height:44px}
+.btn-r{background:var(--rose);color:#fff;box-shadow:0 8px 20px -8px rgba(201,106,128,.5)}
+.btn-r:hover{transform:translateY(-2px)}
+.btn-s{border:1.5px solid var(--sage);color:var(--sage)}
+.btn-s:hover{background:var(--sage);color:#fff}
+@media(max-width:760px){.nav-links{display:none}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,3.5rem);align-items:center;padding:clamp(3rem,7vh,5rem) 0}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.kicker{font-family:'EB Garamond';font-style:italic;font-size:1.1rem;color:var(--sage)}
+h1{font-family:'Charmonman';font-weight:700;font-size:clamp(2.5rem,6vw,4.3rem);line-height:1.25;color:var(--rose);margin:.8rem 0 1rem}
+.hero p{color:var(--muted);max-width:44ch}
+.hero-cta{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:1.7rem}
+.hero-media{position:relative}
+.hero-media img{border-radius:180px 180px 26px 26px;box-shadow:0 30px 60px -28px rgba(61,47,51,.35)}
+
+/* meaning lab */
+.sec-kick{font-family:'EB Garamond';font-style:italic;font-size:1.05rem;color:var(--sage);margin-bottom:.3rem}
+h2{font-family:'Charmonman';font-weight:700;font-size:clamp(1.9rem,4vw,2.8rem);color:var(--rose)}
+.sec-sub{color:var(--muted);margin-top:.4rem;max-width:56ch}
+.lab{margin-top:2.2rem}
+.flower-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media(max-width:900px){.flower-grid{grid-template-columns:repeat(2,1fr)}}
+.flower{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:1.2rem 1rem;text-align:center;transition:all .3s;min-height:44px}
+.flower:hover{border-color:var(--rose);transform:translateY(-3px)}
+.flower.sel{border-color:var(--rose);background:#fdf0f3;box-shadow:0 12px 26px -14px rgba(201,106,128,.4)}
+.flower .fi{width:56px;height:56px;margin:0 auto .6rem;border-radius:50%;display:grid;place-items:center}
+.flower b{font-weight:500;display:block;font-size:.98rem}
+.flower small{color:var(--muted);font-size:.78rem;display:block;margin-top:.15rem}
+.meaning-card{margin-top:1.8rem;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(1.5rem,3vw,2.2rem);position:relative;overflow:hidden}
+.meaning-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--rose),var(--gold),var(--sage))}
+.meaning-empty{text-align:center;color:var(--muted);padding:1.5rem 0;font-family:'EB Garamond';font-style:italic;font-size:1.1rem}
+.meaning-out h3{font-family:'Charmonman';font-size:clamp(1.6rem,3.4vw,2.2rem);color:var(--ink);line-height:1.4;font-weight:700}
+.meaning-out .poem{font-family:'EB Garamond';font-style:italic;font-size:1.15rem;color:var(--sage);margin:.6rem 0 1rem}
+.meaning-out .flowers-sel{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.meaning-out .fchip{background:#f6ecee;border-radius:99px;padding:.35rem .9rem;font-size:.85rem}
+.meaning-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.4rem}
+#orderOk{margin-top:1rem;color:var(--sage);font-weight:500}
+
+/* occasions */
+.occ{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+@media(max-width:900px){.occ{grid-template-columns:repeat(2,1fr)}}
+.ocard{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:transform .3s}
+.ocard:hover{transform:translateY(-4px)}
+.ocard img{height:150px;width:100%;object-fit:cover}
+.ocard .ob{padding:1rem 1.1rem}
+.ocard b{font-weight:500;display:block}
+.ocard span{font-size:.85rem;color:var(--muted)}
+.ocard .op{color:var(--rose);font-weight:500;margin-top:.4rem;display:block}
+footer{background:#3d2f33;color:#c9aeb5;padding:2.2rem 0;font-size:.88rem;margin-top:clamp(3rem,6vh,4rem)}
+.foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+.foot-grid b{color:#fff;font-family:'Charmonman'}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top">ดอกดี<small>DOKDEE FLORIST</small></a>
+    <div class="nav-links"><a href="#lab">ประกอบความหมาย</a><a href="#occ">ช่อตามโอกาส</a></div>
+    <a class="btn btn-r" href="#lab">สั่งช่อด่วน</a>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero wrap">
+    <div>
+      <p class="kicker">Every bloom tells a story</p>
+      <h1>ให้ดอกไม้<br>พูดแทนหัวใจ</h1>
+      <p>ช่อสดจัดใหม่ทุกออร์เดอร์ ออกแบบจาก "ความหมาย" ที่คุณอยากบอก — ส่งด่วนถึงมือคนพิเศษภายใน 3 ชม.</p>
+      <div class="hero-cta">
+        <a class="btn btn-r" href="#lab">ประกอบความหมายช่อคุณ</a>
+        <a class="btn btn-s" href="#occ">ดูช่อตามโอกาส</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="../assets/florist-hero.jpg" alt="เคาน์เตอร์ร้านดอกไม้ กุหลาบและยูคาลิปตัสสด" fetchpriority="high">
+    </div>
+  </section>
+
+  <section class="wrap" id="lab">
+    <p class="sec-kick">Language of Flowers</p>
+    <h2>เลือก 3 ดอก ให้ช่อของคุณพูด</h2>
+    <p class="sec-sub">แตะดอกไม้ 3 ชนิดที่ใช่ — เราประกอบ "ข้อความแห่งช่อ" ให้พร้อมประมาณราคา</p>
+
+    <div class="lab">
+      <div class="flower-grid" id="flowerGrid"></div>
+      <div class="meaning-card" id="meaningCard">
+        <p class="meaning-empty" id="meaningEmpty">ยังไม่ได้เลือกดอกไม้ — แตะการ์ดด้านบน 3 ใบนะครับ/ค่ะ</p>
+        <div class="meaning-out" id="meaningOut" hidden>
+          <h3 id="mTitle">—</h3>
+          <p class="poem" id="mPoem">—</p>
+          <div class="flowers-sel" id="mChips"></div>
+          <div class="meaning-actions">
+            <span style="font-family:'EB Garamond';font-size:1.4rem;color:var(--rose);font-weight:500" id="mPrice"></span>
+            <button class="btn btn-r" id="orderBtn">สั่งช่อด้วยความหมายนี้ →</button>
+          </div>
+          <p id="orderOk" hidden></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="occ" style="padding-top:0">
+    <p class="sec-kick">Ready Bouquets</p>
+    <h2>ช่อพร้อมส่ง ตามโอกาส</h2>
+    <div class="occ">
+      <div class="ocard"><img loading="lazy" src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?q=80&w=1000&auto=format&fit=crop" alt="ช่อกุหลาบแดง"><div class="ob"><b>ช่อบอกรัก</b><span>กุหลาบแดง 12 ดอก + ยูคาลิปตัส</span><span class="op">฿1,290</span></div></div>
+      <div class="ocard"><img loading="lazy" src="https://images.unsplash.com/photo-1468327768560-75b778cbb551?q=80&w=1000&auto=format&fit=crop" alt="ช่อดอกไม้พาสเทล"><div class="ob"><b>ช่อขอบคุณ</b><span>คาร์เนชั่น+เดซี่ โทนพาสเทล</span><span class="op">฿890</span></div></div>
+      <div class="ocard"><img loading="lazy" src="https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?q=80&w=1000&auto=format&fit=crop" alt="ช่อรับปริญญา"><div class="ob"><b>ช่อรับปริญญา</b><span>ทานตะวัน+ลิลลี่ พร้อมตุ๊กตาหมี</span><span class="op">฿1,090</span></div></div>
+      <div class="ocard"><img loading="lazy" src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=1000&auto=format&fit=crop" alt="แจกันดอกไม้สด" onerror="this.src='https://images.unsplash.com/photo-1490750967868-88aa4486c946?q=80&w=1000&auto=format&fit=crop'"><div class="ob"><b>แจกันบ้านรายสัปดาห์</b><span>ส่งทุกจันทร์ คัดตามฤดู</span><span class="op">฿690/สัปดาห์</span></div></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span><b>ดอกดี DOKDEE</b> · ตลาดดอกไม้ปากคลองตลาด</span>
+    <span>เปิดทุกวัน 6:00–20:00 · ส่งด่วน 3 ชม. ใน กทม. · LINE @dokdee</span>
+    <span>© 2569 ดอกดี</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var FLOWERS = [
+    { id:'rose',    n:'กุหลาบแดง',   m:'รักแรงและจริงใจ',        c:'#c94f5f', price:450 },
+    { id:'lily',    n:'ลิลลี่',       m:'ความบริสุทธิ์และเคารพ',    c:'#e8e2d4', price:380 },
+    { id:'sun',     n:'ทานตะวัน',     m:'ความสดใสและศรัทธา',       c:'#f2c14e', price:320 },
+    { id:'carn',    n:'คาร์เนชั่น',    m:'รักของแม่และความซาบซึ้ง', c:'#e8899c', price:290 },
+    { id:'tulip',   n:'ทิวลิป',       m:'คำสัญญาที่สมบูรณ์แบบ',      c:'#d9825f', price:520 },
+    { id:'daisy',   n:'เดซี่',        m:'ความไร้เดียงสาและเริ่มต้น', c:'#f4e9a8', price:260 },
+    { id:'lav',     n:'ลาเวนเดอร์',    m:'ความสงบและคิดถึง',        c:'#9b8ec4', price:350 },
+    { id:'orchid',  n:'กล้วยไม้',     m:'ความหรูหราและชื่นชม',      c:'#b58ec9', price:480 }
+  ];
+  var sel = [];
+
+  document.getElementById('flowerGrid').innerHTML = FLOWERS.map(function(f){
+    return '<button class="flower" data-id="' + f.id + '" aria-pressed="false">' +
+      '<span class="fi" style="background:' + f.c + '"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3d2f33" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.2 2.2M16.9 16.9l2.2 2.2M4.9 19.1l2.2-2.2M16.9 7.1l2.2-2.2"/></svg></span>' +
+      '<b>' + f.n + '</b><small>' + f.m + '</small></button>';
+  }).join('');
+
+  function render(){
+    var card = document.getElementById('meaningCard');
+    var empty = document.getElementById('meaningEmpty');
+    var out = document.getElementById('meaningOut');
+    if (sel.length === 0) { empty.hidden = false; out.hidden = true; return; }
+    empty.hidden = true; out.hidden = false;
+
+    var fs = sel.map(function(id){ return FLOWERS.find(function(f){ return f.id === id; }); });
+    var names = fs.map(function(f){ return f.n; });
+    var meanings = fs.map(function(f){ return f.m; });
+
+    var title;
+    if (fs.length === 1) title = 'ช่อแห่ง"' + meanings[0] + '"';
+    else if (fs.length === 2) title = 'ช่อแห่ง"' + meanings[0] + 'และ' + meanings[1] + '"';
+    else title = 'ช่อแห่ง"' + meanings[0] + ' ' + meanings[1] + ' และ' + meanings[2] + '"';
+
+    var poem = names.slice(0, -1).join(' ') + (fs.length > 1 ? ' และ' + names[fs.length - 1] : names[0]) +
+      ' ในช่อเดียวกัน — ' + meanings.join(' ผสานกับ ') + ' ถึงมือคนสำคัญของคุณ';
+
+    document.getElementById('mTitle').textContent = title;
+    document.getElementById('mPoem').textContent = poem;
+    document.getElementById('mChips').innerHTML = names.map(function(n){ return '<span class="fchip">' + n + '</span>'; }).join('');
+    var price = fs.reduce(function(s, f){ return s + f.price; }, 0) + 250; /* wrap+card */
+    document.getElementById('mPrice').textContent = '฿' + price.toLocaleString('th-TH') + ' (รวมจัดช่อ+การ์ด)';
+    document.getElementById('orderOk').hidden = true;
+  }
+
+  document.getElementById('flowerGrid').addEventListener('click', function(e){
+    var b = e.target.closest('.flower'); if (!b) return;
+    var id = b.dataset.id;
+    var i = sel.indexOf(id);
+    if (i >= 0) { sel.splice(i, 1); b.classList.remove('sel'); b.setAttribute('aria-pressed','false'); }
+    else if (sel.length < 3) { sel.push(id); b.classList.add('sel'); b.setAttribute('aria-pressed','true'); }
+    render();
+  });
+
+  document.getElementById('orderBtn').addEventListener('click', function(){
+    var ok = document.getElementById('orderOk');
+    ok.textContent = 'รับออร์เดอร์แล้ว! เลข DK-' + Math.floor(1000 + Math.random() * 9000) + ' — ช่อจะถึงมือภายใน 3 ชม. พร้อมการ์ดเขียนความหมายนี้ให้ฟรีครับ';
+    ok.hidden = false;
+  });
+
+  render();
+  document.documentElement.style.scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>

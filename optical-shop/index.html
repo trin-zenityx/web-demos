@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>มองดี MONGDEE — ร้านแว่นตา ตัดเลนส์รอรับ 1 ชม. | บางแค</title>
+<meta name="description" content="มองดี ร้านแว่นตาบางแค วัดสายตาฟรีโดยผู้เชี่ยวชาญ ตัดเลนส์รอรับใน 1 ชั่วโมง ตัดแว่นใหม่เริ่ม ฿990 เลนส์แท้รับประกัน 1 ปี">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7fafc; --card:#fff; --blue:#3182ce; --blue-d:#2b6cb0; --blue-soft:#e9f2fb;
+  --ink:#1a2e3d; --muted:#64798c; --line:#e0e9f0; --r:16px;
+  --shadow:0 10px 30px rgba(26,46,61,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Anuphan',system-ui,-apple-system,sans-serif;
+  font-size:16px;line-height:1.65;color:var(--ink);background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--blue);text-decoration:none}
+h1,h2,h3{font-weight:600;line-height:1.28}
+.num{font-family:'Manrope',sans-serif}
+.container{max-width:1120px;margin:0 auto;padding:0 20px}
+.section{padding:76px 0}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:8px}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:12px 26px;border-radius:999px;border:1.5px solid transparent;
+  font-family:'Anuphan',sans-serif;font-size:16px;font-weight:500;cursor:pointer;
+  transition:background .2s,border-color .2s,color .2s,transform .2s;
+}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-d)}
+.btn-ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{max-width:1120px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:18px;min-height:64px;position:relative}
+.logo{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:600;font-size:21px;min-height:44px}
+.logo svg{width:30px;height:30px;color:var(--blue);flex:none}
+.logo small{font-family:'Manrope',sans-serif;font-weight:800;font-size:11px;letter-spacing:.14em;color:var(--muted);margin-top:8px}
+.nav-menu{list-style:none;display:flex;align-items:center;gap:2px;margin-left:auto}
+.nav-menu a{
+  display:flex;align-items:center;min-height:44px;padding:8px 14px;border-radius:10px;
+  color:var(--ink);font-size:15.5px;transition:background .2s,color .2s;
+}
+.nav-menu a:hover{color:var(--blue);background:var(--blue-soft)}
+.nav-cta{margin-left:8px;min-height:44px;padding:10px 22px;font-size:15px}
+.nav-toggle{
+  display:none;width:48px;height:48px;border:1px solid var(--line);border-radius:12px;
+  background:#fff;color:var(--ink);cursor:pointer;place-items:center;margin-left:auto;
+}
+.nav-toggle svg{width:22px;height:22px}
+
+/* ---------- hero ---------- */
+.hero{padding:60px 0 76px;background:linear-gradient(180deg,#edf5fc 0%,var(--bg) 100%)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;color:var(--blue);background:var(--blue-soft);
+  font-weight:600;font-size:14px;padding:7px 15px;border-radius:999px;
+}
+.hero h1{font-size:clamp(32px,5vw,54px);margin:18px 0 14px;letter-spacing:-.01em}
+.lead{color:var(--muted);font-size:18px;max-width:48ch}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 30px}
+.trust{list-style:none;display:flex;gap:20px 24px;flex-wrap:wrap}
+.trust li{display:flex;align-items:center;gap:9px;font-size:15px}
+.trust svg{width:21px;height:21px;color:var(--blue);flex:none}
+.hero-media{position:relative}
+.hero-media img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:24px;box-shadow:var(--shadow)}
+.hero-badge{
+  position:absolute;left:-12px;bottom:26px;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:12px 18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;
+}
+.hero-badge svg{width:26px;height:26px;color:var(--blue);flex:none}
+.hero-badge b{display:block;font-size:15.5px;line-height:1.3}
+.hero-badge span{font-size:13.5px;color:var(--muted)}
+
+/* ---------- section heads ---------- */
+.sec-head{max-width:640px;margin:0 auto 42px;text-align:center}
+.sec-head h2{font-size:clamp(26px,3.4vw,36px);margin:14px 0 10px}
+.sec-sub{color:var(--muted);font-size:16.5px}
+
+/* ---------- simulator ---------- */
+#simulator{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sim-card{
+  display:grid;grid-template-columns:1.35fr 1fr;background:var(--card);
+  border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow);
+}
+.sim-stage{position:relative;min-height:360px;background:#0f1c26;overflow:hidden}
+.sim-blur{position:absolute;inset:0;transform:scale(1.04);will-change:filter;transition:filter .12s linear}
+.sim-blur img{width:100%;height:100%;object-fit:cover}
+.sim-board{
+  position:absolute;top:12%;left:50%;transform:translateX(-50%);
+  width:min(72%,430px);background:rgba(255,255,255,.95);color:#22303c;
+  border-radius:8px;padding:14px 22px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,.28);
+}
+.sim-board-title{font-weight:600;font-size:clamp(15px,2vw,20px)}
+.sim-board-line{font-size:clamp(13px,1.7vw,16px)}
+.sim-board-small{font-size:clamp(11px,1.4vw,13px);color:#5b6b78;margin-top:6px}
+.sim-tag{
+  position:absolute;left:14px;bottom:14px;background:rgba(15,28,38,.75);color:#eaf3fb;
+  font-size:13px;padding:7px 14px;border-radius:999px;
+}
+.sim-panel{padding:30px 28px;display:flex;flex-direction:column;gap:15px}
+.sim-readout{display:flex;align-items:baseline;gap:10px}
+.sim-diopter{font-size:54px;font-weight:800;color:var(--blue);letter-spacing:-.02em;line-height:1}
+.sim-unit{color:var(--muted);font-size:15px}
+.sim-label{font-weight:600;font-size:16px}
+.sim-range{
+  -webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:pointer;
+}
+.sim-range::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--blue) 0%,var(--blue) var(--fill,10%),var(--line) var(--fill,10%))}
+.sim-range::-webkit-slider-thumb{
+  -webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#fff;
+  border:3px solid var(--blue);margin-top:-10px;box-shadow:0 2px 8px rgba(49,130,206,.35);
+}
+.sim-range::-moz-range-track{height:8px;border-radius:99px;background:var(--line)}
+.sim-range::-moz-range-progress{height:8px;border-radius:99px;background:var(--blue)}
+.sim-range::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--blue);box-shadow:0 2px 8px rgba(49,130,206,.35)}
+.sim-scale{display:flex;justify-content:space-between;font-family:'Manrope',sans-serif;font-size:12.5px;color:var(--muted);margin-top:-8px}
+.sim-status{border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:13px 16px;background:var(--bg)}
+.sim-status strong{display:block;font-size:17px;margin-bottom:3px}
+.sim-status p{font-size:15px;color:var(--muted)}
+.sim-status[data-s="ok"]{border-left-color:#38a169}
+.sim-status[data-s="ok"] strong{color:#2f855a}
+.sim-status[data-s="warn"]{border-left-color:#3182ce}
+.sim-status[data-s="warn"] strong{color:var(--blue-d)}
+.sim-status[data-s="high"]{border-left-color:#dd6b20}
+.sim-status[data-s="high"] strong{color:#c05621}
+.sim-status[data-s="urgent"]{border-left-color:#e53e3e}
+.sim-status[data-s="urgent"] strong{color:#c53030}
+.sim-note{font-size:13.5px;color:var(--muted)}
+
+/* ---------- services ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 22px;transition:transform .2s,box-shadow .2s}
+.svc:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.svc-icon{width:52px;height:52px;border-radius:14px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;margin-bottom:16px}
+.svc-icon svg{width:27px;height:27px}
+.svc h3{font-size:19px;margin-bottom:6px}
+.svc p{color:var(--muted);font-size:15px}
+.svc .price{margin-top:16px;font-size:14.5px;color:var(--muted)}
+.svc .price b{font-family:'Manrope',sans-serif;font-size:23px;font-weight:800;color:var(--blue)}
+
+/* ---------- frames ---------- */
+#frames{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.frame-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.frame{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.frame:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.frame img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.frame-body{padding:18px 18px 20px}
+.frame-tag{display:inline-block;font-size:12.5px;font-weight:600;color:var(--blue);background:var(--blue-soft);border-radius:999px;padding:3px 11px}
+.frame h3{font-size:18px;margin:10px 0 4px}
+.frame p{font-size:14.5px;color:var(--muted)}
+.frame .price{margin-top:14px;display:flex;justify-content:space-between;align-items:center}
+.frame .price b{font-family:'Manrope',sans-serif;font-size:20px;font-weight:800;color:var(--ink)}
+.frame .price span{font-size:13px;color:var(--muted)}
+
+/* ---------- eye chart ---------- */
+.chart-wrap{max-width:760px;margin:0 auto}
+.chart-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px 28px;box-shadow:var(--shadow)}
+.chart-row{display:flex;align-items:center;gap:18px;padding:9px 0;border-bottom:1px dashed var(--line)}
+.chart-row:last-child{border-bottom:0}
+.chart-letters{flex:1;text-align:center;font-weight:600;letter-spacing:.35em;text-indent:.35em;white-space:nowrap}
+.chart-val{font-family:'Manrope',sans-serif;font-size:13px;color:var(--muted);width:46px;text-align:right;flex:none}
+.chart-note{margin-top:18px;font-size:14px;color:var(--muted);text-align:center}
+
+/* ---------- cta band ---------- */
+.cta-band{
+  background:linear-gradient(135deg,var(--blue) 0%,var(--blue-d) 100%);color:#fff;
+  border-radius:24px;padding:44px 36px;text-align:center;box-shadow:var(--shadow);
+}
+.cta-band h2{font-size:clamp(24px,3vw,32px);margin-bottom:8px}
+.cta-band p{opacity:.92;margin-bottom:24px}
+.cta-band .btn{background:#fff;color:var(--blue-d)}
+.cta-band .btn:hover{background:#eaf3fb}
+
+/* ---------- footer ---------- */
+footer{background:#10222f;color:#c9d8e4}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px;padding:56px 0 40px}
+footer h3{color:#fff;font-size:17px;margin-bottom:14px}
+footer p,footer li{font-size:15px;margin-bottom:8px}
+footer a{color:#9cc8f0;min-height:44px;display:inline-flex;align-items:center}
+footer a:hover{color:#fff}
+.f-logo{display:flex;align-items:center;gap:10px;color:#fff;font-weight:600;font-size:21px;margin-bottom:14px}
+.f-logo svg{width:28px;height:28px;color:#63b3ed}
+.footer-bar{border-top:1px solid rgba(255,255,255,.12);padding:18px 0;font-size:14px;color:#8fa6b8;text-align:center}
+
+/* ---------- reveal ---------- */
+body.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+body.js .reveal.in{opacity:1;transform:none}
+body.js .svc-grid .reveal:nth-child(2),body.js .frame-grid .reveal:nth-child(2){transition-delay:.07s}
+body.js .svc-grid .reveal:nth-child(3),body.js .frame-grid .reveal:nth-child(3){transition-delay:.14s}
+body.js .svc-grid .reveal:nth-child(4),body.js .frame-grid .reveal:nth-child(4){transition-delay:.21s}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .sim-card{grid-template-columns:1fr}
+  .svc-grid,.frame-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:900px){
+  .nav-toggle{display:grid}
+  .nav-cta{display:none}
+  .nav-menu{
+    display:none;position:absolute;top:100%;left:0;right:0;background:#fff;
+    flex-direction:column;align-items:stretch;gap:2px;padding:10px 16px 16px;
+    border-bottom:1px solid var(--line);box-shadow:var(--shadow);
+  }
+  .nav-menu.open{display:flex}
+}
+@media (max-width:600px){
+  .section{padding:56px 0}
+  .hero{padding:38px 0 54px}
+  .lead{font-size:16.5px}
+  .svc-grid,.frame-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .hero-badge{left:10px;bottom:14px;padding:10px 14px}
+  .sim-panel{padding:22px 18px}
+  .sim-diopter{font-size:44px}
+  .chart-card{padding:20px 14px}
+  .chart-row{gap:10px}
+  .cta-band{padding:34px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  body.js .reveal{opacity:1;transform:none}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<nav class="nav" aria-label="เมนูหลัก">
+  <div class="nav-inner">
+    <a class="logo" href="#top" aria-label="มองดี กลับขึ้นด้านบน">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+      มองดี <small>MONGDEE</small>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="navMenu" aria-label="เปิดหรือปิดเมนู">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#simulator">จำลองสายตา</a></li>
+      <li><a href="#services">บริการ</a></li>
+      <li><a href="#frames">กรอบแว่น</a></li>
+      <li><a href="#check">ทดสอบสายตา</a></li>
+      <li><a href="#contact">ติดต่อ</a></li>
+    </ul>
+    <a class="btn btn-primary nav-cta" href="#contact">วัดสายตาฟรี</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">ร้านแว่นตาบางแค · ตัดเลนส์รอรับใน 1 ชั่วโมง</p>
+      <h1>เห็นชัดในแบบของคุณ</h1>
+      <p class="lead">วัดสายตาละเอียดทีละขั้นตอนโดยนักทัศนมาตร เลือกกรอบและเลนส์ที่เข้ากับหน้าและไลฟ์สไตล์ แล้วรอรับแว่นคู่ใหม่ได้เลยภายในหนึ่งชั่วโมง</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#simulator">ลองจำลองสายตา</a>
+        <a class="btn btn-ghost" href="#frames">ดูกรอบแว่น</a>
+      </div>
+      <ul class="trust">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg>
+          เลนส์แท้ รับประกัน 1 ปี
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+          ตัดรอรับใน 1 ชม.
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+          วัดสายตาฟรี ไม่มีข้อผูกมัด
+        </li>
+      </ul>
+    </div>
+    <div class="hero-media">
+      <img src="../assets/optical-hero.jpg" alt="ชั้นวางกรอบแว่นตาหลากสีและหลายทรงภายในร้านมองดี" width="1200" height="900" fetchpriority="high">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="14" r="3.2"/><circle cx="17.5" cy="14" r="3.2"/><path d="M9.7 14h4.6M3.3 14 2 10.5M20.7 14 22 10.5"/></svg>
+        <div><b>ตัดแว่นใหม่ เริ่ม <span class="num">฿990</span></b><span>รวมกรอบ + เลนส์ + วัดสายตา</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- MYOPIA SIMULATOR -->
+  <section class="section" id="simulator" aria-labelledby="sim-title">
+    <div class="container">
+      <div class="sec-head reveal">
+        <p class="eyebrow">MYOPIA SIMULATOR</p>
+        <h2 id="sim-title">สายตาสั้นเป็นยังไง?</h2>
+        <p class="sec-sub">เลื่อนค่าสายตา แล้วสังเกตกระดานหน้าห้องเรียน — ภาพจะเบลอใกล้เคียงกับที่คนสายตาสั้นมองเห็นจริงเมื่อไม่ใส่แว่น</p>
+      </div>
+      <div class="sim-card reveal">
+        <div class="sim-stage">
+          <div class="sim-blur" id="simBlur">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop" alt="ห้องเรียนมองจากที่นั่งแถวหลัง เห็นกระดานและป้ายตัวหนังสืออยู่ไกลด้านหน้า" width="1200" height="800">
+            <div class="sim-board" aria-hidden="true">
+              <p class="sim-board-title">วิทยาศาสตร์ ป.6 — ระบบสุริยะ</p>
+              <p class="sim-board-line">ดาวเคราะห์ 8 ดวง: พุธ ศุกร์ โลก อังคาร</p>
+              <p class="sim-board-line">พฤหัสบดี เสาร์ ยูเรนัส เนปจูน</p>
+              <p class="sim-board-small">สอบกลางภาคพฤหัสบดีหน้า · ห้อง 402 · เวลา 09:00</p>
+            </div>
+          </div>
+          <p class="sim-tag">มุมมองจากแถวหลัง · เมื่อไม่ใส่แว่น</p>
+        </div>
+        <div class="sim-panel">
+          <div class="sim-readout">
+            <span class="sim-diopter num" id="simD">-1.00</span>
+            <span class="sim-unit">ดีออปเตอร์ (D)</span>
+          </div>
+          <label class="sim-label" for="simRange">ค่าสายตาสั้น</label>
+          <input class="sim-range" type="range" id="simRange" min="0.5" max="8" step="0.5" value="1" aria-describedby="simStatus">
+          <div class="sim-scale" aria-hidden="true"><span>-0.5</span><span>-4.0</span><span>-8.0</span></div>
+          <div class="sim-status" id="simStatus" data-s="ok" aria-live="polite">
+            <strong id="simLevel">ใกล้ปกติ</strong>
+            <p id="simDesc"></p>
+          </div>
+          <a class="btn btn-primary" href="#contact">วัดสายตาฟรีที่ร้าน</a>
+          <p class="sim-note">การจำลองนี้เพื่อความเข้าใจคร่าวๆ ค่าสายตาจริงต้องวัดด้วยเครื่องมือมาตรฐานโดยผู้เชี่ยวชาญ</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services" aria-labelledby="svc-title">
+    <div class="container">
+      <div class="sec-head reveal">
+        <p class="eyebrow">บริการของเรา</p>
+        <h2 id="svc-title">ครบทุกเรื่องสายตา ในที่เดียว</h2>
+        <p class="sec-sub">ราคาชัดเจนก่อนทำ ไม่มีค่าใช้จ่ายแอบแฝง ทุกชิ้นงานรับประกันความพึงพอใจ</p>
+      </div>
+      <div class="svc-grid">
+        <article class="svc reveal">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="14" r="3.2"/><circle cx="17.5" cy="14" r="3.2"/><path d="M9.7 14h4.6M3.3 14 2 10.5M20.7 14 22 10.5"/></svg>
+          </div>
+          <h3>ตัดแว่นใหม่</h3>
+          <p>กรอบ + เลนส์สายตามาตรฐาน พร้อมวัดสายตาฟรี รอรับได้ใน 1 ชั่วโมง</p>
+          <p class="price">เริ่ม <b>฿990</b></p>
+        </article>
+        <article class="svc reveal">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="5.5"/><path d="M14.5 12H21M18 9l3 3-3 3"/></svg>
+          </div>
+          <h3>เปลี่ยนเลนส์</h3>
+          <p>ใช้กรอบเดิมที่คุณรัก เปลี่ยนเลนส์ใหม่ตามค่าสายตาล่าสุด ทุกชนิดเลนส์</p>
+          <p class="price">เริ่ม <b>฿590</b></p>
+        </article>
+        <article class="svc reveal">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z"/><path d="M12 8v4M12 15.5v.5"/></svg>
+          </div>
+          <h3>เลนส์กรองแสงสีฟ้า</h3>
+          <p>ถนอมสายตาจากหน้าจอคอมพิวเตอร์และมือถือ เหมาะกับคนทำงานออฟฟิศ</p>
+          <p class="price">เริ่ม <b>฿890</b></p>
+        </article>
+        <article class="svc reveal">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/></svg>
+          </div>
+          <h3>คอนแทคเลนส์</h3>
+          <p>รายวัน รายเดือน สีและใส พร้อมสอนวิธีใส่และดูแลสำหรับมือใหม่</p>
+          <p class="price">เริ่ม <b>฿290</b></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRAMES -->
+  <section class="section" id="frames" aria-labelledby="frame-title">
+    <div class="container">
+      <div class="sec-head reveal">
+        <p class="eyebrow">กรอบแนะนำ</p>
+        <h2 id="frame-title">4 ทรงยอดนิยมประจำร้าน</h2>
+        <p class="sec-sub">ราคารวมเลนส์สายตามาตรฐานแล้ว ลองจริงหน้าร้านได้ทุกวัน พร้อมคำแนะนำเรื่องทรงที่เข้ากับรูปหน้า</p>
+      </div>
+      <div class="frame-grid">
+        <article class="frame reveal">
+          <img src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?q=80&w=1000&auto=format&fit=crop" alt="กรอบแว่นทรงกลมสไตล์วินเทจวางอยู่บนพื้นหลังสะอาด" width="1000" height="750" loading="lazy" decoding="async">
+          <div class="frame-body">
+            <span class="frame-tag">M-01</span>
+            <h3>ทรงกลมวินเทจ</h3>
+            <p>โลหะบาง น้ำหนักเบา ลุคย้อนยุคสุดคลาสสิก</p>
+            <div class="price"><b class="num">฿1,290</b><span>รวมเลนส์</span></div>
+          </div>
+        </article>
+        <article class="frame reveal">
+          <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=1000&auto=format&fit=crop" alt="แว่นตากรอบอะซิเตททรงเหลี่ยมคลาสสิกสีเข้ม" width="1000" height="750" loading="lazy" decoding="async">
+          <div class="frame-body">
+            <span class="frame-tag">M-02 · ขายดี</span>
+            <h3>ทรงเหลี่ยมคลาสสิก</h3>
+            <p>อะซิเตททรงทางการ เข้าได้ทุกโอกาส ทำงานหรือเรียน</p>
+            <div class="price"><b class="num">฿990</b><span>รวมเลนส์</span></div>
+          </div>
+        </article>
+        <article class="frame reveal">
+          <img src="https://images.unsplash.com/photo-1577803645773-f96470509666?q=80&w=1000&auto=format&fit=crop" alt="ลูกค้ากำลังลองกรอบแว่นทรงโอเวอร์ไซส์ที่หน้าร้าน" width="1000" height="750" loading="lazy" decoding="async">
+          <div class="frame-body">
+            <span class="frame-tag">M-03</span>
+            <h3>ทรงโอเวอร์ไซส์</h3>
+            <p>กรอบใหญ่กำลังดี รับทุกรูปหน้า สวมใส่สบายทั้งวัน</p>
+            <div class="price"><b class="num">฿1,590</b><span>รวมเลนส์</span></div>
+          </div>
+        </article>
+        <article class="frame reveal">
+          <img src="https://images.unsplash.com/photo-1591076482161-42ce6da69f67?q=80&w=1000&auto=format&fit=crop" alt="บรรยากาศภายในร้านแว่นตาพร้อมกรอบดีไซเนอร์ให้เลือกหลากรุ่น" width="1000" height="750" loading="lazy" decoding="async">
+          <div class="frame-body">
+            <span class="frame-tag">ดีไซเนอร์</span>
+            <h3>คอลเลกชันพรีเมียม</h3>
+            <p>รุ่นพิเศษจากแบรนด์ดัง เลือกชมเพิ่มเติมได้ที่หน้าร้าน</p>
+            <div class="price"><b class="num">฿1,890</b><span>เริ่มต้น</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EYE CHART -->
+  <section class="section" id="check" aria-labelledby="check-title">
+    <div class="container chart-wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">ทดสอบเบื้องต้น</p>
+        <h2 id="check-title">ลองอ่านตารางนี้จากจอ</h2>
+        <p class="sec-sub">นั่งห่างจากจอประมาณ 1 เมตร ปิดตาข้างหนึ่ง แล้วอ่านจากบนลงล่าง — แถวสุดท้ายที่อ่านได้ชัดคือระดับสายตาคร่าวๆ ของคุณ</p>
+      </div>
+      <div class="chart-card reveal">
+        <div class="chart-row"><p class="chart-letters" style="font-size:56px">ก ง</p><span class="chart-val">0.1</span></div>
+        <div class="chart-row"><p class="chart-letters" style="font-size:42px">จ ช ท</p><span class="chart-val">0.15</span></div>
+        <div class="chart-row"><p class="chart-letters" style="font-size:32px">น บ ร ส</p><span class="chart-val">0.2</span></div>
+        <div class="chart-row"><p class="chart-letters" style="font-size:24px">ห ด ต พ ม</p><span class="chart-val">0.3</span></div>
+        <div class="chart-row"><p class="chart-letters" style="font-size:18px">ย ล ว ศ อ ฟ</p><span class="chart-val">0.5</span></div>
+        <div class="chart-row"><p class="chart-letters" style="font-size:14px">ค ถ ฉ ฎ ผ ฝ ษ</p><span class="chart-val">1.0</span></div>
+        <p class="chart-note">อ่านได้ถึงแถว <span class="num">1.0</span> = สายตาปกติ · แถว <span class="num">0.5</span> หรือต่ำกว่า แนะนำให้วัดสายตาละเอียด — การทดสอบนี้เป็นการประเมินคร่าวๆ ไม่ใช่การวินิจฉัย</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="section" style="padding-top:0" aria-label="จองคิว">
+    <div class="container">
+      <div class="cta-band reveal">
+        <h2>พร้อมเห็นชัดแล้วหรือยัง</h2>
+        <p>จองคิววัดสายตาฟรีล่วงหน้า ไม่ต้องรอ หรือ walk-in ได้ทุกวัน</p>
+        <a class="btn" href="tel:022345678">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l1.5 4-2.2 1.6a12 12 0 0 0 6.1 6.1L16 13.5l4 1.5v4a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 3 6.2 2 2 0 0 1 5 4Z"/></svg>
+          โทร 02-234-5678
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="f-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+          มองดี <span class="num" style="font-size:11px;letter-spacing:.14em;color:#8fa6b8">MONGDEE</span>
+        </p>
+        <p>ร้านแว่นตาครบวงจรใจกลางบางแค ดูแลสายตาคุณด้วยมาตรฐานแบบคลินิก ตั้งแต่ปี 2558</p>
+      </div>
+      <div>
+        <h3>ที่ตั้งร้าน</h3>
+        <p>123/45 ถนนเพชรเกษม แขวงบางหว้า เขตบางแค กรุงเทพมหานคร 10160</p>
+        <p>BTS บางหว้า ทางออก 2 เดิน 3 นาที</p>
+      </div>
+      <div>
+        <h3>เวลาเปิดทำการ</h3>
+        <p>จันทร์–อาทิตย์ <span class="num">10:00–20:00</span> น.</p>
+        <p>เปิดทุกวัน ไม่มีวันหยุด</p>
+      </div>
+      <div>
+        <h3>ติดต่อ</h3>
+        <p>โทร <a href="tel:022345678">02-234-5678</a></p>
+        <p>มือถือ <a href="tel:0895551234">089-555-1234</a></p>
+        <p>LINE: <span class="num">@mongdee</span></p>
+      </div>
+    </div>
+    <div class="footer-bar">© <span class="num" id="year">2569</span> มองดี ออปติคอล · เห็นชัดในแบบของคุณ</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.body.classList.add('js');
+
+  /* footer year (พ.ศ.) */
+  var y=document.getElementById('year');
+  if(y){y.textContent=String(new Date().getFullYear()+543);}
+
+  /* mobile nav */
+  var toggle=document.querySelector('.nav-toggle');
+  var menu=document.getElementById('navMenu');
+  if(toggle&&menu){
+    toggle.addEventListener('click',function(){
+      var open=menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded',open?'true':'false');
+    });
+    menu.addEventListener('click',function(e){
+      if(e.target.closest('a')){
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+
+  /* myopia simulator */
+  var range=document.getElementById('simRange');
+  var blurEl=document.getElementById('simBlur');
+  var dEl=document.getElementById('simD');
+  var statusEl=document.getElementById('simStatus');
+  var levelEl=document.getElementById('simLevel');
+  var descEl=document.getElementById('simDesc');
+  var STAGES=[
+    {max:1,s:'ok',level:'ใกล้ปกติ',desc:'สายตาสั้นเล็กน้อย อ่านป้ายไกลยังพอได้แต่เริ่มไม่คม ควรตรวจวัดสายตาปีละครั้ง'},
+    {max:3,s:'warn',level:'ควรตัดแว่น',desc:'ป้ายไกลและตัวหนังสือบนกระดานเริ่มเบลอชัดเจน ควรตัดแว่นเพื่อการเรียน การขับรถ และความปลอดภัย'},
+    {max:6,s:'high',level:'สั้นปานกลางถึงมาก',desc:'มองเห็นชัดเฉพาะระยะใกล้มาก ต้องใส่แว่นตลอดเวลา ควรเลือกเลนส์บางพิเศษ (Index 1.60–1.67) ให้แว่นไม่หนา'},
+    {max:8,s:'urgent',level:'ต้องตรวจด่วน',desc:'สายตาสั้นมาก เสี่ยงภาวะแทรกซ้อนทางจอประสาทตา ควรพบจักษุแพทย์ตรวจสุขภาพตาทุก 6–12 เดือน'}
+  ];
+  function renderSim(){
+    var d=parseFloat(range.value);
+    var px=Math.min(10,Math.pow(d,1.12)); /* ~1px ต่อ 1 ดีออปเตอร์ แบบ non-linear */
+    blurEl.style.filter='blur('+px.toFixed(2)+'px)';
+    dEl.textContent='-'+d.toFixed(2);
+    var pct=((d-0.5)/(8-0.5))*100;
+    range.style.setProperty('--fill',pct.toFixed(1)+'%');
+    for(var i=0;i<STAGES.length;i++){
+      if(d<=STAGES[i].max){
+        levelEl.textContent=STAGES[i].level;
+        descEl.textContent=STAGES[i].desc;
+        statusEl.setAttribute('data-s',STAGES[i].s);
+        break;
+      }
+    }
+  }
+  if(range&&blurEl){
+    range.addEventListener('input',renderSim);
+    renderSim();
+  }
+
+  /* reveal on scroll */
+  var items=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window&&items.length){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+      });
+    },{threshold:0.12});
+    items.forEach(function(el){io.observe(el);});
+  }else{
+    items.forEach(function(el){el.classList.add('in');});
+  }
+})();
+</script>
+<div id="zx-credit" style="background:#ffffff;border-top:1px solid #e8e8ed;position:relative;z-index:2">
+  <div style="height:3px;background:linear-gradient(90deg,#FF0000,#990000)"></div>
+  <div style="max-width:760px;margin:0 auto;padding:34px 20px 32px;text-align:center;font-family:'IBM Plex Sans Thai','Sarabun',-apple-system,sans-serif">
+    <p style="margin:0 0 8px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9e9e9e;font-family:'JetBrains Mono','IBM Plex Sans Thai',monospace">ผลงานตัวอย่างจากคลาส First Vibe : Coding</p>
+    <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=credit&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;font-size:clamp(19px,2.6vw,24px);font-weight:600;color:#1d1d1f;text-decoration:none;line-height:1.45"><span style="color:#FF0000">ZenityX</span> — ศูนย์ AI อันดับ 1 เมืองไทย</a>
+    <p style="margin:8px 0 18px;font-size:14px;color:#666666;font-weight:300">เรียนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง ไม่ต้องมีพื้นฐานโค้ด</p>
+    <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="display:inline-block;background:#FF0000;color:#ffffff;font-weight:500;font-size:14.5px;padding:12px 26px;border-radius:99px;text-decoration:none;box-shadow:0 8px 20px -8px rgba(255,0,0,.45)">ดูคอร์ส First Vibe : Coding →</a>
+    <p style="margin:14px 0 0;font-size:12.5px;color:#9e9e9e">โทรสอบถาม <a href="tel:0622629644" style="color:#CC0000;text-decoration:none">062-262-9644</a></p>
+  </div>
+</div>
+<a href="../" id="zx-back" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-family:'IBM Plex Sans Thai','Sarabun',sans-serif;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+</body>
+</html>
