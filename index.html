@@ -7,125 +7,142 @@
 <meta name="description" content="เว็บตัวอย่างที่สร้างด้วย AI จากคลาส First Vibe : Coding for Beginners — เรียนสร้างเว็บด้วย AI แบบจับมือทำจริง ไม่ต้องเขียนโค้ด ที่ ZenityX ศูนย์ AI อันดับ 1 เมืองไทย">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=Sarabun:wght@300;400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --red:#FF0000; --red-mid:#CC0000; --red-deep:#990000;
-  --ink:#1d1d1f; --black:#0a0a0a; --white:#ffffff;
-  --gray-bg:#f5f5f7; --gray-card:#f5f5f5; --gray-text:#666666; --gray-med:#9e9e9e;
-  --hairline:#e8e8ed;
-  --display:'IBM Plex Sans Thai',sans-serif; --body:'Sarabun',sans-serif; --mono:'JetBrains Mono',monospace;
-  --radius:20px; --radius-sm:14px;
-  --shadow-card:0 4px 24px rgba(0,0,0,.06); --shadow-lift:0 18px 44px rgba(0,0,0,.12);
-}
+:root{--red:#FF0000;--red-mid:#CC0000;--red-deep:#990000;--ink:#1d1d1f;--gray:#666666;--gray-l:#9e9e9e;--bg:#f5f5f7;--card:#ffffff;--line:#e8e8ed;--disp:'IBM Plex Sans Thai',sans-serif;--body:'Sarabun',sans-serif;--mono:'JetBrains Mono',monospace;--r:20px}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--gray-bg);color:var(--ink);font-family:var(--body);font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:300;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-::selection{background:var(--red);color:var(--white)}
+img{display:block;max-width:100%}
 :focus-visible{outline:2px solid var(--red);outline-offset:3px}
-.wrap{max-width:1320px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
-
-/* header */
-header{background:var(--white);border-bottom:1px solid var(--hairline);padding:clamp(3.5rem,8vh,6rem) 0 clamp(2.5rem,5vh,3.5rem)}
-header .wrap-inner{max-width:1320px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
-.kicker{font-family:var(--mono);font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:var(--red-mid);display:flex;align-items:center;gap:.9rem;font-weight:500}
-.kicker::before{content:'';width:36px;height:2px;background:var(--red)}
-h1{font-family:var(--display);font-size:clamp(2.2rem,6vw,4.4rem);font-weight:600;line-height:1.18;margin:1.3rem 0 1.1rem;letter-spacing:-.01em}
-h1 .thin{font-weight:300;color:var(--gray-text)}
-.sub{color:var(--gray-text);max-width:58ch;font-size:clamp(.95rem,1.4vw,1.08rem)}
-.sub b{color:var(--ink);font-weight:500}
-.cta-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.2rem}
-.btn-primary{display:inline-flex;align-items:center;gap:.6rem;background:var(--red);color:var(--white);font-weight:500;font-family:var(--display);padding:1rem 1.9rem;border-radius:99px;letter-spacing:.02em;transition:background .3s ease,transform .3s ease,box-shadow .3s ease;box-shadow:0 8px 24px -8px rgba(255,0,0,.4)}
+::selection{background:#ffd9d9;color:var(--ink)}
+button{font:inherit;cursor:pointer}
+/* topbar */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1320px;margin:0 auto;padding:.85rem clamp(1.25rem,4vw,3rem);display:flex;align-items:center;gap:1.2rem}
+.brand{display:flex;align-items:center;gap:.55rem;font-family:var(--disp);font-weight:600;font-size:1.05rem}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--red)}
+.brand small{font-weight:300;color:var(--gray-l);font-size:.9rem}
+.topbar nav{margin-left:auto;display:flex;gap:1rem;align-items:center}
+.switch-tab{display:inline-flex;background:#ececf0;border-radius:99px;padding:4px;gap:2px}
+.switch-tab a{padding:.45rem 1.05rem;border-radius:99px;font-size:.85rem;color:var(--gray);font-family:var(--disp);transition:all .25s;min-height:36px;display:inline-flex;align-items:center}
+.switch-tab a.on{background:#fff;color:var(--ink);font-weight:500;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.btn-r{display:inline-flex;align-items:center;gap:.5rem;background:var(--red);color:#fff;font-family:var(--disp);font-weight:500;border-radius:99px;padding:.65rem 1.3rem;font-size:.88rem;transition:all .25s;box-shadow:0 8px 20px -8px rgba(255,0,0,.4)}
+.btn-r:hover{background:var(--red-mid);transform:translateY(-1px)}
+@media(max-width:640px){.brand small{display:none}.topbar-in{gap:.7rem}.switch-tab a{padding:.45rem .8rem;font-size:.8rem}}
+/* hero */
+.hero{max-width:1320px;margin:0 auto;padding:clamp(2.8rem,7vh,5rem) clamp(1.25rem,4vw,3rem) clamp(1.6rem,3vh,2.2rem)}
+.kick{display:flex;align-items:center;gap:.9rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:var(--red-mid);font-weight:500}
+.kick::before{content:'';width:36px;height:2px;background:var(--red)}
+.hero h1{font-family:var(--disp);font-size:clamp(2.1rem,5.6vw,4rem);font-weight:600;line-height:1.2;letter-spacing:-.01em;margin:1.2rem 0 1rem;max-width:24ch}
+.hero h1 .thin{font-weight:300;color:var(--gray)}
+.hero .sub{color:var(--gray);max-width:62ch;font-size:clamp(.95rem,1.4vw,1.06rem)}
+.hero .sub b{color:var(--ink);font-weight:500}
+.cta-row{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem}
+.btn-primary{display:inline-flex;align-items:center;gap:.6rem;background:var(--red);color:#fff;font-weight:500;font-family:var(--disp);padding:1rem 1.9rem;border-radius:99px;transition:all .3s;box-shadow:0 8px 24px -8px rgba(255,0,0,.4)}
 .btn-primary:hover{background:var(--red-mid);transform:translateY(-2px);box-shadow:0 14px 32px -8px rgba(204,0,0,.45)}
-.btn-ghost{display:inline-flex;align-items:center;border:1px solid var(--hairline);color:var(--gray-text);font-family:var(--display);padding:1rem 1.7rem;border-radius:99px;letter-spacing:.02em;background:var(--white);transition:border-color .3s ease,color .3s ease}
+.btn-ghost{display:inline-flex;align-items:center;border:1px solid var(--line);color:var(--gray);font-family:var(--disp);padding:1rem 1.7rem;border-radius:99px;background:#fff;transition:all .3s}
 .btn-ghost:hover{border-color:var(--red);color:var(--red)}
-.meta-row{display:flex;flex-wrap:wrap;gap:.9rem 2.4rem;margin-top:2.4rem;font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-med)}
+.btn-ghost.hot{border-color:var(--red);color:var(--red)}
+.meta-row{display:flex;flex-wrap:wrap;gap:.8rem 2.2rem;margin-top:2.2rem;font-family:var(--mono);font-size:.74rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gray-l)}
 .meta-row b{color:var(--ink);font-weight:500}
-
-/* grid */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,2.4vw,2rem);padding:clamp(2.5rem,6vh,4rem) 0}
+/* chips */
+.chips{max-width:1320px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem) .2rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.fchip{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:.5rem 1rem;font-size:.84rem;font-family:var(--disp);color:var(--gray);transition:all .2s;min-height:44px}
+.fchip:hover{border-color:var(--red);color:var(--red)}
+.fchip.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:500}
+.fchip b{font-family:var(--mono);font-weight:500;font-size:.75rem;margin-left:.3rem;opacity:.7}
+/* layout */
+main{max-width:1320px;margin:0 auto;padding:clamp(1.2rem,3vh,2rem) clamp(1.25rem,4vw,3rem) clamp(3rem,7vh,4.5rem)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,2.2vw,1.8rem)}
 @media(max-width:1020px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.grid{grid-template-columns:1fr}}
-.card{
-  display:flex;flex-direction:column;background:var(--white);border:1px solid var(--hairline);
-  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-card);
-  opacity:0;transform:translateY(26px);
-  transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease,border-color .45s ease;
-}
-.card.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease,border-color .45s ease}
-.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lift);border-color:rgba(255,0,0,.35)}
-.thumb{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--gray-card)}
-.thumb img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
-.card:hover .thumb img{transform:scale(1.045)}
-.thumb .num{
-  position:absolute;top:.85rem;left:.85rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;font-weight:500;
-  background:rgba(255,255,255,.9);backdrop-filter:blur(6px);padding:.35rem .7rem;border-radius:99px;color:var(--red-mid);
-  border:1px solid rgba(204,0,0,.25);
-}
-.body{padding:1.3rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
-.biz{font-family:var(--mono);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gray-med)}
-.name{font-family:var(--display);font-size:1.32rem;font-weight:600}
-.style{font-size:.88rem;color:var(--gray-text)}
-.tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.5rem}
-.tag{font-size:.72rem;border:1px solid var(--hairline);border-radius:99px;padding:.28rem .75rem;color:var(--gray-text);letter-spacing:.04em;background:var(--gray-card)}
-.open{
-  margin-top:auto;padding-top:1.1rem;display:inline-flex;align-items:center;gap:.55rem;
-  font-size:.86rem;font-weight:500;font-family:var(--display);color:var(--ink);letter-spacing:.03em;transition:gap .35s ease,color .35s ease;
-}
-.card:hover .open{gap:1rem;color:var(--red)}
-
-/* enroll banner */
-.enroll{
-  margin:0 0 clamp(2.5rem,6vh,4rem);border-radius:var(--radius);
-  padding:clamp(2rem,4vw,3.2rem);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;
-  background:var(--white);border:1px solid var(--hairline);box-shadow:var(--shadow-card);
-  position:relative;overflow:hidden;
-}
-.enroll::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,0,0,.06),transparent 55%);pointer-events:none}
-.enroll::after{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(var(--red),var(--red-deep))}
-.enroll > *{position:relative}
-.enroll h2{font-family:var(--display);font-size:clamp(1.5rem,3.4vw,2.3rem);font-weight:600;line-height:1.4}
-.enroll h2 em{color:var(--red);font-style:normal}
-.enroll p{color:var(--gray-text);margin-top:.6rem;max-width:56ch}
-
+/* card */
+.card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.05);opacity:0;transform:translateY(22px);transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s,border-color .4s,opacity .5s}
+.card.in{opacity:1;transform:none}
+.card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(0,0,0,.11);border-color:rgba(255,0,0,.35)}
+.thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#ececf0}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.card:hover .thumb img{transform:scale(1.05)}
+.thumb .num,.thumb .acc{position:absolute;top:.8rem;left:.8rem}
+.thumb .num{font-family:var(--mono);font-size:.7rem;background:rgba(29,29,31,.8);color:#fff;border-radius:99px;padding:.28rem .7rem;letter-spacing:.1em}
+.thumb .acc{width:12px;height:12px;border-radius:50%;box-shadow:0 0 0 3px rgba(255,255,255,.85)}
+.body{padding:1.05rem 1.2rem 1.2rem;display:flex;flex-direction:column;gap:.25rem;flex:1}
+.biz{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red-mid)}
+.name{font-family:var(--disp);font-size:1.2rem;font-weight:600;line-height:1.3}
+.name small{font-family:var(--mono);font-size:.68rem;color:var(--gray-l);font-weight:400;margin-left:.4rem}
+.style,.desc{font-size:.86rem;color:var(--gray);font-weight:300}
+.tags,.feats{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0 .7rem}
+.tags span,.feats span,.tag{font-size:.72rem;background:#f0f0f3;color:var(--gray);border-radius:99px;padding:.22rem .65rem}
+.open{margin-top:auto;display:inline-flex;align-items:center;gap:.4rem;font-family:var(--disp);font-size:.9rem;font-weight:500;color:var(--red)}
+/* group (systems) */
+.group{margin-top:2.4rem}
+.group-head{display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.1rem}
+.group-head h2{font-family:var(--disp);font-size:1.25rem;font-weight:600}
+.group-head .gcode{font-family:var(--mono);font-size:.72rem;color:var(--red);letter-spacing:.15em}
+.group-head .gline{flex:1;height:1px;background:var(--line)}
+/* enroll */
+.enroll{background:linear-gradient(135deg,var(--red),var(--red-deep));border-radius:28px;max-width:1270px;margin:0 auto clamp(3rem,6vh,4rem);padding:clamp(2.2rem,5vw,3.5rem);color:#fff;display:grid;grid-template-columns:1.3fr .7fr;gap:2rem;align-items:center;box-shadow:0 26px 60px -24px rgba(204,0,0,.5)}
+@media(max-width:860px){.enroll{grid-template-columns:1fr}}
+.enroll h2{font-family:var(--disp);font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:600;line-height:1.3}
+.enroll p{margin-top:.8rem;opacity:.88;font-weight:300}
+.ec{background:#fff;color:var(--red-deep);border-radius:18px;padding:1.6rem;text-align:center}
+.ec b{display:block;font-family:var(--disp);font-size:1.05rem;margin-bottom:.3rem}
+.ec .eci{font-size:.85rem;color:var(--gray);margin-bottom:1rem}
+.btn-w{display:inline-flex;align-items:center;justify-content:center;background:var(--ink);color:#fff;font-family:var(--disp);font-weight:500;border-radius:99px;padding:.9rem 1.4rem;width:100%;transition:transform .25s}
+.btn-w:hover{transform:translateY(-2px)}
+.ec .tel{display:block;margin-top:.8rem;font-size:.82rem;color:var(--gray)}
+.ec .tel a{color:var(--red);font-weight:500}
 /* footer */
-footer{border-top:1px solid var(--hairline);background:var(--white);padding:2.2rem 0 2.6rem}
-footer .wrap-inner{max-width:1320px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;color:var(--gray-text);font-size:.85rem}
-footer b{color:var(--ink);font-weight:500}
-footer a{color:var(--red-mid);font-weight:500;text-decoration:underline;text-underline-offset:3px}
-footer a:hover{color:var(--red)}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{transition-duration:.001s!important;animation-duration:.001s!important}
-  .card{opacity:1;transform:none}
-}
+footer{border-top:1px solid var(--line);padding:1.8rem 0;text-align:center;font-size:.82rem;color:var(--gray-l)}
+footer a{color:var(--red)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}.card{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 <script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
-
-<header>
-  <div class="wrap-inner">
-    <p class="kicker">ผลงานจากคลาส First Vibe : Coding — ZenityX</p>
-    <h1>เว็บทุกเว็บในหน้านี้<br><span class="thin">สร้างด้วย AI — โดยไม่ต้องเขียนโค้ดเอง</span></h1>
-    <p class="sub">นี่คือผลงานตัวอย่างที่สร้างด้วยเทคนิค <b>Vibe Coding</b> — ให้ AI ช่วยคิด ออกแบบ และพัฒนาเว็บจริงตั้งแต่ศูนย์ ครอบคลุมหลากธุรกิจและสไตล์ ไม่ซ้ำกันแม้แต่เว็บเดียว ในคลาส <b>First Vibe : Coding for Beginners</b> คุณจะได้ลงมือสร้างเว็บแบบนี้ด้วยตัวเอง แม้ไม่เคยเขียนโค้ดมาก่อน</p>
-    <div class="cta-row">
-      <a class="btn-primary" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=hub-cta&utm_campaign=demos" target="_blank" rel="noopener">ดูรายละเอียดคอร์ส →</a>
-      <a class="btn-ghost" href="tel:0622629644">โทรสอบถาม 062-262-9644</a>
-      <a class="btn-ghost" href="./systems/" style="border-color:var(--red);color:var(--red)">ดูตัวอย่างระบบใช้งาน (POS, CRM, สต็อก) →</a>
-    </div>
-    <div class="meta-row">
-      <span>เรียน <b>1 วันเต็ม</b> · 10:00–17:00</span>
-      <span><b>ไม่ต้องมีพื้นฐาน</b> โค้ด</span>
-      <span>เวิร์กช็อป <b>จับมือทำจริง</b></span>
-      <span>รับ <b>Certificate</b> หลังจบคอร์ส</span>
-    </div>
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="./"><span class="dot"></span>ZenityX <small>Demos</small></a>
+    <nav>
+      <span class="switch-tab">
+        <a href="./" class="on">เว็บไซต์</a>
+        <a href="systems/">ระบบใช้งาน</a>
+      </span>
+      <a class="btn-r" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=hub-top&utm_campaign=demos" target="_blank" rel="noopener">ดูคอร์สเรียน</a>
+    </nav>
+  </div>
+</div>
+<header class="hero">
+  <p class="kick">ผลงานจากคลาส First Vibe : Coding — ZenityX</p>
+  <h1>เว็บทุกเว็บในหน้านี้<br><span class="thin">สร้างด้วย AI — โดยไม่ต้องเขียนโค้ดเอง</span></h1>
+  <p class="sub">นี่คือผลงานตัวอย่างที่สร้างด้วยเทคนิค <b>Vibe Coding</b> — ให้ AI ช่วยคิด ออกแบบ และพัฒนาเว็บจริงตั้งแต่ศูนย์ ครอบคลุมหลากธุรกิจและสไตล์ ไม่ซ้ำกันแม้แต่เว็บเดียว ในคลาส <b>First Vibe : Coding for Beginners</b> คุณจะได้ลงมือสร้างเว็บแบบนี้ด้วยตัวเอง แม้ไม่เคยเขียนโค้ดมาก่อน</p>
+  <div class="cta-row">
+    <a class="btn-primary" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=hub-cta&utm_campaign=demos" target="_blank" rel="noopener">ดูรายละเอียดคอร์ส →</a>
+    <a class="btn-ghost" href="tel:0622629644">โทรสอบถาม 062-262-9644</a>
+  </div>
+  <div class="meta-row">
+    <span>เรียน <b>1 วันเต็ม</b> · 10:00–17:00</span>
+    <span><b>ไม่ต้องมีพื้นฐาน</b> โค้ด</span>
+    <span>มี <b>Certificate</b> รับรอง</span>
+    <span><b>60</b> ผลงานเว็บไซต์</span>
+    <span><b>10</b> ระบบใช้งานจริง</span>
   </div>
 </header>
-
-<div class="wrap">
-  <main class="grid" id="grid">
-
-    <a class="card" href="./akara-resort/">
+<div class="chips" id="chips">
+  <button class="fchip on" data-c="all">ทั้งหมด<b>60</b></button>
+  <button class="fchip" data-c="stay">ที่พัก & ท่องเที่ยว<b>4</b></button>
+  <button class="fchip" data-c="food">อาหาร & เครื่องดื่ม<b>8</b></button>
+  <button class="fchip" data-c="beauty">ความงาม & สุขภาพ<b>7</b></button>
+  <button class="fchip" data-c="home">บ้าน & อสังหา<b>7</b></button>
+  <button class="fchip" data-c="edu">การศึกษา & เด็ก<b>7</b></button>
+  <button class="fchip" data-c="pro">ธุรกิจมืออาชีพ<b>11</b></button>
+  <button class="fchip" data-c="fun">กีฬา & บันเทิง<b>5</b></button>
+  <button class="fchip" data-c="retail">รีเทล & ไลฟ์สไตล์<b>11</b></button>
+</div>
+<main>
+  <div class="grid" id="cardGrid">
+<a class="card" data-cat="stay" href="./akara-resort/">
       <div class="thumb"><span class="num">01</span><img src="./shots/akara-resort.jpg" alt="เว็บรีสอร์ทหรู อัครา ภูเก็ต" loading="lazy"></div>
       <div class="body">
         <span class="biz">รีสอร์ท & ที่พักหรู</span>
@@ -135,8 +152,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./coffee-roastery/">
+<a class="card" data-cat="food" href="./coffee-roastery/">
       <div class="thumb"><span class="num">02</span><img src="./shots/coffee-roastery.jpg" alt="เว็บโรงคั่วกาแฟ คั่วสาทร" loading="lazy"></div>
       <div class="body">
         <span class="biz">คาเฟ่ & โรงคั่วกาแฟ</span>
@@ -146,8 +162,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./thai-restaurant/">
+<a class="card" data-cat="food" href="./thai-restaurant/">
       <div class="thumb"><span class="num">03</span><img src="./shots/thai-restaurant.jpg" alt="เว็บร้านอาหารไทย รสนิยม" loading="lazy"></div>
       <div class="body">
         <span class="biz">ร้านอาหาร Fine Dining</span>
@@ -157,8 +172,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./skincare-brand/">
+<a class="card" data-cat="beauty" href="./skincare-brand/">
       <div class="thumb"><span class="num">04</span><img src="./shots/skincare-brand.jpg" alt="เว็บสกินแคร์ HAURA" loading="lazy"></div>
       <div class="body">
         <span class="biz">แบรนด์สกินแคร์</span>
@@ -168,8 +182,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./property/">
+<a class="card" data-cat="home" href="./property/">
       <div class="thumb"><span class="num">05</span><img src="./shots/property.jpg" alt="เว็บอสังหาริมทรัพย์ THE COMMON" loading="lazy"></div>
       <div class="body">
         <span class="biz">อสังหาริมทรัพย์</span>
@@ -179,8 +192,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./muaythai-gym/">
+<a class="card" data-cat="fun" href="./muaythai-gym/">
       <div class="thumb"><span class="num">06</span><img src="./shots/muaythai-gym.jpg" alt="เว็บยิมมวยไทย สิงห์ดำ" loading="lazy"></div>
       <div class="body">
         <span class="biz">ยิม & ฟิตเนส</span>
@@ -190,8 +202,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./wedding-studio/">
+<a class="card" data-cat="retail" href="./wedding-studio/">
       <div class="thumb"><span class="num">07</span><img src="./shots/wedding-studio.jpg" alt="เว็บสตูดิโอแต่งงาน วันของเรา" loading="lazy"></div>
       <div class="body">
         <span class="biz">ออแกไนซ์งานแต่ง</span>
@@ -201,8 +212,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./saas-accounting/">
+<a class="card" data-cat="pro" href="./saas-accounting/">
       <div class="thumb"><span class="num">08</span><img src="./shots/saas-accounting.jpg" alt="เว็บ SaaS บัญชี เป๋าตังค์" loading="lazy"></div>
       <div class="body">
         <span class="biz">SaaS & เทคโนโลยี</span>
@@ -212,8 +222,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./cat-hotel/">
+<a class="card" data-cat="retail" href="./cat-hotel/">
       <div class="thumb"><span class="num">09</span><img src="./shots/cat-hotel.jpg" alt="เว็บโรงแรมแมว เหมียวเฮาส์" loading="lazy"></div>
       <div class="body">
         <span class="biz">ธุรกิจสัตว์เลี้ยง</span>
@@ -223,8 +232,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./clinic/">
+<a class="card" data-cat="beauty" href="./clinic/">
       <div class="thumb"><span class="num">10</span><img src="./shots/clinic.jpg" alt="เว็บสหคลินิก นภัสสร" loading="lazy"></div>
       <div class="body">
         <span class="biz">คลินิกเสริมความงาม & ทันตกรรม</span>
@@ -234,8 +242,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./property-portal/">
+<a class="card" data-cat="home" href="./property-portal/">
       <div class="thumb"><span class="num">11</span><img src="./shots/property-portal.jpg" alt="เว็บพอร์ทัลอสังหาฯ บ้านดี" loading="lazy"></div>
       <div class="body">
         <span class="biz">พอร์ทัลอสังหาฯ ขาย/เช่า</span>
@@ -245,8 +252,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./wholesale/">
+<a class="card" data-cat="pro" href="./wholesale/">
       <div class="thumb"><span class="num">12</span><img src="./shots/wholesale.jpg" alt="เว็บค้าส่งวัสดุก่อสร้าง ธนภูมิ" loading="lazy"></div>
       <div class="body">
         <span class="biz">ค้าส่ง & ตัวแทนจำหน่าย</span>
@@ -256,8 +262,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./language-school/">
+<a class="card" data-cat="edu" href="./language-school/">
       <div class="thumb"><span class="num">13</span><img src="./shots/language-school.jpg" alt="เว็บสถาบันภาษา LEAP" loading="lazy"></div>
       <div class="body">
         <span class="biz">สถาบันภาษา & การศึกษา</span>
@@ -267,8 +272,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./law-firm/">
+<a class="card" data-cat="pro" href="./law-firm/">
       <div class="thumb"><span class="num">14</span><img src="./shots/law-firm.jpg" alt="เว็บสำนักงานกฎหมาย รัตนากร" loading="lazy"></div>
       <div class="body">
         <span class="biz">สำนักงานกฎหมาย</span>
@@ -278,8 +282,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./tour-company/">
+<a class="card" data-cat="stay" href="./tour-company/">
       <div class="thumb"><span class="num">15</span><img src="./shots/tour-company.jpg" alt="เว็บบริษัททัวร์ เที่ยวกัน" loading="lazy"></div>
       <div class="body">
         <span class="biz">บริษัททัวร์</span>
@@ -289,8 +292,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./furniture/">
+<a class="card" data-cat="home" href="./furniture/">
       <div class="thumb"><span class="num">16</span><img src="./shots/furniture.jpg" alt="เว็บเฟอร์นิเจอร์ WOODSMITH" loading="lazy"></div>
       <div class="body">
         <span class="biz">เฟอร์นิเจอร์ & ตกแต่งภายใน</span>
@@ -300,8 +302,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./elderly-care/">
+<a class="card" data-cat="home" href="./elderly-care/">
       <div class="thumb"><span class="num">17</span><img src="./shots/elderly-care.jpg" alt="เว็บศูนย์ดูแลผู้สูงอายุ บ้านสุขใจ" loading="lazy"></div>
       <div class="body">
         <span class="biz">ศูนย์ดูแลผู้สูงอายุ</span>
@@ -311,8 +312,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./badminton-court/">
+<a class="card" data-cat="fun" href="./badminton-court/">
       <div class="thumb"><span class="num">18</span><img src="./shots/badminton-court.jpg" alt="เว็บสนามแบดมินตัน SMASH CLUB" loading="lazy"></div>
       <div class="body">
         <span class="biz">สนามกีฬาให้เช่า</span>
@@ -322,8 +322,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./bakery/">
+<a class="card" data-cat="food" href="./bakery/">
       <div class="thumb"><span class="num">19</span><img src="./shots/bakery.jpg" alt="เว็บเบเกอรี่ ครัวซองว์" loading="lazy"></div>
       <div class="body">
         <span class="biz">เบเกอรี่ & คาเฟ่</span>
@@ -333,8 +332,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./creative-agency/">
+<a class="card" data-cat="pro" href="./creative-agency/">
       <div class="thumb"><span class="num">20</span><img src="./shots/creative-agency.jpg" alt="เว็บเอเจนซีครีเอทีฟ STUDIO NINE" loading="lazy"></div>
       <div class="body">
         <span class="biz">เอเจนซีครีเอทีฟ</span>
@@ -344,8 +342,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./logistics/">
+<a class="card" data-cat="pro" href="./logistics/">
       <div class="thumb"><span class="num">21</span><img src="./shots/logistics.jpg" alt="เว็บโลจิสติกส์ SPEEDHAUL" loading="lazy"></div>
       <div class="body">
         <span class="biz">โลจิสติกส์ & ขนส่ง B2B</span>
@@ -355,8 +352,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./tea-brand/">
+<a class="card" data-cat="food" href="./tea-brand/">
       <div class="thumb"><span class="num">22</span><img src="./shots/tea-brand.jpg" alt="เว็บแบรนด์ชา ดอยหมอก" loading="lazy"></div>
       <div class="body">
         <span class="biz">แบรนด์ชา & OTOP</span>
@@ -366,8 +362,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./music-school/">
+<a class="card" data-cat="edu" href="./music-school/">
       <div class="thumb"><span class="num">23</span><img src="./shots/music-school.jpg" alt="เว็บโรงเรียนดนตรี โดเรมี" loading="lazy"></div>
       <div class="body">
         <span class="biz">โรงเรียนดนตรี</span>
@@ -377,8 +372,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./insurance/">
+<a class="card" data-cat="pro" href="./insurance/">
       <div class="thumb"><span class="num">24</span><img src="./shots/insurance.jpg" alt="เว็บโบรกเกอร์ประกัน คุ้มครองดี" loading="lazy"></div>
       <div class="body">
         <span class="biz">ประกันภัย & การเงิน</span>
@@ -388,8 +382,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./fashion-shop/">
+<a class="card" data-cat="retail" href="./fashion-shop/">
       <div class="thumb"><span class="num">25</span><img src="./shots/fashion-shop.jpg" alt="เว็บแฟชั่น AKARI" loading="lazy"></div>
       <div class="body">
         <span class="biz">แฟชั่น & อีคอมเมิร์ซ</span>
@@ -399,8 +392,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./barbershop/">
+<a class="card" data-cat="beauty" href="./barbershop/">
       <div class="thumb"><span class="num">26</span><img src="./shots/barbershop.jpg" alt="เว็บบาร์เบอร์ FADE ROOM" loading="lazy"></div>
       <div class="body">
         <span class="biz">บาร์เบอร์ & ร้านตัดผม</span>
@@ -410,8 +402,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./yoga-studio/">
+<a class="card" data-cat="beauty" href="./yoga-studio/">
       <div class="thumb"><span class="num">27</span><img src="./shots/yoga-studio.jpg" alt="เว็บสตูดิโอโยคะ หายใจ" loading="lazy"></div>
       <div class="body">
         <span class="biz">โยคะ & พิลาทิส</span>
@@ -421,8 +412,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./coworking-space/">
+<a class="card" data-cat="home" href="./coworking-space/">
       <div class="thumb"><span class="num">28</span><img src="./shots/coworking-space.jpg" alt="เว็บโคเวิร์กกิ้ง GRID" loading="lazy"></div>
       <div class="body">
         <span class="biz">โคเวิร์กกิ้งสเปซ</span>
@@ -432,8 +422,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./self-storage/">
+<a class="card" data-cat="home" href="./self-storage/">
       <div class="thumb"><span class="num">29</span><img src="./shots/self-storage.jpg" alt="เว็บเซลฟ์สโตเรจ เก็บดี" loading="lazy"></div>
       <div class="body">
         <span class="biz">เซลฟ์สโตเรจ</span>
@@ -443,8 +432,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./meal-prep/">
+<a class="card" data-cat="food" href="./meal-prep/">
       <div class="thumb"><span class="num">30</span><img src="./shots/meal-prep.jpg" alt="เว็บมื้อเพื่อสุขภาพ SUKDEE" loading="lazy"></div>
       <div class="body">
         <span class="biz">อาหารสุขภาพเดลิเวอรี่</span>
@@ -454,8 +442,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./printing-shop/">
+<a class="card" data-cat="pro" href="./printing-shop/">
       <div class="thumb"><span class="num">31</span><img src="./shots/printing-shop.jpg" alt="เว็บร้านป้าย พิมพ์ดี" loading="lazy"></div>
       <div class="body">
         <span class="biz">ร้านป้าย & สิ่งพิมพ์</span>
@@ -465,8 +452,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./hostel/">
+<a class="card" data-cat="stay" href="./hostel/">
       <div class="thumb"><span class="num">32</span><img src="./shots/hostel.jpg" alt="เว็บโฮสเทล นอนดี" loading="lazy"></div>
       <div class="body">
         <span class="biz">โฮสเทล & ที่พักประหยัด</span>
@@ -476,8 +462,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./phone-repair/">
+<a class="card" data-cat="pro" href="./phone-repair/">
       <div class="thumb"><span class="num">33</span><img src="./shots/phone-repair.jpg" alt="เว็บร้านซ่อมมือถือ ซ่อมดี" loading="lazy"></div>
       <div class="body">
         <span class="biz">ซ่อมมือถือ & ไอที</span>
@@ -487,8 +472,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./gold-shop/">
+<a class="card" data-cat="pro" href="./gold-shop/">
       <div class="thumb"><span class="num">34</span><img src="./shots/gold-shop.jpg" alt="เว็บร้านทอง ทองดี" loading="lazy"></div>
       <div class="body">
         <span class="biz">ร้านทอง & เครื่องประดับ</span>
@@ -498,8 +482,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./auto-detailing/">
+<a class="card" data-cat="retail" href="./auto-detailing/">
       <div class="thumb"><span class="num">35</span><img src="./shots/auto-detailing.jpg" alt="เว็บคาร์แคร์ CRYSTAL COAT" loading="lazy"></div>
       <div class="body">
         <span class="biz">คาร์แคร์ & เคลือบสี</span>
@@ -509,8 +492,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./suit-tailor/">
+<a class="card" data-cat="retail" href="./suit-tailor/">
       <div class="thumb"><span class="num">36</span><img src="./shots/suit-tailor.jpg" alt="เว็บร้านตัดสูท MAISON TAILOR" loading="lazy"></div>
       <div class="body">
         <span class="biz">ร้านตัดสูท</span>
@@ -520,8 +502,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./vet-clinic/">
+<a class="card" data-cat="retail" href="./vet-clinic/">
       <div class="thumb"><span class="num">37</span><img src="./shots/vet-clinic.jpg" alt="เว็บคลินิกสัตว์ ใจดีสัตวแพทย์" loading="lazy"></div>
       <div class="body">
         <span class="biz">คลินิกสัตวแพทย์</span>
@@ -531,8 +512,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./photo-studio/">
+<a class="card" data-cat="retail" href="./photo-studio/">
       <div class="thumb"><span class="num">38</span><img src="./shots/photo-studio.jpg" alt="เว็บสตูดิโอถ่ายภาพ FRAME &amp; LIGHT" loading="lazy"></div>
       <div class="body">
         <span class="biz">สตูดิโอถ่ายภาพ</span>
@@ -542,8 +522,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./scuba-diving/">
+<a class="card" data-cat="stay" href="./scuba-diving/">
       <div class="thumb"><span class="num">39</span><img src="./shots/scuba-diving.jpg" alt="เว็บศูนย์ดำน้ำ DEEP BLUE" loading="lazy"></div>
       <div class="body">
         <span class="biz">ศูนย์ดำน้ำ & ทริป</span>
@@ -553,8 +532,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./solar-rooftop/">
+<a class="card" data-cat="pro" href="./solar-rooftop/">
       <div class="thumb"><span class="num">40</span><img src="./shots/solar-rooftop.jpg" alt="เว็บโซลาร์ SUNDECH" loading="lazy"></div>
       <div class="body">
         <span class="biz">โซลาร์เซลล์ & พลังงาน</span>
@@ -564,8 +542,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./study-abroad/">
+<a class="card" data-cat="edu" href="./study-abroad/">
       <div class="thumb"><span class="num">41</span><img src="./shots/study-abroad.jpg" alt="เว็บเรียนต่อต่างประเทศ SKYBRIDGE" loading="lazy"></div>
       <div class="body">
         <span class="biz">เอเจนซี่เรียนต่อ</span>
@@ -575,8 +552,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./kids-playground/">
+<a class="card" data-cat="edu" href="./kids-playground/">
       <div class="thumb"><span class="num">42</span><img src="./shots/kids-playground.jpg" alt="เว็บสนามเด็กเล่น BOING LAND" loading="lazy"></div>
       <div class="body">
         <span class="biz">สนามเด็กเล่น & ครอบครัว</span>
@@ -586,8 +562,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./durian-delivery/">
+<a class="card" data-cat="food" href="./durian-delivery/">
       <div class="thumb"><span class="num">43</span><img src="./shots/durian-delivery.jpg" alt="เว็บทุเรียน ทุเรียนสวนดี" loading="lazy"></div>
       <div class="body">
         <span class="biz">ผลไม้ & สวนออนไลน์</span>
@@ -597,8 +572,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./laundry-shop/">
+<a class="card" data-cat="retail" href="./laundry-shop/">
       <div class="thumb"><span class="num">44</span><img src="./shots/laundry-shop.jpg" alt="เว็บร้านซักผ้า ซักสบาย" loading="lazy"></div>
       <div class="body">
         <span class="biz">ร้านซักผ้า</span>
@@ -608,8 +582,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./tattoo-studio/">
+<a class="card" data-cat="retail" href="./tattoo-studio/">
       <div class="thumb"><span class="num">45</span><img src="./shots/tattoo-studio.jpg" alt="เว็บสตูดิโอสัก INK SOUL" loading="lazy"></div>
       <div class="body">
         <span class="biz">สตูดิโอสัก</span>
@@ -619,8 +592,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./plant-shop/">
+<a class="card" data-cat="retail" href="./plant-shop/">
       <div class="thumb"><span class="num">46</span><img src="./shots/plant-shop.jpg" alt="เว็บร้านต้นไม้ ใบดี" loading="lazy"></div>
       <div class="body">
         <span class="biz">ร้านต้นไม้แต่งบ้าน</span>
@@ -630,8 +602,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./spa-massage/">
+<a class="card" data-cat="beauty" href="./spa-massage/">
       <div class="thumb"><span class="num">47</span><img src="./shots/spa-massage.jpg" alt="เว็บสปา นวลจันทร์" loading="lazy"></div>
       <div class="body">
         <span class="biz">สปา & นวดแผนไทย</span>
@@ -641,8 +612,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./optical-shop/">
+<a class="card" data-cat="beauty" href="./optical-shop/">
       <div class="thumb"><span class="num">48</span><img src="./shots/optical-shop.jpg" alt="เว็บร้านแว่นตา มองดี" loading="lazy"></div>
       <div class="body">
         <span class="biz">ร้านแว่นตา</span>
@@ -652,8 +622,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./noodle-shop/">
+<a class="card" data-cat="food" href="./noodle-shop/">
       <div class="thumb"><span class="num">49</span><img src="./shots/noodle-shop.jpg" alt="เว็บก๋วยเตี๋ยวเรือ เจ๊หนู" loading="lazy"></div>
       <div class="body">
         <span class="biz">ร้านอาหารสตรีทฟู้ด</span>
@@ -663,8 +632,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./dessert-cafe/">
+<a class="card" data-cat="food" href="./dessert-cafe/">
       <div class="thumb"><span class="num">50</span><img src="./shots/dessert-cafe.jpg" alt="เว็บบิงซู หิมะ" loading="lazy"></div>
       <div class="body">
         <span class="biz">คาเฟ่ของหวาน</span>
@@ -674,8 +642,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./esports-cafe/">
+<a class="card" data-cat="fun" href="./esports-cafe/">
       <div class="thumb"><span class="num">51</span><img src="./shots/esports-cafe.jpg" alt="เว็บอีสปอร์ตคาเฟ่ GG ZONE" loading="lazy"></div>
       <div class="body">
         <span class="biz">อีสปอร์ต & เกม</span>
@@ -685,8 +652,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./gokart-track/">
+<a class="card" data-cat="fun" href="./gokart-track/">
       <div class="thumb"><span class="num">52</span><img src="./shots/gokart-track.jpg" alt="เว็บสนามโกคาร์ท APEX KART" loading="lazy"></div>
       <div class="body">
         <span class="biz">สนามโกคาร์ท</span>
@@ -696,8 +662,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./bowling-lane/">
+<a class="card" data-cat="fun" href="./bowling-lane/">
       <div class="thumb"><span class="num">53</span><img src="./shots/bowling-lane.jpg" alt="เว็บโบว์ลิ่ง STRIKE CLUB" loading="lazy"></div>
       <div class="body">
         <span class="biz">โบว์ลิ่ง & บาร์</span>
@@ -707,8 +672,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./swimming-school/">
+<a class="card" data-cat="edu" href="./swimming-school/">
       <div class="thumb"><span class="num">54</span><img src="./shots/swimming-school.jpg" alt="เว็บโรงเรียนว่ายน้ำ ปลาน้อย" loading="lazy"></div>
       <div class="body">
         <span class="biz">โรงเรียนว่ายน้ำ</span>
@@ -718,8 +682,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./stem-school/">
+<a class="card" data-cat="edu" href="./stem-school/">
       <div class="thumb"><span class="num">55</span><img src="./shots/stem-school.jpg" alt="เว็บโรงเรียนโค้ดดิ้ง CODE KID" loading="lazy"></div>
       <div class="body">
         <span class="biz">STEM & โค้ดดิ้งเด็ก</span>
@@ -729,8 +692,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./nail-salon/">
+<a class="card" data-cat="beauty" href="./nail-salon/">
       <div class="thumb"><span class="num">56</span><img src="./shots/nail-salon.jpg" alt="เว็บร้านเล็บ สีสัน" loading="lazy"></div>
       <div class="body">
         <span class="biz">ร้านเล็บ & ความงาม</span>
@@ -740,8 +702,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./interior-design/">
+<a class="card" data-cat="home" href="./interior-design/">
       <div class="thumb"><span class="num">57</span><img src="./shots/interior-design.jpg" alt="เว็บออกแบบภายใน สเปซดี" loading="lazy"></div>
       <div class="body">
         <span class="biz">ออกแบบภายใน</span>
@@ -751,8 +712,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./florist/">
+<a class="card" data-cat="retail" href="./florist/">
       <div class="thumb"><span class="num">58</span><img src="./shots/florist.jpg" alt="เว็บร้านดอกไม้ ดอกดี" loading="lazy"></div>
       <div class="body">
         <span class="biz">ร้านดอกไม้</span>
@@ -762,8 +722,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./driving-school/">
+<a class="card" data-cat="edu" href="./driving-school/">
       <div class="thumb"><span class="num">59</span><img src="./shots/driving-school.jpg" alt="เว็บโรงเรียนสอนขับรถ ขับดี" loading="lazy"></div>
       <div class="body">
         <span class="biz">โรงเรียนสอนขับรถ</span>
@@ -773,8 +732,7 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-    <a class="card" href="./computer-shop/">
+<a class="card" data-cat="pro" href="./computer-shop/">
       <div class="thumb"><span class="num">60</span><img src="./shots/computer-shop.jpg" alt="เว็บร้านคอม SPEC DEE" loading="lazy"></div>
       <div class="body">
         <span class="biz">ร้านคอมพิวเตอร์</span>
@@ -784,38 +742,47 @@ footer a:hover{color:var(--red)}
         <span class="open">เปิดเว็บ →</span>
       </div>
     </a>
-
-  </main>
-
-  <section class="enroll">
-    <div>
-      <h2>อยากสร้างเว็บแบบนี้ <em>ให้ธุรกิจของคุณเอง?</em></h2>
-      <p>คลาส First Vibe : Coding for Beginners — เรียนสดเต็มวัน จับมือทำจริงทุกขั้นตอน จบคลาสพร้อมเว็บจริงของคุณเอง ไม่ต้องมีพื้นฐานโค้ด ที่ ZenityX ศูนย์ AI อันดับ 1 เมืองไทย</p>
-    </div>
-    <a class="btn-primary" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=hub-banner&utm_campaign=demos" target="_blank" rel="noopener">สมัครเรียน / ดูรอบเรียน →</a>
-  </section>
-</div>
-
-<footer>
-  <div class="wrap-inner">
-    <span><b>หมายเหตุ:</b> ทุกเว็บเป็นตัวอย่างสาธิตจากการเรียน — ชื่อ ราคา และเนื้อหาเป็นการสมมติ</span>
-    <span>ออกแบบและพัฒนาโดย <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=hub&utm_campaign=demos" target="_blank" rel="noopener">ZenityX — ศูนย์ AI อันดับ 1 เมืองไทย</a> · สอนสร้างเว็บด้วย AI แบบจับมือทำจริง © 2569</span>
   </div>
+</main>
+<section class="enroll">
+  <div>
+    <h2>อยากสร้างเว็บและระบบแบบนี้ให้ธุรกิจตัวเอง?</h2>
+    <p>คอร์ส First Vibe : Coding สอนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง 1 วันเต็ม — ไม่ต้องมีพื้นฐานโค้ด ออกไปพร้อมผลงานที่ใช้ได้จริง</p>
+  </div>
+  <div class="ec">
+    <b>First Vibe : Coding</b>
+    <p class="eci">เรียนสด 1 วัน · 10:00–17:00 · มี Certificate</p>
+    <a class="btn-w" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=hub-banner&utm_campaign=demos" target="_blank" rel="noopener">ดูรายละเอียดคอร์ส →</a>
+    <span class="tel">หรือโทร <a href="tel:0622629644">062-262-9644</a></span>
+  </div>
+</section>
+<footer>
+  <p>ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=footer&utm_campaign=demos" target="_blank" rel="noopener">ZenityX</a> — ศูนย์ AI อันดับ 1 เมืองไทย · โทร 062-262-9644</p>
 </footer>
-
 <script>
 (function(){
   var cards = document.querySelectorAll('.card');
-  if (!('IntersectionObserver' in window)) { cards.forEach(function(c){ c.classList.add('in'); }); return; }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if (e.isIntersecting) {
-        setTimeout(function(){ e.target.classList.add('in'); }, (Array.prototype.indexOf.call(cards, e.target) % 3) * 90);
-        io.unobserve(e.target);
-      }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    cards.forEach(function(c){ io.observe(c); });
+  } else { cards.forEach(function(c){ c.classList.add('in'); }); }
+})();
+</script>
+<script>
+(function(){
+  var chips = document.getElementById('chips');
+  if (!chips) return;
+  chips.addEventListener('click', function(e){
+    var b = e.target.closest('.fchip'); if (!b) return;
+    chips.querySelectorAll('.fchip').forEach(function(x){ x.classList.remove('on'); });
+    b.classList.add('on');
+    var c = b.dataset.c;
+    document.querySelectorAll('.card').forEach(function(card){
+      card.style.display = (c === 'all' || card.dataset.cat === c) ? '' : 'none';
     });
-  }, { threshold: 0.12 });
-  cards.forEach(function(c){ io.observe(c); });
+  });
 })();
 </script>
 </body>

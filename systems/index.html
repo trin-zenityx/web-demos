@@ -7,105 +7,126 @@
 <meta name="description" content="รวมตัวอย่างระบบใช้งานจริงที่นักเรียนคอร์ส First Vibe : Coding สร้างได้ด้วย AI — POS, CRM, สต็อก, เอกสาร, คิว, HR และอีกมากมาย">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Sarabun:wght@300;400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=Sarabun:wght@300;400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --red:#FF0000; --red-mid:#CC0000; --red-deep:#990000;
-  --ink:#1d1d1f; --gray:#666666; --gray-l:#9e9e9e; --bg:#f5f5f7; --card:#ffffff; --line:#e8e8ed;
-}
+:root{--red:#FF0000;--red-mid:#CC0000;--red-deep:#990000;--ink:#1d1d1f;--gray:#666666;--gray-l:#9e9e9e;--bg:#f5f5f7;--card:#ffffff;--line:#e8e8ed;--disp:'IBM Plex Sans Thai',sans-serif;--body:'Sarabun',sans-serif;--mono:'JetBrains Mono',monospace;--r:20px}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:300;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
-:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 ::selection{background:#ffd9d9;color:var(--ink)}
-.mono{font-family:'JetBrains Mono',monospace}
-
+button{font:inherit;cursor:pointer}
 /* topbar */
 .topbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.topbar-in{max-width:1200px;margin:0 auto;padding:.9rem clamp(1.25rem,4vw,2.5rem);display:flex;align-items:center;gap:1.2rem}
-.brand{display:flex;align-items:center;gap:.6rem;font-weight:600;font-size:1.05rem}
+.topbar-in{max-width:1320px;margin:0 auto;padding:.85rem clamp(1.25rem,4vw,3rem);display:flex;align-items:center;gap:1.2rem}
+.brand{display:flex;align-items:center;gap:.55rem;font-family:var(--disp);font-weight:600;font-size:1.05rem}
 .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--red)}
-.topbar nav{margin-left:auto;display:flex;gap:1.2rem;align-items:center;font-size:.9rem}
-.topbar nav a{color:var(--gray);transition:color .2s}
-.topbar nav a:hover{color:var(--red)}
+.brand small{font-weight:300;color:var(--gray-l);font-size:.9rem}
+.topbar nav{margin-left:auto;display:flex;gap:1rem;align-items:center}
 .switch-tab{display:inline-flex;background:#ececf0;border-radius:99px;padding:4px;gap:2px}
-.switch-tab a{padding:.45rem 1.1rem;border-radius:99px;font-size:.85rem;color:var(--gray)}
+.switch-tab a{padding:.45rem 1.05rem;border-radius:99px;font-size:.85rem;color:var(--gray);font-family:var(--disp);transition:all .25s;min-height:36px;display:inline-flex;align-items:center}
 .switch-tab a.on{background:#fff;color:var(--ink);font-weight:500;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:500;border-radius:99px;padding:.85rem 1.7rem;transition:transform .25s,box-shadow .25s;min-height:44px}
-.btn-r{background:var(--red);color:#fff;box-shadow:0 8px 22px -8px rgba(255,0,0,.45)}
-.btn-r:hover{transform:translateY(-2px)}
-
+.btn-r{display:inline-flex;align-items:center;gap:.5rem;background:var(--red);color:#fff;font-family:var(--disp);font-weight:500;border-radius:99px;padding:.65rem 1.3rem;font-size:.88rem;transition:all .25s;box-shadow:0 8px 20px -8px rgba(255,0,0,.4)}
+.btn-r:hover{background:var(--red-mid);transform:translateY(-1px)}
+@media(max-width:640px){.brand small{display:none}.topbar-in{gap:.7rem}.switch-tab a{padding:.45rem .8rem;font-size:.8rem}}
 /* hero */
-.hero{max-width:1200px;margin:0 auto;padding:clamp(3rem,8vh,5.5rem) clamp(1.25rem,4vw,2.5rem) clamp(2rem,4vh,3rem)}
-.hero .kick{display:inline-flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono';font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:1.1rem}
-.hero .kick::before{content:'';width:26px;height:2px;background:var(--red)}
-.hero h1{font-size:clamp(2rem,5.2vw,3.4rem);font-weight:600;line-height:1.22;letter-spacing:-.01em;max-width:20ch}
-.hero h1 span{color:var(--red)}
-.hero p{margin-top:1.1rem;color:var(--gray);max-width:56ch;font-weight:300;font-size:1.05rem}
-.hero-note{display:inline-flex;align-items:center;gap:.6rem;margin-top:1.4rem;background:#fff;border:1px solid var(--line);border-left:3px solid var(--red);border-radius:12px;padding:.8rem 1.2rem;font-size:.85rem;color:var(--gray)}
-.hero-note b{color:var(--ink)}
-
-/* groups */
-main{max-width:1200px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem) clamp(3rem,7vh,5rem)}
-.group{margin-top:2.6rem}
-.group-head{display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.1rem}
-.group-head h2{font-size:1.25rem;font-weight:600}
-.group-head .gcode{font-family:'JetBrains Mono';font-size:.72rem;color:var(--red);letter-spacing:.15em}
-.group-head .gline{flex:1;height:1px;background:var(--line)}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
-.card:hover{transform:translateY(-5px);box-shadow:0 20px 44px -18px rgba(0,0,0,.14)}
-.card .thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#ececf0}
-.card .thumb img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.hero{max-width:1320px;margin:0 auto;padding:clamp(2.8rem,7vh,5rem) clamp(1.25rem,4vw,3rem) clamp(1.6rem,3vh,2.2rem)}
+.kick{display:flex;align-items:center;gap:.9rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:var(--red-mid);font-weight:500}
+.kick::before{content:'';width:36px;height:2px;background:var(--red)}
+.hero h1{font-family:var(--disp);font-size:clamp(2.1rem,5.6vw,4rem);font-weight:600;line-height:1.2;letter-spacing:-.01em;margin:1.2rem 0 1rem;max-width:24ch}
+.hero h1 .thin{font-weight:300;color:var(--gray)}
+.hero .sub{color:var(--gray);max-width:62ch;font-size:clamp(.95rem,1.4vw,1.06rem)}
+.hero .sub b{color:var(--ink);font-weight:500}
+.cta-row{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem}
+.btn-primary{display:inline-flex;align-items:center;gap:.6rem;background:var(--red);color:#fff;font-weight:500;font-family:var(--disp);padding:1rem 1.9rem;border-radius:99px;transition:all .3s;box-shadow:0 8px 24px -8px rgba(255,0,0,.4)}
+.btn-primary:hover{background:var(--red-mid);transform:translateY(-2px);box-shadow:0 14px 32px -8px rgba(204,0,0,.45)}
+.btn-ghost{display:inline-flex;align-items:center;border:1px solid var(--line);color:var(--gray);font-family:var(--disp);padding:1rem 1.7rem;border-radius:99px;background:#fff;transition:all .3s}
+.btn-ghost:hover{border-color:var(--red);color:var(--red)}
+.btn-ghost.hot{border-color:var(--red);color:var(--red)}
+.meta-row{display:flex;flex-wrap:wrap;gap:.8rem 2.2rem;margin-top:2.2rem;font-family:var(--mono);font-size:.74rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gray-l)}
+.meta-row b{color:var(--ink);font-weight:500}
+/* chips */
+.chips{max-width:1320px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem) .2rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.fchip{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:.5rem 1rem;font-size:.84rem;font-family:var(--disp);color:var(--gray);transition:all .2s;min-height:44px}
+.fchip:hover{border-color:var(--red);color:var(--red)}
+.fchip.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:500}
+.fchip b{font-family:var(--mono);font-weight:500;font-size:.75rem;margin-left:.3rem;opacity:.7}
+/* layout */
+main{max-width:1320px;margin:0 auto;padding:clamp(1.2rem,3vh,2rem) clamp(1.25rem,4vw,3rem) clamp(3rem,7vh,4.5rem)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,2.2vw,1.8rem)}
+@media(max-width:1020px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+/* card */
+.card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.05);opacity:0;transform:translateY(22px);transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s,border-color .4s,opacity .5s}
+.card.in{opacity:1;transform:none}
+.card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(0,0,0,.11);border-color:rgba(255,0,0,.35)}
+.thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#ececf0}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
 .card:hover .thumb img{transform:scale(1.05)}
-.card .acc{position:absolute;top:.8rem;left:.8rem;width:12px;height:12px;border-radius:50%;box-shadow:0 0 0 3px rgba(255,255,255,.8)}
-.card .body{padding:1.1rem 1.2rem 1.2rem}
-.card .name{font-size:1.15rem;font-weight:600;display:flex;align-items:baseline;gap:.5rem}
-.card .name small{font-family:'JetBrains Mono';font-size:.68rem;color:var(--gray-l);font-weight:400}
-.card .desc{font-size:.85rem;color:var(--gray);margin:.3rem 0 .8rem;min-height:2.6em}
-.card .feats{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.9rem}
-.card .feats span{font-size:.72rem;background:#f0f0f3;color:var(--gray);border-radius:99px;padding:.22rem .65rem}
-.card .open{display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;font-weight:500;color:var(--red)}
-
+.thumb .num,.thumb .acc{position:absolute;top:.8rem;left:.8rem}
+.thumb .num{font-family:var(--mono);font-size:.7rem;background:rgba(29,29,31,.8);color:#fff;border-radius:99px;padding:.28rem .7rem;letter-spacing:.1em}
+.thumb .acc{width:12px;height:12px;border-radius:50%;box-shadow:0 0 0 3px rgba(255,255,255,.85)}
+.body{padding:1.05rem 1.2rem 1.2rem;display:flex;flex-direction:column;gap:.25rem;flex:1}
+.biz{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red-mid)}
+.name{font-family:var(--disp);font-size:1.2rem;font-weight:600;line-height:1.3}
+.name small{font-family:var(--mono);font-size:.68rem;color:var(--gray-l);font-weight:400;margin-left:.4rem}
+.style,.desc{font-size:.86rem;color:var(--gray);font-weight:300}
+.tags,.feats{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0 .7rem}
+.tags span,.feats span,.tag{font-size:.72rem;background:#f0f0f3;color:var(--gray);border-radius:99px;padding:.22rem .65rem}
+.open{margin-top:auto;display:inline-flex;align-items:center;gap:.4rem;font-family:var(--disp);font-size:.9rem;font-weight:500;color:var(--red)}
+/* group (systems) */
+.group{margin-top:2.4rem}
+.group-head{display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.1rem}
+.group-head h2{font-family:var(--disp);font-size:1.25rem;font-weight:600}
+.group-head .gcode{font-family:var(--mono);font-size:.72rem;color:var(--red);letter-spacing:.15em}
+.group-head .gline{flex:1;height:1px;background:var(--line)}
 /* enroll */
-.enroll{background:linear-gradient(135deg,var(--red),var(--red-deep));border-radius:28px;margin:0 auto clamp(3rem,6vh,4rem);max-width:1160px;padding:clamp(2.2rem,5vw,3.5rem);color:#fff;display:grid;grid-template-columns:1.3fr .7fr;gap:2rem;align-items:center;box-shadow:0 26px 60px -24px rgba(204,0,0,.5)}
+.enroll{background:linear-gradient(135deg,var(--red),var(--red-deep));border-radius:28px;max-width:1270px;margin:0 auto clamp(3rem,6vh,4rem);padding:clamp(2.2rem,5vw,3.5rem);color:#fff;display:grid;grid-template-columns:1.3fr .7fr;gap:2rem;align-items:center;box-shadow:0 26px 60px -24px rgba(204,0,0,.5)}
 @media(max-width:860px){.enroll{grid-template-columns:1fr}}
-.enroll h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:600;line-height:1.3}
+.enroll h2{font-family:var(--disp);font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:600;line-height:1.3}
 .enroll p{margin-top:.8rem;opacity:.88;font-weight:300}
-.enroll .ec{background:#fff;color:var(--red-deep);border-radius:18px;padding:1.6rem;text-align:center}
-.enroll .ec b{display:block;font-size:1.05rem;margin-bottom:.3rem}
-.enroll .ec p{font-size:.85rem;color:var(--gray);margin-bottom:1rem;opacity:1}
-.btn-w{background:var(--ink);color:#fff;width:100%}
+.ec{background:#fff;color:var(--red-deep);border-radius:18px;padding:1.6rem;text-align:center}
+.ec b{display:block;font-family:var(--disp);font-size:1.05rem;margin-bottom:.3rem}
+.ec .eci{font-size:.85rem;color:var(--gray);margin-bottom:1rem}
+.btn-w{display:inline-flex;align-items:center;justify-content:center;background:var(--ink);color:#fff;font-family:var(--disp);font-weight:500;border-radius:99px;padding:.9rem 1.4rem;width:100%;transition:transform .25s}
 .btn-w:hover{transform:translateY(-2px)}
-footer{border-top:1px solid var(--line);padding:1.6rem 0;text-align:center;font-size:.82rem;color:var(--gray-l)}
+.ec .tel{display:block;margin-top:.8rem;font-size:.82rem;color:var(--gray)}
+.ec .tel a{color:var(--red);font-weight:500}
+/* footer */
+footer{border-top:1px solid var(--line);padding:1.8rem 0;text-align:center;font-size:.82rem;color:var(--gray-l)}
 footer a{color:var(--red)}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}.card{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 <script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
-
 <div class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="../"><span class="dot"></span>ZenityX <span style="font-weight:300;color:var(--gray-l)">Demos</span></a>
+    <a class="brand" href=".././"><span class="dot"></span>ZenityX <small>Demos</small></a>
     <nav>
       <span class="switch-tab">
-        <a href="../">เว็บไซต์</a>
+        <a href=".././">เว็บไซต์</a>
         <a href="./" class="on">ระบบใช้งาน</a>
       </span>
-      <a class="btn btn-r" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=systems-top&utm_campaign=demos" target="_blank" rel="noopener" style="padding:.6rem 1.2rem;font-size:.85rem">ดูคอร์สเรียน</a>
+      <a class="btn-r" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=systems-top&utm_campaign=demos" target="_blank" rel="noopener">ดูคอร์สเรียน</a>
     </nav>
   </div>
 </div>
-
 <header class="hero">
-  <p class="kick">Systems Showcase</p>
-  <h1>ไม่ใช่แค่เว็บสวย —<br>นักเรียนเราสร้าง<span>ระบบใช้งานจริง</span>ได้ด้วย</h1>
-  <p>ทุกระบบด้านล่างเปิดใช้งานได้ทันทีเหมือนโปรแกรมจริง: ล็อกอิน เพิ่ม-ลบ-แก้ข้อมูล คำนวณ พิมพ์เอกสาร — สร้างด้วย AI ในคลาสเดียวกัน ไม่ต้องมีพื้นฐานโค้ด</p>
-  <div class="hero-note">💡 <span><b>ลองกดเข้าระบบได้เลย</b> — ทุกระบบเป็นเดโม ข้อมูลจำลองสมจริง กดเล่นได้เต็มที่ไม่มีพัง</span></div>
+  <p class="kick">Systems Showcase — ZenityX</p>
+  <h1>ไม่ใช่แค่เว็บสวย —<br><span class="thin">นักเรียนเราสร้างระบบใช้งานจริงได้ด้วย</span></h1>
+  <p class="sub">ทุกระบบด้านล่างเปิดใช้งานได้ทันทีเหมือนโปรแกรมจริง: <b>ล็อกอิน เพิ่ม-ลบ-แก้ข้อมูล คำนวณ พิมพ์เอกสาร</b> — สร้างด้วย AI ในคลาสเดียวกัน ไม่ต้องมีพื้นฐานโค้ด <b>ลองกดเข้าระบบได้เลย</b> ทุกระบบเป็นเดโม ข้อมูลจำลองสมจริง กดเล่นได้เต็มที่</p>
+  <div class="cta-row">
+    <a class="btn-primary" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=systems-cta&utm_campaign=demos" target="_blank" rel="noopener">ดูรายละเอียดคอร์ส →</a>
+    <a class="btn-ghost" href="../">← ดูตัวอย่างเว็บไซต์ 60 เว็บ</a>
+  </div>
+  <div class="meta-row">
+    <span><b>10</b> ระบบใช้งานจริง</span>
+    <span>ข้อมูล <b>บันทึกจริง</b> ในเครื่อง</span>
+    <span><b>ไม่ต้องมีพื้นฐาน</b> โค้ด</span>
+  </div>
 </header>
-
 <main>
   <section class="group">
     <div class="group-head"><span class="gcode">A</span><h2>ขายหน้าร้านและบริการ</h2><span class="gline"></span></div>
@@ -221,23 +242,31 @@ footer a{color:var(--red)}
     </div>
   </section>
 </main>
-
 <section class="enroll">
   <div>
-    <h2>อยากสร้างระบบแบบนี้ให้ธุรกิจตัวเอง?</h2>
-    <p>คอร์ส First Vibe : Coding สอนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง 1 วันเต็ม — ไม่ต้องมีพื้นฐานโค้ด ออกไปพร้อมระบบที่ใช้งานได้จริง</p>
+    <h2>อยากสร้างเว็บและระบบแบบนี้ให้ธุรกิจตัวเอง?</h2>
+    <p>คอร์ส First Vibe : Coding สอนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง 1 วันเต็ม — ไม่ต้องมีพื้นฐานโค้ด ออกไปพร้อมผลงานที่ใช้ได้จริง</p>
   </div>
   <div class="ec">
     <b>First Vibe : Coding</b>
-    <p>เรียนสด 1 วัน · 10:00–17:00<br>มี Certificate รับรอง</p>
-    <a class="btn btn-w" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=systems-cta&utm_campaign=demos" target="_blank" rel="noopener">ดูรายละเอียดคอร์ส →</a>
-    <p style="margin-top:.8rem;font-size:.8rem;color:var(--gray)">หรือโทร <a href="tel:0622629644" style="color:var(--red);font-weight:500">062-262-9644</a></p>
+    <p class="eci">เรียนสด 1 วัน · 10:00–17:00 · มี Certificate</p>
+    <a class="btn-w" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=systems-cta&utm_campaign=demos" target="_blank" rel="noopener">ดูรายละเอียดคอร์ส →</a>
+    <span class="tel">หรือโทร <a href="tel:0622629644">062-262-9644</a></span>
   </div>
 </section>
-
 <footer>
-  <p>ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=systems-footer&utm_campaign=demos" target="_blank" rel="noopener">ZenityX</a> — ศูนย์ AI อันดับ 1 เมืองไทย · <a href="../">← กลับหน้ารวมเว็บไซต์</a></p>
+  <p>ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=footer&utm_campaign=demos" target="_blank" rel="noopener">ZenityX</a> — ศูนย์ AI อันดับ 1 เมืองไทย · โทร 062-262-9644</p>
 </footer>
-
+<script>
+(function(){
+  var cards = document.querySelectorAll('.card');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    cards.forEach(function(c){ io.observe(c); });
+  } else { cards.forEach(function(c){ c.classList.add('in'); }); }
+})();
+</script>
 </body>
 </html>
