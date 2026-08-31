@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ใบดี BAIDEE — ร้านต้นไม้แต่งบ้าน | เลือกต้นที่ใช่ให้ห้องของคุณ</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='%23FF0000'/%3E%3C/svg%3E">
 <meta name="description" content="ใบดี — ร้านต้นไม้แต่งบ้าน ย่านอารีย์ คัดต้นไม้ตามแสงห้องจริง ส่งและปลูกให้ถึงบ้าน">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -270,7 +271,6 @@ footer{background:var(--green-deep);color:#c9dcc9;padding:2.2rem 0;font-size:.88
     }).slice(0, 3);
 
     document.querySelectorAll('#results .plant').forEach(function(el){ el.remove(); });
-    var icons = ['🌿','🪴','🍃'];
     sorted.forEach(function(p, i){
       var card = document.createElement('div');
       card.className = 'plant';
