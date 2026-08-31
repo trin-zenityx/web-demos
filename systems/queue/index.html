@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คิวดี — ระบบจองคิวและจอเรียกคิว | ZenityX Demos</title>
+<meta name="description" content="ระบบเดโมจองคิวออนไลน์ + จอแสดงคิวหน้าร้าน เรียกคิวได้จริงพร้อมเสียงแจ้ง">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --acc:#9333ea; --acc-deep:#6d28c8; --acc-soft:#f2e6fd;
+  --bg:#f5f4f8; --card:#ffffff; --side:#1e1630; --ink:#241d33; --muted:#7c748f; --line:#e5e1ee;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.mono{font-family:'JetBrains Mono',monospace}
+[hidden]{display:none!important}
+
+/* LOGIN */
+.login{min-height:100vh;display:grid;place-items:center;padding:1.5rem;background:linear-gradient(160deg,#2a1550,#9333ea 150%)}
+.login-card{background:#fff;border-radius:24px;padding:clamp(2rem,5vw,3rem);width:min(430px,100%);box-shadow:0 30px 80px -20px rgba(0,0,0,.4);text-align:center}
+.login-logo{width:68px;height:68px;border-radius:18px;background:var(--acc);display:grid;place-items:center;margin:0 auto 1rem}
+.login h1{font-size:1.7rem;font-weight:600}
+.login .sub{color:var(--muted);font-size:.9rem;margin:.3rem 0 1.6rem}
+.login input{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:.85rem 1rem;margin-bottom:.8rem;font-size:.95rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:500;border-radius:12px;padding:.85rem 1.4rem;transition:all .2s;min-height:44px}
+.btn-a{background:var(--acc);color:#fff;box-shadow:0 8px 20px -8px rgba(147,51,234,.5)}
+.btn-a:hover{background:var(--acc-deep);transform:translateY(-1px)}
+.btn-block{width:100%}
+.demo-note{margin-top:1rem;font-size:.8rem;color:var(--muted)}
+.demo-note b{color:var(--acc)}
+.login-credit{margin-top:1.6rem;padding-top:1.2rem;border-top:1px dashed var(--line);font-size:.75rem;color:var(--muted)}
+.login-credit a{color:#FF0000;text-decoration:none;font-weight:500}
+
+/* APP */
+.app{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
+.side{background:var(--side);color:#d5cbe8;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.side-logo{display:flex;align-items:center;gap:.7rem;padding:1.2rem 1.2rem 1rem;border-bottom:1px solid rgba(213,203,232,.12)}
+.side-logo .mk{width:38px;height:38px;border-radius:10px;background:var(--acc);display:grid;place-items:center;flex:none}
+.side-logo b{color:#fff;font-size:1.05rem;font-weight:600;display:block;line-height:1.2}
+.side-logo small{font-size:.68rem;opacity:.65}
+.side nav{padding:.8rem .7rem;display:grid;gap:.2rem;flex:1}
+.navi{display:flex;align-items:center;gap:.7rem;padding:.7rem .8rem;border-radius:10px;font-size:.92rem;color:#ab9fc7;transition:all .2s;text-align:left;width:100%;min-height:44px}
+.navi:hover{background:rgba(255,255,255,.06);color:#fff}
+.navi.on{background:var(--acc);color:#fff;font-weight:500}
+.side-foot{padding:1rem .9rem;border-top:1px solid rgba(213,203,232,.12)}
+.user-chip{display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-weight:600;flex:none}
+.user-chip b{color:#fff;font-size:.88rem;display:block;line-height:1.2}
+.user-chip small{font-size:.72rem;opacity:.65}
+.logout{width:100%;text-align:left;padding:.6rem .8rem;border-radius:10px;font-size:.85rem;color:#ab9fc7;transition:all .2s;min-height:44px}
+.logout:hover{background:rgba(214,69,69,.15);color:#ff9d9d}
+.main{min-width:0}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);padding:.8rem clamp(1rem,3vw,1.6rem);display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.topbar h2{font-size:1.1rem;font-weight:600;margin-right:auto}
+.topbar .date{font-size:.82rem;color:var(--muted)}
+.kpi-chip{background:var(--acc-soft);color:var(--acc-deep);border-radius:99px;padding:.4rem .9rem;font-size:.82rem;font-weight:500}
+.reset-btn{font-size:.78rem;color:var(--muted);border:1.5px solid var(--line);border-radius:99px;padding:.45rem .9rem;transition:all .2s;min-height:44px}
+.reset-btn:hover{border-color:#d64545;color:#d64545}
+.content{padding:clamp(1rem,3vw,1.6rem)}
+
+/* BOOKING */
+.book-grid{display:grid;grid-template-columns:1fr 380px;gap:1.2rem;align-items:start}
+@media(max-width:960px){.book-grid{grid-template-columns:1fr}}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.8rem}
+.svc{background:#fff;border:2px solid var(--line);border-radius:16px;padding:1.3rem 1rem;text-align:center;transition:all .2s;min-height:120px;display:flex;flex-direction:column;justify-content:center;gap:.3rem}
+.svc:hover{border-color:var(--acc);transform:translateY(-2px)}
+.svc b{font-weight:600;font-size:1rem}
+.svc small{color:var(--muted);font-size:.8rem}
+.svc .est{font-family:'JetBrains Mono';font-size:.78rem;color:var(--acc-deep)}
+.ticket-panel{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:1.4rem;text-align:center;position:sticky;top:84px}
+.ticket-panel h3{font-size:.95rem;font-weight:600;margin-bottom:1rem}
+.ticket{background:var(--acc-soft);border:2px dashed var(--acc);border-radius:16px;padding:1.6rem 1rem;margin-bottom:1rem}
+.ticket .tnum{font-family:'JetBrains Mono';font-size:2.6rem;font-weight:700;color:var(--acc-deep);letter-spacing:.05em}
+.ticket .tsvc{font-size:.9rem;color:var(--ink);margin-top:.2rem}
+.ticket .tinfo{font-size:.78rem;color:var(--muted);margin-top:.6rem}
+.queue-now{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:1rem 1.2rem;margin-bottom:1rem}
+.queue-now .qn{display:flex;justify-content:space-between;align-items:center}
+.queue-now .qn b{font-family:'JetBrains Mono';font-size:1.4rem;color:var(--acc-deep)}
+
+/* TV DISPLAY */
+.tv-wrap{max-width:900px;margin:0 auto}
+.tv{background:var(--side);border-radius:24px;padding:clamp(1.5rem,4vw,3rem);text-align:center;color:#fff;position:relative;overflow:hidden}
+.tv::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(147,51,234,.25),transparent 60%)}
+.tv>*{position:relative}
+.tv .tv-label{font-size:.85rem;letter-spacing:.3em;color:#ab9fc7;text-transform:uppercase}
+.tv .tv-num{font-family:'JetBrains Mono';font-size:clamp(4rem,14vw,8rem);font-weight:700;color:#fff;line-height:1.15;text-shadow:0 0 40px rgba(147,51,234,.6)}
+.tv .tv-svc{font-size:clamp(1rem,3vw,1.4rem);color:#d5cbe8;margin-bottom:1.5rem}
+.tv .tv-next{display:flex;justify-content:center;gap:1.5rem;font-size:.85rem;color:#ab9fc7}
+.tv .tv-next b{color:#fff;font-family:'JetBrains Mono'}
+.tv-acts{display:flex;gap:.8rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap}
+.btn-tv{background:rgba(147,51,234,.2);border:1.5px solid var(--acc);color:#e9d5ff;padding:.9rem 1.8rem;font-size:1rem;border-radius:14px;min-height:52px}
+.btn-tv:hover{background:var(--acc);color:#fff}
+.btn-tv.primary{background:var(--acc);color:#fff;font-weight:600}
+.btn-tv.primary:hover{background:var(--acc-deep)}
+.tv-history{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.6rem;margin-top:1.2rem}
+.tv-hitem{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:.7rem;text-align:center}
+.tv-hitem b{font-family:'JetBrains Mono';display:block;font-size:1.05rem}
+.tv-hitem span{font-size:.72rem;color:var(--muted)}
+.tv-hitem.calling{border-color:var(--acc);background:var(--acc-soft)}
+
+/* toast */
+.toast{position:fixed;top:1rem;right:1rem;z-index:300;background:var(--ink);color:#fff;border-radius:12px;padding:.85rem 1.2rem;font-size:.88rem;box-shadow:0 12px 30px -10px rgba(0,0,0,.35);opacity:0;transform:translateY(-8px);transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
+
+@media(max-width:860px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed;z-index:150;left:0;top:0;bottom:0;width:236px;transform:translateX(-100%);transition:transform .3s}
+  .side.open{transform:none}
+  .menu-btn{display:inline-flex!important}
+}
+.menu-btn{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:1.5px solid var(--line);border-radius:10px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- LOGIN -->
+<div class="login" id="loginView">
+  <div class="login-card">
+    <div class="login-logo"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="2.5"/></svg></div>
+    <h1>คิวดี</h1>
+    <p class="sub">ระบบจองคิวและจอเรียกคิว · ศูนย์บริการตัวอย่าง</p>
+    <input type="email" value="front@qdee.demo" readonly aria-label="อีเมล">
+    <input type="password" value="demo1234" readonly aria-label="รหัสผ่าน">
+    <button class="btn btn-a btn-block" id="loginBtn" style="font-size:1rem">เข้าสู่ระบบ</button>
+    <p class="demo-note">ระบบเดโม — <b>กดเข้าได้เลย</b> ไม่ต้องใส่รหัสผ่าน</p>
+    <div class="login-credit">ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener">First Vibe : Coding — ZenityX</a></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app" id="appView" hidden>
+  <aside class="side" id="sidebar">
+    <div class="side-logo">
+      <span class="mk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="2.5"/></svg></span>
+      <span><b>คิวดี</b><small>ศูนย์บริการ</small></span>
+    </div>
+    <nav>
+      <button class="navi on" data-page="book"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5h6v4H9zM5 5H3v16h18V5h-2M9 13l2 2 4-4"/></svg>กดรับคิว</button>
+      <button class="navi" data-page="tv"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>จอเรียกคิว (TV)</button>
+    </nav>
+    <div class="side-foot">
+      <div class="user-chip"><span class="avatar">น</span><span><b>นุ่น (พนักงานต้อนรับ)</b><small>เคาน์เตอร์ 1</small></span></div>
+      <button class="logout" id="logoutBtn">← ออกจากระบบ</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <button class="menu-btn" id="menuBtn" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <h2 id="pageTitle">กดรับคิว</h2>
+      <span class="kpi-chip">คิวรออยู่ <b id="waitCount" class="mono">0</b></span>
+      <span class="date" id="todayDate"></span>
+      <button class="reset-btn" id="resetBtn">รีเซ็ตข้อมูลตัวอย่าง</button>
+    </div>
+
+    <div class="content">
+      <!-- BOOK -->
+      <div id="page-book">
+        <div class="book-grid">
+          <div>
+            <div class="queue-now">
+              <div class="qn"><span style="font-size:.85rem;color:var(--muted)">กำลังให้บริการคิว</span><b id="servingNow">A-000</b></div>
+              <div class="qn" style="margin-top:.4rem"><span style="font-size:.85rem;color:var(--muted)">คิวถัดไป</span><b id="nextUp" style="font-size:1.1rem">—</b></div>
+            </div>
+            <p style="font-size:.9rem;color:var(--muted);margin-bottom:.8rem">เลือกประเภทบริการเพื่อออกบัตรคิว:</p>
+            <div class="svc-grid" id="svcGrid"></div>
+          </div>
+          <div class="ticket-panel">
+            <h3>บัตรคิวล่าสุด</h3>
+            <div class="ticket" id="ticketBox" hidden>
+              <div class="tnum" id="tNum">A-000</div>
+              <div class="tsvc" id="tSvc">—</div>
+              <div class="tinfo" id="tInfo">—</div>
+            </div>
+            <p id="ticketHint" style="color:var(--muted);font-size:.85rem">ยังไม่ได้ออกบัตรคิว — แตะบริการด้านซ้าย</p>
+            <div id="waitListWrap" style="text-align:left;margin-top:.5rem"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TV -->
+      <div id="page-tv" hidden>
+        <div class="tv-wrap">
+          <div class="tv">
+            <p class="tv-label">ขณะนี้กำลังให้บริการ</p>
+            <div class="tv-num" id="tvNum">A-000</div>
+            <p class="tv-svc" id="tvSvc">เชิญที่เคาน์เตอร์ 1</p>
+            <div class="tv-next" id="tvNext"></div>
+          </div>
+          <div class="tv-acts">
+            <button class="btn-tv primary" id="callNextBtn">เรียกคิวถัดไป</button>
+            <button class="btn-tv" id="recallBtn">เรียกซ้ำ</button>
+            <button class="btn-tv" id="skipBtn">ข้ามคิว (ไม่มา)</button>
+          </div>
+          <div class="tv-history" id="tvHistory"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<a href="../" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+
+<script>
+(function(){
+'use strict';
+var LS = 'zx-queue-v1';
+var SVCS = [
+  { id:'A', n:'บริการทั่วไป',       d:'สอบถาม-รับเรื่อง',  min:5  },
+  { id:'B', n:'เปิดบัญชีใหม่',      d:'เอกสารครบพร้อม',   min:12 },
+  { id:'C', n:'ชำระค่าบริการ',      d:'รับชำระ-ออกใบเสร็จ', min:4  },
+  { id:'D', n:'แจ้งปัญหาเร่งด่วน',   d:'ทีมเทคนิค',        min:15 }
+];
+var state = load() || { seq:{A:10,B:10,C:10,D:10}, waiting:[], serving:null, done:[], servedToday:0 };
+function load(){ try { return JSON.parse(localStorage.getItem(LS)); } catch(e){ return null; } }
+function save(){ localStorage.setItem(LS, JSON.stringify(state)); }
+function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show');},2200); }
+function svcOf(id){ return SVCS.find(function(s){return s.id===id;}); }
+function qstr(q){ return q.id + '-' + String(q.n).padStart(3,'0'); }
+
+/* login */
+document.getElementById('loginBtn').addEventListener('click', function(){
+  document.getElementById('loginView').hidden = true;
+  document.getElementById('appView').hidden = false;
+});
+document.getElementById('logoutBtn').addEventListener('click', function(){
+  document.getElementById('appView').hidden = true;
+  document.getElementById('loginView').hidden = false;
+});
+
+/* nav */
+var titles = { book:'กดรับคิว', tv:'จอเรียกคิว (TV)' };
+document.querySelectorAll('.navi').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.navi').forEach(function(x){ x.classList.remove('on'); });
+    b.classList.add('on');
+    var p = b.dataset.page;
+    document.getElementById('page-book').hidden = p !== 'book';
+    document.getElementById('page-tv').hidden = p !== 'tv';
+    document.getElementById('pageTitle').textContent = titles[p];
+    document.getElementById('sidebar').classList.remove('open');
+    renderAll();
+  });
+});
+document.getElementById('menuBtn').addEventListener('click', function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+
+/* date */
+var days=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+var months=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+var now=new Date();
+document.getElementById('todayDate').textContent='วัน'+days[now.getDay()]+'ที่ '+now.getDate()+' '+months[now.getMonth()]+' '+(now.getFullYear()+543);
+
+/* beep (WebAudio) */
+function beep(){
+  try {
+    var ctx = beep.ctx || (beep.ctx = new (window.AudioContext||window.webkitAudioContext)());
+    var o = ctx.createOscillator(), g = ctx.createGain();
+    o.type='sine'; o.frequency.value=880;
+    g.gain.setValueAtTime(0.15, ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(); o.stop(ctx.currentTime + 0.5);
+  } catch(e){}
+}
+
+/* booking */
+document.getElementById('svcGrid').innerHTML = SVCS.map(function(s){
+  return '<button class="svc" data-id="'+s.id+'"><b>'+s.id+' — '+s.n+'</b><small>'+s.d+'</small><span class="est">~'+s.min+' นาที/คิว</span></button>';
+}).join('');
+
+document.getElementById('svcGrid').addEventListener('click', function(e){
+  var b = e.target.closest('.svc'); if (!b) return;
+  var s = svcOf(b.dataset.id);
+  var n = ++state.seq[s.id];
+  var q = { id: s.id, n: n, t: Date.now() };
+  state.waiting.push(q); save();
+  document.getElementById('ticketBox').hidden = false;
+  document.getElementById('ticketHint').hidden = true;
+  document.getElementById('tNum').textContent = qstr(q);
+  document.getElementById('tSvc').textContent = s.n;
+  var ahead = state.waiting.length - 1;
+  document.getElementById('tInfo').textContent = 'คิวก่อนหน้า ' + ahead + ' คิว · รอประมาณ ' + (ahead * s.min) + ' นาที';
+  toast('ออกบัตรคิว ' + qstr(q) + ' แล้ว');
+  renderAll();
+});
+
+/* queue ops */
+function renderAll(){
+  var w = state.waiting;
+  document.getElementById('waitCount').textContent = w.length;
+  document.getElementById('servingNow').textContent = state.serving ? qstr(state.serving) : '—';
+  document.getElementById('nextUp').textContent = w.length ? qstr(w[0]) : 'ไม่มีคิวรอ';
+  document.getElementById('tvNum').textContent = state.serving ? qstr(state.serving) : '—';
+  document.getElementById('tvSvc').textContent = state.serving ? svcOf(state.serving.id).n + ' · เชิญที่เคาน์เตอร์ 1' : 'รอเรียกคิว';
+  document.getElementById('tvNext').innerHTML = w.slice(0,3).map(function(q,i){
+    return '<span>ถัดไป '+(i+1)+': <b>'+qstr(q)+'</b></span>';
+  }).join('') || '<span>ไม่มีคิวรอ</span>';
+  /* waiting list on book page */
+  document.getElementById('waitListWrap').innerHTML = w.length ?
+    '<p style="font-size:.8rem;color:var(--muted);margin-bottom:.4rem">คิวที่รอ ('+w.length+'):</p>' +
+    w.map(function(q){ return '<div class="tv-hitem" style="margin-bottom:.4rem;display:flex;justify-content:space-between;align-items:center;padding:.5rem .8rem"><b>'+qstr(q)+'</b><span>'+svcOf(q.id).n+'</span></div>'; }).join('') : '';
+  /* history */
+  document.getElementById('tvHistory').innerHTML = state.done.slice(-8).reverse().map(function(q){
+    return '<div class="tv-hitem"><b>'+qstr(q)+'</b><span>'+svcOf(q.id).n+'</span></div>';
+  }).join('');
+}
+
+document.getElementById('callNextBtn').addEventListener('click', function(){
+  if (!state.waiting.length) { toast('ไม่มีคิวรออยู่'); return; }
+  if (state.serving) { state.done.push(state.serving); }
+  state.serving = state.waiting.shift();
+  state.servedToday++;
+  save(); beep();
+  toast('เรียกคิว ' + qstr(state.serving));
+  renderAll();
+});
+document.getElementById('recallBtn').addEventListener('click', function(){
+  if (!state.serving) { toast('ยังไม่มีคิวที่เรียก'); return; }
+  beep(); toast('เรียกคิว ' + qstr(state.serving) + ' อีกครั้ง');
+});
+document.getElementById('skipBtn').addEventListener('click', function(){
+  if (!state.serving) { toast('ยังไม่มีคิวที่เรียก'); return; }
+  toast('ข้ามคิว ' + qstr(state.serving) + ' (ไม่มาตามเรียก)');
+  state.serving = null; save(); renderAll();
+});
+
+document.getElementById('resetBtn').addEventListener('click', function(){
+  if (confirm('ล้างคิวทั้งหมดเริ่มใหม่?')) {
+    localStorage.removeItem(LS);
+    state = { seq:{A:10,B:10,C:10,D:10}, waiting:[], serving:null, done:[], servedToday:0 };
+    document.getElementById('ticketBox').hidden = true;
+    document.getElementById('ticketHint').hidden = false;
+    renderAll(); toast('รีเซ็ตคิวแล้ว');
+  }
+});
+
+renderAll();
+})();
+</script>
+</body>
+</html>

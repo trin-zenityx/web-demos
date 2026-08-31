@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ลูกค้าดี CRM — ระบบจัดการทีมขาย | ซอฟต์ดี โซลูชั่น</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#5b5bd6; --accent-d:#4646b8; --accent-soft:#ececfb;
+  --ink:#20203a; --muted:#6b6d85; --bg:#f3f4fa; --card:#ffffff; --line:#e6e7f2;
+  --green:#16a34a; --red:#dc2626; --amber:#d97706; --sidebar:#15152e; --sidebar-2:#1d1d3d;
+  --r:14px; --shadow:0 8px 28px rgba(24,24,60,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'IBM Plex Sans Thai',system-ui,sans-serif;font-size:15px;line-height:1.55;color:var(--ink);background:var(--bg)}
+.mono{font-family:'JetBrains Mono',monospace}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:15px}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid rgba(91,91,214,.45);outline-offset:2px;border-radius:6px}
+svg{flex:none}
+
+/* ---------- buttons / chips / toast ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 18px;border-radius:12px;border:1px solid transparent;font-size:15px;font-weight:600;transition:background .18s,transform .12s,box-shadow .18s}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(91,91,214,.35)}
+.btn.primary:hover{background:var(--accent-d)}
+.btn.ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn.ghost:hover{background:#f6f6fd}
+.btn.green{background:var(--green);color:#fff}
+.btn.green:hover{background:#15803d}
+.btn.red{background:#fff;border-color:#f2c9c9;color:var(--red)}
+.btn.red:hover{background:#fdf1f1}
+.btn.sm{min-height:40px;padding:8px 14px;font-size:13.5px;border-radius:10px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:var(--accent-soft);color:var(--accent-d);font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.st-chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--ink);white-space:nowrap}
+.st-chip::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c,#999)}
+#toasts{position:fixed;right:18px;bottom:18px;z-index:1200;display:flex;flex-direction:column;gap:10px;max-width:min(360px,90vw)}
+.toast{background:#191934;color:#fff;padding:13px 16px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.28);font-size:14px;display:flex;gap:10px;align-items:flex-start;animation:tin .25s ease}
+.toast .tk{width:9px;height:9px;border-radius:50%;background:var(--accent);margin-top:6px}
+.toast.ok .tk{background:#4ade80}.toast.warn .tk{background:#fbbf24}
+@keyframes tin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- login ---------- */
+#view-login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(140deg,#14142c 0%,#232358 45%,#3a3a8c 78%,#5b5bd6 135%)}
+.login-card{width:100%;max-width:420px;background:#fff;border-radius:22px;box-shadow:0 30px 80px rgba(8,8,30,.45);padding:38px 34px 30px;text-align:center;animation:up .35s ease}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.login-card .logo{width:64px;height:64px;margin:0 auto 14px}
+.login-card h1{font-size:24px;font-weight:600;letter-spacing:.2px}
+.login-card .tag{color:var(--muted);font-size:13.5px;margin:4px 0 24px}
+.f-field{text-align:left;margin-bottom:14px}
+.f-field label{display:block;font-size:13px;font-weight:600;color:#3c3e58;margin-bottom:6px}
+.f-field input,.f-field select,.f-field textarea{width:100%;min-height:46px;border:1.5px solid var(--line);border-radius:11px;padding:10px 13px;background:#fbfbfe;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+.f-field input:focus,.f-field select:focus,.f-field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,91,214,.16)}
+.login-card .btn{width:100%;margin-top:6px}
+.login-note{margin-top:16px;font-size:12.5px;color:var(--muted);background:var(--accent-soft);border-radius:10px;padding:9px 12px}
+
+/* ---------- app frame ---------- */
+#view-app{display:flex;min-height:100vh}
+.sidebar{width:240px;background:var(--sidebar);color:#c9cae4;display:flex;flex-direction:column;position:fixed;inset:0 auto 0 0;z-index:600;transition:transform .25s ease}
+.sb-brand{display:flex;align-items:center;gap:11px;padding:20px 18px 16px;border-bottom:1px solid rgba(255,255,255,.07)}
+.sb-brand .logo{width:36px;height:36px}
+.sb-brand b{color:#fff;font-size:16.5px;font-weight:600;display:block;line-height:1.2}
+.sb-brand small{font-size:11px;color:#8f91b8}
+.sb-nav{padding:14px 12px;display:flex;flex-direction:column;gap:4px;flex:1;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:12px;width:100%;min-height:46px;padding:10px 13px;border:0;border-radius:11px;background:transparent;color:#b7b9d9;font-size:14.5px;font-weight:500;text-align:left;transition:background .15s,color .15s}
+.nav-item svg{opacity:.85}
+.nav-item:hover{background:rgba(255,255,255,.06);color:#fff}
+.nav-item.active{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(91,91,214,.4)}
+.nav-badge{margin-left:auto;background:rgba(255,255,255,.14);font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;font-family:'JetBrains Mono',monospace}
+.nav-item.active .nav-badge{background:rgba(255,255,255,.22)}
+.sb-foot{padding:14px;border-top:1px solid rgba(255,255,255,.07)}
+.user-chip{display:flex;align-items:center;gap:10px;background:var(--sidebar-2);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#7c7cf0,#4646b8);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px}
+.user-chip b{display:block;color:#fff;font-size:13.5px;font-weight:600;line-height:1.25}
+.user-chip small{color:#8f91b8;font-size:11.5px}
+.btn-logout{width:100%;background:transparent;border:1px solid rgba(255,255,255,.14);color:#b7b9d9;border-radius:11px}
+.btn-logout:hover{background:rgba(255,255,255,.07);color:#fff}
+.sb-ov{position:fixed;inset:0;background:rgba(12,12,30,.5);z-index:550;opacity:0;pointer-events:none;transition:opacity .2s}
+.main{flex:1;margin-left:240px;min-width:0;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:10px 22px;min-height:62px}
+.hamb{display:none;width:44px;height:44px;border:0;border-radius:11px;background:#fff;color:var(--ink);align-items:center;justify-content:center}
+.topbar h2{font-size:17px;font-weight:600}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.tb-date{font-size:13px;color:var(--muted)}
+.content{padding:24px 22px 90px;max-width:1440px;width:100%;margin:0 auto}
+.page{display:none}
+.page.active{display:block;animation:up .25s ease}
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.page-head h3{font-size:20px;font-weight:600}
+.page-head p{color:var(--muted);font-size:13.5px;margin-top:3px}
+
+/* ---------- kanban ---------- */
+.kb-wrap{overflow-x:auto;padding-bottom:10px}
+.kanban{display:grid;grid-template-columns:repeat(5,minmax(238px,1fr));gap:13px;min-width:1220px}
+.kb-col{background:#ecedf6;border-radius:16px;display:flex;flex-direction:column;max-height:calc(100vh - 210px)}
+.kb-head{display:flex;align-items:center;gap:8px;padding:12px 13px 10px;border-bottom:1px solid #dfe0ee}
+.kb-dot{width:10px;height:10px;border-radius:3px;background:var(--c)}
+.kb-head b{font-size:14px;font-weight:600}
+.kb-meta{margin-left:auto;text-align:right;line-height:1.15}
+.kb-meta .n{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700}
+.kb-meta .v{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.kb-add{width:34px;height:34px;min-height:34px;border:0;border-radius:9px;background:#fff;color:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(30,30,70,.12)}
+.kb-add:hover{background:var(--accent-soft)}
+.kb-body{padding:10px;display:flex;flex-direction:column;gap:9px;overflow-y:auto;flex:1;min-height:90px;border-radius:0 0 16px 16px;transition:background .15s}
+.kb-col.over .kb-body{background:rgba(91,91,214,.09);box-shadow:inset 0 0 0 2px rgba(91,91,214,.4)}
+.card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--sc,#999);border-radius:12px;padding:11px 12px 6px;cursor:grab;box-shadow:0 2px 8px rgba(25,25,60,.06);transition:box-shadow .15s,transform .15s}
+.card:hover{box-shadow:0 6px 18px rgba(25,25,60,.13)}
+.card.dragging{opacity:.45;transform:scale(.98)}
+.card.lost{border-left-color:var(--red);background:#fdf7f7}
+.card-co{font-weight:600;font-size:14px;line-height:1.35}
+.card-ct{font-size:12.5px;color:var(--muted);margin-top:2px}
+.card-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px}
+.card-val{font-weight:700;font-size:13.5px;color:var(--accent-d)}
+.card.lost .card-val{color:var(--red);text-decoration:line-through}
+.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.card-date{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--muted)}
+.card-date svg{width:13px;height:13px}
+.card-mv{display:flex;justify-content:space-between;margin:2px -8px 0}
+.mv{width:44px;height:36px;border:0;background:transparent;color:#a3a5c2;display:flex;align-items:center;justify-content:center;border-radius:9px}
+.mv:hover{background:var(--accent-soft);color:var(--accent)}
+.mv svg{width:16px;height:16px}
+.kb-empty{border:1.5px dashed #cfd0e4;border-radius:12px;color:#9a9cba;font-size:12.5px;text-align:center;padding:16px 8px}
+
+/* ---------- table ---------- */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.search-box{position:relative;flex:1;min-width:220px}
+.search-box svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:#9a9cba}
+.search-box input{width:100%;min-height:46px;border:1.5px solid var(--line);border-radius:12px;padding:10px 13px 10px 40px;background:#fff}
+.search-box input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,91,214,.16)}
+.toolbar select{min-height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 13px;background:#fff;color:var(--ink)}
+.t-count{font-size:13px;color:var(--muted);align-self:center;margin-left:auto}
+.t-wrap{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:auto;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;min-width:820px}
+thead th{text-align:left;font-size:12.5px;font-weight:600;color:var(--muted);background:#f8f8fd;padding:12px 14px;border-bottom:1px solid var(--line);white-space:nowrap;user-select:none}
+th[data-sort]{cursor:pointer}
+th[data-sort]:hover{color:var(--accent)}
+th .arr{font-family:'JetBrains Mono',monospace;font-size:11px;margin-left:4px;color:var(--accent)}
+tbody td{padding:12px 14px;border-bottom:1px solid #f0f1f8;font-size:14px;vertical-align:middle}
+tbody tr{cursor:pointer;transition:background .12s}
+tbody tr:hover{background:#f7f7fe}
+tbody tr:last-child td{border-bottom:0}
+.t-co{font-weight:600}
+.t-id{font-size:11px;color:#9a9cba}
+.t-ph{font-size:11.5px;color:var(--muted)}
+.t-val{font-weight:700;color:var(--accent-d)}
+.t-empty{text-align:center;color:var(--muted);padding:36px!important;cursor:default}
+
+/* ---------- dashboard ---------- */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 17px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:flex-start}
+.kpi-ic{width:46px;height:46px;border-radius:13px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center}
+.kpi-ic svg{width:22px;height:22px}
+.kpi small{color:var(--muted);font-size:12.5px;font-weight:500;display:block}
+.kpi .num{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;margin-top:2px;line-height:1.15}
+.kpi .sub{font-size:12px;color:var(--muted);margin-top:2px}
+.kpi.good .kpi-ic{background:#e6f7ec;color:var(--green)}
+.dash-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:14px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.panel h4{font-size:15.5px;font-weight:600;margin-bottom:4px}
+.panel .ph-sub{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+.f-lab{fill:#3c3e58;font-size:12.5px;font-family:'IBM Plex Sans Thai',sans-serif}
+.f-val{fill:#20203a;font-size:12px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.f-note{font-size:12px;color:var(--muted);margin-top:8px}
+.exp-row{display:flex;align-items:center;gap:12px;padding:11px 4px;border-bottom:1px solid #f0f1f8;cursor:pointer;border-radius:8px}
+.exp-row:hover{background:#f7f7fe}
+.exp-row:last-child{border-bottom:0}
+.exp-co{flex:1;min-width:0}
+.exp-co b{display:block;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exp-co small{color:var(--muted);font-size:12px}
+.exp-val{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:var(--accent-d)}
+.exp-badge{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap;background:#fff4e0;color:var(--amber)}
+.exp-badge.over{background:#fdeaea;color:var(--red)}
+.exp-badge.soon{background:#e6f7ec;color:var(--green)}
+
+/* ---------- drawer ---------- */
+.ov{position:fixed;inset:0;background:rgba(14,14,35,.45);z-index:700;opacity:0;pointer-events:none;transition:opacity .22s}
+.ov.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,94vw);background:#fff;z-index:750;transform:translateX(105%);transition:transform .28s ease;display:flex;flex-direction:column;box-shadow:-16px 0 50px rgba(10,10,40,.25)}
+.drawer.show{transform:none}
+.dr-head{display:flex;align-items:flex-start;gap:10px;padding:18px 18px 14px;border-bottom:1px solid var(--line)}
+.dr-head h3{font-size:17px;font-weight:600;line-height:1.3}
+.dr-head .sub{font-size:12.5px;color:var(--muted);margin-top:3px}
+.dr-close{margin-left:auto;width:44px;height:44px;border:0;border-radius:11px;background:#f4f4fb;color:var(--ink);display:flex;align-items:center;justify-content:center}
+.dr-close:hover{background:var(--accent-soft)}
+.dr-body{flex:1;overflow-y:auto;padding:16px 18px}
+.dr-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:14px 0}
+.dr-field{background:#f8f8fd;border-radius:11px;padding:9px 12px}
+.dr-field small{display:block;font-size:11px;color:var(--muted);font-weight:600;margin-bottom:2px}
+.dr-field span{font-size:13.5px;font-weight:500}
+.dr-field span.mono{font-weight:700}
+.dr-sec{font-size:13px;font-weight:600;color:#3c3e58;margin:18px 0 10px;display:flex;align-items:center;gap:7px}
+.dr-sec svg{width:15px;height:15px;color:var(--accent)}
+.tl{position:relative;padding-left:20px}
+.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:#e3e4f3;border-radius:2px}
+.tl-item{position:relative;padding:0 0 14px}
+.tl-item::before{content:"";position:absolute;left:-19px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 2px #d8d8f5}
+.tl-item p{font-size:13.5px}
+.tl-item time{font-size:11.5px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.note-box{display:flex;flex-direction:column;gap:9px;margin-top:6px}
+.note-box textarea{min-height:76px;border:1.5px solid var(--line);border-radius:11px;padding:10px 12px;resize:vertical;background:#fbfbfe}
+.note-box textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,91,214,.16)}
+.dr-foot{padding:13px 18px;border-top:1px solid var(--line);display:flex;gap:9px;flex-wrap:wrap}
+.dr-foot .btn{flex:1;min-width:130px}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:800;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal.show{opacity:1;pointer-events:auto}
+.modal .m-bg{position:absolute;inset:0;background:rgba(14,14,35,.5)}
+.m-card{position:relative;background:#fff;border-radius:20px;width:100%;max-width:520px;max-height:92vh;overflow-y:auto;padding:24px 24px 20px;box-shadow:0 30px 80px rgba(8,8,30,.4);animation:up .25s ease}
+.m-card h3{font-size:18px;font-weight:600;margin-bottom:2px}
+.m-card .m-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+.m-2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.f-err{font-size:12px;color:var(--red);margin-top:4px;min-height:0}
+.f-field.bad input,.f-field.bad select{border-color:var(--red);background:#fffafa}
+.m-actions{display:flex;gap:10px;margin-top:16px}
+.m-actions .btn{flex:1}
+
+/* ---------- back link ---------- */
+.back-home{position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;padding:11px 18px;border-radius:999px;border-left:3px solid #e11d48;box-shadow:0 6px 20px rgba(20,20,60,.18);min-height:44px}
+.back-home:hover{background:#f6f6fd}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  body.sb-open .sidebar{transform:none;box-shadow:20px 0 60px rgba(10,10,40,.4)}
+  body.sb-open .sb-ov{opacity:1;pointer-events:auto}
+  .main{margin-left:0}
+  .hamb{display:flex}
+  .tb-date{display:none}
+  .dash-grid{grid-template-columns:1fr}
+  .content{padding:16px 14px 90px}
+}
+@media (max-width:520px){
+  .topbar{padding:8px 12px}
+  .btn span.hidex{display:none}
+  .kpi .num{font-size:21px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ================= LOGIN ================= -->
+<div id="view-login">
+  <form class="login-card" id="form-login" autocomplete="off">
+    <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c7cf0"/><stop offset="1" stop-color="#4646b8"/></linearGradient></defs><rect width="48" height="48" rx="13" fill="url(#lg1)"/><circle cx="20" cy="17" r="6" fill="#fff"/><path d="M8 38c0-7 5.4-11 12-11 3 0 5.7 1 7.7 2.7" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M29 33.5l3.5 3.5 7.5-8.5" stroke="#a7f3d0" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h1>ลูกค้าดี CRM</h1>
+    <p class="tag">ระบบจัดการทีมขาย · บจก.ซอฟต์ดี โซลูชั่น</p>
+    <div class="f-field">
+      <label for="lg-email">อีเมล</label>
+      <input id="lg-email" type="email" value="demo@softdee.co.th">
+    </div>
+    <div class="f-field">
+      <label for="lg-pass">รหัสผ่าน</label>
+      <input id="lg-pass" type="password" value="demo1234">
+    </div>
+    <button class="btn primary" type="submit">เข้าสู่ระบบ</button>
+    <div class="login-note">ระบบเดโม — กดเข้าได้เลย ไม่ต้องใช้รหัสจริง</div>
+  </form>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="view-app" hidden>
+  <div class="sb-ov" id="sbOv"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c7cf0"/><stop offset="1" stop-color="#4646b8"/></linearGradient></defs><rect width="48" height="48" rx="13" fill="url(#lg2)"/><circle cx="20" cy="17" r="6" fill="#fff"/><path d="M8 38c0-7 5.4-11 12-11 3 0 5.7 1 7.7 2.7" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M29 33.5l3.5 3.5 7.5-8.5" stroke="#a7f3d0" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><b>ลูกค้าดี CRM</b><small>SoftDee Solution</small></div>
+    </div>
+    <nav class="sb-nav">
+      <button class="nav-item active" data-page="pipeline"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="8" width="5" height="12" rx="1.5"/><rect x="17" y="12" width="4" height="8" rx="1.5"/></svg><span>Pipeline</span><span class="nav-badge" id="nb-pipe">0</span></button>
+      <button class="nav-item" data-page="customers"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.9-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="16.5" cy="9" r="2.6"/><path d="M15.5 14.2c2.4.2 4.3 1.9 4.9 4.8"/></svg><span>รายชื่อลูกค้า</span><span class="nav-badge" id="nb-cust">0</span></button>
+      <button class="nav-item" data-page="dashboard"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 16v-5M12.5 16V8M17 16v-3"/></svg><span>ภาพรวม</span></button>
+    </nav>
+    <div class="sb-foot">
+      <div class="user-chip">
+        <div class="avatar">สด</div>
+        <div><b>คุณสดใส มั่นคง</b><small>Sales Manager</small></div>
+      </div>
+      <button class="btn btn-logout" id="btn-logout"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-2"/><path d="M9 12h11"/><path d="m16 8 4 4-4 4"/></svg>ออกจากระบบ</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="hamb" id="btn-hamb" aria-label="เปิดเมนู"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <h2 id="tb-title">Pipeline การขาย</h2>
+      <div class="tb-right">
+        <span class="tb-date" id="tb-date"></span>
+        <button class="btn ghost sm" id="btn-reset"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-.5 4.5"/><path d="M20 5v6h-6"/></svg><span>รีเซ็ตข้อมูลตัวอย่าง</span></button>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- PIPELINE -->
+      <section class="page active" id="page-pipeline">
+        <div class="page-head">
+          <div>
+            <h3>Pipeline การขาย</h3>
+            <p id="pipe-summary">—</p>
+          </div>
+          <button class="btn primary" id="btn-add"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>เพิ่มดีล</button>
+        </div>
+        <div class="kb-wrap"><div class="kanban" id="kanban"></div></div>
+      </section>
+
+      <!-- CUSTOMERS -->
+      <section class="page" id="page-customers">
+        <div class="page-head">
+          <div>
+            <h3>รายชื่อลูกค้า</h3>
+            <p>ค้นหา กรอง และเรียงลำดับดีลทั้งหมด — คลิกแถวเพื่อดูรายละเอียด</p>
+          </div>
+        </div>
+        <div class="toolbar">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="q" type="search" placeholder="ค้นหาบริษัทหรือผู้ติดต่อ…" aria-label="ค้นหา">
+          </div>
+          <select id="f-stage" aria-label="กรองตามขั้นตอน">
+            <option value="">ทุกขั้นตอน</option>
+          </select>
+          <span class="t-count" id="t-count"></span>
+        </div>
+        <div class="t-wrap">
+          <table>
+            <thead><tr>
+              <th data-sort="company">บริษัท<span class="arr"></span></th>
+              <th data-sort="contact">ผู้ติดต่อ<span class="arr"></span></th>
+              <th data-sort="value">มูลค่า<span class="arr"></span></th>
+              <th data-sort="stage">สถานะ<span class="arr"></span></th>
+              <th data-sort="closeDate">ปิดคาดการณ์<span class="arr"></span></th>
+              <th>แท็ก</th>
+            </tr></thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- DASHBOARD -->
+      <section class="page" id="page-dashboard">
+        <div class="page-head">
+          <div>
+            <h3>ภาพรวมธุรกิจ</h3>
+            <p>สรุปผลการขายแบบเรียลไทม์จากข้อมูลดีลทั้งหมด</p>
+          </div>
+        </div>
+        <div class="kpi-grid" id="kpis"></div>
+        <div class="dash-grid">
+          <div class="panel">
+            <h4>Funnel การขาย</h4>
+            <div class="ph-sub">จำนวนดีลในแต่ละขั้นตอน (ข้อมูลจริง)</div>
+            <svg id="funnel" viewBox="0 0 560 240" width="100%" role="img" aria-label="กราฟ funnel การขาย"></svg>
+            <div class="f-note" id="funnel-note"></div>
+          </div>
+          <div class="panel">
+            <h4>ดีลใกล้หมดอายุ</h4>
+            <div class="ph-sub">5 ดีลเปิดที่ใกล้ถึงวันปิดคาดการณ์ที่สุด</div>
+            <div id="expiring"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- ================= DRAWER ================= -->
+<div class="ov" id="drOv"></div>
+<aside class="drawer" id="drawer" aria-label="รายละเอียดดีล">
+  <div class="dr-head">
+    <div><h3 id="dr-title">—</h3><div class="sub" id="dr-sub">—</div></div>
+    <button class="dr-close" id="dr-close" aria-label="ปิด"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="dr-body" id="dr-body"></div>
+  <div class="dr-foot" id="dr-foot"></div>
+</aside>
+
+<!-- ================= MODAL ================= -->
+<div class="modal" id="modal">
+  <div class="m-bg" id="mBg"></div>
+  <form class="m-card" id="form-deal" novalidate>
+    <h3>เพิ่มดีลใหม่</h3>
+    <div class="m-sub">กรอกข้อมูลดีล แล้วกดบันทึก — การ์ดจะไปอยู่ในคอลัมน์ที่เลือกทันที</div>
+    <div class="f-field" data-f="company">
+      <label for="fd-company">ชื่อบริษัท *</label>
+      <input id="fd-company" type="text" placeholder="เช่น บจก.ตัวอย่าง เทรดดิ้ง">
+      <div class="f-err"></div>
+    </div>
+    <div class="m-2">
+      <div class="f-field" data-f="contact">
+        <label for="fd-contact">ผู้ติดต่อ *</label>
+        <input id="fd-contact" type="text" placeholder="ชื่อผู้ติดต่อ">
+        <div class="f-err"></div>
+      </div>
+      <div class="f-field" data-f="phone">
+        <label for="fd-phone">โทรศัพท์</label>
+        <input id="fd-phone" type="tel" placeholder="08x-xxx-xxxx">
+        <div class="f-err"></div>
+      </div>
+    </div>
+    <div class="m-2">
+      <div class="f-field" data-f="value">
+        <label for="fd-value">มูลค่าดีล (บาท) *</label>
+        <input id="fd-value" type="number" min="0" step="1000" placeholder="250000">
+        <div class="f-err"></div>
+      </div>
+      <div class="f-field" data-f="closeDate">
+        <label for="fd-close">ปิดคาดการณ์</label>
+        <input id="fd-close" type="date">
+        <div class="f-err"></div>
+      </div>
+    </div>
+    <div class="m-2">
+      <div class="f-field" data-f="stage">
+        <label for="fd-stage">ขั้นตอนเริ่มต้น</label>
+        <select id="fd-stage"></select>
+        <div class="f-err"></div>
+      </div>
+      <div class="f-field" data-f="tag">
+        <label for="fd-tag">แท็ก</label>
+        <select id="fd-tag"></select>
+        <div class="f-err"></div>
+      </div>
+    </div>
+    <div class="m-actions">
+      <button type="button" class="btn ghost" id="m-cancel">ยกเลิก</button>
+      <button type="submit" class="btn primary">บันทึกดีล</button>
+    </div>
+  </form>
+</div>
+
+<div id="toasts" aria-live="polite"></div>
+<a class="back-home" href="../">หน้ารวมตัวอย่าง</a>
+
+<script>
+(function(){
+'use strict';
+/* ================= helpers ================= */
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function pad(n){return String(n).padStart(2,'0')}
+function dISO(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+function daysFromNow(n){var d=new Date();d.setDate(d.getDate()+n);return dISO(d)}
+function todayISO(){return dISO(new Date())}
+function tsDaysAgo(n,h){var d=new Date();d.setDate(d.getDate()-n);d.setHours(h||10,20,0,0);return d.getTime()}
+function thisMonthDay(day){var n=new Date();var dd=Math.min(day,Math.max(1,n.getDate()));return dISO(new Date(n.getFullYear(),n.getMonth(),dd))}
+function fmtMoney(n){return '฿'+Number(n||0).toLocaleString('th-TH')}
+function fmtShort(n){n=Number(n||0);if(n>=1000000){var v=(n/1000000);return '฿'+(v%1===0?v:v.toFixed(1))+' ล้าน'}return '฿'+n.toLocaleString('th-TH')}
+function fmtDate(iso){if(!iso)return '-';var d=new Date(iso+'T00:00:00');return d.toLocaleDateString('th-TH',{day:'numeric',month:'short',year:'numeric'})}
+function fmtDateTime(ts){var d=new Date(ts);return d.toLocaleDateString('th-TH',{day:'numeric',month:'short'})+' · '+d.toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'})}
+
+var IC={
+ l:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 6-6 6 6 6"/></svg>',
+ r:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 6 6 6-6 6"/></svg>',
+ cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+ plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+ brief:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>',
+ coin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v10M15 9.6c-.7-1-1.8-1.6-3-1.6-1.7 0-3 .9-3 2.2 0 3 6 1.5 6 4.3 0 1.3-1.3 2.3-3 2.3-1.2 0-2.3-.6-3-1.6"/></svg>',
+ checkc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5.5"/></svg>',
+ pct:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M19 5 5 19"/><circle cx="7.2" cy="7.2" r="2.5"/><circle cx="16.8" cy="16.8" r="2.5"/></svg>',
+ clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>',
+ note:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>',
+ xc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg>',
+ trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9.5 7V5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2M6.5 7l1 13h9l1-13"/><path d="M10 11v6M14 11v6"/></svg>',
+ undo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>'
+};
+
+/* ================= data ================= */
+var LS_KEY='zx-crm-v1';
+var STAGES=[
+ {id:'lead',name:'Lead ใหม่',color:'#5b5bd6'},
+ {id:'contacted',name:'ติดต่อแล้ว',color:'#0284c7'},
+ {id:'present',name:'นำเสนอ',color:'#d97706'},
+ {id:'negotiate',name:'เจรจา',color:'#7c3aed'},
+ {id:'won',name:'ปิดการขาย',color:'#16a34a'},
+ {id:'lost',name:'เสียดีล',color:'#dc2626'}
+];
+var KANBAN=['lead','contacted','present','negotiate','won'];
+var TAGS=['Enterprise','SME','ต่ออายุ','แนะนำมา','อีเวนต์'];
+function stageObj(id){for(var i=0;i<STAGES.length;i++){if(STAGES[i].id===id)return STAGES[i]}return STAGES[0]}
+function stageIdx(id){for(var i=0;i<STAGES.length;i++){if(STAGES[i].id===id)return i}return 0}
+
+function seedDeal(id,company,contact,phone,value,stage,tag,closeIn,acts,wonDay,lostAgo){
+ var d={id:id,company:company,contact:contact,phone:phone,value:value,stage:stage,tag:tag,
+   closeDate:daysFromNow(closeIn),createdAt:tsDaysAgo(closeIn+14,9),activities:acts||[],wonAt:null,lostAt:null};
+ if(stage==='won'){d.wonAt=thisMonthDay(wonDay||4);d.closeDate=d.wonAt}
+ if(stage==='lost'){d.lostAt=daysFromNow(-(lostAgo||6))}
+ return d;
+}
+function A(t,d,h){return {ts:tsDaysAgo(d,h),text:t}}
+function seed(){
+ var deals=[
+  seedDeal('D-1001','บมจ.ธนชาติฟู้ดส์','คุณวิภาวี เจริญกิจ','02-345-6789',1850000,'negotiate','Enterprise',12,
+   [A('รับ Lead จากงาน Thailand Food Tech Expo',19,10),A('เดโมระบบ ERP รอบแรกกับทีมไอที',9,14),A('ส่งใบเสนอราคาฉบับแก้ไข รอบอร์ดพิจารณา',3,11)]),
+  seedDeal('D-1002','บจก.สยามลอจิสติกส์','คุณอนุชา พงษ์พัฒน์','081-234-5678',420000,'present','SME',18,
+   [A('โทรคุยครั้งแรก สนใจระบบ WMS',12,13),A('นำเสนอผ่าน Zoom ผู้บริหารเข้าร่วม 4 ท่าน',5,10)]),
+  seedDeal('D-1003','บจก.กรุงเทพเมดิคอล','คุณนภัสสร ใจดี','089-555-1234',680000,'lead','แนะนำมา',25,
+   [A('ลูกค้าเก่าแนะนำมา ฝากนามบัตรไว้',2,15)]),
+  seedDeal('D-1004','บมจ.ไทยพาณิชย์รีเทล','คุณศักดิ์ชัย วงศ์สุวรรณ','02-789-4561',2400000,'negotiate','Enterprise',9,
+   [A('ติดต่อจากหน้าเว็บไซต์',22,9),A('เข้าพบทีมจัดซื้อที่สำนักงานใหญ่',11,14),A('เจรจาส่วนลดปีแรก ขอ PO ภายในเดือนนี้',2,16)]),
+  seedDeal('D-1005','บจก.อีสานอโกรเทค','คุณมาลี แก้วมณี','087-321-6549',260000,'contacted','SME',30,
+   [A('ได้นามบัตรจากงานอีเวนต์ขอนแก่น',8,11),A('โทรติดตาม นัดส่งเอกสารแนะนำบริษัท',4,10)]),
+  seedDeal('D-1006','บจก.เชียงใหม่ทัวร์แอนด์ทราเวล','คุณธีรพงษ์ ชื่นบาน','086-777-8899',150000,'lead','อีเวนต์',35,
+   [A('ลงทะเบียนดาวน์โหลด e-book จากเว็บ',1,13)]),
+  seedDeal('D-1007','บมจ.พัฒนาอสังหาฯ กรุ๊ป','คุณปิยะ รุ่งเรือง','02-555-8899',1200000,'present','Enterprise',21,
+   [A('Inbound จาก Google Ads',15,10),A('เดโมระบบ CRM หน้างาน ลูกค้าประทับใจ',6,15)]),
+  seedDeal('D-1008','บจก.ภูเก็ตซีฟู้ด เอ็กซ์พอร์ต','คุณสุรชัย ทองแท้','076-222-345',340000,'contacted','ต่ออายุ',27,
+   [A('ลูกค้าเก่าต่อสัญญาปีที่ 3',7,9),A('เสนอแพ็กเกจอัปเกรดรายปี',3,14)]),
+  seedDeal('D-1009','บจก.นิวเจน อีดูเคชั่น','คุณชนากานต์ พูนสุข','092-888-7766',480000,'won','SME',0,
+   [A('เดโมระบบสำเร็จ',16,10),A('เซ็นสัญญา 12 เดือน เริ่มออนบอร์ด',4,11)],4),
+  seedDeal('D-1010','บจก.เมทัลเทค อินดัสทรีส์','คุณประเสริฐ บุญมาก','038-111-222',720000,'won','ต่ออายุ',0,
+   [A('ต่อสัญญาปีที่ 2 พร้อมเพิ่มโมดูล QC',9,10)],11),
+  seedDeal('D-1011','บจก.บางนาแพคกิ้ง','คุณอรวรรณ ศรีสุข','02-111-9876',390000,'lost','SME',0,
+   [A('เสนอราคาแล้ว ลูกค้าเลือกเจ้าอื่นเพราะงบจำกัด',6,15)],null,6),
+  seedDeal('D-1012','บจก.โมเดิร์นเฟอร์นิเจอร์','คุณกิตติพงษ์ อินทร์แก้ว','081-999-4433',560000,'lead','แนะนำมา',40,
+   [A('เพื่อนร่วมงานเก่าแนะนำมา รอโทรครั้งแรก',1,9)])
+ ];
+ return {deals:deals,seq:1013};
+}
+
+var state=null;
+function load(){
+ try{var raw=localStorage.getItem(LS_KEY);if(raw){var p=JSON.parse(raw);if(p&&p.deals){state=p;return}}}catch(e){}
+ state=seed();save();
+}
+function save(){try{localStorage.setItem(LS_KEY,JSON.stringify(state))}catch(e){}}
+function findDeal(id){for(var i=0;i<state.deals.length;i++){if(state.deals[i].id===id)return state.deals[i]}return null}
+function pushAct(d,text){d.activities.push({ts:Date.now(),text:text})}
+
+/* ================= toast ================= */
+function toast(msg,type){
+ var t=document.createElement('div');
+ t.className='toast '+(type||'ok');
+ t.innerHTML='<span class="tk"></span><span>'+esc(msg)+'</span>';
+ $('#toasts').appendChild(t);
+ setTimeout(function(){t.style.opacity='0';t.style.transform='translateY(6px)';setTimeout(function(){t.remove()},250)},2800);
+}
+
+/* ================= mutations ================= */
+function setStage(d,ns,quiet){
+ var os=d.stage;if(os===ns)return;
+ d.stage=ns;
+ if(ns==='won'){d.wonAt=todayISO();d.lostAt=null}
+ else if(ns==='lost'){d.lostAt=todayISO();d.wonAt=null}
+ else{d.wonAt=null;d.lostAt=null}
+ pushAct(d,'ย้ายดีลจาก "'+stageObj(os).name+'" ไป "'+stageObj(ns).name+'"');
+ save();renderAll();
+ if(!quiet)toast('ย้าย "'+d.company+'" ไป "'+stageObj(ns).name+'" แล้ว');
+}
+function deleteDeal(d){
+ if(!confirm('ลบดีล "'+d.company+'" ออกจากระบบ?'))return;
+ state.deals=state.deals.filter(function(x){return x.id!==d.id});
+ save();closeDrawer();renderAll();
+ toast('ลบดีลเรียบร้อยแล้ว','warn');
+}
+
+/* ================= render: kanban ================= */
+function colDeals(sid){
+ return state.deals.filter(function(d){return sid==='won'?(d.stage==='won'||d.stage==='lost'):d.stage===sid});
+}
+function cardHTML(d){
+ var st=stageObj(d.stage);
+ var idx=KANBAN.indexOf(d.stage);
+ var arrows='';
+ if(idx>=0){
+  arrows='<div class="card-mv">'
+   +(idx>0?'<button class="mv" data-mv="-1" data-id="'+d.id+'" aria-label="ย้ายไปขั้นก่อนหน้า">'+IC.l+'</button>':'<span></span>')
+   +'<button class="mv" data-mv="1" data-id="'+d.id+'" aria-label="ย้ายไปขั้นถัดไป">'+IC.r+'</button></div>';
+ }
+ return '<article class="card'+(d.stage==='lost'?' lost':'')+'" draggable="true" tabindex="0" data-id="'+d.id+'" style="--sc:'+st.color+'" aria-label="'+esc(d.company)+'">'
+  +'<div class="card-co">'+esc(d.company)+'</div>'
+  +'<div class="card-ct">'+esc(d.contact)+'</div>'
+  +'<div class="card-row"><span class="card-val mono">'+fmtMoney(d.value)+'</span><span class="chip">'+esc(d.tag)+'</span></div>'
+  +'<div class="card-foot"><span class="card-date">'+IC.cal+fmtDate(d.closeDate)+'</span></div>'
+  +arrows+'</article>';
+}
+function renderKanban(){
+ var html='';
+ KANBAN.forEach(function(sid){
+  var st=stageObj(sid);
+  var list=colDeals(sid);
+  var sum=list.reduce(function(s,d){return d.stage==='lost'?s:s+d.value},0);
+  html+='<div class="kb-col" data-stage="'+sid+'">'
+   +'<div class="kb-head"><span class="kb-dot" style="--c:'+st.color+';background:'+st.color+'"></span><b>'+st.name+'</b>'
+   +(sid!=='won'?'<button class="kb-add" data-add="'+sid+'" aria-label="เพิ่มดีลในขั้น '+st.name+'">'+IC.plus+'</button>':'')
+   +'<div class="kb-meta"><div class="n">'+list.length+' ดีล</div><div class="v">'+fmtShort(sum)+'</div></div></div>'
+   +'<div class="kb-body">'
+   +(list.length?list.map(cardHTML).join(''):'<div class="kb-empty">ยังไม่มีดีล — ลากการ์ดมาวางที่นี่</div>')
+   +'</div></div>';
+ });
+ $('#kanban').innerHTML=html;
+
+ /* bind cards */
+ $$('#kanban .card').forEach(function(c){
+  var id=c.getAttribute('data-id');
+  c.addEventListener('dragstart',function(e){
+   e.dataTransfer.setData('text/plain',id);
+   e.dataTransfer.effectAllowed='move';
+   c.classList.add('dragging');
+  });
+  c.addEventListener('dragend',function(){c.classList.remove('dragging')});
+  c.addEventListener('click',function(e){if(e.target.closest('.mv'))return;openDrawer(id)});
+  c.addEventListener('keydown',function(e){if(e.key==='Enter')openDrawer(id)});
+ });
+ $$('#kanban .mv').forEach(function(b){
+  b.addEventListener('click',function(e){
+   e.stopPropagation();
+   var d=findDeal(b.getAttribute('data-id'));
+   var idx=KANBAN.indexOf(d.stage);
+   var ni=idx+Number(b.getAttribute('data-mv'));
+   if(ni>=0&&ni<KANBAN.length)setStage(d,KANBAN[ni]);
+  });
+ });
+ $$('#kanban .kb-add').forEach(function(b){
+  b.addEventListener('click',function(){openModal(b.getAttribute('data-add'))});
+ });
+ /* drop zones */
+ $$('#kanban .kb-col').forEach(function(col){
+  col.addEventListener('dragover',function(e){e.preventDefault();e.dataTransfer.dropEffect='move';col.classList.add('over')});
+  col.addEventListener('dragleave',function(e){if(!col.contains(e.relatedTarget))col.classList.remove('over')});
+  col.addEventListener('drop',function(e){
+   e.preventDefault();col.classList.remove('over');
+   var id=e.dataTransfer.getData('text/plain');
+   var d=findDeal(id);
+   if(d&&d.stage!==col.getAttribute('data-stage'))setStage(d,col.getAttribute('data-stage'));
+  });
+ });
+
+ /* summary + nav badges */
+ var open=state.deals.filter(function(d){return d.stage!=='won'&&d.stage!=='lost'});
+ var sum=open.reduce(function(s,d){return s+d.value},0);
+ $('#pipe-summary').textContent='เปิดอยู่ '+open.length+' ดีล · มูลค่ารวม '+fmtShort(sum)+' — ลากการ์ดข้ามคอลัมน์เพื่ออัปเดตสถานะ';
+ $('#nb-pipe').textContent=open.length;
+ $('#nb-cust').textContent=state.deals.length;
+}
+
+/* ================= render: table ================= */
+var sortKey='company',sortDir=1;
+function chipStage(sid){var st=stageObj(sid);return '<span class="st-chip" style="--c:'+st.color+'">'+st.name+'</span>'}
+function renderTable(){
+ var q=($('#q').value||'').toLowerCase().trim();
+ var fs=$('#f-stage').value;
+ var list=state.deals.filter(function(d){
+  if(fs&&d.stage!==fs)return false;
+  if(q&&(d.company.toLowerCase().indexOf(q)<0&&d.contact.toLowerCase().indexOf(q)<0))return false;
+  return true;
+ });
+ list.sort(function(a,b){
+  var va,vb;
+  if(sortKey==='value'){va=a.value;vb=b.value}
+  else if(sortKey==='stage'){va=stageIdx(a.stage);vb=stageIdx(b.stage)}
+  else if(sortKey==='closeDate'){va=a.closeDate;vb=b.closeDate}
+  else{va=a[sortKey]||'';vb=b[sortKey]||''}
+  var r=(typeof va==='number')?(va-vb):String(va).localeCompare(String(vb),'th');
+  return r*sortDir;
+ });
+ var html=list.map(function(d){
+  return '<tr data-id="'+d.id+'" tabindex="0">'
+   +'<td><div class="t-co">'+esc(d.company)+'</div><div class="t-id mono">'+d.id+'</div></td>'
+   +'<td>'+esc(d.contact)+'<div class="t-ph mono">'+esc(d.phone||'-')+'</div></td>'
+   +'<td class="mono t-val">'+fmtMoney(d.value)+'</td>'
+   +'<td>'+chipStage(d.stage)+'</td>'
+   +'<td class="mono">'+fmtDate(d.closeDate)+'</td>'
+   +'<td><span class="chip">'+esc(d.tag)+'</span></td></tr>';
+ }).join('');
+ $('#tbody').innerHTML=html||'<tr><td colspan="6" class="t-empty">ไม่พบข้อมูลที่ตรงกับเงื่อนไข</td></tr>';
+ $('#t-count').textContent='แสดง '+list.length+' จาก '+state.deals.length+' ดีล';
+ $$('#tbody tr[data-id]').forEach(function(tr){
+  tr.addEventListener('click',function(){openDrawer(tr.getAttribute('data-id'))});
+  tr.addEventListener('keydown',function(e){if(e.key==='Enter')openDrawer(tr.getAttribute('data-id'))});
+ });
+ $$('th[data-sort]').forEach(function(th){
+  var arr=th.querySelector('.arr');
+  arr.textContent=(th.getAttribute('data-sort')===sortKey)?(sortDir>0?'↑':'↓'):'';
+ });
+}
+
+/* ================= render: dashboard ================= */
+function renderDashboard(){
+ var deals=state.deals;
+ var open=deals.filter(function(d){return d.stage!=='won'&&d.stage!=='lost'});
+ var won=deals.filter(function(d){return d.stage==='won'});
+ var lost=deals.filter(function(d){return d.stage==='lost'});
+ var sumOpen=open.reduce(function(s,d){return s+d.value},0);
+ var ym=todayISO().slice(0,7);
+ var wonM=won.filter(function(d){return d.wonAt&&d.wonAt.slice(0,7)===ym});
+ var wonMSum=wonM.reduce(function(s,d){return s+d.value},0);
+ var closed=won.length+lost.length;
+ var rate=closed?Math.round(won.length/closed*100):null;
+ var kpis=[
+  {ic:IC.brief,label:'ดีลเปิดอยู่',num:String(open.length),sub:'มูลค่า '+fmtShort(sumOpen)},
+  {ic:IC.coin,label:'มูลค่าใน Pipeline',num:fmtShort(sumOpen),sub:'เฉลี่ย '+(open.length?fmtShort(Math.round(sumOpen/open.length)):'฿0')+' ต่อดีล'},
+  {ic:IC.checkc,label:'ปิดได้เดือนนี้',num:String(wonM.length)+' ดีล',sub:fmtShort(wonMSum),good:true},
+  {ic:IC.pct,label:'Win Rate',num:rate===null?'—':rate+'%',sub:'จากดีลที่ตัดสิน '+closed+' ดีล'}
+ ];
+ $('#kpis').innerHTML=kpis.map(function(k){
+  return '<div class="kpi'+(k.good?' good':'')+'"><div class="kpi-ic">'+k.ic+'</div><div><small>'+k.label+'</small><div class="num">'+k.num+'</div><div class="sub">'+k.sub+'</div></div></div>';
+ }).join('');
+
+ /* funnel */
+ var counts=['lead','contacted','present','negotiate','won'].map(function(sid){
+  return {name:stageObj(sid).name,color:stageObj(sid).color,n:deals.filter(function(d){return d.stage===sid}).length};
+ });
+ var max=1;counts.forEach(function(c){if(c.n>max)max=c.n});
+ var rows='';
+ counts.forEach(function(c,i){
+  var y=i*46+10;
+  var w=Math.max(c.n?14:4,c.n/max*360);
+  rows+='<text class="f-lab" x="0" y="'+(y+16)+'">'+c.name+'</text>'
+   +'<rect x="100" y="'+y+'" width="'+w+'" height="24" rx="6" fill="'+c.color+'" opacity="'+(0.92-i*0.06)+'"></rect>'
+   +'<text class="f-val" x="'+(100+w+10)+'" y="'+(y+16)+'">'+c.n+'</text>';
+ });
+ $('#funnel').innerHTML=rows;
+ $('#funnel-note').textContent='เสียดีลสะสม '+lost.length+' ดีล · ปิดการขายแล้ว '+won.length+' ดีล';
+
+ /* expiring */
+ var exp=open.slice().sort(function(a,b){return a.closeDate<b.closeDate?-1:1}).slice(0,5);
+ var today=new Date();today.setHours(0,0,0,0);
+ $('#expiring').innerHTML=exp.length?exp.map(function(d){
+  var dd=new Date(d.closeDate+'T00:00:00');
+  var diff=Math.round((dd-today)/86400000);
+  var cls='soon',txt='เหลือ '+diff+' วัน';
+  if(diff<0){cls='over';txt='เกินกำหนด '+Math.abs(diff)+' วัน'}
+  else if(diff<=7){cls='';txt='เหลือ '+diff+' วัน'}
+  return '<div class="exp-row" data-id="'+d.id+'" tabindex="0"><div class="exp-co"><b>'+esc(d.company)+'</b><small>'+stageObj(d.stage).name+' · ปิด '+fmtDate(d.closeDate)+'</small></div>'
+   +'<span class="exp-val">'+fmtShort(d.value)+'</span><span class="exp-badge '+cls+'">'+txt+'</span></div>';
+ }).join(''):'<div class="t-empty">ไม่มีดีลเปิดอยู่</div>';
+ $$('#expiring .exp-row').forEach(function(r){
+  r.addEventListener('click',function(){openDrawer(r.getAttribute('data-id'))});
+  r.addEventListener('keydown',function(e){if(e.key==='Enter')openDrawer(r.getAttribute('data-id'))});
+ });
+}
+
+function renderAll(){renderKanban();renderTable();renderDashboard()}
+
+/* ================= drawer ================= */
+var drawerId=null;
+function openDrawer(id){
+ var d=findDeal(id);if(!d)return;
+ drawerId=id;
+ var st=stageObj(d.stage);
+ $('#dr-title').textContent=d.company;
+ $('#dr-sub').innerHTML='<span class="st-chip" style="--c:'+st.color+'">'+st.name+'</span> &nbsp;<span class="chip">'+esc(d.tag)+'</span> &nbsp;<span class="mono" style="color:#9a9cba;font-size:11.5px">'+d.id+'</span>';
+ var acts=d.activities.slice().sort(function(a,b){return b.ts-a.ts});
+ var stageOpts=STAGES.map(function(s){return '<option value="'+s.id+'"'+(s.id===d.stage?' selected':'')+'>'+s.name+'</option>'}).join('');
+ $('#dr-body').innerHTML=
+  '<div class="dr-grid">'
+  +'<div class="dr-field"><small>ผู้ติดต่อ</small><span>'+esc(d.contact)+'</span></div>'
+  +'<div class="dr-field"><small>โทรศัพท์</small><span class="mono">'+esc(d.phone||'-')+'</span></div>'
+  +'<div class="dr-field"><small>มูลค่าดีล</small><span class="mono" style="color:'+(d.stage==='lost'?'var(--red)':'var(--accent-d)')+'">'+fmtMoney(d.value)+'</span></div>'
+  +'<div class="dr-field"><small>ปิดคาดการณ์</small><span class="mono">'+fmtDate(d.closeDate)+'</span></div>'
+  +'</div>'
+  +'<div class="f-field"><label for="dr-stage">เปลี่ยนขั้นตอน</label><select id="dr-stage">'+stageOpts+'</select></div>'
+  +'<div class="dr-sec">'+IC.note+'บันทึกกิจกรรม ('+acts.length+')</div>'
+  +'<div class="tl">'+(acts.length?acts.map(function(a){return '<div class="tl-item"><p>'+esc(a.text)+'</p><time>'+fmtDateTime(a.ts)+'</time></div>'}).join(''):'<div class="tl-item"><p style="color:var(--muted)">ยังไม่มีกิจกรรม</p></div>')+'</div>'
+  +'<div class="note-box"><textarea id="dr-note" placeholder="พิมพ์โน้ต เช่น ผลการโทร นัดหมายครั้งถัดไป…"></textarea>'
+  +'<button class="btn primary sm" id="dr-addnote" style="align-self:flex-end">บันทึกโน้ต</button></div>';
+ var foot='';
+ if(d.stage==='won'||d.stage==='lost'){
+  foot='<button class="btn ghost" id="dr-reopen">'+IC.undo+' เปิดดีลอีกครั้ง</button>'
+      +'<button class="btn red" id="dr-del">'+IC.trash+' ลบดีล</button>';
+ }else{
+  foot='<button class="btn green" id="dr-won">'+IC.checkc+' ปิดขายได้</button>'
+      +'<button class="btn red" id="dr-lost">'+IC.xc+' เสียดีล</button>'
+      +'<button class="btn ghost" id="dr-del" style="flex:0 0 auto;min-width:52px" aria-label="ลบดีล">'+IC.trash+'</button>';
+ }
+ $('#dr-foot').innerHTML=foot;
+ $('#drOv').classList.add('show');
+ $('#drawer').classList.add('show');
+
+ $('#dr-stage').addEventListener('change',function(){
+  setStage(d,this.value);
+  openDrawer(d.id);
+ });
+ $('#dr-addnote').addEventListener('click',function(){
+  var t=$('#dr-note').value.trim();
+  if(!t){toast('กรุณาพิมพ์โน้ตก่อนบันทึก','warn');return}
+  pushAct(d,t);save();renderAll();openDrawer(d.id);
+  toast('บันทึกโน้ตแล้ว');
+ });
+ var bw=$('#dr-won');if(bw)bw.addEventListener('click',function(){setStage(d,'won');openDrawer(d.id);toast('ยินดีด้วย ปิดการขาย "'+d.company+'" สำเร็จ')});
+ var bl=$('#dr-lost');if(bl)bl.addEventListener('click',function(){setStage(d,'lost');openDrawer(d.id)});
+ var br=$('#dr-reopen');if(br)br.addEventListener('click',function(){setStage(d,'lead');openDrawer(d.id)});
+ var bd=$('#dr-del');if(bd)bd.addEventListener('click',function(){deleteDeal(d)});
+}
+function closeDrawer(){
+ drawerId=null;
+ $('#drOv').classList.remove('show');
+ $('#drawer').classList.remove('show');
+}
+
+/* ================= modal ================= */
+function openModal(stageId){
+ $('#form-deal').reset();
+ $$('#form-deal .f-field').forEach(function(f){f.classList.remove('bad');f.querySelector('.f-err').textContent=''});
+ $('#fd-stage').value=stageId||'lead';
+ $('#fd-close').value=daysFromNow(30);
+ $('#modal').classList.add('show');
+ setTimeout(function(){$('#fd-company').focus()},80);
+}
+function closeModal(){$('#modal').classList.remove('show')}
+function setErr(name,msg){
+ var f=$('#form-deal .f-field[data-f="'+name+'"]');
+ if(msg){f.classList.add('bad');f.querySelector('.f-err').textContent=msg}
+ else{f.classList.remove('bad');f.querySelector('.f-err').textContent=''}
+}
+function submitDeal(e){
+ e.preventDefault();
+ var company=$('#fd-company').value.trim();
+ var contact=$('#fd-contact').value.trim();
+ var phone=$('#fd-phone').value.trim();
+ var value=Number($('#fd-value').value);
+ var closeDate=$('#fd-close').value||daysFromNow(30);
+ var stage=$('#fd-stage').value;
+ var tag=$('#fd-tag').value;
+ var ok=true;
+ if(!company){setErr('company','กรุณากรอกชื่อบริษัท');ok=false}else setErr('company');
+ if(!contact){setErr('contact','กรุณากรอกชื่อผู้ติดต่อ');ok=false}else setErr('contact');
+ if(!value||value<=0){setErr('value','กรุณากรอกมูลค่ามากกว่า 0');ok=false}else setErr('value');
+ if(!ok){toast('กรุณากรอกข้อมูลที่จำเป็นให้ครบ','warn');return}
+ var d={id:'D-'+(state.seq++),company:company,contact:contact,phone:phone,value:value,stage:stage,tag:tag,
+  closeDate:closeDate,createdAt:Date.now(),activities:[{ts:Date.now(),text:'สร้างดีลใหม่เข้าสู่ Pipeline'}],wonAt:null,lostAt:null};
+ state.deals.push(d);
+ save();closeModal();renderAll();
+ toast('เพิ่มดีล "'+company+'" เรียบร้อยแล้ว');
+}
+
+/* ================= navigation ================= */
+var TITLES={pipeline:'Pipeline การขาย',customers:'รายชื่อลูกค้า',dashboard:'ภาพรวมธุรกิจ'};
+function showPage(p){
+ $$('.page').forEach(function(s){s.classList.toggle('active',s.id==='page-'+p)});
+ $$('.nav-item').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-page')===p)});
+ $('#tb-title').textContent=TITLES[p]||'';
+ document.body.classList.remove('sb-open');
+ if(p==='dashboard')renderDashboard();
+}
+
+/* ================= init ================= */
+function init(){
+ load();
+ /* populate selects */
+ $('#fd-stage').innerHTML=KANBAN.slice(0,4).map(function(s){return '<option value="'+s+'">'+stageObj(s).name+'</option>'}).join('');
+ $('#fd-tag').innerHTML=TAGS.map(function(t){return '<option>'+t+'</option>'}).join('');
+ $('#f-stage').innerHTML='<option value="">ทุกขั้นตอน</option>'+STAGES.map(function(s){return '<option value="'+s.id+'">'+s.name+'</option>'}).join('');
+ $('#tb-date').textContent=new Date().toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+ /* login */
+ $('#form-login').addEventListener('submit',function(e){
+  e.preventDefault();
+  $('#view-login').hidden=true;
+  $('#view-app').hidden=false;
+  renderAll();
+  toast('ยินดีต้อนรับ คุณสดใส มั่นคง');
+ });
+ $('#btn-logout').addEventListener('click',function(){
+  closeDrawer();closeModal();
+  $('#view-app').hidden=true;
+  $('#view-login').hidden=false;
+ });
+
+ /* nav */
+ $$('.nav-item').forEach(function(b){b.addEventListener('click',function(){showPage(b.getAttribute('data-page'))})});
+ $('#btn-hamb').addEventListener('click',function(){document.body.classList.toggle('sb-open')});
+ $('#sbOv').addEventListener('click',function(){document.body.classList.remove('sb-open')});
+
+ /* reset */
+ $('#btn-reset').addEventListener('click',function(){
+  if(confirm('ล้างข้อมูลตัวอย่างทั้งหมด แล้วเริ่มใหม่?')){
+   try{localStorage.removeItem(LS_KEY)}catch(e){}
+   location.reload();
+  }
+ });
+
+ /* table toolbar */
+ $('#q').addEventListener('input',renderTable);
+ $('#f-stage').addEventListener('change',renderTable);
+ $$('th[data-sort]').forEach(function(th){
+  th.addEventListener('click',function(){
+   var k=th.getAttribute('data-sort');
+   if(sortKey===k){sortDir*=-1}else{sortKey=k;sortDir=1}
+   renderTable();
+  });
+ });
+
+ /* modal */
+ $('#btn-add').addEventListener('click',function(){openModal('lead')});
+ $('#m-cancel').addEventListener('click',closeModal);
+ $('#mBg').addEventListener('click',closeModal);
+ $('#form-deal').addEventListener('submit',submitDeal);
+
+ /* drawer close */
+ $('#dr-close').addEventListener('click',closeDrawer);
+ $('#drOv').addEventListener('click',closeDrawer);
+ document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeDrawer();closeModal();document.body.classList.remove('sb-open')}
+ });
+}
+document.addEventListener('DOMContentLoaded',init);
+})();
+</script>
+</body>
+</html>

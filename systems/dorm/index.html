@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ห้องดี — ระบบจัดการหอพักสุขใจ</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#b45309; --accent-d:#92400e; --accent-dd:#7c2d12;
+  --bg:#faf7f2; --card:#ffffff; --ink:#292524; --muted:#78716c; --line:#ece3d6;
+  --side:#211609; --ok:#15803d; --ok-bg:#e9f8ef; --bad:#b91c1c; --bad-bg:#fdeeee;
+  --warn:#92400e; --warn-bg:#fdf1dd; --radius:16px;
+  --shadow:0 2px 10px rgba(90,55,15,.06),0 12px 32px rgba(90,55,15,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'IBM Plex Sans Thai',system-ui,-apple-system,sans-serif;font-size:15.5px;line-height:1.55;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+.mono{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
+button{font:inherit;cursor:pointer;border:0;background:none;min-height:44px;color:inherit}
+input,select,textarea{font:inherit;min-height:44px}
+:focus-visible{outline:3px solid rgba(180,83,9,.5);outline-offset:2px;border-radius:10px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+h1,h2,h3{line-height:1.25}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+[hidden]{display:none!important}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;padding:0 18px;min-height:44px;font-weight:600;background:var(--accent);color:#fff;transition:background .15s,transform .15s,box-shadow .15s;border:1px solid transparent;white-space:nowrap}
+.btn:hover{background:var(--accent-d)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:#fff;color:var(--accent-dd);border-color:#e3d4bf}
+.btn.ghost:hover{background:#fbf3e7}
+.btn.danger{background:#dc2626}
+.btn.danger:hover{background:#b91c1c}
+.btn.soft{background:#f7ecdd;color:var(--accent-dd)}
+.btn.soft:hover{background:#f3e2c9}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn svg{flex:none}
+
+/* ---------- login ---------- */
+#loginView{min-height:100vh;display:grid;place-items:center;padding:20px;background:
+  radial-gradient(900px 520px at 12% -8%,rgba(180,83,9,.42),transparent 60%),
+  radial-gradient(760px 520px at 112% 112%,rgba(120,53,15,.55),transparent 58%),
+  linear-gradient(158deg,#191008 0%,#2b1a0c 52%,#170e06 100%)}
+.login-card{width:min(430px,94vw);background:#fffbf5;border-radius:24px;padding:36px 34px 28px;box-shadow:0 40px 90px rgba(0,0,0,.5);animation:rise .4s ease}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.login-logo .mark{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent-dd));display:grid;place-items:center;color:#fff;box-shadow:0 10px 24px rgba(180,83,9,.4)}
+.login-title{font-size:24px;font-weight:600}
+.login-sub{color:var(--muted);font-size:14px;margin-bottom:22px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label{font-size:13.5px;font-weight:500;color:#57534e}
+.field input,.field select,.field textarea{border:1.5px solid #e5d9c6;border-radius:12px;padding:0 14px;background:#fff;color:var(--ink);width:100%}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
+.login-btn{width:100%;margin-top:6px}
+.demo-note{margin-top:16px;display:flex;gap:8px;align-items:flex-start;background:var(--warn-bg);border:1px solid #f0dcbc;color:var(--warn);font-size:13px;border-radius:12px;padding:10px 12px}
+.demo-note svg{flex:none;margin-top:2px}
+
+/* ---------- app shell ---------- */
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:240px;background:linear-gradient(180deg,#241708,#1a0f05);color:#e9ddcb;display:flex;flex-direction:column;z-index:620;padding:20px 14px 14px;transition:transform .25s ease}
+.side-brand{display:flex;align-items:center;gap:11px;padding:2px 8px 18px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:14px}
+.side-brand .mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-dd));display:grid;place-items:center;color:#fff;flex:none}
+.side-brand .t1{font-weight:600;color:#fff;font-size:16.5px}
+.side-brand .t2{font-size:12px;color:#b7a58c}
+.nav-label{font-size:11.5px;letter-spacing:.08em;color:#8f7c62;padding:6px 12px 6px;text-transform:uppercase}
+.nav-btn{display:flex;align-items:center;gap:12px;width:100%;padding:0 13px;min-height:46px;border-radius:12px;font-weight:500;text-align:left;color:#d9c9b2;margin-bottom:4px;transition:background .15s,color .15s}
+.nav-btn svg{flex:none;opacity:.85}
+.nav-btn:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent-d));color:#fff;box-shadow:0 8px 20px rgba(180,83,9,.35)}
+.side-user{margin-top:auto;border-top:1px solid rgba(255,255,255,.08);padding-top:14px;display:flex;flex-direction:column;gap:10px}
+.side-user .who{display:flex;align-items:center;gap:10px;padding:0 8px}
+.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#d97706,#92400e);color:#fff;display:grid;place-items:center;font-weight:600;flex:none;font-size:15px}
+.logout-btn{display:flex;align-items:center;gap:10px;width:100%;padding:0 13px;min-height:44px;border-radius:12px;color:#e8b9a0;font-weight:500;text-align:left}
+.logout-btn:hover{background:rgba(220,38,38,.16);color:#ffb4a8}
+#sideOverlay{position:fixed;inset:0;background:rgba(20,12,4,.5);z-index:610;display:none}
+#sideOverlay.on{display:block}
+
+.main{margin-left:240px;min-height:100vh;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:560;background:rgba(250,247,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 22px;display:flex;align-items:center;gap:14px}
+.hamburger{display:none;border-radius:10px;padding:6px}
+.topbar h1{font-size:19px;font-weight:600}
+.topbar .date{margin-left:auto;color:var(--muted);font-size:14px;display:flex;align-items:center;gap:8px}
+.content{padding:24px;width:100%;max-width:1180px;margin:0 auto;flex:1}
+@media(max-width:920px){
+  .sidebar{transform:translateX(-106%)}
+  .sidebar.open{transform:none;box-shadow:30px 0 80px rgba(0,0,0,.4)}
+  .main{margin-left:0}
+  .hamburger{display:grid;place-items:center}
+  .topbar h1{font-size:17px}
+  .topbar .date span{display:none}
+  .content{padding:16px 14px 90px}
+  .topbar .btn span.btn-txt{display:none}
+  .topbar .btn{padding:0 12px}
+}
+
+/* ---------- cards / stats ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.card-pad{padding:18px}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+@media(max-width:680px){.stat-row{grid-template-columns:1fr}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:center}
+.stat .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;flex:none}
+.stat .lb{font-size:13px;color:var(--muted)}
+.stat .vl{font-size:23px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.stat .vl small{font-size:13px;color:var(--muted);font-family:'IBM Plex Sans Thai',sans-serif;font-weight:400}
+.ic-green{background:var(--ok-bg);color:var(--ok)}
+.ic-red{background:var(--bad-bg);color:var(--bad)}
+.ic-brown{background:#faead6;color:var(--accent-d)}
+
+/* ---------- tables ---------- */
+.table-wrap{overflow-x:auto;border-radius:var(--radius)}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th{font-size:12.5px;color:var(--muted);text-align:left;padding:11px 14px;background:#fbf6ee;border-bottom:1px solid #f0e5d2;font-weight:600;white-space:nowrap}
+td{padding:10px 14px;border-bottom:1px solid #f3ebdd;vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fdf9f2}
+.empty{padding:34px 16px;text-align:center;color:var(--muted)}
+.num-in{width:92px;border:1.5px solid #e5d9c6;border-radius:10px;padding:0 10px;text-align:right;font-family:'JetBrains Mono',monospace;background:#fff}
+.num-in:focus{border-color:var(--accent)}
+.meter-prev{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:13.5px}
+.row-total{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent-dd);white-space:nowrap}
+.billed-tag{display:inline-flex;align-items:center;gap:6px;color:var(--ok);font-size:13.5px;font-weight:500}
+
+/* ---------- badges ---------- */
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.b-green{background:var(--ok-bg);color:var(--ok)}
+.b-red{background:var(--bad-bg);color:var(--bad)}
+.b-amber{background:#fdf1d7;color:#92400e}
+.b-brown{background:#f7e8d4;color:var(--accent-dd)}
+.b-gray{background:#f1efe9;color:#6b6259}
+
+/* ---------- room grid ---------- */
+.chip-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:500;box-shadow:var(--shadow)}
+.chip .sw{width:11px;height:11px;border-radius:4px}
+.floor-sec{margin-bottom:22px}
+.floor-head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.floor-head h2{font-size:16.5px;font-weight:600}
+.floor-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+@media(max-width:1100px){.floor-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:760px){.floor-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.floor-grid{grid-template-columns:repeat(2,1fr)}}
+.room-card{border-radius:15px;border:1.5px solid;padding:12px 12px 11px;text-align:left;min-height:102px;display:flex;flex-direction:column;gap:3px;background:#fff;transition:transform .15s,box-shadow .15s;box-shadow:var(--shadow)}
+.room-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(90,55,15,.14)}
+.room-card .no{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:19px}
+.room-card .nm{font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.room-card .rt{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:auto}
+.room-card.st-vacant{border-color:#bfe8cd;background:linear-gradient(180deg,#f4fcf6,#eefaf2)}
+.room-card.st-vacant .no{color:var(--ok)}
+.room-card.st-occupied{border-color:#eed7b8;background:linear-gradient(180deg,#fffdf9,#fdf6ea)}
+.room-card.st-occupied .no{color:var(--accent-dd)}
+.room-card.st-overdue{border-color:#f3c1c1;background:linear-gradient(180deg,#fffafa,#fdeeee)}
+.room-card.st-overdue .no{color:var(--bad)}
+
+/* ---------- drawer ---------- */
+#drawerWrap{position:fixed;inset:0;z-index:700;pointer-events:none}
+#drawerWrap.open{pointer-events:auto}
+.drawer-overlay{position:absolute;inset:0;background:rgba(26,15,5,.48);opacity:0;transition:opacity .22s}
+#drawerWrap.open .drawer-overlay{opacity:1}
+.drawer{position:absolute;top:0;right:0;height:100%;width:min(420px,94vw);background:#fdfaf5;transform:translateX(106%);transition:transform .26s cubic-bezier(.2,.7,.3,1);box-shadow:-24px 0 70px rgba(0,0,0,.25);display:flex;flex-direction:column}
+#drawerWrap.open .drawer{transform:none}
+.drawer-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;background:#fff}
+.drawer-head h2{font-size:19px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.drawer-body{padding:20px;overflow-y:auto;flex:1}
+.drawer-close{margin-left:auto;border-radius:10px;display:grid;place-items:center;width:44px}
+.drawer-close:hover{background:#f3ead9}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px dashed #eee2cf;font-size:14.5px}
+.kv:last-child{border-bottom:0}
+.kv .k{color:var(--muted)}
+.kv .v{font-weight:500;text-align:right}
+.tenant-hero{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:14px;box-shadow:var(--shadow)}
+.tenant-hero .avatar{width:50px;height:50px;font-size:19px}
+.drawer-actions{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.sec-t{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.04em;margin:16px 0 8px}
+
+/* ---------- modal ---------- */
+#modalRoot{position:fixed;inset:0;z-index:900;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(26,15,5,.55);overflow-y:auto}
+#modalRoot.open{display:flex}
+.modal-card{background:#fff;border-radius:20px;max-width:660px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 50px 110px rgba(0,0,0,.45);animation:rise .25s ease;margin:auto}
+.modal-pad{padding:22px}
+.modal-head{display:flex;align-items:center;gap:12px;padding:18px 22px 0}
+.modal-head h3{font-size:18px;font-weight:600}
+.modal-x{margin-left:auto;width:44px;border-radius:10px;display:grid;place-items:center}
+.modal-x:hover{background:#f3ead9}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;padding:16px 22px 22px;flex-wrap:wrap}
+
+/* ---------- invoice ---------- */
+.invoice-paper{background:#fff;border:1.5px dashed #d8c8ac;border-radius:6px;padding:28px 30px;margin:18px 22px 0;font-size:14.5px}
+.inv-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;border-bottom:2px solid var(--accent);padding-bottom:14px;margin-bottom:14px}
+.inv-dorm{font-size:19px;font-weight:600;color:var(--accent-dd)}
+.inv-doc{font-size:16px;font-weight:600;text-align:right}
+.inv-meta{display:grid;grid-template-columns:1fr 1fr;gap:4px 22px;margin-bottom:14px;font-size:14px}
+@media(max-width:560px){.inv-meta{grid-template-columns:1fr}}
+.inv-table{width:100%;border-collapse:collapse;min-width:0;margin:6px 0 12px}
+.inv-table th{background:#fbf3e4;border-top:1.5px solid #e8d5b5;border-bottom:1.5px solid #e8d5b5;padding:8px 10px;font-size:13px}
+.inv-table td{padding:8px 10px;border-bottom:1px solid #f1e7d5}
+.inv-table .r{text-align:right;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.inv-total{display:flex;justify-content:space-between;align-items:center;background:var(--accent-dd);color:#fff;border-radius:12px;padding:12px 16px;font-weight:600;font-size:16px;margin:6px 0 14px}
+.inv-total .amt{font-family:'JetBrains Mono',monospace;font-size:20px}
+.inv-note{font-size:12.5px;color:var(--muted);border-top:1px dashed #e0d2b8;padding-top:10px}
+.inv-sign{display:flex;justify-content:space-between;gap:20px;margin-top:26px;font-size:13px;color:#57534e;text-align:center}
+.inv-sign .line{width:180px;border-top:1px solid #a8a29e;padding-top:6px;margin-top:34px}
+@media print{
+  body.print-invoice *{visibility:hidden}
+  #invoicePaper,#invoicePaper *{visibility:visible}
+  #invoicePaper{position:fixed;inset:0;width:100%;margin:0;border:0;border-radius:0}
+  .no-print{display:none!important}
+}
+
+/* ---------- toast ---------- */
+#toastRoot{position:fixed;right:18px;bottom:18px;z-index:1000;display:flex;flex-direction:column;gap:10px;max-width:min(360px,90vw)}
+.toast{background:#221507;color:#fdf6ea;padding:12px 16px;border-radius:13px;box-shadow:0 16px 44px rgba(0,0,0,.35);display:flex;gap:10px;align-items:center;border-left:4px solid var(--accent);animation:tin .25s ease;font-size:14.5px}
+.toast svg{flex:none;color:#fbbf24}
+@keyframes tin{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+.toast.out{opacity:0;transform:translateX(20px);transition:.3s}
+
+/* ---------- back link ---------- */
+.back-link{position:fixed;left:16px;bottom:16px;z-index:800;background:#fff;border:1px solid #eee5d8;border-left:3px solid #dc2626;border-radius:999px;padding:0 18px;min-height:44px;display:inline-flex;align-items:center;gap:8px;box-shadow:0 10px 28px rgba(60,35,10,.18);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px}
+.back-link:hover{background:#fdf8f0}
+.back-link svg{color:#dc2626}
+
+/* ---------- repair ---------- */
+.rep-form{display:grid;grid-template-columns:130px 1.1fr 1.4fr auto;gap:10px;align-items:end}
+@media(max-width:860px){.rep-form{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.rep-form{grid-template-columns:1fr}}
+.rep-form .field{margin:0}
+.status-sel{border:1.5px solid #e5d9c6;border-radius:10px;padding:0 10px;background:#fff;font-weight:500}
+.page-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.page-head h2{font-size:20px;font-weight:600}
+.page-head .muted{font-size:14px}
+.info-strip{display:flex;gap:10px;align-items:center;background:#fbf3e4;border:1px solid #efdcb8;color:#7c4a12;border-radius:12px;padding:10px 14px;font-size:14px;margin-bottom:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ================= LOGIN ================= -->
+<div id="loginView">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="mark">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M9 10h.01M15 10h.01M9 13h.01M15 13h.01"/></svg>
+      </div>
+      <div>
+        <div class="login-title">ห้องดี</div>
+        <div class="small muted">ระบบจัดการหอพักและบิลค่าเช่า</div>
+      </div>
+    </div>
+    <div class="login-sub">เข้าสู่ระบบเพื่อจัดการหอพักสุขใจ</div>
+    <form id="loginForm">
+      <div class="field">
+        <label for="lgUser">ชื่อผู้ใช้</label>
+        <input id="lgUser" type="text" value="admin" autocomplete="username">
+      </div>
+      <div class="field">
+        <label for="lgPass">รหัสผ่าน</label>
+        <input id="lgPass" type="password" value="demo1234" autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn login-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        เข้าสู่ระบบ
+      </button>
+    </form>
+    <div class="demo-note">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span><b>ระบบเดโม</b> — ข้อมูลทั้งหมดเป็นข้อมูลตัวอย่างสำหรับนำเสนอ กดเข้าสู่ระบบได้เลยโดยไม่ต้องแก้ไข</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="appView" hidden>
+  <div id="sideOverlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="side-brand">
+      <div class="mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M9 10h.01M15 10h.01M9 13h.01M15 13h.01"/></svg>
+      </div>
+      <div>
+        <div class="t1">ห้องดี</div>
+        <div class="t2">หอพักสุขใจ</div>
+      </div>
+    </div>
+    <div class="nav-label">เมนูหลัก</div>
+    <button class="nav-btn active" data-page="rooms">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      ผังห้องพัก
+    </button>
+    <button class="nav-btn" data-page="meters">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a7 7 0 1 0-7-7"/><path d="M12 15L9 9"/><path d="M5 8a7 7 0 0 1 14 0"/><circle cx="12" cy="15" r="1.6"/></svg>
+      จดมิเตอร์ + ออกบิล
+    </button>
+    <button class="nav-btn" data-page="payments">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="2.5"/><circle cx="12" cy="12.5" r="2.6"/><path d="M5.5 9.5h.01M18.5 15.5h.01"/></svg>
+      ชำระเงิน
+    </button>
+    <button class="nav-btn" data-page="repairs">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4.5 4.5 0 0 0-6 5.6L3 17.6V21h3.4l5.7-5.7a4.5 4.5 0 0 0 5.6-6L14 13l-2.5-2.5 3.2-4.2z"/></svg>
+      แจ้งซ่อม
+    </button>
+    <div class="side-user">
+      <div class="who">
+        <div class="avatar">ผ</div>
+        <div>
+          <div style="color:#fff;font-weight:500;font-size:14.5px">ผู้จัดการเดโม</div>
+          <div class="small" style="color:#b7a58c">ผู้ดูแลหอพัก</div>
+        </div>
+      </div>
+      <button class="logout-btn" id="logoutBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        ออกจากระบบ
+      </button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="hamburger" id="hamburger" aria-label="เปิดเมนู">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <h1 id="pageTitle">ผังห้องพัก</h1>
+      <div class="date">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span id="todayText"></span>
+      </div>
+      <button class="btn ghost" id="resetBtn">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+        <span class="btn-txt">รีเซ็ตข้อมูลตัวอย่าง</span>
+      </button>
+    </header>
+
+    <main class="content">
+
+      <!-- ===== PAGE: ROOMS ===== -->
+      <section id="page-rooms">
+        <div class="chip-row" id="roomChips"></div>
+        <div id="roomGrid"></div>
+      </section>
+
+      <!-- ===== PAGE: METERS ===== -->
+      <section id="page-meters" hidden>
+        <div class="info-strip">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>อัตราค่าสาธารณูปโครง: น้ำ <b class="mono">18</b> บาท/หน่วย · ไฟ <b class="mono">8</b> บาท/หน่วย — บิลประจำเดือน <b id="meterMonth"></b> (กรอกเลขมิเตอร์ครั้งหลัง ระบบคำนวณยอดให้อัตโนมัติ)</span>
+        </div>
+        <div class="card table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ห้อง / ผู้เช่า</th>
+                <th>มิเตอร์น้ำ (ก่อน → หลัง)</th>
+                <th>มิเตอร์ไฟ (ก่อน → หลัง)</th>
+                <th>ยอดรวมบิล</th>
+                <th style="text-align:right">การจัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="meterBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== PAGE: PAYMENTS ===== -->
+      <section id="page-payments" hidden>
+        <div class="stat-row" id="payStats"></div>
+        <div class="card table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ห้อง</th><th>ผู้เช่า</th><th>เดือน</th><th>ยอดรวม</th><th>สถานะ</th><th>ชำระเมื่อ</th><th style="text-align:right">การจัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="billBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== PAGE: REPAIRS ===== -->
+      <section id="page-repairs" hidden>
+        <div class="card card-pad" style="margin-bottom:16px">
+          <div class="page-head" style="margin-bottom:12px">
+            <h2 style="font-size:16.5px">เพิ่มเรื่องแจ้งซ่อม</h2>
+          </div>
+          <form class="rep-form" id="repForm">
+            <div class="field">
+              <label for="repRoom">ห้อง</label>
+              <select id="repRoom"></select>
+            </div>
+            <div class="field">
+              <label for="repTopic">เรื่อง</label>
+              <input id="repTopic" type="text" placeholder="เช่น ก๊อกน้ำรั่ว" required>
+            </div>
+            <div class="field">
+              <label for="repDetail">รายละเอียด</label>
+              <input id="repDetail" type="text" placeholder="อธิบายเพิ่มเติม (ถ้ามี)">
+            </div>
+            <button type="submit" class="btn">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              เพิ่มเรื่อง
+            </button>
+          </form>
+        </div>
+        <div class="card table-wrap">
+          <table>
+            <thead>
+              <tr><th>ห้อง</th><th>เรื่อง</th><th>รายละเอียด</th><th>แจ้งเมื่อ</th><th>สถานะ</th></tr>
+            </thead>
+            <tbody id="repBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ================= DRAWER ================= -->
+<div id="drawerWrap">
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="drawer" role="dialog" aria-label="รายละเอียดห้อง">
+    <div class="drawer-head">
+      <h2 id="drawerNo">101</h2>
+      <span id="drawerBadge"></span>
+      <button class="drawer-close" id="drawerClose" aria-label="ปิด">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+  </div>
+</div>
+
+<!-- ================= MODAL ================= -->
+<div id="modalRoot"></div>
+
+<!-- ================= TOAST ================= -->
+<div id="toastRoot"></div>
+
+<a class="back-link" href="../">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+  หน้ารวมตัวอย่าง
+</a>
+
+<script>
+(function(){
+'use strict';
+
+/* ================= utils ================= */
+function $(id){return document.getElementById(id);}
+var LS_KEY='zx-dorm-v1';
+var WATER_RATE=18, ELEC_RATE=8;
+var TH_M=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+var TH_MS=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+var TH_D=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+function pad(n){return String(n).padStart(2,'0');}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function baht(n){return '฿'+Number(n||0).toLocaleString('en-US');}
+function monthKey(d){d=d||new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1);}
+function monthLabel(k){var p=k.split('-');return TH_M[+p[1]-1]+' '+(+p[0]+543);}
+function todayISO(){var d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+function fmtD(iso){if(!iso)return '-';var p=String(iso).slice(0,10).split('-');if(p.length<3)return iso;return (+p[2])+' '+TH_MS[+p[1]-1]+' '+(+p[0]+543);}
+function fmtDT(iso){if(!iso)return '-';var d=new Date(iso);return d.getDate()+' '+TH_MS[d.getMonth()]+' '+(d.getFullYear()+543)+' · '+pad(d.getHours())+':'+pad(d.getMinutes());}
+function agoISO(days,hrs){var d=new Date();d.setDate(d.getDate()-days);d.setHours(hrs==null?10:hrs,15,0,0);return d.toISOString();}
+
+/* ================= seed / state ================= */
+function seedData(){
+  var mk=monthKey();
+  var rooms=[
+    {no:'101',floor:1,rent:3500,tenant:{name:'สมชาย ใจดี',phone:'081-234-5678',moveIn:'2025-03-01'}},
+    {no:'102',floor:1,rent:3500,tenant:null},
+    {no:'103',floor:1,rent:3500,tenant:{name:'วรรณา ศรีสุข',phone:'089-555-0123',moveIn:'2024-11-15'}},
+    {no:'104',floor:1,rent:3600,tenant:{name:'กิตติพงษ์ แก้วใส',phone:'086-777-8899',moveIn:'2025-06-01'}},
+    {no:'105',floor:1,rent:3600,tenant:null},
+    {no:'106',floor:1,rent:3600,tenant:{name:'พิมพ์ชนก อารีย์',phone:'092-345-1122',moveIn:'2025-08-10'}},
+    {no:'201',floor:2,rent:3800,tenant:{name:'ธนกร พูนสุข',phone:'085-999-4433',moveIn:'2024-05-20'}},
+    {no:'202',floor:2,rent:3800,tenant:{name:'นภัสสร จันทร์เพ็ญ',phone:'090-111-2233',moveIn:'2025-01-05'}},
+    {no:'203',floor:2,rent:3800,tenant:null},
+    {no:'204',floor:2,rent:4000,tenant:{name:'อนุชา ทองแท้',phone:'084-222-5566',moveIn:'2025-09-01'}},
+    {no:'205',floor:2,rent:4000,tenant:{name:'ศิริพร เพชรดี',phone:'088-654-3210',moveIn:'2024-12-01'}},
+    {no:'206',floor:2,rent:4000,tenant:null},
+    {no:'301',floor:3,rent:4200,tenant:{name:'ปวีณา แสงจันทร์',phone:'097-888-7766',moveIn:'2025-02-14'}},
+    {no:'302',floor:3,rent:4200,tenant:{name:'ชัยวัฒน์ บุญนำ',phone:'081-777-6655',moveIn:'2025-07-01'}},
+    {no:'303',floor:3,rent:4500,tenant:{name:'มาลี รุ่งเรือง',phone:'089-000-1122',moveIn:'2025-04-01'}},
+    {no:'304',floor:3,rent:4500,tenant:null},
+    {no:'305',floor:3,rent:4500,tenant:{name:'ณัฐวุฒิ สุขใจ',phone:'095-444-3322',moveIn:'2026-01-15'}},
+    {no:'306',floor:3,rent:4500,tenant:null}
+  ];
+  var meters={'101':{water:148,elec:812},'103':{water:152,elec:880},'104':{water:121,elec:640},
+    '106':{water:133,elec:715},'201':{water:176,elec:1024},'202':{water:140,elec:760},
+    '204':{water:115,elec:590},'205':{water:168,elec:940},'301':{water:159,elec:855},
+    '302':{water:144,elec:798},'303':{water:171,elec:990},'305':{water:128,elec:672}};
+  var bills=[];
+  function addBill(no,wU,eU,status,daysAgo){
+    var room=rooms.filter(function(r){return r.no===no;})[0];
+    var m=meters[no];
+    var b={id:'INV-'+mk.replace('-','')+'-'+no,room:no,month:mk,rent:room.rent,
+      waterPrev:m.water,waterCurr:m.water+wU,waterUnits:wU,
+      elecPrev:m.elec,elecCurr:m.elec+eU,elecUnits:eU,
+      waterCost:wU*WATER_RATE,elecCost:eU*ELEC_RATE,
+      total:room.rent+wU*WATER_RATE+eU*ELEC_RATE,
+      status:status,issuedAt:agoISO(2,9),paidAt:status==='paid'?agoISO(daysAgo,14):null};
+    m.water+=wU;m.elec+=eU;
+    bills.push(b);
+  }
+  addBill('103',5,65,'pending');
+  addBill('201',6,88,'paid',5);
+  addBill('204',4,72,'pending');
+  addBill('205',7,95,'paid',3);
+  addBill('301',5,70,'paid',1);
+  var repairs=[
+    {id:'r1',room:'104',topic:'ก๊อกน้ำห้องน้ำรั่ว',detail:'ก๊อกอ่างล้างหน้าหยดตลอดเวลา น้ำเปลืองมาก',status:'doing',createdAt:agoISO(4,11)},
+    {id:'r2',room:'302',topic:'แอร์ไม่เย็น',detail:'เปิดแล้วมีแต่ลม น่าจะต้องเติมน้ำยาแอร์',status:'new',createdAt:agoISO(1,16)},
+    {id:'r3',room:'106',topic:'ประตูห้องน้ำล็อกไม่ได้',detail:'กลอนล็อกประตูหลุด ปิดไม่สนิท',status:'new',createdAt:agoISO(0,8)},
+    {id:'r4',room:'305',topic:'เพดานรั่วตอนฝนตก',detail:'มีรอยน้ำซึมที่มุมห้องฝั่งหน้าต่าง',status:'doing',createdAt:agoISO(6,10)},
+    {id:'r5',room:'ทางเดินชั้น 2',topic:'หลอดไฟทางเดินเสีย',detail:'เปลี่ยนหลอดใหม่เรียบร้อยแล้ว',status:'done',createdAt:agoISO(9,13)}
+  ];
+  return {rooms:rooms,meters:meters,bills:bills,repairs:repairs,seq:100};
+}
+function save(){try{localStorage.setItem(LS_KEY,JSON.stringify(state));}catch(e){}}
+function load(){
+  try{
+    var s=JSON.parse(localStorage.getItem(LS_KEY));
+    if(s&&s.rooms&&s.rooms.length===18&&s.bills&&s.repairs&&s.meters)return s;
+  }catch(e){}
+  return null;
+}
+var state=load();
+if(!state){state=seedData();save();}
+function nextId(p){state.seq=(state.seq||100)+1;return p+state.seq;}
+
+/* ================= derived ================= */
+function roomByNo(no){return state.rooms.filter(function(r){return r.no===no;})[0];}
+function billOf(no,mk){return state.bills.filter(function(b){return b.room===no&&b.month===(mk||monthKey());})[0];}
+function roomStatus(room){
+  if(!room.tenant)return 'vacant';
+  var pend=state.bills.some(function(b){return b.room===room.no&&b.status==='pending';});
+  return pend?'overdue':'occupied';
+}
+var ST_TXT={vacant:'ว่าง',occupied:'มีผู้เช่า',overdue:'ค้างชำระ'};
+function statusBadge(st){
+  if(st==='vacant')return '<span class="badge b-green"><span class="dot"></span>ว่าง</span>';
+  if(st==='occupied')return '<span class="badge b-brown"><span class="dot"></span>มีผู้เช่า</span>';
+  return '<span class="badge b-red"><span class="dot"></span>ค้างชำระ</span>';
+}
+var REP_TXT={'new':'แจ้งแล้ว','doing':'กำลังซ่อม','done':'เสร็จแล้ว'};
+
+/* ================= toast ================= */
+var checkSvg='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+function toast(msg){
+  var t=document.createElement('div');
+  t.className='toast';
+  t.innerHTML=checkSvg+'<span>'+esc(msg)+'</span>';
+  $('toastRoot').appendChild(t);
+  setTimeout(function(){t.classList.add('out');setTimeout(function(){t.remove();},320);},2600);
+}
+
+/* ================= modal ================= */
+function openModal(html){
+  var m=$('modalRoot');
+  m.innerHTML='<div class="modal-card">'+html+'</div>';
+  m.classList.add('open');
+}
+function closeModal(){$('modalRoot').classList.remove('open');$('modalRoot').innerHTML='';document.body.classList.remove('print-invoice');}
+function confirmBox(title,text,okLabel,onOk,danger){
+  openModal(
+    '<div class="modal-head"><h3>'+esc(title)+'</h3>'+
+    '<button class="modal-x" data-x="1" aria-label="ปิด"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>'+
+    '<div class="modal-pad"><p class="muted">'+esc(text)+'</p></div>'+
+    '<div class="modal-actions">'+
+    '<button class="btn ghost" data-x="1">ยกเลิก</button>'+
+    '<button class="btn '+(danger?'danger':'')+'" id="cfOk">'+esc(okLabel)+'</button></div>'
+  );
+  $('cfOk').addEventListener('click',function(){closeModal();onOk();});
+}
+
+/* ================= invoice ================= */
+function openInvoice(bill){
+  var room=roomByNo(bill.room);
+  var tname=room&&room.tenant?room.tenant.name:'-';
+  var tphone=room&&room.tenant?room.tenant.phone:'-';
+  var paid=bill.status==='paid';
+  openModal(
+    '<div class="modal-head no-print"><h3>ใบแจ้งค่าเช่า — ห้อง '+esc(bill.room)+'</h3>'+
+    '<button class="modal-x" data-x="1" aria-label="ปิด"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>'+
+    '<div class="invoice-paper" id="invoicePaper">'+
+      '<div class="inv-top">'+
+        '<div><div class="inv-dorm">หอพักสุขใจ</div>'+
+        '<div class="small muted">123 ถ.มิตรภาพ ต.ในเมือง อ.เมือง จ.ขอนแก่น 40000 · โทร 043-000-123</div></div>'+
+        '<div class="inv-doc">ใบแจ้งค่าเช่า<div class="small muted mono">'+esc(bill.id)+'</div>'+
+        (paid?'<span class="badge b-green" style="margin-top:6px"><span class="dot"></span>ชำระแล้ว</span>':'<span class="badge b-amber" style="margin-top:6px"><span class="dot"></span>รอชำระ</span>')+'</div>'+
+      '</div>'+
+      '<div class="inv-meta">'+
+        '<div>ห้อง: <b class="mono">'+esc(bill.room)+'</b></div>'+
+        '<div>ประจำเดือน: <b>'+esc(monthLabel(bill.month))+'</b></div>'+
+        '<div>ผู้เช่า: <b>'+esc(tname)+'</b></div>'+
+        '<div>โทร: <span class="mono">'+esc(tphone)+'</span></div>'+
+      '</div>'+
+      '<table class="inv-table"><thead><tr><th>รายการ</th><th class="r">จำนวน</th><th class="r">บาท/หน่วย</th><th class="r">จำนวนเงิน</th></tr></thead><tbody>'+
+        '<tr><td>ค่าเช่าห้องพักประจำเดือน</td><td class="r">1</td><td class="r">'+bill.rent.toLocaleString('en-US')+'</td><td class="r">'+bill.rent.toLocaleString('en-US')+'</td></tr>'+
+        '<tr><td>ค่าน้ำประปา (เลขก่อน '+bill.waterPrev+' → หลัง '+bill.waterCurr+')</td><td class="r">'+bill.waterUnits+'</td><td class="r">'+WATER_RATE+'</td><td class="r">'+bill.waterCost.toLocaleString('en-US')+'</td></tr>'+
+        '<tr><td>ค่าไฟฟ้า (เลขก่อน '+bill.elecPrev+' → หลัง '+bill.elecCurr+')</td><td class="r">'+bill.elecUnits+'</td><td class="r">'+ELEC_RATE+'</td><td class="r">'+bill.elecCost.toLocaleString('en-US')+'</td></tr>'+
+      '</tbody></table>'+
+      '<div class="inv-total"><span>รวมทั้งสิ้น</span><span class="amt">'+baht(bill.total)+'</span></div>'+
+      '<div class="inv-note">กรุณาชำระภายในวันที่ 5 ของเดือนถัดไป ชำระที่สำนักงานหอพัก หรือโอนบัญชี ธ.กรุงไทย 123-4-56789-0 ชื่อบัญชี หอพักสุขใจ'+
+      (paid?'<br>รับชำระเมื่อ: '+esc(fmtDT(bill.paidAt)):'')+'</div>'+
+      '<div class="inv-sign"><div class="line">ผู้รับเงิน</div><div class="line">ผู้ชำระเงิน</div></div>'+
+    '</div>'+
+    '<div class="modal-actions no-print">'+
+      '<button class="btn ghost" data-x="1">ปิด</button>'+
+      '<button class="btn" id="printInv"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> พิมพ์ใบแจ้งค่าเช่า</button>'+
+    '</div>'
+  );
+  $('printInv').addEventListener('click',function(){
+    document.body.classList.add('print-invoice');
+    window.print();
+    setTimeout(function(){document.body.classList.remove('print-invoice');},400);
+  });
+}
+
+/* ================= render: rooms ================= */
+function renderRooms(){
+  var counts={vacant:0,occupied:0,overdue:0};
+  state.rooms.forEach(function(r){counts[roomStatus(r)]++;});
+  $('roomChips').innerHTML=
+    '<span class="chip"><span class="sw" style="background:#22c55e"></span>ว่าง <b class="mono">'+counts.vacant+'</b> ห้อง</span>'+
+    '<span class="chip"><span class="sw" style="background:#b45309"></span>มีผู้เช่า <b class="mono">'+counts.occupied+'</b> ห้อง</span>'+
+    '<span class="chip"><span class="sw" style="background:#ef4444"></span>ค้างชำระ <b class="mono">'+counts.overdue+'</b> ห้อง</span>'+
+    '<span class="chip" style="margin-left:auto">ทั้งหมด <b class="mono">18</b> ห้อง · 3 ชั้น</span>';
+  var html='';
+  [1,2,3].forEach(function(f){
+    html+='<div class="floor-sec"><div class="floor-head"><h2>ชั้น '+f+'</h2><span class="small muted">ห้อง '+f+'01 – '+f+'06</span></div><div class="floor-grid">';
+    state.rooms.filter(function(r){return r.floor===f;}).forEach(function(r){
+      var st=roomStatus(r);
+      html+='<button class="room-card st-'+st+'" data-room="'+r.no+'">'+
+        '<span class="no">'+r.no+'</span>'+
+        '<span class="nm">'+(r.tenant?esc(r.tenant.name):'— ว่าง —')+'</span>'+
+        '<span class="rt">'+baht(r.rent)+'/เดือน</span>'+
+      '</button>';
+    });
+    html+='</div></div>';
+  });
+  $('roomGrid').innerHTML=html;
+}
+
+/* ================= drawer ================= */
+function openDrawer(no){
+  var room=roomByNo(no);
+  if(!room)return;
+  var st=roomStatus(room);
+  $('drawerNo').textContent='ห้อง '+no;
+  $('drawerBadge').innerHTML=statusBadge(st);
+  var body=$('drawerBody');
+  var mk=monthKey();
+  var bill=billOf(no,mk);
+  if(room.tenant){
+    var t=room.tenant;
+    var initial=esc(String(t.name).charAt(0));
+    body.innerHTML=
+      '<div class="tenant-hero"><div class="avatar">'+initial+'</div><div>'+
+      '<div style="font-weight:600;font-size:16.5px">'+esc(t.name)+'</div>'+
+      '<div class="small muted mono">'+esc(t.phone)+'</div></div></div>'+
+      '<div class="sec-t">รายละเอียดผู้เช่า</div>'+
+      '<div class="kv"><span class="k">วันที่เข้าอยู่</span><span class="v">'+fmtD(t.moveIn)+'</span></div>'+
+      '<div class="kv"><span class="k">ค่าเช่ารายเดือน</span><span class="v mono">'+baht(room.rent)+'</span></div>'+
+      '<div class="kv"><span class="k">สถานะบิลเดือนนี้</span><span class="v">'+(bill?(bill.status==='paid'?'<span class="badge b-green"><span class="dot"></span>ชำระแล้ว</span>':'<span class="badge b-amber"><span class="dot"></span>รอชำระ '+baht(bill.total)+'</span>'):'<span class="badge b-gray">ยังไม่ออกบิล</span>')+'</span></div>'+
+      '<div class="drawer-actions">'+
+      (bill?'<button class="btn soft" data-view="'+bill.id+'"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> ดูใบแจ้งค่าเช่าเดือนนี้</button>':'')+
+      '<button class="btn danger" data-moveout="'+no+'"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> ย้ายออก</button>'+
+      '</div>';
+  }else{
+    body.innerHTML=
+      '<p class="muted" style="margin-bottom:14px">ห้องนี้ว่างอยู่ กรอกข้อมูลเพื่อเพิ่มผู้เช่าใหม่</p>'+
+      '<form id="tenantForm">'+
+      '<div class="field"><label for="tfName">ชื่อผู้เช่า</label><input id="tfName" type="text" placeholder="เช่น สมหญิง ดีงาม" required></div>'+
+      '<div class="field"><label for="tfPhone">เบอร์โทรศัพท์</label><input id="tfPhone" type="tel" placeholder="08x-xxx-xxxx" required></div>'+
+      '<div class="field"><label for="tfRent">ค่าเช่าต่อเดือน (บาท)</label><input id="tfRent" type="number" min="3000" max="6000" step="100" value="'+room.rent+'" required></div>'+
+      '<div class="field"><label for="tfMove">วันที่เข้าอยู่</label><input id="tfMove" type="date" value="'+todayISO()+'" required></div>'+
+      '<button type="submit" class="btn" style="width:100%"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> เพิ่มผู้เช่า</button>'+
+      '</form>';
+    $('tenantForm').addEventListener('submit',function(e){
+      e.preventDefault();
+      var name=$('tfName').value.trim(),phone=$('tfPhone').value.trim();
+      var rent=parseInt($('tfRent').value,10),mv=$('tfMove').value;
+      if(!name||!phone||!rent){toast('กรุณากรอกข้อมูลให้ครบ');return;}
+      room.tenant={name:name,phone:phone,moveIn:mv||todayISO()};
+      room.rent=rent;
+      if(!state.meters[no])state.meters[no]={water:0,elec:0};
+      save();closeDrawer();renderAll();
+      toast('เพิ่มผู้เช่าห้อง '+no+' เรียบร้อย');
+    });
+  }
+  $('drawerWrap').classList.add('open');
+}
+function closeDrawer(){$('drawerWrap').classList.remove('open');}
+
+/* ================= render: meters ================= */
+function renderMeters(){
+  $('meterMonth').textContent=monthLabel(monthKey());
+  var tb=$('meterBody');
+  var mk=monthKey();
+  var occ=state.rooms.filter(function(r){return r.tenant;});
+  if(!occ.length){tb.innerHTML='<tr><td colspan="5" class="empty">ยังไม่มีห้องที่มีผู้เช่า</td></tr>';return;}
+  var html='';
+  occ.forEach(function(r){
+    var m=state.meters[r.no]||{water:0,elec:0};
+    var b=billOf(r.no,mk);
+    if(b){
+      html+='<tr><td><b class="mono">'+r.no+'</b><div class="small muted">'+esc(r.tenant.name)+'</div></td>'+
+        '<td colspan="2"><span class="billed-tag"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> ออกบิลเดือนนี้แล้ว — น้ำ '+b.waterUnits+' หน่วย · ไฟ '+b.elecUnits+' หน่วย</span></td>'+
+        '<td class="row-total">'+baht(b.total)+'</td>'+
+        '<td style="text-align:right"><button class="btn ghost" data-view="'+b.id+'">ดูบิล</button></td></tr>';
+    }else{
+      html+='<tr data-room="'+r.no+'" data-wp="'+m.water+'" data-ep="'+m.elec+'" data-rent="'+r.rent+'">'+
+        '<td><b class="mono">'+r.no+'</b><div class="small muted">'+esc(r.tenant.name)+'</div><div class="small muted mono">ค่าเช่า '+baht(r.rent)+'</div></td>'+
+        '<td><span class="meter-prev">'+m.water+'</span> → <input type="number" class="num-in in-w" min="'+m.water+'" placeholder="เลขหลัง" inputmode="numeric"></td>'+
+        '<td><span class="meter-prev">'+m.elec+'</span> → <input type="number" class="num-in in-e" min="'+m.elec+'" placeholder="เลขหลัง" inputmode="numeric"></td>'+
+        '<td class="row-total cell-total">—</td>'+
+        '<td style="text-align:right"><button class="btn btn-issue" data-issue="'+r.no+'" disabled>ออกบิล</button></td></tr>';
+    }
+  });
+  tb.innerHTML=html;
+}
+function recalcRow(tr){
+  var wp=+tr.dataset.wp,ep=+tr.dataset.ep,rent=+tr.dataset.rent;
+  var wv=tr.querySelector('.in-w').value,ev=tr.querySelector('.in-e').value;
+  var cell=tr.querySelector('.cell-total'),btn=tr.querySelector('.btn-issue');
+  if(wv===''||ev===''){cell.textContent='—';btn.disabled=true;return;}
+  var w=parseInt(wv,10),e=parseInt(ev,10);
+  if(isNaN(w)||isNaN(e)||w<wp||e<ep){
+    cell.textContent=(isNaN(w)||isNaN(e))?'—':'เลขต่ำกว่าครั้งก่อน';
+    cell.style.color='var(--bad)';btn.disabled=true;return;
+  }
+  var total=rent+(w-wp)*WATER_RATE+(e-ep)*ELEC_RATE;
+  cell.style.color='';cell.textContent=baht(total);
+  btn.disabled=false;
+}
+
+/* ================= render: bills / payments ================= */
+function renderBills(){
+  var mk=monthKey();
+  var bills=state.bills.filter(function(b){return b.month===mk;})
+    .sort(function(a,b){return a.room<b.room?-1:1;});
+  var paidSum=0,paidN=0,pendSum=0,pendN=0,vacant=0;
+  bills.forEach(function(b){if(b.status==='paid'){paidSum+=b.total;paidN++;}else{pendSum+=b.total;pendN++;}});
+  state.rooms.forEach(function(r){if(!r.tenant)vacant++;});
+  $('payStats').innerHTML=
+    '<div class="stat"><div class="ic ic-green"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="lb">เก็บเงินแล้ว (เดือนนี้)</div><div class="vl">'+baht(paidSum)+' <small>'+paidN+' บิล</small></div></div></div>'+
+    '<div class="stat"><div class="ic ic-red"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="lb">ค้างชำระ</div><div class="vl">'+baht(pendSum)+' <small>'+pendN+' บิล</small></div></div></div>'+
+    '<div class="stat"><div class="ic ic-brown"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></div><div><div class="lb">ห้องว่าง</div><div class="vl">'+vacant+' <small>จาก 18 ห้อง</small></div></div></div>';
+  var tb=$('billBody');
+  if(!bills.length){
+    tb.innerHTML='<tr><td colspan="7" class="empty">ยังไม่มีบิลประจำเดือน'+esc(monthLabel(mk))+' — ไปที่หน้า "จดมิเตอร์ + ออกบิล" เพื่อออกบิล</td></tr>';
+    return;
+  }
+  var html='';
+  bills.forEach(function(b){
+    var r=roomByNo(b.room);
+    var tn=r&&r.tenant?r.tenant.name:'-';
+    html+='<tr><td><b class="mono">'+b.room+'</b></td><td>'+esc(tn)+'</td><td class="small">'+esc(monthLabel(b.month))+'</td>'+
+      '<td class="row-total">'+baht(b.total)+'</td>'+
+      '<td>'+(b.status==='paid'?'<span class="badge b-green"><span class="dot"></span>ชำระแล้ว</span>':'<span class="badge b-amber"><span class="dot"></span>รอชำระ</span>')+'</td>'+
+      '<td class="small mono">'+(b.paidAt?esc(fmtDT(b.paidAt)):'—')+'</td>'+
+      '<td style="text-align:right;white-space:nowrap">'+
+        '<button class="btn ghost" data-view="'+b.id+'">ดูบิล</button> '+
+        (b.status==='pending'?'<button class="btn" data-pay="'+b.id+'">รับชำระ</button>':'')+
+      '</td></tr>';
+  });
+  tb.innerHTML=html;
+}
+
+/* ================= render: repairs ================= */
+function renderRepairs(){
+  var sel=$('repRoom');
+  if(!sel.options.length){
+    var oh='';
+    state.rooms.forEach(function(r){oh+='<option value="'+r.no+'">'+r.no+(r.tenant?'':' (ว่าง)')+'</option>';});
+    sel.innerHTML=oh;
+  }
+  var tb=$('repBody');
+  var list=state.repairs.slice().sort(function(a,b){return (a.createdAt<b.createdAt)?1:-1;});
+  if(!list.length){tb.innerHTML='<tr><td colspan="5" class="empty">ยังไม่มีเรื่องแจ้งซ่อม</td></tr>';return;}
+  var html='';
+  list.forEach(function(rp){
+    html+='<tr><td><b class="mono">'+esc(rp.room)+'</b></td><td style="font-weight:500">'+esc(rp.topic)+'</td>'+
+      '<td class="small muted">'+esc(rp.detail||'—')+'</td>'+
+      '<td class="small mono">'+esc(fmtDT(rp.createdAt))+'</td>'+
+      '<td><select class="status-sel" data-rep="'+rp.id+'">'+
+        ['new','doing','done'].map(function(s){return '<option value="'+s+'"'+(rp.status===s?' selected':'')+'>'+REP_TXT[s]+'</option>';}).join('')+
+      '</select></td></tr>';
+  });
+  tb.innerHTML=html;
+}
+
+function renderAll(){renderRooms();renderMeters();renderBills();renderRepairs();}
+
+/* ================= navigation ================= */
+var TITLES={rooms:'ผังห้องพัก',meters:'จดมิเตอร์ + ออกบิล',payments:'ชำระเงิน',repairs:'แจ้งซ่อม'};
+function showPage(p){
+  ['rooms','meters','payments','repairs'].forEach(function(k){$('page-'+k).hidden=(k!==p);});
+  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.toggle('active',b.dataset.page===p);});
+  $('pageTitle').textContent=TITLES[p]||'';
+  $('sidebar').classList.remove('open');
+  $('sideOverlay').classList.remove('on');
+  window.scrollTo(0,0);
+}
+
+/* ================= events ================= */
+document.querySelectorAll('.nav-btn').forEach(function(b){
+  b.addEventListener('click',function(){showPage(b.dataset.page);});
+});
+$('hamburger').addEventListener('click',function(){
+  $('sidebar').classList.add('open');$('sideOverlay').classList.add('on');
+});
+$('sideOverlay').addEventListener('click',function(){
+  $('sidebar').classList.remove('open');$('sideOverlay').classList.remove('on');
+});
+
+$('loginForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  $('loginView').hidden=true;
+  $('appView').hidden=false;
+  renderAll();
+  toast('เข้าสู่ระบบสำเร็จ ยินดีต้อนรับ');
+});
+$('logoutBtn').addEventListener('click',function(){
+  $('appView').hidden=true;
+  $('loginView').hidden=false;
+  toast('ออกจากระบบแล้ว');
+});
+
+$('roomGrid').addEventListener('click',function(e){
+  var c=e.target.closest('[data-room]');
+  if(c)openDrawer(c.dataset.room);
+});
+$('drawerClose').addEventListener('click',closeDrawer);
+$('drawerOverlay').addEventListener('click',closeDrawer);
+$('drawerBody').addEventListener('click',function(e){
+  var mv=e.target.closest('[data-moveout]');
+  if(mv){
+    var no=mv.dataset.moveout;
+    var room=roomByNo(no);
+    var nm=room.tenant?room.tenant.name:'';
+    confirmBox('ยืนยันการย้ายออก','ผู้เช่า "'+nm+'" จะถูกย้ายออกจากห้อง '+no+' และห้องจะกลับเป็นสถานะว่าง','ยืนยันย้ายออก',function(){
+      room.tenant=null;save();closeDrawer();renderAll();
+      toast('ห้อง '+no+' ย้ายออกเรียบร้อย ห้องว่างแล้ว');
+    },true);
+    return;
+  }
+  var vw=e.target.closest('[data-view]');
+  if(vw){
+    var b=state.bills.filter(function(x){return x.id===vw.dataset.view;})[0];
+    if(b)openInvoice(b);
+  }
+});
+
+$('meterBody').addEventListener('input',function(e){
+  var tr=e.target.closest('tr[data-room]');
+  if(tr)recalcRow(tr);
+});
+$('meterBody').addEventListener('click',function(e){
+  var vw=e.target.closest('[data-view]');
+  if(vw){
+    var b0=state.bills.filter(function(x){return x.id===vw.dataset.view;})[0];
+    if(b0)openInvoice(b0);
+    return;
+  }
+  var btn=e.target.closest('[data-issue]');
+  if(!btn||btn.disabled)return;
+  var no=btn.dataset.issue;
+  var tr=btn.closest('tr');
+  var wp=+tr.dataset.wp,ep=+tr.dataset.ep,rent=+tr.dataset.rent;
+  var w=parseInt(tr.querySelector('.in-w').value,10);
+  var el2=parseInt(tr.querySelector('.in-e').value,10);
+  if(isNaN(w)||isNaN(el2)||w<wp||el2<ep){toast('กรุณากรอกเลขมิเตอร์ให้ถูกต้อง');return;}
+  var room=roomByNo(no);
+  var bill={id:'INV-'+monthKey().replace('-','')+'-'+no,room:no,month:monthKey(),rent:rent,
+    waterPrev:wp,waterCurr:w,waterUnits:w-wp,elecPrev:ep,elecCurr:el2,elecUnits:el2-ep,
+    waterCost:(w-wp)*WATER_RATE,elecCost:(el2-ep)*ELEC_RATE,
+    total:rent+(w-wp)*WATER_RATE+(el2-ep)*ELEC_RATE,
+    status:'pending',issuedAt:new Date().toISOString(),paidAt:null};
+  state.bills.push(bill);
+  state.meters[no]={water:w,elec:el2};
+  save();renderAll();
+  openInvoice(bill);
+  toast('ออกบิลห้อง '+no+' ยอด '+baht(bill.total)+' เรียบร้อย');
+});
+
+$('billBody').addEventListener('click',function(e){
+  var vw=e.target.closest('[data-view]');
+  if(vw){
+    var b=state.bills.filter(function(x){return x.id===vw.dataset.view;})[0];
+    if(b)openInvoice(b);
+    return;
+  }
+  var py=e.target.closest('[data-pay]');
+  if(py){
+    var b2=state.bills.filter(function(x){return x.id===py.dataset.pay;})[0];
+    if(!b2)return;
+    b2.status='paid';b2.paidAt=new Date().toISOString();
+    save();renderAll();
+    toast('รับชำระห้อง '+b2.room+' ยอด '+baht(b2.total)+' แล้ว');
+  }
+});
+
+$('repForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var room=$('repRoom').value,topic=$('repTopic').value.trim(),detail=$('repDetail').value.trim();
+  if(!topic){toast('กรุณาระบุเรื่องที่แจ้งซ่อม');return;}
+  state.repairs.push({id:nextId('rp'),room:room,topic:topic,detail:detail,status:'new',createdAt:new Date().toISOString()});
+  save();renderRepairs();
+  $('repForm').reset();
+  toast('เพิ่มเรื่องแจ้งซ่อมห้อง '+room+' แล้ว');
+});
+$('repBody').addEventListener('change',function(e){
+  var sel=e.target.closest('[data-rep]');
+  if(!sel)return;
+  var rp=state.repairs.filter(function(x){return x.id===sel.dataset.rep;})[0];
+  if(rp){rp.status=sel.value;save();toast('อัปเดตสถานะ "'+rp.topic+'" เป็น '+REP_TXT[sel.value]);}
+});
+
+$('modalRoot').addEventListener('click',function(e){
+  if(e.target===$('modalRoot')||e.target.closest('[data-x]'))closeModal();
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeModal();closeDrawer();}
+});
+
+$('resetBtn').addEventListener('click',function(){
+  confirmBox('รีเซ็ตข้อมูลตัวอย่าง','ข้อมูลทั้งหมดที่แก้ไขไว้จะถูกลบ และกลับไปเป็นข้อมูลตัวอย่างเริ่มต้น','รีเซ็ตข้อมูล',function(){
+    try{localStorage.removeItem(LS_KEY);}catch(e){}
+    state=seedData();save();renderAll();showPage('rooms');
+    toast('รีเซ็ตเป็นข้อมูลตัวอย่างเรียบร้อย');
+  },true);
+});
+
+/* ================= init ================= */
+(function init(){
+  var d=new Date();
+  $('todayText').textContent='วัน'+TH_D[d.getDay()]+'ที่ '+d.getDate()+' '+TH_M[d.getMonth()]+' '+(d.getFullYear()+543);
+})();
+})();
+</script>
+</body>
+</html>

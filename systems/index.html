@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ตัวอย่างระบบใช้งานจริง — POS, CRM, สต็อก และอื่นๆ | ZenityX Demos</title>
+<meta name="description" content="รวมตัวอย่างระบบใช้งานจริงที่นักเรียนคอร์ส First Vibe : Coding สร้างได้ด้วย AI — POS, CRM, สต็อก, เอกสาร, คิว, HR และอีกมากมาย">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Sarabun:wght@300;400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#FF0000; --red-mid:#CC0000; --red-deep:#990000;
+  --ink:#1d1d1f; --gray:#666666; --gray-l:#9e9e9e; --bg:#f5f5f7; --card:#ffffff; --line:#e8e8ed;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+::selection{background:#ffd9d9;color:var(--ink)}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* topbar */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1200px;margin:0 auto;padding:.9rem clamp(1.25rem,4vw,2.5rem);display:flex;align-items:center;gap:1.2rem}
+.brand{display:flex;align-items:center;gap:.6rem;font-weight:600;font-size:1.05rem}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--red)}
+.topbar nav{margin-left:auto;display:flex;gap:1.2rem;align-items:center;font-size:.9rem}
+.topbar nav a{color:var(--gray);transition:color .2s}
+.topbar nav a:hover{color:var(--red)}
+.switch-tab{display:inline-flex;background:#ececf0;border-radius:99px;padding:4px;gap:2px}
+.switch-tab a{padding:.45rem 1.1rem;border-radius:99px;font-size:.85rem;color:var(--gray)}
+.switch-tab a.on{background:#fff;color:var(--ink);font-weight:500;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:500;border-radius:99px;padding:.85rem 1.7rem;transition:transform .25s,box-shadow .25s;min-height:44px}
+.btn-r{background:var(--red);color:#fff;box-shadow:0 8px 22px -8px rgba(255,0,0,.45)}
+.btn-r:hover{transform:translateY(-2px)}
+
+/* hero */
+.hero{max-width:1200px;margin:0 auto;padding:clamp(3rem,8vh,5.5rem) clamp(1.25rem,4vw,2.5rem) clamp(2rem,4vh,3rem)}
+.hero .kick{display:inline-flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono';font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:1.1rem}
+.hero .kick::before{content:'';width:26px;height:2px;background:var(--red)}
+.hero h1{font-size:clamp(2rem,5.2vw,3.4rem);font-weight:600;line-height:1.22;letter-spacing:-.01em;max-width:20ch}
+.hero h1 span{color:var(--red)}
+.hero p{margin-top:1.1rem;color:var(--gray);max-width:56ch;font-weight:300;font-size:1.05rem}
+.hero-note{display:inline-flex;align-items:center;gap:.6rem;margin-top:1.4rem;background:#fff;border:1px solid var(--line);border-left:3px solid var(--red);border-radius:12px;padding:.8rem 1.2rem;font-size:.85rem;color:var(--gray)}
+.hero-note b{color:var(--ink)}
+
+/* groups */
+main{max-width:1200px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem) clamp(3rem,7vh,5rem)}
+.group{margin-top:2.6rem}
+.group-head{display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.1rem}
+.group-head h2{font-size:1.25rem;font-weight:600}
+.group-head .gcode{font-family:'JetBrains Mono';font-size:.72rem;color:var(--red);letter-spacing:.15em}
+.group-head .gline{flex:1;height:1px;background:var(--line)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.card:hover{transform:translateY(-5px);box-shadow:0 20px 44px -18px rgba(0,0,0,.14)}
+.card .thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#ececf0}
+.card .thumb img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.card:hover .thumb img{transform:scale(1.05)}
+.card .acc{position:absolute;top:.8rem;left:.8rem;width:12px;height:12px;border-radius:50%;box-shadow:0 0 0 3px rgba(255,255,255,.8)}
+.card .body{padding:1.1rem 1.2rem 1.2rem}
+.card .name{font-size:1.15rem;font-weight:600;display:flex;align-items:baseline;gap:.5rem}
+.card .name small{font-family:'JetBrains Mono';font-size:.68rem;color:var(--gray-l);font-weight:400}
+.card .desc{font-size:.85rem;color:var(--gray);margin:.3rem 0 .8rem;min-height:2.6em}
+.card .feats{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.9rem}
+.card .feats span{font-size:.72rem;background:#f0f0f3;color:var(--gray);border-radius:99px;padding:.22rem .65rem}
+.card .open{display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;font-weight:500;color:var(--red)}
+
+/* enroll */
+.enroll{background:linear-gradient(135deg,var(--red),var(--red-deep));border-radius:28px;margin:0 auto clamp(3rem,6vh,4rem);max-width:1160px;padding:clamp(2.2rem,5vw,3.5rem);color:#fff;display:grid;grid-template-columns:1.3fr .7fr;gap:2rem;align-items:center;box-shadow:0 26px 60px -24px rgba(204,0,0,.5)}
+@media(max-width:860px){.enroll{grid-template-columns:1fr}}
+.enroll h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:600;line-height:1.3}
+.enroll p{margin-top:.8rem;opacity:.88;font-weight:300}
+.enroll .ec{background:#fff;color:var(--red-deep);border-radius:18px;padding:1.6rem;text-align:center}
+.enroll .ec b{display:block;font-size:1.05rem;margin-bottom:.3rem}
+.enroll .ec p{font-size:.85rem;color:var(--gray);margin-bottom:1rem;opacity:1}
+.btn-w{background:var(--ink);color:#fff;width:100%}
+.btn-w:hover{transform:translateY(-2px)}
+footer{border-top:1px solid var(--line);padding:1.6rem 0;text-align:center;font-size:.82rem;color:var(--gray-l)}
+footer a{color:var(--red)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="../"><span class="dot"></span>ZenityX <span style="font-weight:300;color:var(--gray-l)">Demos</span></a>
+    <nav>
+      <span class="switch-tab">
+        <a href="../">เว็บไซต์</a>
+        <a href="./" class="on">ระบบใช้งาน</a>
+      </span>
+      <a class="btn btn-r" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=systems-top&utm_campaign=demos" target="_blank" rel="noopener" style="padding:.6rem 1.2rem;font-size:.85rem">ดูคอร์สเรียน</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <p class="kick">Systems Showcase</p>
+  <h1>ไม่ใช่แค่เว็บสวย —<br>นักเรียนเราสร้าง<span>ระบบใช้งานจริง</span>ได้ด้วย</h1>
+  <p>ทุกระบบด้านล่างเปิดใช้งานได้ทันทีเหมือนโปรแกรมจริง: ล็อกอิน เพิ่ม-ลบ-แก้ข้อมูล คำนวณ พิมพ์เอกสาร — สร้างด้วย AI ในคลาสเดียวกัน ไม่ต้องมีพื้นฐานโค้ด</p>
+  <div class="hero-note">💡 <span><b>ลองกดเข้าระบบได้เลย</b> — ทุกระบบเป็นเดโม ข้อมูลจำลองสมจริง กดเล่นได้เต็มที่ไม่มีพัง</span></div>
+</header>
+
+<main>
+  <section class="group">
+    <div class="group-head"><span class="gcode">A</span><h2>ขายหน้าร้านและบริการ</h2><span class="gline"></span></div>
+    <div class="cards">
+      <a class="card" href="./pos/">
+        <div class="thumb"><span class="acc" style="background:#0e9f6e"></span><img src="../shots/systems/pos.jpg" alt="ระบบ POS ขายดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">POS ขายดี <small>ขายหน้าร้าน</small></span>
+          <p class="desc">คิดเงิน ส่วนลด numpad รับเงิน-ทอน พิมพ์ใบเสร็จ ประวัติบิล ยอดขายวันนี้</p>
+          <div class="feats"><span>ตะกร้าสด</span><span>เงินทอนอัตโนมัติ</span><span>ใบเสร็จพิมพ์ได้</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+      <a class="card" href="./kds/">
+        <div class="thumb"><span class="acc" style="background:#ea580c"></span><img src="../shots/systems/kds.jpg" alt="ระบบจอครัว ครัวดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">ครัวดี KDS <small>จอครัวร้านอาหาร</small></span>
+          <p class="desc">ตั๋วออร์เดอร์ไหล ใหม่→ทำ→เสร็จ จับเวลาเปลี่ยนสี รับออร์เดอร์+โน้ตพิเศษ</p>
+          <div class="feats"><span>จับเวลาสด</span><span>เสียงแจ้งเตือน</span><span>สรุปยอดวัน</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+      <a class="card" href="./queue/">
+        <div class="thumb"><span class="acc" style="background:#9333ea"></span><img src="../shots/systems/queue.jpg" alt="ระบบจองคิว คิวดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">คิวดี <small>จองคิว + จอ TV</small></span>
+          <p class="desc">กดรับเลขคิวตามบริการ ประมาณเวลารอ จอ TV เรียกคิวตัวใหญ่พร้อมเสียง</p>
+          <div class="feats"><span>บัตรคิว</span><span>จอเรียกคิว</span><span>เสียงเรียก</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="group">
+    <div class="group-head"><span class="gcode">B</span><h2>ลูกค้าและเอกสาร</h2><span class="gline"></span></div>
+    <div class="cards">
+      <a class="card" href="./crm/">
+        <div class="thumb"><span class="acc" style="background:#5b5bd6"></span><img src="../shots/systems/crm.jpg" alt="ระบบ CRM ลูกค้าดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">ลูกค้าดี CRM <small>ทีมขาย</small></span>
+          <p class="desc">Pipeline kanban ลากดีลข้ามขั้นได้ มูลค่ารวมสด drawer รายละเอียด+ไทม์ไลน์</p>
+          <div class="feats"><span>ลากการ์ด</span><span>Activity log</span><span>Win rate</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+      <a class="card" href="./documents/">
+        <div class="thumb"><span class="acc" style="background:#0284c7"></span><img src="../shots/systems/documents.jpg" alt="ระบบออกเอกสาร เอกสารดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">เอกสารดี <small>QT/IV/RE</small></span>
+          <p class="desc">ใบเสนอราคา แจ้งหนี้ เสร็จ คิด VAT 7% อัตโนมัติ ตัวอย่าง A4 พิมพ์จริง</p>
+          <div class="feats"><span>VAT 7%</span><span>เลขที่รันอัตโนมัติ</span><span>พิมพ์ A4</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="group">
+    <div class="group-head"><span class="gcode">C</span><h2>คลังและทรัพย์สิน</h2><span class="gline"></span></div>
+    <div class="cards">
+      <a class="card" href="./inventory/">
+        <div class="thumb"><span class="acc" style="background:#d97706"></span><img src="../shots/systems/inventory.jpg" alt="ระบบสต็อก สต็อกดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">สต็อกดี <small>คลังสินค้า</small></span>
+          <p class="desc">รับ-เบิกสินค้า แจ้งเตือนของใกล้หมด ประวัติเคลื่อนไหว สแกน SKU เด้งหา</p>
+          <div class="feats"><span>รับ/เบิก</span><span>แจ้งเตือนต่ำ</span><span>Movement log</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+      <a class="card" href="./dorm/">
+        <div class="thumb"><span class="acc" style="background:#b45309"></span><img src="../shots/systems/dorm.jpg" alt="ระบบหอพัก ห้องดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">ห้องดี <small>หอพักและบิล</small></span>
+          <p class="desc">ผังห้อง 18 ห้อง จดมิเตอร์น้ำไฟ คิดบิลอัตโนมัติ ใบแจ้งค่าเช่า แจ้งซ่อม</p>
+          <div class="feats"><span>ผังห้องสด</span><span>มิเตอร์→บิล</span><span>แจ้งซ่อม</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="group">
+    <div class="group-head"><span class="gcode">D</span><h2>คน งาน และผู้บริหาร</h2><span class="gline"></span></div>
+    <div class="cards">
+      <a class="card" href="./hr/">
+        <div class="thumb"><span class="acc" style="background:#0d9488"></span><img src="../shots/systems/hr.jpg" alt="ระบบ HR คนดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">คนดี HR <small>ลงเวลาและลา</small></span>
+          <p class="desc">นาฬิกาลงเวลาจริง ตารางเดือน สาย/ขาด/OT ยื่นลา→อนุมัติ โควต้าคงเหลือ</p>
+          <div class="feats"><span>ลงเวลาสด</span><span>ตารางเดือน</span><span>อนุมัติลา</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+      <a class="card" href="./kanban/">
+        <div class="thumb"><span class="acc" style="background:#7c3aed"></span><img src="../shots/systems/kanban.jpg" alt="ระบบ Kanban งานดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">งานดี <small>Kanban ทีม</small></span>
+          <p class="desc">บอร์ด 4 คอลัมน์ลากงาน label กำหนดส่ง เช็คลิสต์ย่อย สรุปภาพรวมทีม</p>
+          <div class="feats"><span>ลากงานข้ามคอลัมน์</span><span>เช็คลิสต์</span><span>สรุปรายคน</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+      <a class="card" href="./dashboard/">
+        <div class="thumb"><span class="acc" style="background:#0891b2"></span><img src="../shots/systems/dashboard.jpg" alt="ระบบ Dashboard ผู้บริหารดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">ผู้บริหารดี <small>Executive BI</small></span>
+          <p class="desc">KPI นับขึ้น กราฟรายได้+donut ช่องทาง ตารางสาขา ส่งออก CSV จริง</p>
+          <div class="feats"><span>กราฟจากข้อมูลจริง</span><span>เลือกช่วงเวลา</span><span>Export CSV</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<section class="enroll">
+  <div>
+    <h2>อยากสร้างระบบแบบนี้ให้ธุรกิจตัวเอง?</h2>
+    <p>คอร์ส First Vibe : Coding สอนสร้างเว็บและระบบด้วย AI แบบจับมือทำจริง 1 วันเต็ม — ไม่ต้องมีพื้นฐานโค้ด ออกไปพร้อมระบบที่ใช้งานได้จริง</p>
+  </div>
+  <div class="ec">
+    <b>First Vibe : Coding</b>
+    <p>เรียนสด 1 วัน · 10:00–17:00<br>มี Certificate รับรอง</p>
+    <a class="btn btn-w" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=systems-cta&utm_campaign=demos" target="_blank" rel="noopener">ดูรายละเอียดคอร์ส →</a>
+    <p style="margin-top:.8rem;font-size:.8rem;color:var(--gray)">หรือโทร <a href="tel:0622629644" style="color:var(--red);font-weight:500">062-262-9644</a></p>
+  </div>
+</section>
+
+<footer>
+  <p>ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/?utm_source=web-demos&utm_medium=systems-footer&utm_campaign=demos" target="_blank" rel="noopener">ZenityX</a> — ศูนย์ AI อันดับ 1 เมืองไทย · <a href="../">← กลับหน้ารวมเว็บไซต์</a></p>
+</footer>
+
+</body>
+</html>
