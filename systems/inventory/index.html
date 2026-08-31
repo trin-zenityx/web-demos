@@ -865,5 +865,22 @@ else{showView('login');}
 
 })();
 </script>
+<script>
+/* Auto-enter app when opened with ?app=1 (from showcase hub) */
+(function(){
+  if (!/[?&]app=1/.test(location.href)) return;
+  function enter(){
+    var b = document.getElementById('loginBtn') || document.getElementById('btnLogin')
+         || document.querySelector('#loginForm button[type="submit"]')
+         || document.querySelector('.login-card button[type="submit"]')
+         || Array.prototype.find.call(document.querySelectorAll('button'), function(x){ return /เข้าสู่ระบบ/.test(x.textContent); });
+    if (b) { b.click(); return; }
+    var f = document.getElementById('loginForm') || document.querySelector('#loginView form') || document.querySelector('.login form');
+    if (f && f.requestSubmit) f.requestSubmit();
+  }
+  if (document.readyState !== 'loading') setTimeout(enter, 80);
+  else document.addEventListener('DOMContentLoaded', function(){ setTimeout(enter, 80); });
+})();
+</script>
 </body>
 </html>
