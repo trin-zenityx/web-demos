@@ -81,6 +81,16 @@ main{max-width:1320px;margin:0 auto;padding:clamp(1.2rem,3vh,2rem) clamp(1.25rem
 .tags,.feats{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0 .7rem}
 .tags span,.feats span,.tag{font-size:.72rem;background:#f0f0f3;color:var(--gray);border-radius:99px;padding:.22rem .65rem}
 .open{margin-top:auto;display:inline-flex;align-items:center;gap:.4rem;font-family:var(--disp);font-size:.9rem;font-weight:500;color:var(--red)}
+
+/* featured card */
+.card.feature{grid-column:1/-1;display:grid;grid-template-columns:1.15fr .85fr}
+.card.feature .thumb{aspect-ratio:auto;min-height:280px}
+.card.feature .body{padding:clamp(1.4rem,3vw,2.2rem);justify-content:center}
+.card.feature .name{font-size:1.5rem}
+.card.feature .desc{font-size:.95rem}
+.card.feature .feats span{font-size:.78rem;padding:.3rem .8rem}
+@media(max-width:860px){.card.feature{grid-template-columns:1fr}.card.feature .thumb{min-height:200px;aspect-ratio:16/9}}
+
 /* group (systems) */
 .group{margin-top:2.4rem}
 .group-head{display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.1rem}
@@ -134,10 +144,15 @@ footer a{color:var(--red)}
   </div>
 </header>
 <main>
-  <section class="group">
-    <div class="group-head"><span class="gcode">A</span><h2>ขายหน้าร้านและบริการ</h2><span class="gline"></span></div>
-    <div class="cards">
-      <a class="card" href="./pos/?app=1">
+<div class="chips" id="chips">
+  <button class="fchip on" data-c="all">ทั้งหมด<b>10</b></button>
+  <button class="fchip" data-c="sell">ขายหน้าร้าน & บริการ<b>3</b></button>
+  <button class="fchip" data-c="docs">ลูกค้า & เอกสาร<b>2</b></button>
+  <button class="fchip" data-c="stock">คลัง & ทรัพย์สิน<b>2</b></button>
+  <button class="fchip" data-c="ops">คน งาน & ผู้บริหาร<b>3</b></button>
+</div>
+  <div class="grid" id="cardGrid">
+<a class="card feature" data-cat="sell" href="./pos/?app=1">
         <div class="thumb"><span class="acc" style="background:#0e9f6e"></span><img src="../shots/systems/pos.jpg" alt="ระบบ POS ขายดี" loading="lazy"></div>
         <div class="body">
           <span class="name">POS ขายดี <small>ขายหน้าร้าน</small></span>
@@ -146,31 +161,7 @@ footer a{color:var(--red)}
           <span class="open">เปิดระบบ →</span>
         </div>
       </a>
-      <a class="card" href="./kds/?app=1">
-        <div class="thumb"><span class="acc" style="background:#ea580c"></span><img src="../shots/systems/kds.jpg" alt="ระบบจอครัว ครัวดี" loading="lazy"></div>
-        <div class="body">
-          <span class="name">ครัวดี KDS <small>จอครัวร้านอาหาร</small></span>
-          <p class="desc">ตั๋วออร์เดอร์ไหล ใหม่→ทำ→เสร็จ จับเวลาเปลี่ยนสี รับออร์เดอร์+โน้ตพิเศษ</p>
-          <div class="feats"><span>จับเวลาสด</span><span>เสียงแจ้งเตือน</span><span>สรุปยอดวัน</span></div>
-          <span class="open">เปิดระบบ →</span>
-        </div>
-      </a>
-      <a class="card" href="./queue/?app=1">
-        <div class="thumb"><span class="acc" style="background:#9333ea"></span><img src="../shots/systems/queue.jpg" alt="ระบบจองคิว คิวดี" loading="lazy"></div>
-        <div class="body">
-          <span class="name">คิวดี <small>จองคิว + จอ TV</small></span>
-          <p class="desc">กดรับเลขคิวตามบริการ ประมาณเวลารอ จอ TV เรียกคิวตัวใหญ่พร้อมเสียง</p>
-          <div class="feats"><span>บัตรคิว</span><span>จอเรียกคิว</span><span>เสียงเรียก</span></div>
-          <span class="open">เปิดระบบ →</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <section class="group">
-    <div class="group-head"><span class="gcode">B</span><h2>ลูกค้าและเอกสาร</h2><span class="gline"></span></div>
-    <div class="cards">
-      <a class="card" href="./crm/?app=1">
+<a class="card" data-cat="docs" href="./crm/?app=1">
         <div class="thumb"><span class="acc" style="background:#5b5bd6"></span><img src="../shots/systems/crm.jpg" alt="ระบบ CRM ลูกค้าดี" loading="lazy"></div>
         <div class="body">
           <span class="name">ลูกค้าดี CRM <small>ทีมขาย</small></span>
@@ -179,64 +170,7 @@ footer a{color:var(--red)}
           <span class="open">เปิดระบบ →</span>
         </div>
       </a>
-      <a class="card" href="./documents/?app=1">
-        <div class="thumb"><span class="acc" style="background:#0284c7"></span><img src="../shots/systems/documents.jpg" alt="ระบบออกเอกสาร เอกสารดี" loading="lazy"></div>
-        <div class="body">
-          <span class="name">เอกสารดี <small>QT/IV/RE</small></span>
-          <p class="desc">ใบเสนอราคา แจ้งหนี้ เสร็จ คิด VAT 7% อัตโนมัติ ตัวอย่าง A4 พิมพ์จริง</p>
-          <div class="feats"><span>VAT 7%</span><span>เลขที่รันอัตโนมัติ</span><span>พิมพ์ A4</span></div>
-          <span class="open">เปิดระบบ →</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <section class="group">
-    <div class="group-head"><span class="gcode">C</span><h2>คลังและทรัพย์สิน</h2><span class="gline"></span></div>
-    <div class="cards">
-      <a class="card" href="./inventory/?app=1">
-        <div class="thumb"><span class="acc" style="background:#d97706"></span><img src="../shots/systems/inventory.jpg" alt="ระบบสต็อก สต็อกดี" loading="lazy"></div>
-        <div class="body">
-          <span class="name">สต็อกดี <small>คลังสินค้า</small></span>
-          <p class="desc">รับ-เบิกสินค้า แจ้งเตือนของใกล้หมด ประวัติเคลื่อนไหว สแกน SKU เด้งหา</p>
-          <div class="feats"><span>รับ/เบิก</span><span>แจ้งเตือนต่ำ</span><span>Movement log</span></div>
-          <span class="open">เปิดระบบ →</span>
-        </div>
-      </a>
-      <a class="card" href="./dorm/?app=1">
-        <div class="thumb"><span class="acc" style="background:#b45309"></span><img src="../shots/systems/dorm.jpg" alt="ระบบหอพัก ห้องดี" loading="lazy"></div>
-        <div class="body">
-          <span class="name">ห้องดี <small>หอพักและบิล</small></span>
-          <p class="desc">ผังห้อง 18 ห้อง จดมิเตอร์น้ำไฟ คิดบิลอัตโนมัติ ใบแจ้งค่าเช่า แจ้งซ่อม</p>
-          <div class="feats"><span>ผังห้องสด</span><span>มิเตอร์→บิล</span><span>แจ้งซ่อม</span></div>
-          <span class="open">เปิดระบบ →</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <section class="group">
-    <div class="group-head"><span class="gcode">D</span><h2>คน งาน และผู้บริหาร</h2><span class="gline"></span></div>
-    <div class="cards">
-      <a class="card" href="./hr/?app=1">
-        <div class="thumb"><span class="acc" style="background:#0d9488"></span><img src="../shots/systems/hr.jpg" alt="ระบบ HR คนดี" loading="lazy"></div>
-        <div class="body">
-          <span class="name">คนดี HR <small>ลงเวลาและลา</small></span>
-          <p class="desc">นาฬิกาลงเวลาจริง ตารางเดือน สาย/ขาด/OT ยื่นลา→อนุมัติ โควต้าคงเหลือ</p>
-          <div class="feats"><span>ลงเวลาสด</span><span>ตารางเดือน</span><span>อนุมัติลา</span></div>
-          <span class="open">เปิดระบบ →</span>
-        </div>
-      </a>
-      <a class="card" href="./kanban/?app=1">
-        <div class="thumb"><span class="acc" style="background:#7c3aed"></span><img src="../shots/systems/kanban.jpg" alt="ระบบ Kanban งานดี" loading="lazy"></div>
-        <div class="body">
-          <span class="name">งานดี <small>Kanban ทีม</small></span>
-          <p class="desc">บอร์ด 4 คอลัมน์ลากงาน label กำหนดส่ง เช็คลิสต์ย่อย สรุปภาพรวมทีม</p>
-          <div class="feats"><span>ลากงานข้ามคอลัมน์</span><span>เช็คลิสต์</span><span>สรุปรายคน</span></div>
-          <span class="open">เปิดระบบ →</span>
-        </div>
-      </a>
-      <a class="card" href="./dashboard/?app=1">
+<a class="card" data-cat="ops" href="./dashboard/?app=1">
         <div class="thumb"><span class="acc" style="background:#0891b2"></span><img src="../shots/systems/dashboard.jpg" alt="ระบบ Dashboard ผู้บริหารดี" loading="lazy"></div>
         <div class="body">
           <span class="name">ผู้บริหารดี <small>Executive BI</small></span>
@@ -245,8 +179,70 @@ footer a{color:var(--red)}
           <span class="open">เปิดระบบ →</span>
         </div>
       </a>
-    </div>
-  </section>
+<a class="card" data-cat="stock" href="./inventory/?app=1">
+        <div class="thumb"><span class="acc" style="background:#d97706"></span><img src="../shots/systems/inventory.jpg" alt="ระบบสต็อก สต็อกดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">สต็อกดี <small>คลังสินค้า</small></span>
+          <p class="desc">รับ-เบิกสินค้า แจ้งเตือนของใกล้หมด ประวัติเคลื่อนไหว สแกน SKU เด้งหา</p>
+          <div class="feats"><span>รับ/เบิก</span><span>แจ้งเตือนต่ำ</span><span>Movement log</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+<a class="card" data-cat="docs" href="./documents/?app=1">
+        <div class="thumb"><span class="acc" style="background:#0284c7"></span><img src="../shots/systems/documents.jpg" alt="ระบบออกเอกสาร เอกสารดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">เอกสารดี <small>QT/IV/RE</small></span>
+          <p class="desc">ใบเสนอราคา แจ้งหนี้ เสร็จ คิด VAT 7% อัตโนมัติ ตัวอย่าง A4 พิมพ์จริง</p>
+          <div class="feats"><span>VAT 7%</span><span>เลขที่รันอัตโนมัติ</span><span>พิมพ์ A4</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+<a class="card" data-cat="sell" href="./kds/?app=1">
+        <div class="thumb"><span class="acc" style="background:#ea580c"></span><img src="../shots/systems/kds.jpg" alt="ระบบจอครัว ครัวดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">ครัวดี KDS <small>จอครัวร้านอาหาร</small></span>
+          <p class="desc">ตั๋วออร์เดอร์ไหล ใหม่→ทำ→เสร็จ จับเวลาเปลี่ยนสี รับออร์เดอร์+โน้ตพิเศษ</p>
+          <div class="feats"><span>จับเวลาสด</span><span>เสียงแจ้งเตือน</span><span>สรุปยอดวัน</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+<a class="card" data-cat="sell" href="./queue/?app=1">
+        <div class="thumb"><span class="acc" style="background:#9333ea"></span><img src="../shots/systems/queue.jpg" alt="ระบบจองคิว คิวดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">คิวดี <small>จองคิว + จอ TV</small></span>
+          <p class="desc">กดรับเลขคิวตามบริการ ประมาณเวลารอ จอ TV เรียกคิวตัวใหญ่พร้อมเสียง</p>
+          <div class="feats"><span>บัตรคิว</span><span>จอเรียกคิว</span><span>เสียงเรียก</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+<a class="card" data-cat="ops" href="./hr/?app=1">
+        <div class="thumb"><span class="acc" style="background:#0d9488"></span><img src="../shots/systems/hr.jpg" alt="ระบบ HR คนดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">คนดี HR <small>ลงเวลาและลา</small></span>
+          <p class="desc">นาฬิกาลงเวลาจริง ตารางเดือน สาย/ขาด/OT ยื่นลา→อนุมัติ โควต้าคงเหลือ</p>
+          <div class="feats"><span>ลงเวลาสด</span><span>ตารางเดือน</span><span>อนุมัติลา</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+<a class="card" data-cat="stock" href="./dorm/?app=1">
+        <div class="thumb"><span class="acc" style="background:#b45309"></span><img src="../shots/systems/dorm.jpg" alt="ระบบหอพัก ห้องดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">ห้องดี <small>หอพักและบิล</small></span>
+          <p class="desc">ผังห้อง 18 ห้อง จดมิเตอร์น้ำไฟ คิดบิลอัตโนมัติ ใบแจ้งค่าเช่า แจ้งซ่อม</p>
+          <div class="feats"><span>ผังห้องสด</span><span>มิเตอร์→บิล</span><span>แจ้งซ่อม</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+<a class="card" data-cat="ops" href="./kanban/?app=1">
+        <div class="thumb"><span class="acc" style="background:#7c3aed"></span><img src="../shots/systems/kanban.jpg" alt="ระบบ Kanban งานดี" loading="lazy"></div>
+        <div class="body">
+          <span class="name">งานดี <small>Kanban ทีม</small></span>
+          <p class="desc">บอร์ด 4 คอลัมน์ลากงาน label กำหนดส่ง เช็คลิสต์ย่อย สรุปภาพรวมทีม</p>
+          <div class="feats"><span>ลากงานข้ามคอลัมน์</span><span>เช็คลิสต์</span><span>สรุปรายคน</span></div>
+          <span class="open">เปิดระบบ →</span>
+        </div>
+      </a>
+  </div>
 </main>
 <section class="enroll">
   <div>
@@ -272,6 +268,21 @@ footer a{color:var(--red)}
     }, { rootMargin: '0px 0px -8% 0px' });
     cards.forEach(function(c){ io.observe(c); });
   } else { cards.forEach(function(c){ c.classList.add('in'); }); }
+})();
+</script>
+<script>
+(function(){
+  var chips = document.getElementById('chips');
+  if (!chips) return;
+  chips.addEventListener('click', function(e){
+    var b = e.target.closest('.fchip'); if (!b) return;
+    chips.querySelectorAll('.fchip').forEach(function(x){ x.classList.remove('on'); });
+    b.classList.add('on');
+    var c = b.dataset.c;
+    document.querySelectorAll('.card').forEach(function(card){
+      card.style.display = (c === 'all' || card.dataset.cat === c) ? '' : 'none';
+    });
+  });
 })();
 </script>
 </body>
