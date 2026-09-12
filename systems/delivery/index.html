@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ส่งดี — ระบบจัดการงานจัดส่ง | ZenityX Demos</title>
+<meta name="description" content="ระบบเดโมจัดการงานจัดส่ง — มอบหมายไรเดอร์ ติดตามสถานะ สรุปงานรายวัน">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --acc:#a16207; --acc-deep:#854d06; --acc-soft:#faf3e0;
+  --bg:#f6f6f4; --card:#ffffff; --side:#221c10; --ink:#241f14; --muted:#7d7460; --line:#e6e2d6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.mono{font-family:'JetBrains Mono',monospace}
+[hidden]{display:none!important}
+
+/* LOGIN */
+.login{min-height:100vh;display:grid;place-items:center;padding:1.5rem;background:linear-gradient(160deg,#3a2c08,#a16207 150%)}
+.login-card{background:#fff;border-radius:24px;padding:clamp(2rem,5vw,3rem);width:min(430px,100%);box-shadow:0 30px 80px -20px rgba(0,0,0,.4);text-align:center}
+.login-logo{width:68px;height:68px;border-radius:18px;background:var(--acc);display:grid;place-items:center;margin:0 auto 1rem}
+.login h1{font-size:1.7rem;font-weight:600}
+.login .sub{color:var(--muted);font-size:.9rem;margin:.3rem 0 1.6rem}
+.login input{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:.85rem 1rem;margin-bottom:.8rem;font-size:.95rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:500;border-radius:12px;padding:.85rem 1.4rem;transition:all .2s;min-height:44px}
+.btn-a{background:var(--acc);color:#fff;box-shadow:0 8px 20px -8px rgba(161,98,7,.5)}
+.btn-a:hover{background:var(--acc-deep);transform:translateY(-1px)}
+.btn-o{border:1.5px solid var(--line);color:var(--muted)}
+.btn-o:hover{border-color:var(--acc);color:var(--acc)}
+.btn-block{width:100%}
+.demo-note{margin-top:1rem;font-size:.8rem;color:var(--muted)}
+.demo-note b{color:var(--acc)}
+.login-credit{margin-top:1.6rem;padding-top:1.2rem;border-top:1px dashed var(--line);font-size:.75rem;color:var(--muted)}
+.login-credit a{color:#FF0000;text-decoration:none;font-weight:500}
+
+/* APP */
+.app{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
+.side{background:var(--side);color:#e3d9c2;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.side-logo{display:flex;align-items:center;gap:.7rem;padding:1.2rem 1.2rem 1rem;border-bottom:1px solid rgba(227,217,194,.12)}
+.side-logo .mk{width:38px;height:38px;border-radius:10px;background:var(--acc);display:grid;place-items:center;flex:none}
+.side-logo b{color:#fff;font-size:1.05rem;font-weight:600;display:block;line-height:1.2}
+.side-logo small{font-size:.68rem;opacity:.65}
+.side nav{padding:.8rem .7rem;display:grid;gap:.2rem;flex:1}
+.navi{display:flex;align-items:center;gap:.7rem;padding:.7rem .8rem;border-radius:10px;font-size:.92rem;color:#c3b693;transition:all .2s;text-align:left;width:100%;min-height:44px}
+.navi:hover{background:rgba(255,255,255,.06);color:#fff}
+.navi.on{background:var(--acc);color:#fff;font-weight:500}
+.side-foot{padding:1rem .9rem;border-top:1px solid rgba(227,217,194,.12)}
+.user-chip{display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-weight:600;flex:none}
+.user-chip b{color:#fff;font-size:.88rem;display:block;line-height:1.2}
+.user-chip small{font-size:.72rem;opacity:.65}
+.logout{width:100%;text-align:left;padding:.6rem .8rem;border-radius:10px;font-size:.85rem;color:#c3b693;transition:all .2s;min-height:44px}
+.logout:hover{background:rgba(214,69,69,.15);color:#ff9d9d}
+.main{min-width:0}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);padding:.8rem clamp(1rem,3vw,1.6rem);display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.topbar h2{font-size:1.1rem;font-weight:600;margin-right:auto}
+.topbar .date{font-size:.82rem;color:var(--muted)}
+.kpi-chip{background:var(--acc-soft);color:var(--acc-deep);border-radius:99px;padding:.4rem .9rem;font-size:.82rem;font-weight:500}
+.reset-btn{font-size:.78rem;color:var(--muted);border:1.5px solid var(--line);border-radius:99px;padding:.45rem .9rem;min-height:44px;transition:all .2s}
+.reset-btn:hover{border-color:#d64545;color:#d64545}
+.content{padding:clamp(1rem,3vw,1.6rem)}
+
+/* jobs */
+.jobs-head{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:.5rem 1rem;font-size:.84rem;transition:all .2s;min-height:44px}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:500}
+.chip b{font-family:'JetBrains Mono';font-size:.78rem;opacity:.7;margin-left:.2rem}
+.btn-new{margin-left:auto}
+.job-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:.9rem}
+.job{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:1.1rem 1.2rem;transition:box-shadow .2s,transform .2s}
+.job:hover{transform:translateY(-2px);box-shadow:0 10px 26px -14px rgba(36,31,20,.2)}
+.job .jh{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.job .jh b{font-family:'JetBrains Mono';font-size:.92rem}
+.badge{display:inline-block;font-size:.72rem;font-weight:600;padding:.22rem .7rem;border-radius:99px}
+.s-wait{background:#f0f0f0;color:#666}
+.s-going{background:#fff3d6;color:#92600a}
+.s-done{background:#dcf5e9;color:#0b7a55}
+.s-issue{background:#fdeaea;color:#c23b3b}
+.job .addr{font-size:.88rem;color:var(--muted);margin-bottom:.5rem}
+.job .cust{font-size:.9rem;font-weight:500}
+.job .jr{display:flex;align-items:center;gap:.5rem;margin-top:.7rem;font-size:.82rem;color:var(--muted)}
+.job .jr select{border:1.5px solid var(--line);border-radius:10px;padding:.45rem .6rem;font-size:.82rem;min-height:40px;flex:1}
+.job .acts{display:flex;gap:.5rem;margin-top:.7rem}
+.job .acts .btn{flex:1;font-size:.82rem;padding:.55rem .8rem}
+
+/* riders */
+.rider-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.9rem}
+.rider{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:1.2rem;text-align:center}
+.rider .rav{width:52px;height:52px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-weight:600;font-size:1.2rem;margin:0 auto .6rem}
+.rider b{display:block;font-size:.98rem}
+.rider .st{font-size:.78rem;margin-top:.3rem}
+.rider .st.on{color:#92600a;font-weight:600}
+.rider .st.off{color:#0b7a55}
+.rider .cnt{font-family:'JetBrains Mono';font-size:.8rem;color:var(--muted);margin-top:.5rem}
+
+/* timeline modal */
+.overlay{position:fixed;inset:0;background:rgba(34,28,16,.55);backdrop-filter:blur(4px);z-index:200;display:grid;place-items:center;padding:1rem}
+.modal{background:#fff;border-radius:20px;width:min(480px,100%);max-height:90vh;overflow-y:auto;padding:1.6rem}
+.modal h3{font-size:1.05rem;margin-bottom:1rem}
+.tl{position:relative;padding-left:1.6rem}
+.tl::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl-item{position:relative;padding:.55rem 0 .55rem .6rem}
+.tl-item::before{content:'';position:absolute;left:-1.28rem;top:.85rem;width:10px;height:10px;border-radius:50%;background:var(--acc);border:2px solid #fff;box-shadow:0 0 0 2px var(--acc-soft)}
+.tl-item b{font-size:.9rem;font-weight:500;display:block}
+.tl-item span{font-size:.78rem;color:var(--muted);font-family:'JetBrains Mono'}
+.modal .m-acts{display:flex;gap:.6rem;margin-top:1.2rem}
+
+/* summary */
+.sum-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.9rem;margin-bottom:1.2rem}
+.kpi{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:1.1rem 1.2rem}
+.kpi span{font-size:.78rem;color:var(--muted)}
+.kpi b{font-family:'JetBrains Mono';font-size:1.6rem;font-weight:700;display:block;color:var(--acc-deep)}
+.tbl-wrap{background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{text-align:left;padding:.8rem 1rem;color:var(--muted);font-weight:500;font-size:.78rem;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:.75rem 1rem;border-bottom:1px solid #f2f0e9;vertical-align:middle}
+tr:last-child td{border-bottom:0}
+
+/* toast */
+.toast{position:fixed;top:1rem;right:1rem;z-index:300;background:var(--ink);color:#fff;border-radius:12px;padding:.85rem 1.2rem;font-size:.88rem;box-shadow:0 12px 30px -10px rgba(0,0,0,.35);opacity:0;transform:translateY(-8px);transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
+
+@media(max-width:860px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed;z-index:150;left:0;top:0;bottom:0;width:236px;transform:translateX(-100%);transition:transform .3s}
+  .side.open{transform:none}
+  .menu-btn{display:inline-flex!important}
+}
+.menu-btn{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:1.5px solid var(--line);border-radius:10px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- LOGIN -->
+<div class="login" id="loginView">
+  <div class="login-card">
+    <div class="login-logo"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M5 17h14M6 17V8h9l3 4v5"/><circle cx="8.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/><path d="M2 17h2"/></svg></div>
+    <h1>ส่งดี</h1>
+    <p class="sub">ระบบจัดการงานจัดส่ง · ส่งดี เอ็กซ์เพรส</p>
+    <input type="email" value="ops@songdee.express" readonly aria-label="อีเมล">
+    <input type="password" value="demo1234" readonly aria-label="รหัสผ่าน">
+    <button class="btn btn-a btn-block" id="loginBtn" style="font-size:1rem">เข้าสู่ระบบ</button>
+    <p class="demo-note">ระบบเดโม — <b>กดเข้าได้เลย</b> ไม่ต้องใส่รหัสผ่าน</p>
+    <div class="login-credit">ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener">First Vibe : Coding — ZenityX</a></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app" id="appView" hidden>
+  <aside class="side" id="sidebar">
+    <div class="side-logo">
+      <span class="mk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M5 17h14M6 17V8h9l3 4v5"/><circle cx="8.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/></svg></span>
+      <span><b>ส่งดี</b><small>Operations Center</small></span>
+    </div>
+    <nav>
+      <button class="navi on" data-page="jobs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>งานจัดส่งวันนี้</button>
+      <button class="navi" data-page="riders"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>ไรเดอร์</button>
+      <button class="navi" data-page="sum"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 5-8"/></svg>สรุปวันนี้</button>
+    </nav>
+    <div class="side-foot">
+      <div class="user-chip"><span class="avatar">อ</span><span><b>ออฟ (แอดมิน)</b><small>ศูนย์กระจายสินค้า</small></span></div>
+      <button class="logout" id="logoutBtn">← ออกจากระบบ</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <button class="menu-btn" id="menuBtn" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <h2 id="pageTitle">งานจัดส่งวันนี้</h2>
+      <span class="kpi-chip">กำลังส่ง <b id="activeCount" class="mono">0</b> งาน</span>
+      <span class="date" id="todayDate"></span>
+      <button class="reset-btn" id="resetBtn">รีเซ็ตข้อมูลตัวอย่าง</button>
+    </div>
+
+    <div class="content">
+      <!-- JOBS -->
+      <div id="page-jobs">
+        <div class="jobs-head">
+          <div id="filterChips" style="display:flex;gap:.5rem;flex-wrap:wrap"></div>
+          <button class="btn btn-a btn-new" id="newJobBtn">+ สร้างงานจัดส่ง</button>
+        </div>
+        <div class="job-grid" id="jobGrid"></div>
+      </div>
+
+      <!-- RIDERS -->
+      <div id="page-riders" hidden>
+        <div class="rider-grid" id="riderGrid"></div>
+      </div>
+
+      <!-- SUMMARY -->
+      <div id="page-sum" hidden>
+        <div class="sum-grid" id="sumKpis"></div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>เลขงาน</th><th>ลูกค้า</th><th>ปลายทาง</th><th>ไรเดอร์</th><th>สถานะ</th><th>เวลาสำเร็จ</th></tr></thead>
+            <tbody id="sumBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- job timeline modal -->
+<div class="overlay" id="jobOverlay" hidden>
+  <div class="modal">
+    <h3 id="jmTitle">—</h3>
+    <div id="jmMeta" style="font-size:.86rem;color:var(--muted);margin-bottom:1rem"></div>
+    <div class="tl" id="jmTimeline"></div>
+    <div class="m-acts">
+      <button class="btn btn-o" id="jmClose" style="flex:1">ปิด</button>
+    </div>
+  </div>
+</div>
+
+<!-- new job modal -->
+<div class="overlay" id="newOverlay" hidden>
+  <div class="modal">
+    <h3>สร้างงานจัดส่งใหม่</h3>
+    <div style="display:grid;gap:.7rem">
+      <input id="njCust" placeholder="ชื่อลูกค้า *" style="border:1.5px solid var(--line);border-radius:10px;padding:.7rem .9rem" aria-label="ชื่อลูกค้า">
+      <input id="njAddr" placeholder="ปลายทาง (เขต/จังหวัด) *" style="border:1.5px solid var(--line);border-radius:10px;padding:.7rem .9rem" aria-label="ปลายทาง">
+      <select id="njType" style="border:1.5px solid var(--line);border-radius:10px;padding:.7rem .9rem;min-height:44px" aria-label="ประเภทงาน">
+        <option value="เอกสาร">เอกสาร</option>
+        <option value="พัสดุเล็ก">พัสดุเล็ก</option>
+        <option value="พัสดุใหญ่">พัสดุใหญ่</option>
+        <option value="อาหาร">อาหาร</option>
+      </select>
+    </div>
+    <div class="m-acts">
+      <button class="btn btn-o" id="njCancel" style="flex:1">ยกเลิก</button>
+      <button class="btn btn-a" id="njSave" style="flex:1">สร้างงาน</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<a href="../" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
+
+<script>
+(function(){
+'use strict';
+var LS = 'zx-delivery-v1';
+var RIDERS = [
+  { id:'r1', n:'ต้น วิชัย',  zone:'ในเมือง' },
+  { id:'r2', n:'บอล ธีรพงษ์', zone:'ตะวันออก' },
+  { id:'r3', n:'มายด์ ปภาดา', zone:'เหนือ' },
+  { id:'r4', n:'โอ๊ต กิตติ',  zone:'ใต้' },
+  { id:'r5', n:'เบนซ์ ณัฐพล', zone:'ตะวันตก' }
+];
+var STATUS = {
+  wait:  { t:'รอจัด',   cls:'s-wait'  },
+  going: { t:'กำลังส่ง', cls:'s-going' },
+  done:  { t:'ส่งแล้ว',  cls:'s-done'  },
+  issue: { t:'มีปัญหา',  cls:'s-issue' }
+};
+var ADDR = ['บางกะปิ','ลาดพร้าว','บางนา','ธนบุรี','พระโขนง','ห้วยขวาง','ดอนเมือง','มีนบุรี','จตุจักร','บางแค','ราชเทวี','ปทุมวัน'];
+var CUST = ['ร้านกาแฟสดใส','คุณมายด์','บจก.พูนทรัพย์','คุณโอ๋','ร้านชำแม่ลาน้อย','คุณเจ','สำนักงานตั้งตระการ','คุณฝ้าย','หจก.รุ่งเรือง','คุณเต้ย'];
+var TYPES = ['เอกสาร','พัสดุเล็ก','พัสดุใหญ่','อาหาร'];
+
+function seedJobs(){
+  var jobs = [];
+  for (var i = 0; i < 12; i++) {
+    var st = i < 4 ? 'wait' : (i < 8 ? 'going' : (i < 11 ? 'done' : 'wait'));
+    var j = {
+      id: 'JOB-' + (2600 + i),
+      cust: CUST[i % CUST.length],
+      addr: 'เขต' + ADDR[i % ADDR.length],
+      type: TYPES[i % TYPES.length],
+      status: st,
+      rider: st === 'wait' ? null : RIDERS[i % RIDERS.length].id,
+      log: [{ t: 'สร้างงาน', at: Date.now() - (12 - i) * 3600000 }]
+    };
+    if (st === 'going') j.log.push({ t: 'มอบหมาย + รับงาน', at: Date.now() - (10 - i) * 1800000 });
+    if (st === 'done') { j.log.push({ t: 'มอบหมาย + รับงาน', at: Date.now() - (10 - i) * 1800000 }); j.log.push({ t: 'ส่งสำเร็จ', at: Date.now() - (8 - i) * 1200000 }); }
+    jobs.push(j);
+  }
+  return jobs;
+}
+var state = load() || { jobs: seedJobs(), seq: 2612 };
+function load(){ try { return JSON.parse(localStorage.getItem(LS)); } catch(e){ return null; } }
+function save(){ localStorage.setItem(LS, JSON.stringify(state)); }
+function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show');},2200); }
+function rname(id){ var r = RIDERS.find(function(x){return x.id===id;}); return r ? r.n : '—'; }
+function tstr(ts){ return new Date(ts).toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}); }
+var filter = 'all';
+
+/* login */
+document.getElementById('loginBtn').addEventListener('click', function(){
+  document.getElementById('loginView').hidden = true;
+  document.getElementById('appView').hidden = false;
+});
+document.getElementById('logoutBtn').addEventListener('click', function(){
+  document.getElementById('appView').hidden = true;
+  document.getElementById('loginView').hidden = false;
+});
+
+/* nav */
+var titles = { jobs:'งานจัดส่งวันนี้', riders:'ไรเดอร์', sum:'สรุปวันนี้' };
+document.querySelectorAll('.navi').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.navi').forEach(function(x){ x.classList.remove('on'); });
+    b.classList.add('on');
+    var p = b.dataset.page;
+    ['jobs','riders','sum'].forEach(function(x){ document.getElementById('page-'+x).hidden = x !== p; });
+    document.getElementById('pageTitle').textContent = titles[p];
+    document.getElementById('sidebar').classList.remove('open');
+    renderAll();
+  });
+});
+document.getElementById('menuBtn').addEventListener('click', function(){
+  document.getElementById('sidebar').classList.toggle('open');
+});
+
+/* date */
+var days=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+var months=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+var now=new Date();
+document.getElementById('todayDate').textContent='วัน'+days[now.getDay()]+'ที่ '+now.getDate()+' '+months[now.getMonth()]+' '+(now.getFullYear()+543);
+
+/* filter chips */
+function renderChips(){
+  var counts = { all: state.jobs.length };
+  Object.keys(STATUS).forEach(function(k){ counts[k] = state.jobs.filter(function(j){return j.status===k;}).length; });
+  document.getElementById('filterChips').innerHTML =
+    '<button class="chip'+(filter==='all'?' on':'')+'" data-f="all">ทั้งหมด<b>'+counts.all+'</b></button>' +
+    Object.keys(STATUS).map(function(k){
+      return '<button class="chip'+(filter===k?' on':'')+'" data-f="'+k+'">'+STATUS[k].t+'<b>'+counts[k]+'</b></button>';
+    }).join('');
+  document.getElementById('activeCount').textContent = counts.going;
+}
+document.getElementById('filterChips').addEventListener('click', function(e){
+  var b = e.target.closest('.chip'); if (!b) return;
+  filter = b.dataset.f; renderChips(); renderJobs();
+});
+
+/* jobs */
+function renderJobs(){
+  var list = state.jobs.filter(function(j){ return filter === 'all' || j.status === filter; });
+  document.getElementById('jobGrid').innerHTML = list.map(function(j){
+    var st = STATUS[j.status];
+    var acts = '';
+    if (j.status === 'wait') acts = '<button class="btn btn-a" data-act="assign" data-id="'+j.id+'">มอบหมายไรเดอร์</button>';
+    else if (j.status === 'going') acts = '<button class="btn btn-a" data-act="done" data-id="'+j.id+'">ส่งสำเร็จ</button><button class="btn btn-o" data-act="issue" data-id="'+j.id+'">แจ้งปัญหา</button>';
+    else if (j.status === 'issue') acts = '<button class="btn btn-a" data-act="retry" data-id="'+j.id+'">ส่งใหม่</button>';
+    return '<div class="job">' +
+      '<div class="jh"><b>'+j.id+'</b><span class="badge '+st.cls+'">'+st.t+'</span></div>' +
+      '<div class="cust">'+j.cust+'</div>' +
+      '<div class="addr">'+j.type+' → '+j.addr+'</div>' +
+      '<div class="jr"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>' + (j.rider ? rname(j.rider) : 'ยังไม่มีไรเดอร์') + '</div>' +
+      '<div class="acts">' + acts + '<button class="btn btn-o" data-act="view" data-id="'+j.id+'">ไทม์ไลน์</button></div>' +
+      '</div>';
+  }).join('') || '<p style="color:var(--muted);padding:2rem 0">ไม่มีงานในหมวดนี้</p>';
+}
+
+document.getElementById('jobGrid').addEventListener('click', function(e){
+  var b = e.target.closest('button[data-act]'); if (!b) return;
+  var j = state.jobs.find(function(x){ return x.id === b.dataset.id; });
+  var act = b.dataset.act;
+  if (act === 'view') { openJob(j); return; }
+  if (act === 'assign') {
+    var free = RIDERS.filter(function(r){ return !state.jobs.some(function(x){ return x.rider===r.id && x.status==='going'; }); });
+    if (!free.length) { toast('ไรเดอร์ทุกคนกำลังส่งอยู่ — รอสักครู่'); return; }
+    j.rider = free[0].id;
+    j.status = 'going';
+    j.log.push({ t:'มอบหมายให้ ' + rname(j.rider) + ' และรับงาน', at: Date.now() });
+    save(); toast(j.id + ' → ' + rname(j.rider));
+  } else if (act === 'done') {
+    j.status = 'done'; j.log.push({ t:'ส่งสำเร็จ', at: Date.now() });
+    save(); toast(j.id + ' ส่งสำเร็จแล้ว');
+  } else if (act === 'issue') {
+    j.status = 'issue'; j.log.push({ t:'แจ้งปัญหา (ติดต่อผู้รับไม่ได้)', at: Date.now() });
+    save(); toast(j.id + ' บันทึกปัญหาแล้ว');
+  } else if (act === 'retry') {
+    j.status = 'wait'; j.rider = null; j.log.push({ t:'กลับคิวรอจัดใหม่', at: Date.now() });
+    save(); toast(j.id + ' กลับเข้าคิว');
+  }
+  renderAll();
+});
+
+/* job modal */
+function openJob(j){
+  document.getElementById('jmTitle').textContent = j.id + ' — ' + j.cust;
+  document.getElementById('jmMeta').textContent = j.type + ' → ' + j.addr + ' · ไรเดอร์: ' + rname(j.rider);
+  document.getElementById('jmTimeline').innerHTML = j.log.slice().reverse().map(function(l){
+    return '<div class="tl-item"><b>'+l.t+'</b><span>'+tstr(l.at)+' น.</span></div>';
+  }).join('');
+  document.getElementById('jobOverlay').hidden = false;
+}
+document.getElementById('jmClose').addEventListener('click', function(){ document.getElementById('jobOverlay').hidden = true; });
+
+/* new job */
+document.getElementById('newJobBtn').addEventListener('click', function(){ document.getElementById('newOverlay').hidden = false; });
+document.getElementById('njCancel').addEventListener('click', function(){ document.getElementById('newOverlay').hidden = true; });
+document.getElementById('njSave').addEventListener('click', function(){
+  var c = document.getElementById('njCust').value.trim();
+  var a = document.getElementById('njAddr').value.trim();
+  if (!c || !a) { toast('กรอกชื่อลูกค้าและปลายทางก่อนครับ'); return; }
+  var j = { id:'JOB-' + (state.seq++), cust:c, addr:a, type:document.getElementById('njType').value, status:'wait', rider:null, log:[{t:'สร้างงาน',at:Date.now()}] };
+  state.jobs.unshift(j); save();
+  document.getElementById('newOverlay').hidden = true;
+  document.getElementById('njCust').value = ''; document.getElementById('njAddr').value = '';
+  toast('สร้าง ' + j.id + ' แล้ว');
+  renderAll();
+});
+
+/* riders */
+function renderRiders(){
+  document.getElementById('riderGrid').innerHTML = RIDERS.map(function(r){
+    var active = state.jobs.filter(function(j){ return j.rider===r.id && j.status==='going'; });
+    var done = state.jobs.filter(function(j){ return j.rider===r.id && j.status==='done'; }).length;
+    return '<div class="rider"><span class="rav">'+r.n[0]+'</span><b>'+r.n+'</b>' +
+      '<div class="st '+(active.length?'on':'off')+'">'+(active.length ? 'กำลังส่ง: '+active.map(function(j){return j.id;}).join(', ') : 'ว่าง พร้อมรับงาน')+'</div>' +
+      '<div class="cnt">โซน '+r.zone+' · ส่งสำเร็จวันนี้ '+done+' งาน</div></div>';
+  }).join('');
+}
+
+/* summary */
+function renderSum(){
+  var done = state.jobs.filter(function(j){return j.status==='done';});
+  var going = state.jobs.filter(function(j){return j.status==='going';});
+  var wait = state.jobs.filter(function(j){return j.status==='wait';});
+  var issue = state.jobs.filter(function(j){return j.status==='issue';});
+  document.getElementById('sumKpis').innerHTML =
+    '<div class="kpi"><span>งานทั้งหมด</span><b>'+state.jobs.length+'</b></div>' +
+    '<div class="kpi"><span>ส่งสำเร็จ</span><b style="color:#0b7a55">'+done.length+'</b></div>' +
+    '<div class="kpi"><span>กำลังส่ง</span><b>'+going.length+'</b></div>' +
+    '<div class="kpi"><span>รอจัด</span><b>'+wait.length+'</b></div>' +
+    '<div class="kpi"><span>มีปัญหา</span><b style="color:#c23b3b">'+issue.length+'</b></div>';
+  document.getElementById('sumBody').innerHTML = state.jobs.map(function(j){
+    var doneLog = j.log.filter(function(l){return l.t==='ส่งสำเร็จ';})[0];
+    return '<tr><td class="mono">'+j.id+'</td><td>'+j.cust+'</td><td>'+j.addr+'</td><td>'+rname(j.rider)+'</td>' +
+      '<td><span class="badge '+STATUS[j.status].cls+'">'+STATUS[j.status].t+'</span></td>' +
+      '<td class="mono">'+(doneLog ? tstr(doneLog.at) : '—')+'</td></tr>';
+  }).join('');
+}
+
+function renderAll(){ renderChips(); renderJobs(); renderRiders(); renderSum(); }
+
+document.getElementById('resetBtn').addEventListener('click', function(){
+  if (confirm('ล้างงานทั้งหมดและเริ่มข้อมูลตัวอย่างใหม่?')) {
+    localStorage.removeItem(LS);
+    state = { jobs: seedJobs(), seq: 2612 };
+    renderAll(); toast('รีเซ็ตข้อมูลแล้ว');
+  }
+});
+
+renderAll();
+})();
+</script>
+</body>
+</html>

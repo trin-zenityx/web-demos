@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>นัดดี — ระบบปฏิทินนัดหมาย คลินิกทันตกรรมยิ้มดี</title>
+<meta name="description" content="ระบบเดโมปฏิทินนัดหมายสำหรับคลินิกทันตกรรม จัดการนัดหมาย ผู้ป่วย และตารางทันตแพทย์ในที่เดียว">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#c2410c;
+  --accent-dark:#9a3412;
+  --accent-soft:#fff7ed;
+  --ink:#1c1917;
+  --muted:#78716c;
+  --line:#e7e5e4;
+  --bg:#fafaf9;
+  --card:#ffffff;
+  --dark:#1c1917;
+  --dark-2:#292524;
+  --ok:#15803d; --ok-bg:#dcfce7;
+  --warn:#b45309; --warn-bg:#fef3c7;
+  --bad:#b91c1c; --bad-bg:#fee2e2;
+  --gray:#57534e; --gray-bg:#f5f5f4;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(28,25,23,.06),0 8px 24px rgba(28,25,23,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'IBM Plex Sans Thai',system-ui,sans-serif;
+  font-size:15px;line-height:1.65;color:var(--ink);background:var(--bg);
+}
+.num{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:15px}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+svg{display:block}
+
+/* ---------- LOGIN ---------- */
+.login{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+  background:
+    radial-gradient(900px 500px at 85% -10%,rgba(194,65,12,.55),transparent 60%),
+    radial-gradient(700px 500px at -10% 110%,rgba(194,65,12,.28),transparent 55%),
+    linear-gradient(160deg,#292524 0%,#1c1917 55%,#0c0a09 100%);
+}
+.login-card{
+  width:100%;max-width:400px;background:var(--card);border-radius:20px;padding:36px 32px 28px;
+  box-shadow:0 24px 64px rgba(0,0,0,.45);
+}
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.login-logo .mark{width:48px;height:48px;border-radius:14px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex:none}
+.login-logo h1{font-size:24px;font-weight:600;letter-spacing:-.01em}
+.login-logo h1 small{display:block;font-size:12.5px;font-weight:400;color:var(--muted)}
+.login-sub{color:var(--muted);font-size:14px;margin:6px 0 22px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13.5px;font-weight:500;margin-bottom:6px}
+.field input,.field select,.field textarea{
+  width:100%;min-height:44px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+  background:#fff;color:var(--ink);transition:border-color .15s,box-shadow .15s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(194,65,12,.15);outline:none}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;
+  padding:10px 18px;border-radius:10px;border:1px solid transparent;font-weight:500;font-size:15px;
+  transition:background .15s,border-color .15s,color .15s;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-dark)}
+.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-danger{background:#fff;border-color:#fecaca;color:var(--bad)}
+.btn-danger:hover{background:var(--bad-bg)}
+.btn-block{width:100%}
+.btn-sm{min-height:44px;padding:8px 12px;font-size:13.5px;border-radius:9px}
+.login-note{
+  margin-top:16px;font-size:12.5px;color:var(--muted);background:var(--accent-soft);
+  border:1px dashed #fdba74;border-radius:10px;padding:10px 12px;
+}
+.login-credit{margin-top:18px;text-align:center;font-size:12px;color:var(--muted)}
+.login-credit a{color:var(--accent);text-decoration:none;font-weight:500}
+.login-credit a:hover{text-decoration:underline}
+
+/* ---------- APP SHELL ---------- */
+.app{display:flex;min-height:100vh}
+.sidebar{
+  position:fixed;inset:0 auto 0 0;width:240px;background:var(--dark);color:#e7e5e4;
+  display:flex;flex-direction:column;z-index:700;transition:transform .25s ease;
+}
+.sidebar-brand{display:flex;align-items:center;gap:10px;padding:20px 18px;border-bottom:1px solid var(--dark-2)}
+.sidebar-brand .mark{width:38px;height:38px;border-radius:11px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex:none}
+.sidebar-brand b{font-size:17px;font-weight:600;color:#fff}
+.sidebar-brand span{display:block;font-size:11.5px;color:#a8a29e;font-weight:400}
+.nav{padding:14px 10px;display:flex;flex-direction:column;gap:4px;flex:1}
+.nav button{
+  display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:10px 12px;
+  border:none;border-radius:10px;background:transparent;color:#d6d3d1;font-size:14.5px;text-align:left;
+  transition:background .15s,color .15s;
+}
+.nav button:hover{background:var(--dark-2);color:#fff}
+.nav button.active{background:var(--accent);color:#fff}
+.nav button svg{flex:none}
+.sidebar-user{border-top:1px solid var(--dark-2);padding:14px}
+.sidebar-user .who{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;flex:none}
+.sidebar-user .who b{display:block;font-size:13.5px;color:#fff;font-weight:500}
+.sidebar-user .who span{font-size:11.5px;color:#a8a29e}
+.btn-logout{
+  display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:44px;
+  background:transparent;border:1px solid var(--dark-2);border-radius:10px;color:#d6d3d1;font-size:13.5px;
+}
+.btn-logout:hover{border-color:var(--accent);color:#fff}
+
+.main{flex:1;margin-left:240px;min-width:0;display:flex;flex-direction:column}
+.topbar{
+  position:sticky;top:0;z-index:600;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 24px;height:64px;
+}
+.topbar h2{font-size:18px;font-weight:600;letter-spacing:-.01em;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .date{font-size:13.5px;color:var(--muted);white-space:nowrap}
+.hamburger{display:none;width:44px;height:44px;border:1px solid var(--line);background:#fff;border-radius:10px;align-items:center;justify-content:center}
+.content{padding:24px;max-width:1200px;width:100%;margin:0 auto}
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.page-head h3{font-size:22px;font-weight:600;letter-spacing:-.01em}
+.page-head p{color:var(--muted);font-size:13.5px;margin-top:2px}
+
+/* ---------- CARDS / TABLES ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line);font-size:14px;vertical-align:middle}
+th{font-size:12.5px;color:var(--muted);font-weight:500;background:#fafaf9;white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:#fafaf9}
+.muted{color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:13px;white-space:nowrap}
+.chip .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.badge{display:inline-flex;align-items:center;min-height:26px;padding:2px 10px;border-radius:999px;font-size:12.5px;font-weight:500;white-space:nowrap}
+.badge.confirmed{color:var(--ok);background:var(--ok-bg)}
+.badge.pending{color:var(--warn);background:var(--warn-bg)}
+.badge.cancelled{color:var(--gray);background:var(--gray-bg)}
+.badge.noshow{color:var(--bad);background:var(--bad-bg)}
+
+/* ---------- KPI ---------- */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.kpi .label{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.kpi .value{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;margin-top:4px;letter-spacing:-.02em}
+.kpi .value small{font-size:14px;color:var(--muted);font-weight:500}
+.kpi.accent{border-left:4px solid var(--accent)}
+
+/* ---------- CALENDAR ---------- */
+.cal-head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.cal-title{font-size:17px;font-weight:600;flex:1;min-width:140px}
+.cal-nav{display:flex;gap:8px;align-items:center}
+.icon-btn{width:44px;height:44px;border:1px solid var(--line);background:#fff;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink)}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.cal-week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:12px 16px 0}
+.cal-week div{text-align:center;font-size:12.5px;color:var(--muted);font-weight:500;padding:4px 0}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:12px 16px 16px}
+.cal-cell{
+  min-height:92px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;
+  transition:border-color .15s,background .15s;
+}
+.cal-cell:hover{border-color:var(--accent)}
+.cal-cell .dnum{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500}
+.cal-cell.today{border:2px solid var(--accent);padding:7px}
+.cal-cell.today .dnum{color:var(--accent);font-weight:700}
+.cal-cell.selected{background:var(--accent-soft);border-color:var(--accent)}
+.cal-cell .dots{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.cal-cell .dots i{width:7px;height:7px;border-radius:50%}
+.cal-cell .more{font-size:10.5px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.cal-cell.blank{border:none;background:transparent;pointer-events:none}
+.cal-legend{display:flex;gap:16px;flex-wrap:wrap;padding:0 16px 16px;font-size:13px;color:var(--muted)}
+
+/* ---------- DRAWER ---------- */
+.overlay{
+  position:fixed;inset:0;background:rgba(28,25,23,.45);z-index:850;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.overlay.show{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;width:380px;max-width:94vw;background:#fff;z-index:900;
+  transform:translateX(105%);transition:transform .25s ease;display:flex;flex-direction:column;
+  box-shadow:-16px 0 48px rgba(28,25,23,.18);
+}
+.drawer.open{transform:translateX(0)}
+.drawer-head{display:flex;align-items:center;gap:10px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.drawer-head h4{font-size:16.5px;font-weight:600;flex:1}
+.drawer-body{flex:1;overflow-y:auto;padding:16px 20px}
+.drawer-foot{padding:14px 20px;border-top:1px solid var(--line)}
+.appt-item{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:#fff}
+.appt-item.cancelled{opacity:.55}
+.appt-item .row1{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.appt-item .time{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px}
+.appt-item .row1 .badge{margin-left:auto}
+.appt-item .who{font-weight:500;font-size:14.5px}
+.appt-item .meta{font-size:13px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;margin-top:2px}
+.appt-item .actions{display:flex;gap:8px;margin-top:10px}
+.empty{text-align:center;color:var(--muted);padding:40px 12px;font-size:14px}
+.empty svg{margin:0 auto 10px;opacity:.4}
+
+/* ---------- MODAL ---------- */
+.modal-wrap{
+  position:fixed;inset:0;z-index:950;display:none;align-items:center;justify-content:center;padding:20px;
+  background:rgba(28,25,23,.5);
+}
+.modal-wrap.show{display:flex}
+.modal{background:#fff;border-radius:18px;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.3)}
+.modal-head{display:flex;align-items:center;gap:10px;padding:20px 24px 0}
+.modal-head h4{font-size:18px;font-weight:600;flex:1}
+.modal-body{padding:16px 24px 24px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.form-grid .full{grid-column:1/-1}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:8px}
+.slot{
+  min-height:44px;border:1px solid var(--line);background:#fff;border-radius:9px;
+  font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:500;transition:all .12s;
+}
+.slot:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+.slot.sel{background:var(--accent);border-color:var(--accent);color:#fff}
+.slot:disabled{background:var(--gray-bg);color:#a8a29e;text-decoration:line-through;cursor:not-allowed}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
+
+/* ---------- TOAST ---------- */
+.toasts{position:fixed;right:16px;bottom:16px;z-index:1000;display:flex;flex-direction:column;gap:8px;max-width:min(360px,92vw)}
+.toast{
+  display:flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border-radius:12px;
+  padding:12px 16px;font-size:14px;box-shadow:0 12px 32px rgba(0,0,0,.25);
+  transform:translateY(12px);opacity:0;transition:all .25s ease;
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.error{background:#7f1d1d}
+.toast.success .ticon{color:#4ade80}
+.toast.error .ticon{color:#fca5a5}
+
+/* ---------- BACK HUB ---------- */
+.back-hub{
+  position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;
+  min-height:44px;padding:10px 18px;background:#fff;border-radius:999px;border-left:3px solid #dc2626;
+  box-shadow:0 8px 24px rgba(28,25,23,.16);color:var(--ink);text-decoration:none;font-size:13.5px;font-weight:500;
+}
+.back-hub:hover{color:var(--accent)}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:960px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0);box-shadow:16px 0 48px rgba(0,0,0,.3)}
+  .main{margin-left:0}
+  .hamburger{display:inline-flex}
+  .topbar{padding:0 16px}
+  .topbar .date{display:none}
+  .content{padding:16px}
+  .cal-cell{min-height:64px;padding:6px;border-radius:10px}
+  .cal-cell.today{padding:5px}
+  .cal-cell .dnum{font-size:12px}
+  .kpis{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  th,td{padding:10px 12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ================= LOGIN ================= -->
+<div class="login" id="loginView">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="mark" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5.5C10 3.5 6.5 3.5 5 6c-1.6 2.7-.3 5.6.8 8.2.7 1.7 1 4.3 2.2 4.3 1.4 0 1.2-3.2 2-5 .3-.6 1-.6 1.3 0 .8 1.8.6 5 2 5 1.2 0 1.5-2.6 2.2-4.3 1.1-2.6 2.4-5.5.8-8.2-1.5-2.5-5-2.5-7-.5z"/>
+        </svg>
+      </div>
+      <h1>นัดดี<small>ระบบปฏิทินนัดหมายคลินิก</small></h1>
+    </div>
+    <p class="login-sub">เข้าสู่ระบบเพื่อจัดการนัดหมายของคลินิกทันตกรรมยิ้มดี</p>
+    <form id="loginForm">
+      <div class="field">
+        <label for="loginUser">ชื่อผู้ใช้</label>
+        <input id="loginUser" type="text" value="admin" autocomplete="username">
+      </div>
+      <div class="field">
+        <label for="loginPass">รหัสผ่าน</label>
+        <input id="loginPass" type="password" value="1234" autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">เข้าสู่ระบบ</button>
+    </form>
+    <div class="login-note">ระบบเดโม — กดเข้าสู่ระบบได้เลย ข้อมูลทั้งหมดเป็นข้อมูลจำลองและจัดเก็บในเบราว์เซอร์ของคุณเท่านั้น</div>
+    <p class="login-credit">สร้างโดย <a href="../../first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener">ZenityX — คอร์สสร้างเว็บด้วย AI</a></p>
+  </div>
+</div>
+
+<!-- ================= APP ================= -->
+<div class="app" id="appView" hidden>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5.5C10 3.5 6.5 3.5 5 6c-1.6 2.7-.3 5.6.8 8.2.7 1.7 1 4.3 2.2 4.3 1.4 0 1.2-3.2 2-5 .3-.6 1-.6 1.3 0 .8 1.8.6 5 2 5 1.2 0 1.5-2.6 2.2-4.3 1.1-2.6 2.4-5.5.8-8.2-1.5-2.5-5-2.5-7-.5z"/>
+        </svg>
+      </div>
+      <div><b>นัดดี</b><span>คลินิกทันตกรรมยิ้มดี</span></div>
+    </div>
+    <nav class="nav" aria-label="เมนูหลัก">
+      <button type="button" data-page="calendar" class="active">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+        ปฏิทินนัดหมาย
+      </button>
+      <button type="button" data-page="today">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+        นัดวันนี้
+      </button>
+      <button type="button" data-page="patients">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5 6.5-5s5.7 1.5 6.5 5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 15.3c1.7.8 2.7 2.3 3 4.7"/></svg>
+        ผู้ป่วย
+      </button>
+    </nav>
+    <div class="sidebar-user">
+      <div class="who">
+        <div class="avatar" aria-hidden="true">อ</div>
+        <div><b>ผู้ดูแลระบบ</b><span>หน้าเคาน์เตอร์ยิ้มดี</span></div>
+      </div>
+      <button type="button" class="btn-logout" id="btnLogout">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h3"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>
+        ออกจากระบบ
+      </button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="hamburger" id="btnMenu" aria-label="เปิดเมนู">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <h2 id="pageTitle">ปฏิทินนัดหมาย</h2>
+      <span class="date num" id="topDate"></span>
+      <button type="button" class="btn btn-ghost btn-sm" id="btnReset">รีเซ็ตข้อมูลตัวอย่าง</button>
+    </header>
+
+    <main class="content">
+      <!-- CALENDAR PAGE -->
+      <section id="page-calendar">
+        <div class="page-head">
+          <div>
+            <h3>ปฏิทินนัดหมาย</h3>
+            <p>คลิกที่วันเพื่อดูรายการนัดและเพิ่มนัดหมายใหม่</p>
+          </div>
+          <button type="button" class="btn btn-primary" id="btnAddAppt">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            เพิ่มนัดหมาย
+          </button>
+        </div>
+        <div class="card">
+          <div class="cal-head">
+            <div class="cal-title" id="calTitle"></div>
+            <div class="cal-nav">
+              <button type="button" class="btn btn-ghost btn-sm" id="btnThisMonth">วันนี้</button>
+              <button type="button" class="icon-btn" id="btnPrevMonth" aria-label="เดือนก่อนหน้า">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <button type="button" class="icon-btn" id="btnNextMonth" aria-label="เดือนถัดไป">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="cal-week" aria-hidden="true">
+            <div>อา.</div><div>จ.</div><div>อ.</div><div>พ.</div><div>พฤ.</div><div>ศ.</div><div>ส.</div>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+          <div class="cal-legend" id="calLegend"></div>
+        </div>
+      </section>
+
+      <!-- TODAY PAGE -->
+      <section id="page-today" hidden>
+        <div class="page-head">
+          <div>
+            <h3>นัดวันนี้</h3>
+            <p id="todaySub"></p>
+          </div>
+        </div>
+        <div class="kpis">
+          <div class="kpi accent">
+            <div class="label">นัดหมายวันนี้</div>
+            <div class="value" id="kpiToday">0</div>
+          </div>
+          <div class="kpi">
+            <div class="label">รอยืนยัน</div>
+            <div class="value" id="kpiPending">0</div>
+          </div>
+          <div class="kpi">
+            <div class="label">อัตราไม่มาตามนัดเดือนนี้</div>
+            <div class="value" id="kpiNoshow">0<small>%</small></div>
+          </div>
+        </div>
+        <div class="card table-wrap">
+          <table>
+            <thead><tr>
+              <th>เวลา</th><th>ผู้ป่วย</th><th>บริการ</th><th>ทันตแพทย์</th><th>สถานะ</th><th>การกระทำ</th>
+            </tr></thead>
+            <tbody id="todayBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PATIENTS PAGE -->
+      <section id="page-patients" hidden>
+        <div class="page-head">
+          <div>
+            <h3>ทะเบียนผู้ป่วย</h3>
+            <p>ค้นหาและดูประวัตินัดหมายของผู้ป่วย</p>
+          </div>
+        </div>
+        <div class="card" style="padding:16px;margin-bottom:14px">
+          <div class="field" style="margin:0">
+            <label for="patientSearch">ค้นหาผู้ป่วย</label>
+            <input id="patientSearch" type="search" placeholder="พิมพ์ชื่อหรือเบอร์โทร เช่น สมชาย, 081">
+          </div>
+        </div>
+        <div class="card table-wrap">
+          <table>
+            <thead><tr>
+              <th>ชื่อผู้ป่วย</th><th>เบอร์โทร</th><th>นัดล่าสุด</th><th>นัดถัดไป</th>
+            </tr></thead>
+            <tbody id="patientBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- ================= DAY DRAWER ================= -->
+<div class="overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="dayDrawer" aria-label="รายการนัดรายวัน">
+  <div class="drawer-head">
+    <h4 id="drawerTitle">รายการนัด</h4>
+    <button type="button" class="icon-btn" id="drawerClose" aria-label="ปิดหน้าต่าง">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="drawerList"></div>
+  <div class="drawer-foot">
+    <button type="button" class="btn btn-primary btn-block" id="drawerAdd">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      เพิ่มนัดในวันนี้
+    </button>
+  </div>
+</aside>
+
+<!-- ================= APPOINTMENT MODAL ================= -->
+<div class="modal-wrap" id="modalWrap">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <h4 id="modalTitle">เพิ่มนัดหมาย</h4>
+      <button type="button" class="icon-btn" id="modalClose" aria-label="ปิดหน้าต่าง">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="apptForm" novalidate>
+        <div class="form-grid">
+          <div class="field full">
+            <label for="fName">ชื่อผู้ป่วย</label>
+            <input id="fName" type="text" list="patientList" placeholder="เช่น คุณสมชาย วงศ์สุวรรณ" autocomplete="off">
+            <datalist id="patientList"></datalist>
+          </div>
+          <div class="field">
+            <label for="fPhone">เบอร์โทร</label>
+            <input id="fPhone" type="tel" class="num" placeholder="08x-xxx-xxxx" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="fStatus">สถานะ</label>
+            <select id="fStatus">
+              <option value="pending">รอยืนยัน</option>
+              <option value="confirmed">ยืนยันแล้ว</option>
+              <option value="cancelled">ยกเลิก</option>
+              <option value="noshow">ไม่มาตามนัด</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fDentist">ทันตแพทย์</label>
+            <select id="fDentist"></select>
+          </div>
+          <div class="field">
+            <label for="fService">บริการ</label>
+            <select id="fService"></select>
+          </div>
+          <div class="field full">
+            <label for="fDate">วันที่นัด</label>
+            <input id="fDate" type="date" class="num">
+          </div>
+          <div class="field full">
+            <label>เวลานัด (ช่วงละ 30 นาที — ช่องที่ขีดฆ่าคือหมอท่านนี้มีนัดแล้ว)</label>
+            <div class="slots" id="slotGrid"></div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="modalCancel">ยกเลิก</button>
+          <button type="submit" class="btn btn-primary" id="btnSaveAppt">บันทึกนัดหมาย</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<a class="back-hub" href="../">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  หน้ารวมตัวอย่าง
+</a>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------------- CONSTANTS ---------------- */
+var LS_KEY = 'zx-appt-v1';
+var DENTISTS = [
+  { id:'d1', name:'ทพ.ณิชา สว่างวงศ์', color:'#0e7490' },
+  { id:'d2', name:'ทพ.กิตติพงศ์ มั่นคง', color:'#7c3aed' },
+  { id:'d3', name:'นพ.ทินกร ใจดี', color:'#15803d' }
+];
+var SERVICES = ['ตรวจทั่วไป','ขูดหินปูน','อุดฟัน','ถอนฟัน','จัดฟัน'];
+var STATUS_LABEL = { confirmed:'ยืนยันแล้ว', pending:'รอยืนยัน', cancelled:'ยกเลิก', noshow:'ไม่มาตามนัด' };
+var SLOTS = [];
+for (var h=9; h<17; h++){ SLOTS.push(pad(h)+':00'); SLOTS.push(pad(h)+':30'); }
+
+/* ---------------- HELPERS ---------------- */
+function pad(n){ return (n<10?'0':'')+n; }
+function fmt(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+function parseDate(s){ var p=s.split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
+function uid(p){ return p + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function dentistById(id){ for (var i=0;i<DENTISTS.length;i++) if (DENTISTS[i].id===id) return DENTISTS[i]; return DENTISTS[0]; }
+function thaiDate(ds, opts){
+  var o = opts || { weekday:'long', day:'numeric', month:'long', year:'numeric' };
+  return parseDate(ds).toLocaleDateString('th-TH', o);
+}
+function thaiShort(ds){
+  return parseDate(ds).toLocaleDateString('th-TH', { day:'numeric', month:'short' });
+}
+var TODAY = fmt(new Date());
+var THIS_MONTH = TODAY.slice(0,7);
+
+/* ---------------- SEED / STORE ---------------- */
+function seed(){
+  var t = new Date();
+  function off(n){ var d = new Date(t.getFullYear(), t.getMonth(), t.getDate()+n); return fmt(d); }
+  var patients = [
+    { id:'p1',  name:'คุณสมชาย วงศ์สุวรรณ',   phone:'081-234-5678' },
+    { id:'p2',  name:'คุณวรรณา ศรีสุข',       phone:'089-555-1234' },
+    { id:'p3',  name:'คุณประเสริฐ ทองแท้',     phone:'086-789-4561' },
+    { id:'p4',  name:'คุณนภัสสร แก้วใส',      phone:'092-345-6789' },
+    { id:'p5',  name:'คุณธนกร รุ่งเรือง',      phone:'085-111-2233' },
+    { id:'p6',  name:'คุณมาลี บุญมาก',         phone:'098-777-8899' },
+    { id:'p7',  name:'คุณอนันต์ ชัยวัฒนา',     phone:'083-456-7890' },
+    { id:'p8',  name:'คุณพิมพ์ชนก อารีย์',     phone:'097-222-3344' },
+    { id:'p9',  name:'คุณสุรชัย เพิ่มพูน',     phone:'084-999-0011' },
+    { id:'p10', name:'คุณจิราพร ธาราทิพย์',    phone:'090-666-7788' }
+  ];
+  function p(i){ return patients[i-1]; }
+  function a(i, dayOff, time, dentistId, service, status){
+    var pt = p(i);
+    return { id:uid('a'), patientId:pt.id, name:pt.name, phone:pt.phone,
+             dentistId:dentistId, service:service, date:off(dayOff), time:time, status:status };
+  }
+  var appts = [
+    // ย้อนหลังเดือนนี้ (สำหรับประวัติและอัตราไม่มา)
+    a(1,-13,'10:00','d1','ขูดหินปูน','confirmed'),
+    a(3,-12,'09:30','d2','ตรวจทั่วไป','noshow'),
+    a(2,-11,'14:00','d3','อุดฟัน','confirmed'),
+    a(4,-9 ,'11:00','d1','จัดฟัน','confirmed'),
+    a(5,-8 ,'15:30','d2','ถอนฟัน','confirmed'),
+    a(6,-7 ,'09:00','d3','ตรวจทั่วไป','noshow'),
+    a(7,-6 ,'13:00','d1','ขูดหินปูน','confirmed'),
+    a(8,-5 ,'10:30','d2','อุดฟัน','confirmed'),
+    a(9,-4 ,'16:00','d3','ตรวจทั่วไป','cancelled'),
+    a(10,-3,'09:30','d1','จัดฟัน','confirmed'),
+    a(1,-2 ,'11:30','d2','ตรวจทั่วไป','confirmed'),
+    a(4,-1 ,'14:30','d3','ขูดหินปูน','confirmed'),
+    // วันนี้
+    a(2,0,'09:00','d1','ตรวจทั่วไป','confirmed'),
+    a(5,0,'09:30','d2','จัดฟัน','confirmed'),
+    a(6,0,'10:30','d1','อุดฟัน','pending'),
+    a(8,0,'13:30','d3','ขูดหินปูน','confirmed'),
+    a(9,0,'15:00','d2','ตรวจทั่วไป','pending'),
+    // อนาคต
+    a(3 ,1 ,'10:00','d1','ถอนฟัน','confirmed'),
+    a(7 ,1 ,'14:00','d2','ตรวจทั่วไป','pending'),
+    a(10,2 ,'09:30','d3','จัดฟัน','confirmed'),
+    a(2 ,3 ,'11:00','d2','ขูดหินปูน','pending'),
+    a(6 ,5 ,'16:30','d1','ตรวจทั่วไป','confirmed'),
+    a(8 ,7 ,'13:00','d3','อุดฟัน','confirmed'),
+    a(1 ,9 ,'10:30','d2','จัดฟัน','pending'),
+    a(9 ,12,'15:30','d1','ถอนฟัน','confirmed')
+  ];
+  return { patients:patients, appts:appts };
+}
+
+function load(){
+  try {
+    var raw = localStorage.getItem(LS_KEY);
+    if (raw){ var d = JSON.parse(raw); if (d && d.patients && d.appts) return d; }
+  } catch(e){}
+  var s = seed();
+  localStorage.setItem(LS_KEY, JSON.stringify(s));
+  return s;
+}
+function save(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+
+var state = load();
+
+/* ---------------- UI STATE ---------------- */
+var currentPage = 'calendar';
+var calDate = new Date(); // month being viewed
+var selectedDate = TODAY;
+var editingId = null;
+var selectedTime = null;
+
+/* ---------------- TOAST ---------------- */
+function toast(msg, type){
+  type = type || 'success';
+  var el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.innerHTML = '<svg class="ticon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+    (type==='success' ? '<path d="M20 6L9 17l-5-5"/>' : '<circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/>') +
+    '</svg><span>' + esc(msg) + '</span>';
+  $('toasts').appendChild(el);
+  requestAnimationFrame(function(){ el.classList.add('show'); });
+  setTimeout(function(){
+    el.classList.remove('show');
+    setTimeout(function(){ el.remove(); }, 300);
+  }, 3200);
+}
+
+/* ---------------- CONFLICT CHECK ---------------- */
+function hasConflict(dentistId, date, time, excludeId){
+  return state.appts.some(function(a){
+    return a.id !== excludeId && a.dentistId === dentistId && a.date === date &&
+           a.time === time && a.status !== 'cancelled';
+  });
+}
+
+/* ---------------- RENDER: CALENDAR ---------------- */
+function apptsOn(ds){
+  return state.appts.filter(function(a){ return a.date === ds && a.status !== 'cancelled'; });
+}
+
+function renderCalendar(){
+  var y = calDate.getFullYear(), m = calDate.getMonth();
+  $('calTitle').textContent = new Date(y, m, 1).toLocaleDateString('th-TH', { month:'long', year:'numeric' });
+  var firstDay = new Date(y, m, 1).getDay();
+  var days = new Date(y, m+1, 0).getDate();
+  var html = '';
+  for (var b=0; b<firstDay; b++) html += '<div class="cal-cell blank" aria-hidden="true"></div>';
+  for (var d=1; d<=days; d++){
+    var ds = y+'-'+pad(m+1)+'-'+pad(d);
+    var list = apptsOn(ds);
+    var dots = '';
+    var max = Math.min(list.length, 4);
+    for (var i=0; i<max; i++) dots += '<i style="background:'+dentistById(list[i].dentistId).color+'"></i>';
+    if (list.length > 4) dots += '<span class="more">+'+(list.length-4)+'</span>';
+    var cls = 'cal-cell';
+    if (ds === TODAY) cls += ' today';
+    if (ds === selectedDate) cls += ' selected';
+    html += '<button type="button" class="'+cls+'" data-date="'+ds+'" aria-label="วันที่ '+d+' มี '+list.length+' นัด">' +
+            '<span class="dnum">'+d+'</span><span class="dots">'+dots+'</span></button>';
+  }
+  $('calGrid').innerHTML = html;
+  var leg = '';
+  DENTISTS.forEach(function(dt){
+    leg += '<span class="chip"><span class="dot" style="background:'+dt.color+'"></span>'+esc(dt.name)+'</span>';
+  });
+  $('calLegend').innerHTML = leg;
+}
+
+/* ---------------- RENDER: DRAWER ---------------- */
+function openDrawer(ds){
+  selectedDate = ds;
+  renderCalendar();
+  renderDrawer();
+  $('dayDrawer').classList.add('open');
+  $('drawerOverlay').classList.add('show');
+}
+function closeDrawer(){
+  $('dayDrawer').classList.remove('open');
+  $('drawerOverlay').classList.remove('show');
+}
+function renderDrawer(){
+  $('drawerTitle').textContent = thaiDate(selectedDate);
+  var list = state.appts.filter(function(a){ return a.date === selectedDate; })
+    .sort(function(x,y){ return x.time < y.time ? -1 : 1; });
+  if (!list.length){
+    $('drawerList').innerHTML =
+      '<div class="empty"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>ยังไม่มีนัดหมายในวันนี้<br>กดปุ่มด้านล่างเพื่อเพิ่มนัด</div>';
+    return;
+  }
+  var html = '';
+  list.forEach(function(a){
+    var dt = dentistById(a.dentistId);
+    html += '<div class="appt-item'+(a.status==='cancelled'?' cancelled':'')+'">' +
+      '<div class="row1"><span class="time num">'+a.time+'</span>' +
+      '<span class="badge '+a.status+'">'+STATUS_LABEL[a.status]+'</span></div>' +
+      '<div class="who">'+esc(a.name)+'</div>' +
+      '<div class="meta"><span>'+esc(a.service)+'</span>' +
+      '<span class="chip"><span class="dot" style="background:'+dt.color+'"></span>'+esc(dt.name)+'</span>' +
+      '<span class="num">'+esc(a.phone)+'</span></div>' +
+      '<div class="actions">' +
+        '<button type="button" class="btn btn-ghost btn-sm" data-act="edit" data-id="'+a.id+'">แก้ไข</button>' +
+        (a.status!=='cancelled' ? '<button type="button" class="btn btn-danger btn-sm" data-act="cancel" data-id="'+a.id+'">ยกเลิกนัด</button>' : '') +
+      '</div></div>';
+  });
+  $('drawerList').innerHTML = html;
+}
+
+/* ---------------- RENDER: TODAY ---------------- */
+function renderToday(){
+  $('todaySub').textContent = thaiDate(TODAY) + ' — เรียงตามเวลานัด';
+  var list = state.appts.filter(function(a){ return a.date === TODAY; })
+    .sort(function(x,y){ return x.time < y.time ? -1 : 1; });
+  var active = list.filter(function(a){ return a.status !== 'cancelled'; });
+  var pending = list.filter(function(a){ return a.status === 'pending'; });
+  // no-show rate this month (past + today, not cancelled)
+  var scope = state.appts.filter(function(a){
+    return a.date.slice(0,7) === THIS_MONTH && a.date <= TODAY && a.status !== 'cancelled';
+  });
+  var noShows = scope.filter(function(a){ return a.status === 'noshow'; }).length;
+  var rate = scope.length ? Math.round(noShows / scope.length * 100) : 0;
+  $('kpiToday').textContent = active.length;
+  $('kpiPending').textContent = pending.length;
+  $('kpiNoshow').innerHTML = rate + '<small>%</small>';
+
+  if (!list.length){
+    $('todayBody').innerHTML = '<tr><td colspan="6" class="muted" style="text-align:center;padding:32px">วันนี้ยังไม่มีนัดหมาย</td></tr>';
+    return;
+  }
+  var html = '';
+  list.forEach(function(a){
+    var dt = dentistById(a.dentistId);
+    var opts = '';
+    ['pending','confirmed','noshow','cancelled'].forEach(function(s){
+      opts += '<option value="'+s+'"'+(a.status===s?' selected':'')+'>'+STATUS_LABEL[s]+'</option>';
+    });
+    html += '<tr>' +
+      '<td class="num" style="font-weight:700">'+a.time+'</td>' +
+      '<td><div style="font-weight:500">'+esc(a.name)+'</div><div class="muted num" style="font-size:12.5px">'+esc(a.phone)+'</div></td>' +
+      '<td>'+esc(a.service)+'</td>' +
+      '<td><span class="chip"><span class="dot" style="background:'+dt.color+'"></span>'+esc(dt.name)+'</span></td>' +
+      '<td><select class="status-sel" data-id="'+a.id+'" aria-label="เปลี่ยนสถานะของ '+esc(a.name)+'" ' +
+        'style="min-height:44px;border:1px solid var(--line);border-radius:9px;padding:6px 10px;background:#fff">'+opts+'</select></td>' +
+      '<td style="white-space:nowrap">' +
+        '<button type="button" class="btn btn-ghost btn-sm" data-act="edit" data-id="'+a.id+'">แก้ไข</button> ' +
+        (a.status!=='cancelled' ? '<button type="button" class="btn btn-danger btn-sm" data-act="cancel" data-id="'+a.id+'">ยกเลิก</button>' : '') +
+      '</td></tr>';
+  });
+  $('todayBody').innerHTML = html;
+}
+
+/* ---------------- RENDER: PATIENTS ---------------- */
+function renderPatients(){
+  var q = ($('patientSearch').value || '').trim().toLowerCase();
+  var qDigits = q.replace(/\D/g,'');
+  var html = '';
+  state.patients.forEach(function(pt){
+    var digits = pt.phone.replace(/\D/g,'');
+    if (q && pt.name.toLowerCase().indexOf(q) === -1 && (!qDigits || digits.indexOf(qDigits) === -1)) return;
+    var mine = state.appts.filter(function(a){ return a.patientId === pt.id && a.status !== 'cancelled'; });
+    var past = mine.filter(function(a){ return a.date < TODAY; }).sort(function(x,y){ return x.date < y.date ? 1 : -1; })[0];
+    var next = mine.filter(function(a){ return a.date >= TODAY; }).sort(function(x,y){ return x.date < y.date ? -1 : 1; })[0];
+    html += '<tr>' +
+      '<td style="font-weight:500">'+esc(pt.name)+'</td>' +
+      '<td class="num">'+esc(pt.phone)+'</td>' +
+      '<td>'+(past ? thaiShort(past.date)+' <span class="muted">· '+esc(past.service)+'</span>' : '<span class="muted">—</span>')+'</td>' +
+      '<td>'+(next ? thaiShort(next.date)+' <span class="num" style="font-weight:600">'+next.time+'</span> <span class="muted">· '+esc(next.service)+'</span>' : '<span class="muted">—</span>')+'</td>' +
+      '</tr>';
+  });
+  $('patientBody').innerHTML = html || '<tr><td colspan="4" class="muted" style="text-align:center;padding:32px">ไม่พบผู้ป่วยที่ค้นหา</td></tr>';
+}
+
+/* ---------------- MODAL ---------------- */
+function fillSelects(){
+  $('fDentist').innerHTML = DENTISTS.map(function(d){ return '<option value="'+d.id+'">'+esc(d.name)+'</option>'; }).join('');
+  $('fService').innerHTML = SERVICES.map(function(s){ return '<option>'+esc(s)+'</option>'; }).join('');
+  $('patientList').innerHTML = state.patients.map(function(p){ return '<option value="'+esc(p.name)+'">'+esc(p.phone)+'</option>'; }).join('');
+}
+
+function openModal(appt, presetDate){
+  editingId = appt ? appt.id : null;
+  selectedTime = appt ? appt.time : null;
+  $('modalTitle').textContent = appt ? 'แก้ไขนัดหมาย' : 'เพิ่มนัดหมาย';
+  $('fName').value = appt ? appt.name : '';
+  $('fPhone').value = appt ? appt.phone : '';
+  $('fDentist').value = appt ? appt.dentistId : 'd1';
+  $('fService').value = appt ? appt.service : SERVICES[0];
+  $('fDate').value = appt ? appt.date : (presetDate || TODAY);
+  $('fStatus').value = appt ? appt.status : 'pending';
+  renderSlots();
+  $('modalWrap').classList.add('show');
+  setTimeout(function(){ $('fName').focus(); }, 60);
+}
+function closeModal(){ $('modalWrap').classList.remove('show'); }
+
+function renderSlots(){
+  var dentistId = $('fDentist').value;
+  var date = $('fDate').value;
+  var html = '';
+  SLOTS.forEach(function(t){
+    var busy = date ? hasConflict(dentistId, date, t, editingId) : false;
+    html += '<button type="button" class="slot'+(selectedTime===t?' sel':'')+'" data-time="'+t+'"' +
+            (busy ? ' disabled title="ทันตแพทย์ท่านนี้มีนัดในเวลานี้แล้ว"' : '') + '>'+t+'</button>';
+  });
+  $('slotGrid').innerHTML = html;
+}
+
+function findOrCreatePatient(name, phone){
+  for (var i=0;i<state.patients.length;i++){
+    if (state.patients[i].name === name){
+      if (phone && state.patients[i].phone !== phone) state.patients[i].phone = phone;
+      return state.patients[i];
+    }
+  }
+  var pt = { id:uid('p'), name:name, phone:phone };
+  state.patients.push(pt);
+  return pt;
+}
+
+function saveAppt(){
+  var name = $('fName').value.trim();
+  var phone = $('fPhone').value.trim();
+  var dentistId = $('fDentist').value;
+  var service = $('fService').value;
+  var date = $('fDate').value;
+  var status = $('fStatus').value;
+
+  if (!name){ toast('กรุณากรอกชื่อผู้ป่วย','error'); $('fName').focus(); return; }
+  var digits = phone.replace(/\D/g,'');
+  if (digits.length < 9 || digits.length > 10){ toast('กรุณากรอกเบอร์โทรให้ถูกต้อง','error'); $('fPhone').focus(); return; }
+  if (!date){ toast('กรุณาเลือกวันที่นัด','error'); $('fDate').focus(); return; }
+  if (!selectedTime){ toast('กรุณาเลือกเวลานัด','error'); return; }
+  if (status !== 'cancelled' && hasConflict(dentistId, date, selectedTime, editingId)){
+    toast('ทันตแพทย์ท่านนี้มีนัดในเวลาดังกล่าวแล้ว กรุณาเลือกเวลาอื่น','error');
+    renderSlots();
+    return;
+  }
+
+  var pt = findOrCreatePatient(name, phone);
+  if (editingId){
+    var a = null;
+    state.appts.forEach(function(x){ if (x.id === editingId) a = x; });
+    if (a){
+      a.patientId = pt.id; a.name = pt.name; a.phone = pt.phone;
+      a.dentistId = dentistId; a.service = service; a.date = date;
+      a.time = selectedTime; a.status = status;
+    }
+    toast('บันทึกการแก้ไขนัดหมายแล้ว');
+  } else {
+    state.appts.push({ id:uid('a'), patientId:pt.id, name:pt.name, phone:pt.phone,
+      dentistId:dentistId, service:service, date:date, time:selectedTime, status:status });
+    toast('เพิ่มนัดหมายใหม่เรียบร้อยแล้ว');
+  }
+  save();
+  closeModal();
+  renderAll();
+}
+
+function cancelAppt(id){
+  state.appts.forEach(function(a){ if (a.id === id) a.status = 'cancelled'; });
+  save();
+  renderAll();
+  toast('ยกเลิกนัดหมายแล้ว');
+}
+
+/* ---------------- NAV / SHELL ---------------- */
+var PAGE_TITLES = { calendar:'ปฏิทินนัดหมาย', today:'นัดวันนี้', patients:'ทะเบียนผู้ป่วย' };
+function navigate(page){
+  currentPage = page;
+  ['calendar','today','patients'].forEach(function(p){
+    $('page-'+p).hidden = (p !== page);
+  });
+  document.querySelectorAll('.nav button').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-page') === page);
+  });
+  $('pageTitle').textContent = PAGE_TITLES[page];
+  $('sidebar').classList.remove('open');
+}
+
+function renderAll(){
+  fillSelects();
+  renderCalendar();
+  if (!$('dayDrawer').classList.contains('open') === false) renderDrawer();
+  renderToday();
+  renderPatients();
+}
+
+function updateTopDate(){
+  $('topDate').textContent = new Date().toLocaleDateString('th-TH',
+    { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+}
+
+/* ---------------- EVENTS ---------------- */
+$('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  $('loginView').hidden = true;
+  $('appView').hidden = false;
+  updateTopDate();
+  renderAll();
+  toast('ยินดีต้อนรับเข้าสู่ระบบนัดดี');
+});
+$('btnLogout').addEventListener('click', function(){
+  closeDrawer(); closeModal();
+  $('appView').hidden = true;
+  $('loginView').hidden = false;
+});
+$('btnMenu').addEventListener('click', function(){ $('sidebar').classList.toggle('open'); });
+
+document.querySelectorAll('.nav button').forEach(function(b){
+  b.addEventListener('click', function(){ navigate(b.getAttribute('data-page')); });
+});
+
+$('btnReset').addEventListener('click', function(){
+  localStorage.removeItem(LS_KEY);
+  state = load();
+  selectedDate = TODAY;
+  calDate = new Date();
+  renderAll();
+  toast('รีเซ็ตข้อมูลตัวอย่างเรียบร้อยแล้ว');
+});
+
+$('btnPrevMonth').addEventListener('click', function(){ calDate = new Date(calDate.getFullYear(), calDate.getMonth()-1, 1); renderCalendar(); });
+$('btnNextMonth').addEventListener('click', function(){ calDate = new Date(calDate.getFullYear(), calDate.getMonth()+1, 1); renderCalendar(); });
+$('btnThisMonth').addEventListener('click', function(){ calDate = new Date(); selectedDate = TODAY; renderCalendar(); });
+
+$('calGrid').addEventListener('click', function(e){
+  var cell = e.target.closest ? e.target.closest('.cal-cell[data-date]') : null;
+  if (cell) openDrawer(cell.getAttribute('data-date'));
+});
+
+$('drawerClose').addEventListener('click', closeDrawer);
+$('drawerOverlay').addEventListener('click', closeDrawer);
+$('drawerAdd').addEventListener('click', function(){ openModal(null, selectedDate); });
+$('btnAddAppt').addEventListener('click', function(){ openModal(null, selectedDate || TODAY); });
+
+$('modalClose').addEventListener('click', closeModal);
+$('modalCancel').addEventListener('click', closeModal);
+$('modalWrap').addEventListener('click', function(e){ if (e.target === $('modalWrap')) closeModal(); });
+
+$('fDentist').addEventListener('change', renderSlots);
+$('fDate').addEventListener('change', renderSlots);
+$('slotGrid').addEventListener('click', function(e){
+  var s = e.target.closest ? e.target.closest('.slot') : null;
+  if (!s || s.disabled) return;
+  selectedTime = s.getAttribute('data-time');
+  renderSlots();
+});
+$('fName').addEventListener('change', function(){
+  var name = $('fName').value.trim();
+  state.patients.forEach(function(p){
+    if (p.name === name) $('fPhone').value = p.phone;
+  });
+});
+$('apptForm').addEventListener('submit', function(e){ e.preventDefault(); saveAppt(); });
+
+/* delegated edit/cancel buttons (drawer + today table) */
+document.addEventListener('click', function(e){
+  var btn = e.target.closest ? e.target.closest('button[data-act]') : null;
+  if (!btn) return;
+  var id = btn.getAttribute('data-id');
+  var appt = null;
+  state.appts.forEach(function(a){ if (a.id === id) appt = a; });
+  if (!appt) return;
+  if (btn.getAttribute('data-act') === 'edit') openModal(appt, null);
+  else if (btn.getAttribute('data-act') === 'cancel') cancelAppt(id);
+});
+
+document.addEventListener('change', function(e){
+  var sel = e.target.closest ? e.target.closest('.status-sel') : null;
+  if (!sel) return;
+  var id = sel.getAttribute('data-id');
+  state.appts.forEach(function(a){
+    if (a.id === id){ a.status = sel.value; }
+  });
+  save();
+  renderAll();
+  toast('อัปเดตสถานะนัดหมายแล้ว');
+});
+
+$('patientSearch').addEventListener('input', renderPatients);
+
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape'){ closeModal(); closeDrawer(); $('sidebar').classList.remove('open'); }
+});
+})();
+</script>
+</body>
+</html>
