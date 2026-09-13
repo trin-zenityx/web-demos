@@ -195,6 +195,8 @@ input,select{font:inherit;color:inherit}
             <div class="tv-num" id="tvNum">A-000</div>
             <p class="tv-svc" id="tvSvc">เชิญที่เคาน์เตอร์ 1</p>
             <div class="tv-next" id="tvNext"></div>
+            <div class="tv-kds" id="tvKds" hidden style="margin-top:14px;background:#fff7ed;border:2px solid #ea580c;color:#9a3412;border-radius:14px;padding:.8rem 1.2rem;font-weight:600;font-size:1.05rem;display:flex;align-items:center;gap:.6rem;justify-content:center;animation:kdsIn .35s ease"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round"><path d="M6 13.9A4 4 0 0 1 7.5 6a5 5 0 0 1 9 0 4 4 0 0 1 1.5 7.9V17H6v-3.1z"/><path d="M6 20h12"/></svg><span id="tvKdsTxt"></span></div>
+            <style>@keyframes kdsIn{from{opacity:0;transform:translateY(-8px) scale(.97)}}</style>
           </div>
           <div class="tv-acts">
             <button class="btn-tv primary" id="callNextBtn">เรียกคิวถัดไป</button>
@@ -368,6 +370,46 @@ renderAll();
   }
   if (document.readyState !== 'loading') setTimeout(enter, 80);
   else document.addEventListener('DOMContentLoaded', function(){ setTimeout(enter, 80); });
+})();
+</script>
+<script>
+/* Cross-system bridge: รับเหตุการณ์ "ออเดอร์พร้อมเสิร์ฟ" จากครัวดี KDS มาแจ้งบนจอ TV */
+(function(){
+  var LINK_KEY = 'zx-link-v1';
+  var seenT = Date.now();
+  function beep(){
+    try {
+      var ctx = beep._ctx || (beep._ctx = new (window.AudioContext||window.webkitAudioContext)());
+      [0, .18].forEach(function(w){
+        var o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sine'; o.frequency.value = 988;
+        var t0 = ctx.currentTime + w;
+        g.gain.setValueAtTime(.08, t0);
+        g.gain.exponentialRampToValueAtTime(.001, t0 + .14);
+        o.connect(g); g.connect(ctx.destination); o.start(t0); o.stop(t0 + .16);
+      });
+    } catch(e){}
+  }
+  function poll(){
+    try {
+      var d = JSON.parse(localStorage.getItem(LINK_KEY));
+      if (!d || !d.events) return;
+      var ev = d.events.find(function(e){ return e.sys === 'kds' && e.type === 'order-ready' && e.t > seenT; });
+      if (ev) {
+        seenT = ev.t;
+        var box = document.getElementById('tvKds');
+        if (box) {
+          document.getElementById('tvKdsTxt').textContent = ev.msg.replace('ครัวดี · ', '');
+          box.hidden = false;
+          beep();
+          clearTimeout(box._h);
+          box._h = setTimeout(function(){ box.hidden = true; }, 12000);
+        }
+      }
+    } catch(e){}
+  }
+  setInterval(poll, 2000);
+  poll();
 })();
 </script>
 </body>

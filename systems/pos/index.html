@@ -797,6 +797,16 @@ var offline = false, splitCash = '';
 
 function load(){ try { var d = JSON.parse(localStorage.getItem(LS)); return d && d.products ? d : null; } catch(e){ return null; } }
 function save(){ localStorage.setItem(LS, JSON.stringify(state)); }
+
+/* ---------- cross-system bridge (แชร์เหตุการณ์กับระบบอื่นในเครือผ่าน localStorage) ---------- */
+var LINK_KEY = 'zx-link-v1';
+function linkRead(){ try { var d = JSON.parse(localStorage.getItem(LINK_KEY)); return d && d.events ? d : {events:[]}; } catch(e){ return {events:[]}; } }
+function linkWrite(sys, type, msg, val){
+  var l = linkRead();
+  l.events.unshift({ t: Date.now(), sys: sys, type: type, msg: msg, val: (val === undefined ? null : val) });
+  l.events = l.events.slice(0, 60);
+  try { localStorage.setItem(LINK_KEY, JSON.stringify(l)); } catch(e){}
+}
 function fmt(n){ return '฿' + Math.round(n).toLocaleString('th-TH'); }
 function toast(m, err){ var t=document.getElementById('toast'); t.textContent=m; t.className='toast show'+(err?' err':''); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show');},2400); if (err) sfx.error(); }
 function closeAllModals(){ document.querySelectorAll('.overlay').forEach(function(o){ o.hidden = true; }); }
@@ -1208,6 +1218,7 @@ document.getElementById('payConfirm').addEventListener('click', function(){
     if (p) { p.stock = Math.max(0, p.stock - l.q); p.sold += l.q; }
   });
   state.bills.unshift(bill); save();
+  linkWrite('pos','sale','ขายดี POS · บิล ' + bill.no + ' ยอด ' + fmt(bill.net) + ' (' + bill.tender + ')', bill.net);
   closeAllModals();
   showReceipt(bill);
   sfx.pay();
