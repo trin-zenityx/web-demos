@@ -61,3 +61,28 @@ POS / CRM / สต็อก / ออกเอกสาร / จองคิว+�
 
 ## ขั้นตอนต่อระบบ (pipeline เดิม)
 brief → สร้าง (subagent/เขียนเอง) → verify headless → แบรนด์แบนด์+ปุ่มกลับ → systems.html → push → live check
+
+---
+
+## Entry Pattern Matrix (กฎใหม่: ห้ามซ้ำหน้าเข้าระบบ)
+คนดูเดโมไม่ควรเจอหน้า login เหมือนกันทุกระบบ — แต่ละระบบใช้ entry ที่เหมาะกับธุรกิจ:
+
+| Pattern | ระบบ | สถานะ |
+|---|---|---|
+| PIN pad (ของจริง) | ขายดี POS | ✅ Pro |
+| เลือกสถานีครัว + PIN | ครัวดี KDS | ✅ Pro |
+| Kiosk แยกลูกค้า/พนักงาน ไม่มี credential | คิวดี | ✅ Pro |
+| ปุ่ม SSO จำลอง "เข้าด้วย Google" | ลูกค้าดี CRM | รอ Pro |
+| สแกนบัตรพนักงาน (เส้นสแกนวิ่ง) | สต็อกดี | รอ Pro |
+| เช็คอินใบหน้าจำลอง | คนดี HR | รอ Pro |
+| เลือก workspace/สาขา | เอกสารดี, ส่งดี | รอ Pro |
+| ไม่มี gate เข้าตรง + ป้าย "เดโมสด" | ผู้บริหารดี, งานดี | รอ Pro |
+| แตะบัตรสมาชิก/QR | ฟิตดี | รอ Pro |
+| การ์ดนักเรียน / เลือกห้องพัก | เรียนดี, ห้องดี, พักดี | รอ Pro |
+| การจองคือตัวเริ่ม (booking = entry) | นัดดี | รอ Pro |
+
+## Cross-System Bridge (zx-link-v1)
+localStorage key `zx-link-v1` = `{events:[{t,sys,type,msg,val}]}` cap 60 — origin เดียวกันแชร์กันจริง
+- pos: sale (ทุกบิล) · kds: order-new/order-ready/menu-86 · queue: queue-take/queue-call
+- kds มี feed drawer อ่านทุกระบบ · queue TV รับ kds order-ready แจ้งบนจอ
+- ระบบ Pro ใหม่ทุกตัวต้องเขียน event ของตัวเอง + อ่านของคนอื่น
