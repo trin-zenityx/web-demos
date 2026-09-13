@@ -23,7 +23,7 @@ body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 input,select{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-.mono{font-family:var(--mono)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 [hidden]{display:none!important}
 
 /* ============ SPLASH ============ */
@@ -245,7 +245,7 @@ tr:last-child td{border-bottom:0}
 .pay-total span{font-size:.75rem;color:#8fa3bc;display:block}
 .pay-total b{font-family:var(--mono);font-size:2rem;color:#4ade80}
 .pay-tabs{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1rem}
-.pay-tab{border:1.5px solid var(--line);border-radius:10px;padding:.8rem;font-weight:500;display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:52px}
+.pay-tab{border:1.5px solid var(--line);border-radius:10px;padding:.8rem;font-weight:500;display:flex;align-items:center;justify-content:center;gap:.55rem;min-height:52px}
 .pay-tab.on{border-color:var(--acc);background:var(--acc-soft);color:var(--acc-deep)}
 .numpad{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin:.8rem 0}
 .numpad button{border:1.5px solid var(--line);border-radius:10px;min-height:52px;font-family:var(--mono);font-size:1.05rem;transition:all .1s;background:#fff}
@@ -348,7 +348,7 @@ tr:last-child td{border-bottom:0}
 
 <!-- APP -->
 <div class="app" id="appView" hidden>
-  <div class="mobtop"><button id="mobMenu" aria-label="เมนู">☰</button><b>ขายดี POS</b></div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ขายดี POS</b></div>
   <aside class="rail" id="rail">
     <div class="logo"><img src="assets/logo.jpg" alt="ขายดี"></div>
     <nav>
@@ -391,7 +391,7 @@ tr:last-child td{border-bottom:0}
         <div class="ticket">
           <div class="tk-head">
             <span class="tno" id="tkNo">#—</span>
-            <div class="cust"><button id="custBtn">👤 ลูกค้าทั่วไป (แตะเพื่อเลือกสมาชิก)</button></div>
+            <div class="cust"><button id="custBtn" style="display:flex;align-items:center;gap:.4rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg><span id="custName">ลูกค้าทั่วไป</span></button></div>
             <button class="vd" id="voidTicket" title="ยกเลิกตั๋วทั้งใบ" style="color:#f87171;border:1px solid transparent;min-height:36px">ยกเลิก</button>
           </div>
           <div class="tk-lines" id="tkLines"><p class="tk-empty">ตั๋วว่าง — แตะสินค้าด้านซ้าย<br>หรือยิงบาร์โค้ดเพื่อเริ่มขาย</p></div>
@@ -470,7 +470,7 @@ tr:last-child td{border-bottom:0}
       <span>ขายดี POS v2.4.1</span>
       <span class="ok">● พร้อมใช้งาน</span>
       <span class="sp"></span>
-      <button id="sndBtn" class="snd-on">🔊 เสียง: เปิด</button>
+      <button id="sndBtn" class="snd-on" style="display:flex;align-items:center;gap:.35rem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg> เสียง</button>
       <span id="stCashier">—</span>
       <span id="stBills">บิลวันนี้: 0</span>
       <button id="resetBtn">รีเซ็ตข้อมูลตัวอย่าง</button>
@@ -523,8 +523,8 @@ tr:last-child td{border-bottom:0}
   <div class="modal pay-modal">
     <div class="pay-total"><span>ยอดที่ต้องชำระ</span><b id="payTotal">฿0</b></div>
     <div class="pay-tabs">
-      <button class="pay-tab on" data-t="cash">💵 เงินสด</button>
-      <button class="pay-tab" data-t="qr">📱 QR พร้อมเพย์</button>
+      <button class="pay-tab on" data-t="cash"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 10v4M18 10v4"/></svg> เงินสด</button>
+      <button class="pay-tab" data-t="qr"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:none"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM17 17h4v4h-4z" fill="currentColor"/></svg> QR พร้อมเพย์</button>
     </div>
     <div id="payCash">
       <div class="numpad" id="payPad">
@@ -628,11 +628,11 @@ var sfx = {
 document.getElementById('sndBtn').addEventListener('click', function(){
   SND.on = !SND.on;
   localStorage.setItem('zx-pos2-snd', SND.on ? '1' : '0');
-  this.textContent = SND.on ? '🔊 เสียง: เปิด' : '🔇 เสียง: ปิด';
+  this.innerHTML = SND.on ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg> เสียง' : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg> ปิดเสียง';
   this.classList.toggle('snd-on', SND.on);
   if (SND.on) sfx.open();
 });
-if (!SND.on) { var sb = document.getElementById('sndBtn'); sb.textContent = '🔇 เสียง: ปิด'; sb.classList.remove('snd-on'); }
+if (!SND.on) { var sb = document.getElementById('sndBtn'); sb.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg> ปิดเสียง'; sb.classList.remove('snd-on'); }
 
 /* ---------- catalog ---------- */
 var CATS = [
@@ -876,7 +876,7 @@ function renderCart(){
       '<div><div class="nm">'+l.n+'</div>' + (l.note ? '<div class="nt">“'+l.note+'”</div>' : '') + '<div class="up">'+fmt(l.p)+' × '+l.q+'</div></div>' +
       '<div><div class="amt">'+fmt(l.p*l.q)+'</div><div class="row2" style="justify-content:flex-end;margin-top:.2rem">' +
       '<span class="qty"><button data-a="-" data-i="'+i+'">−</button><span>'+l.q+'</span><button data-a="+" data-i="'+i+'">+</button></span>' +
-      '<button class="vd" data-a="note" data-i="'+i+'" title="โน้ต">✎</button>' +
+      '<button class="vd" data-a="note" data-i="'+i+'" title="โน้ต"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></button>' +
       '<button class="vd" data-a="rm" data-i="'+i+'" title="ลบรายการ">×</button>' +
       '</div></div></div>';
   }).join('');
@@ -887,7 +887,7 @@ function renderCart(){
   document.getElementById('tkTotal').textContent = fmt(t.net);
   document.getElementById('payAmt').textContent = ' ' + fmt(t.net);
   document.getElementById('payBtn').disabled = !(t.net > 0);
-  document.getElementById('custBtn').textContent = '👤 ' + member.n;
+  document.getElementById('custName').textContent = member.n;
 }
 document.getElementById('tkLines').addEventListener('click', function(e){
   var b = e.target.closest('button'); if (!b) return;
@@ -1151,7 +1151,7 @@ function renderProductsPage(){
     return '<tr><td class="mono" style="font-size:.75rem">'+p.sku+'</td><td><b>'+p.n+'</b></td>' +
       '<td><span class="badge" style="background:'+catColor(p.c)+'18;color:'+catColor(p.c)+'">'+catName(p.c)+'</span></td>' +
       '<td class="mono">'+fmt(p.p)+'</td>' +
-      '<td class="mono">'+(p.stock<=10?'<span style="color:var(--amber);font-weight:700">'+p.stock+' ⚠</span>':p.stock)+'</td>' +
+      '<td class="mono">'+(p.stock<=10?'<span style="color:var(--amber);font-weight:700">'+p.stock+' <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-1px"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>':p.stock)+'</td>' +
       '<td class="mono">'+p.sold+'</td>' +
       '<td><button class="tlink" data-sku="'+p.sku+'">แก้ไข</button></td></tr>';
   }).join('');
@@ -1207,8 +1207,8 @@ function renderReport(){
     '<div class="rep-kpi"><span>เฉลี่ยต่อบิล</span><b>'+fmt(avg)+'</b></div>' +
     '<div class="rep-kpi"><span>บิลที่ยกเลิก</span><b style="color:var(--danger)">'+state.bills.filter(function(b){return b.void;}).length+'</b></div>';
   document.getElementById('tenderRows').innerHTML =
-    '<div class="tender-row"><span class="tn">💵 เงินสด</span><b>'+fmt(cash)+'</b></div>' +
-    '<div class="tender-row"><span class="tn">📱 QR พร้อมเพย์</span><b>'+fmt(qr)+'</b></div>' +
+    '<div class="tender-row"><span class="tn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 10v4M18 10v4"/></svg> เงินสด</span><b>'+fmt(cash)+'</b></div>' +
+    '<div class="tender-row"><span class="tn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex:none"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM17 17h4v4h-4z" fill="currentColor"/></svg> QR พร้อมเพย์</span><b>'+fmt(qr)+'</b></div>' +
     '<div class="tender-row" style="border-top:2px solid var(--ink);font-weight:600"><span class="tn">รวมสุทธิ</span><b>'+fmt(cash+qr)+'</b></div>';
   var agg = {};
   ok.forEach(function(b){ b.items.forEach(function(i){ agg[i.n] = (agg[i.n]||0) + i.q; }); });
