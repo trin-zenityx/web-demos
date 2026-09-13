@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>พักดี — ระบบหน้าฟรอนต์โรงแรม</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#1e3a8a; --accent-2:#2748b8; --accent-soft:#e8edfb;
+  --ink:#0f172a; --mut:#64748b; --line:#e2e8f0; --bg:#f1f5f9; --card:#ffffff;
+  --green:#15803d; --green-bg:#dcfce7; --amber:#b45309; --amber-bg:#fef3c7;
+  --gray:#475569; --gray-bg:#e2e8f0; --red:#dc2626;
+  --r:14px; --shadow:0 6px 24px rgba(15,23,42,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'IBM Plex Sans Thai',system-ui,sans-serif;font-size:15px;color:var(--ink);background:var(--bg);line-height:1.55}
+.num,.mono{font-family:'JetBrains Mono',monospace}
+button{font-family:inherit;font-size:15px;cursor:pointer;border:none;background:none;color:inherit}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid #93c5fd;outline-offset:2px;border-radius:6px}
+svg{display:block}
+h1,h2,h3{font-weight:600;line-height:1.3}
+
+/* ---------- LOGIN ---------- */
+#login{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;
+  background:radial-gradient(1000px 500px at 85% -10%,rgba(96,130,255,.35),transparent 60%),
+  radial-gradient(800px 500px at 0% 110%,rgba(30,58,138,.5),transparent 55%),
+  linear-gradient(160deg,#22409e 0%,#16265e 55%,#0a1330 100%)}
+.login-card{width:min(400px,100%);background:#fff;border-radius:20px;padding:36px 32px 26px;box-shadow:0 30px 80px rgba(2,6,23,.5)}
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.logo-badge{width:46px;height:46px;border-radius:13px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.logo-badge svg{stroke:#fff}
+.login-logo .t1{font-size:22px;font-weight:600}
+.login-logo .t2{font-size:12.5px;color:var(--mut)}
+.login-card h1{font-size:19px;margin:18px 0 4px}
+.login-card .sub{color:var(--mut);font-size:13.5px;margin-bottom:20px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:500;margin-bottom:6px;color:#334155}
+.field input,.field select{width:100%;height:46px;border:1.5px solid var(--line);border-radius:10px;padding:0 14px;font:inherit;background:#fff}
+.field input:focus,.field select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:10px;font-weight:500;transition:background .15s,transform .15s}
+.btn-primary{background:var(--accent);color:#fff;width:100%}
+.btn-primary:hover{background:var(--accent-2)}
+.btn-ghost{border:1.5px solid var(--line);background:#fff;color:#334155}
+.btn-ghost:hover{background:#f8fafc}
+.btn-sm{min-height:38px;padding:0 14px;font-size:13.5px;border-radius:9px}
+.btn-danger{background:#fef2f2;color:var(--red);border:1.5px solid #fecaca}
+.login-note{margin-top:16px;text-align:center;font-size:12.5px;color:var(--mut)}
+.login-credit{margin-top:10px;text-align:center;font-size:11.5px;color:#94a3b8}
+.login-credit a{color:#94a3b8}
+.demo-tag{display:inline-block;background:var(--accent-soft);color:var(--accent);font-size:11.5px;font-weight:600;border-radius:99px;padding:3px 10px;margin-bottom:8px}
+
+/* ---------- APP LAYOUT ---------- */
+#app{display:none;min-height:100vh}
+body.authed #app{display:block}
+body.authed #login{display:none}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:240px;background:#0b1533;color:#cbd5e1;display:flex;flex-direction:column;z-index:300;transition:transform .25s ease}
+.sb-brand{display:flex;align-items:center;gap:11px;padding:20px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-brand .t1{color:#fff;font-weight:600;font-size:17px}
+.sb-brand .t2{font-size:11px;color:#7d8bb0}
+.sb-nav{padding:14px 10px;flex:1}
+.sb-link{display:flex;align-items:center;gap:12px;width:100%;min-height:46px;padding:0 12px;border-radius:10px;color:#aab4d4;font-size:14.5px;text-align:left;margin-bottom:4px;transition:background .15s,color .15s}
+.sb-link:hover{background:rgba(255,255,255,.06);color:#fff}
+.sb-link.active{background:var(--accent);color:#fff}
+.sb-link svg{stroke:currentColor;flex:0 0 auto}
+.sb-user{padding:14px;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;flex:0 0 auto}
+.sb-user .u-name{color:#fff;font-size:13.5px;font-weight:500;line-height:1.2}
+.sb-user .u-role{font-size:11.5px;color:#7d8bb0}
+.sb-logout{margin-left:auto;width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#aab4d4}
+.sb-logout:hover{background:rgba(255,255,255,.08);color:#fff}
+.sb-logout svg{stroke:currentColor}
+.main{margin-left:240px;min-height:100vh;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(241,245,249,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:12px 24px;min-height:64px}
+.topbar h2{font-size:18px}
+.topbar .date{color:var(--mut);font-size:13px;margin-left:auto;white-space:nowrap}
+.hamb{display:none;width:44px;height:44px;border-radius:10px;align-items:center;justify-content:center}
+.hamb svg{stroke:var(--ink)}
+.content{padding:24px;max-width:1240px;width:100%;margin:0 auto}
+
+/* ---------- ROOM GRID ---------- */
+.stat-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:13px;min-height:36px}
+.dot{width:9px;height:9px;border-radius:50%}
+.dot-g{background:#22c55e}.dot-i{background:#3b5bdb}.dot-a{background:#f59e0b}.dot-x{background:#94a3b8}
+.room-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:14px}
+.room-card{background:#fff;border:1.5px solid var(--line);border-radius:var(--r);padding:16px 14px 14px;text-align:left;min-height:128px;display:flex;flex-direction:column;gap:6px;transition:transform .15s,box-shadow .15s,border-color .15s;width:100%}
+.room-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.room-card .rnum{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700}
+.room-card .rtype{font-size:12px;color:var(--mut)}
+.room-card .rprice{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;margin-top:auto}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;border-radius:99px;padding:3px 10px;width:fit-content}
+.b-vacant{background:var(--green-bg);color:var(--green)}
+.b-occ{background:#dfe7ff;color:var(--accent)}
+.b-due{background:var(--amber-bg);color:var(--amber)}
+.b-clean{background:var(--gray-bg);color:var(--gray)}
+.room-card.st-vacant{border-color:#bbf7d0}
+.room-card.st-occupied{border-color:#c7d6ff;background:linear-gradient(180deg,#f6f8ff,#fff)}
+.room-card.st-due{border-color:#fde68a;background:linear-gradient(180deg,#fffdf3,#fff)}
+.room-card.st-cleaning{border-style:dashed}
+
+/* ---------- DRAWER ---------- */
+.overlay{position:fixed;inset:0;background:rgba(2,6,23,.45);z-index:600;opacity:0;pointer-events:none;transition:opacity .2s}
+.overlay.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:#fff;z-index:700;transform:translateX(105%);transition:transform .25s ease;display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(2,6,23,.18)}
+.drawer.show{transform:translateX(0)}
+.dr-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.dr-head .rnum{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700}
+.dr-close{margin-left:auto;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.dr-close:hover{background:#f1f5f9}
+.dr-close svg{stroke:var(--mut)}
+.dr-body{padding:20px;overflow-y:auto;flex:1}
+.dr-sec{margin-bottom:20px}
+.dr-sec h4{font-size:12.5px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:7px 0;font-size:14px;border-bottom:1px dashed var(--line)}
+.kv:last-child{border-bottom:none}
+.kv .k{color:var(--mut)}
+.kv .v{font-weight:500;text-align:right}
+.folio-line{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.folio-line .q{color:var(--mut);font-size:12.5px}
+.dr-actions{padding:16px 20px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.empty-svc{font-size:13px;color:var(--mut);padding:8px 0}
+
+/* ---------- FRONT DESK ---------- */
+.fd-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.panel-h{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.panel-h h3{font-size:15.5px}
+.panel-h .cnt{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--mut)}
+.fd-row{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid #f1f5f9;min-height:60px}
+.fd-row:last-child{border-bottom:none}
+.fd-rnum{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;width:52px}
+.fd-info{flex:1;min-width:0}
+.fd-info .n{font-weight:500;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fd-info .s{font-size:12px;color:var(--mut)}
+.empty-note{padding:26px 18px;color:var(--mut);font-size:13.5px;text-align:center}
+
+/* ---------- TABLE ---------- */
+.tbl-wrap{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow-x:auto;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th{font-size:12px;color:var(--mut);font-weight:600;text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);background:#f8fafc;white-space:nowrap}
+td{padding:12px 14px;border-bottom:1px solid #f1f5f9;font-size:14px;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+td .mono{font-size:13.5px}
+.row-actions{display:flex;gap:8px;justify-content:flex-end}
+
+/* ---------- OVERVIEW ---------- */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow)}
+.kpi .kl{font-size:12.5px;color:var(--mut);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.kpi .kv2{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700}
+.kpi .ks{font-size:12px;color:var(--mut);margin-top:2px}
+.kpi .ic{width:32px;height:32px;border-radius:9px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center}
+.kpi .ic svg{stroke:var(--accent)}
+.cal{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.cal-h{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cal-h h3{font-size:15.5px}
+.legend{display:flex;gap:14px;margin-left:auto;font-size:12px;color:var(--mut);flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.lg{width:22px;height:10px;border-radius:4px}
+.lg-stay{background:var(--accent)}
+.lg-book{background:#fff;border:2px solid #0d9488}
+.lg-due{background:#f59e0b}
+.cal-scroll{overflow-x:auto}
+.cal-inner{min-width:880px}
+.cal-row{display:grid;grid-template-columns:110px 1fr;border-bottom:1px solid #f1f5f9;align-items:stretch}
+.cal-row:last-child{border-bottom:none}
+.cal-label{padding:10px 14px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13.5px;border-right:1px solid var(--line);display:flex;align-items:center;background:#fbfdff}
+.cal-label .st-dot{width:8px;height:8px;border-radius:50%;margin-left:auto}
+.cal-days{display:grid;grid-template-columns:repeat(14,1fr)}
+.cal-hd{font-size:10.5px;color:var(--mut);text-align:center;padding:8px 2px;border-bottom:1px solid var(--line);border-left:1px dashed #eef2f7;font-family:'JetBrains Mono',monospace}
+.cal-hd.today{color:var(--accent);font-weight:700;background:var(--accent-soft)}
+.cal-track{display:grid;grid-template-columns:repeat(14,1fr);grid-auto-rows:min-content;gap:3px 0;padding:5px 0;align-content:center}
+.bar{height:19px;border-radius:5px;font-size:10.5px;color:#fff;padding:0 7px;display:flex;align-items:center;white-space:nowrap;overflow:hidden;margin:0 2px;font-weight:500}
+.bar.stay{background:var(--accent)}
+.bar.stay.due{background:#f59e0b}
+.bar.book{background:#fff;border:2px solid #0d9488;color:#0f766e;height:16px}
+
+/* ---------- MODAL ---------- */
+.modal-wrap{position:fixed;inset:0;z-index:750;display:none;align-items:center;justify-content:center;padding:18px}
+.modal-wrap.show{display:flex}
+.modal-bg{position:absolute;inset:0;background:rgba(2,6,23,.5)}
+.modal{position:relative;background:#fff;border-radius:18px;width:min(480px,100%);max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(2,6,23,.4)}
+.modal.wide{width:min(560px,100%)}
+.mo-head{padding:20px 22px 0}
+.mo-head h3{font-size:17px}
+.mo-head .ms{font-size:13px;color:var(--mut);margin-top:2px}
+.mo-body{padding:18px 22px}
+.mo-foot{padding:0 22px 22px;display:flex;gap:10px}
+.mo-foot .btn{flex:1}
+.qty-row{display:flex;gap:10px}
+.qty-row .field{flex:1}
+.total-live{background:var(--accent-soft);border-radius:10px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;font-size:14px;margin-top:4px}
+.total-live .mono{font-size:18px;font-weight:700;color:var(--accent)}
+.folio-tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.folio-tbl td{padding:8px 0;border-bottom:1px dashed var(--line)}
+.folio-tbl .r{text-align:right;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.folio-tbl .sub td{border-bottom:1.5px solid var(--line);font-weight:600}
+.folio-tbl .vat td{color:var(--mut)}
+.folio-tbl .grand td{font-size:17px;font-weight:700;padding-top:10px}
+.folio-tbl .grand .r{color:var(--accent)}
+
+/* ---------- RECEIPT ---------- */
+.receipt{background:#fff;border:1.5px dashed var(--line);border-radius:12px;padding:22px;font-size:13px}
+.receipt .rc-head{text-align:center;border-bottom:1.5px dashed var(--line);padding-bottom:12px;margin-bottom:12px}
+.receipt .rc-head .h{font-size:16px;font-weight:600}
+.receipt .rc-head .s{font-size:11.5px;color:var(--mut)}
+.rc-line{display:flex;justify-content:space-between;padding:4px 0}
+.rc-line .r{font-family:'JetBrains Mono',monospace}
+.rc-tot{border-top:1.5px dashed var(--line);margin-top:8px;padding-top:8px}
+.rc-grand{font-size:16px;font-weight:700}
+.rc-foot{text-align:center;color:var(--mut);font-size:11.5px;margin-top:14px}
+#print-area{display:none}
+@media print{
+  body>*{display:none !important}
+  #print-area{display:block !important;padding:20px;font-family:'IBM Plex Sans Thai',sans-serif}
+}
+
+/* ---------- TOAST ---------- */
+#toasts{position:fixed;right:18px;bottom:18px;z-index:900;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.toast{background:#0f172a;color:#fff;border-radius:12px;padding:12px 18px;font-size:13.5px;box-shadow:0 12px 30px rgba(2,6,23,.35);display:flex;align-items:center;gap:10px;animation:tin .25s ease}
+.toast svg{stroke:#4ade80;flex:0 0 auto}
+@keyframes tin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- BACK HOME ---------- */
+.back-home{position:fixed;left:16px;bottom:16px;z-index:800;background:#fff;border:1px solid var(--line);border-left:3px solid var(--red);border-radius:99px;padding:10px 18px;font-size:13px;font-weight:500;color:var(--ink);text-decoration:none;box-shadow:0 8px 24px rgba(2,6,23,.12);display:inline-flex;align-items:center;gap:8px;min-height:44px}
+.back-home:hover{background:#f8fafc}
+.back-home svg{stroke:var(--mut)}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  body.sb-open .sidebar{transform:translateX(0)}
+  .main{margin-left:0}
+  .hamb{display:flex}
+  .fd-cols{grid-template-columns:1fr}
+  .topbar .date{display:none}
+}
+@media (max-width:560px){
+  .content{padding:16px}
+  .room-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  .topbar{padding:10px 14px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ============ LOGIN ============ -->
+<div id="login">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="logo-badge">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l7-5 7 5v13"/><path d="M3 21h18"/><path d="M9 21v-4a1 1 0 011-1h4a1 1 0 011 1v4"/><path d="M9 11h.01M15 11h.01"/></svg>
+      </div>
+      <div>
+        <div class="t1">พักดี</div>
+        <div class="t2">ระบบหน้าฟรอนต์โรงแรม</div>
+      </div>
+    </div>
+    <span class="demo-tag">ระบบเดโม</span>
+    <h1>อัครา บูทีค โฮเทล</h1>
+    <p class="sub">12 ห้อง · 3 ชั้น · เข้าสู่ระบบเพื่อจัดการหน้าฟรอนต์</p>
+    <form id="login-form">
+      <div class="field">
+        <label for="lg-user">ชื่อผู้ใช้</label>
+        <input id="lg-user" type="text" value="frontdesk" autocomplete="username">
+      </div>
+      <div class="field">
+        <label for="lg-pass">รหัสผ่าน</label>
+        <input id="lg-pass" type="password" value="demo1234" autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
+    </form>
+    <p class="login-note">ระบบเดโม — กดเข้าสู่ระบบได้เลย ข้อมูลทั้งหมดเป็นข้อมูลจำลอง</p>
+    <p class="login-credit">ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener">First Vibe : Coding — ZenityX</a></p>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app">
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="logo-badge" style="width:40px;height:40px;border-radius:11px">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l7-5 7 5v13"/><path d="M3 21h18"/><path d="M9 21v-4a1 1 0 011-1h4a1 1 0 011 1v4"/></svg>
+      </div>
+      <div>
+        <div class="t1">พักดี</div>
+        <div class="t2">อัครา บูทีค โฮเทล</div>
+      </div>
+    </div>
+    <nav class="sb-nav" id="sb-nav">
+      <button class="sb-link active" data-view="rooms">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        ผังห้อง
+      </button>
+      <button class="sb-link" data-view="frontdesk">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+        เช็คอิน / เช็คเอาท์
+      </button>
+      <button class="sb-link" data-view="guests">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        แขกในอาคาร
+      </button>
+      <button class="sb-link" data-view="overview">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 5-8"/></svg>
+        ภาพรวม
+      </button>
+    </nav>
+    <div class="sb-user">
+      <div class="avatar">ฟด</div>
+      <div>
+        <div class="u-name">ฟรอนต์ เดโม</div>
+        <div class="u-role">พนักงานต้อนรับ</div>
+      </div>
+      <button class="sb-logout" id="btn-logout" title="ออกจากระบบ" aria-label="ออกจากระบบ">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="hamb" id="btn-hamb" aria-label="เปิดเมนู">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <h2 id="page-title">ผังห้อง</h2>
+      <span class="date mono" id="th-date"></span>
+      <button class="btn btn-ghost btn-sm" id="btn-reset" style="margin-left:auto">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        รีเซ็ตข้อมูลตัวอย่าง
+      </button>
+    </header>
+    <main class="content" id="view"></main>
+  </div>
+</div>
+
+<!-- drawer -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="รายละเอียดห้อง"></aside>
+
+<!-- modal -->
+<div class="modal-wrap" id="modal-wrap">
+  <div class="modal-bg" id="modal-bg"></div>
+  <div class="modal" id="modal" role="dialog" aria-modal="true"></div>
+</div>
+
+<div id="toasts"></div>
+<div id="print-area"></div>
+
+<a class="back-home" href="../">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+  หน้ารวมตัวอย่าง
+</a>
+
+<script>
+'use strict';
+/* ================= DATA ================= */
+var STORE = 'zx-hotel-v1';
+var SVC = [
+  {id:'bf',  name:'อาหารเช้า',        price:250, unit:'ท่าน'},
+  {id:'mw',  name:'มินิบาร์ — น้ำดื่ม', price:30,  unit:'ขวด'},
+  {id:'ms',  name:'มินิบาร์ — โซดา',   price:35,  unit:'ขวด'},
+  {id:'mb',  name:'มินิบาร์ — เบียร์',  price:80,  unit:'ขวด'},
+  {id:'mn',  name:'มินิบาร์ — มาม่า',   price:25,  unit:'ถ้วย'},
+  {id:'ld1', name:'ซักรีด (ต่อชิ้น)',   price:50,  unit:'ชิ้น'},
+  {id:'ld5', name:'ซักรีดแพ็ค 5 ชิ้น',  price:200, unit:'แพ็ค'},
+  {id:'ex',  name:'เตียงเสริม',         price:500, unit:'คืน'}
+];
+var FLOORS = [
+  {no:1, type:'สแตนดาร์ด', price:1800},
+  {no:2, type:'ซูพีเรีย',  price:2400},
+  {no:3, type:'ดีลักซ์',   price:3500}
+];
+
+function pad(n){ return String(n).padStart(2,'0'); }
+function iso(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+function todayStr(){ return iso(new Date()); }
+function addDays(str,n){ var d=new Date(str+'T00:00:00'); d.setDate(d.getDate()+n); return iso(d); }
+function diffDays(a,b){ return Math.round((new Date(b+'T00:00:00') - new Date(a+'T00:00:00'))/86400000); }
+function thDate(str,opts){
+  return new Date(str+'T00:00:00').toLocaleDateString('th-TH', opts || {day:'numeric',month:'short'});
+}
+function thb(n){ return '฿' + Number(n).toLocaleString('en-US'); }
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function mkStay(name, phone, ciOffset, nights, folio){
+  var t = todayStr();
+  var ci = addDays(t, ciOffset);
+  return { name:name, phone:phone, checkin:ci, nights:nights, checkout:addDays(ci,nights), folio:folio||[] };
+}
+function fi(sid, qty, dOffset){
+  var s = null;
+  for (var i=0;i<SVC.length;i++) if (SVC[i].id===sid) s=SVC[i];
+  return { sid:sid, name:s.name, price:s.price, qty:qty, date:addDays(todayStr(), dOffset||0) };
+}
+function seed(){
+  var rooms = [];
+  for (var f=0; f<3; f++){
+    for (var i=1; i<=4; i++){
+      rooms.push({
+        id: FLOORS[f].no*100 + i,
+        floor: FLOORS[f].no,
+        type: FLOORS[f].type,
+        price: FLOORS[f].price,
+        status: 'vacant',
+        stay: null
+      });
+    }
+  }
+  function R(id){ for (var i=0;i<rooms.length;i++) if (rooms[i].id===id) return rooms[i]; return null; }
+  R(101).status='occupied';
+  R(101).stay = mkStay('คุณสมชาย ใจดี','081-234-5678',-1,3,[ fi('bf',2,0) ]);
+  R(102).status='occupied';
+  R(102).stay = mkStay('คุณอารีย์ ตั้งตรง','089-555-0123',-2,2,[ fi('mb',2,-1), fi('mw',1,-1) ]);
+  R(201).status='occupied';
+  R(201).stay = mkStay('คุณนัทธมน แสงทอง','092-881-4477',0,1,[]);
+  R(203).status='occupied';
+  R(203).stay = mkStay('คุณปิยะ วงศ์สุข','086-402-9911',-3,4,[ fi('ld5',1,-2), fi('bf',1,-1), fi('mn',2,0) ]);
+  R(302).status='occupied';
+  R(302).stay = mkStay('คุณเอมิลี่ เชน','+66-95-118-2200',-1,2,[ fi('bf',2,0), fi('ms',2,0) ]);
+  R(303).status='cleaning';
+  var t = todayStr();
+  var bookings = [
+    {room:104, name:'คุณวิภา รุ่งเรือง',   start:addDays(t,1), nights:2},
+    {room:301, name:'คุณจิราภรณ์ สุขใจ',    start:addDays(t,2), nights:2},
+    {room:202, name:'คุณธนกร พัฒนากิจ',    start:addDays(t,3), nights:3},
+    {room:103, name:'คุณอเล็กซ์ เชน',      start:addDays(t,5), nights:4},
+    {room:204, name:'คุณมาลี ดอกบุนนาค',   start:addDays(t,7), nights:2},
+    {room:304, name:'คุณ Takeshi Yamada', start:addDays(t,9), nights:3}
+  ];
+  return { rooms:rooms, bookings:bookings };
+}
+function save(){ try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
+function load(){
+  try{
+    var raw = localStorage.getItem(STORE);
+    if (raw){ var d = JSON.parse(raw); if (d && d.rooms && d.rooms.length===12) return d; }
+  }catch(e){}
+  var s = seed(); try{ localStorage.setItem(STORE, JSON.stringify(s)); }catch(e){}
+  return s;
+}
+var state = load();
+var T = todayStr();
+var currentView = 'rooms';
+var drawerRoom = null;
+
+function roomById(id){ for (var i=0;i<state.rooms.length;i++) if (state.rooms[i].id===id) return state.rooms[i]; return null; }
+function dispStatus(r){
+  if (r.status==='occupied' && r.stay && r.stay.checkout <= T) return 'due';
+  if (r.status==='occupied') return 'occupied';
+  return r.status; // vacant | cleaning
+}
+var ST_META = {
+  vacant:   {label:'ว่าง',               cls:'b-vacant', card:'st-vacant'},
+  occupied: {label:'เข้าพักอยู่',         cls:'b-occ',    card:'st-occupied'},
+  due:      {label:'เช็คเอาท์วันนี้',      cls:'b-due',    card:'st-due'},
+  cleaning: {label:'รอทำความสะอาด',        cls:'b-clean',  card:'st-cleaning'}
+};
+function folioSvcTotal(stay){
+  var s=0; for (var i=0;i<stay.folio.length;i++) s += stay.folio[i].price*stay.folio[i].qty;
+  return s;
+}
+
+/* ================= UI CORE ================= */
+function toast(msg){
+  var box = document.getElementById('toasts');
+  var el = document.createElement('div');
+  el.className='toast';
+  el.innerHTML = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>'+esc(msg)+'</span>';
+  box.appendChild(el);
+  setTimeout(function(){ el.style.opacity='0'; el.style.transition='opacity .3s'; setTimeout(function(){ el.remove(); },320); },2800);
+}
+function openOverlay(){ document.getElementById('overlay').classList.add('show'); }
+function closeOverlay(){ document.getElementById('overlay').classList.remove('show'); }
+function openDrawer(roomId){
+  drawerRoom = roomId;
+  renderDrawer();
+  document.getElementById('drawer').classList.add('show');
+  openOverlay();
+}
+function closeDrawer(){
+  drawerRoom = null;
+  document.getElementById('drawer').classList.remove('show');
+  closeOverlay();
+}
+function openModal(html, wide){
+  var m = document.getElementById('modal');
+  m.className = wide ? 'modal wide' : 'modal';
+  m.innerHTML = html;
+  document.getElementById('modal-wrap').classList.add('show');
+}
+function closeModal(){ document.getElementById('modal-wrap').classList.remove('show'); }
+function renderAll(){ renderView(); if (drawerRoom) renderDrawer(); }
+
+/* ================= VIEWS ================= */
+var VIEW_TITLES = { rooms:'ผังห้อง', frontdesk:'เช็คอิน / เช็คเอาท์', guests:'แขกในอาคารตอนนี้', overview:'ภาพรวม' };
+
+function renderView(){
+  document.getElementById('page-title').textContent = VIEW_TITLES[currentView];
+  var v = document.getElementById('view');
+  if (currentView==='rooms') v.innerHTML = viewRooms();
+  else if (currentView==='frontdesk') v.innerHTML = viewFrontdesk();
+  else if (currentView==='guests') v.innerHTML = viewGuests();
+  else v.innerHTML = viewOverview();
+}
+
+function counts(){
+  var c = {vacant:0, occupied:0, due:0, cleaning:0};
+  state.rooms.forEach(function(r){ c[dispStatus(r)]++; });
+  return c;
+}
+
+/* ---- ผังห้อง ---- */
+function viewRooms(){
+  var c = counts();
+  var h = '<div class="stat-chips">'
+    + '<span class="chip"><span class="dot dot-g"></span>ว่าง <b class="mono">'+c.vacant+'</b></span>'
+    + '<span class="chip"><span class="dot dot-i"></span>เข้าพักอยู่ <b class="mono">'+c.occupied+'</b></span>'
+    + '<span class="chip"><span class="dot dot-a"></span>เช็คเอาท์วันนี้ <b class="mono">'+c.due+'</b></span>'
+    + '<span class="chip"><span class="dot dot-x"></span>รอทำความสะอาด <b class="mono">'+c.cleaning+'</b></span>'
+    + '</div><div class="room-grid">';
+  state.rooms.forEach(function(r){
+    var st = dispStatus(r), m = ST_META[st];
+    h += '<button class="room-card '+m.card+'" onclick="openDrawer('+r.id+')" aria-label="ห้อง '+r.id+' '+m.label+'">'
+      + '<span class="rnum">'+r.id+'</span>'
+      + '<span class="rtype">ชั้น '+r.floor+' · '+r.type+'</span>'
+      + '<span class="badge '+m.cls+'">'+m.label+'</span>'
+      + '<span class="rprice">'+thb(r.price)+'<span style="color:var(--mut);font-weight:400">/คืน</span></span>'
+      + '</button>';
+  });
+  return h + '</div>';
+}
+
+/* ---- เช็คอิน/เช็คเอาท์ ---- */
+function viewFrontdesk(){
+  var vacant=[], busy=[];
+  state.rooms.forEach(function(r){
+    var st = dispStatus(r);
+    if (st==='vacant') vacant.push(r);
+    if (st==='occupied'||st==='due'||st==='cleaning') busy.push({r:r, st:st});
+  });
+  var h = '<div class="fd-cols"><div class="panel"><div class="panel-h"><h3>ห้องพร้อมเช็คอิน</h3><span class="cnt">'+vacant.length+' ห้อง</span></div>';
+  if (!vacant.length) h += '<div class="empty-note">ไม่มีห้องว่างในขณะนี้</div>';
+  vacant.forEach(function(r){
+    h += '<div class="fd-row"><span class="fd-rnum">'+r.id+'</span>'
+      + '<div class="fd-info"><div class="n">'+r.type+' · ชั้น '+r.floor+'</div><div class="s mono">'+thb(r.price)+'/คืน</div></div>'
+      + '<button class="btn btn-primary btn-sm" style="width:auto" onclick="openCheckin('+r.id+')">เช็คอิน</button></div>';
+  });
+  h += '</div><div class="panel"><div class="panel-h"><h3>เข้าพักอยู่ / รอดำเนินการ</h3><span class="cnt">'+busy.length+' ห้อง</span></div>';
+  if (!busy.length) h += '<div class="empty-note">ยังไม่มีแขกเข้าพัก</div>';
+  busy.forEach(function(x){
+    var r=x.r, m=ST_META[x.st];
+    var info='', act='';
+    if (r.stay){
+      info = '<div class="n">'+esc(r.stay.name)+'</div><div class="s">ออก '+thDate(r.stay.checkout)+' · <span class="mono">'+thb(r.price*r.stay.nights + folioSvcTotal(r.stay))+'</span></div>';
+    } else {
+      info = '<div class="n" style="color:var(--mut)">—</div><div class="s">รอแม่บ้านทำความสะอาด</div>';
+    }
+    if (x.st==='cleaning') act = '<button class="btn btn-ghost btn-sm" onclick="cleanDone('+r.id+')">ทำความสะอาดเสร็จ</button>';
+    else act = '<button class="btn btn-ghost btn-sm" onclick="openCheckout('+r.id+')">เช็คเอาท์</button>';
+    h += '<div class="fd-row"><span class="fd-rnum">'+r.id+'</span><div class="fd-info">'+info+'</div>'
+      + '<span class="badge '+m.cls+'">'+m.label+'</span>'+act+'</div>';
+  });
+  return h + '</div></div>';
+}
+
+/* ---- แขกในอาคาร ---- */
+function viewGuests(){
+  var rows = state.rooms.filter(function(r){ return r.status==='occupied' && r.stay; });
+  if (!rows.length) return '<div class="panel"><div class="empty-note">ขณะนี้ไม่มีแขกในอาคาร</div></div>';
+  var h = '<div class="tbl-wrap"><table><thead><tr>'
+    + '<th>ห้อง</th><th>ชื่อแขก</th><th>เบอร์โทร</th><th>เช็คอิน</th><th>เช็คเอาท์</th><th style="text-align:right">ค่าห้อง/คืน</th><th style="text-align:right">บริการเสริมสะสม</th><th></th>'
+    + '</tr></thead><tbody>';
+  rows.forEach(function(r){
+    var s = r.stay, st = dispStatus(r);
+    h += '<tr>'
+      + '<td class="mono" style="font-weight:700">'+r.id+'</td>'
+      + '<td>'+esc(s.name)+' <span class="badge '+ST_META[st].cls+'" style="margin-left:6px">'+ST_META[st].label+'</span></td>'
+      + '<td class="mono">'+esc(s.phone)+'</td>'
+      + '<td>'+thDate(s.checkin)+'</td>'
+      + '<td>'+thDate(s.checkout)+'</td>'
+      + '<td style="text-align:right" class="mono">'+thb(r.price)+'</td>'
+      + '<td style="text-align:right" class="mono">'+thb(folioSvcTotal(s))+'</td>'
+      + '<td><div class="row-actions">'
+      + '<button class="btn btn-ghost btn-sm" onclick="openService('+r.id+')">เพิ่มบริการ</button>'
+      + '<button class="btn btn-ghost btn-sm" onclick="openDrawer('+r.id+')">ดูฟอลิโอ</button>'
+      + '</div></td></tr>';
+  });
+  return h + '</tbody></table></div>';
+}
+
+/* ---- ภาพรวม ---- */
+function viewOverview(){
+  var c = counts();
+  var occPct = Math.round(((c.occupied + c.due) / 12) * 100);
+  var dueN = c.due;
+  // รายได้คาดการณ์เดือนนี้
+  var mk = T.slice(0,7);
+  var mend = (function(){ var d=new Date(T+'T00:00:00'); d.setMonth(d.getMonth()+1); d.setDate(0); return iso(d); })();
+  function minD(a,b){ return a<b?a:b; }
+  function maxD(a,b){ return a>b?a:b; }
+  var rev = 0;
+  state.rooms.forEach(function(r){
+    if (r.status==='occupied' && r.stay){
+      var from = maxD(T, mk+'-01');
+      var to = minD(r.stay.checkout, addDays(mend,1));
+      var n = Math.max(0, diffDays(from, to));
+      rev += n * r.price;
+    }
+  });
+  state.bookings.forEach(function(b){
+    if (b.start.slice(0,7) === mk){
+      var r = roomById(b.room); if (!r) return;
+      var from = maxD(b.start, T);
+      var to = minD(addDays(b.start, b.nights), addDays(mend,1));
+      rev += Math.max(0, diffDays(from, to)) * r.price;
+    }
+  });
+  var kpi = '<div class="kpi-grid">'
+    + kpiCard('อัตราเข้าพักวันนี้', occPct+'%', (c.occupied+c.due)+' จาก 12 ห้อง', 'M3 21V8l7-5 7 5v13M3 21h18')
+    + kpiCard('รายได้คาดการณ์เดือนนี้', thb(rev), 'ค่าห้องที่เหลือ + จองล่วงหน้า', 'M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6')
+    + kpiCard('เช็คเอาท์วันนี้', dueN+' ห้อง', dueN? 'ต้องเตรียมห้องให้ทัน':'ไม่มีกำหนดเช็คเอาท์', 'M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3')
+    + kpiCard('ห้องว่างพร้อมขาย', c.vacant+' ห้อง', c.cleaning+' ห้องรอทำความสะอาด', 'M20 6L9 17l-5-5')
+    + '</div>';
+
+  // calendar 14 วัน
+  var days = []; for (var i=0;i<14;i++) days.push(addDays(T,i));
+  var cal = '<div class="cal"><div class="cal-h"><h3>ปฏิทินจอง 14 วันข้างหน้า</h3>'
+    + '<div class="legend"><span><span class="lg lg-stay"></span>เข้าพักอยู่</span><span><span class="lg lg-book"></span>จองล่วงหน้า</span><span><span class="lg lg-due"></span>เช็คเอาท์วันนี้</span></div></div>'
+    + '<div class="cal-scroll"><div class="cal-inner">'
+    + '<div class="cal-row"><div class="cal-label" style="font-family:inherit;color:var(--mut);font-weight:500">ห้อง</div><div class="cal-days">';
+  days.forEach(function(d){
+    cal += '<div class="cal-hd'+(d===T?' today':'')+'">'+new Date(d+'T00:00:00').toLocaleDateString('th-TH',{weekday:'short'}).replace('.','')+'<br>'+new Date(d+'T00:00:00').getDate()+'</div>';
+  });
+  cal += '</div></div>';
+  state.rooms.forEach(function(r){
+    var st = dispStatus(r);
+    var dotColor = st==='vacant'?'#22c55e':st==='occupied'?'#3b5bdb':st==='due'?'#f59e0b':'#94a3b8';
+    cal += '<div class="cal-row"><div class="cal-label">'+r.id+'<span class="st-dot" style="background:'+dotColor+'"></span></div><div class="cal-track">';
+    if (r.status==='occupied' && r.stay){
+      var s = Math.max(0, diffDays(T, r.stay.checkin));
+      var e = diffDays(T, r.stay.checkout);
+      if (e > 0){
+        var s2 = Math.min(s,13), e2 = Math.min(e,14);
+        if (e2 > s2){
+          cal += '<div class="bar stay'+(st==='due'?' due':'')+'" style="grid-column:'+(s2+1)+' / span '+(e2-s2)+';grid-row:1">'+esc(r.stay.name)+'</div>';
+        }
+      }
+    }
+    state.bookings.forEach(function(b){
+      if (b.room !== r.id) return;
+      var bs = diffDays(T, b.start), be = bs + b.nights;
+      if (be <= 0 || bs >= 14) return;
+      var bs2 = Math.max(0,Math.min(bs,13)), be2 = Math.min(be,14);
+      if (be2 <= bs2) return;
+      cal += '<div class="bar book" style="grid-column:'+(bs2+1)+' / span '+(be2-bs2)+';grid-row:2">'+esc(b.name)+'</div>';
+    });
+    cal += '</div></div>';
+  });
+  cal += '</div></div></div>';
+  return kpi + cal;
+}
+function kpiCard(label, val, sub, path){
+  return '<div class="kpi"><div class="kl"><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="'+path+'"/></svg></span>'+label+'</div>'
+    + '<div class="kv2">'+val+'</div><div class="ks">'+sub+'</div></div>';
+}
+
+/* ================= DRAWER ================= */
+function renderDrawer(){
+  var r = roomById(drawerRoom);
+  if (!r){ closeDrawer(); return; }
+  var st = dispStatus(r), m = ST_META[st];
+  var h = '<div class="dr-head"><span class="rnum">'+r.id+'</span><span class="badge '+m.cls+'">'+m.label+'</span>'
+    + '<button class="dr-close" onclick="closeDrawer()" aria-label="ปิด"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div><div class="dr-body">'
+    + '<div class="dr-sec"><h4>ข้อมูลห้อง</h4>'
+    + '<div class="kv"><span class="k">ประเภท</span><span class="v">'+r.type+' · ชั้น '+r.floor+'</span></div>'
+    + '<div class="kv"><span class="k">ราคา</span><span class="v mono">'+thb(r.price)+' / คืน</span></div></div>';
+  var acts = '';
+  if (r.stay){
+    var s = r.stay;
+    h += '<div class="dr-sec"><h4>ข้อมูลแขก</h4>'
+      + '<div class="kv"><span class="k">ชื่อ</span><span class="v">'+esc(s.name)+'</span></div>'
+      + '<div class="kv"><span class="k">เบอร์โทร</span><span class="v mono">'+esc(s.phone)+'</span></div>'
+      + '<div class="kv"><span class="k">เข้าพัก</span><span class="v">'+thDate(s.checkin,{day:'numeric',month:'short'})+' · '+s.nights+' คืน</span></div>'
+      + '<div class="kv"><span class="k">เช็คเอาท์</span><span class="v">'+thDate(s.checkout,{weekday:'short',day:'numeric',month:'short'})+'</span></div></div>'
+      + '<div class="dr-sec"><h4>บริการเสริมในฟอลิโอ</h4>';
+    if (!s.folio.length) h += '<div class="empty-svc">ยังไม่มีรายการบริการเสริม</div>';
+    s.folio.forEach(function(f){
+      h += '<div class="folio-line"><span>'+esc(f.name)+' <span class="q">× '+f.qty+'</span></span><span class="mono">'+thb(f.price*f.qty)+'</span></div>';
+    });
+    h += '</div>';
+    acts = '<button class="btn btn-ghost" onclick="openService('+r.id+')">เพิ่มบริการเสริม</button>'
+      + '<button class="btn btn-primary" onclick="openCheckout('+r.id+')">สรุปฟอลิโอ / เช็คเอาท์</button>';
+  } else if (st==='vacant'){
+    h += '<div class="dr-sec"><div class="empty-svc">ห้องว่างพร้อมเช็คอิน</div></div>';
+    acts = '<button class="btn btn-primary" onclick="openCheckin('+r.id+')">เช็คอินห้องนี้</button>';
+  } else if (st==='cleaning'){
+    h += '<div class="dr-sec"><div class="empty-svc">แขกเช็คเอาท์แล้ว รอแม่บ้านทำความสะอาด</div></div>';
+    acts = '<button class="btn btn-primary" onclick="cleanDone('+r.id+')">ทำความสะอาดเสร็จ — เปิดขายห้อง</button>';
+  }
+  h += '</div><div class="dr-actions">'+acts+'</div>';
+  document.getElementById('drawer').innerHTML = h;
+}
+
+/* ================= ACTIONS ================= */
+function openCheckin(id){
+  var r = roomById(id);
+  if (!r || dispStatus(r)!=='vacant') return;
+  openModal(
+    '<div class="mo-head"><h3>เช็คอิน — ห้อง '+r.id+'</h3><p class="ms">'+r.type+' · ชั้น '+r.floor+' · <span class="mono">'+thb(r.price)+'</span>/คืน</p></div>'
+    + '<div class="mo-body">'
+    + '<div class="field"><label for="ci-name">ชื่อแขก</label><input id="ci-name" type="text" placeholder="เช่น คุณวิชัย ศรีสุข" autocomplete="off"></div>'
+    + '<div class="qty-row">'
+    + '<div class="field"><label for="ci-nights">จำนวนคืน</label><input id="ci-nights" class="mono" type="number" min="1" max="30" value="1" oninput="ciPreview('+r.id+')"></div>'
+    + '<div class="field"><label for="ci-phone">เบอร์โทร</label><input id="ci-phone" class="mono" type="tel" placeholder="08x-xxx-xxxx" autocomplete="off"></div>'
+    + '</div>'
+    + '<div class="total-live"><span id="ci-co">เช็คเอาท์ '+thDate(addDays(T,1),{weekday:'short',day:'numeric',month:'short'})+'</span><span class="mono" id="ci-total">'+thb(r.price)+'</span></div>'
+    + '</div>'
+    + '<div class="mo-foot"><button class="btn btn-ghost" onclick="closeModal()">ยกเลิก</button>'
+    + '<button class="btn btn-primary" onclick="doCheckin('+r.id+')">ยืนยันเช็คอิน</button></div>'
+  );
+  setTimeout(function(){ var el=document.getElementById('ci-name'); if(el) el.focus(); },50);
+}
+function ciPreview(id){
+  var r = roomById(id);
+  var n = Math.max(1, Math.min(30, parseInt(document.getElementById('ci-nights').value,10)||1));
+  document.getElementById('ci-co').textContent = 'เช็คเอาท์ ' + thDate(addDays(T,n),{weekday:'short',day:'numeric',month:'short'});
+  document.getElementById('ci-total').textContent = thb(r.price*n);
+}
+function doCheckin(id){
+  var r = roomById(id);
+  var name = document.getElementById('ci-name').value.trim();
+  var phone = document.getElementById('ci-phone').value.trim() || '—';
+  var n = Math.max(1, Math.min(30, parseInt(document.getElementById('ci-nights').value,10)||1));
+  if (!name){ document.getElementById('ci-name').focus(); toast('กรุณากรอกชื่อแขก'); return; }
+  r.status = 'occupied';
+  r.stay = { name:name, phone:phone, checkin:T, nights:n, checkout:addDays(T,n), folio:[] };
+  save(); closeModal(); renderAll();
+  toast('เช็คอินห้อง '+id+' เรียบร้อย — ออก '+thDate(r.stay.checkout));
+}
+
+function openService(id){
+  var r = roomById(id);
+  if (!r || !r.stay) return;
+  var opts = SVC.map(function(s){ return '<option value="'+s.id+'">'+s.name+' — '+thb(s.price)+'/'+s.unit+'</option>'; }).join('');
+  openModal(
+    '<div class="mo-head"><h3>เพิ่มบริการเสริม — ห้อง '+r.id+'</h3><p class="ms">'+esc(r.stay.name)+' · เพิ่มเข้าฟอลิโอห้อง</p></div>'
+    + '<div class="mo-body">'
+    + '<div class="field"><label for="sv-id">รายการ</label><select id="sv-id" onchange="svPreview()">'+opts+'</select></div>'
+    + '<div class="field"><label for="sv-qty">จำนวน</label><input id="sv-qty" class="mono" type="number" min="1" max="99" value="1" oninput="svPreview()"></div>'
+    + '<div class="total-live"><span>ยอดที่จะเพิ่มเข้าฟอลิโอ</span><span class="mono" id="sv-total">'+thb(SVC[0].price)+'</span></div>'
+    + '</div>'
+    + '<div class="mo-foot"><button class="btn btn-ghost" onclick="closeModal()">ยกเลิก</button>'
+    + '<button class="btn btn-primary" onclick="doService('+r.id+')">เพิ่มเข้าฟอลิโอ</button></div>'
+  );
+}
+function svcById(sid){ for (var i=0;i<SVC.length;i++) if (SVC[i].id===sid) return SVC[i]; return SVC[0]; }
+function svPreview(){
+  var s = svcById(document.getElementById('sv-id').value);
+  var q = Math.max(1, parseInt(document.getElementById('sv-qty').value,10)||1);
+  document.getElementById('sv-total').textContent = thb(s.price*q);
+}
+function doService(id){
+  var r = roomById(id);
+  var s = svcById(document.getElementById('sv-id').value);
+  var q = Math.max(1, Math.min(99, parseInt(document.getElementById('sv-qty').value,10)||1));
+  r.stay.folio.push({ sid:s.id, name:s.name, price:s.price, qty:q, date:T });
+  save(); closeModal(); renderAll();
+  toast('เพิ่ม "'+s.name+' × '+q+'" เข้าฟอลิโอห้อง '+id);
+}
+
+function openCheckout(id){
+  var r = roomById(id);
+  if (!r || !r.stay) return;
+  var s = r.stay;
+  var roomCharge = r.price * s.nights;
+  var svcTotal = folioSvcTotal(s);
+  var sub = roomCharge + svcTotal;
+  var vat = Math.round(sub * 0.07);
+  var grand = sub + vat;
+  var lines = '<tr><td>ค่าห้อง '+r.type+' <span style="color:var(--mut)">('+thb(r.price)+' × '+s.nights+' คืน)</span></td><td class="r">'+thb(roomCharge)+'</td></tr>';
+  s.folio.forEach(function(f){
+    lines += '<tr><td>'+esc(f.name)+' <span style="color:var(--mut)">('+thb(f.price)+' × '+f.qty+')</span></td><td class="r">'+thb(f.price*f.qty)+'</td></tr>';
+  });
+  openModal(
+    '<div class="mo-head"><h3>สรุปฟอลิโอ — ห้อง '+r.id+'</h3><p class="ms">'+esc(s.name)+' · เข้าพัก '+thDate(s.checkin)+' ถึง '+thDate(s.checkout)+'</p></div>'
+    + '<div class="mo-body"><table class="folio-tbl">'+lines
+    + '<tr class="sub"><td>รวมก่อนภาษี</td><td class="r">'+thb(sub)+'</td></tr>'
+    + '<tr class="vat"><td>VAT 7%</td><td class="r">'+thb(vat)+'</td></tr>'
+    + '<tr class="grand"><td>ยอดสุทธิ</td><td class="r">'+thb(grand)+'</td></tr>'
+    + '</table></div>'
+    + '<div class="mo-foot"><button class="btn btn-ghost" onclick="closeModal()">ยกเลิก</button>'
+    + '<button class="btn btn-primary" onclick="doCheckout('+r.id+')">ยืนยันเช็คเอาท์</button></div>',
+    true
+  );
+}
+
+function doCheckout(id){
+  var r = roomById(id);
+  if (!r || !r.stay) return;
+  var s = r.stay;
+  var roomCharge = r.price * s.nights;
+  var svcTotal = folioSvcTotal(s);
+  var sub = roomCharge + svcTotal;
+  var vat = Math.round(sub * 0.07);
+  var grand = sub + vat;
+  var rcNo = 'RC-' + Date.now().toString().slice(-6);
+  var rc = '<div class="receipt" id="receipt-src">'
+    + '<div class="rc-head"><div class="h">อัครา บูทีค โฮเทล</div><div class="s">ใบเสร็จรับเงิน · เลขที่ '+rcNo+'<br>ออกเมื่อ '+new Date().toLocaleDateString('th-TH',{day:'numeric',month:'long',year:'numeric'})+'</div></div>'
+    + '<div class="rc-line"><span>แขก</span><span>'+esc(s.name)+'</span></div>'
+    + '<div class="rc-line"><span>ห้อง</span><span class="r">'+r.id+' ('+r.type+')</span></div>'
+    + '<div class="rc-line"><span>เข้าพัก</span><span>'+thDate(s.checkin)+' — '+thDate(s.checkout)+' ('+s.nights+' คืน)</span></div>'
+    + '<div style="border-top:1px dashed var(--line);margin:8px 0"></div>'
+    + '<div class="rc-line"><span>ค่าห้อง '+thb(r.price)+' × '+s.nights+' คืน</span><span class="r">'+thb(roomCharge)+'</span></div>';
+  s.folio.forEach(function(f){
+    rc += '<div class="rc-line"><span>'+esc(f.name)+' × '+f.qty+'</span><span class="r">'+thb(f.price*f.qty)+'</span></div>';
+  });
+  rc += '<div class="rc-tot">'
+    + '<div class="rc-line"><span>รวมก่อนภาษี</span><span class="r">'+thb(sub)+'</span></div>'
+    + '<div class="rc-line"><span>VAT 7%</span><span class="r">'+thb(vat)+'</span></div>'
+    + '<div class="rc-line rc-grand"><span>ยอดสุทธิ</span><span class="r">'+thb(grand)+'</span></div></div>'
+    + '<div class="rc-foot">ขอบคุณที่เข้าพักกับอัครา บูทีค โฮเทล<br>ระบบพักดี — เอกสารเดโม ไม่ใช่ใบเสร็จจริง</div></div>';
+
+  r.status = 'cleaning';
+  r.stay = null;
+  save();
+  openModal(
+    '<div class="mo-head"><h3>เช็คเอาท์เรียบร้อย — ห้อง '+id+'</h3><p class="ms">ห้องเปลี่ยนเป็นสถานะรอทำความสะอาดแล้ว</p></div>'
+    + '<div class="mo-body">'+rc+'</div>'
+    + '<div class="mo-foot"><button class="btn btn-ghost" onclick="closeModal();renderAll()">ปิด</button>'
+    + '<button class="btn btn-primary" onclick="printReceipt()">พิมพ์ใบเสร็จ</button></div>',
+    true
+  );
+  renderAll();
+  toast('เช็คเอาท์ห้อง '+id+' — ยอดสุทธิ '+thb(grand));
+}
+
+function printReceipt(){
+  var src = document.getElementById('receipt-src');
+  if (!src) return;
+  document.getElementById('print-area').innerHTML = src.outerHTML;
+  document.body.classList.add('printing');
+  window.print();
+}
+window.addEventListener('afterprint', function(){ document.body.classList.remove('printing'); });
+
+function cleanDone(id){
+  var r = roomById(id);
+  if (!r) return;
+  r.status = 'vacant';
+  save(); renderAll();
+  toast('ห้อง '+id+' ทำความสะอาดเสร็จ — เปิดขายแล้ว');
+}
+
+/* ================= NAV / AUTH ================= */
+function switchView(v){
+  currentView = v;
+  var links = document.querySelectorAll('.sb-link');
+  links.forEach(function(l){ l.classList.toggle('active', l.dataset.view===v); });
+  document.body.classList.remove('sb-open');
+  closeDrawer();
+  renderView();
+}
+document.getElementById('sb-nav').addEventListener('click', function(e){
+  var b = e.target.closest('.sb-link');
+  if (b) switchView(b.dataset.view);
+});
+document.getElementById('login-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.body.classList.add('authed');
+  renderView();
+});
+document.getElementById('btn-logout').addEventListener('click', function(){
+  document.body.classList.remove('authed');
+  closeDrawer(); closeModal();
+});
+document.getElementById('btn-hamb').addEventListener('click', function(){
+  document.body.classList.toggle('sb-open');
+});
+document.getElementById('btn-reset').addEventListener('click', function(){
+  state = seed(); save(); renderAll();
+  toast('รีเซ็ตข้อมูลตัวอย่างแล้ว');
+});
+document.getElementById('overlay').addEventListener('click', closeDrawer);
+document.getElementById('modal-bg').addEventListener('click', function(){ closeModal(); });
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape'){ closeModal(); closeDrawer(); }
+});
+
+/* ================= INIT ================= */
+document.getElementById('th-date').textContent = new Date().toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+</script>
+</body>
+</html>

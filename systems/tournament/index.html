@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แข่งดี — ระบบจัดการแข่งขัน | GG ZONE อีสปอร์ตคาเฟ่</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0f; --panel:#121219; --panel2:#181822; --panel3:#1f1f2c;
+  --line:#262636; --line2:#33334a;
+  --text:#f2f1ea; --muted:#9b9bb0; --dim:#6c6c82;
+  --accent:#ca8a04; --accent-hi:#eab308; --accent-soft:rgba(202,138,4,.14);
+  --green:#16a34a; --green-soft:rgba(22,163,74,.16);
+  --red:#dc2626; --red-soft:rgba(220,38,38,.14);
+  --live:#f59e0b;
+  --r:14px; --sb:240px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:15px}
+body{
+  font-family:"IBM Plex Sans Thai",system-ui,sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:"JetBrains Mono",monospace}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select{font-family:inherit}
+:focus-visible{outline:2px solid var(--accent-hi);outline-offset:2px;border-radius:6px}
+svg{display:block}
+[hidden]{display:none!important}
+
+/* ============ LOGIN ============ */
+#loginView{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+  background:
+    radial-gradient(900px 500px at 15% -10%, rgba(202,138,4,.22), transparent 60%),
+    radial-gradient(700px 500px at 110% 110%, rgba(202,138,4,.14), transparent 55%),
+    linear-gradient(160deg,#0d0c07 0%, #0a0a0f 45%, #11100a 100%);
+}
+.login-card{
+  width:100%;max-width:420px;background:rgba(18,18,25,.92);
+  border:1px solid var(--line2);border-radius:20px;padding:36px 32px 26px;
+  box-shadow:0 30px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05);
+  position:relative;overflow:hidden;
+}
+.login-card::before{
+  content:"";position:absolute;inset:0 0 auto 0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--accent-hi),transparent);
+}
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.login-logo .mark{
+  width:46px;height:46px;border-radius:12px;display:grid;place-items:center;
+  background:linear-gradient(140deg,#eab308,#ca8a04 60%,#854d0e);
+  box-shadow:0 8px 24px rgba(202,138,4,.4);
+}
+.login-logo h1{font-size:1.5rem;font-weight:600;letter-spacing:.2px}
+.login-logo h1 span{color:var(--accent-hi)}
+.login-sub{color:var(--muted);font-size:.9rem;margin-bottom:24px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:6px;font-weight:500}
+.field input{
+  width:100%;min-height:48px;padding:11px 14px;border-radius:10px;
+  background:var(--panel2);border:1px solid var(--line2);color:var(--text);font-size:1rem;
+}
+.field input:focus{border-color:var(--accent)}
+.btn-gold{
+  width:100%;min-height:50px;border-radius:11px;font-size:1rem;font-weight:600;
+  background:linear-gradient(140deg,#eab308,#ca8a04);color:#1a1400;
+  transition:filter .15s, transform .15s;
+}
+.btn-gold:hover{filter:brightness(1.08)}
+.btn-gold:active{transform:scale(.985)}
+.login-note{
+  margin-top:18px;padding:12px 14px;border-radius:10px;text-align:center;
+  background:var(--accent-soft);border:1px dashed rgba(202,138,4,.45);
+  color:#e7c96a;font-size:.84rem;
+}
+.credit{margin-top:16px;text-align:center;font-size:.74rem;color:var(--dim)}
+.credit a{color:var(--accent-hi);text-decoration:none}
+.credit a:hover{text-decoration:underline}
+
+/* ============ APP SHELL ============ */
+#app{display:flex;min-height:100vh}
+#sidebar{
+  width:var(--sb);flex:0 0 var(--sb);position:sticky;top:0;height:100vh;
+  background:linear-gradient(180deg,#101017,#0c0c12);
+  border-right:1px solid var(--line);display:flex;flex-direction:column;padding:18px 14px;z-index:60;
+}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 18px;border-bottom:1px solid var(--line)}
+.brand .mark{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(140deg,#eab308,#ca8a04 60%,#854d0e)}
+.brand b{font-size:1.06rem;font-weight:600}
+.brand small{display:block;color:var(--dim);font-size:.7rem;font-weight:400}
+.nav{display:flex;flex-direction:column;gap:4px;margin-top:16px;flex:1}
+.nav-btn{
+  display:flex;align-items:center;gap:11px;width:100%;min-height:46px;
+  padding:10px 12px;border-radius:10px;color:var(--muted);font-size:.95rem;text-align:left;
+  transition:background .15s,color .15s;
+}
+.nav-btn svg{flex:0 0 auto}
+.nav-btn:hover{background:var(--panel2);color:var(--text)}
+.nav-btn.active{background:var(--accent-soft);color:var(--accent-hi);font-weight:500}
+.sb-foot{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.sb-user{display:flex;align-items:center;gap:10px;padding:6px 8px}
+.avatar{
+  width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto;
+  background:var(--panel3);border:1px solid var(--line2);color:var(--accent-hi);font-weight:600;font-size:.85rem;
+}
+.sb-user div{line-height:1.25;min-width:0}
+.sb-user b{font-size:.86rem;font-weight:500;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-user small{color:var(--dim);font-size:.72rem}
+.btn-ghost{
+  display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;
+  border-radius:10px;border:1px solid var(--line2);color:var(--muted);font-size:.88rem;width:100%;
+  transition:border-color .15s,color .15s;
+}
+.btn-ghost:hover{border-color:var(--red);color:#f87171}
+
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{
+  position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:14px 24px;background:rgba(10,10,15,.85);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.topbar h2{font-size:1.15rem;font-weight:600}
+.topbar .date{color:var(--muted);font-size:.85rem}
+.tb-spacer{flex:1}
+.kpi-chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:6px 13px;
+  border-radius:99px;border:1px solid var(--line2);background:var(--panel);font-size:.8rem;color:var(--muted);
+}
+.chip b{color:var(--text);font-family:"JetBrains Mono",monospace;font-weight:600}
+.chip .dot{width:8px;height:8px;border-radius:50%}
+.chip.live .dot{background:var(--live);box-shadow:0 0 0 4px rgba(245,158,11,.18)}
+.chip.done .dot{background:var(--green)}
+.btn-sm{
+  display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:9px 16px;
+  border-radius:10px;font-size:.86rem;font-weight:500;border:1px solid var(--line2);
+  background:var(--panel2);color:var(--text);transition:border-color .15s,background .15s;
+}
+.btn-sm:hover{border-color:var(--accent)}
+.btn-sm.warn:hover{border-color:var(--red);color:#f87171}
+.btn-sm.gold{background:linear-gradient(140deg,#eab308,#ca8a04);color:#1a1400;border:none;font-weight:600}
+.btn-sm.gold:hover{filter:brightness(1.08)}
+.btn-sm:disabled{opacity:.4;cursor:not-allowed}
+.hamb{display:none}
+
+.content{padding:26px 24px 90px;max-width:1240px;width:100%;margin:0 auto}
+.page-head{margin-bottom:20px}
+.page-head h3{font-size:1.35rem;font-weight:600;margin-bottom:4px}
+.page-head p{color:var(--muted);font-size:.9rem}
+
+/* ============ BRACKET ============ */
+.bracket-scroll{overflow:auto;padding-bottom:12px}
+.bracket-wrap{position:relative;min-width:860px;padding:8px 4px 8px 0}
+.bracket{display:flex;gap:84px;position:relative;z-index:2}
+.round-col{display:flex;flex-direction:column;justify-content:space-around;gap:18px;flex:1;min-width:224px}
+.round-title{
+  text-align:center;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent-hi);font-weight:600;padding:6px 0 2px;
+}
+.round-title small{display:block;color:var(--dim);letter-spacing:0;text-transform:none;font-weight:400;margin-top:2px}
+.wires{position:absolute;inset:0;z-index:1;pointer-events:none}
+.wires path{stroke:#3d3d55;stroke-width:2;fill:none}
+.wires path.hot{stroke:var(--accent);stroke-width:2.5}
+
+.match{
+  width:100%;text-align:left;background:var(--panel);border:1px solid var(--line2);
+  border-radius:12px;overflow:hidden;transition:border-color .15s, box-shadow .15s;display:block;
+}
+.match:hover{border-color:var(--accent)}
+.match.done{border-color:rgba(202,138,4,.4)}
+.match.live{border-color:var(--live);box-shadow:0 0 0 3px rgba(245,158,11,.12), 0 0 26px rgba(245,158,11,.14)}
+.m-row{
+  display:flex;align-items:center;gap:9px;padding:10px 12px;min-height:44px;
+}
+.m-row + .m-row{border-top:1px solid var(--line)}
+.m-row.tbd{color:var(--dim)}
+.m-tag{
+  width:30px;height:22px;border-radius:6px;display:grid;place-items:center;flex:0 0 auto;
+  font-family:"JetBrains Mono",monospace;font-size:.62rem;font-weight:700;color:#0c0c10;
+}
+.m-name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.92rem}
+.m-score{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:1.05rem;color:var(--dim);min-width:22px;text-align:right}
+.m-row.win{background:linear-gradient(90deg,rgba(202,138,4,.16),transparent 70%)}
+.m-row.win .m-name{color:var(--accent-hi);font-weight:600}
+.m-row.win .m-score{color:var(--accent-hi)}
+.m-row.lose{opacity:.55}
+.m-meta{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:6px 12px;background:rgba(0,0,0,.25);border-top:1px solid var(--line);
+  font-size:.7rem;color:var(--dim);
+}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:99px;font-size:.68rem;font-weight:500}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%}
+.badge.st-pending{background:var(--panel3);color:var(--muted)}
+.badge.st-pending::before{background:var(--dim)}
+.badge.st-live{background:rgba(245,158,11,.16);color:#fbbf24}
+.badge.st-live::before{background:var(--live);animation:pulse 1.2s infinite}
+.badge.st-done{background:var(--green-soft);color:#4ade80}
+.badge.st-done::before{background:var(--green)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.champ-banner{
+  margin-top:26px;border-radius:18px;padding:30px 26px;text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(150deg,rgba(202,138,4,.28),rgba(202,138,4,.06) 55%), var(--panel);
+  border:1px solid rgba(202,138,4,.55);
+  box-shadow:0 20px 60px rgba(202,138,4,.15);
+}
+.champ-banner .cup{width:64px;height:64px;margin:0 auto 10px;display:grid;place-items:center;border-radius:50%;
+  background:linear-gradient(140deg,#eab308,#ca8a04 60%,#854d0e);box-shadow:0 10px 30px rgba(202,138,4,.5)}
+.champ-banner small{color:#e7c96a;letter-spacing:.22em;text-transform:uppercase;font-size:.72rem;font-weight:600}
+.champ-banner h4{font-size:1.9rem;font-weight:600;color:#fde68a;margin:6px 0 4px}
+.champ-banner p{color:var(--muted);font-size:.88rem}
+
+/* ============ TEAMS ============ */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:16px}
+.team-card{background:var(--panel);border:1px solid var(--line2);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:12px}
+.team-top{display:flex;align-items:center;gap:12px}
+.team-tag{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:.9rem;color:#0c0c10;flex:0 0 auto}
+.team-top b{font-size:1.02rem;font-weight:600;display:block}
+.team-top small{color:var(--muted);font-size:.78rem}
+.team-record{margin-left:auto;text-align:right}
+.team-record .wl{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:1.05rem}
+.team-record small{color:var(--dim);font-size:.7rem;display:block}
+.players{list-style:none;border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:6px}
+.players li{display:flex;align-items:center;gap:9px;font-size:.86rem;color:#cfcfdd}
+.players li .no{font-family:"JetBrains Mono",monospace;font-size:.68rem;color:var(--dim);width:16px}
+.team-actions{display:flex;gap:8px;margin-top:auto}
+.team-actions .btn-sm{flex:1;justify-content:center;min-height:44px}
+.lock-note{
+  display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;margin-bottom:16px;
+  background:var(--accent-soft);border:1px solid rgba(202,138,4,.4);color:#e7c96a;font-size:.86rem;
+}
+
+/* ============ MATCHES TABLE ============ */
+.round-block{margin-bottom:26px}
+.round-block h4{font-size:1rem;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.round-block h4 .cnt{font-family:"JetBrains Mono",monospace;font-size:.72rem;color:var(--dim);font-weight:400}
+.table-card{background:var(--panel);border:1px solid var(--line2);border-radius:var(--r);overflow:hidden}
+.mtable{width:100%;border-collapse:collapse;min-width:640px}
+.mtable th{
+  text-align:left;font-size:.72rem;color:var(--dim);font-weight:500;letter-spacing:.05em;
+  padding:11px 16px;border-bottom:1px solid var(--line);background:rgba(0,0,0,.22);
+}
+.mtable td{padding:12px 16px;border-bottom:1px solid var(--line);font-size:.9rem;vertical-align:middle}
+.mtable tr:last-child td{border-bottom:none}
+.mtable tr.live-row{background:rgba(245,158,11,.05)}
+.vs{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.vs .sc{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:1rem;color:var(--accent-hi)}
+.vs .v{color:var(--dim);font-size:.74rem}
+.t-mini{display:inline-flex;align-items:center;gap:7px}
+.t-mini .m-tag{width:26px;height:19px;font-size:.58rem}
+.t-mini.w{color:var(--accent-hi);font-weight:600}
+.t-mini.l{opacity:.6}
+.table-scroll{overflow-x:auto}
+
+/* ============ BIG SCREEN ============ */
+#bigscreen{
+  position:fixed;inset:0;z-index:700;background:#000;padding:34px 42px;overflow:auto;
+  display:flex;flex-direction:column;
+}
+#bigscreen .bs-head{display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+#bigscreen .bs-head h2{font-size:1.7rem;font-weight:600;color:#fde68a}
+#bigscreen .bs-head .org{color:#a1a1aa;font-size:.95rem}
+#bigscreen .bs-head .bs-close{margin-left:auto}
+#bigscreen .bracket-wrap{min-width:1100px}
+#bigscreen .match{background:#101016;border-color:#2c2c3e}
+#bigscreen .m-name{font-size:1.12rem}
+#bigscreen .m-score{font-size:1.35rem}
+#bigscreen .m-row{min-height:56px;padding:14px 16px}
+#bigscreen .m-tag{width:38px;height:27px;font-size:.74rem}
+#bigscreen .round-title{font-size:1rem}
+#bigscreen .m-meta{font-size:.8rem;padding:8px 14px}
+#bigscreen .bracket{gap:110px}
+#bigscreen .champ-banner h4{font-size:2.6rem}
+body.big #app{filter:blur(2px) brightness(.4)}
+
+/* ============ MODAL / TOAST ============ */
+.modal-ov{
+  position:fixed;inset:0;z-index:750;background:rgba(0,0,0,.66);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.modal{
+  width:100%;max-width:460px;background:var(--panel2);border:1px solid var(--line2);
+  border-radius:18px;padding:24px;box-shadow:0 30px 90px rgba(0,0,0,.6);
+  animation:pop .18s ease-out;max-height:88vh;overflow:auto;
+}
+@keyframes pop{from{transform:scale(.96) translateY(8px);opacity:0}}
+.modal h4{font-size:1.12rem;font-weight:600;margin-bottom:4px}
+.modal .msub{color:var(--muted);font-size:.83rem;margin-bottom:18px}
+.score-edit{display:flex;align-items:center;justify-content:center;gap:16px;margin:8px 0 16px}
+.score-edit .side{flex:1;text-align:center;min-width:0}
+.score-edit .side .tn{font-size:.9rem;font-weight:500;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.score-edit input{
+  width:76px;height:76px;text-align:center;font-family:"JetBrains Mono",monospace;
+  font-size:2.1rem;font-weight:700;border-radius:14px;background:var(--panel);
+  border:2px solid var(--line2);color:var(--text);
+}
+.score-edit input:focus{border-color:var(--accent)}
+.score-edit .colon{font-family:"JetBrains Mono",monospace;font-size:1.6rem;color:var(--dim)}
+.quick{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.quick button{
+  min-height:44px;padding:9px 16px;border-radius:99px;border:1px solid var(--line2);
+  font-family:"JetBrains Mono",monospace;font-weight:600;font-size:.92rem;color:var(--muted);
+}
+.quick button:hover{border-color:var(--accent);color:var(--accent-hi)}
+.modal-actions{display:flex;gap:10px;margin-top:6px}
+.modal-actions .btn-sm{flex:1;justify-content:center}
+.form-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+#toastRoot{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:790;display:flex;flex-direction:column;gap:8px;align-items:center}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:12px 20px;border-radius:12px;
+  background:#1c1c28;border:1px solid var(--line2);font-size:.9rem;
+  box-shadow:0 14px 40px rgba(0,0,0,.5);animation:tin .2s ease-out;
+}
+.toast.ok{border-color:rgba(22,163,74,.5)}
+.toast.err{border-color:rgba(220,38,38,.5)}
+@keyframes tin{from{transform:translateY(12px);opacity:0}}
+
+/* ============ BACK FAB ============ */
+.back-fab{
+  position:fixed;left:16px;bottom:16px;z-index:800;
+  display:inline-flex;align-items:center;gap:8px;min-height:44px;
+  background:#fff;color:#18181b;font-size:.85rem;font-weight:500;
+  padding:10px 18px 10px 14px;border-radius:99px;text-decoration:none;
+  border-left:3px solid var(--red);box-shadow:0 10px 30px rgba(0,0,0,.45);
+}
+.back-fab:hover{background:#f4f4f5}
+
+/* ============ RESPONSIVE ============ */
+.scrim{display:none}
+@media (max-width:900px){
+  #sidebar{
+    position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);
+    transition:transform .22s ease;box-shadow:20px 0 60px rgba(0,0,0,.5);
+  }
+  body.nav-open #sidebar{transform:none}
+  .scrim{
+    display:block;position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.55);
+    opacity:0;pointer-events:none;transition:opacity .2s;
+  }
+  body.nav-open .scrim{opacity:1;pointer-events:auto}
+  .hamb{display:inline-flex}
+  .content{padding:20px 14px 90px}
+  .topbar{padding:12px 14px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
+
+<!-- ================= LOGIN ================= -->
+<div id="loginView">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="mark" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a1400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a2 2 0 0 0 2 4h1M17 6h3a2 2 0 0 1-2 4h-1"/></svg>
+      </div>
+      <h1>แข่ง<span>ดี</span></h1>
+    </div>
+    <p class="login-sub">ระบบจัดการทัวร์นาเมนต์ ROV ประจำเดือน — GG ZONE อีสปอร์ตคาเฟ่</p>
+    <form id="loginForm">
+      <div class="field">
+        <label for="lgUser">อีเมลผู้จัด</label>
+        <input id="lgUser" type="email" value="admin@ggzone.gg" autocomplete="username">
+      </div>
+      <div class="field">
+        <label for="lgPass">รหัสผ่าน</label>
+        <input id="lgPass" type="password" value="demo1234" autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn-gold">เข้าสู่ระบบ</button>
+    </form>
+    <div class="login-note">ระบบเดโม — กดเข้าสู่ระบบได้เลย ข้อมูลทั้งหมดเป็นข้อมูลตัวอย่าง</div>
+    <p class="credit">สร้างโดย <a href="../../first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos">ZenityX — คอร์ส First Vibe Coding for Beginners</a></p>
+  </div>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="app" hidden>
+  <div class="scrim" id="scrim"></div>
+  <aside id="sidebar">
+    <div class="brand">
+      <div class="mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a2 2 0 0 0 2 4h1M17 6h3a2 2 0 0 1-2 4h-1"/></svg>
+      </div>
+      <div><b>แข่งดี</b><small>GG ZONE อีสปอร์ตคาเฟ่</small></div>
+    </div>
+    <nav class="nav" aria-label="เมนูหลัก">
+      <button class="nav-btn active" data-page="bracket">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h4M4 19h4M8 12h4M12 12h4M16 5v14M16 12h4"/><circle cx="4" cy="5" r="1.4"/><circle cx="4" cy="19" r="1.4"/><circle cx="20" cy="12" r="1.4"/></svg>
+        สายแข่ง
+      </button>
+      <button class="nav-btn" data-page="teams">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 2.8-4.5 5.5-4.5s4.9 1.5 5.5 4.5"/><circle cx="17" cy="9" r="2.4"/><path d="M16 14.6c2.6.2 4.1 1.6 4.6 4"/></svg>
+        ทีม
+      </button>
+      <button class="nav-btn" data-page="matches">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2.5"/><path d="M3 9.5h18M8 2.5V5M16 2.5V5M7 14h4M7 17h7"/></svg>
+        แมตช์ทั้งหมด
+      </button>
+      <button class="nav-btn" id="btnBigNav">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        โหมดจอใหญ่
+      </button>
+    </nav>
+    <div class="sb-foot">
+      <div class="sb-user">
+        <div class="avatar" aria-hidden="true">GG</div>
+        <div><b>ผู้จัด GG ZONE</b><small>admin@ggzone.gg</small></div>
+      </div>
+      <button class="btn-ghost" id="btnLogout">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3M16 17l5-5-5-5M21 12H9"/></svg>
+        ออกจากระบบ
+      </button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="btn-sm hamb" id="btnHamb" aria-label="เปิดเมนู">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <h2 id="pageTitle">สายแข่ง</h2>
+      <span class="date" id="thaiDate"></span>
+      <div class="tb-spacer"></div>
+      <div class="kpi-chips">
+        <span class="chip done"><span class="dot"></span>เล่นแล้ว <b id="kpiDone">0/7</b></span>
+        <span class="chip live"><span class="dot"></span>กำลังแข่ง <b id="kpiLive">0</b></span>
+      </div>
+      <button class="btn-sm gold" id="btnBigTop">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        จอใหญ่
+      </button>
+      <button class="btn-sm warn" id="btnReset">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+        รีเซ็ตข้อมูลตัวอย่าง
+      </button>
+    </header>
+    <main class="content">
+      <section id="page-bracket"></section>
+      <section id="page-teams" hidden></section>
+      <section id="page-matches" hidden></section>
+    </main>
+  </div>
+</div>
+
+<!-- ================= BIG SCREEN ================= -->
+<div id="bigscreen" hidden>
+  <div class="bs-head">
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a2 2 0 0 0 2 4h1M17 6h3a2 2 0 0 1-2 4h-1"/></svg>
+    <div>
+      <h2>แข่งดี — ROV Monthly Championship</h2>
+      <div class="org">GG ZONE อีสปอร์ตคาเฟ่ · <span id="bsDate"></span></div>
+    </div>
+    <button class="btn-sm bs-close" id="btnBigClose">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      ออกจากจอใหญ่ (Esc)
+    </button>
+  </div>
+  <div id="bsBody" style="flex:1"></div>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toastRoot" aria-live="polite"></div>
+
+<a class="back-fab" href="../">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  หน้ารวมตัวอย่าง
+</a>
+
+<script>
+(function(){
+"use strict";
+
+/* ================= DATA ================= */
+var LS_KEY = "zx-tour-v1";
+var ROUND_NAMES = ["รอบ 8 ทีม","รอบรองชนะเลิศ","รอบชิงชนะเลิศ"];
+var TEAM_COLORS = ["#eab308","#22d3ee","#f472b6","#4ade80","#fb923c","#a78bfa","#f87171","#38bdf8"];
+
+function seedState(){
+  var T = [
+    {id:"t1",tag:"GGZ",name:"GGZ Titans",   players:["ฟลุ๊ค ธนกฤต","บอส ณัฐพล","แบงค์ วรวุฒิ","โอ๊ต ภาคิน","เจมส์ ปวริศ"]},
+    {id:"t2",tag:"JDE",name:"มังกรหยก Esports",players:["ไนซ์ ชนะศักดิ์","ต้น ศุภกร","พลอย ณิชารีย์","กอล์ฟ อนุวัฒน์","มาร์ค กิตติพงษ์"]},
+    {id:"t3",tag:"SFF",name:"สายฟ้าฟาด",     players:["เบียร์ ชนาธิป","โมง วิชญะ","เอ ธนาธร","ปอนด์ จิรายุ","เต๋า สิทธิชัย"]},
+    {id:"t4",tag:"KLM",name:"กะละมัง All-Star",players:["โฟล์ค ปัณณวิชญ์","บีม ธันยา","แตงโม ศุภวรรณ","โอม รวิทัต","แนน พิชญา"]},
+    {id:"t5",tag:"NKN",name:"นนทบุรีไนท์",    players:["เต้ย อธิบดินทร์","นิว ชยพล","ตังเม วงศ์วร","ปุ๊ก วรัญญู","แพท ดิลกรัตน์"]},
+    {id:"t6",tag:"CBS",name:"ชลบุรีชาร์ค",    players:["กัน ธีรภัทร","มิ้นท์ ปริญญา","โตโต้ สุรเชษฐ์","อาร์ม จตุรงค์","พรีม ชนกนันท์"]},
+    {id:"t7",tag:"KKP",name:"ขอนแก่นโจรสลัด", players:["โจ้ ธีรเดช","แชมป์ สรวิชญ์","นัท ภูริทัต","ใบเตย อรัชพร","เตอร์ รชต"]},
+    {id:"t8",tag:"CNW",name:"เชียงใหม่วูล์ฟ",  players:["เพชร วรเมธ","หมูปิ้ง เกียรติศักดิ์","ฟ้าใส จิราภรณ์","ตั้ม นพดล","เบล เบญญภา"]}
+  ];
+  function mk(id,round,order,home,away,time){
+    return {id:id,round:round,order:order,home:home,away:away,homeScore:null,awayScore:null,status:"pending",time:time,startedAt:null};
+  }
+  return {
+    teams:T,
+    matches:[
+      mk("m1",0,0,"t1","t8","18:00"),
+      mk("m2",0,1,"t4","t5","18:40"),
+      mk("m3",0,2,"t2","t7","19:20"),
+      mk("m4",0,3,"t3","t6","20:00"),
+      mk("m5",1,0,null,null,"20:50"),
+      mk("m6",1,1,null,null,"21:30"),
+      mk("m7",2,0,null,null,"22:10")
+    ]
+  };
+}
+
+function load(){
+  try{
+    var raw = localStorage.getItem(LS_KEY);
+    if(raw){ var s = JSON.parse(raw); if(s && s.teams && s.matches) return s; }
+  }catch(e){}
+  var s = seedState(); save(s); return s;
+}
+function save(s){ if(s){ state = s; } try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} }
+
+var state = load();
+var page = "bracket";
+var NEXT = { m1:{m:"m5",slot:"home"}, m2:{m:"m5",slot:"away"}, m3:{m:"m6",slot:"home"}, m4:{m:"m6",slot:"away"}, m5:{m:"m7",slot:"home"}, m6:{m:"m7",slot:"away"} };
+
+function teamById(id){ for(var i=0;i<state.teams.length;i++){ if(state.teams[i].id===id) return state.teams[i]; } return null; }
+function teamIdx(id){ for(var i=0;i<state.teams.length;i++){ if(state.teams[i].id===id) return i; } return 0; }
+function matchById(id){ for(var i=0;i<state.matches.length;i++){ if(state.matches[i].id===id) return state.matches[i]; } return null; }
+function winnerOf(m){
+  if(m.status!=="done"||m.homeScore==null||m.awayScore==null) return null;
+  return m.homeScore>m.awayScore ? m.home : m.away;
+}
+function champion(){ return winnerOf(matchById("m7")); }
+function statsOf(tid){
+  var w=0,l=0;
+  state.matches.forEach(function(m){
+    if(m.status!=="done") return;
+    var wn = winnerOf(m);
+    if(m.home===tid||m.away===tid){ if(wn===tid){w++;}else{l++;} }
+  });
+  return {w:w,l:l};
+}
+function playedAny(){ return state.matches.some(function(m){ return m.status==="done"; }); }
+
+/* ================= HELPERS ================= */
+function $(s,r){ return (r||document).querySelector(s); }
+function el(html){ var t=document.createElement("template"); t.innerHTML=html.trim(); return t.content.firstChild; }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function toast(msg,ok){
+  var t = el('<div class="toast '+(ok===false?"err":"ok")+'">'+esc(msg)+"</div>");
+  $("#toastRoot").appendChild(t);
+  setTimeout(function(){ t.style.opacity="0"; t.style.transition="opacity .3s"; setTimeout(function(){ t.remove(); },320); },2600);
+}
+function statusBadge(st){
+  if(st==="live") return '<span class="badge st-live">กำลังแข่ง</span>';
+  if(st==="done") return '<span class="badge st-done">จบแล้ว</span>';
+  return '<span class="badge st-pending">รอแข่ง</span>';
+}
+function tagHtml(t){
+  var c = TEAM_COLORS[teamIdx(t.id)%TEAM_COLORS.length];
+  return '<span class="m-tag" style="background:'+c+'">'+esc(t.tag)+"</span>";
+}
+
+/* ================= RENDER: BRACKET ================= */
+function matchCardHtml(m,big){
+  var home = m.home?teamById(m.home):null, away = m.away?teamById(m.away):null;
+  var w = winnerOf(m);
+  function row(t,score,side){
+    if(!t) return '<div class="m-row tbd"><span class="m-tag" style="background:#2a2a3a;color:#666">?</span><span class="m-name">รอผู้ชนะ</span><span class="m-score">–</span></div>';
+    var cls = w ? (w===t.id?" win":" lose") : "";
+    return '<div class="m-row'+cls+'">'+tagHtml(t)+'<span class="m-name">'+esc(t.name)+'</span><span class="m-score">'+(score==null?"–":score)+"</span></div>";
+  }
+  var clickable = home&&away;
+  return '<button class="match '+m.status+'" data-mid="'+m.id+'" data-next="'+(NEXT[m.id]?NEXT[m.id].m:"")+'" style="width:100%" '+(clickable?"":'disabled title="รอทีมเข้ารอบ"')+'>'+
+    row(home,m.homeScore)+row(away,m.awayScore)+
+    '<div class="m-meta"><span>'+esc(m.time)+' น.</span>'+statusBadge(m.status)+'</div></button>';
+}
+
+function bracketHtml(){
+  var html = '<div class="bracket-scroll"><div class="bracket-wrap"><svg class="wires" aria-hidden="true"></svg><div class="bracket">';
+  for(var r=0;r<3;r++){
+    var ms = state.matches.filter(function(m){return m.round===r;}).sort(function(a,b){return a.order-b.order;});
+    html += '<div class="round-col"><div class="round-title">'+ROUND_NAMES[r]+'<small>'+ms.length+' แมตช์</small></div>';
+    ms.forEach(function(m){ html += matchCardHtml(m); });
+    html += "</div>";
+  }
+  html += "</div></div></div>";
+  var c = champion();
+  if(c){
+    var st = statsOf(c.id);
+    html += '<div class="champ-banner"><div class="cup"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1a1400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a2 2 0 0 0 2 4h1M17 6h3a2 2 0 0 1-2 4h-1"/></svg></div>'+
+      '<small>ผู้ชนะเลิศ</small><h4>'+esc(c.name)+'</h4>'+
+      '<p>สถิติในรายการนี้ ชนะ '+st.w+' · แพ้ '+st.l+' — GG ZONE ROV Monthly Championship</p></div>';
+  }
+  return html;
+}
+
+function drawWires(wrap){
+  var svg = wrap.querySelector(".wires"); if(!svg) return;
+  var wr = wrap.getBoundingClientRect();
+  var W = wrap.scrollWidth, H = wrap.scrollHeight;
+  svg.setAttribute("width",W); svg.setAttribute("height",H); svg.setAttribute("viewBox","0 0 "+W+" "+H);
+  var paths = "";
+  wrap.querySelectorAll(".match[data-next]").forEach(function(card){
+    var nid = card.getAttribute("data-next"); if(!nid) return;
+    var tgt = wrap.querySelector('.match[data-mid="'+nid+'"]'); if(!tgt) return;
+    var a = card.getBoundingClientRect(), b = tgt.getBoundingClientRect();
+    var x1 = a.right - wr.left + wrap.scrollLeft, y1 = a.top - wr.top + wrap.scrollTop + a.height/2;
+    var x2 = b.left - wr.left + wrap.scrollLeft, y2 = b.top - wr.top + wrap.scrollTop + b.height/2;
+    var mx = (x1+x2)/2;
+    var hot = card.classList.contains("done") ? ' class="hot"' : "";
+    paths += '<path'+hot+' d="M'+x1+' '+y1+' C'+mx+' '+y1+','+mx+' '+y2+','+x2+' '+y2+'"/>';
+  });
+  svg.innerHTML = paths;
+}
+
+function renderBracketPage(){
+  var host = $("#page-bracket");
+  host.innerHTML = '<div class="page-head"><h3>สายแข่ง — Single Elimination 8 ทีม</h3><p>แตะที่แมตช์เพื่อกรอกผล ผู้ชนะจะเลื่อนเข้ารอบถัดไปอัตโนมัติ</p></div>'+bracketHtml();
+  bindMatchCards(host);
+  requestAnimationFrame(function(){ drawWires(host.querySelector(".bracket-wrap")); });
+}
+
+function bindMatchCards(root){
+  root.querySelectorAll(".match").forEach(function(card){
+    card.addEventListener("click",function(){
+      var m = matchById(card.getAttribute("data-mid"));
+      if(m && m.home && m.away) openScoreModal(m);
+    });
+  });
+}
+
+/* ================= RENDER: TEAMS ================= */
+function renderTeamsPage(){
+  var locked = playedAny();
+  var host = $("#page-teams");
+  var html = '<div class="page-head"><h3>ทีมที่เข้าร่วม ('+state.teams.length+'/8)</h3><p>รายชื่อทีมและผู้เล่นในรายการ GG ZONE ROV Monthly Championship</p></div>';
+  if(locked) html += '<div class="lock-note"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>เริ่มแข่งขันแล้ว — ล็อกการแก้ไขทีมเพื่อคงความถูกต้องของสายแข่ง</div>';
+  html += '<div class="team-grid">';
+  state.teams.forEach(function(t){
+    var st = statsOf(t.id);
+    var c = TEAM_COLORS[teamIdx(t.id)%TEAM_COLORS.length];
+    html += '<div class="team-card"><div class="team-top"><span class="team-tag" style="background:'+c+'">'+esc(t.tag)+'</span>'+
+      '<div style="min-width:0"><b>'+esc(t.name)+'</b><small>'+esc(t.players[0])+' (กัปตัน)</small></div>'+
+      '<div class="team-record"><span class="wl" style="color:'+(st.w>0?'#4ade80':'var(--muted)')+'">'+st.w+'</span><span class="wl" style="color:var(--dim)">-</span><span class="wl" style="color:'+(st.l>0?'#f87171':'var(--muted)')+'">'+st.l+'</span><small>ชนะ-แพ้</small></div></div>'+
+      '<ul class="players">'+t.players.map(function(p,i){ return '<li><span class="no">'+(i+1)+'</span>'+esc(p)+'</li>'; }).join("")+"</ul>"+
+      '<div class="team-actions"><button class="btn-sm" data-edit="'+t.id+'"'+(locked?" disabled":"")+'>แก้ไขทีม</button>'+
+      '<button class="btn-sm warn" data-del="'+t.id+'"'+(locked?" disabled":"")+'>ลบ</button></div></div>';
+  });
+  html += "</div>";
+  if(!locked && state.teams.length<8){
+    html += '<div style="margin-top:16px"><button class="btn-sm gold" id="btnAddTeam">+ เพิ่มทีม ('+state.teams.length+'/8)</button></div>';
+  } else if(!locked){
+    html += '<div style="margin-top:16px"><button class="btn-sm gold" disabled>ครบ 8 ทีมแล้ว</button></div>';
+  }
+  host.innerHTML = html;
+  host.querySelectorAll("[data-edit]").forEach(function(b){ b.addEventListener("click",function(){ openTeamModal(b.getAttribute("data-edit")); }); });
+  host.querySelectorAll("[data-del]").forEach(function(b){ b.addEventListener("click",function(){ delTeam(b.getAttribute("data-del")); }); });
+  var add = $("#btnAddTeam",host); if(add) add.addEventListener("click",function(){ openTeamModal(null); });
+}
+
+/* ================= RENDER: MATCHES ================= */
+function renderMatchesPage(){
+  var host = $("#page-matches");
+  var html = '<div class="page-head"><h3>แมตช์ทั้งหมด</h3><p>ควบคุมสถานะแมตช์ — เริ่มแมตช์ แล้วบันทึกผลเมื่อจบ</p></div>';
+  for(var r=0;r<3;r++){
+    var ms = state.matches.filter(function(m){return m.round===r;}).sort(function(a,b){return a.order-b.order;});
+    var done = ms.filter(function(m){return m.status==="done";}).length;
+    html += '<div class="round-block"><h4>'+ROUND_NAMES[r]+' <span class="cnt">'+done+'/'+ms.length+' จบแล้ว</span></h4>'+
+      '<div class="table-card"><div class="table-scroll"><table class="mtable"><thead><tr><th>คู่แข่ง</th><th>คะแนน</th><th>เวลา</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody>';
+    ms.forEach(function(m){
+      var h = m.home?teamById(m.home):null, a = m.away?teamById(m.away):null;
+      var w = winnerOf(m);
+      function tn(t,side){
+        if(!t) return '<span class="t-mini"><span class="m-tag" style="background:#2a2a3a;color:#666;width:26px;height:19px;font-size:.58rem">?</span>รอผู้ชนะ</span>';
+        var cls = w ? (w===t.id?" w":" l") : "";
+        return '<span class="t-mini'+cls+'">'+tagHtml(t)+esc(t.name)+"</span>";
+      }
+      var score = (m.homeScore!=null&&m.awayScore!=null) ? '<span class="sc">'+m.homeScore+' – '+m.awayScore+'</span>' : '<span class="v">ยังไม่มีผล</span>';
+      var actions = "";
+      if(h&&a){
+        if(m.status==="pending") actions += '<button class="btn-sm gold" data-start="'+m.id+'">เริ่มแมตช์</button> ';
+        actions += '<button class="btn-sm" data-result="'+m.id+'">'+(m.status==="done"?"แก้ไขผล":"บันทึกผล")+"</button>";
+      } else {
+        actions = '<span style="color:var(--dim);font-size:.8rem">รอทีมจากรอบก่อน</span>';
+      }
+      var time = m.time+" น." + (m.startedAt? ' <span style="color:var(--dim);font-size:.75rem">(เริ่ม '+m.startedAt+')</span>' : "");
+      html += '<tr class="'+(m.status==="live"?"live-row":"")+'"><td><div class="vs">'+tn(h)+'<span class="v">พบ</span>'+tn(a)+'</div></td>'+
+        '<td>'+score+'</td><td>'+time+'</td><td>'+statusBadge(m.status)+'</td><td>'+actions+'</td></tr>';
+    });
+    html += "</tbody></table></div></div></div>";
+  }
+  host.innerHTML = html;
+  host.querySelectorAll("[data-start]").forEach(function(b){ b.addEventListener("click",function(){ startMatch(b.getAttribute("data-start")); }); });
+  host.querySelectorAll("[data-result]").forEach(function(b){ b.addEventListener("click",function(){ openScoreModal(matchById(b.getAttribute("data-result"))); }); });
+}
+
+/* ================= ACTIONS ================= */
+function startMatch(id){
+  var m = matchById(id); if(!m||!m.home||!m.away||m.status!=="pending") return;
+  m.status = "live";
+  var d = new Date();
+  m.startedAt = ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
+  save(); rerender();
+  toast("เริ่มแมตช์ "+teamById(m.home).name+" พบ "+teamById(m.away).name);
+}
+
+function resetDownstream(mid){
+  var nx = NEXT[mid]; if(!nx) return;
+  var nm = matchById(nx.m);
+  var changed = false;
+  if(nm[nx.slot] !== undefined){ /* slot cleared by caller first */ }
+  if(nm.status!=="pending" || nm.homeScore!=null){
+    nm.status="pending"; nm.homeScore=null; nm.awayScore=null; nm.startedAt=null; changed=true;
+  }
+  if(changed || winnerOf(nm)!==null){ /* ensure deep reset */ }
+  resetDownstreamDeep(nm);
+}
+function resetDownstreamDeep(m){
+  var nx = NEXT[m.id]; if(!nx) return;
+  var nm = matchById(nx.m);
+  if(nm[nx.slot]===m.home || nm[nx.slot]===m.away || nm[nx.slot]!==null){
+    // only clear if downstream points to someone who came from this match's previous winner chain
+  }
+  nm[nx.slot] = null;
+  if(nm.status!=="pending"){ nm.status="pending"; nm.homeScore=null; nm.awayScore=null; nm.startedAt=null; }
+  resetDownstreamDeep(nm);
+}
+
+function saveResult(mid,hs,as){
+  var m = matchById(mid); if(!m) return;
+  var prevWinner = winnerOf(m);
+  m.homeScore = hs; m.awayScore = as; m.status = "done";
+  var w = winnerOf(m);
+  var nx = NEXT[mid];
+  if(nx){
+    var nm = matchById(nx.m);
+    if(prevWinner !== w){
+      // winner changed: clear this slot downstream and reset that chain
+      nm[nx.slot] = w;
+      if(nm.status!=="pending"){
+        var other = nx.slot==="home" ? nm.away : nm.home;
+        var keepOther = other;
+        var keepSlot = nx.slot==="home" ? "away" : "home";
+        nm.status="pending"; nm.homeScore=null; nm.awayScore=null; nm.startedAt=null;
+        nm[keepSlot] = keepOther;
+        resetDownstreamDeep(nm);
+      }
+    } else {
+      nm[nx.slot] = w;
+    }
+  }
+  save(); rerender();
+  toast("บันทึกผล: "+teamById(m.home).name+" "+hs+" – "+as+" "+teamById(m.away).name);
+}
+
+function delTeam(id){
+  if(playedAny()) return;
+  var t = teamById(id); if(!t) return;
+  if(!confirm("ลบทีม "+t.name+" ออกจากรายการ?")) return;
+  state.teams = state.teams.filter(function(x){ return x.id!==id; });
+  state.matches.forEach(function(m){
+    if(m.home===id) m.home=null;
+    if(m.away===id) m.away=null;
+  });
+  save(); rerender();
+  toast("ลบทีม "+t.name+" แล้ว",false);
+}
+
+/* ================= MODALS ================= */
+function closeModal(){ $("#modalRoot").innerHTML=""; }
+
+function openScoreModal(m){
+  if(!m||!m.home||!m.away) return;
+  var h = teamById(m.home), a = teamById(m.away);
+  var root = $("#modalRoot");
+  root.innerHTML =
+  '<div class="modal-ov" id="mOv"><div class="modal" role="dialog" aria-modal="true" aria-label="บันทึกผลแมตช์">'+
+    '<h4>บันทึกผลแมตช์</h4><p class="msub">'+ROUND_NAMES[m.round]+' · '+esc(m.time)+' น. '+(m.status==="done"?"· แก้ไขผลเดิม":"")+'</p>'+
+    '<div class="score-edit">'+
+      '<div class="side"><div class="tn">'+tagHtml(h)+' '+esc(h.name)+'</div><input id="scH" class="mono" type="number" min="0" max="9" value="'+(m.homeScore!=null?m.homeScore:0)+'" inputmode="numeric"></div>'+
+      '<div class="colon">:</div>'+
+      '<div class="side"><div class="tn">'+tagHtml(a)+' '+esc(a.name)+'</div><input id="scA" class="mono" type="number" min="0" max="9" value="'+(m.awayScore!=null?m.awayScore:0)+'" inputmode="numeric"></div>'+
+    '</div>'+
+    '<div class="quick">'+
+      '<button data-q="2-0">2–0</button><button data-q="2-1">2–1</button><button data-q="1-2">1–2</button><button data-q="0-2">0–2</button>'+
+    '</div>'+
+    '<div class="modal-actions"><button class="btn-sm" id="mCancel">ยกเลิก</button><button class="btn-sm gold" id="mSave">บันทึกผล</button></div>'+
+  '</div></div>';
+  $("#mOv").addEventListener("click",function(e){ if(e.target.id==="mOv") closeModal(); });
+  $("#mCancel").addEventListener("click",closeModal);
+  root.querySelectorAll("[data-q]").forEach(function(b){
+    b.addEventListener("click",function(){
+      var p = b.getAttribute("data-q").split("-");
+      $("#scH").value = p[0]; $("#scA").value = p[1];
+    });
+  });
+  $("#mSave").addEventListener("click",function(){
+    var hs = parseInt($("#scH").value,10), as = parseInt($("#scA").value,10);
+    if(isNaN(hs)||isNaN(as)||hs<0||as<0){ toast("กรอกคะแนนไม่ถูกต้อง",false); return; }
+    if(hs===as){ toast("ผลเสมอไม่ได้ — ต้องมีผู้ชนะ",false); return; }
+    closeModal(); saveResult(m.id,hs,as);
+  });
+  $("#scH").focus();
+}
+
+function openTeamModal(id){
+  var t = id?teamById(id):null;
+  var root = $("#modalRoot");
+  var ps = t?t.players.slice(0):["","","","",""];
+  while(ps.length<5) ps.push("");
+  var inputs = ps.map(function(p,i){
+    return '<div class="field"><label>ผู้เล่นคนที่ '+(i+1)+(i===0?" (กัปตันทีม)":"")+'</label><input id="tp'+i+'" type="text" value="'+esc(p)+'" maxlength="60" placeholder="ชื่อ-นามสกุล"></div>';
+  }).join("");
+  root.innerHTML =
+  '<div class="modal-ov" id="mOv"><div class="modal" role="dialog" aria-modal="true" aria-label="'+(t?"แก้ไขทีม":"เพิ่มทีม")+'">'+
+    '<h4>'+(t?"แก้ไขทีม":"เพิ่มทีมใหม่")+'</h4><p class="msub">ทีมละ 5 ผู้เล่น · รายการรับสูงสุด 8 ทีม</p>'+
+    '<div class="form-grid">'+
+      '<div class="field"><label>ชื่อทีม</label><input id="tName" type="text" value="'+esc(t?t.name:"")+'" maxlength="40" placeholder="เช่น สายฟ้าฟาด"></div>'+
+      '<div class="field"><label>ตัวย่อ (3 ตัวอักษร)</label><input id="tTag" class="mono" type="text" value="'+esc(t?t.tag:"")+'" maxlength="3" placeholder="SFF" style="text-transform:uppercase"></div>'+
+      inputs+
+    '</div>'+
+    '<div class="modal-actions"><button class="btn-sm" id="mCancel">ยกเลิก</button><button class="btn-sm gold" id="mSave">'+(t?"บันทึกการแก้ไข":"เพิ่มทีม")+'</button></div>'+
+  '</div></div>';
+  $("#mOv").addEventListener("click",function(e){ if(e.target.id==="mOv") closeModal(); });
+  $("#mCancel").addEventListener("click",closeModal);
+  $("#mSave").addEventListener("click",function(){
+    var name = $("#tName").value.trim(), tag = $("#tTag").value.trim().toUpperCase();
+    var players = [0,1,2,3,4].map(function(i){ return $("#tp"+i).value.trim(); });
+    if(!name){ toast("กรอกชื่อทีม",false); return; }
+    if(!tag) tag = name.slice(0,3).toUpperCase();
+    if(players.some(function(p){return !p;})){ toast("กรอกผู้เล่นให้ครบ 5 คน",false); return; }
+    if(t){
+      t.name=name; t.tag=tag; t.players=players;
+      save(); rerender(); closeModal(); toast("บันทึกทีม "+name+" แล้ว");
+    } else {
+      if(state.teams.length>=8){ toast("ครบ 8 ทีมแล้ว",false); return; }
+      var nid = "t"+Date.now();
+      state.teams.push({id:nid,tag:tag,name:name,players:players});
+      // put into first empty bracket slot in round 0
+      for(var i=0;i<state.matches.length;i++){
+        var m = state.matches[i];
+        if(m.round===0){ if(!m.home){ m.home=nid; break; } if(!m.away){ m.away=nid; break; } }
+      }
+      save(); rerender(); closeModal(); toast("เพิ่มทีม "+name+" เข้าสายแข่งแล้ว");
+    }
+  });
+  $("#tName").focus();
+}
+
+/* ================= BIG SCREEN ================= */
+function openBig(){
+  document.body.classList.add("big");
+  $("#bigscreen").hidden = false;
+  $("#bsDate").textContent = thaiDate();
+  renderBig();
+}
+function closeBig(){
+  document.body.classList.remove("big");
+  $("#bigscreen").hidden = true;
+}
+function renderBig(){
+  var host = $("#bsBody");
+  host.innerHTML = bracketHtml();
+  bindMatchCards(host);
+  requestAnimationFrame(function(){ drawWires(host.querySelector(".bracket-wrap")); });
+}
+
+/* ================= NAV / SHELL ================= */
+var TITLES = {bracket:"สายแข่ง", teams:"ทีม", matches:"แมตช์ทั้งหมด"};
+function thaiDate(){
+  return new Date().toLocaleDateString("th-TH",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+}
+function setPage(p){
+  page = p;
+  document.querySelectorAll(".nav-btn[data-page]").forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-page")===p); });
+  ["bracket","teams","matches"].forEach(function(k){ $("#page-"+k).hidden = (k!==p); });
+  $("#pageTitle").textContent = TITLES[p];
+  document.body.classList.remove("nav-open");
+  renderPage();
+}
+function renderPage(){
+  if(page==="bracket") renderBracketPage();
+  else if(page==="teams") renderTeamsPage();
+  else renderMatchesPage();
+}
+function updateKpi(){
+  var done = state.matches.filter(function(m){return m.status==="done";}).length;
+  var live = state.matches.filter(function(m){return m.status==="live";}).length;
+  $("#kpiDone").textContent = done+"/7";
+  $("#kpiLive").textContent = live;
+}
+function rerender(){
+  updateKpi();
+  renderPage();
+  if(!$("#bigscreen").hidden) renderBig();
+}
+
+/* ================= WIRE UP ================= */
+document.querySelectorAll(".nav-btn[data-page]").forEach(function(b){
+  b.addEventListener("click",function(){ setPage(b.getAttribute("data-page")); });
+});
+$("#btnBigNav").addEventListener("click",openBig);
+$("#btnBigTop").addEventListener("click",openBig);
+$("#btnBigClose").addEventListener("click",closeBig);
+$("#btnHamb").addEventListener("click",function(){ document.body.classList.toggle("nav-open"); });
+$("#scrim").addEventListener("click",function(){ document.body.classList.remove("nav-open"); });
+$("#btnLogout").addEventListener("click",function(){
+  closeBig();
+  $("#app").hidden = true; $("#loginView").hidden = false;
+  toast("ออกจากระบบแล้ว");
+});
+$("#btnReset").addEventListener("click",function(){
+  if(!confirm("รีเซ็ตข้อมูลทั้งหมดกลับเป็นข้อมูลตัวอย่าง?")) return;
+  localStorage.removeItem(LS_KEY);
+  state = seedState(); save();
+  rerender(); toast("รีเซ็ตข้อมูลตัวอย่างแล้ว");
+});
+$("#loginForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  $("#loginView").hidden = true; $("#app").hidden = false;
+  $("#thaiDate").textContent = thaiDate();
+  setPage("bracket"); updateKpi();
+});
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){
+    if(!$("#bigscreen").hidden) closeBig();
+    else if($("#mOv")) closeModal();
+    else document.body.classList.remove("nav-open");
+  }
+});
+var rsz;
+window.addEventListener("resize",function(){
+  clearTimeout(rsz);
+  rsz = setTimeout(function(){
+    var w1 = $("#page-bracket .bracket-wrap"); if(w1 && !$("#page-bracket").hidden) drawWires(w1);
+    var w2 = $("#bsBody .bracket-wrap"); if(w2 && !$("#bigscreen").hidden) drawWires(w2);
+  },120);
+});
+$("#thaiDate").textContent = thaiDate();
+})();
+</script>
+</body>
+</html>
