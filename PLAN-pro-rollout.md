@@ -53,4 +53,5 @@ kanban งานดี, admin-shop ร้านดีแอดมิน, cashboo
 - [x] Queue คิวดี (2026-09-14)
 - [x] CRM ลูกค้าดี (2026-09-14)
 - [x] Inventory สต็อกดี (2026-09-14 · badge-scan entry, ROP+PO, POS bridge sales feed)
-- [ ] (ว่าง — ตัวถัดไป: documents)
+- [x] Documents เอกสารดี (2026-09-14 · workspace picker, QT→IV→RE chain, baht text, CRM→IV bridge)
+- [ ] (ว่าง — ตัวถัดไป: dashboard)
