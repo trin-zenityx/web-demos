@@ -2,926 +2,931 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ลูกค้าดี CRM — ระบบจัดการทีมขาย | ซอฟต์ดี โซลูชั่น</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='%23FF0000'/%3E%3C/svg%3E">
-<meta name="description" content="ระบบเดโม CRM ทีมขาย — pipeline kanban ลากดีลได้ มูลค่ารวมสด ใช้งานได้ทันที">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ลูกค้าดี CRM — ระบบบริหารลูกค้าสัมพันธ์ระดับมืออาชีพ | ZenityX Demos</title>
+<meta name="description" content="CRM ระดับ production — SSO login, pipeline kanban ลากได้, activity timeline, funnel report, เชื่อมข้อมูลข้ามระบบ">
+<meta property="og:title" content="ลูกค้าดี CRM — เดโมใช้งานได้จริง">
+<meta property="og:description" content="ลากดีลข้าม pipeline, บันทึกกิจกรรม, วิเคราะห์ funnel — ระบบ CRM ที่เหมือนของจริง">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%235b5bd6'/%3E%3Ccircle cx='50' cy='38' r='12' fill='white'/%3E%3Ccircle cx='30' cy='64' r='9' fill='white'/%3E%3Ccircle cx='70' cy='64' r='9' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --accent:#5b5bd6; --accent-d:#4646b8; --accent-soft:#ececfb;
-  --ink:#20203a; --muted:#6b6d85; --bg:#f3f4fa; --card:#ffffff; --line:#e6e7f2;
-  --green:#16a34a; --red:#dc2626; --amber:#d97706; --sidebar:#15152e; --sidebar-2:#1d1d3d;
-  --r:14px; --shadow:0 8px 28px rgba(24,24,60,.10);
+  --acc:#5b5bd6; --acc-deep:#4848b8; --acc-soft:#ececfc;
+  --bg:#f4f4f8; --panel:#ffffff; --line:#e5e5ef;
+  --ink:#1c1c28; --muted:#6f6f85;
+  --dark:#191924; --dark2:#232336; --dline:#34345200;
+  --green:#16a34a; --amber:#d97706; --red:#dc2626; --blue:#0284c7; --purple:#9333ea;
+  --mono:'JetBrains Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
-body{font-family:'IBM Plex Sans Thai',system-ui,sans-serif;font-size:15px;line-height:1.55;color:var(--ink);background:var(--bg)}
-.mono{font-family:'JetBrains Mono',monospace}
-button{font-family:inherit;cursor:pointer}
-input,select,textarea{font-family:inherit;font-size:15px}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 [hidden]{display:none!important}
-:focus-visible{outline:3px solid rgba(91,91,214,.45);outline-offset:2px;border-radius:6px}
-svg{flex:none}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 
-/* ---------- buttons / chips / toast ---------- */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 18px;border-radius:12px;border:1px solid transparent;font-size:15px;font-weight:600;transition:background .18s,transform .12s,box-shadow .18s}
-.btn:active{transform:translateY(1px)}
-.btn.primary{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(91,91,214,.35)}
-.btn.primary:hover{background:var(--accent-d)}
-.btn.ghost{background:#fff;border-color:var(--line);color:var(--ink)}
-.btn.ghost:hover{background:#f6f6fd}
-.btn.green{background:var(--green);color:#fff}
-.btn.green:hover{background:#15803d}
-.btn.red{background:#fff;border-color:#f2c9c9;color:var(--red)}
-.btn.red:hover{background:#fdf1f1}
-.btn.sm{min-height:40px;padding:8px 14px;font-size:13.5px;border-radius:10px}
-.chip{display:inline-flex;align-items:center;gap:5px;background:var(--accent-soft);color:var(--accent-d);font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap}
-.st-chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--ink);white-space:nowrap}
-.st-chip::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c,#999)}
-#toasts{position:fixed;right:18px;bottom:18px;z-index:1200;display:flex;flex-direction:column;gap:10px;max-width:min(360px,90vw)}
-.toast{background:#191934;color:#fff;padding:13px 16px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.28);font-size:14px;display:flex;gap:10px;align-items:flex-start;animation:tin .25s ease}
-.toast .tk{width:9px;height:9px;border-radius:50%;background:var(--accent);margin-top:6px}
-.toast.ok .tk{background:#4ade80}.toast.warn .tk{background:#fbbf24}
-@keyframes tin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* SPLASH */
+.splash{position:fixed;inset:0;z-index:400;background:#14141f;display:grid;place-items:center;transition:opacity .5s}
+.splash.out{opacity:0;pointer-events:none}
+.splash .sp-in{text-align:center;color:#fff}
+.splash img{width:88px;height:88px;border-radius:22px;margin:0 auto 1rem;box-shadow:0 16px 40px -10px rgba(91,91,214,.6)}
+.splash b{font-size:1.4rem;font-weight:600;display:block}
+.splash .ver{font-family:var(--mono);font-size:.72rem;color:#7a7a9e;margin-top:.3rem}
+.splash .bar{width:180px;height:4px;background:#2b2b45;border-radius:99px;margin:1.2rem auto 0;overflow:hidden}
+.splash .bar i{display:block;height:100%;width:0;background:var(--acc);border-radius:99px;animation:boot 1s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes boot{to{width:100%}}
 
-/* ---------- login ---------- */
-#view-login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(140deg,#14142c 0%,#232358 45%,#3a3a8c 78%,#5b5bd6 135%)}
-.login-card{width:100%;max-width:420px;background:#fff;border-radius:22px;box-shadow:0 30px 80px rgba(8,8,30,.45);padding:38px 34px 30px;text-align:center;animation:up .35s ease}
-@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.login-card .logo{width:64px;height:64px;margin:0 auto 14px}
-.login-card h1{font-size:24px;font-weight:600;letter-spacing:.2px}
-.login-card .tag{color:var(--muted);font-size:13.5px;margin:4px 0 24px}
-.f-field{text-align:left;margin-bottom:14px}
-.f-field label{display:block;font-size:13px;font-weight:600;color:#3c3e58;margin-bottom:6px}
-.f-field input,.f-field select,.f-field textarea{width:100%;min-height:46px;border:1.5px solid var(--line);border-radius:11px;padding:10px 13px;background:#fbfbfe;color:var(--ink);transition:border-color .15s,box-shadow .15s}
-.f-field input:focus,.f-field select:focus,.f-field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,91,214,.16)}
-.login-card .btn{width:100%;margin-top:6px}
-.login-note{margin-top:16px;font-size:12.5px;color:var(--muted);background:var(--accent-soft);border-radius:10px;padding:9px 12px}
+/* SSO LOGIN — pattern SaaS */
+.login{min-height:100vh;display:grid;place-items:center;padding:1.5rem;background:radial-gradient(1000px 600px at 50% -15%,#2c2c52,#14141f 62%),#14141f}
+.sso-card{background:#fff;border-radius:22px;width:min(420px,100%);padding:2.4rem 2rem 1.6rem;box-shadow:0 40px 90px -20px rgba(0,0,0,.5);text-align:center}
+.sso-card .logo-lg{width:64px;height:64px;border-radius:17px;margin:0 auto .9rem;box-shadow:0 10px 24px -8px rgba(91,91,214,.45)}
+.sso-card h1{font-size:1.35rem;font-weight:600}
+.sso-card .sub{color:var(--muted);font-size:.85rem;margin:.3rem 0 1.6rem}
+.sso-btn{display:flex;align-items:center;justify-content:center;gap:.7rem;width:100%;border:1.5px solid #dadce0;border-radius:99px;padding:.75rem 1rem;font-weight:500;font-size:.95rem;background:#fff;transition:all .15s;min-height:50px}
+.sso-btn:hover{border-color:#b6b6c9;box-shadow:0 4px 14px -6px rgba(0,0,0,.15)}
+.sso-div{display:flex;align-items:center;gap:.8rem;color:var(--muted);font-size:.75rem;margin:1.1rem 0}
+.sso-div::before,.sso-div::after{content:'';flex:1;height:1px;background:var(--line)}
+.magic-link{display:flex;gap:.5rem}
+.magic-link input{flex:1;border:1.5px solid var(--line);border-radius:99px;padding:.7rem 1.1rem;font-size:.9rem;outline:none}
+.magic-link input:focus{border-color:var(--acc)}
+.magic-link button{border:1.5px solid var(--acc);color:var(--acc);border-radius:99px;padding:.7rem 1.1rem;font-weight:500;font-size:.85rem;white-space:nowrap}
+.magic-link button:hover{background:var(--acc-soft)}
+.sso-note{margin-top:1.4rem;font-size:.74rem;color:var(--muted);background:#fafafc;border:1px dashed var(--line);border-radius:10px;padding:.55rem .8rem}
+.sso-credit{margin-top:1rem;font-size:.7rem;color:var(--muted)}
+.sso-credit a{color:#FF0000;text-decoration:none;font-weight:500}
 
-/* ---------- app frame ---------- */
-#view-app{display:flex;min-height:100vh}
-.sidebar{width:240px;background:var(--sidebar);color:#c9cae4;display:flex;flex-direction:column;position:fixed;inset:0 auto 0 0;z-index:600;transition:transform .25s ease}
-.sb-brand{display:flex;align-items:center;gap:11px;padding:20px 18px 16px;border-bottom:1px solid rgba(255,255,255,.07)}
-.sb-brand .logo{width:36px;height:36px}
-.sb-brand b{color:#fff;font-size:16.5px;font-weight:600;display:block;line-height:1.2}
-.sb-brand small{font-size:11px;color:#8f91b8}
-.sb-nav{padding:14px 12px;display:flex;flex-direction:column;gap:4px;flex:1;overflow-y:auto}
-.nav-item{display:flex;align-items:center;gap:12px;width:100%;min-height:46px;padding:10px 13px;border:0;border-radius:11px;background:transparent;color:#b7b9d9;font-size:14.5px;font-weight:500;text-align:left;transition:background .15s,color .15s}
-.nav-item svg{opacity:.85}
-.nav-item:hover{background:rgba(255,255,255,.06);color:#fff}
-.nav-item.active{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(91,91,214,.4)}
-.nav-badge{margin-left:auto;background:rgba(255,255,255,.14);font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;font-family:'JetBrains Mono',monospace}
-.nav-item.active .nav-badge{background:rgba(255,255,255,.22)}
-.sb-foot{padding:14px;border-top:1px solid rgba(255,255,255,.07)}
-.user-chip{display:flex;align-items:center;gap:10px;background:var(--sidebar-2);border-radius:12px;padding:10px 12px;margin-bottom:10px}
-.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#7c7cf0,#4646b8);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px}
-.user-chip b{display:block;color:#fff;font-size:13.5px;font-weight:600;line-height:1.25}
-.user-chip small{color:#8f91b8;font-size:11.5px}
-.btn-logout{width:100%;background:transparent;border:1px solid rgba(255,255,255,.14);color:#b7b9d9;border-radius:11px}
-.btn-logout:hover{background:rgba(255,255,255,.07);color:#fff}
-.sb-ov{position:fixed;inset:0;background:rgba(12,12,30,.5);z-index:550;opacity:0;pointer-events:none;transition:opacity .2s}
-.main{flex:1;margin-left:240px;min-width:0;display:flex;flex-direction:column}
-.topbar{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:10px 22px;min-height:62px}
-.hamb{display:none;width:44px;height:44px;border:0;border-radius:11px;background:#fff;color:var(--ink);align-items:center;justify-content:center}
-.topbar h2{font-size:17px;font-weight:600}
-.tb-right{margin-left:auto;display:flex;align-items:center;gap:12px}
-.tb-date{font-size:13px;color:var(--muted)}
-.content{padding:24px 22px 90px;max-width:1440px;width:100%;margin:0 auto}
-.page{display:none}
-.page.active{display:block;animation:up .25s ease}
-.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:18px;flex-wrap:wrap}
-.page-head h3{font-size:20px;font-weight:600}
-.page-head p{color:var(--muted);font-size:13.5px;margin-top:3px}
+/* account chooser (Google-style) */
+.g-overlay{position:fixed;inset:0;background:rgba(20,20,31,.6);backdrop-filter:blur(3px);z-index:250;display:grid;place-items:center;padding:1rem}
+.g-card{background:#fff;border-radius:28px;width:min(400px,100%);padding:1.8rem 1.4rem;box-shadow:0 40px 90px -20px rgba(0,0,0,.55);animation:mup .25s cubic-bezier(.2,.8,.2,1)}
+.g-card .g-logo{display:block;margin:0 auto .8rem;width:34px}
+.g-card h2{text-align:center;font-size:1.25rem;font-weight:400;color:#202124}
+.g-card .g-sub{text-align:center;color:#5f6368;font-size:.85rem;margin:.25rem 0 1.2rem}
+.g-card .g-sub b{color:#202124;font-weight:600}
+.g-acct{display:flex;align-items:center;gap:.9rem;padding:.75rem .8rem;border-radius:12px;width:100%;text-align:left;transition:background .12s;min-height:56px}
+.g-acct:hover{background:#f4f4f8}
+.g-acct .av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:600;flex:none}
+.g-acct b{display:block;font-size:.92rem;color:#202124;font-weight:500}
+.g-acct small{color:#5f6368;font-size:.78rem}
+.g-div{height:1px;background:var(--line);margin:.5rem 0}
+.g-loading{text-align:center;padding:1.4rem 0;color:#5f6368;font-size:.88rem}
+.g-loading .spin{width:30px;height:30px;border:3px solid #e5e5ef;border-top-color:var(--acc);border-radius:50%;margin:0 auto .7rem;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes mup{from{opacity:0;transform:translateY(14px) scale(.98)}}
 
-/* ---------- kanban ---------- */
-.kb-wrap{overflow-x:auto;padding-bottom:10px}
-.kanban{display:grid;grid-template-columns:repeat(5,minmax(238px,1fr));gap:13px;min-width:1220px}
-.kb-col{background:#ecedf6;border-radius:16px;display:flex;flex-direction:column;max-height:calc(100vh - 210px)}
-.kb-head{display:flex;align-items:center;gap:8px;padding:12px 13px 10px;border-bottom:1px solid #dfe0ee}
-.kb-dot{width:10px;height:10px;border-radius:3px;background:var(--c)}
-.kb-head b{font-size:14px;font-weight:600}
-.kb-meta{margin-left:auto;text-align:right;line-height:1.15}
-.kb-meta .n{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700}
-.kb-meta .v{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
-.kb-add{width:34px;height:34px;min-height:34px;border:0;border-radius:9px;background:#fff;color:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(30,30,70,.12)}
-.kb-add:hover{background:var(--accent-soft)}
-.kb-body{padding:10px;display:flex;flex-direction:column;gap:9px;overflow-y:auto;flex:1;min-height:90px;border-radius:0 0 16px 16px;transition:background .15s}
-.kb-col.over .kb-body{background:rgba(91,91,214,.09);box-shadow:inset 0 0 0 2px rgba(91,91,214,.4)}
-.card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--sc,#999);border-radius:12px;padding:11px 12px 6px;cursor:grab;box-shadow:0 2px 8px rgba(25,25,60,.06);transition:box-shadow .15s,transform .15s}
-.card:hover{box-shadow:0 6px 18px rgba(25,25,60,.13)}
-.card.dragging{opacity:.45;transform:scale(.98)}
-.card.lost{border-left-color:var(--red);background:#fdf7f7}
-.card-co{font-weight:600;font-size:14px;line-height:1.35}
-.card-ct{font-size:12.5px;color:var(--muted);margin-top:2px}
-.card-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px}
-.card-val{font-weight:700;font-size:13.5px;color:var(--accent-d)}
-.card.lost .card-val{color:var(--red);text-decoration:line-through}
-.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
-.card-date{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--muted)}
-.card-date svg{width:13px;height:13px}
-.card-mv{display:flex;justify-content:space-between;margin:2px -8px 0}
-.mv{width:44px;height:36px;border:0;background:transparent;color:#a3a5c2;display:flex;align-items:center;justify-content:center;border-radius:9px}
-.mv:hover{background:var(--accent-soft);color:var(--accent)}
-.mv svg{width:16px;height:16px}
-.kb-empty{border:1.5px dashed #cfd0e4;border-radius:12px;color:#9a9cba;font-size:12.5px;text-align:center;padding:16px 8px}
+/* APP SHELL */
+.app{display:grid;grid-template-columns:72px 1fr;min-height:100vh}
+.rail{background:#14141f;display:flex;flex-direction:column;align-items:center;padding:.8rem 0;position:sticky;top:0;height:100vh;z-index:60}
+.rail .logo{width:44px;height:44px;border-radius:12px;overflow:hidden;margin-bottom:1rem}
+.rail .logo img{width:100%;height:100%;object-fit:cover}
+.rail nav{display:grid;gap:.4rem;flex:1}
+.ri{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;color:#7a7a9e;position:relative;transition:all .15s}
+.ri:hover{background:rgba(255,255,255,.07);color:#fff}
+.ri.on{background:var(--acc);color:#fff}
+.ri .tip{position:absolute;left:70px;background:var(--dark2);color:#fff;font-size:.72rem;padding:.3rem .6rem;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:70}
+.ri:hover .tip{opacity:1}
+.rail .who{width:44px;height:44px;border-radius:50%;background:#232336;color:#b4b4ff;display:grid;place-items:center;font-weight:600;font-size:.8rem}
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{background:#fff;border-bottom:1px solid var(--line);padding:.55rem 1.1rem;display:flex;align-items:center;gap:.8rem;font-size:.8rem;flex-wrap:wrap}
+.ws-chip{display:flex;align-items:center;gap:.45rem;font-weight:600;font-size:.82rem}
+.ws-chip .wm{width:26px;height:26px;border-radius:7px;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:.72rem}
+.stat-chip{display:flex;align-items:center;gap:.4rem;background:#fafafc;border:1px solid var(--line);border-radius:8px;padding:.3rem .7rem;font-size:.75rem;color:var(--muted)}
+.stat-chip b{font-family:var(--mono);color:var(--ink);font-weight:700}
+.stat-chip.green b{color:var(--green)}
+.topbar .sp{flex:1}
+.topbar .clock{font-family:var(--mono);font-size:.9rem}
+.tbtn{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);border-radius:8px;padding:.3rem .75rem;font-size:.78rem;color:var(--muted);min-height:34px;transition:all .15s;background:#fff}
+.tbtn:hover{border-color:var(--acc);color:var(--acc)}
+.tbtn.primary{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.tbtn.primary:hover{background:var(--acc-deep)}
+.search-b{border:1.5px solid var(--line);border-radius:8px;padding:.35rem .7rem;font-size:.82rem;min-height:34px;width:190px;outline:none;background:#fafafc}
+.search-b:focus{border-color:var(--acc)}
+.sync-pill{display:flex;align-items:center;gap:.35rem;color:var(--muted);font-size:.75rem;border:1px solid var(--line);border-radius:99px;padding:.25rem .7rem;min-height:32px;background:#fff}
+.sync-pill i{width:7px;height:7px;border-radius:50%;background:#4ade80}
+.sync-pill.off{border-color:var(--amber);color:var(--amber)}
+.sync-pill.off i{background:var(--amber)}
+.offline-banner{background:#fef3c7;color:#92400e;font-size:.8rem;padding:.4rem 1.1rem;display:flex;align-items:center;gap:.6rem}
+.offline-banner .mono{margin-left:auto}
+.content{flex:1;padding:1rem;min-height:0}
 
-/* ---------- table ---------- */
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.search-box{position:relative;flex:1;min-width:220px}
-.search-box svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:#9a9cba}
-.search-box input{width:100%;min-height:46px;border:1.5px solid var(--line);border-radius:12px;padding:10px 13px 10px 40px;background:#fff}
-.search-box input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,91,214,.16)}
-.toolbar select{min-height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 13px;background:#fff;color:var(--ink)}
-.t-count{font-size:13px;color:var(--muted);align-self:center;margin-left:auto}
-.t-wrap{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:auto;box-shadow:var(--shadow)}
-table{width:100%;border-collapse:collapse;min-width:820px}
-thead th{text-align:left;font-size:12.5px;font-weight:600;color:var(--muted);background:#f8f8fd;padding:12px 14px;border-bottom:1px solid var(--line);white-space:nowrap;user-select:none}
-th[data-sort]{cursor:pointer}
-th[data-sort]:hover{color:var(--accent)}
-th .arr{font-family:'JetBrains Mono',monospace;font-size:11px;margin-left:4px;color:var(--accent)}
-tbody td{padding:12px 14px;border-bottom:1px solid #f0f1f8;font-size:14px;vertical-align:middle}
-tbody tr{cursor:pointer;transition:background .12s}
-tbody tr:hover{background:#f7f7fe}
-tbody tr:last-child td{border-bottom:0}
-.t-co{font-weight:600}
-.t-id{font-size:11px;color:#9a9cba}
-.t-ph{font-size:11.5px;color:var(--muted)}
-.t-val{font-weight:700;color:var(--accent-d)}
-.t-empty{text-align:center;color:var(--muted);padding:36px!important;cursor:default}
+/* PIPELINE */
+.pipe-wrap{overflow-x:auto;padding-bottom:.5rem}
+.pipe{display:grid;grid-template-columns:repeat(4,minmax(250px,1fr));gap:.8rem;min-width:1060px}
+.col{background:#eceef5;border-radius:14px;padding:.6rem;min-height:300px;transition:background .15s}
+.col.dragover{background:var(--acc-soft);outline:2px dashed var(--acc);outline-offset:-2px}
+.col-head{display:flex;align-items:center;gap:.5rem;padding:.35rem .5rem .7rem}
+.col-head .dot{width:10px;height:10px;border-radius:3px}
+.col-head b{font-size:.86rem;font-weight:600}
+.col-head .cn{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.col-head .cs{margin-left:auto;font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--muted)}
+.card-d{background:#fff;border:1px solid var(--line);border-radius:11px;padding:.7rem .8rem;margin-bottom:.55rem;cursor:grab;transition:all .15s;box-shadow:0 1px 3px rgba(28,28,40,.05)}
+.card-d:hover{border-color:var(--acc);box-shadow:0 6px 16px -8px rgba(91,91,214,.3)}
+.card-d:active{cursor:grabbing}
+.card-d.dragging{opacity:.4}
+.card-d b{font-size:.86rem;display:block;line-height:1.35}
+.card-d .acct{font-size:.74rem;color:var(--muted)}
+.card-d .row{display:flex;align-items:center;gap:.5rem;margin-top:.5rem}
+.card-d .val{font-family:var(--mono);font-weight:700;font-size:.86rem;color:var(--acc-deep)}
+.card-d .prob{font-family:var(--mono);font-size:.66rem;background:#f1f1f9;border-radius:5px;padding:.1rem .35rem;color:var(--muted)}
+.card-d .own{width:22px;height:22px;border-radius:50%;color:#fff;font-size:.6rem;display:grid;place-items:center;font-weight:600;margin-left:auto}
+.card-d .age{font-family:var(--mono);font-size:.66rem;color:var(--muted);margin-top:.3rem}
+.card-d .age.late{color:var(--red);font-weight:700}
+.card-d .exp{font-family:var(--mono);font-size:.66rem;color:var(--muted)}
 
-/* ---------- dashboard ---------- */
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px}
-.kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 17px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:flex-start}
-.kpi-ic{width:46px;height:46px;border-radius:13px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center}
-.kpi-ic svg{width:22px;height:22px}
-.kpi small{color:var(--muted);font-size:12.5px;font-weight:500;display:block}
-.kpi .num{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;margin-top:2px;line-height:1.15}
-.kpi .sub{font-size:12px;color:var(--muted);margin-top:2px}
-.kpi.good .kpi-ic{background:#e6f7ec;color:var(--green)}
-.dash-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:14px}
-.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
-.panel h4{font-size:15.5px;font-weight:600;margin-bottom:4px}
-.panel .ph-sub{font-size:12.5px;color:var(--muted);margin-bottom:12px}
-.f-lab{fill:#3c3e58;font-size:12.5px;font-family:'IBM Plex Sans Thai',sans-serif}
-.f-val{fill:#20203a;font-size:12px;font-weight:700;font-family:'JetBrains Mono',monospace}
-.f-note{font-size:12px;color:var(--muted);margin-top:8px}
-.exp-row{display:flex;align-items:center;gap:12px;padding:11px 4px;border-bottom:1px solid #f0f1f8;cursor:pointer;border-radius:8px}
-.exp-row:hover{background:#f7f7fe}
-.exp-row:last-child{border-bottom:0}
-.exp-co{flex:1;min-width:0}
-.exp-co b{display:block;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.exp-co small{color:var(--muted);font-size:12px}
-.exp-val{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:var(--accent-d)}
-.exp-badge{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap;background:#fff4e0;color:var(--amber)}
-.exp-badge.over{background:#fdeaea;color:var(--red)}
-.exp-badge.soon{background:#e6f7ec;color:var(--green)}
+/* drawer */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,94vw);background:#fff;border-left:1px solid var(--line);z-index:250;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.scrim{position:fixed;inset:0;background:rgba(20,20,31,.45);z-index:240}
+.d-head{padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+.d-head .x{float:right;width:38px;height:38px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted)}
+.d-head .x:hover{border-color:var(--red);color:var(--red)}
+.d-head b{font-size:1.05rem}
+.d-head .d-acct{color:var(--muted);font-size:.82rem}
+.d-body{flex:1;overflow-y:auto;padding:1rem 1.2rem}
+.stepper{display:flex;align-items:center;margin:0 0 1rem}
+.stp{flex:1;text-align:center;position:relative}
+.stp::before{content:'';position:absolute;top:9px;left:-50%;right:50%;height:2px;background:var(--line)}
+.stp:first-child::before{display:none}
+.stp .dt{width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid var(--line);margin:0 auto .25rem;position:relative;z-index:1;transition:all .2s}
+.stp small{font-size:.64rem;color:var(--muted);display:block}
+.stp.done .dt{background:var(--acc);border-color:var(--acc)}
+.stp.done::before{background:var(--acc)}
+.stp.done small{color:var(--acc-deep);font-weight:600}
+.stp.cur .dt{border-color:var(--acc);box-shadow:0 0 0 4px var(--acc-soft)}
+.stp.cur small{color:var(--ink);font-weight:600}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;font-size:.85rem;margin-bottom:1rem;background:#fafafc;border-radius:12px;padding:.8rem 1rem}
+.kv dt{color:var(--muted);font-size:.78rem}
+.kv dd{font-weight:500}
+.kv dd.mono{font-family:var(--mono)}
+.wl-acts{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.2rem}
+.wl-btn{border-radius:10px;min-height:46px;font-weight:600;font-size:.88rem;border:1.5px solid var(--line)}
+.wl-btn.won{background:#f0fdf4;border-color:#86efac;color:#15803d}
+.wl-btn.won:hover{background:#dcfce7}
+.wl-btn.lost:hover{border-color:var(--red);color:var(--red)}
+.tl-h{font-size:.8rem;font-weight:600;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.tl-item{display:flex;gap:.7rem;padding:.55rem 0;border-bottom:1px dashed var(--line);font-size:.84rem}
+.tl-item:last-child{border-bottom:0}
+.tl-item .ti{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none}
+.tl-item .tt{font-size:.68rem;color:var(--muted);font-family:var(--mono)}
+.act-add{display:grid;gap:.5rem;margin-top:.8rem}
+.act-add .row{display:flex;gap:.5rem}
+.act-add select{border:1.5px solid var(--line);border-radius:9px;padding:.5rem .6rem;font-size:.82rem;background:#fff}
+.act-add input{flex:1;border:1.5px solid var(--line);border-radius:9px;padding:.5rem .7rem;font-size:.85rem;outline:none}
+.act-add input:focus{border-color:var(--acc)}
+.act-add button{background:var(--acc);color:#fff;border-radius:9px;padding:.5rem 1rem;font-weight:600;min-height:40px}
 
-/* ---------- drawer ---------- */
-.ov{position:fixed;inset:0;background:rgba(14,14,35,.45);z-index:700;opacity:0;pointer-events:none;transition:opacity .22s}
-.ov.show{opacity:1;pointer-events:auto}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,94vw);background:#fff;z-index:750;transform:translateX(105%);transition:transform .28s ease;display:flex;flex-direction:column;box-shadow:-16px 0 50px rgba(10,10,40,.25)}
-.drawer.show{transform:none}
-.dr-head{display:flex;align-items:flex-start;gap:10px;padding:18px 18px 14px;border-bottom:1px solid var(--line)}
-.dr-head h3{font-size:17px;font-weight:600;line-height:1.3}
-.dr-head .sub{font-size:12.5px;color:var(--muted);margin-top:3px}
-.dr-close{margin-left:auto;width:44px;height:44px;border:0;border-radius:11px;background:#f4f4fb;color:var(--ink);display:flex;align-items:center;justify-content:center}
-.dr-close:hover{background:var(--accent-soft)}
-.dr-body{flex:1;overflow-y:auto;padding:16px 18px}
-.dr-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:14px 0}
-.dr-field{background:#f8f8fd;border-radius:11px;padding:9px 12px}
-.dr-field small{display:block;font-size:11px;color:var(--muted);font-weight:600;margin-bottom:2px}
-.dr-field span{font-size:13.5px;font-weight:500}
-.dr-field span.mono{font-weight:700}
-.dr-sec{font-size:13px;font-weight:600;color:#3c3e58;margin:18px 0 10px;display:flex;align-items:center;gap:7px}
-.dr-sec svg{width:15px;height:15px;color:var(--accent)}
-.tl{position:relative;padding-left:20px}
-.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:#e3e4f3;border-radius:2px}
-.tl-item{position:relative;padding:0 0 14px}
-.tl-item::before{content:"";position:absolute;left:-19px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 2px #d8d8f5}
-.tl-item p{font-size:13.5px}
-.tl-item time{font-size:11.5px;color:var(--muted);font-family:'JetBrains Mono',monospace}
-.note-box{display:flex;flex-direction:column;gap:9px;margin-top:6px}
-.note-box textarea{min-height:76px;border:1.5px solid var(--line);border-radius:11px;padding:10px 12px;resize:vertical;background:#fbfbfe}
-.note-box textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,91,214,.16)}
-.dr-foot{padding:13px 18px;border-top:1px solid var(--line);display:flex;gap:9px;flex-wrap:wrap}
-.dr-foot .btn{flex:1;min-width:130px}
+/* reports */
+.rep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.8rem;margin-bottom:1rem}
+.rep-kpi{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:1rem 1.1rem}
+.rep-kpi span{font-size:.74rem;color:var(--muted);display:block}
+.rep-kpi b{font-family:var(--mono);font-size:1.45rem;font-weight:700}
+.rep-kpi b.g{color:var(--green)}
+.rep-2col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:900px){.rep-2col{grid-template-columns:1fr}}
+.panel{background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
+.p-head{padding:.9rem 1.2rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.p-head b{font-weight:600}
+.p-head .count{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.fun-row{display:grid;grid-template-columns:110px 1fr 90px;align-items:center;gap:.8rem;padding:.55rem 1.2rem}
+.fun-row .fl{font-size:.8rem;color:var(--muted)}
+.fun-row .fb{height:26px;border-radius:6px;display:flex;align-items:center;padding:0 .6rem;color:#fff;font-family:var(--mono);font-size:.72rem;font-weight:700;min-width:34px;transition:width .3s}
+.fun-row .fv{font-family:var(--mono);font-size:.78rem;text-align:right;color:var(--muted)}
+.mchart{display:flex;align-items:flex-end;gap:8px;height:150px;padding:1rem 1.2rem}
+.mchart .mb{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+.mchart .mbv{font-family:var(--mono);font-size:.64rem;color:var(--muted)}
+.mchart .mbar{width:70%;border-radius:5px 5px 0 0;background:var(--green);min-height:3px}
+.mchart .mbl{font-family:var(--mono);font-size:.64rem;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th{text-align:left;padding:.7rem 1rem;color:var(--muted);font-weight:500;font-size:.74rem;letter-spacing:.04em;border-bottom:1px solid var(--line);white-space:nowrap;background:#fafafc}
+td{padding:.65rem 1rem;border-bottom:1px solid #f1f1f9;vertical-align:middle}
+tr:last-child td{border-bottom:0}
+.badge{display:inline-block;font-size:.68rem;font-weight:700;padding:.15rem .55rem;border-radius:99px;white-space:nowrap}
+.b-won{background:#dcfce7;color:#15803d}
+.b-lost{background:#fee2e2;color:#b91c1c}
+.b-open{background:var(--acc-soft);color:var(--acc-deep)}
+.tlink{color:var(--acc);font-weight:500;min-height:40px;padding:.2rem .5rem;cursor:pointer}
+.tlink:hover{text-decoration:underline}
+.own-chip{display:inline-flex;align-items:center;gap:.4rem}
+.own-chip .av{width:24px;height:24px;border-radius:50%;color:#fff;font-size:.62rem;display:grid;place-items:center;font-weight:600}
 
-/* ---------- modal ---------- */
-.modal{position:fixed;inset:0;z-index:800;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;pointer-events:none;transition:opacity .2s}
-.modal.show{opacity:1;pointer-events:auto}
-.modal .m-bg{position:absolute;inset:0;background:rgba(14,14,35,.5)}
-.m-card{position:relative;background:#fff;border-radius:20px;width:100%;max-width:520px;max-height:92vh;overflow-y:auto;padding:24px 24px 20px;box-shadow:0 30px 80px rgba(8,8,30,.4);animation:up .25s ease}
-.m-card h3{font-size:18px;font-weight:600;margin-bottom:2px}
-.m-card .m-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
-.m-2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
-.f-err{font-size:12px;color:var(--red);margin-top:4px;min-height:0}
-.f-field.bad input,.f-field.bad select{border-color:var(--red);background:#fffafa}
-.m-actions{display:flex;gap:10px;margin-top:16px}
-.m-actions .btn{flex:1}
+/* feed drawer (shared component) */
+.feed .d-head{display:flex;align-items:center;gap:.6rem}
+.feed .d-head .x{float:none;margin-left:auto}
+.d-note{padding:.7rem 1.2rem;border-top:1px solid var(--line);font-size:.72rem;color:var(--muted)}
+.feed-item{display:flex;gap:.7rem;padding:.6rem 0;border-bottom:1px dashed var(--line);animation:tin .2s}
+@keyframes tin{from{opacity:0;transform:translateX(8px)}}
+.feed-item .fi{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:none}
+.feed-item .fm{font-size:.82rem;line-height:1.45}
+.feed-item .ft{font-family:var(--mono);font-size:.66rem;color:var(--muted);margin-top:.1rem}
 
-/* ---------- back link ---------- */
-.back-home{position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;padding:11px 18px;border-radius:999px;border-left:3px solid #e11d48;box-shadow:0 6px 20px rgba(20,20,60,.18);min-height:44px}
-.back-home:hover{background:#f6f6fd}
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(20,20,31,.55);backdrop-filter:blur(3px);z-index:200;display:grid;place-items:center;padding:1rem}
+.modal{background:#fff;border-radius:18px;width:min(520px,100%);max-height:92vh;overflow-y:auto;padding:1.4rem;animation:mup .22s cubic-bezier(.2,.8,.2,1)}
+.modal h3{font-size:1.05rem;font-weight:600;margin-bottom:1rem}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.fgrid .full{grid-column:1/-1}
+.fgrid input,.fgrid select,.fgrid textarea{border:1.5px solid var(--line);border-radius:10px;padding:.65rem .85rem;min-height:44px;width:100%;background:#fff;outline:none}
+.fgrid input:focus,.fgrid select:focus{border-color:var(--acc)}
+.fgrid label{font-size:.78rem;color:var(--muted);display:grid;gap:.25rem}
+.m-acts{display:flex;gap:.6rem;margin-top:1.1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:500;border-radius:10px;padding:.75rem 1.2rem;transition:all .15s;min-height:46px}
+.btn-a{background:var(--acc);color:#fff}
+.btn-a:hover{background:var(--acc-deep)}
+.btn-o{border:1.5px solid var(--line);color:var(--muted)}
+.btn-o:hover{border-color:var(--acc);color:var(--acc)}
+.btn-danger{border:1.5px solid var(--red);color:var(--red)}
+.btn-danger:hover{background:#fef2f2}
 
-/* ---------- responsive ---------- */
-@media (max-width:900px){
-  .sidebar{transform:translateX(-100%)}
-  body.sb-open .sidebar{transform:none;box-shadow:20px 0 60px rgba(10,10,40,.4)}
-  body.sb-open .sb-ov{opacity:1;pointer-events:auto}
-  .main{margin-left:0}
-  .hamb{display:flex}
-  .tb-date{display:none}
-  .dash-grid{grid-template-columns:1fr}
-  .content{padding:16px 14px 90px}
+/* toast */
+.toast{position:fixed;top:1rem;right:1rem;z-index:300;background:#232336;color:#fff;border-radius:10px;padding:.8rem 1.1rem;font-size:.85rem;box-shadow:0 12px 30px -10px rgba(0,0,0,.4);opacity:0;transform:translateY(-8px);transition:all .25s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
+.toast.err{background:#7f1d1d}
+
+/* statusbar */
+.statusbar{background:#14141f;color:#7a7a9e;font-size:.72rem;padding:.45rem 1.1rem;display:flex;gap:1.4rem;align-items:center;font-family:var(--mono);flex-wrap:wrap}
+.statusbar .ok{color:#4ade80}
+.statusbar .sp{flex:1}
+.statusbar button{color:#7a7a9e;min-height:30px;font-family:var(--mono);font-size:.72rem;display:inline-flex;align-items:center;gap:.35rem}
+.statusbar button:hover{color:#fff}
+
+@media(max-width:860px){
+  .app{grid-template-columns:1fr}
+  .rail{position:fixed;left:0;top:0;bottom:0;width:72px;transform:translateX(-100%);transition:transform .25s;z-index:100}
+  .rail.open{transform:none}
+  .mobtop{display:flex!important}
 }
-@media (max-width:520px){
-  .topbar{padding:8px 12px}
-  .btn span.hidex{display:none}
-  .kpi .num{font-size:21px}
-}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{transition:none!important;animation:none!important}
-}
+.mobtop{display:none;background:#fff;border-bottom:1px solid var(--line);padding:.5rem .8rem;align-items:center;gap:.8rem}
+.mobtop button{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
 </style>
 </head>
 <body>
 <script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
 
-<!-- ================= LOGIN ================= -->
-<div id="view-login">
-  <form class="login-card" id="form-login" autocomplete="off">
-    <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c7cf0"/><stop offset="1" stop-color="#4646b8"/></linearGradient></defs><rect width="48" height="48" rx="13" fill="url(#lg1)"/><circle cx="20" cy="17" r="6" fill="#fff"/><path d="M8 38c0-7 5.4-11 12-11 3 0 5.7 1 7.7 2.7" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M29 33.5l3.5 3.5 7.5-8.5" stroke="#a7f3d0" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <h1>ลูกค้าดี CRM</h1>
-    <p class="tag">ระบบจัดการทีมขาย · บจก.ซอฟต์ดี โซลูชั่น</p><div style="margin-top:1.2rem;padding-top:1rem;border-top:1px dashed rgba(120,120,140,.3);font-size:12px;color:#8a8fa3;text-align:center">ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener" style="color:#FF0000;font-weight:500;text-decoration:none">First Vibe : Coding — ZenityX</a></div>
-    <div class="f-field">
-      <label for="lg-email">อีเมล</label>
-      <input id="lg-email" type="email" value="demo@softdee.co.th">
-    </div>
-    <div class="f-field">
-      <label for="lg-pass">รหัสผ่าน</label>
-      <input id="lg-pass" type="password" value="demo1234">
-    </div>
-    <button class="btn primary" type="submit">เข้าสู่ระบบ</button>
-    <div class="login-note">ระบบเดโม — กดเข้าได้เลย ไม่ต้องใช้รหัสจริง</div>
-  </form>
+<!-- SPLASH -->
+<div class="splash" id="splash">
+  <div class="sp-in">
+    <img src="assets/logo.jpg" alt="โลโก้ลูกค้าดี CRM">
+    <b>ลูกค้าดี CRM</b>
+    <div class="ver">v4.2.0 · build 2569.09 · Sales Cloud</div>
+    <div class="bar"><i></i></div>
+  </div>
 </div>
 
-<!-- ================= APP ================= -->
-<div id="view-app" hidden>
-  <div class="sb-ov" id="sbOv"></div>
-  <aside class="sidebar" id="sidebar">
-    <div class="sb-brand">
-      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c7cf0"/><stop offset="1" stop-color="#4646b8"/></linearGradient></defs><rect width="48" height="48" rx="13" fill="url(#lg2)"/><circle cx="20" cy="17" r="6" fill="#fff"/><path d="M8 38c0-7 5.4-11 12-11 3 0 5.7 1 7.7 2.7" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M29 33.5l3.5 3.5 7.5-8.5" stroke="#a7f3d0" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div><b>ลูกค้าดี CRM</b><small>SoftDee Solution</small></div>
+<!-- SSO LOGIN -->
+<div class="login" id="loginView" hidden>
+  <div class="sso-card">
+    <img class="logo-lg" src="assets/logo.jpg" alt="ลูกค้าดี CRM">
+    <h1>ลูกค้าดี CRM</h1>
+    <p class="sub">workspace: <b>รสใจ เอเจนซี่</b> · เข้าสู่ระบบเพื่อจัดการดีลของคุณ</p>
+    <button class="sso-btn" id="googleBtn">
+      <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.3-2.1 3.7-5.2 3.7-8.6z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.2 0-5.9-2.1-6.8-5H1.2v3C3.2 21.3 7.3 24 12 24z"/><path fill="#FBBC05" d="M5.2 14.4c-.2-.7-.4-1.5-.4-2.4s.1-1.7.4-2.4v-3H1.2C.4 8.2 0 10 0 12s.4 3.8 1.2 5.4l4-3z"/><path fill="#EA4335" d="M12 4.7c1.8 0 3 .8 3.7 1.4l3.3-3.2C17.9 1.1 15.2 0 12 0 7.3 0 3.2 2.7 1.2 6.6l4 3c.9-2.8 3.6-4.9 6.8-4.9z"/></svg>
+      เข้าสู่ระบบด้วย Google
+    </button>
+    <div class="sso-div">หรือ</div>
+    <div class="magic-link">
+      <input id="magicEmail" type="email" placeholder="อีเมลบริษัท" value="ann@rosjai.agency" aria-label="อีเมล">
+      <button id="magicBtn">ส่งลิงก์เข้าระบบ</button>
     </div>
-    <nav class="sb-nav">
-      <button class="nav-item active" data-page="pipeline"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="8" width="5" height="12" rx="1.5"/><rect x="17" y="12" width="4" height="8" rx="1.5"/></svg><span>Pipeline</span><span class="nav-badge" id="nb-pipe">0</span></button>
-      <button class="nav-item" data-page="customers"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.9-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="16.5" cy="9" r="2.6"/><path d="M15.5 14.2c2.4.2 4.3 1.9 4.9 4.8"/></svg><span>รายชื่อลูกค้า</span><span class="nav-badge" id="nb-cust">0</span></button>
-      <button class="nav-item" data-page="dashboard"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 16v-5M12.5 16V8M17 16v-3"/></svg><span>ภาพรวม</span></button>
+    <p class="sso-note">ระบบเดโม — SSO จำลอง กดเข้าได้เลย ไม่มีการเชื่อมบัญชีจริง</p>
+    <p class="sso-credit">ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener">First Vibe : Coding — ZenityX</a></p>
+  </div>
+</div>
+
+<!-- account chooser -->
+<div class="g-overlay" id="gOverlay" hidden>
+  <div class="g-card" id="gCard"></div>
+</div>
+
+<!-- APP -->
+<div class="app" id="appView" hidden>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ลูกค้าดี CRM</b></div>
+  <aside class="rail" id="rail">
+    <div class="logo"><img src="assets/logo.jpg" alt="ลูกค้าดี"></div>
+    <nav>
+      <button class="ri on" data-page="pipe" aria-label="Pipeline"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 14v4M12 10v8M17 6v12"/></svg><span class="tip">Pipeline (P)</span></button>
+      <button class="ri" data-page="accounts" aria-label="บัญชีลูกค้า"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4"/></svg><span class="tip">บัญชีลูกค้า (A)</span></button>
+      <button class="ri" data-page="report" aria-label="รายงาน"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span class="tip">รายงาน funnel (R)</span></button>
+      <button class="ri" id="feedBtn" aria-label="กิจกรรมข้ามระบบ"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="tip">กิจกรรมข้ามระบบ (F) <span id="feedBadge" class="mono" hidden></span></span></button>
     </nav>
-    <div class="sb-foot">
-      <div class="user-chip">
-        <div class="avatar">สด</div>
-        <div><b>คุณสดใส มั่นคง</b><small>Sales Manager</small></div>
-      </div>
-      <button class="btn btn-logout" id="btn-logout"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-2"/><path d="M9 12h11"/><path d="m16 8 4 4-4 4"/></svg>ออกจากระบบ</button>
-    </div>
+    <button class="who" id="whoBtn" title="ออกจากระบบ">—</button>
   </aside>
 
   <div class="main">
-    <header class="topbar">
-      <button class="hamb" id="btn-hamb" aria-label="เปิดเมนู"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-      <h2 id="tb-title">Pipeline การขาย</h2>
-      <div class="tb-right">
-        <span class="tb-date" id="tb-date"></span>
-        <button class="btn ghost sm" id="btn-reset"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-.5 4.5"/><path d="M20 5v6h-6"/></svg><span>รีเซ็ตข้อมูลตัวอย่าง</span></button>
+    <div class="topbar">
+      <span class="ws-chip"><span class="wm">ร</span> รสใจ เอเจนซี่</span>
+      <span class="stat-chip">Pipeline <b id="stPipe">฿0</b></span>
+      <span class="stat-chip">ถ่วงน้ำหนัก <b id="stWeight">฿0</b></span>
+      <span class="stat-chip green">Win rate <b id="stWin">—</b></span>
+      <span class="sp"></span>
+      <input class="search-b" id="searchInput" placeholder="ค้นหาดีล/บริษัท…" aria-label="ค้นหา">
+      <button class="tbtn primary" id="newDealBtn">+ ดีลใหม่ (N)</button>
+      <button class="sync-pill" id="syncPill"><i></i><span id="syncTxt">ออนไลน์</span></button>
+      <span class="clock" id="clock">--:--:--</span>
+    </div>
+    <div class="offline-banner" id="offBanner" hidden>
+      <b>โหมดออฟไลน์</b> แก้ไขดีลต่อได้ — ซิงก์เมื่อเชื่อมต่อกลับ <span class="mono" id="offNote"></span>
+    </div>
+
+    <div class="content">
+      <div id="page-pipe"><div class="pipe-wrap"><div class="pipe" id="pipeBoard"></div></div></div>
+
+      <div id="page-accounts" hidden>
+        <div class="panel">
+          <div class="p-head"><b>บัญชีลูกค้า</b><span class="count" id="acctCount"></span></div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>บริษัท</th><th>ผู้ติดต่อ</th><th>ดีลที่เปิด</th><th>มูลค่า pipeline</th><th>กิจกรรมล่าสุด</th><th></th></tr></thead>
+            <tbody id="acctBody"></tbody>
+          </table></div>
+        </div>
       </div>
-    </header>
 
-    <main class="content">
-      <!-- PIPELINE -->
-      <section class="page active" id="page-pipeline">
-        <div class="page-head">
-          <div>
-            <h3>Pipeline การขาย</h3>
-            <p id="pipe-summary">—</p>
-          </div>
-          <button class="btn primary" id="btn-add"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>เพิ่มดีล</button>
+      <div id="page-report" hidden>
+        <div class="rep-grid" id="repKpis"></div>
+        <div class="rep-2col">
+          <div class="panel"><div class="p-head"><b>Funnel — ดีลที่เปิดอยู่ตามขั้น</b></div><div id="funnelRows" style="padding:.5rem 0 1rem"></div></div>
+          <div class="panel"><div class="p-head"><b>ยอดปิดการขายรายเดือน (6 เดือน)</b></div><div class="mchart" id="monthChart"></div></div>
         </div>
-        <div class="kb-wrap"><div class="kanban" id="kanban"></div></div>
-      </section>
+        <div class="panel" style="margin-top:1rem"><div class="p-head"><b>อันดับทีมขาย</b></div><div style="overflow-x:auto"><table>
+          <thead><tr><th>เซลล์</th><th>ดีลเปิด</th><th>ปิดได้</th><th>มูลค่าปิดได้</th><th>Win rate</th></tr></thead>
+          <tbody id="ownerBody"></tbody>
+        </table></div></div>
+        <div class="panel" style="margin-top:1rem"><div class="p-head"><b>เหตุผลที่เสียดีล</b></div><div style="overflow-x:auto"><table>
+          <thead><tr><th>ดีล</th><th>บริษัท</th><th>มูลค่า</th><th>เหตุผล</th><th>เมื่อ</th></tr></thead>
+          <tbody id="lostBody"></tbody>
+        </table></div></div>
+      </div>
+    </div>
 
-      <!-- CUSTOMERS -->
-      <section class="page" id="page-customers">
-        <div class="page-head">
-          <div>
-            <h3>รายชื่อลูกค้า</h3>
-            <p>ค้นหา กรอง และเรียงลำดับดีลทั้งหมด — คลิกแถวเพื่อดูรายละเอียด</p>
-          </div>
-        </div>
-        <div class="toolbar">
-          <div class="search-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <input id="q" type="search" placeholder="ค้นหาบริษัทหรือผู้ติดต่อ…" aria-label="ค้นหา">
-          </div>
-          <select id="f-stage" aria-label="กรองตามขั้นตอน">
-            <option value="">ทุกขั้นตอน</option>
-          </select>
-          <span class="t-count" id="t-count"></span>
-        </div>
-        <div class="t-wrap">
-          <table>
-            <thead><tr>
-              <th data-sort="company">บริษัท<span class="arr"></span></th>
-              <th data-sort="contact">ผู้ติดต่อ<span class="arr"></span></th>
-              <th data-sort="value">มูลค่า<span class="arr"></span></th>
-              <th data-sort="stage">สถานะ<span class="arr"></span></th>
-              <th data-sort="closeDate">ปิดคาดการณ์<span class="arr"></span></th>
-              <th>แท็ก</th>
-            </tr></thead>
-            <tbody id="tbody"></tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- DASHBOARD -->
-      <section class="page" id="page-dashboard">
-        <div class="page-head">
-          <div>
-            <h3>ภาพรวมธุรกิจ</h3>
-            <p>สรุปผลการขายแบบเรียลไทม์จากข้อมูลดีลทั้งหมด</p>
-          </div>
-        </div>
-        <div class="kpi-grid" id="kpis"></div>
-        <div class="dash-grid">
-          <div class="panel">
-            <h4>Funnel การขาย</h4>
-            <div class="ph-sub">จำนวนดีลในแต่ละขั้นตอน (ข้อมูลจริง)</div>
-            <svg id="funnel" viewBox="0 0 560 240" width="100%" role="img" aria-label="กราฟ funnel การขาย"></svg>
-            <div class="f-note" id="funnel-note"></div>
-          </div>
-          <div class="panel">
-            <h4>ดีลใกล้หมดอายุ</h4>
-            <div class="ph-sub">5 ดีลเปิดที่ใกล้ถึงวันปิดคาดการณ์ที่สุด</div>
-            <div id="expiring"></div>
-          </div>
-        </div>
-      </section>
-    </main>
+    <div class="statusbar">
+      <span>ลูกค้าดี CRM v4.2.0</span>
+      <span class="ok">● พร้อมใช้งาน</span>
+      <span class="sp"></span>
+      <span id="stUser">—</span>
+      <span id="stDeals">ดีลเปิด: 0</span>
+      <button id="resetBtn">รีเซ็ตข้อมูลตัวอย่าง</button>
+    </div>
   </div>
 </div>
 
-<!-- ================= DRAWER ================= -->
-<div class="ov" id="drOv"></div>
-<aside class="drawer" id="drawer" aria-label="รายละเอียดดีล">
-  <div class="dr-head">
-    <div><h3 id="dr-title">—</h3><div class="sub" id="dr-sub">—</div></div>
-    <button class="dr-close" id="dr-close" aria-label="ปิด"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+<!-- deal drawer -->
+<div class="scrim" id="scrim" hidden></div>
+<div class="drawer" id="dealDrawer">
+  <div class="d-head">
+    <button class="x" id="dealClose" aria-label="ปิด"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <b id="dName">—</b>
+    <div class="d-acct" id="dAcct">—</div>
   </div>
-  <div class="dr-body" id="dr-body"></div>
-  <div class="dr-foot" id="dr-foot"></div>
-</aside>
-
-<!-- ================= MODAL ================= -->
-<div class="modal" id="modal">
-  <div class="m-bg" id="mBg"></div>
-  <form class="m-card" id="form-deal" novalidate>
-    <h3>เพิ่มดีลใหม่</h3>
-    <div class="m-sub">กรอกข้อมูลดีล แล้วกดบันทึก — การ์ดจะไปอยู่ในคอลัมน์ที่เลือกทันที</div>
-    <div class="f-field" data-f="company">
-      <label for="fd-company">ชื่อบริษัท *</label>
-      <input id="fd-company" type="text" placeholder="เช่น บจก.ตัวอย่าง เทรดดิ้ง">
-      <div class="f-err"></div>
+  <div class="d-body">
+    <div class="stepper" id="dStepper"></div>
+    <dl class="kv" id="dKv"></dl>
+    <div class="wl-acts" id="dWlActs">
+      <button class="wl-btn won" id="wonBtn">ปิดการขายได้ ✓</button>
+      <button class="wl-btn lost" id="lostBtn">เสียดีล</button>
     </div>
-    <div class="m-2">
-      <div class="f-field" data-f="contact">
-        <label for="fd-contact">ผู้ติดต่อ *</label>
-        <input id="fd-contact" type="text" placeholder="ชื่อผู้ติดต่อ">
-        <div class="f-err"></div>
+    <p class="tl-h">ไทม์ไลน์กิจกรรม</p>
+    <div id="dTimeline"></div>
+    <div class="act-add">
+      <div class="row">
+        <select id="actType" aria-label="ประเภทกิจกรรม">
+          <option value="call">โทรศัพท์</option><option value="line">LINE</option>
+          <option value="email">อีเมล</option><option value="meet">นัดพบ</option><option value="note">โน้ต</option>
+        </select>
+        <input id="actText" placeholder="บันทึกกิจกรรม เช่น คุยเรื่องงบ…">
       </div>
-      <div class="f-field" data-f="phone">
-        <label for="fd-phone">โทรศัพท์</label>
-        <input id="fd-phone" type="tel" placeholder="08x-xxx-xxxx">
-        <div class="f-err"></div>
-      </div>
+      <button id="actAdd">+ เพิ่มกิจกรรม</button>
     </div>
-    <div class="m-2">
-      <div class="f-field" data-f="value">
-        <label for="fd-value">มูลค่าดีล (บาท) *</label>
-        <input id="fd-value" type="number" min="0" step="1000" placeholder="250000">
-        <div class="f-err"></div>
-      </div>
-      <div class="f-field" data-f="closeDate">
-        <label for="fd-close">ปิดคาดการณ์</label>
-        <input id="fd-close" type="date">
-        <div class="f-err"></div>
-      </div>
-    </div>
-    <div class="m-2">
-      <div class="f-field" data-f="stage">
-        <label for="fd-stage">ขั้นตอนเริ่มต้น</label>
-        <select id="fd-stage"></select>
-        <div class="f-err"></div>
-      </div>
-      <div class="f-field" data-f="tag">
-        <label for="fd-tag">แท็ก</label>
-        <select id="fd-tag"></select>
-        <div class="f-err"></div>
-      </div>
-    </div>
-    <div class="m-actions">
-      <button type="button" class="btn ghost" id="m-cancel">ยกเลิก</button>
-      <button type="submit" class="btn primary">บันทึกดีล</button>
-    </div>
-  </form>
+  </div>
 </div>
 
-<div id="toasts" aria-live="polite"></div>
-<a id="zx-back" class="back-home" href="../">หน้ารวมตัวอย่าง</a>
+<!-- feed drawer -->
+<div class="drawer feed" id="feedDrawer">
+  <div class="d-head"><b>กิจกรรมข้ามระบบ</b><span class="count mono" id="feedCount" style="font-size:.7rem;color:var(--muted)"></span><button class="x" id="feedClose" aria-label="ปิด"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+  <div class="d-body" id="feedBody" style="flex:1;overflow-y:auto;padding:.6rem 1.2rem"></div>
+  <div class="d-note">ทุกระบบในเครือ ZenityX Demos บนโดเมนนี้แชร์เหตุการณ์ผ่าน localStorage จริง — ลองขายใน ขายดี POS หรือเรียกคิวใน คิวดี แล้วกลับมาดู</div>
+</div>
+
+<!-- new deal modal -->
+<div class="overlay" id="dealOverlay" hidden>
+  <div class="modal">
+    <h3 id="dealFormTitle">ดีลใหม่</h3>
+    <div class="fgrid">
+      <label class="full">ชื่อดีล<input id="ndName" placeholder="เช่น แพ็กเกจเว็บไซต์+SEO ปี"></label>
+      <label>บริษัท<input id="ndAcct" list="acctList" placeholder="เลือกหรือพิมพ์ใหม่"><datalist id="acctList"></datalist></label>
+      <label>ผู้ติดต่อ<input id="ndContact" placeholder="ชื่อผู้ติดต่อ"></label>
+      <label>มูลค่า (บาท)<input id="ndValue" type="number" min="0" placeholder="150000"></label>
+      <label>คาดว่าจะปิด<input id="ndExp" type="date"></label>
+      <label>เจ้าของดีล<select id="ndOwner"></select></label>
+      <label>ขั้นเริ่มต้น<select id="ndStage"><option value="new">ลีดใหม่</option><option value="contact">ติดต่อแล้ว</option><option value="propose">เสนอราคา</option><option value="nego">เจรจา</option></select></label>
+    </div>
+    <div class="m-acts">
+      <button class="btn btn-o" id="ndCancel" style="flex:1">ยกเลิก</button>
+      <button class="btn btn-a" id="ndSave" style="flex:2">สร้างดีล</button>
+    </div>
+  </div>
+</div>
+
+<!-- lost reason modal -->
+<div class="overlay" id="lostOverlay" hidden>
+  <div class="modal" style="width:min(400px,100%)">
+    <h3>เหตุผลที่เสียดีล</h3>
+    <div class="fgrid">
+      <label class="full">เลือกเหตุผล<select id="lostReason">
+        <option>งบประมาณไม่พอ</option><option>เลือกคู่แข่ง</option><option>เลื่อนโปรเจกต์</option>
+        <option>ติดต่อไม่ได้แล้ว</option><option>ความต้องการเปลี่ยน</option><option>อื่นๆ</option>
+      </select></label>
+    </div>
+    <div class="m-acts">
+      <button class="btn btn-o" id="lostCancel" style="flex:1">กลับ</button>
+      <button class="btn btn-danger" id="lostConfirm" style="flex:2">ยืนยันเสียดีล</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<a href="../" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
 
 <script>
 (function(){
 'use strict';
-/* ================= helpers ================= */
-function $(s,r){return (r||document).querySelector(s)}
-function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
-function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-function pad(n){return String(n).padStart(2,'0')}
-function dISO(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
-function daysFromNow(n){var d=new Date();d.setDate(d.getDate()+n);return dISO(d)}
-function todayISO(){return dISO(new Date())}
-function tsDaysAgo(n,h){var d=new Date();d.setDate(d.getDate()-n);d.setHours(h||10,20,0,0);return d.getTime()}
-function thisMonthDay(day){var n=new Date();var dd=Math.min(day,Math.max(1,n.getDate()));return dISO(new Date(n.getFullYear(),n.getMonth(),dd))}
-function fmtMoney(n){return '฿'+Number(n||0).toLocaleString('th-TH')}
-function fmtShort(n){n=Number(n||0);if(n>=1000000){var v=(n/1000000);return '฿'+(v%1===0?v:v.toFixed(1))+' ล้าน'}return '฿'+n.toLocaleString('th-TH')}
-function fmtDate(iso){if(!iso)return '-';var d=new Date(iso+'T00:00:00');return d.toLocaleDateString('th-TH',{day:'numeric',month:'short',year:'numeric'})}
-function fmtDateTime(ts){var d=new Date(ts);return d.toLocaleDateString('th-TH',{day:'numeric',month:'short'})+' · '+d.toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'})}
+var LS = 'zx-crm2-v1';
+var LINK_KEY = 'zx-link-v1';
 
-var IC={
- l:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m14 6-6 6 6 6"/></svg>',
- r:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 6 6 6-6 6"/></svg>',
- cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
- plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
- brief:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg>',
- coin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v10M15 9.6c-.7-1-1.8-1.6-3-1.6-1.7 0-3 .9-3 2.2 0 3 6 1.5 6 4.3 0 1.3-1.3 2.3-3 2.3-1.2 0-2.3-.6-3-1.6"/></svg>',
- checkc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5.5"/></svg>',
- pct:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M19 5 5 19"/><circle cx="7.2" cy="7.2" r="2.5"/><circle cx="16.8" cy="16.8" r="2.5"/></svg>',
- clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>',
- note:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>',
- xc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg>',
- trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9.5 7V5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2M6.5 7l1 13h9l1-13"/><path d="M10 11v6M14 11v6"/></svg>',
- undo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>'
-};
+/* ---------- bridge ---------- */
+function linkRead(){ try { var d = JSON.parse(localStorage.getItem(LINK_KEY)); return d && d.events ? d : {events:[]}; } catch(e){ return {events:[]}; } }
+function linkWrite(sys, type, msg, val){
+  var l = linkRead();
+  l.events.unshift({ t: Date.now(), sys: sys, type: type, msg: msg, val: (val === undefined ? null : val) });
+  l.events = l.events.slice(0, 60);
+  try { localStorage.setItem(LINK_KEY, JSON.stringify(l)); } catch(e){}
+}
 
-/* ================= data ================= */
-var LS_KEY='zx-crm-v1';
-var STAGES=[
- {id:'lead',name:'Lead ใหม่',color:'#5b5bd6'},
- {id:'contacted',name:'ติดต่อแล้ว',color:'#0284c7'},
- {id:'present',name:'นำเสนอ',color:'#d97706'},
- {id:'negotiate',name:'เจรจา',color:'#7c3aed'},
- {id:'won',name:'ปิดการขาย',color:'#16a34a'},
- {id:'lost',name:'เสียดีล',color:'#dc2626'}
+/* ---------- data ---------- */
+var OWNERS = [
+  { id:'ann',  n:'แอน',  full:'แอน ผู้จัดการฝ่ายขาย', email:'ann@rosjai.agency',  c:'#5b5bd6' },
+  { id:'boss', n:'บอส',  full:'บอส เซลล์อาวุโส',      email:'boss@rosjai.agency', c:'#0284c7' },
+  { id:'jen',  n:'เจน',  full:'เจน เซลล์',            email:'jen@rosjai.agency',  c:'#9333ea' }
 ];
-var KANBAN=['lead','contacted','present','negotiate','won'];
-var TAGS=['Enterprise','SME','ต่ออายุ','แนะนำมา','อีเวนต์'];
-function stageObj(id){for(var i=0;i<STAGES.length;i++){if(STAGES[i].id===id)return STAGES[i]}return STAGES[0]}
-function stageIdx(id){for(var i=0;i<STAGES.length;i++){if(STAGES[i].id===id)return i}return 0}
-
-function seedDeal(id,company,contact,phone,value,stage,tag,closeIn,acts,wonDay,lostAgo){
- var d={id:id,company:company,contact:contact,phone:phone,value:value,stage:stage,tag:tag,
-   closeDate:daysFromNow(closeIn),createdAt:tsDaysAgo(closeIn+14,9),activities:acts||[],wonAt:null,lostAt:null};
- if(stage==='won'){d.wonAt=thisMonthDay(wonDay||4);d.closeDate=d.wonAt}
- if(stage==='lost'){d.lostAt=daysFromNow(-(lostAgo||6))}
- return d;
+var STAGES = [
+  { id:'new',     n:'ลีดใหม่',     prob:10, c:'#64748b' },
+  { id:'contact', n:'ติดต่อแล้ว',  prob:30, c:'#0284c7' },
+  { id:'propose', n:'เสนอราคา',    prob:50, c:'#d97706' },
+  { id:'nego',    n:'เจรจา',       prob:75, c:'#9333ea' }
+];
+var ACT_META = {
+  call:{ n:'โทรศัพท์', c:'#0284c7', svg:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.8.7a2 2 0 0 1 1.8 2.1z"/>' },
+  line:{ n:'LINE', c:'#16a34a', svg:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>' },
+  email:{ n:'อีเมล', c:'#d97706', svg:'<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/>' },
+  meet:{ n:'นัดพบ', c:'#9333ea', svg:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>' },
+  note:{ n:'โน้ต', c:'#64748b', svg:'<path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/>' },
+  sys:{ n:'ระบบ', c:'#5b5bd6', svg:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>' }
+};
+function stageOf(id){ return STAGES.find(function(s){ return s.id === id; }); }
+function ownOf(id){ return OWNERS.find(function(o){ return o.id === id; }); }
+var DAY = 86400000;
+function seedDeals(){
+  var now = Date.now();
+  function act(type, text, daysAgo){ return { t: now - daysAgo*DAY, type: type, text: text, by: 'ann' }; }
+  return [
+    { id:'d01', name:'เว็บไซต์ + ระบบจองออนไลน์', account:'หจก.บ้านสวนรีสอร์ท', contact:'คุณลดา (เจ้าของ)', value:280000, stage:'nego', prob:75, owner:'ann', expected: now+9*DAY, createdAt: now-22*DAY,
+      activities:[act('meet','พบเจ้าของที่รีสอร์ท เห็นหน้างานจริง',18), act('call','ต่อรองเรื่องงบประมาณ เหลือ 280k',5)] },
+    { id:'d02', name:'แพ็กเกจการตลาดออนไลน์รายปี', account:'บจก.เมดิแคร์คลินิก', contact:'พี่หมอธน', value:850000, stage:'nego', prob:75, owner:'boss', expected: now+14*DAY, createdAt: now-35*DAY,
+      activities:[act('email','ส่ง proposal ฉบับแก้ไขรอบ 2',7), act('meet','ประชุมผู้บริหารคลินิก',12)] },
+    { id:'d03', name:'ระบบ POS หน้าร้าน 3 สาขา', account:'บจก.สวัสดีเบเกอรี่', contact:'คุณแว่น', value:420000, stage:'propose', prob:50, owner:'ann', expected: now+21*DAY, createdAt: now-12*DAY,
+      activities:[act('call','เดโมระบบ POS ให้ทีมร้านดู',8)] },
+    { id:'d04', name:'ออกแบบแบรนด์ใหม่ทั้งระบบ', account:'ร้านกาแฟคุณปู', contact:'คุณปู', value:150000, stage:'propose', prob:50, owner:'jen', expected: now+18*DAY, createdAt: now-9*DAY,
+      activities:[act('line','ส่ง moodboard ให้ดู ลูกค้าชอบทิศทางที่ 2',3)] },
+    { id:'d05', name:'เว็บอีคอมเมิร์ซ + ระบบสต็อก', account:'หจก.ทวีทรัพย์อะไหล่', contact:'คุณทวี', value:380000, stage:'contact', prob:30, owner:'boss', expected: now+30*DAY, createdAt: now-6*DAY,
+      activities:[act('call','โทรแนะนำตัวครั้งแรก นัดคุยอาทิตย์หน้า',4)] },
+    { id:'d06', name:'วิดีโอโปรโมท + ถ่ายภาพสินค้า', account:'หจก.ปิ่นทองการพิมพ์', contact:'คุณปิ่น', value:120000, stage:'contact', prob:30, owner:'jen', expected: now+25*DAY, createdAt: now-5*DAY,
+      activities:[act('line','ได้ใบแนะนำจากลูกค้าเก่า',5)] },
+    { id:'d07', name:'ระบบ CRM + การตลาดอัตโนมัติ', account:'บจก.ซิกม่าโลจิสติกส์', contact:'คุณวิทย์', value:650000, stage:'new', prob:10, owner:'ann', expected: now+45*DAY, createdAt: now-2*DAY,
+      activities:[act('sys','ลีดเข้าจากฟอร์มเว็บไซต์',2)] },
+    { id:'d08', name:'เว็บไซต์โรงงาน 2 ภาษา', account:'บจก.นวัตกรรมไทย', contact:'คุณเกรียง', value:190000, stage:'new', prob:10, owner:'jen', expected: now+40*DAY, createdAt: now-1*DAY,
+      activities:[act('sys','ลีดจากงานอีเวนต์ SME Expo',1)] },
+    { id:'d09', name:'ระบบสมาชิกสะสมแต้ม', account:'ร้านชำลุงป้าแขม', contact:'ป้าแขม', value:95000, stage:'new', prob:10, owner:'boss', expected: now+35*DAY, createdAt: now-1*DAY, activities:[act('sys','ลูกค้าเดินเข้ามาสอบถามหน้าร้าน',1)] },
+    /* closed — won */
+    { id:'w01', name:'เว็บไซต์ + SEO รายปี', account:'บจก.สยามสมาร์ทโฮม', contact:'คุณอ๊อด', value:520000, stage:'won', prob:100, owner:'ann', expected: now-10*DAY, createdAt: now-90*DAY, wonAt: now-10*DAY, activities:[act('meet','เซ็นสัญญาเรียบร้อย',10)] },
+    { id:'w02', name:'ถ่ายแบบสินค้า 200 SKU', account:'บจก.เมดิแคร์คลินิก', contact:'พี่หมอธน', value:180000, stage:'won', prob:100, owner:'jen', expected: now-40*DAY, createdAt: now-100*DAY, wonAt: now-40*DAY, activities:[act('call','ปิดดีลผ่านโทรศัพท์',40)] },
+    { id:'w03', name:'แพ็กเกจโฆษณา 6 เดือน', account:'บจก.สวัสดีเบเกอรี่', contact:'คุณแว่น', value:300000, stage:'won', prob:100, owner:'boss', expected: now-75*DAY, createdAt: now-140*DAY, wonAt: now-75*DAY, activities:[act('meet','ปิดการขายหน้างาน',75)] },
+    { id:'w04', name:'ระบบจองคิวออนไลน์', account:'บจก.เมดิแคร์คลินิก', contact:'พี่หมอธน', value:240000, stage:'won', prob:100, owner:'ann', expected: now-130*DAY, createdAt: now-180*DAY, wonAt: now-130*DAY, activities:[act('email','สัญญา e-sign',130)] },
+    { id:'w05', name:'ออกแบบโลโก้+CI', account:'ร้านกาแฟคุณปู', contact:'คุณปู', value:85000, stage:'won', prob:100, owner:'jen', expected: now-160*DAY, createdAt: now-190*DAY, wonAt: now-160*DAY, activities:[act('line','ลูกค้าตอบตกลงในไลน์',160)] },
+    /* closed — lost */
+    { id:'l01', name:'แอปสั่งอาหารเฉพาะร้าน', account:'ร้านก๋วยเตี๋ยวเจ๊อ้อย', contact:'เจ๊อ้อย', value:220000, stage:'lost', prob:0, owner:'boss', expected: now-20*DAY, createdAt: now-70*DAY, lostAt: now-20*DAY, lostReason:'งบประมาณไม่พอ', activities:[act('call','ลูกค้าบอกงบไม่ไหวช่วงนี้',20)] },
+    { id:'l02', name:'เว็บไซต์รับสมัครงาน', account:'บจก.ทะเยอทะยาน', contact:'คุณนพดล', value:160000, stage:'lost', prob:0, owner:'ann', expected: now-55*DAY, createdAt: now-120*DAY, lostAt: now-55*DAY, lostReason:'เลือกคู่แข่ง', activities:[act('email','ลูกค้าแจ้งเลือกเจ้าอื่น ราคาถูกกว่า 20%',55)] },
+    { id:'l03', name:'ระบบบัญชีออนไลน์', account:'หจก.ทวีทรัพย์อะไหล่', contact:'คุณทวี', value:200000, stage:'lost', prob:0, owner:'jen', expected: now-95*DAY, createdAt: now-150*DAY, lostAt: now-95*DAY, lostReason:'เลื่อนโปรเจกต์', activities:[act('meet','ผู้บริหารเลื่อนเป็นไตรมาสหน้า',95)] }
+  ];
 }
-function A(t,d,h){return {ts:tsDaysAgo(d,h),text:t}}
-function seed(){
- var deals=[
-  seedDeal('D-1001','บมจ.ธนชาติฟู้ดส์','คุณวิภาวี เจริญกิจ','02-345-6789',1850000,'negotiate','Enterprise',12,
-   [A('รับ Lead จากงาน Thailand Food Tech Expo',19,10),A('เดโมระบบ ERP รอบแรกกับทีมไอที',9,14),A('ส่งใบเสนอราคาฉบับแก้ไข รอบอร์ดพิจารณา',3,11)]),
-  seedDeal('D-1002','บจก.สยามลอจิสติกส์','คุณอนุชา พงษ์พัฒน์','081-234-5678',420000,'present','SME',18,
-   [A('โทรคุยครั้งแรก สนใจระบบ WMS',12,13),A('นำเสนอผ่าน Zoom ผู้บริหารเข้าร่วม 4 ท่าน',5,10)]),
-  seedDeal('D-1003','บจก.กรุงเทพเมดิคอล','คุณนภัสสร ใจดี','089-555-1234',680000,'lead','แนะนำมา',25,
-   [A('ลูกค้าเก่าแนะนำมา ฝากนามบัตรไว้',2,15)]),
-  seedDeal('D-1004','บมจ.ไทยพาณิชย์รีเทล','คุณศักดิ์ชัย วงศ์สุวรรณ','02-789-4561',2400000,'negotiate','Enterprise',9,
-   [A('ติดต่อจากหน้าเว็บไซต์',22,9),A('เข้าพบทีมจัดซื้อที่สำนักงานใหญ่',11,14),A('เจรจาส่วนลดปีแรก ขอ PO ภายในเดือนนี้',2,16)]),
-  seedDeal('D-1005','บจก.อีสานอโกรเทค','คุณมาลี แก้วมณี','087-321-6549',260000,'contacted','SME',30,
-   [A('ได้นามบัตรจากงานอีเวนต์ขอนแก่น',8,11),A('โทรติดตาม นัดส่งเอกสารแนะนำบริษัท',4,10)]),
-  seedDeal('D-1006','บจก.เชียงใหม่ทัวร์แอนด์ทราเวล','คุณธีรพงษ์ ชื่นบาน','086-777-8899',150000,'lead','อีเวนต์',35,
-   [A('ลงทะเบียนดาวน์โหลด e-book จากเว็บ',1,13)]),
-  seedDeal('D-1007','บมจ.พัฒนาอสังหาฯ กรุ๊ป','คุณปิยะ รุ่งเรือง','02-555-8899',1200000,'present','Enterprise',21,
-   [A('Inbound จาก Google Ads',15,10),A('เดโมระบบ CRM หน้างาน ลูกค้าประทับใจ',6,15)]),
-  seedDeal('D-1008','บจก.ภูเก็ตซีฟู้ด เอ็กซ์พอร์ต','คุณสุรชัย ทองแท้','076-222-345',340000,'contacted','ต่ออายุ',27,
-   [A('ลูกค้าเก่าต่อสัญญาปีที่ 3',7,9),A('เสนอแพ็กเกจอัปเกรดรายปี',3,14)]),
-  seedDeal('D-1009','บจก.นิวเจน อีดูเคชั่น','คุณชนากานต์ พูนสุข','092-888-7766',480000,'won','SME',0,
-   [A('เดโมระบบสำเร็จ',16,10),A('เซ็นสัญญา 12 เดือน เริ่มออนบอร์ด',4,11)],4),
-  seedDeal('D-1010','บจก.เมทัลเทค อินดัสทรีส์','คุณประเสริฐ บุญมาก','038-111-222',720000,'won','ต่ออายุ',0,
-   [A('ต่อสัญญาปีที่ 2 พร้อมเพิ่มโมดูล QC',9,10)],11),
-  seedDeal('D-1011','บจก.บางนาแพคกิ้ง','คุณอรวรรณ ศรีสุข','02-111-9876',390000,'lost','SME',0,
-   [A('เสนอราคาแล้ว ลูกค้าเลือกเจ้าอื่นเพราะงบจำกัด',6,15)],null,6),
-  seedDeal('D-1012','บจก.โมเดิร์นเฟอร์นิเจอร์','คุณกิตติพงษ์ อินทร์แก้ว','081-999-4433',560000,'lead','แนะนำมา',40,
-   [A('เพื่อนร่วมงานเก่าแนะนำมา รอโทรครั้งแรก',1,9)])
- ];
- return {deals:deals,seq:1013};
-}
-
-var state=null;
-function load(){
- try{var raw=localStorage.getItem(LS_KEY);if(raw){var p=JSON.parse(raw);if(p&&p.deals){state=p;return}}}catch(e){}
- state=seed();save();
-}
-function save(){try{localStorage.setItem(LS_KEY,JSON.stringify(state))}catch(e){}}
-function findDeal(id){for(var i=0;i<state.deals.length;i++){if(state.deals[i].id===id)return state.deals[i]}return null}
-function pushAct(d,text){d.activities.push({ts:Date.now(),text:text})}
-
-/* ================= toast ================= */
-function toast(msg,type){
- var t=document.createElement('div');
- t.className='toast '+(type||'ok');
- t.innerHTML='<span class="tk"></span><span>'+esc(msg)+'</span>';
- $('#toasts').appendChild(t);
- setTimeout(function(){t.style.opacity='0';t.style.transform='translateY(6px)';setTimeout(function(){t.remove()},250)},2800);
-}
-
-/* ================= mutations ================= */
-function setStage(d,ns,quiet){
- var os=d.stage;if(os===ns)return;
- d.stage=ns;
- if(ns==='won'){d.wonAt=todayISO();d.lostAt=null}
- else if(ns==='lost'){d.lostAt=todayISO();d.wonAt=null}
- else{d.wonAt=null;d.lostAt=null}
- pushAct(d,'ย้ายดีลจาก "'+stageObj(os).name+'" ไป "'+stageObj(ns).name+'"');
- save();renderAll();
- if(!quiet)toast('ย้าย "'+d.company+'" ไป "'+stageObj(ns).name+'" แล้ว');
-}
-function deleteDeal(d){
- if(!confirm('ลบดีล "'+d.company+'" ออกจากระบบ?'))return;
- state.deals=state.deals.filter(function(x){return x.id!==d.id});
- save();closeDrawer();renderAll();
- toast('ลบดีลเรียบร้อยแล้ว','warn');
+function blank(){ return { deals: seedDeals(), seq: 100 }; }
+var state = load() || blank();
+var me = null, query = '', openDealId = null, offline = false;
+function load(){ try { var d = JSON.parse(localStorage.getItem(LS)); return d && d.deals ? d : null; } catch(e){ return null; } }
+function save(){ localStorage.setItem(LS, JSON.stringify(state)); }
+function fmt(n){ return '฿' + Math.round(n).toLocaleString('th-TH'); }
+function fmtK(n){ return n >= 1000000 ? '฿' + (n/1000000).toFixed(1) + 'M' : '฿' + Math.round(n/1000) + 'k'; }
+function toast(m, err){ var t=document.getElementById('toast'); t.textContent=m; t.className='toast show'+(err?' err':''); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show');},2400); }
+function closeAllModals(){ document.querySelectorAll('.overlay').forEach(function(o){ o.hidden = true; }); }
+function ago(t){
+  var s = Math.floor((Date.now()-t)/1000);
+  if (s < 3600) return Math.max(1,Math.floor(s/60)) + ' นาทีที่แล้ว';
+  if (s < 86400) return Math.floor(s/3600) + ' ชม.ที่แล้ว';
+  return Math.floor(s/86400) + ' วันที่แล้ว';
 }
 
-/* ================= render: kanban ================= */
-function colDeals(sid){
- return state.deals.filter(function(d){return sid==='won'?(d.stage==='won'||d.stage==='lost'):d.stage===sid});
-}
-function cardHTML(d){
- var st=stageObj(d.stage);
- var idx=KANBAN.indexOf(d.stage);
- var arrows='';
- if(idx>=0){
-  arrows='<div class="card-mv">'
-   +(idx>0?'<button class="mv" data-mv="-1" data-id="'+d.id+'" aria-label="ย้ายไปขั้นก่อนหน้า">'+IC.l+'</button>':'<span></span>')
-   +'<button class="mv" data-mv="1" data-id="'+d.id+'" aria-label="ย้ายไปขั้นถัดไป">'+IC.r+'</button></div>';
- }
- return '<article class="card'+(d.stage==='lost'?' lost':'')+'" draggable="true" tabindex="0" data-id="'+d.id+'" style="--sc:'+st.color+'" aria-label="'+esc(d.company)+'">'
-  +'<div class="card-co">'+esc(d.company)+'</div>'
-  +'<div class="card-ct">'+esc(d.contact)+'</div>'
-  +'<div class="card-row"><span class="card-val mono">'+fmtMoney(d.value)+'</span><span class="chip">'+esc(d.tag)+'</span></div>'
-  +'<div class="card-foot"><span class="card-date">'+IC.cal+fmtDate(d.closeDate)+'</span></div>'
-  +arrows+'</article>';
-}
-function renderKanban(){
- var html='';
- KANBAN.forEach(function(sid){
-  var st=stageObj(sid);
-  var list=colDeals(sid);
-  var sum=list.reduce(function(s,d){return d.stage==='lost'?s:s+d.value},0);
-  html+='<div class="kb-col" data-stage="'+sid+'">'
-   +'<div class="kb-head"><span class="kb-dot" style="--c:'+st.color+';background:'+st.color+'"></span><b>'+st.name+'</b>'
-   +(sid!=='won'?'<button class="kb-add" data-add="'+sid+'" aria-label="เพิ่มดีลในขั้น '+st.name+'">'+IC.plus+'</button>':'')
-   +'<div class="kb-meta"><div class="n">'+list.length+' ดีล</div><div class="v">'+fmtShort(sum)+'</div></div></div>'
-   +'<div class="kb-body">'
-   +(list.length?list.map(cardHTML).join(''):'<div class="kb-empty">ยังไม่มีดีล — ลากการ์ดมาวางที่นี่</div>')
-   +'</div></div>';
- });
- $('#kanban').innerHTML=html;
+/* ---------- splash / clock ---------- */
+var skipSplash = new URLSearchParams(location.search).get('app') === '1' || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+setTimeout(function(){
+  document.getElementById('splash').classList.add('out');
+  if (skipSplash) { me = OWNERS[0]; enterApp(); }
+  else document.getElementById('loginView').hidden = false;
+  setTimeout(function(){ document.getElementById('splash').hidden = true; }, 550);
+}, skipSplash ? 50 : 1150);
+setInterval(function(){ document.getElementById('clock').textContent = new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit',second:'2-digit'}); }, 1000);
 
- /* bind cards */
- $$('#kanban .card').forEach(function(c){
-  var id=c.getAttribute('data-id');
-  c.addEventListener('dragstart',function(e){
-   e.dataTransfer.setData('text/plain',id);
-   e.dataTransfer.effectAllowed='move';
-   c.classList.add('dragging');
+/* ---------- SSO flow ---------- */
+document.getElementById('googleBtn').addEventListener('click', function(){
+  document.getElementById('gCard').innerHTML =
+    '<svg class="g-logo" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.3-2.1 3.7-5.2 3.7-8.6z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.2 0-5.9-2.1-6.8-5H1.2v3C3.2 21.3 7.3 24 12 24z"/><path fill="#FBBC05" d="M5.2 14.4c-.2-.7-.4-1.5-.4-2.4s.1-1.7.4-2.4v-3H1.2C.4 8.2 0 10 0 12s.4 3.8 1.2 5.4l4-3z"/><path fill="#EA4335" d="M12 4.7c1.8 0 3 .8 3.7 1.4l3.3-3.2C17.9 1.1 15.2 0 12 0 7.3 0 3.2 2.7 1.2 6.6l4 3c.9-2.8 3.6-4.9 6.8-4.9z"/></svg>' +
+    '<h2>เลือกบัญชี</h2><p class="g-sub">เพื่อดำเนินการต่อกับ <b>ลูกค้าดี CRM</b></p>' +
+    OWNERS.map(function(o){
+      return '<button class="g-acct" data-o="'+o.id+'"><span class="av" style="background:'+o.c+'">'+o.n[0]+'</span><span><b>'+o.full+'</b><small>'+o.email+'</small></span></button>';
+    }).join('') +
+    '<div class="g-div"></div>' +
+    '<button class="g-acct" id="gOther"><span class="av" style="background:#fff;border:1px dashed #dadce0;color:#5f6368"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></span><span><b style="font-weight:400">ใช้บัญชีอื่น</b><small>เดโมนี้มี 3 บัญชีให้เลือก</small></span></button>';
+  document.getElementById('gOverlay').hidden = false;
+  document.getElementById('gOther').addEventListener('click', function(){ toast('เดโม: เลือกจาก 3 บัญชีด้านบนได้เลยครับ'); });
+  document.querySelectorAll('.g-acct[data-o]').forEach(function(b){
+    b.addEventListener('click', function(){
+      me = ownOf(b.dataset.o);
+      document.getElementById('gCard').innerHTML = '<div class="g-loading"><div class="spin"></div>กำลังเข้าสู่ระบบด้วย ' + me.email + ' …</div>';
+      setTimeout(function(){
+        document.getElementById('gOverlay').hidden = true;
+        enterApp();
+      }, 900);
+    });
   });
-  c.addEventListener('dragend',function(){c.classList.remove('dragging')});
-  c.addEventListener('click',function(e){if(e.target.closest('.mv'))return;openDrawer(id)});
-  c.addEventListener('keydown',function(e){if(e.key==='Enter')openDrawer(id)});
- });
- $$('#kanban .mv').forEach(function(b){
-  b.addEventListener('click',function(e){
-   e.stopPropagation();
-   var d=findDeal(b.getAttribute('data-id'));
-   var idx=KANBAN.indexOf(d.stage);
-   var ni=idx+Number(b.getAttribute('data-mv'));
-   if(ni>=0&&ni<KANBAN.length)setStage(d,KANBAN[ni]);
-  });
- });
- $$('#kanban .kb-add').forEach(function(b){
-  b.addEventListener('click',function(){openModal(b.getAttribute('data-add'))});
- });
- /* drop zones */
- $$('#kanban .kb-col').forEach(function(col){
-  col.addEventListener('dragover',function(e){e.preventDefault();e.dataTransfer.dropEffect='move';col.classList.add('over')});
-  col.addEventListener('dragleave',function(e){if(!col.contains(e.relatedTarget))col.classList.remove('over')});
-  col.addEventListener('drop',function(e){
-   e.preventDefault();col.classList.remove('over');
-   var id=e.dataTransfer.getData('text/plain');
-   var d=findDeal(id);
-   if(d&&d.stage!==col.getAttribute('data-stage'))setStage(d,col.getAttribute('data-stage'));
-  });
- });
-
- /* summary + nav badges */
- var open=state.deals.filter(function(d){return d.stage!=='won'&&d.stage!=='lost'});
- var sum=open.reduce(function(s,d){return s+d.value},0);
- $('#pipe-summary').textContent='เปิดอยู่ '+open.length+' ดีล · มูลค่ารวม '+fmtShort(sum)+' — ลากการ์ดข้ามคอลัมน์เพื่ออัปเดตสถานะ';
- $('#nb-pipe').textContent=open.length;
- $('#nb-cust').textContent=state.deals.length;
-}
-
-/* ================= render: table ================= */
-var sortKey='company',sortDir=1;
-function chipStage(sid){var st=stageObj(sid);return '<span class="st-chip" style="--c:'+st.color+'">'+st.name+'</span>'}
-function renderTable(){
- var q=($('#q').value||'').toLowerCase().trim();
- var fs=$('#f-stage').value;
- var list=state.deals.filter(function(d){
-  if(fs&&d.stage!==fs)return false;
-  if(q&&(d.company.toLowerCase().indexOf(q)<0&&d.contact.toLowerCase().indexOf(q)<0))return false;
-  return true;
- });
- list.sort(function(a,b){
-  var va,vb;
-  if(sortKey==='value'){va=a.value;vb=b.value}
-  else if(sortKey==='stage'){va=stageIdx(a.stage);vb=stageIdx(b.stage)}
-  else if(sortKey==='closeDate'){va=a.closeDate;vb=b.closeDate}
-  else{va=a[sortKey]||'';vb=b[sortKey]||''}
-  var r=(typeof va==='number')?(va-vb):String(va).localeCompare(String(vb),'th');
-  return r*sortDir;
- });
- var html=list.map(function(d){
-  return '<tr data-id="'+d.id+'" tabindex="0">'
-   +'<td><div class="t-co">'+esc(d.company)+'</div><div class="t-id mono">'+d.id+'</div></td>'
-   +'<td>'+esc(d.contact)+'<div class="t-ph mono">'+esc(d.phone||'-')+'</div></td>'
-   +'<td class="mono t-val">'+fmtMoney(d.value)+'</td>'
-   +'<td>'+chipStage(d.stage)+'</td>'
-   +'<td class="mono">'+fmtDate(d.closeDate)+'</td>'
-   +'<td><span class="chip">'+esc(d.tag)+'</span></td></tr>';
- }).join('');
- $('#tbody').innerHTML=html||'<tr><td colspan="6" class="t-empty">ไม่พบข้อมูลที่ตรงกับเงื่อนไข</td></tr>';
- $('#t-count').textContent='แสดง '+list.length+' จาก '+state.deals.length+' ดีล';
- $$('#tbody tr[data-id]').forEach(function(tr){
-  tr.addEventListener('click',function(){openDrawer(tr.getAttribute('data-id'))});
-  tr.addEventListener('keydown',function(e){if(e.key==='Enter')openDrawer(tr.getAttribute('data-id'))});
- });
- $$('th[data-sort]').forEach(function(th){
-  var arr=th.querySelector('.arr');
-  arr.textContent=(th.getAttribute('data-sort')===sortKey)?(sortDir>0?'↑':'↓'):'';
- });
-}
-
-/* ================= render: dashboard ================= */
-function renderDashboard(){
- var deals=state.deals;
- var open=deals.filter(function(d){return d.stage!=='won'&&d.stage!=='lost'});
- var won=deals.filter(function(d){return d.stage==='won'});
- var lost=deals.filter(function(d){return d.stage==='lost'});
- var sumOpen=open.reduce(function(s,d){return s+d.value},0);
- var ym=todayISO().slice(0,7);
- var wonM=won.filter(function(d){return d.wonAt&&d.wonAt.slice(0,7)===ym});
- var wonMSum=wonM.reduce(function(s,d){return s+d.value},0);
- var closed=won.length+lost.length;
- var rate=closed?Math.round(won.length/closed*100):null;
- var kpis=[
-  {ic:IC.brief,label:'ดีลเปิดอยู่',num:String(open.length),sub:'มูลค่า '+fmtShort(sumOpen)},
-  {ic:IC.coin,label:'มูลค่าใน Pipeline',num:fmtShort(sumOpen),sub:'เฉลี่ย '+(open.length?fmtShort(Math.round(sumOpen/open.length)):'฿0')+' ต่อดีล'},
-  {ic:IC.checkc,label:'ปิดได้เดือนนี้',num:String(wonM.length)+' ดีล',sub:fmtShort(wonMSum),good:true},
-  {ic:IC.pct,label:'Win Rate',num:rate===null?'—':rate+'%',sub:'จากดีลที่ตัดสิน '+closed+' ดีล'}
- ];
- $('#kpis').innerHTML=kpis.map(function(k){
-  return '<div class="kpi'+(k.good?' good':'')+'"><div class="kpi-ic">'+k.ic+'</div><div><small>'+k.label+'</small><div class="num">'+k.num+'</div><div class="sub">'+k.sub+'</div></div></div>';
- }).join('');
-
- /* funnel */
- var counts=['lead','contacted','present','negotiate','won'].map(function(sid){
-  return {name:stageObj(sid).name,color:stageObj(sid).color,n:deals.filter(function(d){return d.stage===sid}).length};
- });
- var max=1;counts.forEach(function(c){if(c.n>max)max=c.n});
- var rows='';
- counts.forEach(function(c,i){
-  var y=i*46+10;
-  var w=Math.max(c.n?14:4,c.n/max*360);
-  rows+='<text class="f-lab" x="0" y="'+(y+16)+'">'+c.name+'</text>'
-   +'<rect x="100" y="'+y+'" width="'+w+'" height="24" rx="6" fill="'+c.color+'" opacity="'+(0.92-i*0.06)+'"></rect>'
-   +'<text class="f-val" x="'+(100+w+10)+'" y="'+(y+16)+'">'+c.n+'</text>';
- });
- $('#funnel').innerHTML=rows;
- $('#funnel-note').textContent='เสียดีลสะสม '+lost.length+' ดีล · ปิดการขายแล้ว '+won.length+' ดีล';
-
- /* expiring */
- var exp=open.slice().sort(function(a,b){return a.closeDate<b.closeDate?-1:1}).slice(0,5);
- var today=new Date();today.setHours(0,0,0,0);
- $('#expiring').innerHTML=exp.length?exp.map(function(d){
-  var dd=new Date(d.closeDate+'T00:00:00');
-  var diff=Math.round((dd-today)/86400000);
-  var cls='soon',txt='เหลือ '+diff+' วัน';
-  if(diff<0){cls='over';txt='เกินกำหนด '+Math.abs(diff)+' วัน'}
-  else if(diff<=7){cls='';txt='เหลือ '+diff+' วัน'}
-  return '<div class="exp-row" data-id="'+d.id+'" tabindex="0"><div class="exp-co"><b>'+esc(d.company)+'</b><small>'+stageObj(d.stage).name+' · ปิด '+fmtDate(d.closeDate)+'</small></div>'
-   +'<span class="exp-val">'+fmtShort(d.value)+'</span><span class="exp-badge '+cls+'">'+txt+'</span></div>';
- }).join(''):'<div class="t-empty">ไม่มีดีลเปิดอยู่</div>';
- $$('#expiring .exp-row').forEach(function(r){
-  r.addEventListener('click',function(){openDrawer(r.getAttribute('data-id'))});
-  r.addEventListener('keydown',function(e){if(e.key==='Enter')openDrawer(r.getAttribute('data-id'))});
- });
-}
-
-function renderAll(){renderKanban();renderTable();renderDashboard()}
-
-/* ================= drawer ================= */
-var drawerId=null;
-function openDrawer(id){
- var d=findDeal(id);if(!d)return;
- drawerId=id;
- var st=stageObj(d.stage);
- $('#dr-title').textContent=d.company;
- $('#dr-sub').innerHTML='<span class="st-chip" style="--c:'+st.color+'">'+st.name+'</span> &nbsp;<span class="chip">'+esc(d.tag)+'</span> &nbsp;<span class="mono" style="color:#9a9cba;font-size:11.5px">'+d.id+'</span>';
- var acts=d.activities.slice().sort(function(a,b){return b.ts-a.ts});
- var stageOpts=STAGES.map(function(s){return '<option value="'+s.id+'"'+(s.id===d.stage?' selected':'')+'>'+s.name+'</option>'}).join('');
- $('#dr-body').innerHTML=
-  '<div class="dr-grid">'
-  +'<div class="dr-field"><small>ผู้ติดต่อ</small><span>'+esc(d.contact)+'</span></div>'
-  +'<div class="dr-field"><small>โทรศัพท์</small><span class="mono">'+esc(d.phone||'-')+'</span></div>'
-  +'<div class="dr-field"><small>มูลค่าดีล</small><span class="mono" style="color:'+(d.stage==='lost'?'var(--red)':'var(--accent-d)')+'">'+fmtMoney(d.value)+'</span></div>'
-  +'<div class="dr-field"><small>ปิดคาดการณ์</small><span class="mono">'+fmtDate(d.closeDate)+'</span></div>'
-  +'</div>'
-  +'<div class="f-field"><label for="dr-stage">เปลี่ยนขั้นตอน</label><select id="dr-stage">'+stageOpts+'</select></div>'
-  +'<div class="dr-sec">'+IC.note+'บันทึกกิจกรรม ('+acts.length+')</div>'
-  +'<div class="tl">'+(acts.length?acts.map(function(a){return '<div class="tl-item"><p>'+esc(a.text)+'</p><time>'+fmtDateTime(a.ts)+'</time></div>'}).join(''):'<div class="tl-item"><p style="color:var(--muted)">ยังไม่มีกิจกรรม</p></div>')+'</div>'
-  +'<div class="note-box"><textarea id="dr-note" placeholder="พิมพ์โน้ต เช่น ผลการโทร นัดหมายครั้งถัดไป…"></textarea>'
-  +'<button class="btn primary sm" id="dr-addnote" style="align-self:flex-end">บันทึกโน้ต</button></div>';
- var foot='';
- if(d.stage==='won'||d.stage==='lost'){
-  foot='<button class="btn ghost" id="dr-reopen">'+IC.undo+' เปิดดีลอีกครั้ง</button>'
-      +'<button class="btn red" id="dr-del">'+IC.trash+' ลบดีล</button>';
- }else{
-  foot='<button class="btn green" id="dr-won">'+IC.checkc+' ปิดขายได้</button>'
-      +'<button class="btn red" id="dr-lost">'+IC.xc+' เสียดีล</button>'
-      +'<button class="btn ghost" id="dr-del" style="flex:0 0 auto;min-width:52px" aria-label="ลบดีล">'+IC.trash+'</button>';
- }
- $('#dr-foot').innerHTML=foot;
- $('#drOv').classList.add('show');
- $('#drawer').classList.add('show');
-
- $('#dr-stage').addEventListener('change',function(){
-  setStage(d,this.value);
-  openDrawer(d.id);
- });
- $('#dr-addnote').addEventListener('click',function(){
-  var t=$('#dr-note').value.trim();
-  if(!t){toast('กรุณาพิมพ์โน้ตก่อนบันทึก','warn');return}
-  pushAct(d,t);save();renderAll();openDrawer(d.id);
-  toast('บันทึกโน้ตแล้ว');
- });
- var bw=$('#dr-won');if(bw)bw.addEventListener('click',function(){setStage(d,'won');openDrawer(d.id);toast('ยินดีด้วย ปิดการขาย "'+d.company+'" สำเร็จ')});
- var bl=$('#dr-lost');if(bl)bl.addEventListener('click',function(){setStage(d,'lost');openDrawer(d.id)});
- var br=$('#dr-reopen');if(br)br.addEventListener('click',function(){setStage(d,'lead');openDrawer(d.id)});
- var bd=$('#dr-del');if(bd)bd.addEventListener('click',function(){deleteDeal(d)});
-}
-function closeDrawer(){
- drawerId=null;
- $('#drOv').classList.remove('show');
- $('#drawer').classList.remove('show');
-}
-
-/* ================= modal ================= */
-function openModal(stageId){
- $('#form-deal').reset();
- $$('#form-deal .f-field').forEach(function(f){f.classList.remove('bad');f.querySelector('.f-err').textContent=''});
- $('#fd-stage').value=stageId||'lead';
- $('#fd-close').value=daysFromNow(30);
- $('#modal').classList.add('show');
- setTimeout(function(){$('#fd-company').focus()},80);
-}
-function closeModal(){$('#modal').classList.remove('show')}
-function setErr(name,msg){
- var f=$('#form-deal .f-field[data-f="'+name+'"]');
- if(msg){f.classList.add('bad');f.querySelector('.f-err').textContent=msg}
- else{f.classList.remove('bad');f.querySelector('.f-err').textContent=''}
-}
-function submitDeal(e){
- e.preventDefault();
- var company=$('#fd-company').value.trim();
- var contact=$('#fd-contact').value.trim();
- var phone=$('#fd-phone').value.trim();
- var value=Number($('#fd-value').value);
- var closeDate=$('#fd-close').value||daysFromNow(30);
- var stage=$('#fd-stage').value;
- var tag=$('#fd-tag').value;
- var ok=true;
- if(!company){setErr('company','กรุณากรอกชื่อบริษัท');ok=false}else setErr('company');
- if(!contact){setErr('contact','กรุณากรอกชื่อผู้ติดต่อ');ok=false}else setErr('contact');
- if(!value||value<=0){setErr('value','กรุณากรอกมูลค่ามากกว่า 0');ok=false}else setErr('value');
- if(!ok){toast('กรุณากรอกข้อมูลที่จำเป็นให้ครบ','warn');return}
- var d={id:'D-'+(state.seq++),company:company,contact:contact,phone:phone,value:value,stage:stage,tag:tag,
-  closeDate:closeDate,createdAt:Date.now(),activities:[{ts:Date.now(),text:'สร้างดีลใหม่เข้าสู่ Pipeline'}],wonAt:null,lostAt:null};
- state.deals.push(d);
- save();closeModal();renderAll();
- toast('เพิ่มดีล "'+company+'" เรียบร้อยแล้ว');
-}
-
-/* ================= navigation ================= */
-var TITLES={pipeline:'Pipeline การขาย',customers:'รายชื่อลูกค้า',dashboard:'ภาพรวมธุรกิจ'};
-function showPage(p){
- $$('.page').forEach(function(s){s.classList.toggle('active',s.id==='page-'+p)});
- $$('.nav-item').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-page')===p)});
- $('#tb-title').textContent=TITLES[p]||'';
- document.body.classList.remove('sb-open');
- if(p==='dashboard')renderDashboard();
-}
-
-/* ================= init ================= */
-function init(){
- load();
- /* populate selects */
- $('#fd-stage').innerHTML=KANBAN.slice(0,4).map(function(s){return '<option value="'+s+'">'+stageObj(s).name+'</option>'}).join('');
- $('#fd-tag').innerHTML=TAGS.map(function(t){return '<option>'+t+'</option>'}).join('');
- $('#f-stage').innerHTML='<option value="">ทุกขั้นตอน</option>'+STAGES.map(function(s){return '<option value="'+s.id+'">'+s.name+'</option>'}).join('');
- $('#tb-date').textContent=new Date().toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-
- /* login */
- $('#form-login').addEventListener('submit',function(e){
-  e.preventDefault();
-  $('#view-login').hidden=true;
-  $('#view-app').hidden=false;
+});
+document.getElementById('magicBtn').addEventListener('click', function(){
+  var em = document.getElementById('magicEmail').value.trim();
+  var o = OWNERS.find(function(x){ return x.email === em; }) || OWNERS[0];
+  me = o;
+  toast('ส่งลิงก์เข้าระบบไปที่ ' + o.email + ' แล้ว (เดโม: เข้าอัตโนมัติ)');
+  setTimeout(enterApp, 800);
+});
+function enterApp(){
+  document.getElementById('loginView').hidden = true;
+  document.getElementById('appView').hidden = false;
+  document.getElementById('whoBtn').textContent = me.n[0];
+  document.getElementById('stUser').textContent = me.full;
   renderAll();
-  toast('ยินดีต้อนรับ คุณสดใส มั่นคง');
- });
- $('#btn-logout').addEventListener('click',function(){
-  closeDrawer();closeModal();
-  $('#view-app').hidden=true;
-  $('#view-login').hidden=false;
- });
-
- /* nav */
- $$('.nav-item').forEach(function(b){b.addEventListener('click',function(){showPage(b.getAttribute('data-page'))})});
- $('#btn-hamb').addEventListener('click',function(){document.body.classList.toggle('sb-open')});
- $('#sbOv').addEventListener('click',function(){document.body.classList.remove('sb-open')});
-
- /* reset */
- $('#btn-reset').addEventListener('click',function(){
-  if(confirm('ล้างข้อมูลตัวอย่างทั้งหมด แล้วเริ่มใหม่?')){
-   try{localStorage.removeItem(LS_KEY)}catch(e){}
-   location.reload();
-  }
- });
-
- /* table toolbar */
- $('#q').addEventListener('input',renderTable);
- $('#f-stage').addEventListener('change',renderTable);
- $$('th[data-sort]').forEach(function(th){
-  th.addEventListener('click',function(){
-   var k=th.getAttribute('data-sort');
-   if(sortKey===k){sortDir*=-1}else{sortKey=k;sortDir=1}
-   renderTable();
-  });
- });
-
- /* modal */
- $('#btn-add').addEventListener('click',function(){openModal('lead')});
- $('#m-cancel').addEventListener('click',closeModal);
- $('#mBg').addEventListener('click',closeModal);
- $('#form-deal').addEventListener('submit',submitDeal);
-
- /* drawer close */
- $('#dr-close').addEventListener('click',closeDrawer);
- $('#drOv').addEventListener('click',closeDrawer);
- document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'){closeDrawer();closeModal();document.body.classList.remove('sb-open')}
- });
 }
-document.addEventListener('DOMContentLoaded',init);
-})();
-</script>
-<script>
-/* Auto-enter app when opened with ?app=1 (from showcase hub) */
-(function(){
-  if (!/[?&]app=1/.test(location.href)) return;
-  function enter(){
-    var b = document.getElementById('loginBtn') || document.getElementById('btnLogin')
-         || document.querySelector('#loginForm button[type="submit"]')
-         || document.querySelector('.login-card button[type="submit"]')
-         || Array.prototype.find.call(document.querySelectorAll('button'), function(x){ return /เข้าสู่ระบบ/.test(x.textContent); });
-    if (b) { b.click(); return; }
-    var f = document.getElementById('loginForm') || document.querySelector('#loginView form') || document.querySelector('.login form');
-    if (f && f.requestSubmit) f.requestSubmit();
+document.getElementById('whoBtn').addEventListener('click', function(){
+  document.getElementById('appView').hidden = true;
+  document.getElementById('loginView').hidden = false;
+});
+document.getElementById('mobMenu').addEventListener('click', function(){ document.getElementById('rail').classList.toggle('open'); });
+
+/* ---------- offline ---------- */
+document.getElementById('syncPill').addEventListener('click', function(){
+  offline = !offline;
+  this.classList.toggle('off', offline);
+  document.getElementById('syncTxt').textContent = offline ? 'ออฟไลน์' : 'ออนไลน์';
+  document.getElementById('offBanner').hidden = !offline;
+  document.getElementById('offNote').textContent = offline ? 'แก้ไขเก็บในเครื่อง' : '';
+  toast(offline ? 'จำลองออฟไลน์ — แก้ดีลต่อได้' : 'กลับมาออนไลน์ — ซิงก์เรียบร้อย');
+});
+
+/* ---------- pipeline ---------- */
+function openDeals(){ return state.deals.filter(function(d){ return STAGES.some(function(s){ return s.id === d.stage; }); }); }
+function filtered(list){
+  if (!query) return list;
+  var q = query.toLowerCase();
+  return list.filter(function(d){ return (d.name + d.account + d.contact).toLowerCase().indexOf(q) >= 0; });
+}
+function renderPipe(){
+  var q = filtered(openDeals());
+  document.getElementById('pipeBoard').innerHTML = STAGES.map(function(s){
+    var col = q.filter(function(d){ return d.stage === s.id; });
+    var sum = col.reduce(function(a,d){ return a + d.value; }, 0);
+    return '<div class="col" data-stage="'+s.id+'">' +
+      '<div class="col-head"><span class="dot" style="background:'+s.c+'"></span><b>'+s.n+'</b><span class="cn">'+col.length+'</span><span class="cs">'+fmtK(sum)+'</span></div>' +
+      col.map(function(d){
+        var age = Math.floor((Date.now() - d.createdAt)/DAY);
+        var late = age > 14;
+        var ow = ownOf(d.owner);
+        return '<div class="card-d" draggable="true" data-id="'+d.id+'">' +
+          '<b>'+d.name+'</b><span class="acct">'+d.account+' · '+d.contact+'</span>' +
+          '<div class="row"><span class="val">'+fmtK(d.value)+'</span><span class="prob">'+d.prob+'%</span>' +
+          '<span class="own" style="background:'+ow.c+'" title="'+ow.full+'">'+ow.n[0]+'</span></div>' +
+          '<div class="row" style="margin-top:.3rem"><span class="age'+(late?' late':'')+'">'+age+' วันในขั้นนี้'+(late?' — ค้างนาน':'')+'</span>' +
+          '<span class="exp" style="margin-left:auto">ปิด '+new Date(d.expected).toLocaleDateString('th-TH',{day:'numeric',month:'short'})+'</span></div>' +
+          '</div>';
+      }).join('') +
+      (col.length ? '' : '<p style="text-align:center;color:#a5a5bd;font-size:.75rem;padding:1.2rem 0">ลากดีลมาวางที่นี่</p>') +
+      '</div>';
+  }).join('');
+  bindDnD();
+  var open = openDeals();
+  var pipe = open.reduce(function(a,d){ return a + d.value; }, 0);
+  var weight = open.reduce(function(a,d){ return a + d.value * d.prob / 100; }, 0);
+  var won = state.deals.filter(function(d){ return d.stage === 'won'; });
+  var lost = state.deals.filter(function(d){ return d.stage === 'lost'; });
+  var wr = (won.length + lost.length) ? Math.round(won.length / (won.length + lost.length) * 100) : null;
+  document.getElementById('stPipe').textContent = fmtK(pipe);
+  document.getElementById('stWeight').textContent = fmtK(weight);
+  document.getElementById('stWin').textContent = wr === null ? '—' : wr + '%';
+  document.getElementById('stDeals').textContent = 'ดีลเปิด: ' + open.length;
+}
+function bindDnD(){
+  document.querySelectorAll('.card-d').forEach(function(c){
+    c.addEventListener('dragstart', function(e){
+      e.dataTransfer.setData('text/plain', c.dataset.id);
+      c.classList.add('dragging');
+    });
+    c.addEventListener('dragend', function(){ c.classList.remove('dragging'); });
+    c.addEventListener('click', function(){ openDeal(c.dataset.id); });
+  });
+  document.querySelectorAll('.col').forEach(function(col){
+    col.addEventListener('dragover', function(e){ e.preventDefault(); col.classList.add('dragover'); });
+    col.addEventListener('dragleave', function(){ col.classList.remove('dragover'); });
+    col.addEventListener('drop', function(e){
+      e.preventDefault(); col.classList.remove('dragover');
+      var id = e.dataTransfer.getData('text/plain');
+      var d = state.deals.find(function(x){ return x.id === id; });
+      var target = col.dataset.stage;
+      if (!d || d.stage === target) return;
+      var from = stageOf(d.stage);
+      d.stage = target;
+      d.prob = stageOf(target).prob;
+      d.activities.unshift({ t: Date.now(), type:'sys', text:'ย้ายจาก "' + from.n + '" มา "' + stageOf(target).n + '"', by: me.id });
+      save(); renderPipe(); renderStats();
+      toast(d.name + ' → ' + stageOf(target).n);
+    });
+  });
+}
+document.getElementById('searchInput').addEventListener('input', function(e){ query = e.target.value; renderPipe(); });
+
+/* ---------- deal drawer ---------- */
+function openDeal(id){
+  openDealId = id;
+  var d = state.deals.find(function(x){ return x.id === id; });
+  if (!d) return;
+  document.getElementById('dName').textContent = d.name;
+  document.getElementById('dAcct').textContent = d.account + ' · ' + d.contact;
+  var closed = d.stage === 'won' || d.stage === 'lost';
+  /* stepper */
+  if (!closed) {
+    var idx = STAGES.findIndex(function(s){ return s.id === d.stage; });
+    document.getElementById('dStepper').innerHTML = STAGES.map(function(s, i){
+      return '<div class="stp'+(i < idx ? ' done' : i === idx ? ' cur' : '')+'"><div class="dt"></div><small>'+s.n+'</small></div>';
+    }).join('') + '';
+  } else {
+    document.getElementById('dStepper').innerHTML = '<div style="width:100%;text-align:center;padding:.6rem;border-radius:10px;font-weight:600;font-size:.88rem;' + (d.stage==='won' ? 'background:#dcfce7;color:#15803d' : 'background:#fee2e2;color:#b91c1c') + '">' + (d.stage==='won' ? 'ปิดการขายแล้ว ✓ ' : 'เสียดีล — ' + (d.lostReason||'')) + '</div>';
   }
-  if (document.readyState !== 'loading') setTimeout(enter, 80);
-  else document.addEventListener('DOMContentLoaded', function(){ setTimeout(enter, 80); });
+  /* kv */
+  document.getElementById('dKv').innerHTML =
+    '<dt>มูลค่า</dt><dd class="mono">'+fmt(d.value)+'</dd>' +
+    '<dt>ความน่าจะเป็น</dt><dd class="mono">'+d.prob+'%</dd>' +
+    '<dt>มูลค่าถ่วงน้ำหนัก</dt><dd class="mono">'+fmt(d.value * d.prob / 100)+'</dd>' +
+    '<dt>เจ้าของดีล</dt><dd>'+ownOf(d.owner).full+'</dd>' +
+    '<dt>คาดว่าจะปิด</dt><dd class="mono">'+new Date(d.expected).toLocaleDateString('th-TH',{day:'numeric',month:'long',year:'numeric'})+'</dd>' +
+    '<dt>สร้างเมื่อ</dt><dd class="mono">'+ago(d.createdAt)+'</dd>';
+  document.getElementById('dWlActs').hidden = closed;
+  /* timeline */
+  document.getElementById('dTimeline').innerHTML = d.activities.length ? d.activities.map(function(a){
+    var m = ACT_META[a.type] || ACT_META.note;
+    return '<div class="tl-item"><span class="ti" style="background:'+m.c+'18;color:'+m.c+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'+m.svg+'</svg></span>' +
+      '<span><b style="font-weight:500">'+m.n+'</b> · '+a.text+'<div class="tt">'+ago(a.t)+' · โดย '+ownOf(a.by).n+'</div></span></div>';
+  }).join('') : '<p style="color:var(--muted);font-size:.82rem">ยังไม่มีกิจกรรม</p>';
+  document.getElementById('actText').value = '';
+  document.getElementById('dealDrawer').classList.add('open');
+  document.getElementById('scrim').hidden = false;
+}
+function closeDeal(){ document.getElementById('dealDrawer').classList.remove('open'); document.getElementById('scrim').hidden = true; openDealId = null; }
+document.getElementById('dealClose').addEventListener('click', closeDeal);
+document.getElementById('scrim').addEventListener('click', function(){ closeDeal(); closeFeed(); });
+document.getElementById('actAdd').addEventListener('click', function(){
+  var txt = document.getElementById('actText').value.trim();
+  if (!txt) { toast('พิมพ์รายละเอียดกิจกรรมก่อนครับ', true); return; }
+  var d = state.deals.find(function(x){ return x.id === openDealId; });
+  d.activities.unshift({ t: Date.now(), type: document.getElementById('actType').value, text: txt, by: me.id });
+  save(); openDeal(d.id);
+  toast('บันทึกกิจกรรมแล้ว');
+});
+document.getElementById('wonBtn').addEventListener('click', function(){
+  var d = state.deals.find(function(x){ return x.id === openDealId; });
+  d.stage = 'won'; d.prob = 100; d.wonAt = Date.now();
+  d.activities.unshift({ t: Date.now(), type:'sys', text:'ปิดการขายสำเร็จ ' + fmt(d.value), by: me.id });
+  save(); closeDeal(); renderAll();
+  linkWrite('crm','deal-won','ลูกค้าดี CRM · ปิดดีล "' + d.name + '" ' + fmt(d.value) + ' โดย ' + me.n, d.value);
+  toast('ปิดการขาย! ' + d.name + ' ' + fmt(d.value));
+});
+document.getElementById('lostBtn').addEventListener('click', function(){
+  document.getElementById('lostOverlay').hidden = false;
+});
+document.getElementById('lostCancel').addEventListener('click', closeAllModals);
+document.getElementById('lostConfirm').addEventListener('click', function(){
+  var d = state.deals.find(function(x){ return x.id === openDealId; });
+  d.stage = 'lost'; d.prob = 0; d.lostAt = Date.now();
+  d.lostReason = document.getElementById('lostReason').value;
+  d.activities.unshift({ t: Date.now(), type:'sys', text:'เสียดีล — ' + d.lostReason, by: me.id });
+  save(); closeAllModals(); closeDeal(); renderAll();
+  linkWrite('crm','deal-lost','ลูกค้าดี CRM · เสียดีล "' + d.name + '" (' + d.lostReason + ')', d.value);
+  toast('บันทึกเสียดีล: ' + d.name);
+});
+
+/* ---------- new deal ---------- */
+document.getElementById('newDealBtn').addEventListener('click', function(){
+  var accts = [];
+  state.deals.forEach(function(d){ if (accts.indexOf(d.account) < 0) accts.push(d.account); });
+  document.getElementById('acctList').innerHTML = accts.map(function(a){ return '<option value="'+a+'">'; }).join('');
+  document.getElementById('ndOwner').innerHTML = OWNERS.map(function(o){ return '<option value="'+o.id+'"'+(o.id===me.id?' selected':'')+'>'+o.full+'</option>'; }).join('');
+  var next = new Date(Date.now() + 30*DAY);
+  document.getElementById('ndExp').value = next.toISOString().slice(0,10);
+  document.getElementById('dealOverlay').hidden = false;
+});
+document.getElementById('ndCancel').addEventListener('click', closeAllModals);
+document.getElementById('ndSave').addEventListener('click', function(){
+  var name = document.getElementById('ndName').value.trim();
+  var acct = document.getElementById('ndAcct').value.trim();
+  var contact = document.getElementById('ndContact').value.trim();
+  var val = parseFloat(document.getElementById('ndValue').value);
+  if (!name || !acct || isNaN(val)) { toast('กรอกชื่อดีล บริษัท และมูลค่าให้ครบครับ', true); return; }
+  var st = document.getElementById('ndStage').value;
+  var d = {
+    id: 'd' + (state.seq++), name: name, account: acct, contact: contact || '—', value: val,
+    stage: st, prob: stageOf(st).prob, owner: document.getElementById('ndOwner').value,
+    expected: new Date(document.getElementById('ndExp').value || Date.now()).getTime(),
+    createdAt: Date.now(),
+    activities: [{ t: Date.now(), type:'sys', text:'สร้างดีลใหม่', by: me.id }]
+  };
+  state.deals.unshift(d); save(); closeAllModals(); renderAll();
+  linkWrite('crm','deal-new','ลูกค้าดี CRM · ดีลใหม่ "' + name + '" ' + fmt(val) + ' โดย ' + me.n, val);
+  toast('สร้างดีล "' + name + '" แล้ว');
+  openDeal(d.id);
+});
+
+/* ---------- accounts ---------- */
+function renderAccounts(){
+  var map = {};
+  state.deals.forEach(function(d){
+    if (!map[d.account]) map[d.account] = { name: d.account, contact: d.contact, open: 0, val: 0, last: 0 };
+    var a = map[d.account];
+    if (STAGES.some(function(s){ return s.id === d.stage; })) { a.open++; a.val += d.value; }
+    d.activities.forEach(function(ac){ if (ac.t > a.last) a.last = ac.t; });
+  });
+  var list = Object.keys(map).map(function(k){ return map[k]; }).sort(function(a,b){ return b.val - a.val; });
+  document.getElementById('acctCount').textContent = list.length + ' บริษัท';
+  document.getElementById('acctBody').innerHTML = list.map(function(a){
+    return '<tr><td><b>'+a.name+'</b></td><td>'+a.contact+'</td>' +
+      '<td>'+(a.open ? '<span class="badge b-open">'+a.open+' ดีล</span>' : '<span style="color:var(--muted);font-size:.78rem">ไม่มีดีลเปิด</span>')+'</td>' +
+      '<td class="mono">'+(a.val ? fmt(a.val) : '—')+'</td>' +
+      '<td class="mono" style="font-size:.75rem;color:var(--muted)">'+ago(a.last)+'</td>' +
+      '<td><span class="tlink" data-acct="'+a.name+'">ดูดีล</span></td></tr>';
+  }).join('');
+}
+document.getElementById('acctBody').addEventListener('click', function(e){
+  var b = e.target.closest('[data-acct]'); if (!b) return;
+  query = b.dataset.acct;
+  document.getElementById('searchInput').value = query;
+  goPage('pipe'); renderPipe();
+});
+
+/* ---------- reports ---------- */
+function renderReport(){
+  var open = openDeals();
+  var won = state.deals.filter(function(d){ return d.stage === 'won'; });
+  var lost = state.deals.filter(function(d){ return d.stage === 'lost'; });
+  var wonVal = won.reduce(function(a,d){ return a + d.value; }, 0);
+  var wr = (won.length + lost.length) ? Math.round(won.length / (won.length + lost.length) * 100) : 0;
+  document.getElementById('repKpis').innerHTML =
+    '<div class="rep-kpi"><span>Pipeline ที่เปิดอยู่</span><b>'+fmtK(open.reduce(function(a,d){return a+d.value;},0))+'</b></div>' +
+    '<div class="rep-kpi"><span>ปิดการขายแล้ว (สะสม)</span><b class="g">'+fmtK(wonVal)+'</b></div>' +
+    '<div class="rep-kpi"><span>ดีลที่ชนะ</span><b>'+won.length+'</b></div>' +
+    '<div class="rep-kpi"><span>Win rate</span><b>'+wr+'%</b></div>' +
+    '<div class="rep-kpi"><span>ขนาดดีลเฉลี่ย (ชนะ)</span><b>'+fmtK(won.length ? wonVal/won.length : 0)+'</b></div>';
+  /* funnel */
+  var maxC = Math.max.apply(null, STAGES.map(function(s){ return open.filter(function(d){ return d.stage === s.id; }).length; }).concat([1]));
+  document.getElementById('funnelRows').innerHTML = STAGES.map(function(s){
+    var col = open.filter(function(d){ return d.stage === s.id; });
+    var val = col.reduce(function(a,d){ return a + d.value; }, 0);
+    return '<div class="fun-row"><span class="fl">'+s.n+'</span>' +
+      '<div class="fb" style="width:'+Math.round(col.length/maxC*100)+'%;background:'+s.c+'">'+col.length+'</div>' +
+      '<span class="fv">'+fmtK(val)+'</span></div>';
+  }).join('');
+  /* monthly won (6 months) */
+  var months = [];
+  var now = new Date();
+  for (var i = 5; i >= 0; i--) {
+    var d0 = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    months.push({ y: d0.getFullYear(), m: d0.getMonth(), lbl: d0.toLocaleDateString('th-TH',{month:'short'}), val: 0 });
+  }
+  won.forEach(function(d){
+    if (!d.wonAt) return;
+    var w = new Date(d.wonAt);
+    var mm = months.find(function(x){ return x.y === w.getFullYear() && x.m === w.getMonth(); });
+    if (mm) mm.val += d.value;
+  });
+  var maxV = Math.max.apply(null, months.map(function(x){ return x.val; }).concat([1]));
+  document.getElementById('monthChart').innerHTML = months.map(function(mm){
+    return '<div class="mb"><span class="mbv">'+(mm.val ? fmtK(mm.val) : '')+'</span>' +
+      '<div class="mbar" style="height:'+Math.round(mm.val/maxV*100)+'px"></div>' +
+      '<span class="mbl">'+mm.lbl+'</span></div>';
+  }).join('');
+  /* owners */
+  document.getElementById('ownerBody').innerHTML = OWNERS.map(function(o){
+    var ow = won.filter(function(d){ return d.owner === o.id; });
+    var ol = lost.filter(function(d){ return d.owner === o.id; });
+    var oo = open.filter(function(d){ return d.owner === o.id; });
+    var owv = ow.reduce(function(a,d){ return a + d.value; }, 0);
+    var owr = (ow.length + ol.length) ? Math.round(ow.length/(ow.length+ol.length)*100) : 0;
+    return '<tr><td><span class="own-chip"><span class="av" style="background:'+o.c+'">'+o.n[0]+'</span>'+o.full+'</span></td>' +
+      '<td class="mono">'+oo.length+'</td><td class="mono">'+ow.length+'</td><td class="mono">'+fmt(owv)+'</td><td class="mono">'+owr+'%</td></tr>';
+  }).join('');
+  /* lost */
+  document.getElementById('lostBody').innerHTML = lost.length ? lost.map(function(d){
+    return '<tr><td><b>'+d.name+'</b></td><td>'+d.account+'</td><td class="mono">'+fmt(d.value)+'</td>' +
+      '<td><span class="badge b-lost">'+d.lostReason+'</span></td><td class="mono" style="font-size:.75rem;color:var(--muted)">'+ago(d.lostAt)+'</td></tr>';
+  }).join('') : '<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:1.5rem">ยังไม่เคยเสียดีล</td></tr>';
+}
+
+/* ---------- feed drawer ---------- */
+var lastSeenFeed = 0;
+function sysIcon(sys){
+  if (sys === 'pos') return { c:'#0c8a61', svg:'<path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="10" cy="21" r="1"/><circle cx="18" cy="21" r="1"/>' };
+  if (sys === 'kds') return { c:'#ea580c', svg:'<path d="M6 13.9A4 4 0 0 1 7.5 6a5 5 0 0 1 9 0 4 4 0 0 1 1.5 7.9V17H6v-3.1z"/><path d="M6 20h12"/>' };
+  if (sys === 'queue') return { c:'#9333ea', svg:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>' };
+  return { c:'#5b5bd6', svg:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>' };
+}
+function renderFeed(){
+  var l = linkRead();
+  document.getElementById('feedCount').textContent = l.events.length + ' เหตุการณ์';
+  var body = document.getElementById('feedBody');
+  if (!l.events.length) { body.innerHTML = '<p style="color:var(--muted);padding:1.5rem 0;font-size:.85rem">ยังไม่มีกิจกรรม — เมื่อระบบใดในเครือทำงาน เหตุการณ์จะไหลเข้าที่นี่อัตโนมัติ</p>'; return; }
+  body.innerHTML = l.events.slice(0, 25).map(function(ev){
+    var ic = sysIcon(ev.sys);
+    return '<div class="feed-item"><span class="fi" style="background:'+ic.c+'22;color:'+ic.c+'"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'+ic.svg+'</svg></span>' +
+      '<span><span class="fm">'+ev.msg+'</span><div class="ft">'+ago(ev.t)+'</div></span></div>';
+  }).join('');
+  lastSeenFeed = l.events.length ? l.events[0].t : 0;
+  updateFeedBadge();
+}
+function updateFeedBadge(){
+  var l = linkRead();
+  var newer = l.events.filter(function(e){ return e.t > lastSeenFeed && e.sys !== 'crm'; }).length;
+  var badge = document.getElementById('feedBadge');
+  if (newer && !document.getElementById('feedDrawer').classList.contains('open')) { badge.hidden = false; badge.textContent = ' (+' + newer + ')'; }
+  else badge.hidden = true;
+}
+document.getElementById('feedBtn').addEventListener('click', function(){
+  renderFeed();
+  document.getElementById('feedDrawer').classList.add('open');
+  document.getElementById('scrim').hidden = false;
+});
+document.getElementById('feedClose').addEventListener('click', closeFeed);
+function closeFeed(){ document.getElementById('feedDrawer').classList.remove('open'); if (!openDealId) document.getElementById('scrim').hidden = true; }
+setInterval(updateFeedBadge, 3000);
+
+/* ---------- pages / shortcuts ---------- */
+function goPage(p){
+  document.querySelectorAll('.ri[data-page]').forEach(function(x){ x.classList.toggle('on', x.dataset.page === p); });
+  ['pipe','accounts','report'].forEach(function(x){ document.getElementById('page-'+x).hidden = x !== p; });
+  document.getElementById('rail').classList.remove('open');
+  renderAll();
+}
+document.querySelectorAll('.ri[data-page]').forEach(function(b){ b.addEventListener('click', function(){ goPage(b.dataset.page); }); });
+document.addEventListener('keydown', function(e){
+  if (document.getElementById('appView').hidden) return;
+  if (e.key === 'Escape') { closeAllModals(); closeDeal(); closeFeed(); document.getElementById('scrim').hidden = true; return; }
+  var tgt = e.target;
+  if (tgt && tgt.matches && tgt.matches('input,select,textarea')) return;
+  if (e.key === 'n' || e.key === 'N') document.getElementById('newDealBtn').click();
+  else if (e.key === 'p' || e.key === 'P') goPage('pipe');
+  else if (e.key === 'a' || e.key === 'A') goPage('accounts');
+  else if (e.key === 'r' || e.key === 'R') goPage('report');
+  else if (e.key === 'f' || e.key === 'F') document.getElementById('feedBtn').click();
+});
+
+/* reset */
+document.getElementById('resetBtn').addEventListener('click', function(){
+  if (confirm('รีเซ็ตดีลทั้งหมดกลับข้อมูลตัวอย่าง?')) {
+    localStorage.removeItem(LS);
+    state = blank(); save();
+    renderAll();
+    toast('รีเซ็ตข้อมูลแล้ว');
+  }
+});
+
+/* ---------- init ---------- */
+function renderStats(){ /* handled in renderPipe */ }
+function renderAll(){ renderPipe(); renderAccounts(); renderReport(); updateFeedBadge(); }
+renderAll();
 })();
 </script>
 </body>
