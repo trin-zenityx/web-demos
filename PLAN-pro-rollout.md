@@ -55,4 +55,5 @@ kanban งานดี, admin-shop ร้านดีแอดมิน, cashboo
 - [x] Inventory สต็อกดี (2026-09-14 · badge-scan entry, ROP+PO, POS bridge sales feed)
 - [x] Documents เอกสารดี (2026-09-14 · workspace picker, QT→IV→RE chain, baht text, CRM→IV bridge)
 - [x] Dashboard ผู้บริหารดี (2026-09-15 · no-gate live command center, รวม bridge 6 ระบบ)
-- [ ] (ว่าง — ตัวถัดไป: hr)
+- [x] HR คนดี (2026-09-15 · face-scan check-in, สาย/OT, ใบลา 2 ชั้น, payroll จริง)
+- [ ] (ว่าง — ตัวถัดไป: dorm)
