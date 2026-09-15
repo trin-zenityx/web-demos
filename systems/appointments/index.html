@@ -2,1023 +2,750 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>นัดดี — ระบบปฏิทินนัดหมาย คลินิกทันตกรรมยิ้มดี</title>
-<meta name="description" content="ระบบเดโมปฏิทินนัดหมายสำหรับคลินิกทันตกรรม จัดการนัดหมาย ผู้ป่วย และตารางทันตแพทย์ในที่เดียว">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>นัดดี Pro — ระบบจองนัดหมายคลินิก | ZenityX Demos</title>
+<meta name="description" content="ระบบนัดหมายระดับ production — จองเองหน้าแรกไม่ต้องล็อกอิน, slot ชนกันไม่ได้, ยืนยัน/no-show, ปฏิทินเจ้าหน้าที่">
+<meta property="og:title" content="นัดดี Pro — เดโมใช้งานได้จริง">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23c2410c'/%3E%3Crect x='20' y='26' width='60' height='56' rx='8' fill='white'/%3E%3Cpath d='M20 40h60' stroke='%23c2410c' stroke-width='6'/%3E%3Ccircle cx='50' cy='62' r='12' fill='none' stroke='%23c2410c' stroke-width='5'/%3E%3Cpath d='M50 55v7l5 4' stroke='%23c2410c' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --accent:#c2410c;
-  --accent-dark:#9a3412;
-  --accent-soft:#fff7ed;
-  --ink:#1c1917;
-  --muted:#78716c;
-  --line:#e7e5e4;
-  --bg:#fafaf9;
-  --card:#ffffff;
-  --dark:#1c1917;
-  --dark-2:#292524;
-  --ok:#15803d; --ok-bg:#dcfce7;
-  --warn:#b45309; --warn-bg:#fef3c7;
-  --bad:#b91c1c; --bad-bg:#fee2e2;
-  --gray:#57534e; --gray-bg:#f5f5f4;
-  --radius:14px;
-  --shadow:0 1px 2px rgba(28,25,23,.06),0 8px 24px rgba(28,25,23,.08);
+  --acc:#c2410c; --acc-deep:#9a3412; --acc-soft:#ffedd5;
+  --bg:#f7f5f3; --panel:#ffffff; --line:#eae5e0;
+  --ink:#201a16; --muted:#7d7469;
+  --dark:#221a13; --dark2:#2f2419; --dline:#4c3d2b;
+  --green:#16a34a; --amber:#d97706; --red:#dc2626; --blue:#0284c7;
+  --mono:'JetBrains Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 [hidden]{display:none!important}
-html{-webkit-text-size-adjust:100%}
-body{
-  font-family:'IBM Plex Sans Thai',system-ui,sans-serif;
-  font-size:15px;line-height:1.65;color:var(--ink);background:var(--bg);
-}
-.num{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
-button{font-family:inherit;font-size:inherit;cursor:pointer}
-input,select,textarea{font-family:inherit;font-size:15px}
-a{color:var(--accent)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
-svg{display:block}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 
-/* ---------- LOGIN ---------- */
-.login{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
-  background:
-    radial-gradient(900px 500px at 85% -10%,rgba(194,65,12,.55),transparent 60%),
-    radial-gradient(700px 500px at -10% 110%,rgba(194,65,12,.28),transparent 55%),
-    linear-gradient(160deg,#292524 0%,#1c1917 55%,#0c0a09 100%);
-}
-.login-card{
-  width:100%;max-width:400px;background:var(--card);border-radius:20px;padding:36px 32px 28px;
-  box-shadow:0 24px 64px rgba(0,0,0,.45);
-}
-.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.login-logo .mark{width:48px;height:48px;border-radius:14px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex:none}
-.login-logo h1{font-size:24px;font-weight:600;letter-spacing:-.01em}
-.login-logo h1 small{display:block;font-size:12.5px;font-weight:400;color:var(--muted)}
-.login-sub{color:var(--muted);font-size:14px;margin:6px 0 22px}
-.field{margin-bottom:14px}
-.field label{display:block;font-size:13.5px;font-weight:500;margin-bottom:6px}
-.field input,.field select,.field textarea{
-  width:100%;min-height:44px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;
-  background:#fff;color:var(--ink);transition:border-color .15s,box-shadow .15s;
-}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(194,65,12,.15);outline:none}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;
-  padding:10px 18px;border-radius:10px;border:1px solid transparent;font-weight:500;font-size:15px;
-  transition:background .15s,border-color .15s,color .15s;
-}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{background:var(--accent-dark)}
-.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink)}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-.btn-danger{background:#fff;border-color:#fecaca;color:var(--bad)}
-.btn-danger:hover{background:var(--bad-bg)}
-.btn-block{width:100%}
-.btn-sm{min-height:44px;padding:8px 12px;font-size:13.5px;border-radius:9px}
-.login-note{
-  margin-top:16px;font-size:12.5px;color:var(--muted);background:var(--accent-soft);
-  border:1px dashed #fdba74;border-radius:10px;padding:10px 12px;
-}
-.login-credit{margin-top:18px;text-align:center;font-size:12px;color:var(--muted)}
-.login-credit a{color:var(--accent);text-decoration:none;font-weight:500}
-.login-credit a:hover{text-decoration:underline}
+/* BOOKING-FIRST ENTRY */
+.book-view{min-height:100vh;padding:1.5rem;background:radial-gradient(1100px 650px at 50% -20%,#43200e,#17120b 62%),#17120b;color:#fff;display:flex;flex-direction:column;align-items:center}
+.book-head{display:flex;align-items:center;gap:.8rem;margin-bottom:.3rem}
+.book-head img{width:50px;height:50px;border-radius:13px}
+.book-head b{font-size:1.4rem}
+.book-sub{color:#d9b08c;font-size:.86rem;margin-bottom:1.6rem}
+.book-card{background:#fff;color:#201a16;border-radius:20px;width:min(680px,100%);padding:1.6rem;box-shadow:0 40px 90px -20px rgba(0,0,0,.5)}
+.steps{display:flex;gap:.4rem;margin-bottom:1.2rem}
+.steps .st{flex:1;text-align:center;font-size:.72rem;color:var(--muted);padding-bottom:.5rem;border-bottom:3px solid var(--line);transition:all .2s}
+.steps .st.on{color:var(--acc-deep);border-color:var(--acc);font-weight:600}
+.steps .st.done{color:var(--green);border-color:var(--green)}
+.bk-svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+@media(max-width:600px){.bk-svc-grid{grid-template-columns:1fr}}
+.bk-svc{border:1.5px solid var(--line);border-radius:12px;padding:.9rem;text-align:left;transition:all .15s;display:flex;gap:.7rem;align-items:flex-start}
+.bk-svc:hover{border-color:var(--acc)}
+.bk-svc.on{border-color:var(--acc);background:var(--acc-soft)}
+.bk-svc .si{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none;color:#fff}
+.bk-svc b{display:block;font-size:.9rem}
+.bk-svc small{color:var(--muted);font-size:.73rem}
+.day-strip{display:flex;gap:.45rem;overflow-x:auto;padding-bottom:.4rem;margin-bottom:.8rem}
+.day-b{border:1.5px solid var(--line);border-radius:11px;padding:.55rem .7rem;min-width:72px;text-align:center;transition:all .15s;flex:none}
+.day-b:hover{border-color:var(--acc)}
+.day-b.on{border-color:var(--acc);background:var(--acc);color:#fff}
+.day-b .dw{font-size:.68rem;display:block}
+.day-b .dn{font-family:var(--mono);font-weight:700;font-size:1.05rem}
+.slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:.4rem}
+.slot-b{border:1.5px solid var(--line);border-radius:9px;padding:.5rem .3rem;font-family:var(--mono);font-size:.82rem;transition:all .15s;min-height:42px}
+.slot-b:hover:not(:disabled){border-color:var(--acc)}
+.slot-b.on{border-color:var(--acc);background:var(--acc);color:#fff}
+.slot-b:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.doc-pick{display:flex;gap:.5rem;margin-bottom:.8rem}
+.doc-b{flex:1;border:1.5px solid var(--line);border-radius:11px;padding:.6rem;text-align:center;transition:all .15s}
+.doc-b:hover{border-color:var(--acc)}
+.doc-b.on{border-color:var(--acc);background:var(--acc-soft)}
+.doc-b b{font-size:.85rem;display:block}
+.doc-b small{color:var(--muted);font-size:.7rem}
+.bk-form{display:grid;gap:.6rem}
+.bk-form input{border:1.5px solid var(--line);border-radius:10px;padding:.7rem .9rem;min-height:46px;outline:none;font-size:.92rem}
+.bk-form input:focus{border-color:var(--acc)}
+.bk-nav{display:flex;gap:.6rem;margin-top:1.2rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:600;border-radius:10px;padding:.75rem 1.3rem;transition:all .15s;min-height:48px}
+.btn-a{background:var(--acc);color:#fff}
+.btn-a:hover{background:var(--acc-deep)}
+.btn-a:disabled{opacity:.4;cursor:not-allowed}
+.btn-o{border:1.5px solid var(--line);color:var(--muted)}
+.btn-o:hover{border-color:var(--acc);color:var(--acc)}
+.staff-link{margin-top:1.6rem;color:#8a6f52;font-size:.8rem;min-height:44px}
+.staff-link:hover{color:#d9b08c}
+.book-credit{margin-top:.8rem;font-size:.72rem;color:#6f5a44}
+.book-credit a{color:#FF6b6b;text-decoration:none;font-weight:500}
+/* success card */
+.ticket-ok{text-align:center;padding:1rem 0}
+.ticket-ok .okc{width:64px;height:64px;border-radius:50%;background:#dcfce7;color:#16a34a;display:grid;place-items:center;margin:0 auto .8rem}
+.ticket-ok .bno{font-family:var(--mono);font-size:2rem;font-weight:700;letter-spacing:.05em;margin:.3rem 0}
+.ticket-ok .bmeta{font-size:.9rem;color:var(--muted);line-height:1.8}
+.ticket-ok .bmeta b{color:var(--ink)}
 
-/* ---------- APP SHELL ---------- */
-.app{display:flex;min-height:100vh}
-.sidebar{
-  position:fixed;inset:0 auto 0 0;width:240px;background:var(--dark);color:#e7e5e4;
-  display:flex;flex-direction:column;z-index:700;transition:transform .25s ease;
-}
-.sidebar-brand{display:flex;align-items:center;gap:10px;padding:20px 18px;border-bottom:1px solid var(--dark-2)}
-.sidebar-brand .mark{width:38px;height:38px;border-radius:11px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex:none}
-.sidebar-brand b{font-size:17px;font-weight:600;color:#fff}
-.sidebar-brand span{display:block;font-size:11.5px;color:#a8a29e;font-weight:400}
-.nav{padding:14px 10px;display:flex;flex-direction:column;gap:4px;flex:1}
-.nav button{
-  display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:10px 12px;
-  border:none;border-radius:10px;background:transparent;color:#d6d3d1;font-size:14.5px;text-align:left;
-  transition:background .15s,color .15s;
-}
-.nav button:hover{background:var(--dark-2);color:#fff}
-.nav button.active{background:var(--accent);color:#fff}
-.nav button svg{flex:none}
-.sidebar-user{border-top:1px solid var(--dark-2);padding:14px}
-.sidebar-user .who{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;flex:none}
-.sidebar-user .who b{display:block;font-size:13.5px;color:#fff;font-weight:500}
-.sidebar-user .who span{font-size:11.5px;color:#a8a29e}
-.btn-logout{
-  display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:44px;
-  background:transparent;border:1px solid var(--dark-2);border-radius:10px;color:#d6d3d1;font-size:13.5px;
-}
-.btn-logout:hover{border-color:var(--accent);color:#fff}
+/* ADMIN APP */
+.app{display:grid;grid-template-columns:72px 1fr;min-height:100vh}
+.rail{background:var(--dark);display:flex;flex-direction:column;align-items:center;padding:.8rem 0;position:sticky;top:0;height:100vh;z-index:60}
+.rail .logo{width:44px;height:44px;border-radius:12px;overflow:hidden;margin-bottom:1rem}
+.rail .logo img{width:100%;height:100%;object-fit:cover}
+.rail nav{display:grid;gap:.4rem;flex:1}
+.ri{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;color:#a68a6f;position:relative;transition:all .15s}
+.ri:hover{background:rgba(255,255,255,.07);color:#fff}
+.ri.on{background:var(--acc);color:#fff}
+.ri .tip{position:absolute;left:70px;background:var(--dark2);color:#fff;font-size:.72rem;padding:.3rem .6rem;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:70}
+.ri:hover .tip{opacity:1}
+.rail .who{width:44px;height:44px;border-radius:50%;background:var(--dark2);color:#fdba74;display:grid;place-items:center;font-weight:600;font-size:.8rem}
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{background:#fff;border-bottom:1px solid var(--line);padding:.55rem 1.1rem;display:flex;align-items:center;gap:.8rem;font-size:.8rem;flex-wrap:wrap}
+.ws-chip{display:flex;align-items:center;gap:.45rem;font-weight:600;font-size:.82rem}
+.ws-chip .wm{width:26px;height:26px;border-radius:7px;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:.72rem}
+.stat-chip{display:flex;align-items:center;gap:.4rem;background:#faf7f4;border:1px solid var(--line);border-radius:8px;padding:.3rem .7rem;font-size:.75rem;color:var(--muted)}
+.stat-chip b{font-family:var(--mono);color:var(--ink);font-weight:700}
+.stat-chip.red b{color:var(--red)}
+.stat-chip.green b{color:var(--green)}
+.topbar .sp{flex:1}
+.topbar .clock{font-family:var(--mono);font-size:.9rem}
+.tbtn{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);border-radius:8px;padding:.3rem .75rem;font-size:.78rem;color:var(--muted);min-height:34px;transition:all .15s;background:#fff}
+.tbtn:hover{border-color:var(--acc);color:var(--acc)}
+.tbtn.primary{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.sync-pill{display:flex;align-items:center;gap:.35rem;color:var(--muted);font-size:.75rem;border:1px solid var(--line);border-radius:99px;padding:.25rem .7rem;min-height:32px;background:#fff}
+.sync-pill i{width:7px;height:7px;border-radius:50%;background:#4ade80}
+.sync-pill.off{border-color:var(--amber);color:var(--amber)}
+.sync-pill.off i{background:var(--amber)}
+.offline-banner{background:#fef3c7;color:#92400e;font-size:.8rem;padding:.4rem 1.1rem}
+.content{flex:1;padding:1rem;min-height:0}
 
-.main{flex:1;margin-left:240px;min-width:0;display:flex;flex-direction:column}
-.topbar{
-  position:sticky;top:0;z-index:600;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 24px;height:64px;
-}
-.topbar h2{font-size:18px;font-weight:600;letter-spacing:-.01em;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.topbar .date{font-size:13.5px;color:var(--muted);white-space:nowrap}
-.hamburger{display:none;width:44px;height:44px;border:1px solid var(--line);background:#fff;border-radius:10px;align-items:center;justify-content:center}
-.content{padding:24px;max-width:1200px;width:100%;margin:0 auto}
-.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px;flex-wrap:wrap}
-.page-head h3{font-size:22px;font-weight:600;letter-spacing:-.01em}
-.page-head p{color:var(--muted);font-size:13.5px;margin-top:2px}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:.8rem;margin-bottom:1rem}
+.kpi{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:1rem 1.1rem}
+.kpi span{font-size:.74rem;color:var(--muted);display:block}
+.kpi b{font-family:var(--mono);font-size:1.5rem;font-weight:700}
+.kpi b.r{color:var(--red)}
+.kpi b.g{color:var(--green)}
+.panel{background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
+.p-head{padding:.9rem 1.2rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.p-head b{font-weight:600}
+.p-head .count{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th{text-align:left;padding:.7rem 1rem;color:var(--muted);font-weight:500;font-size:.74rem;letter-spacing:.04em;border-bottom:1px solid var(--line);white-space:nowrap;background:#faf7f4}
+td{padding:.65rem 1rem;border-bottom:1px solid #f3efe9;vertical-align:middle}
+tr:last-child td{border-bottom:0}
+.badge{display:inline-block;font-size:.68rem;font-weight:700;padding:.15rem .55rem;border-radius:99px;white-space:nowrap}
+.b-book{background:var(--acc-soft);color:var(--acc-deep)}
+.b-conf{background:#dcfce7;color:#15803d}
+.b-done{background:#f1f5f9;color:#64748b}
+.b-cancel{background:#fee2e2;color:#b91c1c}
+.b-noshow{background:#3f1d1d;color:#f87171}
+.tlink{color:var(--acc);font-weight:500;min-height:40px;padding:.2rem .5rem}
+.tlink:hover{text-decoration:underline}
+.tlink.red{color:var(--red)}
+.tlink.green{color:var(--green)}
 
-/* ---------- CARDS / TABLES ---------- */
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:640px}
-th,td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line);font-size:14px;vertical-align:middle}
-th{font-size:12.5px;color:var(--muted);font-weight:500;background:#fafaf9;white-space:nowrap}
-tbody tr:last-child td{border-bottom:none}
-tbody tr:hover td{background:#fafaf9}
-.muted{color:var(--muted)}
-.chip{display:inline-flex;align-items:center;gap:7px;font-size:13px;white-space:nowrap}
-.chip .dot{width:9px;height:9px;border-radius:50%;flex:none}
-.badge{display:inline-flex;align-items:center;min-height:26px;padding:2px 10px;border-radius:999px;font-size:12.5px;font-weight:500;white-space:nowrap}
-.badge.confirmed{color:var(--ok);background:var(--ok-bg)}
-.badge.pending{color:var(--warn);background:var(--warn-bg)}
-.badge.cancelled{color:var(--gray);background:var(--gray-bg)}
-.badge.noshow{color:var(--bad);background:var(--bad-bg)}
+/* agenda timeline */
+.ag-row{display:flex;gap:.9rem;padding:.75rem 1.2rem;border-bottom:1px solid #f3efe9;align-items:center}
+.ag-row:last-child{border-bottom:0}
+.ag-row .ag-t{font-family:var(--mono);font-weight:700;font-size:.95rem;width:64px;flex:none}
+.ag-row .ag-bar{width:5px;align-self:stretch;border-radius:3px;flex:none}
+.ag-row .ag-b{flex:1;min-width:0}
+.ag-row .ag-b b{font-size:.88rem;display:block}
+.ag-row .ag-b small{color:var(--muted);font-size:.74rem}
+.ag-row.now{background:#fff7ed}
 
-/* ---------- KPI ---------- */
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
-.kpi .label{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
-.kpi .value{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;margin-top:4px;letter-spacing:-.02em}
-.kpi .value small{font-size:14px;color:var(--muted);font-weight:500}
-.kpi.accent{border-left:4px solid var(--accent)}
+/* week calendar */
+.wk{display:grid;grid-template-columns:60px repeat(7,1fr);font-size:.75rem}
+.wk .wk-h{padding:.5rem .4rem;font-weight:600;text-align:center;border-bottom:1px solid var(--line);background:#faf7f4;font-family:var(--mono)}
+.wk .wk-t{padding:.5rem .4rem;color:var(--muted);font-family:var(--mono);border-bottom:1px solid #f3efe9;text-align:right}
+.wk .wk-c{border-bottom:1px solid #f3efe9;border-left:1px solid #f3efe9;min-height:34px;padding:2px}
+.wk .wk-ev{border-radius:5px;font-size:.64rem;padding:.15rem .3rem;margin-bottom:2px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
 
-/* ---------- CALENDAR ---------- */
-.cal-head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.cal-title{font-size:17px;font-weight:600;flex:1;min-width:140px}
-.cal-nav{display:flex;gap:8px;align-items:center}
-.icon-btn{width:44px;height:44px;border:1px solid var(--line);background:#fff;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink)}
-.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
-.cal-week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:12px 16px 0}
-.cal-week div{text-align:center;font-size:12.5px;color:var(--muted);font-weight:500;padding:4px 0}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:12px 16px 16px}
-.cal-cell{
-  min-height:92px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px;
-  display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;
-  transition:border-color .15s,background .15s;
+/* feed drawer + modal + misc (shared) */
+.overlay{position:fixed;inset:0;background:rgba(34,26,19,.55);backdrop-filter:blur(3px);z-index:200;display:grid;place-items:center;padding:1rem}
+.modal{background:#fff;border-radius:18px;width:min(460px,100%);max-height:92vh;overflow-y:auto;padding:1.4rem;animation:mup .22s cubic-bezier(.2,.8,.2,1)}
+@keyframes mup{from{opacity:0;transform:translateY(14px) scale(.98)}}
+.modal h3{font-size:1.05rem;font-weight:600;margin-bottom:1rem}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,92vw);background:#fff;border-left:1px solid var(--line);z-index:250;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.scrim{position:fixed;inset:0;background:rgba(34,26,19,.45);z-index:240}
+.d-head{padding:.9rem 1.1rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.6rem}
+.d-head b{font-weight:600}
+.d-head .x{margin-left:auto;width:38px;height:38px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted)}
+.d-body{flex:1;overflow-y:auto;padding:.6rem 1.1rem}
+.feed-item{display:flex;gap:.7rem;padding:.6rem 0;border-bottom:1px dashed var(--line);animation:tin .2s}
+@keyframes tin{from{opacity:0;transform:translateX(8px)}}
+.feed-item .fi{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:none}
+.feed-item .fm{font-size:.82rem;line-height:1.45}
+.feed-item .ft{font-family:var(--mono);font-size:.66rem;color:var(--muted);margin-top:.1rem}
+.d-note{padding:.7rem 1.1rem;border-top:1px solid var(--line);font-size:.72rem;color:var(--muted)}
+.toast{position:fixed;top:1rem;right:1rem;z-index:300;background:var(--dark2);color:#fff;border-radius:10px;padding:.8rem 1.1rem;font-size:.85rem;box-shadow:0 12px 30px -10px rgba(0,0,0,.4);opacity:0;transform:translateY(-8px);transition:all .25s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
+.toast.err{background:#7f1d1d}
+.statusbar{background:var(--dark);color:#a68a6f;font-size:.72rem;padding:.45rem 1.1rem;display:flex;gap:1.4rem;align-items:center;font-family:var(--mono);flex-wrap:wrap}
+.statusbar .ok{color:#4ade80}
+.statusbar .sp{flex:1}
+.statusbar button{color:#a68a6f;min-height:30px;font-family:var(--mono);font-size:.72rem}
+.statusbar button:hover{color:#fff}
+@media(max-width:860px){
+  .app{grid-template-columns:1fr}
+  .rail{position:fixed;left:0;top:0;bottom:0;width:72px;transform:translateX(-100%);transition:transform .25s;z-index:100}
+  .rail.open{transform:none}
+  .mobtop{display:flex!important}
 }
-.cal-cell:hover{border-color:var(--accent)}
-.cal-cell .dnum{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500}
-.cal-cell.today{border:2px solid var(--accent);padding:7px}
-.cal-cell.today .dnum{color:var(--accent);font-weight:700}
-.cal-cell.selected{background:var(--accent-soft);border-color:var(--accent)}
-.cal-cell .dots{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-.cal-cell .dots i{width:7px;height:7px;border-radius:50%}
-.cal-cell .more{font-size:10.5px;color:var(--muted);font-family:'JetBrains Mono',monospace}
-.cal-cell.blank{border:none;background:transparent;pointer-events:none}
-.cal-legend{display:flex;gap:16px;flex-wrap:wrap;padding:0 16px 16px;font-size:13px;color:var(--muted)}
-
-/* ---------- DRAWER ---------- */
-.overlay{
-  position:fixed;inset:0;background:rgba(28,25,23,.45);z-index:850;
-  opacity:0;pointer-events:none;transition:opacity .2s;
-}
-.overlay.show{opacity:1;pointer-events:auto}
-.drawer{
-  position:fixed;top:0;right:0;bottom:0;width:380px;max-width:94vw;background:#fff;z-index:900;
-  transform:translateX(105%);transition:transform .25s ease;display:flex;flex-direction:column;
-  box-shadow:-16px 0 48px rgba(28,25,23,.18);
-}
-.drawer.open{transform:translateX(0)}
-.drawer-head{display:flex;align-items:center;gap:10px;padding:18px 20px;border-bottom:1px solid var(--line)}
-.drawer-head h4{font-size:16.5px;font-weight:600;flex:1}
-.drawer-body{flex:1;overflow-y:auto;padding:16px 20px}
-.drawer-foot{padding:14px 20px;border-top:1px solid var(--line)}
-.appt-item{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:#fff}
-.appt-item.cancelled{opacity:.55}
-.appt-item .row1{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.appt-item .time{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px}
-.appt-item .row1 .badge{margin-left:auto}
-.appt-item .who{font-weight:500;font-size:14.5px}
-.appt-item .meta{font-size:13px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;margin-top:2px}
-.appt-item .actions{display:flex;gap:8px;margin-top:10px}
-.empty{text-align:center;color:var(--muted);padding:40px 12px;font-size:14px}
-.empty svg{margin:0 auto 10px;opacity:.4}
-
-/* ---------- MODAL ---------- */
-.modal-wrap{
-  position:fixed;inset:0;z-index:950;display:none;align-items:center;justify-content:center;padding:20px;
-  background:rgba(28,25,23,.5);
-}
-.modal-wrap.show{display:flex}
-.modal{background:#fff;border-radius:18px;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.3)}
-.modal-head{display:flex;align-items:center;gap:10px;padding:20px 24px 0}
-.modal-head h4{font-size:18px;font-weight:600;flex:1}
-.modal-body{padding:16px 24px 24px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
-.form-grid .full{grid-column:1/-1}
-.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:8px}
-.slot{
-  min-height:44px;border:1px solid var(--line);background:#fff;border-radius:9px;
-  font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:500;transition:all .12s;
-}
-.slot:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
-.slot.sel{background:var(--accent);border-color:var(--accent);color:#fff}
-.slot:disabled{background:var(--gray-bg);color:#a8a29e;text-decoration:line-through;cursor:not-allowed}
-.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
-
-/* ---------- TOAST ---------- */
-.toasts{position:fixed;right:16px;bottom:16px;z-index:1000;display:flex;flex-direction:column;gap:8px;max-width:min(360px,92vw)}
-.toast{
-  display:flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border-radius:12px;
-  padding:12px 16px;font-size:14px;box-shadow:0 12px 32px rgba(0,0,0,.25);
-  transform:translateY(12px);opacity:0;transition:all .25s ease;
-}
-.toast.show{transform:translateY(0);opacity:1}
-.toast.error{background:#7f1d1d}
-.toast.success .ticon{color:#4ade80}
-.toast.error .ticon{color:#fca5a5}
-
-/* ---------- BACK HUB ---------- */
-.back-hub{
-  position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;
-  min-height:44px;padding:10px 18px;background:#fff;border-radius:999px;border-left:3px solid #dc2626;
-  box-shadow:0 8px 24px rgba(28,25,23,.16);color:var(--ink);text-decoration:none;font-size:13.5px;font-weight:500;
-}
-.back-hub:hover{color:var(--accent)}
-
-/* ---------- RESPONSIVE ---------- */
-@media (max-width:960px){
-  .sidebar{transform:translateX(-100%)}
-  .sidebar.open{transform:translateX(0);box-shadow:16px 0 48px rgba(0,0,0,.3)}
-  .main{margin-left:0}
-  .hamburger{display:inline-flex}
-  .topbar{padding:0 16px}
-  .topbar .date{display:none}
-  .content{padding:16px}
-  .cal-cell{min-height:64px;padding:6px;border-radius:10px}
-  .cal-cell.today{padding:5px}
-  .cal-cell .dnum{font-size:12px}
-  .kpis{grid-template-columns:1fr}
-  .form-grid{grid-template-columns:1fr}
-  th,td{padding:10px 12px}
-}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important}
-}
+.mobtop{display:none;background:#fff;border-bottom:1px solid var(--line);padding:.5rem .8rem;align-items:center;gap:.8rem}
+.mobtop button{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
 </style>
 </head>
 <body>
 <script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
 
-<!-- ================= LOGIN ================= -->
-<div class="login" id="loginView">
-  <div class="login-card">
-    <div class="login-logo">
-      <div class="mark" aria-hidden="true">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 5.5C10 3.5 6.5 3.5 5 6c-1.6 2.7-.3 5.6.8 8.2.7 1.7 1 4.3 2.2 4.3 1.4 0 1.2-3.2 2-5 .3-.6 1-.6 1.3 0 .8 1.8.6 5 2 5 1.2 0 1.5-2.6 2.2-4.3 1.1-2.6 2.4-5.5.8-8.2-1.5-2.5-5-2.5-7-.5z"/>
-        </svg>
-      </div>
-      <h1>นัดดี<small>ระบบปฏิทินนัดหมายคลินิก</small></h1>
+<!-- BOOKING-FIRST ENTRY -->
+<div class="book-view" id="bookView" hidden>
+  <div class="book-head"><img src="assets/logo.jpg" alt="โลโก้นัดดี"><b>นัดดี Pro</b></div>
+  <p class="book-sub">คลินิกผิวหนังธาดา · จองนัดออนไลน์ได้ทันที ไม่ต้องสมัครสมาชิก</p>
+  <div class="book-card">
+    <div class="steps" id="bkSteps">
+      <div class="st on" data-s="0">1. เลือกบริการ</div>
+      <div class="st" data-s="1">2. วันและเวลา</div>
+      <div class="st" data-s="2">3. ข้อมูลติดต่อ</div>
     </div>
-    <p class="login-sub">เข้าสู่ระบบเพื่อจัดการนัดหมายของคลินิกทันตกรรมยิ้มดี</p>
-    <form id="loginForm">
-      <div class="field">
-        <label for="loginUser">ชื่อผู้ใช้</label>
-        <input id="loginUser" type="text" value="admin" autocomplete="username">
+    <div id="bkStep0"><div class="bk-svc-grid" id="svcGrid"></div></div>
+    <div id="bkStep1" hidden>
+      <div class="doc-pick" id="docPick"></div>
+      <div class="day-strip" id="dayStrip"></div>
+      <div class="slot-grid" id="slotGrid"></div>
+    </div>
+    <div id="bkStep2" hidden>
+      <div class="bk-form">
+        <input id="bkName" placeholder="ชื่อ-นามสกุล" aria-label="ชื่อ">
+        <input id="bkPhone" placeholder="เบอร์โทรศัพท์" aria-label="เบอร์โทร">
       </div>
-      <div class="field">
-        <label for="loginPass">รหัสผ่าน</label>
-        <input id="loginPass" type="password" value="1234" autocomplete="current-password">
-      </div>
-      <button type="submit" class="btn btn-primary btn-block">เข้าสู่ระบบ</button>
-    </form>
-    <div class="login-note">ระบบเดโม — กดเข้าสู่ระบบได้เลย ข้อมูลทั้งหมดเป็นข้อมูลจำลองและจัดเก็บในเบราว์เซอร์ของคุณเท่านั้น</div>
-    <p class="login-credit">สร้างโดย <a href="../../first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener">ZenityX — คอร์สสร้างเว็บด้วย AI</a></p>
+      <div class="edit-sum" id="bkSum" style="background:#faf7f4;border-radius:10px;padding:.7rem 1rem;font-size:.85rem;margin-top:.8rem"></div>
+    </div>
+    <div id="bkDone" hidden></div>
+    <div class="bk-nav">
+      <button class="btn btn-o" id="bkBack" hidden>← กลับ</button>
+      <span style="flex:1"></span>
+      <button class="btn btn-a" id="bkNext" disabled>ถัดไป →</button>
+    </div>
   </div>
+  <button class="staff-link" id="staffLink">สำหรับเจ้าหน้าที่คลินิก →</button>
+  <p class="book-credit">ระบบเดโม — ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener">First Vibe : Coding — ZenityX</a></p>
 </div>
 
-<!-- ================= APP ================= -->
+<!-- ADMIN APP -->
 <div class="app" id="appView" hidden>
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-brand">
-      <div class="mark" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 5.5C10 3.5 6.5 3.5 5 6c-1.6 2.7-.3 5.6.8 8.2.7 1.7 1 4.3 2.2 4.3 1.4 0 1.2-3.2 2-5 .3-.6 1-.6 1.3 0 .8 1.8.6 5 2 5 1.2 0 1.5-2.6 2.2-4.3 1.1-2.6 2.4-5.5.8-8.2-1.5-2.5-5-2.5-7-.5z"/>
-        </svg>
-      </div>
-      <div><b>นัดดี</b><span>คลินิกทันตกรรมยิ้มดี</span></div>
-    </div>
-    <nav class="nav" aria-label="เมนูหลัก">
-      <button type="button" data-page="calendar" class="active">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
-        ปฏิทินนัดหมาย
-      </button>
-      <button type="button" data-page="today">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
-        นัดวันนี้
-      </button>
-      <button type="button" data-page="patients">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5 6.5-5s5.7 1.5 6.5 5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 15.3c1.7.8 2.7 2.3 3 4.7"/></svg>
-        ผู้ป่วย
-      </button>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>นัดดี Pro</b></div>
+  <aside class="rail" id="rail">
+    <div class="logo"><img src="assets/logo.jpg" alt="นัดดี"></div>
+    <nav>
+      <button class="ri on" data-page="agenda" aria-label="วันนี้"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span class="tip">นัดวันนี้ (D)</span></button>
+      <button class="ri" data-page="week" aria-label="ปฏิทินสัปดาห์"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="tip">ปฏิทินสัปดาห์ (W)</span></button>
+      <button class="ri" data-page="all" aria-label="นัดทั้งหมด"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span class="tip">นัดทั้งหมด (A)</span></button>
+      <button class="ri" id="feedBtn" aria-label="กิจกรรมข้ามระบบ"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span class="tip">กิจกรรมข้ามระบบ (F) <span id="feedBadge" class="mono" hidden></span></span></button>
     </nav>
-    <div class="sidebar-user">
-      <div class="who">
-        <div class="avatar" aria-hidden="true">อ</div>
-        <div><b>ผู้ดูแลระบบ</b><span>หน้าเคาน์เตอร์ยิ้มดี</span></div>
-      </div>
-      <button type="button" class="btn-logout" id="btnLogout">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h3"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>
-        ออกจากระบบ
-      </button>
-    </div>
+    <button class="who" id="whoBtn" title="กลับหน้าจอง">จ</button>
   </aside>
 
   <div class="main">
-    <header class="topbar">
-      <button type="button" class="hamburger" id="btnMenu" aria-label="เปิดเมนู">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-      <h2 id="pageTitle">ปฏิทินนัดหมาย</h2>
-      <span class="date num" id="topDate"></span>
-      <button type="button" class="btn btn-ghost btn-sm" id="btnReset">รีเซ็ตข้อมูลตัวอย่าง</button>
-    </header>
-
-    <main class="content">
-      <!-- CALENDAR PAGE -->
-      <section id="page-calendar">
-        <div class="page-head">
-          <div>
-            <h3>ปฏิทินนัดหมาย</h3>
-            <p>คลิกที่วันเพื่อดูรายการนัดและเพิ่มนัดหมายใหม่</p>
-          </div>
-          <button type="button" class="btn btn-primary" id="btnAddAppt">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-            เพิ่มนัดหมาย
-          </button>
-        </div>
-        <div class="card">
-          <div class="cal-head">
-            <div class="cal-title" id="calTitle"></div>
-            <div class="cal-nav">
-              <button type="button" class="btn btn-ghost btn-sm" id="btnThisMonth">วันนี้</button>
-              <button type="button" class="icon-btn" id="btnPrevMonth" aria-label="เดือนก่อนหน้า">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-              </button>
-              <button type="button" class="icon-btn" id="btnNextMonth" aria-label="เดือนถัดไป">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-              </button>
-            </div>
-          </div>
-          <div class="cal-week" aria-hidden="true">
-            <div>อา.</div><div>จ.</div><div>อ.</div><div>พ.</div><div>พฤ.</div><div>ศ.</div><div>ส.</div>
-          </div>
-          <div class="cal-grid" id="calGrid"></div>
-          <div class="cal-legend" id="calLegend"></div>
-        </div>
-      </section>
-
-      <!-- TODAY PAGE -->
-      <section id="page-today" hidden>
-        <div class="page-head">
-          <div>
-            <h3>นัดวันนี้</h3>
-            <p id="todaySub"></p>
-          </div>
-        </div>
-        <div class="kpis">
-          <div class="kpi accent">
-            <div class="label">นัดหมายวันนี้</div>
-            <div class="value" id="kpiToday">0</div>
-          </div>
-          <div class="kpi">
-            <div class="label">รอยืนยัน</div>
-            <div class="value" id="kpiPending">0</div>
-          </div>
-          <div class="kpi">
-            <div class="label">อัตราไม่มาตามนัดเดือนนี้</div>
-            <div class="value" id="kpiNoshow">0<small>%</small></div>
-          </div>
-        </div>
-        <div class="card table-wrap">
-          <table>
-            <thead><tr>
-              <th>เวลา</th><th>ผู้ป่วย</th><th>บริการ</th><th>ทันตแพทย์</th><th>สถานะ</th><th>การกระทำ</th>
-            </tr></thead>
-            <tbody id="todayBody"></tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- PATIENTS PAGE -->
-      <section id="page-patients" hidden>
-        <div class="page-head">
-          <div>
-            <h3>ทะเบียนผู้ป่วย</h3>
-            <p>ค้นหาและดูประวัตินัดหมายของผู้ป่วย</p>
-          </div>
-        </div>
-        <div class="card" style="padding:16px;margin-bottom:14px">
-          <div class="field" style="margin:0">
-            <label for="patientSearch">ค้นหาผู้ป่วย</label>
-            <input id="patientSearch" type="search" placeholder="พิมพ์ชื่อหรือเบอร์โทร เช่น สมชาย, 081">
-          </div>
-        </div>
-        <div class="card table-wrap">
-          <table>
-            <thead><tr>
-              <th>ชื่อผู้ป่วย</th><th>เบอร์โทร</th><th>นัดล่าสุด</th><th>นัดถัดไป</th>
-            </tr></thead>
-            <tbody id="patientBody"></tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-  </div>
-</div>
-
-<!-- ================= DAY DRAWER ================= -->
-<div class="overlay" id="drawerOverlay"></div>
-<aside class="drawer" id="dayDrawer" aria-label="รายการนัดรายวัน">
-  <div class="drawer-head">
-    <h4 id="drawerTitle">รายการนัด</h4>
-    <button type="button" class="icon-btn" id="drawerClose" aria-label="ปิดหน้าต่าง">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-  </div>
-  <div class="drawer-body" id="drawerList"></div>
-  <div class="drawer-foot">
-    <button type="button" class="btn btn-primary btn-block" id="drawerAdd">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-      เพิ่มนัดในวันนี้
-    </button>
-  </div>
-</aside>
-
-<!-- ================= APPOINTMENT MODAL ================= -->
-<div class="modal-wrap" id="modalWrap">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-head">
-      <h4 id="modalTitle">เพิ่มนัดหมาย</h4>
-      <button type="button" class="icon-btn" id="modalClose" aria-label="ปิดหน้าต่าง">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
+    <div class="topbar">
+      <span class="ws-chip"><span class="wm">ธ</span> คลินิกผิวหนังธาดา</span>
+      <span class="stat-chip">นัดวันนี้ <b id="stToday">0</b></span>
+      <span class="stat-chip green">ยืนยันแล้ว <b id="stConf">0</b></span>
+      <span class="stat-chip red">No-show เดือนนี้ <b id="stNoShow">0</b></span>
+      <span class="sp"></span>
+      <button class="tbtn primary" id="walkinBtn">+ รับ Walk-in</button>
+      <button class="sync-pill" id="syncPill"><i></i><span id="syncTxt">ออนไลน์</span></button>
+      <span class="clock" id="clock">--:--:--</span>
     </div>
-    <div class="modal-body">
-      <form id="apptForm" novalidate>
-        <div class="form-grid">
-          <div class="field full">
-            <label for="fName">ชื่อผู้ป่วย</label>
-            <input id="fName" type="text" list="patientList" placeholder="เช่น คุณสมชาย วงศ์สุวรรณ" autocomplete="off">
-            <datalist id="patientList"></datalist>
-          </div>
-          <div class="field">
-            <label for="fPhone">เบอร์โทร</label>
-            <input id="fPhone" type="tel" class="num" placeholder="08x-xxx-xxxx" autocomplete="off">
-          </div>
-          <div class="field">
-            <label for="fStatus">สถานะ</label>
-            <select id="fStatus">
-              <option value="pending">รอยืนยัน</option>
-              <option value="confirmed">ยืนยันแล้ว</option>
-              <option value="cancelled">ยกเลิก</option>
-              <option value="noshow">ไม่มาตามนัด</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="fDentist">ทันตแพทย์</label>
-            <select id="fDentist"></select>
-          </div>
-          <div class="field">
-            <label for="fService">บริการ</label>
-            <select id="fService"></select>
-          </div>
-          <div class="field full">
-            <label for="fDate">วันที่นัด</label>
-            <input id="fDate" type="date" class="num">
-          </div>
-          <div class="field full">
-            <label>เวลานัด (ช่วงละ 30 นาที — ช่องที่ขีดฆ่าคือหมอท่านนี้มีนัดแล้ว)</label>
-            <div class="slots" id="slotGrid"></div>
-          </div>
+    <div class="offline-banner" id="offBanner" hidden><b>โหมดออฟไลน์</b> รับนัดต่อได้ — ซิงก์เมื่อกลับมาออนไลน์</div>
+
+    <div class="content">
+      <div id="page-agenda">
+        <div class="kpi-grid" id="kpiGrid"></div>
+        <div class="panel"><div class="p-head"><b>ตารางนัดวันนี้</b><span class="count" id="agCount"></span></div><div id="agList"></div></div>
+      </div>
+      <div id="page-week" hidden>
+        <div class="panel"><div class="p-head"><b>ปฏิทินสัปดาห์นี้</b><span class="count">คลิกนัดเพื่อจัดการ</span></div>
+        <div style="overflow-x:auto"><div class="wk" id="wkGrid" style="min-width:760px"></div></div></div>
+      </div>
+      <div id="page-all" hidden>
+        <div class="panel">
+          <div class="p-head"><b>นัดหมายทั้งหมด</b><span class="count" id="allCount"></span></div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>เลขนัด</th><th>ลูกค้า</th><th>บริการ</th><th>หมอ</th><th>วันเวลา</th><th>สถานะ</th><th></th></tr></thead>
+            <tbody id="allBody"></tbody>
+          </table></div>
         </div>
-        <div class="modal-actions">
-          <button type="button" class="btn btn-ghost" id="modalCancel">ยกเลิก</button>
-          <button type="submit" class="btn btn-primary" id="btnSaveAppt">บันทึกนัดหมาย</button>
-        </div>
-      </form>
+      </div>
+    </div>
+
+    <div class="statusbar">
+      <span>นัดดี Pro v1.4.0</span>
+      <span class="ok">● พร้อมใช้งาน</span>
+      <span class="sp"></span>
+      <span id="stBook">นัดทั้งหมด: 0</span>
+      <button id="resetBtn">รีเซ็ตข้อมูลตัวอย่าง</button>
     </div>
   </div>
 </div>
 
-<div class="toasts" id="toasts" aria-live="polite"></div>
+<!-- walk-in modal -->
+<div class="overlay" id="wiOverlay" hidden>
+  <div class="modal">
+    <h3>รับ Walk-in (นัดทันทีวันนี้)</h3>
+    <div class="bk-form">
+      <input id="wiName" placeholder="ชื่อลูกค้า">
+      <select id="wiSvc"></select>
+      <select id="wiDoc"></select>
+      <select id="wiSlot"></select>
+    </div>
+    <div class="bk-nav">
+      <button class="btn btn-o" id="wiCancel" style="flex:1">ยกเลิก</button>
+      <button class="btn btn-a" id="wiSave" style="flex:2">รับนัด</button>
+    </div>
+  </div>
+</div>
 
-<a class="back-hub" href="../">
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-  หน้ารวมตัวอย่าง
+<!-- feed drawer -->
+<div class="scrim" id="scrim" hidden></div>
+<div class="drawer" id="feedDrawer">
+  <div class="d-head"><b>กิจกรรมข้ามระบบ</b><span class="count mono" id="feedCount" style="font-size:.7rem;color:var(--muted)"></span><button class="x" id="feedClose" aria-label="ปิด"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+  <div class="d-body" id="feedBody"></div>
+  <div class="d-note">ทุกระบบในเครือ ZenityX Demos แชร์เหตุการณ์ผ่าน localStorage จริง</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<a href="../" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
 </a>
 
 <script>
 (function(){
 'use strict';
+var LS = 'zx-appt2-v1';
+var LINK_KEY = 'zx-link-v1';
 
-/* ---------------- CONSTANTS ---------------- */
-var LS_KEY = 'zx-appt-v1';
-var DENTISTS = [
-  { id:'d1', name:'ทพ.ณิชา สว่างวงศ์', color:'#0e7490' },
-  { id:'d2', name:'ทพ.กิตติพงศ์ มั่นคง', color:'#7c3aed' },
-  { id:'d3', name:'นพ.ทินกร ใจดี', color:'#15803d' }
+/* bridge */
+function linkRead(){ try { var d = JSON.parse(localStorage.getItem(LINK_KEY)); return d && d.events ? d : {events:[]}; } catch(e){ return {events:[]}; } }
+function linkWrite(sys, type, msg, val){
+  var l = linkRead();
+  l.events.unshift({ t: Date.now(), sys: sys, type: type, msg: msg, val: (val === undefined ? null : val) });
+  l.events = l.events.slice(0, 60);
+  try { localStorage.setItem(LINK_KEY, JSON.stringify(l)); } catch(e){}
+}
+
+/* data */
+var SVCS = [
+  { id:'s1', n:'ตรวจผิวทั่วไป', d:'ตรวจและวินิจฉัยเบื้องต้น', dur:30, c:'#c2410c' },
+  { id:'s2', n:'เลเซอร์กำจัดขน', d:'เต็มหน้า/รักแร้', dur:60, c:'#0284c7' },
+  { id:'s3', n:'ดูแลสิว + กดสิว', d:'ทำความสะอาดล้ำลึก', dur:60, c:'#9333ea' },
+  { id:'s4', n:'ฉีดวิตามินผิว', d:'วิตามินเข้มข้น', dur:30, c:'#16a34a' }
 ];
-var SERVICES = ['ตรวจทั่วไป','ขูดหินปูน','อุดฟัน','ถอนฟัน','จัดฟัน'];
-var STATUS_LABEL = { confirmed:'ยืนยันแล้ว', pending:'รอยืนยัน', cancelled:'ยกเลิก', noshow:'ไม่มาตามนัด' };
-var SLOTS = [];
-for (var h=9; h<17; h++){ SLOTS.push(pad(h)+':00'); SLOTS.push(pad(h)+':30'); }
-
-/* ---------------- HELPERS ---------------- */
-function pad(n){ return (n<10?'0':'')+n; }
-function fmt(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
-function parseDate(s){ var p=s.split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
-function uid(p){ return p + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
-function $(id){ return document.getElementById(id); }
-function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function dentistById(id){ for (var i=0;i<DENTISTS.length;i++) if (DENTISTS[i].id===id) return DENTISTS[i]; return DENTISTS[0]; }
-function thaiDate(ds, opts){
-  var o = opts || { weekday:'long', day:'numeric', month:'long', year:'numeric' };
-  return parseDate(ds).toLocaleDateString('th-TH', o);
-}
-function thaiShort(ds){
-  return parseDate(ds).toLocaleDateString('th-TH', { day:'numeric', month:'short' });
-}
-var TODAY = fmt(new Date());
-var THIS_MONTH = TODAY.slice(0,7);
-
-/* ---------------- SEED / STORE ---------------- */
+var DOCS = [
+  { id:'dr1', n:'หมอกานต์', role:'ผิวหนังวุฒิบัตร' },
+  { id:'dr2', n:'หมอปอย', role:'เวชศาสตร์ความงาม' }
+];
+var OPEN_H = 10, CLOSE_H = 19, SLOT_M = 30;
+var DAY = 86400000;
+function dayKey(t){ var d = new Date(t); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+function slotT(dayT, slotIdx){ var d = new Date(dayT); d.setHours(OPEN_H + Math.floor(slotIdx * SLOT_M / 60), (slotIdx * SLOT_M) % 60, 0, 0); return d.getTime(); }
+function slotLabel(idx){ var mins = OPEN_H*60 + idx*SLOT_M; return String(Math.floor(mins/60)).padStart(2,'0') + ':' + String(mins%60).padStart(2,'0'); }
 function seed(){
-  var t = new Date();
-  function off(n){ var d = new Date(t.getFullYear(), t.getMonth(), t.getDate()+n); return fmt(d); }
-  var patients = [
-    { id:'p1',  name:'คุณสมชาย วงศ์สุวรรณ',   phone:'081-234-5678' },
-    { id:'p2',  name:'คุณวรรณา ศรีสุข',       phone:'089-555-1234' },
-    { id:'p3',  name:'คุณประเสริฐ ทองแท้',     phone:'086-789-4561' },
-    { id:'p4',  name:'คุณนภัสสร แก้วใส',      phone:'092-345-6789' },
-    { id:'p5',  name:'คุณธนกร รุ่งเรือง',      phone:'085-111-2233' },
-    { id:'p6',  name:'คุณมาลี บุญมาก',         phone:'098-777-8899' },
-    { id:'p7',  name:'คุณอนันต์ ชัยวัฒนา',     phone:'083-456-7890' },
-    { id:'p8',  name:'คุณพิมพ์ชนก อารีย์',     phone:'097-222-3344' },
-    { id:'p9',  name:'คุณสุรชัย เพิ่มพูน',     phone:'084-999-0011' },
-    { id:'p10', name:'คุณจิราพร ธาราทิพย์',    phone:'090-666-7788' }
-  ];
-  function p(i){ return patients[i-1]; }
-  function a(i, dayOff, time, dentistId, service, status){
-    var pt = p(i);
-    return { id:uid('a'), patientId:pt.id, name:pt.name, phone:pt.phone,
-             dentistId:dentistId, service:service, date:off(dayOff), time:time, status:status };
+  var books = [], now = Date.now(), seq = 1;
+  var NAMES = ['คุณนิภา','คุณธนกฤต','คุณแพร','คุณสมชาย','คุณจูน','คุณเอิร์ธ','คุณมิ้น','คุณต้าร์'];
+  var ni = 0;
+  for (var dOff = -2; dOff <= 4; dOff++) {
+    var day = now + dOff * DAY;
+    var n = 2 + ((dOff + 10) % 3); /* 2-4 นัด/วัน deterministic */
+    var used = {};
+    for (var k = 0; k < n; k++) {
+      var sv = SVCS[(dOff + k + 8) % 4 === 0 ? 0 : Math.abs(dOff + k) % 4];
+      var doc = DOCS[(k + dOff + 20) % 2];
+      var slot = 3 + ((dOff * 7 + k * 5 + 40) % 12);
+      if (used[slot]) slot = (slot + 3) % 18;
+      used[slot] = 1;
+      var st = 'booked';
+      var t0 = slotT(day, slot);
+      if (t0 < now - 3600000) st = ((dOff + k) % 5 === 0) ? 'noshow' : 'done';
+      books.push({
+        no: 'BK-' + String(seq++).padStart(3,'0'),
+        name: NAMES[ni++ % NAMES.length], phone: '0890000' + String(100 + ni),
+        svc: sv.id, doc: doc.id, day: dayKey(day), slot: slot, dur: sv.dur,
+        status: st, t: t0
+      });
+    }
   }
-  var appts = [
-    // ย้อนหลังเดือนนี้ (สำหรับประวัติและอัตราไม่มา)
-    a(1,-13,'10:00','d1','ขูดหินปูน','confirmed'),
-    a(3,-12,'09:30','d2','ตรวจทั่วไป','noshow'),
-    a(2,-11,'14:00','d3','อุดฟัน','confirmed'),
-    a(4,-9 ,'11:00','d1','จัดฟัน','confirmed'),
-    a(5,-8 ,'15:30','d2','ถอนฟัน','confirmed'),
-    a(6,-7 ,'09:00','d3','ตรวจทั่วไป','noshow'),
-    a(7,-6 ,'13:00','d1','ขูดหินปูน','confirmed'),
-    a(8,-5 ,'10:30','d2','อุดฟัน','confirmed'),
-    a(9,-4 ,'16:00','d3','ตรวจทั่วไป','cancelled'),
-    a(10,-3,'09:30','d1','จัดฟัน','confirmed'),
-    a(1,-2 ,'11:30','d2','ตรวจทั่วไป','confirmed'),
-    a(4,-1 ,'14:30','d3','ขูดหินปูน','confirmed'),
-    // วันนี้
-    a(2,0,'09:00','d1','ตรวจทั่วไป','confirmed'),
-    a(5,0,'09:30','d2','จัดฟัน','confirmed'),
-    a(6,0,'10:30','d1','อุดฟัน','pending'),
-    a(8,0,'13:30','d3','ขูดหินปูน','confirmed'),
-    a(9,0,'15:00','d2','ตรวจทั่วไป','pending'),
-    // อนาคต
-    a(3 ,1 ,'10:00','d1','ถอนฟัน','confirmed'),
-    a(7 ,1 ,'14:00','d2','ตรวจทั่วไป','pending'),
-    a(10,2 ,'09:30','d3','จัดฟัน','confirmed'),
-    a(2 ,3 ,'11:00','d2','ขูดหินปูน','pending'),
-    a(6 ,5 ,'16:30','d1','ตรวจทั่วไป','confirmed'),
-    a(8 ,7 ,'13:00','d3','อุดฟัน','confirmed'),
-    a(1 ,9 ,'10:30','d2','จัดฟัน','pending'),
-    a(9 ,12,'15:30','d1','ถอนฟัน','confirmed')
-  ];
-  return { patients:patients, appts:appts };
+  return { books: books, seq: seq };
 }
+function blank(){ return seed(); }
+var state = load() || blank();
+var offline = false, curPage = 'agenda';
+var bk = { step:0, svc:null, doc:'dr1', day:null, slot:null };
+function load(){ try { var d = JSON.parse(localStorage.getItem(LS)); return d && d.books ? d : null; } catch(e){ return null; } }
+function save(){ localStorage.setItem(LS, JSON.stringify(state)); }
+function toast(m, err){ var t=document.getElementById('toast'); t.textContent=m; t.className='toast show'+(err?' err':''); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show');},2600); }
+function closeAllModals(){ document.querySelectorAll('.overlay').forEach(function(o){ o.hidden = true; }); }
+function svcOf(id){ return SVCS.find(function(s){ return s.id === id; }); }
+function docOf(id){ return DOCS.find(function(d){ return d.id === id; }); }
+function ago(t){ var s=Math.floor((Date.now()-t)/1000); if(s<3600) return Math.max(1,Math.floor(s/60))+' นาทีที่แล้ว'; if(s<86400) return Math.floor(s/3600)+' ชม.ที่แล้ว'; return Math.floor(s/86400)+' วันที่แล้ว'; }
+function dayTh(t){ return new Date(t).toLocaleDateString('th-TH',{weekday:'short',day:'numeric',month:'short'}); }
+var ST_TH = { booked:'จองแล้ว', confirmed:'ยืนยันแล้ว', done:'เสร็จสิ้น', cancelled:'ยกเลิก', noshow:'No-show' };
 
-function load(){
-  try {
-    var raw = localStorage.getItem(LS_KEY);
-    if (raw){ var d = JSON.parse(raw); if (d && d.patients && d.appts) return d; }
-  } catch(e){}
-  var s = seed();
-  localStorage.setItem(LS_KEY, JSON.stringify(s));
-  return s;
+/* entry / clock */
+var skipEntry = new URLSearchParams(location.search).get('app') === '1' || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+setTimeout(function(){
+  if (skipEntry) enterStaff();
+  else { document.getElementById('bookView').hidden = false; renderBooking(); }
+}, 60);
+setInterval(function(){ document.getElementById('clock').textContent = new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit',second:'2-digit'}); }, 1000);
+document.getElementById('staffLink').addEventListener('click', enterStaff);
+function enterStaff(){
+  document.getElementById('bookView').hidden = true;
+  document.getElementById('appView').hidden = false;
+  save();
+  renderAll();
 }
-function save(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+document.getElementById('whoBtn').addEventListener('click', function(){
+  document.getElementById('appView').hidden = true;
+  document.getElementById('bookView').hidden = false;
+  renderBooking();
+});
+document.getElementById('mobMenu').addEventListener('click', function(){ document.getElementById('rail').classList.toggle('open'); });
 
-var state = load();
+/* offline */
+document.getElementById('syncPill').addEventListener('click', function(){
+  offline = !offline;
+  this.classList.toggle('off', offline);
+  document.getElementById('syncTxt').textContent = offline ? 'ออฟไลน์' : 'ออนไลน์';
+  document.getElementById('offBanner').hidden = !offline;
+  toast(offline ? 'จำลองออฟไลน์' : 'กลับมาออนไลน์');
+});
 
-/* ---------------- UI STATE ---------------- */
-var currentPage = 'calendar';
-var calDate = new Date(); // month being viewed
-var selectedDate = TODAY;
-var editingId = null;
-var selectedTime = null;
-
-/* ---------------- TOAST ---------------- */
-function toast(msg, type){
-  type = type || 'success';
-  var el = document.createElement('div');
-  el.className = 'toast ' + type;
-  el.innerHTML = '<svg class="ticon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
-    (type==='success' ? '<path d="M20 6L9 17l-5-5"/>' : '<circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/>') +
-    '</svg><span>' + esc(msg) + '</span>';
-  $('toasts').appendChild(el);
-  requestAnimationFrame(function(){ el.classList.add('show'); });
-  setTimeout(function(){
-    el.classList.remove('show');
-    setTimeout(function(){ el.remove(); }, 300);
-  }, 3200);
-}
-
-/* ---------------- CONFLICT CHECK ---------------- */
-function hasConflict(dentistId, date, time, excludeId){
-  return state.appts.some(function(a){
-    return a.id !== excludeId && a.dentistId === dentistId && a.date === date &&
-           a.time === time && a.status !== 'cancelled';
+/* ---------- booking flow ---------- */
+function slotTaken(dayK, docId, slotIdx, durMin){
+  var need = Math.ceil((durMin || 30) / SLOT_M);
+  return state.books.some(function(b){
+    if (b.day !== dayK || b.doc !== docId) return false;
+    if (b.status === 'cancelled') return false;
+    var bNeed = Math.ceil(b.dur / SLOT_M);
+    for (var i = 0; i < need; i++) for (var j = 0; j < bNeed; j++)
+      if (slotIdx + i === b.slot + j) return true;
+    return false;
   });
 }
-
-/* ---------------- RENDER: CALENDAR ---------------- */
-function apptsOn(ds){
-  return state.appts.filter(function(a){ return a.date === ds && a.status !== 'cancelled'; });
+function renderBooking(){
+  bk = { step:0, svc:null, doc:'dr1', day:null, slot:null };
+  renderSteps();
 }
-
-function renderCalendar(){
-  var y = calDate.getFullYear(), m = calDate.getMonth();
-  $('calTitle').textContent = new Date(y, m, 1).toLocaleDateString('th-TH', { month:'long', year:'numeric' });
-  var firstDay = new Date(y, m, 1).getDay();
-  var days = new Date(y, m+1, 0).getDate();
-  var html = '';
-  for (var b=0; b<firstDay; b++) html += '<div class="cal-cell blank" aria-hidden="true"></div>';
-  for (var d=1; d<=days; d++){
-    var ds = y+'-'+pad(m+1)+'-'+pad(d);
-    var list = apptsOn(ds);
-    var dots = '';
-    var max = Math.min(list.length, 4);
-    for (var i=0; i<max; i++) dots += '<i style="background:'+dentistById(list[i].dentistId).color+'"></i>';
-    if (list.length > 4) dots += '<span class="more">+'+(list.length-4)+'</span>';
-    var cls = 'cal-cell';
-    if (ds === TODAY) cls += ' today';
-    if (ds === selectedDate) cls += ' selected';
-    html += '<button type="button" class="'+cls+'" data-date="'+ds+'" aria-label="วันที่ '+d+' มี '+list.length+' นัด">' +
-            '<span class="dnum">'+d+'</span><span class="dots">'+dots+'</span></button>';
-  }
-  $('calGrid').innerHTML = html;
-  var leg = '';
-  DENTISTS.forEach(function(dt){
-    leg += '<span class="chip"><span class="dot" style="background:'+dt.color+'"></span>'+esc(dt.name)+'</span>';
+function renderSteps(){
+  document.querySelectorAll('#bkSteps .st').forEach(function(el, i){
+    el.classList.toggle('on', i === bk.step);
+    el.classList.toggle('done', i < bk.step);
   });
-  $('calLegend').innerHTML = leg;
+  [0,1,2].forEach(function(i){ document.getElementById('bkStep'+i).hidden = bk.step !== i; });
+  document.getElementById('bkDone').hidden = bk.step !== 3;
+  document.getElementById('bkBack').hidden = bk.step === 0 || bk.step === 3;
+  var nx = document.getElementById('bkNext');
+  nx.hidden = bk.step === 3;
+  nx.textContent = bk.step === 2 ? 'ยืนยันการจอง ✓' : 'ถัดไป →';
+  nx.disabled = (bk.step === 0 && !bk.svc) || (bk.step === 1 && (bk.day === null || bk.slot === null)) || bk.step === 3;
+  if (bk.step === 0) renderSvcGrid();
+  if (bk.step === 1) renderSlotStep();
+  if (bk.step === 2) renderBkSum();
 }
-
-/* ---------------- RENDER: DRAWER ---------------- */
-function openDrawer(ds){
-  selectedDate = ds;
-  renderCalendar();
-  renderDrawer();
-  $('dayDrawer').classList.add('open');
-  $('drawerOverlay').classList.add('show');
+function renderSvcGrid(){
+  document.getElementById('svcGrid').innerHTML = SVCS.map(function(s){
+    return '<button class="bk-svc'+(bk.svc===s.id?' on':'')+'" data-svc="'+s.id+'">' +
+      '<span class="si" style="background:'+s.c+'"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>' +
+      '<span><b>'+s.n+'</b><small>'+s.d+' · '+s.dur+' นาที</small></span></button>';
+  }).join('');
 }
-function closeDrawer(){
-  $('dayDrawer').classList.remove('open');
-  $('drawerOverlay').classList.remove('show');
-}
-function renderDrawer(){
-  $('drawerTitle').textContent = thaiDate(selectedDate);
-  var list = state.appts.filter(function(a){ return a.date === selectedDate; })
-    .sort(function(x,y){ return x.time < y.time ? -1 : 1; });
-  if (!list.length){
-    $('drawerList').innerHTML =
-      '<div class="empty"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>ยังไม่มีนัดหมายในวันนี้<br>กดปุ่มด้านล่างเพื่อเพิ่มนัด</div>';
-    return;
-  }
-  var html = '';
-  list.forEach(function(a){
-    var dt = dentistById(a.dentistId);
-    html += '<div class="appt-item'+(a.status==='cancelled'?' cancelled':'')+'">' +
-      '<div class="row1"><span class="time num">'+a.time+'</span>' +
-      '<span class="badge '+a.status+'">'+STATUS_LABEL[a.status]+'</span></div>' +
-      '<div class="who">'+esc(a.name)+'</div>' +
-      '<div class="meta"><span>'+esc(a.service)+'</span>' +
-      '<span class="chip"><span class="dot" style="background:'+dt.color+'"></span>'+esc(dt.name)+'</span>' +
-      '<span class="num">'+esc(a.phone)+'</span></div>' +
-      '<div class="actions">' +
-        '<button type="button" class="btn btn-ghost btn-sm" data-act="edit" data-id="'+a.id+'">แก้ไข</button>' +
-        (a.status!=='cancelled' ? '<button type="button" class="btn btn-danger btn-sm" data-act="cancel" data-id="'+a.id+'">ยกเลิกนัด</button>' : '') +
-      '</div></div>';
-  });
-  $('drawerList').innerHTML = html;
-}
-
-/* ---------------- RENDER: TODAY ---------------- */
-function renderToday(){
-  $('todaySub').textContent = thaiDate(TODAY) + ' — เรียงตามเวลานัด';
-  var list = state.appts.filter(function(a){ return a.date === TODAY; })
-    .sort(function(x,y){ return x.time < y.time ? -1 : 1; });
-  var active = list.filter(function(a){ return a.status !== 'cancelled'; });
-  var pending = list.filter(function(a){ return a.status === 'pending'; });
-  // no-show rate this month (past + today, not cancelled)
-  var scope = state.appts.filter(function(a){
-    return a.date.slice(0,7) === THIS_MONTH && a.date <= TODAY && a.status !== 'cancelled';
-  });
-  var noShows = scope.filter(function(a){ return a.status === 'noshow'; }).length;
-  var rate = scope.length ? Math.round(noShows / scope.length * 100) : 0;
-  $('kpiToday').textContent = active.length;
-  $('kpiPending').textContent = pending.length;
-  $('kpiNoshow').innerHTML = rate + '<small>%</small>';
-
-  if (!list.length){
-    $('todayBody').innerHTML = '<tr><td colspan="6" class="muted" style="text-align:center;padding:32px">วันนี้ยังไม่มีนัดหมาย</td></tr>';
-    return;
-  }
-  var html = '';
-  list.forEach(function(a){
-    var dt = dentistById(a.dentistId);
-    var opts = '';
-    ['pending','confirmed','noshow','cancelled'].forEach(function(s){
-      opts += '<option value="'+s+'"'+(a.status===s?' selected':'')+'>'+STATUS_LABEL[s]+'</option>';
-    });
-    html += '<tr>' +
-      '<td class="num" style="font-weight:700">'+a.time+'</td>' +
-      '<td><div style="font-weight:500">'+esc(a.name)+'</div><div class="muted num" style="font-size:12.5px">'+esc(a.phone)+'</div></td>' +
-      '<td>'+esc(a.service)+'</td>' +
-      '<td><span class="chip"><span class="dot" style="background:'+dt.color+'"></span>'+esc(dt.name)+'</span></td>' +
-      '<td><select class="status-sel" data-id="'+a.id+'" aria-label="เปลี่ยนสถานะของ '+esc(a.name)+'" ' +
-        'style="min-height:44px;border:1px solid var(--line);border-radius:9px;padding:6px 10px;background:#fff">'+opts+'</select></td>' +
-      '<td style="white-space:nowrap">' +
-        '<button type="button" class="btn btn-ghost btn-sm" data-act="edit" data-id="'+a.id+'">แก้ไข</button> ' +
-        (a.status!=='cancelled' ? '<button type="button" class="btn btn-danger btn-sm" data-act="cancel" data-id="'+a.id+'">ยกเลิก</button>' : '') +
-      '</td></tr>';
-  });
-  $('todayBody').innerHTML = html;
-}
-
-/* ---------------- RENDER: PATIENTS ---------------- */
-function renderPatients(){
-  var q = ($('patientSearch').value || '').trim().toLowerCase();
-  var qDigits = q.replace(/\D/g,'');
-  var html = '';
-  state.patients.forEach(function(pt){
-    var digits = pt.phone.replace(/\D/g,'');
-    if (q && pt.name.toLowerCase().indexOf(q) === -1 && (!qDigits || digits.indexOf(qDigits) === -1)) return;
-    var mine = state.appts.filter(function(a){ return a.patientId === pt.id && a.status !== 'cancelled'; });
-    var past = mine.filter(function(a){ return a.date < TODAY; }).sort(function(x,y){ return x.date < y.date ? 1 : -1; })[0];
-    var next = mine.filter(function(a){ return a.date >= TODAY; }).sort(function(x,y){ return x.date < y.date ? -1 : 1; })[0];
-    html += '<tr>' +
-      '<td style="font-weight:500">'+esc(pt.name)+'</td>' +
-      '<td class="num">'+esc(pt.phone)+'</td>' +
-      '<td>'+(past ? thaiShort(past.date)+' <span class="muted">· '+esc(past.service)+'</span>' : '<span class="muted">—</span>')+'</td>' +
-      '<td>'+(next ? thaiShort(next.date)+' <span class="num" style="font-weight:600">'+next.time+'</span> <span class="muted">· '+esc(next.service)+'</span>' : '<span class="muted">—</span>')+'</td>' +
-      '</tr>';
-  });
-  $('patientBody').innerHTML = html || '<tr><td colspan="4" class="muted" style="text-align:center;padding:32px">ไม่พบผู้ป่วยที่ค้นหา</td></tr>';
-}
-
-/* ---------------- MODAL ---------------- */
-function fillSelects(){
-  $('fDentist').innerHTML = DENTISTS.map(function(d){ return '<option value="'+d.id+'">'+esc(d.name)+'</option>'; }).join('');
-  $('fService').innerHTML = SERVICES.map(function(s){ return '<option>'+esc(s)+'</option>'; }).join('');
-  $('patientList').innerHTML = state.patients.map(function(p){ return '<option value="'+esc(p.name)+'">'+esc(p.phone)+'</option>'; }).join('');
-}
-
-function openModal(appt, presetDate){
-  editingId = appt ? appt.id : null;
-  selectedTime = appt ? appt.time : null;
-  $('modalTitle').textContent = appt ? 'แก้ไขนัดหมาย' : 'เพิ่มนัดหมาย';
-  $('fName').value = appt ? appt.name : '';
-  $('fPhone').value = appt ? appt.phone : '';
-  $('fDentist').value = appt ? appt.dentistId : 'd1';
-  $('fService').value = appt ? appt.service : SERVICES[0];
-  $('fDate').value = appt ? appt.date : (presetDate || TODAY);
-  $('fStatus').value = appt ? appt.status : 'pending';
+document.getElementById('svcGrid').addEventListener('click', function(e){
+  var b = e.target.closest('.bk-svc'); if (!b) return;
+  bk.svc = b.dataset.svc; renderSteps();
+});
+function renderSlotStep(){
+  document.getElementById('docPick').innerHTML = DOCS.map(function(d){
+    return '<button class="doc-b'+(bk.doc===d.id?' on':'')+'" data-doc="'+d.id+'"><b>'+d.n+'</b><small>'+d.role+'</small></button>';
+  }).join('');
+  var today = new Date(); today.setHours(0,0,0,0);
+  document.getElementById('dayStrip').innerHTML = Array.from({length:7}, function(_,i){
+    var d = new Date(today.getTime() + i*DAY);
+    var dk = dayKey(d.getTime());
+    return '<button class="day-b'+(bk.day===dk?' on':'')+'" data-day="'+dk+'">' +
+      '<span class="dw">'+d.toLocaleDateString('th-TH',{weekday:'short'})+'</span>' +
+      '<span class="dn">'+d.getDate()+'</span></button>';
+  }).join('');
   renderSlots();
-  $('modalWrap').classList.add('show');
-  setTimeout(function(){ $('fName').focus(); }, 60);
 }
-function closeModal(){ $('modalWrap').classList.remove('show'); }
-
 function renderSlots(){
-  var dentistId = $('fDentist').value;
-  var date = $('fDate').value;
+  var grid = document.getElementById('slotGrid');
+  if (!bk.day) { grid.innerHTML = '<p style="color:var(--muted);font-size:.82rem;grid-column:1/-1">เลือกวันก่อนครับ</p>'; return; }
+  var svc = svcOf(bk.svc);
+  var now = Date.now();
+  var nSlots = (CLOSE_H - OPEN_H) * 60 / SLOT_M;
   var html = '';
-  SLOTS.forEach(function(t){
-    var busy = date ? hasConflict(dentistId, date, t, editingId) : false;
-    html += '<button type="button" class="slot'+(selectedTime===t?' sel':'')+'" data-time="'+t+'"' +
-            (busy ? ' disabled title="ทันตแพทย์ท่านนี้มีนัดในเวลานี้แล้ว"' : '') + '>'+t+'</button>';
-  });
-  $('slotGrid').innerHTML = html;
-}
-
-function findOrCreatePatient(name, phone){
-  for (var i=0;i<state.patients.length;i++){
-    if (state.patients[i].name === name){
-      if (phone && state.patients[i].phone !== phone) state.patients[i].phone = phone;
-      return state.patients[i];
-    }
+  for (var i = 0; i < nSlots; i++) {
+    var taken = slotTaken(bk.day, bk.doc, i, svc.dur);
+    var past = bk.day === dayKey(now) && slotT(now, i) < now + 3600000;
+    html += '<button class="slot-b'+(bk.slot===i?' on':'')+'" data-slot="'+i+'"'+(taken||past?' disabled':'')+'>'+slotLabel(i)+'</button>';
   }
-  var pt = { id:uid('p'), name:name, phone:phone };
-  state.patients.push(pt);
-  return pt;
+  grid.innerHTML = html;
 }
+document.getElementById('docPick').addEventListener('click', function(e){
+  var b = e.target.closest('.doc-b'); if (!b) return;
+  bk.doc = b.dataset.doc; bk.slot = null; renderSlotStep();
+});
+document.getElementById('dayStrip').addEventListener('click', function(e){
+  var b = e.target.closest('.day-b'); if (!b) return;
+  bk.day = b.dataset.day; bk.slot = null; renderSlotStep();
+  document.querySelectorAll('.day-b').forEach(function(x){ x.classList.toggle('on', x.dataset.day === bk.day); });
+});
+document.getElementById('slotGrid').addEventListener('click', function(e){
+  var b = e.target.closest('.slot-b'); if (!b || b.disabled) return;
+  bk.slot = +b.dataset.slot;
+  document.querySelectorAll('.slot-b').forEach(function(x){ x.classList.toggle('on', x === b); });
+  document.getElementById('bkNext').disabled = false;
+});
+function renderBkSum(){
+  var svc = svcOf(bk.svc);
+  document.getElementById('bkSum').innerHTML =
+    '<b>'+svc.n+'</b> · '+svc.dur+' นาที<br>หมอ: '+docOf(bk.doc).n+'<br>วันที่: <b>'+dayTh(new Date(bk.day+'T00:00:00').getTime())+'</b> เวลา <b class="mono">'+slotLabel(bk.slot)+'</b>';
+}
+document.getElementById('bkBack').addEventListener('click', function(){ bk.step--; renderSteps(); });
+document.getElementById('bkNext').addEventListener('click', function(){
+  if (bk.step < 2) { bk.step++; renderSteps(); return; }
+  var name = document.getElementById('bkName').value.trim();
+  var phone = document.getElementById('bkPhone').value.trim();
+  if (!name || !phone) { toast('กรอกชื่อและเบอร์โทรครับ', true); return; }
+  var svc = svcOf(bk.svc);
+  if (slotTaken(bk.day, bk.doc, bk.slot, svc.dur)) { toast('ช่วงเวลานี้ถูกจองแล้วครับ', true); bk.step = 1; renderSteps(); return; }
+  var b = {
+    no: 'BK-' + String(state.seq++).padStart(3,'0'),
+    name: name, phone: phone, svc: bk.svc, doc: bk.doc, day: bk.day, slot: bk.slot, dur: svc.dur,
+    status: 'booked', t: slotT(new Date(bk.day+'T00:00:00').getTime(), bk.slot)
+  };
+  state.books.push(b); save();
+  linkWrite('appt','booking-new','นัดดี · นัดใหม่ ' + b.no + ' — ' + name + ' ' + svc.n + ' (' + dayTh(b.t) + ' ' + slotLabel(b.slot) + ')', null);
+  bk.step = 3;
+  document.getElementById('bkDone').innerHTML =
+    '<div class="ticket-ok"><span class="okc"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span>' +
+    '<p style="color:var(--muted);font-size:.8rem">จองสำเร็จ! แคปหน้าจอนี้ไว้</p>' +
+    '<div class="bno">'+b.no+'</div>' +
+    '<p class="bmeta"><b>'+svc.n+'</b> · '+docOf(b.doc).n+'<br>'+dayTh(b.t)+' เวลา <b class="mono">'+slotLabel(b.slot)+'</b> ('+svc.dur+' นาที)<br>มาก่อนเวลา 10 นาทีนะคะ</p></div>';
+  renderSteps();
+});
 
-function saveAppt(){
-  var name = $('fName').value.trim();
-  var phone = $('fPhone').value.trim();
-  var dentistId = $('fDentist').value;
-  var service = $('fService').value;
-  var date = $('fDate').value;
-  var status = $('fStatus').value;
+/* ---------- admin: agenda ---------- */
+function todayBooks(){
+  return state.books.filter(function(b){ return b.day === dayKey(Date.now()) && b.status !== 'cancelled'; })
+    .sort(function(a,b){ return a.slot - b.slot; });
+}
+function renderAgenda(){
+  var tb = todayBooks();
+  var conf = tb.filter(function(b){ return b.status === 'confirmed'; }).length;
+  var m0 = new Date(); m0.setDate(1); m0.setHours(0,0,0,0);
+  var noShow = state.books.filter(function(b){ return b.status === 'noshow' && b.t >= m0.getTime(); }).length;
+  document.getElementById('stToday').textContent = tb.length;
+  document.getElementById('stConf').textContent = conf;
+  document.getElementById('stNoShow').textContent = noShow;
+  document.getElementById('stBook').textContent = 'นัดทั้งหมด: ' + state.books.filter(function(b){return b.status!=='cancelled';}).length;
+  var freeSlots = 0;
+  for (var i = 0; i < 18; i++) if (!slotTaken(dayKey(Date.now()), 'dr1', i, 30)) freeSlots++;
+  document.getElementById('kpiGrid').innerHTML =
+    '<div class="kpi"><span>นัดวันนี้</span><b>'+tb.length+'</b><span class="sub">ยืนยัน '+conf+'</span></div>' +
+    '<div class="kpi"><span>ช่องว่างเหลือ (หมอกานต์)</span><b class="g">'+freeSlots+'</b><span class="sub">จาก 18 slot</span></div>' +
+    '<div class="kpi"><span>No-show เดือนนี้</span><b class="r">'+noShow+'</b><span class="sub">ต้องตามงาน</span></div>' +
+    '<div class="kpi"><span>นัดสัปดาห์นี้</span><b>'+state.books.filter(function(b){ return b.t >= Date.now()-2*DAY && b.t <= Date.now()+5*DAY && b.status!=='cancelled'; }).length+'</b><span class="sub">รวมทุกหมอ</span></div>';
+  document.getElementById('agCount').textContent = tb.length + ' นัด';
+  var now = Date.now();
+  document.getElementById('agList').innerHTML = tb.length ? tb.map(function(b){
+    var s = svcOf(b.svc), d = docOf(b.doc);
+    var isNow = b.t <= now && b.t + b.dur*60000 > now;
+    return '<div class="ag-row'+(isNow?' now':'')+'"><span class="ag-t">'+slotLabel(b.slot)+'</span>' +
+      '<span class="ag-bar" style="background:'+s.c+'"></span>' +
+      '<span class="ag-b"><b>'+b.name+' — '+s.n+'</b><small>'+d.n+' · '+b.dur+' นาที · '+b.phone+'</small></span>' +
+      '<span class="badge b-'+({booked:'book',confirmed:'conf',done:'done',noshow:'noshow'})[b.status]+'">'+ST_TH[b.status]+'</span>' +
+      (b.status === 'booked' ? '<button class="tlink green" data-conf="'+b.no+'">ยืนยัน</button>' : '') +
+      (b.status === 'confirmed' ? '<button class="tlink" data-done="'+b.no+'">เสร็จสิ้น</button>' : '') +
+      (b.status === 'booked' || b.status === 'confirmed' ? '<button class="tlink red" data-ns="'+b.no+'">No-show</button>' : '') +
+      '</div>';
+  }).join('') : '<p style="color:var(--muted);padding:2rem;text-align:center">วันนี้ไม่มีนัด — รับ Walk-in ได้เลย</p>';
+}
+document.getElementById('agList').addEventListener('click', function(e){
+  var c = e.target.closest('[data-conf]'), dn = e.target.closest('[data-done]'), ns = e.target.closest('[data-ns]');
+  var b = null, to = null;
+  if (c) { b = state.books.find(function(x){ return x.no === c.dataset.conf; }); to = 'confirmed'; }
+  else if (dn) { b = state.books.find(function(x){ return x.no === dn.dataset.done; }); to = 'done'; }
+  else if (ns) { b = state.books.find(function(x){ return x.no === ns.dataset.ns; }); to = 'noshow'; }
+  if (!b) return;
+  b.status = to; save(); renderAll();
+  if (to === 'done') linkWrite('appt','booking-done','นัดดี · ' + b.name + ' รับบริการเสร็จ (' + svcOf(b.svc).n + ')', null);
+  toast(b.no + ' → ' + ST_TH[to]);
+});
 
-  if (!name){ toast('กรุณากรอกชื่อผู้ป่วย','error'); $('fName').focus(); return; }
-  var digits = phone.replace(/\D/g,'');
-  if (digits.length < 9 || digits.length > 10){ toast('กรุณากรอกเบอร์โทรให้ถูกต้อง','error'); $('fPhone').focus(); return; }
-  if (!date){ toast('กรุณาเลือกวันที่นัด','error'); $('fDate').focus(); return; }
-  if (!selectedTime){ toast('กรุณาเลือกเวลานัด','error'); return; }
-  if (status !== 'cancelled' && hasConflict(dentistId, date, selectedTime, editingId)){
-    toast('ทันตแพทย์ท่านนี้มีนัดในเวลาดังกล่าวแล้ว กรุณาเลือกเวลาอื่น','error');
-    renderSlots();
-    return;
+/* ---------- week calendar ---------- */
+function renderWeek(){
+  var today = new Date(); today.setHours(0,0,0,0);
+  var dow = (today.getDay() + 6) % 7; /* monday=0 */
+  var mon = today.getTime() - dow * DAY;
+  var html = '<div class="wk-h">เวลา</div>';
+  var days = [];
+  for (var i = 0; i < 7; i++) {
+    var d = new Date(mon + i*DAY);
+    days.push(d);
+    html += '<div class="wk-h"'+(dayKey(d.getTime())===dayKey(Date.now())?' style="color:var(--acc)"':'')+'>'+d.toLocaleDateString('th-TH',{weekday:'short'})+'<br><b>'+d.getDate()+'</b></div>';
   }
-
-  var pt = findOrCreatePatient(name, phone);
-  if (editingId){
-    var a = null;
-    state.appts.forEach(function(x){ if (x.id === editingId) a = x; });
-    if (a){
-      a.patientId = pt.id; a.name = pt.name; a.phone = pt.phone;
-      a.dentistId = dentistId; a.service = service; a.date = date;
-      a.time = selectedTime; a.status = status;
-    }
-    toast('บันทึกการแก้ไขนัดหมายแล้ว');
-  } else {
-    state.appts.push({ id:uid('a'), patientId:pt.id, name:pt.name, phone:pt.phone,
-      dentistId:dentistId, service:service, date:date, time:selectedTime, status:status });
-    toast('เพิ่มนัดหมายใหม่เรียบร้อยแล้ว');
+  for (var h = OPEN_H; h < CLOSE_H; h++) {
+    html += '<div class="wk-t">'+String(h).padStart(2,'0')+':00</div>';
+    days.forEach(function(d){
+      var dk = dayKey(d.getTime());
+      var evs = state.books.filter(function(b){
+        return b.day === dk && b.status !== 'cancelled' && (OPEN_H + b.slot*SLOT_M/60) >= h && (OPEN_H + b.slot*SLOT_M/60) < h+1;
+      });
+      html += '<div class="wk-c">' + evs.map(function(b){
+        return '<div class="wk-ev" style="background:'+svcOf(b.svc).c+'" data-ev="'+b.no+'" title="'+b.name+'">'+slotLabel(b.slot)+' '+b.name+'</div>';
+      }).join('') + '</div>';
+    });
   }
-  save();
-  closeModal();
+  document.getElementById('wkGrid').innerHTML = html;
+}
+document.getElementById('wkGrid').addEventListener('click', function(e){
+  var b = e.target.closest('[data-ev]'); if (!b) return;
+  var bk2 = state.books.find(function(x){ return x.no === b.dataset.ev; });
+  toast(bk2.no + ' · ' + bk2.name + ' — ' + svcOf(bk2.svc).n + ' ' + slotLabel(bk2.slot) + ' (' + ST_TH[bk2.status] + ')');
+});
+
+/* ---------- all bookings ---------- */
+function renderAll2(){
+  var list = state.books.slice().sort(function(a,b){ return a.t - b.t; });
+  document.getElementById('allCount').textContent = list.length + ' นัด';
+  document.getElementById('allBody').innerHTML = list.map(function(b){
+    return '<tr><td class="mono"><b>'+b.no+'</b></td><td>'+b.name+'<br><small style="color:var(--muted);font-family:var(--mono);font-size:.68rem">'+b.phone+'</small></td>' +
+      '<td>'+svcOf(b.svc).n+'</td><td>'+docOf(b.doc).n+'</td>' +
+      '<td class="mono" style="font-size:.76rem">'+dayTh(b.t)+' '+slotLabel(b.slot)+'</td>' +
+      '<td><span class="badge b-'+({booked:'book',confirmed:'conf',done:'done',cancelled:'cancel',noshow:'noshow'})[b.status]+'">'+ST_TH[b.status]+'</span></td>' +
+      '<td>'+(b.status==='booked'||b.status==='confirmed' ? '<button class="tlink red" data-cancel="'+b.no+'">ยกเลิก</button>' : '')+'</td></tr>';
+  }).join('');
+}
+document.getElementById('allBody').addEventListener('click', function(e){
+  var b = e.target.closest('[data-cancel]'); if (!b) return;
+  if (!confirm('ยกเลิกนัด ' + b.dataset.cancel + '?')) return;
+  var bk3 = state.books.find(function(x){ return x.no === b.dataset.cancel; });
+  bk3.status = 'cancelled'; save(); renderAll();
+  toast('ยกเลิก ' + bk3.no + ' แล้ว — slot ว่างทันที');
+});
+
+/* ---------- walk-in ---------- */
+document.getElementById('walkinBtn').addEventListener('click', function(){
+  document.getElementById('wiSvc').innerHTML = SVCS.map(function(s){ return '<option value="'+s.id+'">'+s.n+' ('+s.dur+' นาที)</option>'; }).join('');
+  document.getElementById('wiDoc').innerHTML = DOCS.map(function(d){ return '<option value="'+d.id+'">'+d.n+'</option>'; }).join('');
+  var now = Date.now();
+  var opts = '';
+  for (var i = 0; i < 18; i++) {
+    if (slotT(now, i) < now) continue;
+    if (slotTaken(dayKey(now), document.getElementById('wiDoc').value || 'dr1', i, 30)) continue;
+    opts += '<option value="'+i+'">'+slotLabel(i)+'</option>';
+  }
+  document.getElementById('wiSlot').innerHTML = opts || '<option value="">— เต็มวันนี้ —</option>';
+  document.getElementById('wiOverlay').hidden = false;
+});
+document.getElementById('wiDoc').addEventListener('change', function(){ document.getElementById('walkinBtn').click(); });
+document.getElementById('wiCancel').addEventListener('click', closeAllModals);
+document.getElementById('wiSave').addEventListener('click', function(){
+  var name = document.getElementById('wiName').value.trim();
+  var slot = document.getElementById('wiSlot').value;
+  if (!name || slot === '') { toast('กรอกชื่อและเลือกเวลาครับ', true); return; }
+  var svc = svcOf(document.getElementById('wiSvc').value);
+  var b = { no:'BK-' + String(state.seq++).padStart(3,'0'), name:name, phone:'—', svc:svc.id, doc:document.getElementById('wiDoc').value,
+    day: dayKey(Date.now()), slot:+slot, dur:svc.dur, status:'confirmed', t: slotT(Date.now(), +slot) };
+  state.books.push(b); save(); closeAllModals(); renderAll();
+  linkWrite('appt','booking-new','นัดดี · Walk-in ' + b.no + ' — ' + name + ' ' + svc.n + ' ' + slotLabel(b.slot), null);
+  toast('รับ Walk-in ' + b.no + ' เวลา ' + slotLabel(b.slot));
+  document.getElementById('wiName').value = '';
+});
+
+/* ---------- feed ---------- */
+var lastSeenFeed = 0;
+function sysIcon(sys){
+  var M = {
+    pos:{c:'#0c8a61',s:'<path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="10" cy="21" r="1"/><circle cx="18" cy="21" r="1"/>'},
+    kds:{c:'#ea580c',s:'<path d="M6 13.9A4 4 0 0 1 7.5 6a5 5 0 0 1 9 0 4 4 0 0 1 1.5 7.9V17H6v-3.1z"/><path d="M6 20h12"/>'},
+    queue:{c:'#9333ea',s:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>'},
+    crm:{c:'#5b5bd6',s:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/>'},
+    inv:{c:'#d97706',s:'<path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/>'},
+    docs:{c:'#0284c7',s:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>'},
+    hr:{c:'#0d9488',s:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/>'},
+    dorm:{c:'#b45309',s:'<path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4"/>'},
+    appt:{c:'#c2410c',s:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>'}
+  };
+  return M[sys] || { c:'#64748b', s:'<circle cx="12" cy="12" r="9"/>' };
+}
+function renderFeed(){
+  var l = linkRead();
+  document.getElementById('feedCount').textContent = l.events.length + ' เหตุการณ์';
+  var body = document.getElementById('feedBody');
+  if (!l.events.length) { body.innerHTML = '<p style="color:var(--muted);padding:1.5rem 0;font-size:.85rem">ยังไม่มีกิจกรรม</p>'; return; }
+  body.innerHTML = l.events.slice(0, 25).map(function(ev){
+    var ic = sysIcon(ev.sys);
+    return '<div class="feed-item"><span class="fi" style="background:'+ic.c+'22;color:'+ic.c+'"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'+ic.s+'</svg></span>' +
+      '<span><span class="fm">'+ev.msg+'</span><div class="ft">'+ago(ev.t)+'</div></span></div>';
+  }).join('');
+  lastSeenFeed = l.events.length ? l.events[0].t : 0;
+  updateFeedBadge();
+}
+function updateFeedBadge(){
+  var l = linkRead();
+  var newer = l.events.filter(function(e){ return e.t > lastSeenFeed && e.sys !== 'appt'; }).length;
+  var badge = document.getElementById('feedBadge');
+  if (newer && !document.getElementById('feedDrawer').classList.contains('open')) { badge.hidden = false; badge.textContent = ' (+' + newer + ')'; }
+  else badge.hidden = true;
+}
+document.getElementById('feedBtn').addEventListener('click', function(){
+  renderFeed();
+  document.getElementById('feedDrawer').classList.add('open');
+  document.getElementById('scrim').hidden = false;
+});
+document.getElementById('feedClose').addEventListener('click', closeFeed);
+document.getElementById('scrim').addEventListener('click', closeFeed);
+function closeFeed(){ document.getElementById('feedDrawer').classList.remove('open'); document.getElementById('scrim').hidden = true; }
+setInterval(updateFeedBadge, 3000);
+
+/* ---------- pages / shortcuts ---------- */
+function goPage(p){
+  curPage = p;
+  document.querySelectorAll('.ri[data-page]').forEach(function(x){ x.classList.toggle('on', x.dataset.page === p); });
+  ['agenda','week','all'].forEach(function(x){ document.getElementById('page-'+x).hidden = x !== p; });
+  document.getElementById('rail').classList.remove('open');
   renderAll();
 }
-
-function cancelAppt(id){
-  state.appts.forEach(function(a){ if (a.id === id) a.status = 'cancelled'; });
-  save();
-  renderAll();
-  toast('ยกเลิกนัดหมายแล้ว');
-}
-
-/* ---------------- NAV / SHELL ---------------- */
-var PAGE_TITLES = { calendar:'ปฏิทินนัดหมาย', today:'นัดวันนี้', patients:'ทะเบียนผู้ป่วย' };
-function navigate(page){
-  currentPage = page;
-  ['calendar','today','patients'].forEach(function(p){
-    $('page-'+p).hidden = (p !== page);
-  });
-  document.querySelectorAll('.nav button').forEach(function(b){
-    b.classList.toggle('active', b.getAttribute('data-page') === page);
-  });
-  $('pageTitle').textContent = PAGE_TITLES[page];
-  $('sidebar').classList.remove('open');
-}
-
-function renderAll(){
-  fillSelects();
-  renderCalendar();
-  if (!$('dayDrawer').classList.contains('open') === false) renderDrawer();
-  renderToday();
-  renderPatients();
-}
-
-function updateTopDate(){
-  $('topDate').textContent = new Date().toLocaleDateString('th-TH',
-    { weekday:'long', day:'numeric', month:'long', year:'numeric' });
-}
-
-/* ---------------- EVENTS ---------------- */
-$('loginForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  $('loginView').hidden = true;
-  $('appView').hidden = false;
-  updateTopDate();
-  renderAll();
-  toast('ยินดีต้อนรับเข้าสู่ระบบนัดดี');
-});
-$('btnLogout').addEventListener('click', function(){
-  closeDrawer(); closeModal();
-  $('appView').hidden = true;
-  $('loginView').hidden = false;
-});
-$('btnMenu').addEventListener('click', function(){ $('sidebar').classList.toggle('open'); });
-
-document.querySelectorAll('.nav button').forEach(function(b){
-  b.addEventListener('click', function(){ navigate(b.getAttribute('data-page')); });
-});
-
-$('btnReset').addEventListener('click', function(){
-  localStorage.removeItem(LS_KEY);
-  state = load();
-  selectedDate = TODAY;
-  calDate = new Date();
-  renderAll();
-  toast('รีเซ็ตข้อมูลตัวอย่างเรียบร้อยแล้ว');
-});
-
-$('btnPrevMonth').addEventListener('click', function(){ calDate = new Date(calDate.getFullYear(), calDate.getMonth()-1, 1); renderCalendar(); });
-$('btnNextMonth').addEventListener('click', function(){ calDate = new Date(calDate.getFullYear(), calDate.getMonth()+1, 1); renderCalendar(); });
-$('btnThisMonth').addEventListener('click', function(){ calDate = new Date(); selectedDate = TODAY; renderCalendar(); });
-
-$('calGrid').addEventListener('click', function(e){
-  var cell = e.target.closest ? e.target.closest('.cal-cell[data-date]') : null;
-  if (cell) openDrawer(cell.getAttribute('data-date'));
-});
-
-$('drawerClose').addEventListener('click', closeDrawer);
-$('drawerOverlay').addEventListener('click', closeDrawer);
-$('drawerAdd').addEventListener('click', function(){ openModal(null, selectedDate); });
-$('btnAddAppt').addEventListener('click', function(){ openModal(null, selectedDate || TODAY); });
-
-$('modalClose').addEventListener('click', closeModal);
-$('modalCancel').addEventListener('click', closeModal);
-$('modalWrap').addEventListener('click', function(e){ if (e.target === $('modalWrap')) closeModal(); });
-
-$('fDentist').addEventListener('change', renderSlots);
-$('fDate').addEventListener('change', renderSlots);
-$('slotGrid').addEventListener('click', function(e){
-  var s = e.target.closest ? e.target.closest('.slot') : null;
-  if (!s || s.disabled) return;
-  selectedTime = s.getAttribute('data-time');
-  renderSlots();
-});
-$('fName').addEventListener('change', function(){
-  var name = $('fName').value.trim();
-  state.patients.forEach(function(p){
-    if (p.name === name) $('fPhone').value = p.phone;
-  });
-});
-$('apptForm').addEventListener('submit', function(e){ e.preventDefault(); saveAppt(); });
-
-/* delegated edit/cancel buttons (drawer + today table) */
-document.addEventListener('click', function(e){
-  var btn = e.target.closest ? e.target.closest('button[data-act]') : null;
-  if (!btn) return;
-  var id = btn.getAttribute('data-id');
-  var appt = null;
-  state.appts.forEach(function(a){ if (a.id === id) appt = a; });
-  if (!appt) return;
-  if (btn.getAttribute('data-act') === 'edit') openModal(appt, null);
-  else if (btn.getAttribute('data-act') === 'cancel') cancelAppt(id);
-});
-
-document.addEventListener('change', function(e){
-  var sel = e.target.closest ? e.target.closest('.status-sel') : null;
-  if (!sel) return;
-  var id = sel.getAttribute('data-id');
-  state.appts.forEach(function(a){
-    if (a.id === id){ a.status = sel.value; }
-  });
-  save();
-  renderAll();
-  toast('อัปเดตสถานะนัดหมายแล้ว');
-});
-
-$('patientSearch').addEventListener('input', renderPatients);
-
+document.querySelectorAll('.ri[data-page]').forEach(function(b){ b.addEventListener('click', function(){ goPage(b.dataset.page); }); });
 document.addEventListener('keydown', function(e){
-  if (e.key === 'Escape'){ closeModal(); closeDrawer(); $('sidebar').classList.remove('open'); }
+  if (document.getElementById('appView').hidden) return;
+  if (e.key === 'Escape') { closeAllModals(); closeFeed(); return; }
+  var tgt = e.target;
+  if (tgt && tgt.matches && tgt.matches('input,select,textarea')) return;
+  if (e.key === 'd' || e.key === 'D') goPage('agenda');
+  else if (e.key === 'w' || e.key === 'W') goPage('week');
+  else if (e.key === 'a' || e.key === 'A') goPage('all');
+  else if (e.key === 'f' || e.key === 'F') document.getElementById('feedBtn').click();
 });
-})();
-</script>
-<script>
-/* Auto-enter app when opened with ?app=1 (from showcase hub) */
-(function(){
-  if (!/[?&]app=1/.test(location.href)) return;
-  function enter(){
-    var b = document.getElementById('loginBtn') || document.getElementById('btnLogin')
-         || document.querySelector('#loginForm button[type="submit"]')
-         || document.querySelector('.login-card button[type="submit"]')
-         || Array.prototype.find.call(document.querySelectorAll('button'), function(x){ return /\u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a/.test(x.textContent); });
-    if (b) { b.click(); return; }
-    var f = document.getElementById('loginForm') || document.querySelector('#loginView form') || document.querySelector('.login form');
-    if (f && f.requestSubmit) f.requestSubmit();
+
+/* reset */
+document.getElementById('resetBtn').addEventListener('click', function(){
+  if (confirm('รีเซ็ตนัดหมายทั้งหมดกลับตัวอย่าง?')) {
+    localStorage.removeItem(LS);
+    state = blank(); save();
+    renderAll();
+    toast('รีเซ็ตข้อมูลแล้ว');
   }
-  if (document.readyState !== 'loading') setTimeout(enter, 80);
-  else document.addEventListener('DOMContentLoaded', function(){ setTimeout(enter, 80); });
+});
+
+/* init */
+function renderAll(){ renderAgenda(); renderWeek(); renderAll2(); updateFeedBadge(); }
+renderAll();
 })();
 </script>
 </body>
