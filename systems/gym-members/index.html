@@ -2,943 +2,613 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ฟิตดี — ระบบสมาชิกฟิตเนส | สิงห์ดำ ฟิตเนส</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ฟิตดี Pro — ระบบสมาชิกฟิตเนส เช็คอิน QR | ZenityX Demos</title>
+<meta name="description" content="ระบบฟิตเนสระดับ production — สแกน QR เช็คอินหน้ายิม, เตือนหมดอายุ, ต่อแพ็กเกจ, จองคลาสกลุ่ม, เชื่อมข้ามระบบ">
+<meta property="og:title" content="ฟิตดี Pro — เดโมใช้งานได้จริง">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2365a30d'/%3E%3Cpath d='M22 42v16M34 34v32M66 34v32M78 42v16M34 50h32' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --accent:#65a30d; --accent-d:#4d7c0f; --accent-soft:#ecfccb; --accent-ink:#365314;
-  --bg:#f3f5ee; --card:#ffffff; --ink:#17220e; --mut:#67735b; --line:#e3e8d8;
-  --dark:#131a0b; --red:#dc2626; --red-d:#991b1b; --red-soft:#fee2e2;
-  --amber:#d97706; --amber-soft:#fef3c7; --yel:#eab308;
-  --mono:'JetBrains Mono',ui-monospace,monospace;
-  --sans:'IBM Plex Sans Thai',system-ui,-apple-system,sans-serif;
-  --r:14px; --sh:0 1px 2px rgba(20,30,8,.05),0 8px 24px rgba(20,30,8,.06);
+  --acc:#65a30d; --acc-deep:#4d7c0f; --acc-soft:#ecfccb;
+  --bg:#f5f8f2; --panel:#ffffff; --line:#e6ecdf;
+  --ink:#1b2113; --muted:#6d7a5e;
+  --dark:#1a2113; --dark2:#26311b; --dline:#3d4d2a;
+  --green:#16a34a; --amber:#d97706; --red:#dc2626; --blue:#0284c7;
+  --mono:'JetBrains Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 [hidden]{display:none!important}
-html{scroll-behavior:smooth}
-body{font-family:var(--sans);font-size:15px;line-height:1.55;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
-button{font-family:var(--sans)}
-.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.mut{color:var(--mut)}
-.tx-red{color:var(--red)} .tx-amber{color:var(--amber)} .tx-lime{color:var(--accent-d)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 
-/* ---------- buttons / inputs ---------- */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 18px;border-radius:10px;border:1px solid transparent;font-size:15px;font-weight:500;cursor:pointer;transition:background .15s,border-color .15s,transform .1s;text-decoration:none;white-space:nowrap}
-.btn:active{transform:scale(.98)}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{background:var(--accent-d)}
-.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink)}
-.btn-ghost:hover{border-color:#c8d2b2;background:#fafbf5}
-.btn-danger{background:var(--red);color:#fff}
-.btn-danger:hover{background:#b91c1c}
-.btn-danger-ghost{background:#fff;border-color:#fecaca;color:var(--red)}
-.btn-danger-ghost:hover{background:#fef2f2}
-.btn-lg{min-height:52px;font-size:16px;padding:12px 26px;border-radius:12px}
-.btn:disabled{background:#e7ebdd;color:#9aa48c;cursor:not-allowed;border-color:transparent}
-.btn-full{background:var(--red-soft);color:var(--red-d);cursor:not-allowed}
-.grow{flex:1}
-.inp{min-height:44px;width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:15px;font-family:var(--sans);background:#fff;color:var(--ink);transition:border-color .15s,box-shadow .15s}
-.inp:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(101,163,13,.16)}
-.inp::placeholder{color:#a4ae96}
-select.inp{cursor:pointer}
+/* QR-SCAN ENTRY */
+.qr-view{min-height:100vh;display:grid;place-items:center;padding:1.5rem;background:radial-gradient(1100px 650px at 50% -20%,#2e430f,#141b0c 62%),#141b0c}
+.qr-in{width:min(860px,100%);text-align:center}
+.qr-brand{display:flex;align-items:center;justify-content:center;gap:.8rem;margin-bottom:.4rem;color:#fff}
+.qr-brand img{width:52px;height:52px;border-radius:14px}
+.qr-brand b{font-size:1.5rem;font-weight:600}
+.qr-sub{color:#b8cf8c;font-size:.9rem;margin-bottom:1.6rem}
+.mem-row{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.4rem}
+.mem-card{background:rgba(255,255,255,.05);border:1.5px solid #3d4d2a;border-radius:16px;padding:1rem;width:168px;color:#fff;transition:all .2s}
+.mem-card:hover{border-color:var(--acc);transform:translateY(-3px)}
+.mem-card .qr-mock{width:72px;height:72px;border-radius:10px;background:#fff;margin:0 auto .6rem;padding:6px}
+.mem-card b{display:block;font-size:.88rem}
+.mem-card small{color:#b8cf8c;font-size:.72rem}
+.mem-card .exp{font-size:.68rem;margin-top:.3rem;font-family:var(--mono)}
+.mem-card .exp.warn{color:#fcd34d}
+.mem-card .exp.bad{color:#f87171}
+.scan-zone{width:min(420px,100%);margin:0 auto;background:#1a2113;border:2px solid var(--dline);border-radius:18px;padding:1.2rem;position:relative}
+.scan-frame{width:150px;height:150px;margin:0 auto;position:relative;border-radius:16px;background:#0f150b;display:grid;place-items:center}
+.scan-frame .corner{position:absolute;width:26px;height:26px;border:3px solid var(--acc);opacity:.9}
+.corner.tl{top:8px;left:8px;border-right:0;border-bottom:0;border-radius:8px 0 0 0}
+.corner.tr{top:8px;right:8px;border-left:0;border-bottom:0;border-radius:0 8px 0 0}
+.corner.bl{bottom:8px;left:8px;border-right:0;border-top:0;border-radius:0 0 0 8px}
+.corner.br{bottom:8px;right:8px;border-left:0;border-top:0;border-radius:0 0 8px 0}
+.scan-beam{position:absolute;left:12px;right:12px;height:2px;background:linear-gradient(90deg,transparent,#a3e635,transparent);box-shadow:0 0 12px #a3e635;display:none}
+.scan-zone.scanning .scan-beam{display:block;animation:beam 1s ease-in-out infinite}
+@keyframes beam{0%,100%{top:16%}50%{top:80%}}
+.scan-msg{color:#b8cf8c;font-size:.82rem;margin-top:.8rem;min-height:1.3rem}
+.scan-zone.ok .scan-msg{color:#4ade80;font-weight:600}
+.qr-credit{margin-top:1.6rem;font-size:.72rem;color:#75875a}
+.qr-credit a{color:#FF6b6b;text-decoration:none;font-weight:500}
 
-/* ---------- login ---------- */
-#loginView{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:
-  radial-gradient(900px 480px at 75% -10%,rgba(101,163,13,.30),transparent 60%),
-  radial-gradient(700px 420px at 8% 110%,rgba(101,163,13,.14),transparent 60%),
-  #0b1006}
-.login-card{width:100%;max-width:404px;background:linear-gradient(180deg,#171f0e,#101609);border:1px solid rgba(163,230,53,.20);border-radius:22px;padding:34px 30px 26px;color:#e9f1d9;box-shadow:0 30px 80px rgba(0,0,0,.45)}
-.logo-row{display:flex;align-items:center;gap:14px;margin-bottom:8px}
-.logo-mark{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#84cc16,#4d7c0f);display:flex;align-items:center;justify-content:center;color:#0f1607;flex:none}
-.logo-name{font-size:26px;font-weight:600;letter-spacing:.5px}
-.logo-sub{font-size:13px;color:#9fb088;margin-top:2px}
-.login-title{font-size:19px;font-weight:600;margin:22px 0 4px}
-.login-sub{font-size:14px;color:#9fb088;margin-bottom:20px}
-.fld{display:block;margin-bottom:14px}
-.fld>span{display:block;font-size:13px;font-weight:500;color:#8ea07a;margin-bottom:6px}
-.login-card .inp{background:#0d1308;border-color:#2a361b;color:#eef5df}
-.login-card .inp:focus{border-color:#84cc16;box-shadow:0 0 0 3px rgba(132,204,22,.18)}
-.login-card .inp:disabled{opacity:.75;cursor:text}
-.login-btn{width:100%;margin-top:6px;font-weight:600}
-.demo-note{margin-top:18px;padding:10px 14px;border:1px dashed rgba(163,230,53,.35);border-radius:10px;font-size:13px;color:#c4d6a4;background:rgba(101,163,13,.08);text-align:center}
-.credit{margin-top:14px;text-align:center;font-size:12px;color:#7c8b68}
-.credit a{color:#a3e635;text-decoration:none}
-.credit a:hover{text-decoration:underline}
+/* APP */
+.app{display:grid;grid-template-columns:72px 1fr;min-height:100vh}
+.rail{background:var(--dark);display:flex;flex-direction:column;align-items:center;padding:.8rem 0;position:sticky;top:0;height:100vh;z-index:60}
+.rail .logo{width:44px;height:44px;border-radius:12px;overflow:hidden;margin-bottom:1rem}
+.rail .logo img{width:100%;height:100%;object-fit:cover}
+.rail nav{display:grid;gap:.4rem;flex:1}
+.ri{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;color:#8fa872;position:relative;transition:all .15s}
+.ri:hover{background:rgba(255,255,255,.07);color:#fff}
+.ri.on{background:var(--acc);color:#fff}
+.ri .tip{position:absolute;left:70px;background:var(--dark2);color:#fff;font-size:.72rem;padding:.3rem .6rem;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:70}
+.ri:hover .tip{opacity:1}
+.rail .who{width:44px;height:44px;border-radius:50%;background:var(--dark2);color:#a3e635;display:grid;place-items:center;font-weight:600;font-size:.8rem}
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{background:#fff;border-bottom:1px solid var(--line);padding:.55rem 1.1rem;display:flex;align-items:center;gap:.8rem;font-size:.8rem;flex-wrap:wrap}
+.ws-chip{display:flex;align-items:center;gap:.45rem;font-weight:600;font-size:.82rem}
+.ws-chip .wm{width:26px;height:26px;border-radius:7px;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:.72rem}
+.stat-chip{display:flex;align-items:center;gap:.4rem;background:#f7faf3;border:1px solid var(--line);border-radius:8px;padding:.3rem .7rem;font-size:.75rem;color:var(--muted)}
+.stat-chip b{font-family:var(--mono);color:var(--ink);font-weight:700}
+.stat-chip.red b{color:var(--red)}
+.stat-chip.green b{color:var(--green)}
+.stat-chip.amber b{color:var(--amber)}
+.topbar .sp{flex:1}
+.topbar .clock{font-family:var(--mono);font-size:.9rem}
+.tbtn{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);border-radius:8px;padding:.3rem .75rem;font-size:.78rem;color:var(--muted);min-height:34px;transition:all .15s;background:#fff}
+.tbtn:hover{border-color:var(--acc);color:var(--acc)}
+.tbtn.primary{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.sync-pill{display:flex;align-items:center;gap:.35rem;color:var(--muted);font-size:.75rem;border:1px solid var(--line);border-radius:99px;padding:.25rem .7rem;min-height:32px;background:#fff}
+.sync-pill i{width:7px;height:7px;border-radius:50%;background:#4ade80}
+.sync-pill.off{border-color:var(--amber);color:var(--amber)}
+.sync-pill.off i{background:var(--amber)}
+.offline-banner{background:#fef3c7;color:#92400e;font-size:.8rem;padding:.4rem 1.1rem}
+.content{flex:1;padding:1rem;min-height:0}
 
-/* ---------- app shell ---------- */
-#appView{min-height:100vh}
-#sidebar{width:240px;position:fixed;inset:0 auto 0 0;z-index:120;background:linear-gradient(180deg,#161e0d,#0e1308);color:#dfe8ce;display:flex;flex-direction:column;padding:20px 14px 92px;transition:transform .22s}
-.sb-logo{display:flex;align-items:center;gap:11px;padding:2px 8px 18px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:16px}
-.sb-logo .logo-mark{width:40px;height:40px;border-radius:11px}
-.sb-logo b{font-size:18px;font-weight:600;color:#f2f7e6;display:block;line-height:1.2}
-.sb-logo span{font-size:11.5px;color:#8ea07a}
-.nav-label{font-size:11px;letter-spacing:.8px;color:#6d7d58;padding:0 12px 8px;font-weight:500}
-.nav-item{display:flex;align-items:center;gap:12px;width:100%;min-height:46px;padding:11px 14px;margin-bottom:4px;border:0;border-radius:11px;background:none;color:#a9b795;font-size:15px;font-weight:500;cursor:pointer;text-align:left;transition:background .15s,color .15s}
-.nav-item svg{flex:none}
-.nav-item:hover{background:rgba(255,255,255,.06);color:#e6efcf}
-.nav-item.active{background:rgba(101,163,13,.18);color:#d9f99d}
-.sb-user{margin-top:auto;display:flex;align-items:center;gap:10px;padding:12px 10px;border-top:1px solid rgba(255,255,255,.07)}
-.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#a3e635,#65a30d);color:#16220a;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;flex:none}
-.sb-user .u-name{font-size:13.5px;font-weight:500;color:#e9f1d9;line-height:1.25}
-.sb-user .u-role{font-size:11.5px;color:#7c8b68}
-.icon-btn{width:40px;height:40px;min-height:40px;border-radius:10px;border:0;background:rgba(255,255,255,.05);color:#a9b795;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:none;transition:background .15s,color .15s}
-.icon-btn:hover{background:rgba(220,38,38,.18);color:#fca5a5}
-.main{margin-left:240px;display:flex;flex-direction:column;min-height:100vh;min-width:0}
-#topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 24px;min-height:64px;background:rgba(243,245,238,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-#hamburger{display:none}
-.tb-title{font-size:19px;font-weight:600}
-.tb-date{font-size:13px;color:var(--mut);margin-top:1px}
-.tb-right{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.kpi{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;min-height:40px;font-size:13px;color:var(--mut)}
-.kpi b{font-family:var(--mono);font-size:15px;color:var(--ink)}
-.kpi.lime{border-color:#d9f99d;background:#f7fee7}.kpi.lime svg{color:var(--accent-d)}.kpi.lime b{color:var(--accent-d)}
-.kpi.red{border-color:#fecaca;background:#fef2f2}.kpi.red svg{color:var(--red)}.kpi.red b{color:var(--red)}
-#content{padding:26px 24px 60px;width:100%;max-width:1160px;margin:0 auto}
-.page-head{margin-bottom:20px}
-.page-head h2{font-size:22px;font-weight:600}
-.page-head p{font-size:14px;color:var(--mut);margin-top:2px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:22px}
-
-/* ---------- checkin page ---------- */
-.grid-2{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:start}
-.searchrow{display:flex;gap:10px;margin:14px 0 10px}
-.searchrow .inp{font-family:var(--mono);font-size:16px;letter-spacing:.4px}
-.quickchips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
-.qchip{min-height:36px;padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:#fafbf5;font-size:12.5px;cursor:pointer;color:var(--mut);font-family:var(--sans)}
-.qchip:hover{border-color:var(--accent);color:var(--accent-d)}
-.qchip .num{font-weight:500}
-.member-card{margin-top:16px;border-top:1px solid var(--line);padding-top:18px;animation:pop .25s ease}
-@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.mc-top{display:flex;gap:14px;align-items:center;margin-bottom:14px}
-.avatar-lg{width:58px;height:58px;border-radius:16px;background:var(--accent-soft);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:600;flex:none;border:1.5px solid #d9f99d}
-.mc-name{font-size:19px;font-weight:600}
-.mc-sub{font-size:13px;color:var(--mut);font-family:var(--mono)}
-.mc-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
-.pkg{font-size:12px;font-weight:500;padding:4px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:5px}
-.pkg-monthly{background:#e0f2fe;color:#075985}
-.pkg-m6{background:#ede9fe;color:#5b21b6}
-.pkg-yearly{background:#fef9c3;color:#854d0e}
-.exp-tag{font-size:13px;color:var(--mut)}
-.exp-tag b{color:var(--ink);font-family:var(--mono);font-weight:500}
-.status-big{display:flex;align-items:center;gap:12px;border-radius:13px;padding:15px 18px;font-size:20px;font-weight:600;margin-bottom:14px}
-.status-big.ok{background:var(--accent-soft);color:var(--accent-ink);border:2px solid #a3e635}
-.status-big.bad{background:var(--red-soft);color:var(--red-d);border:2px solid #fca5a5}
-.status-big svg{flex:none}
-.dup{font-size:13px;color:var(--amber);margin-top:10px;display:flex;align-items:center;gap:6px}
-.empty-hint{margin-top:16px;border:1.5px dashed var(--line);border-radius:13px;padding:26px 18px;text-align:center;color:var(--mut);font-size:14px}
-.empty-hint svg{color:#b6c19f;margin-bottom:8px}
-.nf-card{margin-top:16px;border:2px solid #fca5a5;background:#fef2f2;border-radius:13px;padding:18px;color:var(--red-d);font-weight:500;display:flex;gap:10px;align-items:center;animation:pop .25s ease}
-.ck-list{display:flex;flex-direction:column}
-.ck-row{display:flex;align-items:center;gap:11px;padding:11px 2px;border-bottom:1px solid #eef1e5;min-height:52px}
-.ck-row:last-child{border-bottom:0}
-.avatar-sm{width:36px;height:36px;border-radius:50%;background:#f1f7e3;color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex:none;border:1px solid #e2ecc9}
-.ck-name{font-size:14.5px;font-weight:500}
-.ck-sub{font-size:12px;color:var(--mut)}
-.ck-time{margin-left:auto;font-family:var(--mono);font-size:13.5px;color:var(--accent-d);font-weight:500;background:var(--accent-soft);padding:3px 10px;border-radius:8px}
-.count-pill{font-family:var(--mono);font-size:12.5px;background:var(--accent-soft);color:var(--accent-ink);padding:2px 10px;border-radius:999px;font-weight:500}
-
-/* ---------- members page ---------- */
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
-.toolbar .inp{max-width:280px}
-.chips{display:flex;gap:8px;flex-wrap:wrap}
-.chip{min-height:40px;padding:8px 15px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:13.5px;font-weight:500;color:var(--mut);display:inline-flex;align-items:center;gap:7px;transition:all .15s}
-.chip:hover{border-color:#c3cda9}
-.chip .c{font-family:var(--mono);font-size:12px;background:#f0f3e7;border-radius:99px;padding:1px 8px}
-.chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-.chip.active .c{background:rgba(255,255,255,.18);color:#fff}
-.chip.red{color:var(--red);border-color:#fecaca}
-.chip.red .c{background:var(--red-soft);color:var(--red)}
-.chip.red.active{background:var(--red);color:#fff;border-color:var(--red)}
-.chip.red.active .c{background:rgba(255,255,255,.22);color:#fff}
-.tbl-wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
-table{width:100%;border-collapse:collapse;min-width:780px}
-th{font-size:12.5px;font-weight:500;color:var(--mut);text-align:left;padding:13px 14px;border-bottom:1px solid var(--line);background:#fafbf5;white-space:nowrap}
-td{padding:13px 14px;border-bottom:1px solid #eef1e5;font-size:14.5px;vertical-align:middle}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:.8rem;margin-bottom:1rem}
+.kpi{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:1rem 1.1rem}
+.kpi span{font-size:.74rem;color:var(--muted);display:block}
+.kpi b{font-family:var(--mono);font-size:1.5rem;font-weight:700}
+.kpi b.r{color:var(--red)}
+.kpi b.a{color:var(--amber)}
+.kpi b.g{color:var(--green)}
+.panel{background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
+.p-head{padding:.9rem 1.2rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.p-head b{font-weight:600}
+.p-head .count{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th{text-align:left;padding:.7rem 1rem;color:var(--muted);font-weight:500;font-size:.74rem;letter-spacing:.04em;border-bottom:1px solid var(--line);white-space:nowrap;background:#f7faf3}
+td{padding:.65rem 1rem;border-bottom:1px solid #eff4ea;vertical-align:middle}
 tr:last-child td{border-bottom:0}
-tr.clickable{cursor:pointer}
-tr.clickable:hover td{background:#f7faf0}
-.mname{font-weight:500}
-.msub{font-size:12px;color:var(--mut)}
-td.num{font-size:13.5px}
+.badge{display:inline-block;font-size:.68rem;font-weight:700;padding:.15rem .55rem;border-radius:99px;white-space:nowrap}
+.b-act{background:#dcfce7;color:#15803d}
+.b-warn{background:#fef3c7;color:#b45309}
+.b-exp{background:#fee2e2;color:#b91c1c}
+.b-in{background:#dcfce7;color:#15803d}
+.b-out{background:#f1f5f9;color:#64748b}
+.tlink{color:var(--acc);font-weight:500;min-height:40px;padding:.2rem .5rem}
+.tlink:hover{text-decoration:underline}
+.dash-2col{display:grid;grid-template-columns:1.2fr .8fr;gap:1rem}
+@media(max-width:900px){.dash-2col{grid-template-columns:1fr}}
+.gym-row{display:flex;align-items:center;gap:.7rem;padding:.6rem 1.2rem;border-bottom:1px solid #eff4ea;font-size:.86rem}
+.gym-row:last-child{border-bottom:0}
+.gym-row .av{width:32px;height:32px;border-radius:9px;color:#fff;display:grid;place-items:center;font-weight:700;font-size:.75rem;flex:none}
+.gym-row .t{margin-left:auto;font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.cls-row{display:flex;align-items:center;gap:.8rem;padding:.75rem 1.2rem;border-bottom:1px solid #eff4ea}
+.cls-row:last-child{border-bottom:0}
+.cls-row .ct{font-family:var(--mono);font-weight:700;width:56px;flex:none}
+.cls-row .cb{flex:1;min-width:0}
+.cls-row .cb b{font-size:.88rem;display:block}
+.cls-row .cb small{color:var(--muted);font-size:.73rem}
+.cap{width:110px;flex:none}
+.cap .bar{height:7px;border-radius:4px;background:#eef3e8;overflow:hidden}
+.cap .bar i{display:block;height:100%;background:var(--acc);border-radius:4px}
+.cap small{font-family:var(--mono);font-size:.66rem;color:var(--muted)}
 
-/* ---------- classes page ---------- */
-.cls-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:16px}
-.cls-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:20px;display:flex;flex-direction:column;gap:12px}
-.cls-time{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent-ink);display:flex;align-items:baseline;gap:8px}
-.cls-time small{font-size:12px;font-weight:400;color:var(--mut);font-family:var(--sans)}
-.cls-name{font-size:17px;font-weight:600}
-.cls-coach{font-size:13px;color:var(--mut);display:flex;align-items:center;gap:6px}
-.pbar{height:9px;border-radius:99px;background:#edf0e2;overflow:hidden}
-.pbar>i{display:block;height:100%;border-radius:99px;background:var(--accent);transition:width .3s}
-.pbar.warn>i{background:var(--yel)}
-.pbar.full>i{background:var(--red)}
-.cls-cap{display:flex;justify-content:space-between;font-size:13px;color:var(--mut)}
-.cls-cap b{font-family:var(--mono);color:var(--ink)}
-.cls-cap .st-full{color:var(--red);font-weight:600}
-.cls-cap .st-warn{color:#a16207;font-weight:500}
-.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--mut);margin-bottom:16px}
-.legend span{display:inline-flex;align-items:center;gap:6px}
-.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
-.dot.ok{background:var(--accent)}.dot.warn{background:var(--yel)}.dot.full{background:var(--red)}
-
-/* ---------- modal ---------- */
-#modalRoot .overlay{position:fixed;inset:0;z-index:900;background:rgba(10,16,4,.55);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:16px;animation:fade .15s ease}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-.modal{background:#fff;border-radius:18px;width:100%;max-width:520px;max-height:88vh;overflow:auto;box-shadow:0 26px 70px rgba(0,0,0,.35);animation:pop .2s ease}
-.m-head{display:flex;align-items:center;justify-content:space-between;padding:20px 22px 0}
-.m-head h3{font-size:18px;font-weight:600}
-.m-x{width:40px;height:40px;min-height:40px;border:0;border-radius:10px;background:#f2f4ea;color:var(--mut);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
-.m-x:hover{background:#e6e9db;color:var(--ink)}
-.m-body{padding:18px 22px}
-.m-foot{display:flex;gap:10px;padding:0 22px 22px}
-.m-body .fld>span{color:var(--mut)}
-.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.pkg-opt{position:relative;cursor:pointer}
-.pkg-opt input{position:absolute;opacity:0;inset:0;cursor:pointer}
-.pkg-opt-body{display:flex;flex-direction:column;gap:3px;border:1.5px solid var(--line);border-radius:12px;padding:12px 12px;min-height:64px;transition:all .15s;background:#fff}
-.pkg-opt:hover .pkg-opt-body{border-color:#c3cda9}
-.pkg-opt input:checked+.pkg-opt-body{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
-.pkg-opt input:focus-visible+.pkg-opt-body{outline:2px solid var(--accent);outline-offset:2px}
-.pkg-opt-name{font-size:14px;font-weight:600}
-.pkg-opt-sub{font-size:11.5px;color:var(--mut)}
-.renew-prev{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px;padding:13px 15px;background:#f7faf0;border:1px solid var(--line);border-radius:11px;font-size:14px}
-.renew-prev b{font-family:var(--mono);font-weight:600}
-.pf-head{display:flex;gap:14px;align-items:center;margin-bottom:16px}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.stat{background:#f7faf0;border:1px solid var(--line);border-radius:11px;padding:11px 14px}
-.stat .k{font-size:12px;color:var(--mut)}
-.stat .v{font-size:16px;font-weight:600;font-family:var(--mono);margin-top:2px}
-.h-title{font-size:13px;font-weight:600;color:var(--mut);margin:14px 0 8px;text-transform:none;letter-spacing:.2px}
-.h-list{border:1px solid var(--line);border-radius:11px;overflow:hidden}
-.h-row{display:flex;align-items:center;gap:10px;padding:9px 14px;font-size:13.5px;border-bottom:1px solid #eef1e5;min-height:42px}
-.h-row:last-child{border-bottom:0}
-.h-row .num{margin-left:auto;color:var(--accent-d);font-weight:500;font-size:13px}
-.h-empty{padding:14px;text-align:center;color:var(--mut);font-size:13px}
-.status-pill{font-size:12px;font-weight:600;padding:4px 12px;border-radius:999px}
-.status-pill.ok{background:var(--accent-soft);color:var(--accent-ink)}
-.status-pill.soon{background:var(--amber-soft);color:#92400e}
-.status-pill.expired{background:var(--red-soft);color:var(--red-d)}
-
-/* ---------- toast ---------- */
-#toastRoot{position:fixed;right:16px;bottom:16px;z-index:950;display:flex;flex-direction:column;gap:8px;max-width:min(380px,calc(100vw - 32px))}
-.toast{display:flex;align-items:center;gap:10px;background:#17220e;color:#eef4e3;padding:12px 16px;border-radius:12px;min-height:44px;font-size:14px;box-shadow:0 12px 32px rgba(0,0,0,.28);border-left:3px solid var(--accent);animation:tin .22s ease}
-.toast svg{flex:none;color:#a3e635}
-.toast.err{border-left-color:var(--red)}.toast.err svg{color:#f87171}
-.toast.warn{border-left-color:var(--yel)}.toast.warn svg{color:#facc15}
-.toast.out{opacity:0;transform:translateY(6px);transition:all .25s}
-@keyframes tin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-
-/* ---------- back home capsule ---------- */
-.back-home{position:fixed;left:14px;bottom:14px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 18px;background:#fff;border:1px solid #e2e5da;border-left:3px solid var(--red);border-radius:999px;font-size:13.5px;font-weight:500;color:#1a2b12;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.14)}
-.back-home:hover{background:#fafbf5}
-
-/* ---------- responsive ---------- */
-@media (max-width:980px){.grid-2{grid-template-columns:1fr}}
-@media (max-width:900px){
-  #sidebar{transform:translateX(-100%)}
-  #sidebar.open{transform:none;box-shadow:24px 0 60px rgba(0,0,0,.35)}
-  .main{margin-left:0}
-  #hamburger{display:inline-flex;background:#fff;border:1px solid var(--line);color:var(--ink)}
-  #content{padding:18px 14px 70px}
-  .pkg-grid{grid-template-columns:1fr}
+/* modal + drawer shared */
+.overlay{position:fixed;inset:0;background:rgba(26,33,19,.55);backdrop-filter:blur(3px);z-index:200;display:grid;place-items:center;padding:1rem}
+.modal{background:#fff;border-radius:18px;width:min(460px,100%);max-height:92vh;overflow-y:auto;padding:1.4rem;animation:mup .22s cubic-bezier(.2,.8,.2,1)}
+@keyframes mup{from{opacity:0;transform:translateY(14px) scale(.98)}}
+.modal h3{font-size:1.05rem;font-weight:600;margin-bottom:1rem}
+.pkg-grid{display:grid;gap:.5rem}
+.pkg-b{border:1.5px solid var(--line);border-radius:11px;padding:.8rem .9rem;text-align:left;display:flex;align-items:center;gap:.7rem;transition:all .15s}
+.pkg-b:hover{border-color:var(--acc)}
+.pkg-b.on{border-color:var(--acc);background:var(--acc-soft)}
+.pkg-b b{font-size:.88rem;flex:1}
+.pkg-b .mono{color:var(--acc-deep);font-weight:700}
+.m-acts{display:flex;gap:.6rem;margin-top:1.1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:600;border-radius:10px;padding:.75rem 1.2rem;transition:all .15s;min-height:46px}
+.btn-a{background:var(--acc);color:#fff}
+.btn-a:hover{background:var(--acc-deep)}
+.btn-o{border:1.5px solid var(--line);color:var(--muted)}
+.btn-o:hover{border-color:var(--acc);color:var(--acc)}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,92vw);background:#fff;border-left:1px solid var(--line);z-index:250;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.scrim{position:fixed;inset:0;background:rgba(26,33,19,.45);z-index:240}
+.d-head{padding:.9rem 1.1rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.6rem}
+.d-head b{font-weight:600}
+.d-head .x{margin-left:auto;width:38px;height:38px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted)}
+.d-body{flex:1;overflow-y:auto;padding:.6rem 1.1rem}
+.feed-item{display:flex;gap:.7rem;padding:.6rem 0;border-bottom:1px dashed var(--line);animation:tin .2s}
+@keyframes tin{from{opacity:0;transform:translateX(8px)}}
+.feed-item .fi{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:none}
+.feed-item .fm{font-size:.82rem;line-height:1.45}
+.feed-item .ft{font-family:var(--mono);font-size:.66rem;color:var(--muted);margin-top:.1rem}
+.d-note{padding:.7rem 1.1rem;border-top:1px solid var(--line);font-size:.72rem;color:var(--muted)}
+.toast{position:fixed;top:1rem;right:1rem;z-index:300;background:var(--dark2);color:#fff;border-radius:10px;padding:.8rem 1.1rem;font-size:.85rem;box-shadow:0 12px 30px -10px rgba(0,0,0,.4);opacity:0;transform:translateY(-8px);transition:all .25s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
+.toast.err{background:#7f1d1d}
+.statusbar{background:var(--dark);color:#8fa872;font-size:.72rem;padding:.45rem 1.1rem;display:flex;gap:1.4rem;align-items:center;font-family:var(--mono);flex-wrap:wrap}
+.statusbar .ok{color:#4ade80}
+.statusbar .sp{flex:1}
+.statusbar button{color:#8fa872;min-height:30px;font-family:var(--mono);font-size:.72rem}
+.statusbar button:hover{color:#fff}
+@media(max-width:860px){
+  .app{grid-template-columns:1fr}
+  .rail{position:fixed;left:0;top:0;bottom:0;width:72px;transform:translateX(-100%);transition:transform .25s;z-index:100}
+  .rail.open{transform:none}
+  .mobtop{display:flex!important}
 }
-@media (max-width:520px){
-  .tb-right{width:100%;margin-left:0}
-  .searchrow{flex-direction:column}
-  .m-foot{flex-direction:column}
-  .toolbar .inp{max-width:none}
-}
+.mobtop{display:none;background:#fff;border-bottom:1px solid var(--line);padding:.5rem .8rem;align-items:center;gap:.8rem}
+.mobtop button{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
 </style>
 </head>
 <body>
 <script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
 
-<!-- ================= LOGIN ================= -->
-<div id="loginView">
-  <div class="login-card">
-    <div class="logo-row">
-      <div class="logo-mark" aria-hidden="true">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"/></svg>
+<!-- QR-SCAN ENTRY -->
+<div class="qr-view" id="qrView" hidden>
+  <div class="qr-in">
+    <div class="qr-brand"><img src="assets/logo.jpg" alt=""><b>ฟิตดี Pro</b></div>
+    <p class="qr-sub">FITMAX ยิม สาขาอารีย์ · สแกนบัตรสมาชิกเพื่อเช็คอิน</p>
+    <div class="mem-row" id="memRow"></div>
+    <div class="scan-zone" id="scanZone">
+      <div class="scan-frame">
+        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#75875a" stroke-width="1.4" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM17 17h4v4h-4z" fill="currentColor"/></svg>
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <i class="scan-beam"></i>
       </div>
-      <div>
-        <div class="logo-name">ฟิตดี</div>
-        <div class="logo-sub">ระบบสมาชิกฟิตเนส • สิงห์ดำ ฟิตเนส</div>
-      </div>
+      <div class="scan-msg" id="scanMsg">รอสแกนบัตรสมาชิก…</div>
     </div>
-    <div class="login-title">เข้าสู่ระบบ</div>
-    <div class="login-sub">สำหรับพนักงานหน้าเคาน์เตอร์และผู้จัดการสาขา</div>
-    <form id="loginForm">
-      <label class="fld"><span>อีเมลพนักงาน</span><input class="inp num" id="loginUser" value="admin@fitdee.th" autocomplete="username"></label>
-      <label class="fld"><span>รหัสผ่าน</span><input class="inp num" id="loginPass" type="password" value="demo1234" autocomplete="current-password"></label>
-      <button type="submit" class="btn btn-primary btn-lg login-btn">เข้าสู่ระบบ</button>
-    </form>
-    <div class="demo-note">ระบบเดโมสำหรับนำเสนอ — กด “เข้าสู่ระบบ” ได้เลย ไม่ต้องใช้รหัสจริง</div>
-    <div class="credit">พัฒนาโดย <a href="../../first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener">ZenityX</a> · อยากสร้างเว็บแบบนี้ด้วย AI? ดูคอร์ส First Vibe Coding for Beginners</div>
+    <p class="qr-credit">ระบบเดโม — ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener">First Vibe : Coding — ZenityX</a></p>
   </div>
 </div>
 
-<!-- ================= APP ================= -->
-<div id="appView" hidden>
-  <aside id="sidebar">
-    <div class="sb-logo">
-      <div class="logo-mark" aria-hidden="true">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"/></svg>
-      </div>
-      <div><b>ฟิตดี</b><span>สิงห์ดำ ฟิตเนส</span></div>
-    </div>
-    <div class="nav-label">เมนูหลัก</div>
-    <button class="nav-item active" data-page="checkin">
-      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg>
-      เช็คอินหน้ายิม
-    </button>
-    <button class="nav-item" data-page="members">
-      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      สมาชิก
-    </button>
-    <button class="nav-item" data-page="classes">
-      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2 2 4-4"/></svg>
-      คลาสวันนี้
-    </button>
-    <div class="sb-user">
-      <div class="avatar">ผจ</div>
-      <div style="min-width:0">
-        <div class="u-name">ผู้จัดการสาขา</div>
-        <div class="u-role">สิงห์ดำ ฟิตเนส</div>
-      </div>
-      <button class="icon-btn" id="logoutBtn" title="ออกจากระบบ" aria-label="ออกจากระบบ" style="margin-left:auto">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>
-      </button>
-    </div>
+<!-- APP -->
+<div class="app" id="appView" hidden>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ฟิตดี Pro</b></div>
+  <aside class="rail" id="rail">
+    <div class="logo"><img src="assets/logo.jpg" alt="ฟิตดี"></div>
+    <nav>
+      <button class="ri on" data-page="today" aria-label="วันนี้"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span class="tip">ภาพรวมวันนี้ (D)</span></button>
+      <button class="ri" data-page="members" aria-label="สมาชิก"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="tip">สมาชิก (M)</span></button>
+      <button class="ri" data-page="classes" aria-label="คลาสกลุ่ม"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="tip">คลาสกลุ่มวันนี้ (C)</span></button>
+      <button class="ri" id="feedBtn" aria-label="กิจกรรมข้ามระบบ"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span class="tip">กิจกรรมข้ามระบบ (F) <span id="feedBadge" class="mono" hidden></span></span></button>
+    </nav>
+    <button class="who" id="whoBtn" title="กลับหน้าสแกน">ฟ</button>
   </aside>
 
   <div class="main">
-    <header id="topbar">
-      <button class="icon-btn" id="hamburger" aria-label="เปิดเมนู">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-      </button>
-      <div>
-        <div class="tb-title" id="pageTitle">เช็คอินหน้ายิม</div>
-        <div class="tb-date num" id="thaiDate"></div>
+    <div class="topbar">
+      <span class="ws-chip"><span class="wm">ฟ</span> FITMAX ยิม อารีย์</span>
+      <span class="stat-chip green">อยู่ในยิมตอนนี้ <b id="stIn">0</b></span>
+      <span class="stat-chip">เช็คอินวันนี้ <b id="stCk">0</b></span>
+      <span class="stat-chip amber">ใกล้หมดอายุ <b id="stExp">0</b></span>
+      <span class="sp"></span>
+      <button class="sync-pill" id="syncPill"><i></i><span id="syncTxt">ออนไลน์</span></button>
+      <span class="clock" id="clock">--:--:--</span>
+    </div>
+    <div class="offline-banner" id="offBanner" hidden><b>โหมดออฟไลน์</b> เช็คอินเก็บในเครื่องก่อน</div>
+
+    <div class="content">
+      <div id="page-today">
+        <div class="kpi-grid" id="kpiGrid"></div>
+        <div class="dash-2col">
+          <div class="panel"><div class="p-head"><b>เช็คอินวันนี้</b><span class="count" id="ckCount"></span></div><div id="ckList"></div></div>
+          <div class="panel"><div class="p-head"><b>ใกล้หมดอายุใน 7 วัน</b></div><div id="expList"></div></div>
+        </div>
       </div>
-      <div class="tb-right">
-        <span class="kpi lime" id="kpiGym"></span>
-        <span class="kpi red" id="kpiSoon"></span>
-        <button class="btn btn-ghost" id="resetBtn" style="min-height:40px;padding:8px 14px;font-size:13.5px">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
-          รีเซ็ตข้อมูลตัวอย่าง
-        </button>
+
+      <div id="page-members" hidden>
+        <div class="panel">
+          <div class="p-head"><b>สมาชิกทั้งหมด</b><span class="count" id="memCount"></span></div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>สมาชิก</th><th>แพ็กเกจ</th><th>หมดอายุ</th><th>เช็คอินเดือนนี้</th><th>สถานะ</th><th></th></tr></thead>
+            <tbody id="memBody"></tbody>
+          </table></div>
+        </div>
       </div>
-    </header>
 
-    <main id="content">
-      <!-- เช็คอิน -->
-      <section id="page-checkin">
-        <div class="page-head">
-          <h2>เช็คอินหน้ายิม</h2>
-          <p>ค้นหาสมาชิกด้วยรหัสหรือเบอร์โทร แล้วบันทึกเวลาเข้ายิม</p>
+      <div id="page-classes" hidden>
+        <div class="panel">
+          <div class="p-head"><b>คลาสกลุ่มวันนี้</b><span class="count">จองได้ถ้ายังไม่เต็ม</span></div>
+          <div id="clsList"></div>
         </div>
-        <div class="grid-2">
-          <div class="card">
-            <div class="searchrow">
-              <input class="inp" id="ckInput" placeholder="เช่น MB-0001 หรือ 081-234-5678" autocomplete="off" aria-label="รหัสสมาชิกหรือเบอร์โทร">
-              <button class="btn btn-primary" id="ckGo">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-                ค้นหา
-              </button>
-            </div>
-            <div class="quickchips">
-              <button class="qchip" data-q="MB-0001">ทดลอง <span class="num">MB-0001</span> (ใช้งานได้)</button>
-              <button class="qchip" data-q="MB-0002"><span class="num">MB-0002</span> (ใกล้หมดอายุ)</button>
-              <button class="qchip" data-q="MB-0004"><span class="num">MB-0004</span> (หมดอายุ)</button>
-            </div>
-            <div id="ckResult">
-              <div class="empty-hint">
-                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg>
-                <div>พิมพ์รหัสสมาชิกหรือเบอร์โทร แล้วกด Enter<br>ระบบจะแสดงสถานะสมาชิกทันที</div>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-              <h3 style="font-size:16px;font-weight:600">เช็คอินวันนี้</h3>
-              <span class="count-pill" id="ckTodayCount">0</span>
-            </div>
-            <div class="ck-list" id="ckList"></div>
-          </div>
-        </div>
-      </section>
+      </div>
+    </div>
 
-      <!-- สมาชิก -->
-      <section id="page-members" hidden>
-        <div class="page-head">
-          <h2>สมาชิกทั้งหมด</h2>
-          <p>จัดการข้อมูลสมาชิก แพ็กเกจ และวันหมดอายุ</p>
-        </div>
-        <div class="toolbar">
-          <input class="inp" id="memSearch" placeholder="ค้นหาชื่อ / รหัส / เบอร์โทร" aria-label="ค้นหาสมาชิก">
-          <div class="chips" id="memChips"></div>
-          <button class="btn btn-primary" id="addMemberBtn" style="margin-left:auto">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-            เพิ่มสมาชิก
-          </button>
-        </div>
-        <div class="tbl-wrap">
-          <table>
-            <thead><tr>
-              <th>รหัส</th><th>ชื่อสมาชิก</th><th>แพ็กเกจ</th><th>หมดอายุ</th><th>เข้ายิมล่าสุด</th><th style="text-align:right">ครั้งเดือนนี้</th>
-            </tr></thead>
-            <tbody id="memRows"></tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- คลาสวันนี้ -->
-      <section id="page-classes" hidden>
-        <div class="page-head">
-          <h2>คลาสกลุ่มวันนี้</h2>
-          <p>ตารางคลาสประจำวันและจำนวนผู้จอง — จองได้เฉพาะสมาชิกที่ยังไม่หมดอายุ</p>
-        </div>
-        <div class="legend">
-          <span><i class="dot ok"></i> ว่าง</span>
-          <span><i class="dot warn"></i> จองเกินครึ่ง</span>
-          <span><i class="dot full"></i> เต็มแล้ว (ห้ามจอง)</span>
-        </div>
-        <div class="cls-grid" id="clsGrid"></div>
-      </section>
-    </main>
+    <div class="statusbar">
+      <span>ฟิตดี Pro v1.6.2</span>
+      <span class="ok">● พร้อมใช้งาน</span>
+      <span class="sp"></span>
+      <span id="stMem">สมาชิก: 0</span>
+      <button id="resetBtn">รีเซ็ตข้อมูลตัวอย่าง</button>
+    </div>
   </div>
 </div>
 
-<div id="modalRoot"></div>
-<div id="toastRoot" aria-live="polite"></div>
+<!-- renew modal -->
+<div class="overlay" id="rnOverlay" hidden>
+  <div class="modal">
+    <h3 id="rnTitle">ต่อแพ็กเกจ</h3>
+    <div class="pkg-grid" id="pkgGrid"></div>
+    <div class="m-acts">
+      <button class="btn btn-o" id="rnCancel" style="flex:1">ยกเลิก</button>
+      <button class="btn btn-a" id="rnSave" style="flex:2">ชำระและต่ออายุ</button>
+    </div>
+  </div>
+</div>
 
-<a class="back-home" href="../">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-  หน้ารวมตัวอย่าง
+<!-- feed drawer -->
+<div class="scrim" id="scrim" hidden></div>
+<div class="drawer" id="feedDrawer">
+  <div class="d-head"><b>กิจกรรมข้ามระบบ</b><span class="count mono" id="feedCount" style="font-size:.7rem;color:var(--muted)"></span><button class="x" id="feedClose" aria-label="ปิด"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+  <div class="d-body" id="feedBody"></div>
+  <div class="d-note">ทุกระบบในเครือ ZenityX Demos แชร์เหตุการณ์ผ่าน localStorage จริง</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<a href="../" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
 </a>
 
 <script>
 (function(){
 'use strict';
-var KEY='zx-gym-v1';
-var PKGS={
-  monthly:{name:'รายเดือน',days:30,price:1200},
-  m6:{name:'6 เดือน',days:180,price:6000},
-  yearly:{name:'รายปี',days:365,price:9900}
-};
-var CLASSES=[
-  {id:'yoga',name:'โยคะยามเช้า',time:'06:30',coach:'ครูแอ้ว',max:15},
-  {id:'hiit',name:'HIIT เบิร์นเที่ยง',time:'12:15',coach:'โค้ชบอล',max:12},
-  {id:'muay',name:'มวยไทยฟิต',time:'18:30',coach:'ครูเสือ',max:10},
-  {id:'ride',name:'ปั่น Rhythm Ride',time:'19:30',coach:'โค้ชมิ้นท์',max:20}
+var LS = 'zx-gym2-v1';
+var LINK_KEY = 'zx-link-v1';
+var DAY = 86400000;
+
+function linkRead(){ try { var d = JSON.parse(localStorage.getItem(LINK_KEY)); return d && d.events ? d : {events:[]}; } catch(e){ return {events:[]}; } }
+function linkWrite(sys, type, msg, val){
+  var l = linkRead();
+  l.events.unshift({ t: Date.now(), sys: sys, type: type, msg: msg, val: (val === undefined ? null : val) });
+  l.events = l.events.slice(0, 60);
+  try { localStorage.setItem(LINK_KEY, JSON.stringify(l)); } catch(e){}
+}
+
+var PKGS = [
+  { id:'m1', n:'รายเดือน', price: 1290, days: 30 },
+  { id:'m3', n:'3 เดือน', price: 3390, days: 90 },
+  { id:'y1', n:'รายปี', price: 11900, days: 365 }
 ];
-var PAGE_TITLES={checkin:'เช็คอินหน้ายิม',members:'สมาชิก',classes:'คลาสวันนี้'};
-
-/* ---------- icons ---------- */
-var ICO={
-  ok:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>',
-  okBig:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>',
-  err:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>',
-  errBig:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>',
-  warn:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>',
-  x:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>',
-  clock:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
-  pulse:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
-  check:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',
-  refresh:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>',
-  user:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
-};
-
-/* ---------- date helpers ---------- */
-function pad(n){return String(n).padStart(2,'0');}
-function dkey(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
-function today(){return dkey(new Date());}
-function addDays(key,days){var d=new Date(key+'T12:00:00');d.setDate(d.getDate()+days);return dkey(d);}
-function daysLeft(m){var a=new Date(today()+'T00:00:00'),b=new Date(m.expiry+'T00:00:00');return Math.round((b-a)/86400000);}
-function fmtDate(key){return new Intl.DateTimeFormat('th-TH',{day:'numeric',month:'short',year:'numeric'}).format(new Date(key+'T12:00:00'));}
-function fmtTime(iso){var d=new Date(iso);return pad(d.getHours())+':'+pad(d.getMinutes());}
-function fmtPhone(p){if(!p)return'—';var d=String(p).replace(/\D/g,'');if(d.length===10)return d.slice(0,3)+'-'+d.slice(3,6)+'-'+d.slice(6);return p;}
-function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-function initials(name){var p=name.trim().split(/\s+/);return (p[0]?p[0].charAt(0):'')+(p[1]?p[1].charAt(0):'');}
-function relLabel(iso){
-  var d=new Date(iso),t=today(),k=dkey(d);
-  if(k===t)return'วันนี้ '+fmtTime(iso);
-  if(k===addDays(t,-1))return'เมื่อวาน '+fmtTime(iso);
-  return fmtDate(k)+' '+fmtTime(iso);
-}
-
-/* ---------- seed ---------- */
+var CLASSES = [
+  { t:'07:30', n:'Morning Yoga', coach:'โค้ชเมย์', cap: 15 },
+  { t:'12:15', n:'HIIT Express', coach:'โค้ชบอล', cap: 12 },
+  { t:'18:30', n:'Spin Class', coach:'โค้ชจูน', cap: 20 },
+  { t:'19:30', n:'Muay Thai Fit', coach:'โค้ชแบงค์', cap: 16 }
+];
 function seed(){
-  var t=today(),now=Date.now();
-  function ago(min){return new Date(now-min*60000).toISOString();}
-  function ci(d,h,m){var dt=new Date();dt.setDate(dt.getDate()-d);dt.setHours(h,m,0,0);return dt.toISOString();}
-  function mem(id,name,phone,pkg,off,checkins){return{id:id,name:name,phone:phone,pkg:pkg,expiry:addDays(t,off),checkins:checkins,renewals:[]};}
-  var members=[
-    mem('MB-0001','ธนกฤต วงศ์สุวรรณ','0812345678','yearly',300,[ago(40),ci(1,18,45),ci(2,7,5),ci(4,19,10),ci(6,6,50),ci(8,18,30),ci(11,19,0),ci(13,7,20)]),
-    mem('MB-0002','ศิริพร แก้วใส','0895550123','monthly',5,[ci(1,12,30),ci(3,12,40),ci(7,13,0),ci(9,12,20)]),
-    mem('MB-0003','วิชัย รุ่งเรือง','0861112233','m6',45,[ago(250),ci(1,7,0),ci(5,6,45),ci(10,7,15),ci(15,18,0)]),
-    mem('MB-0004','ณัฐวดี พูนสุข','0924445566','monthly',-2,[ci(6,19,0),ci(12,18,40),ci(20,19,30)]),
-    mem('MB-0005','อนุชา ทองแท้','0817778899','yearly',150,[ci(1,6,40),ci(2,18,20),ci(4,19,5),ci(6,6,35),ci(9,18,50),ci(14,19,15),ci(17,7,0),ci(21,18,10),ci(24,19,40)]),
-    mem('MB-0006','พิมพ์ชนก จันทร์เพ็ญ','0952223344','m6',6,[ci(2,12,10),ci(5,12,30),ci(8,13,0)]),
-    mem('MB-0007','กิตติพงษ์ ใจดี','0889990011','monthly',20,[ago(90),ci(1,19,20),ci(3,18,55),ci(6,19,10),ci(10,18,35),ci(13,19,25)]),
-    mem('MB-0008','สุภาวดี ศรีสุข','0845556677','yearly',200,[ago(150),ci(2,6,35),ci(4,6,50),ci(7,7,5),ci(11,6,45)]),
-    mem('MB-0009','ปวีณา บุญมาก','0903334455','monthly',-10,[ci(12,18,20),ci(18,19,0),ci(25,18,45)]),
-    mem('MB-0010','รัชพล มั่นคง','0876667788','m6',100,[ci(1,19,45),ci(3,18,20),ci(5,19,5),ci(8,18,40),ci(12,19,20),ci(16,18,55)]),
-    mem('MB-0011','ชนากานต์ เพียรดี','0938889900','monthly',1,[ci(1,12,45),ci(4,13,10),ci(9,12,35)]),
-    mem('MB-0012','ธีรภัทร สายชล','0851119900','yearly',75,[ago(200),ci(2,19,0),ci(5,18,30),ci(9,19,15),ci(13,18,45),ci(17,19,30),ci(22,18,15)])
-  ];
-  var bookings={};
-  bookings[t]={
-    yoga:['MB-0001','MB-0005','MB-0006','MB-0008','MB-0011','MB-0012'],
-    hiit:['MB-0001','MB-0002','MB-0003','MB-0005','MB-0007','MB-0010','MB-0012'],
-    muay:['MB-0001','MB-0002','MB-0003','MB-0005','MB-0006','MB-0007','MB-0008','MB-0010','MB-0011','MB-0012'],
-    ride:['MB-0001','MB-0002','MB-0003','MB-0005','MB-0006','MB-0007','MB-0008','MB-0010','MB-0011','MB-0012','MB-0009']
+  var now = Date.now();
+  return {
+    members: [
+      { id:'g1', n:'คุณเอิร์ธ', phone:'081-223-4455', pkg:'รายปี', exp: now + 320*DAY, ckMonth: 14, c:'#65a30d' },
+      { id:'g2', n:'คุณมิ้นท์', phone:'089-556-7788', pkg:'รายเดือน', exp: now + 4*DAY, ckMonth: 9, c:'#0284c7' },
+      { id:'g3', n:'คุณโต้ง', phone:'082-889-0011', pkg:'3 เดือน', exp: now + 55*DAY, ckMonth: 12, c:'#9333ea' },
+      { id:'g4', n:'คุณแนน', phone:'084-111-2233', pkg:'รายเดือน', exp: now - 2*DAY, ckMonth: 3, c:'#dc2626' },
+      { id:'g5', n:'คุณบีม', phone:'086-777-9900', pkg:'รายปี', exp: now + 6*DAY, ckMonth: 18, c:'#d97706' },
+      { id:'g6', n:'คุณเจมส์', phone:'087-333-5566', pkg:'3 เดือน', exp: now + 70*DAY, ckMonth: 7, c:'#0d9488' }
+    ],
+    checkins: [],
+    classBook: { '12:15': 9, '18:30': 14, '19:30': 6 },
+    seq: 1
   };
-  return {members:members,bookings:bookings};
+}
+var state = load() || blank();
+var offline = false, renewId = null, renewPkg = 'm1';
+function blank(){ return seed(); }
+function load(){ try { var d = JSON.parse(localStorage.getItem(LS)); return d && d.members ? d : null; } catch(e){ return null; } }
+function save(){ localStorage.setItem(LS, JSON.stringify(state)); }
+function fmt(n){ return '฿' + Math.round(n).toLocaleString('th-TH'); }
+function toast(m, err){ var t=document.getElementById('toast'); t.textContent=m; t.className='toast show'+(err?' err':''); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show');},2400); }
+function closeAllModals(){ document.querySelectorAll('.overlay').forEach(function(o){ o.hidden = true; }); }
+function ago(t){ var s=Math.floor((Date.now()-t)/1000); if(s<3600) return Math.max(1,Math.floor(s/60))+' นาทีที่แล้ว'; if(s<86400) return Math.floor(s/3600)+' ชม.ที่แล้ว'; return Math.floor(s/86400)+' วันที่แล้ว'; }
+function memStatus(m){
+  if (m.exp < Date.now()) return 'exp';
+  if (m.exp - Date.now() < 7*DAY) return 'warn';
+  return 'act';
+}
+function beep(){
+  try {
+    var ctx = beep._c || (beep._c = new (window.AudioContext||window.webkitAudioContext)());
+    var o = ctx.createOscillator(), g = ctx.createGain();
+    o.type='sine'; o.frequency.value=1568;
+    var t0 = ctx.currentTime;
+    g.gain.setValueAtTime(.09, t0);
+    g.gain.exponentialRampToValueAtTime(.001, t0+.18);
+    o.connect(g); g.connect(ctx.destination); o.start(t0); o.stop(t0+.2);
+  } catch(e){}
 }
 
-/* ---------- storage ---------- */
-function load(){try{var r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){}}
-var DB=load();
-if(!DB||!DB.members){DB=seed();save();}
+/* entry */
+var skipEntry = new URLSearchParams(location.search).get('app') === '1' || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+setTimeout(function(){
+  if (skipEntry) enterApp();
+  else { renderMemCards(); document.getElementById('qrView').hidden = false; }
+}, 60);
+setInterval(function(){ document.getElementById('clock').textContent = new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit',second:'2-digit'}); }, 1000);
 
-/* ---------- domain helpers ---------- */
-function find(id){for(var i=0;i<DB.members.length;i++)if(DB.members[i].id===id)return DB.members[i];return null;}
-function memStatus(m){var d=daysLeft(m);if(d<0)return'expired';if(d<=7)return'soon';return'ok';}
-function isActive(m){return memStatus(m)!=='expired';}
-function latest(arr){if(!arr||!arr.length)return null;var s=arr.slice().sort();return s[s.length-1];}
-function monthCount(m){var p=today().slice(0,7);return m.checkins.filter(function(c){return c.slice(0,7)===p;}).length;}
-function inGymCount(){var cut=Date.now()-3*3600*1000;return DB.members.filter(function(m){return m.checkins.some(function(c){return new Date(c).getTime()>=cut;});}).length;}
-function soonCount(){return DB.members.filter(function(m){return memStatus(m)==='soon';}).length;}
-function nextId(){var mx=0;DB.members.forEach(function(m){var n=parseInt(m.id.replace(/\D/g,''),10);if(n>mx)mx=n;});return 'MB-'+pad2(mx+1);}
-function pad2(n){return String(n).padStart(4,'0');}
-
-/* ---------- sound ---------- */
-var AC=null;
-function beep(ok){
-  try{
-    if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();
-    if(AC.state==='suspended')AC.resume();
-    var t0=AC.currentTime;
-    function tone(f,st,dur,vol){
-      var o=AC.createOscillator(),g=AC.createGain();
-      o.type='sine';o.frequency.value=f;
-      g.gain.setValueAtTime(0.001,t0+st);
-      g.gain.exponentialRampToValueAtTime(vol,t0+st+0.02);
-      g.gain.exponentialRampToValueAtTime(0.001,t0+st+dur);
-      o.connect(g);g.connect(AC.destination);
-      o.start(t0+st);o.stop(t0+st+dur+0.05);
+function qrSvg(seedStr){
+  var s = 0; for (var i = 0; i < seedStr.length; i++) s = (s * 31 + seedStr.charCodeAt(i)) % 99991;
+  var cells = '';
+  for (var y = 0; y < 12; y++) for (var x = 0; x < 12; x++) {
+    s = (s * 9301 + 49297) % 233280;
+    if ((s / 233280) > 0.52) cells += '<rect x="'+x+'" y="'+y+'" width="1" height="1"/>';
+  }
+  return '<svg viewBox="0 0 12 12" width="100%" height="100%"><rect width="12" height="12" fill="#fff"/><g fill="#1b2113">'+cells+'</g></svg>';
+}
+function renderMemCards(){
+  document.getElementById('memRow').innerHTML = state.members.slice(0, 3).map(function(m){
+    var st = memStatus(m);
+    return '<button class="mem-card" data-m="'+m.id+'"><span class="qr-mock">'+qrSvg(m.id+m.n)+'</span>' +
+      '<b>'+m.n+'</b><small>'+m.pkg+'</small>' +
+      '<div class="exp '+(st==='warn'?'warn':st==='exp'?'bad':'')+'">'+(st==='exp'?'หมดอายุแล้ว':'หมด '+new Date(m.exp).toLocaleDateString('th-TH',{day:'numeric',month:'short'}))+'</div></button>';
+  }).join('');
+}
+var scanning = false;
+document.getElementById('memRow').addEventListener('click', function(e){
+  var b = e.target.closest('.mem-card'); if (!b || scanning) return;
+  var m = state.members.find(function(x){ return x.id === b.dataset.m; });
+  scanning = true;
+  var z = document.getElementById('scanZone');
+  z.classList.add('scanning');
+  document.getElementById('scanMsg').textContent = 'กำลังอ่าน QR…';
+  setTimeout(function(){
+    z.classList.remove('scanning');
+    beep();
+    if (memStatus(m) === 'exp') {
+      document.getElementById('scanMsg').textContent = '✕ บัตรหมดอายุ — กรุณาต่อแพ็กเกจที่เคาน์เตอร์';
+      toast('สมาชิก ' + m.n + ' หมดอายุ — เข้ายิมไม่ได้ จนต่ออายุ', true);
+      scanning = false;
+      return;
     }
-    if(ok){tone(880,0,0.16,0.12);tone(1318,0.14,0.22,0.10);}
-    else{tone(220,0,0.28,0.12);tone(185,0.16,0.3,0.10);}
-  }catch(e){}
+    z.classList.add('ok');
+    document.getElementById('scanMsg').textContent = '✓ เช็คอินสำเร็จ — ' + m.n;
+    doCheckin(m);
+    setTimeout(enterApp, 800);
+  }, 1100);
+});
+function doCheckin(m){
+  state.checkins.unshift({ id: 'CK-' + String(state.seq++).padStart(3,'0'), mem: m.id, t: Date.now(), out: null });
+  m.ckMonth++;
+  save();
+  linkWrite('gym','checkin','ฟิตดี · ' + m.n + ' เช็คอินยิม', null);
 }
+function enterApp(){
+  document.getElementById('qrView').hidden = true;
+  document.getElementById('appView').hidden = false;
+  save();
+  renderAll();
+}
+document.getElementById('whoBtn').addEventListener('click', function(){
+  document.getElementById('appView').hidden = true;
+  scanning = false;
+  var z = document.getElementById('scanZone');
+  z.classList.remove('scanning','ok');
+  document.getElementById('scanMsg').textContent = 'รอสแกนบัตรสมาชิก…';
+  renderMemCards();
+  document.getElementById('qrView').hidden = false;
+});
+document.getElementById('mobMenu').addEventListener('click', function(){ document.getElementById('rail').classList.toggle('open'); });
 
-/* ---------- toast / modal ---------- */
-var modalRoot=document.getElementById('modalRoot');
-var toastRoot=document.getElementById('toastRoot');
-function toast(msg,type){
-  type=type||'ok';
-  var t=document.createElement('div');
-  t.className='toast '+type;
-  t.innerHTML=(type==='err'?ICO.err:type==='warn'?ICO.warn:ICO.ok)+'<span>'+msg+'</span>';
-  toastRoot.appendChild(t);
-  setTimeout(function(){t.classList.add('out');setTimeout(function(){t.remove();},260);},3200);
-}
-function openModal(html,onBind){
-  modalRoot.innerHTML='<div class="overlay" id="ovl"><div class="modal" role="dialog" aria-modal="true">'+html+'</div></div>';
-  document.getElementById('ovl').addEventListener('click',function(e){if(e.target.id==='ovl')closeModal();});
-  if(onBind)onBind();
-  var f=modalRoot.querySelector('.modal input,.modal select,.modal button');
-  if(f)f.focus();
-}
-function closeModal(){modalRoot.innerHTML='';}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
-window.closeModal=closeModal;
+/* offline */
+document.getElementById('syncPill').addEventListener('click', function(){
+  offline = !offline;
+  this.classList.toggle('off', offline);
+  document.getElementById('syncTxt').textContent = offline ? 'ออฟไลน์' : 'ออนไลน์';
+  document.getElementById('offBanner').hidden = !offline;
+  toast(offline ? 'จำลองออฟไลน์' : 'กลับมาออนไลน์');
+});
 
-/* ---------- KPI / topbar ---------- */
-function renderKPIs(){
-  document.getElementById('kpiGym').innerHTML=ICO.pulse+'<span>ในยิมตอนนี้</span><b>'+inGymCount()+'</b><span>คน</span>';
-  document.getElementById('kpiSoon').innerHTML=ICO.clock+'<span>ใกล้หมดอายุ</span><b>'+soonCount()+'</b><span>คน</span>';
+/* ---------- today ---------- */
+function renderToday(){
+  var d0 = new Date(); d0.setHours(0,0,0,0);
+  var today = state.checkins.filter(function(c){ return c.t >= d0.getTime(); });
+  var inGym = today.filter(function(c){ return !c.out; }).length;
+  var expSoon = state.members.filter(function(m){ return memStatus(m) === 'warn'; }).length;
+  var expd = state.members.filter(function(m){ return memStatus(m) === 'exp'; }).length;
+  document.getElementById('stIn').textContent = inGym;
+  document.getElementById('stCk').textContent = today.length;
+  document.getElementById('stExp').textContent = expSoon + expd;
+  document.getElementById('stMem').textContent = 'สมาชิก: ' + state.members.length;
+  document.getElementById('kpiGrid').innerHTML =
+    '<div class="kpi"><span>อยู่ในยิมตอนนี้</span><b class="g">'+inGym+'</b><span class="sub">คน</span></div>' +
+    '<div class="kpi"><span>เช็คอินวันนี้</span><b>'+today.length+'</b><span class="sub">ครั้ง</span></div>' +
+    '<div class="kpi"><span>ใกล้หมดอายุ (7 วัน)</span><b class="a">'+expSoon+'</b><span class="sub">ต้องติดตาม</span></div>' +
+    '<div class="kpi"><span>หมดอายุแล้ว</span><b class="r">'+expd+'</b><span class="sub">เข้ายิมไม่ได้</span></div>';
+  document.getElementById('ckCount').textContent = today.length + ' ครั้ง';
+  document.getElementById('ckList').innerHTML = today.length ? today.map(function(c){
+    var m = state.members.find(function(x){ return x.id === c.mem; });
+    return '<div class="gym-row"><span class="av" style="background:'+m.c+'">'+m.n.replace(/^คุณ/,'')[0]+'</span>' +
+      '<span><b>'+m.n+'</b> · '+m.pkg+'</span>' +
+      (c.out ? '<span class="badge b-out">ออกแล้ว</span>' : '<span class="badge b-in">อยู่ในยิม</span>') +
+      '<span class="t">'+ago(c.t)+'</span></div>';
+  }).join('') : '<p style="color:var(--muted);padding:1.6rem;text-align:center;font-size:.85rem">ยังไม่มีเช็คอิน — สแกนบัตรที่หน้าแรก</p>';
+  var soon = state.members.filter(function(m){ return memStatus(m) !== 'act'; });
+  document.getElementById('expList').innerHTML = soon.length ? soon.map(function(m){
+    var st = memStatus(m);
+    var days = Math.ceil((m.exp - Date.now())/DAY);
+    return '<div class="gym-row"><span class="av" style="background:'+m.c+'">'+m.n.replace(/^คุณ/,'')[0]+'</span>' +
+      '<span style="flex:1"><b>'+m.n+'</b> · '+m.pkg+'<br><small style="color:var(--muted)">'+(st==='exp'?'หมดไป '+Math.abs(days)+' วัน':'เหลือ '+days+' วัน')+'</small></span>' +
+      '<button class="tlink" data-renew="'+m.id+'">ต่ออายุ</button></div>';
+  }).join('') : '<p style="color:var(--muted);padding:1.6rem;text-align:center;font-size:.85rem">ไม่มีใครใกล้หมดอายุ</p>';
 }
-document.getElementById('thaiDate').textContent=new Intl.DateTimeFormat('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
+document.getElementById('expList').addEventListener('click', function(e){
+  var b = e.target.closest('[data-renew]'); if (!b) return;
+  openRenew(b.dataset.renew);
+});
 
-/* ---------- checkin page ---------- */
-var lastShownId=null;
-function pkgBadge(pkg){return '<span class="pkg pkg-'+pkg+'">'+PKGS[pkg].name+'</span>';}
-function showMember(m){
-  lastShownId=m.id;
-  var st=memStatus(m),d=daysLeft(m),last=latest(m.checkins);
-  var dup=(last&&(Date.now()-new Date(last).getTime()<3*3600*1000))
-    ?'<p class="dup">'+ICO.warn+' เช็คอินล่าสุด'+relLabel(last).replace('วันนี้','วันนี้เวลา')+'</p>':'';
-  var status=st==='expired'
-    ?'<div class="status-big bad">'+ICO.errBig+' หมดอายุแล้ว — เข้ายิมไม่ได้</div>'
-    :'<div class="status-big ok">'+ICO.okBig+' สมาชิกใช้งานได้ — เข้ายิมได้</div>';
-  var action=st==='expired'
-    ?'<button class="btn btn-danger btn-lg" style="width:100%" onclick="openRenew(\''+m.id+'\')">'+ICO.refresh+' ต่อแพ็กเกจ</button>'
-    :'<button class="btn btn-primary btn-lg" style="width:100%" onclick="doCheckIn(\''+m.id+'\')">'+ICO.check+' เช็คอิน</button>';
-  var expSub=st==='expired'?'<span class="tx-red">หมดอายุมาแล้ว '+Math.abs(d)+' วัน</span>'
-    :(st==='soon'?'<span class="tx-amber">เหลืออีก '+d+' วัน</span>':'<span class="tx-lime">เหลืออีก '+d+' วัน</span>');
-  document.getElementById('ckResult').innerHTML=
-    '<div class="member-card">'+
-      '<div class="mc-top"><div class="avatar-lg">'+esc(initials(m.name))+'</div>'+
-        '<div><div class="mc-name">'+esc(m.name)+'</div><div class="mc-sub">'+m.id+' • '+fmtPhone(m.phone)+'</div></div></div>'+
-      '<div class="mc-meta">'+pkgBadge(m.pkg)+'<span class="exp-tag">หมดอายุ <b>'+fmtDate(m.expiry)+'</b> · '+expSub+'</span></div>'+
-      status+action+dup+
-    '</div>';
-}
-function doSearch(){
-  var inp=document.getElementById('ckInput');
-  var q=inp.value.trim();
-  if(!q){toast('กรุณาพิมพ์รหัสสมาชิกหรือเบอร์โทร','warn');return;}
-  var qn=q.replace(/[^0-9A-Za-z]/g,'').toUpperCase();
-  var qd=q.replace(/\D/g,'');
-  var m=null;
-  for(var i=0;i<DB.members.length;i++){
-    var mm=DB.members[i];
-    if(mm.id.replace('-','').toUpperCase()===qn){m=mm;break;}
-    if(qd.length>=9&&mm.phone&&mm.phone.indexOf(qd)!==-1){m=mm;break;}
-  }
-  if(m){showMember(m);}
-  else{
-    lastShownId=null;
-    beep(false);
-    toast('ไม่พบสมาชิก — ตรวจสอบรหัสหรือเบอร์โทรอีกครั้ง','err');
-    document.getElementById('ckResult').innerHTML='<div class="nf-card">'+ICO.errBig+'<div>ไม่พบสมาชิก “'+esc(q)+'”<br><span style="font-weight:400;font-size:13px">ลองตรวจสอบตัวสะกด หรือสมัครสมาชิกใหม่ที่หน้า “สมาชิก”</span></div></div>';
-  }
-}
-window.doCheckIn=function(id){
-  var m=find(id);if(!m)return;
-  var iso=new Date().toISOString();
-  m.checkins.push(iso);save();
-  beep(true);
-  toast('เช็คอินสำเร็จ • '+esc(m.name)+' • เวลา '+fmtTime(iso));
-  showMember(m);renderTodayList();renderKPIs();
-};
-function renderTodayList(){
-  var t=today(),rows=[];
-  DB.members.forEach(function(m){
-    m.checkins.forEach(function(c){if(dkey(new Date(c))===t)rows.push({m:m,iso:c});});
-  });
-  rows.sort(function(a,b){return a.iso<b.iso?1:-1;});
-  document.getElementById('ckTodayCount').textContent=rows.length;
-  document.getElementById('ckList').innerHTML=rows.length?rows.map(function(r){
-    return '<div class="ck-row"><div class="avatar-sm">'+esc(initials(r.m.name))+'</div>'+
-      '<div><div class="ck-name">'+esc(r.m.name)+'</div><div class="ck-sub num">'+r.m.id+' · '+PKGS[r.m.pkg].name+'</div></div>'+
-      '<div class="ck-time">'+fmtTime(r.iso)+'</div></div>';
-  }).join(''):'<div class="h-empty">ยังไม่มีการเช็คอินวันนี้</div>';
-}
-
-/* ---------- members page ---------- */
-var MF={q:'',chip:'all'};
-function chipBtn(key,label,count,red){
-  return '<button class="chip'+(red?' red':'')+(MF.chip===key?' active':'')+'" onclick="setChip(\''+key+'\')">'+label+' <span class="c">'+count+'</span></button>';
-}
-window.setChip=function(k){MF.chip=k;renderMembers();};
+/* ---------- members ---------- */
 function renderMembers(){
-  var counts={
-    all:DB.members.length,
-    soon:soonCount(),
-    expired:DB.members.filter(function(m){return memStatus(m)==='expired';}).length,
-    active:DB.members.filter(function(m){return memStatus(m)!=='expired';}).length
-  };
-  document.getElementById('memChips').innerHTML=
-    chipBtn('all','ทั้งหมด',counts.all)+
-    chipBtn('soon','ใกล้หมดอายุใน 7 วัน',counts.soon,true)+
-    chipBtn('expired','หมดอายุแล้ว',counts.expired)+
-    chipBtn('active','ใช้งานได้',counts.active);
-  var q=MF.q.trim().toLowerCase(),qd=MF.q.replace(/\D/g,'');
-  var list=DB.members.filter(function(m){
-    var st=memStatus(m);
-    if(MF.chip==='soon'&&st!=='soon')return false;
-    if(MF.chip==='expired'&&st!=='expired')return false;
-    if(MF.chip==='active'&&st==='expired')return false;
-    if(!q)return true;
-    return m.name.toLowerCase().indexOf(q)!==-1||m.id.toLowerCase().indexOf(q)!==-1||(qd&&m.phone&&m.phone.indexOf(qd)!==-1);
-  });
-  document.getElementById('memRows').innerHTML=list.length?list.map(function(m){
-    var st=memStatus(m),d=daysLeft(m),last=latest(m.checkins);
-    var stLabel=st==='expired'?'<span class="tx-red">หมดอายุแล้ว</span>'
-      :st==='soon'?'<span class="tx-amber">เหลือ '+d+' วัน</span>'
-      :'<span class="mut">เหลือ '+d+' วัน</span>';
-    return '<tr class="clickable" onclick="openProfile(\''+m.id+'\')">'+
-      '<td class="num">'+m.id+'</td>'+
-      '<td><div class="mname">'+esc(m.name)+'</div><div class="msub num">'+fmtPhone(m.phone)+'</div></td>'+
-      '<td>'+pkgBadge(m.pkg)+'</td>'+
-      '<td><div class="num" style="font-size:13.5px">'+fmtDate(m.expiry)+'</div><div class="msub">'+stLabel+'</div></td>'+
-      '<td style="font-size:13.5px">'+(last?relLabel(last):'—')+'</td>'+
-      '<td class="num" style="text-align:right;font-weight:500">'+monthCount(m)+'</td>'+
-    '</tr>';
-  }).join(''):'<tr><td colspan="6" style="text-align:center;padding:30px;color:var(--mut)">ไม่พบสมาชิกตามเงื่อนไข</td></tr>';
-}
-
-/* ---------- profile modal ---------- */
-window.openProfile=function(id){
-  var m=find(id);if(!m)return;
-  var st=memStatus(m),d=daysLeft(m);
-  var pill=st==='expired'?'<span class="status-pill expired">หมดอายุแล้ว</span>'
-    :st==='soon'?'<span class="status-pill soon">ใกล้หมดอายุ — เหลือ '+d+' วัน</span>'
-    :'<span class="status-pill ok">ใช้งานได้ — เหลือ '+d+' วัน</span>';
-  var hist=m.checkins.slice().sort().reverse().slice(0,8);
-  var histHtml=hist.length?hist.map(function(c){
-    return '<div class="h-row">'+ICO.user+'<span>'+relLabel(c)+'</span><span class="num">'+fmtTime(c)+' น.</span></div>';
-  }).join(''):'<div class="h-empty">ยังไม่มีประวัติเช็คอิน</div>';
-  var renHtml=(m.renewals&&m.renewals.length)?m.renewals.slice().reverse().slice(0,5).map(function(r){
-    return '<div class="h-row">'+ICO.refresh+'<span>'+PKGS[r.pkg].name+' — ฿'+r.price.toLocaleString('th-TH')+'</span><span class="num">'+fmtDate(dkey(new Date(r.at)))+'</span></div>';
-  }).join(''):'';
-  openModal(
-    '<div class="m-head"><h3>โปรไฟล์สมาชิก</h3><button class="m-x" onclick="closeModal()" aria-label="ปิด">'+ICO.x+'</button></div>'+
-    '<div class="m-body">'+
-      '<div class="pf-head"><div class="avatar-lg">'+esc(initials(m.name))+'</div>'+
-        '<div><div class="mc-name">'+esc(m.name)+'</div><div class="mc-sub">'+m.id+' • '+fmtPhone(m.phone)+'</div>'+
-        '<div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap">'+pkgBadge(m.pkg)+pill+'</div></div></div>'+
-      '<div class="stat-grid">'+
-        '<div class="stat"><div class="k">หมดอายุ</div><div class="v">'+fmtDate(m.expiry)+'</div></div>'+
-        '<div class="stat"><div class="k">เช็คอินเดือนนี้</div><div class="v">'+monthCount(m)+' ครั้ง</div></div>'+
-        '<div class="stat"><div class="k">เช็คอินสะสม</div><div class="v">'+m.checkins.length+' ครั้ง</div></div>'+
-        '<div class="stat"><div class="k">เข้ายิมล่าสุด</div><div class="v" style="font-size:13.5px">'+(latest(m.checkins)?relLabel(latest(m.checkins)):'—')+'</div></div>'+
-      '</div>'+
-      '<div class="h-title">ประวัติเช็คอินล่าสุด</div><div class="h-list">'+histHtml+'</div>'+
-      (renHtml?'<div class="h-title">ประวัติต่ออายุ / สมัคร</div><div class="h-list">'+renHtml+'</div>':'')+
-    '</div>'+
-    '<div class="m-foot"><button class="btn btn-primary grow" onclick="openRenew(\''+m.id+'\')">'+ICO.refresh+' ต่ออายุแพ็กเกจ</button>'+
-    '<button class="btn btn-ghost" onclick="closeModal()">ปิด</button></div>'
-  );
-};
-
-/* ---------- renew modal ---------- */
-function pkgRadios(sel,name){
-  return Object.keys(PKGS).map(function(k){
-    return '<label class="pkg-opt"><input type="radio" name="'+name+'" value="'+k+'"'+(k===sel?' checked':'')+'>'+
-      '<span class="pkg-opt-body"><span class="pkg-opt-name">'+PKGS[k].name+'</span>'+
-      '<span class="pkg-opt-sub num">'+PKGS[k].days+' วัน • ฿'+PKGS[k].price.toLocaleString('th-TH')+'</span></span></label>';
+  document.getElementById('memCount').textContent = state.members.length + ' คน';
+  document.getElementById('memBody').innerHTML = state.members.map(function(m){
+    var st = memStatus(m);
+    return '<tr><td><b>'+m.n+'</b><br><small style="color:var(--muted);font-family:var(--mono);font-size:.7rem">'+m.phone+'</small></td>' +
+      '<td>'+m.pkg+'</td><td class="mono" style="font-size:.76rem">'+new Date(m.exp).toLocaleDateString('th-TH')+'</td>' +
+      '<td class="mono">'+m.ckMonth+'</td>' +
+      '<td>'+(st==='act'?'<span class="badge b-act">ปกติ</span>':st==='warn'?'<span class="badge b-warn">ใกล้หมดอายุ</span>':'<span class="badge b-exp">หมดอายุ</span>')+'</td>' +
+      '<td><button class="tlink" data-renew="'+m.id+'">ต่ออายุ/เปลี่ยนแพ็กเกจ</button></td></tr>';
   }).join('');
 }
-window.openRenew=function(id){
-  var m=find(id);if(!m)return;
-  var st=memStatus(m);
-  var base=m.expiry>=today()?m.expiry:today();
-  function prev(k){return fmtDate(addDays(base,PKGS[k].days));}
-  openModal(
-    '<div class="m-head"><h3>ต่ออายุแพ็กเกจ</h3><button class="m-x" onclick="closeModal()" aria-label="ปิด">'+ICO.x+'</button></div>'+
-    '<div class="m-body">'+
-      '<div style="display:flex;gap:12px;align-items:center;margin-bottom:16px"><div class="avatar-sm">'+esc(initials(m.name))+'</div>'+
-      '<div><div style="font-weight:600">'+esc(m.name)+'</div><div class="msub num">'+m.id+' · ปัจจุบันหมดอายุ '+fmtDate(m.expiry)+(st==='expired'?' <span class="tx-red">(หมดอายุแล้ว)</span>':'')+'</div></div></div>'+
-      '<div class="fld"><span style="color:var(--mut)">เลือกแพ็กเกจใหม่</span><div class="pkg-grid" id="rnPkgs">'+pkgRadios(m.pkg,'rnpkg')+'</div></div>'+
-      '<div class="renew-prev">หมดอายุใหม่ <b id="rnNew">'+prev(m.pkg)+'</b> · ยอดชำระ <b id="rnPrice" class="tx-lime">฿'+PKGS[m.pkg].price.toLocaleString('th-TH')+'</b></div>'+
-    '</div>'+
-    '<div class="m-foot"><button class="btn btn-primary btn-lg grow" id="rnOk">ยืนยันต่ออายุ</button>'+
-    '<button class="btn btn-ghost" onclick="closeModal()">ยกเลิก</button></div>',
-    function(){
-      var cur=m.pkg;
-      modalRoot.querySelectorAll('input[name="rnpkg"]').forEach(function(r){
-        r.addEventListener('change',function(){
-          cur=r.value;
-          document.getElementById('rnNew').textContent=prev(cur);
-          document.getElementById('rnPrice').textContent='฿'+PKGS[cur].price.toLocaleString('th-TH');
-        });
-      });
-      document.getElementById('rnOk').addEventListener('click',function(){
-        m.pkg=cur;
-        m.expiry=addDays(base,PKGS[cur].days);
-        m.renewals=m.renewals||[];
-        m.renewals.push({at:new Date().toISOString(),pkg:cur,price:PKGS[cur].price});
-        save();closeModal();
-        toast('ต่ออายุสำเร็จ • '+esc(m.name)+' • หมดอายุใหม่ '+fmtDate(m.expiry));
-        renderKPIs();renderMembers();
-        if(lastShownId===m.id)showMember(m);
-        renderTodayList();
-      });
-    }
-  );
-};
-
-/* ---------- add member ---------- */
-document.getElementById('addMemberBtn').addEventListener('click',function(){
-  openModal(
-    '<div class="m-head"><h3>เพิ่มสมาชิกใหม่</h3><button class="m-x" onclick="closeModal()" aria-label="ปิด">'+ICO.x+'</button></div>'+
-    '<div class="m-body">'+
-      '<label class="fld"><span>ชื่อ-นามสกุล</span><input class="inp" id="amName" placeholder="เช่น สมชาย ใจดี"></label>'+
-      '<label class="fld"><span>เบอร์โทร</span><input class="inp num" id="amPhone" inputmode="numeric" placeholder="08x-xxx-xxxx"></label>'+
-      '<div class="fld"><span>เลือกแพ็กเกจ</span><div class="pkg-grid" id="amPkgs">'+pkgRadios('monthly','ampkg')+'</div></div>'+
-      '<div class="renew-prev">เริ่มสมาชิกวันนี้ — หมดอายุ <b id="amExp">'+fmtDate(addDays(today(),30))+'</b> · ค่าสมัคร <b id="amPrice" class="tx-lime">฿'+PKGS.monthly.price.toLocaleString('th-TH')+'</b></div>'+
-    '</div>'+
-    '<div class="m-foot"><button class="btn btn-primary btn-lg grow" id="amSave">บันทึกสมาชิกใหม่</button>'+
-    '<button class="btn btn-ghost" onclick="closeModal()">ยกเลิก</button></div>',
-    function(){
-      var cur='monthly';
-      modalRoot.querySelectorAll('input[name="ampkg"]').forEach(function(r){
-        r.addEventListener('change',function(){
-          cur=r.value;
-          document.getElementById('amExp').textContent=fmtDate(addDays(today(),PKGS[cur].days));
-          document.getElementById('amPrice').textContent='฿'+PKGS[cur].price.toLocaleString('th-TH');
-        });
-      });
-      document.getElementById('amSave').addEventListener('click',function(){
-        var name=document.getElementById('amName').value.trim();
-        var phone=document.getElementById('amPhone').value.replace(/\D/g,'');
-        if(name.length<4){toast('กรุณากรอกชื่อ-นามสกุล','warn');return;}
-        if(phone.length<9||phone.length>10){toast('กรุณากรอกเบอร์โทร 9-10 หลัก','warn');return;}
-        var id=nextId();
-        var rec={id:id,name:name,phone:phone,pkg:cur,expiry:addDays(today(),PKGS[cur].days),checkins:[],renewals:[{at:new Date().toISOString(),pkg:cur,price:PKGS[cur].price}]};
-        DB.members.push(rec);save();closeModal();
-        toast('เพิ่มสมาชิกสำเร็จ • '+id+' • '+esc(name));
-        renderMembers();renderKPIs();
-      });
-    }
-  );
+document.getElementById('memBody').addEventListener('click', function(e){
+  var b = e.target.closest('[data-renew]'); if (!b) return;
+  openRenew(b.dataset.renew);
 });
-document.getElementById('memSearch').addEventListener('input',function(e){MF.q=e.target.value;renderMembers();});
-
-/* ---------- classes page ---------- */
-function bookingsFor(cid){
-  var t=today();
-  if(!DB.bookings)DB.bookings={};
-  if(!DB.bookings[t])DB.bookings[t]={};
-  if(!DB.bookings[t][cid])DB.bookings[t][cid]=[];
-  return DB.bookings[t][cid];
+function openRenew(memId){
+  renewId = memId; renewPkg = 'm1';
+  var m = state.members.find(function(x){ return x.id === memId; });
+  document.getElementById('rnTitle').textContent = 'ต่อแพ็กเกจ — ' + m.n + ' (ปัจจุบัน: ' + m.pkg + ')';
+  document.getElementById('pkgGrid').innerHTML = PKGS.map(function(p){
+    return '<button class="pkg-b'+(p.id===renewPkg?' on':'')+'" data-pkg="'+p.id+'"><b>'+p.n+'</b><span class="mono">'+fmt(p.price)+'</span></button>';
+  }).join('');
+  document.getElementById('rnOverlay').hidden = false;
 }
+document.getElementById('pkgGrid').addEventListener('click', function(e){
+  var b = e.target.closest('.pkg-b'); if (!b) return;
+  renewPkg = b.dataset.pkg;
+  document.querySelectorAll('.pkg-b').forEach(function(x){ x.classList.toggle('on', x === b); });
+});
+document.getElementById('rnCancel').addEventListener('click', closeAllModals);
+document.getElementById('rnSave').addEventListener('click', function(){
+  var m = state.members.find(function(x){ return x.id === renewId; });
+  var p = PKGS.find(function(x){ return x.id === renewPkg; });
+  var base = m.exp > Date.now() ? m.exp : Date.now();
+  m.pkg = p.n;
+  m.exp = base + p.days * DAY;
+  save(); closeAllModals(); renderAll();
+  linkWrite('gym','renew','ฟิตดี · ' + m.n + ' ต่อแพ็กเกจ' + p.n + ' ' + fmt(p.price) + ' (หมดอายุใหม่ ' + new Date(m.exp).toLocaleDateString('th-TH') + ')', p.price);
+  beep();
+  toast('ต่ออายุสำเร็จ — ' + m.n + ' · ' + p.n + ' · ' + fmt(p.price));
+});
+
+/* ---------- classes ---------- */
 function renderClasses(){
-  document.getElementById('clsGrid').innerHTML=CLASSES.map(function(c){
-    var arr=bookingsFor(c.id),n=arr.length;
-    var full=n>=c.max,warn=!full&&(n/c.max>=0.5);
-    var state=full?'full':warn?'warn':'ok';
-    var pct=Math.min(100,Math.round(n/c.max*100));
-    var capLabel=full?'<span class="st-full">เต็มแล้ว</span>':warn?'<span class="st-warn">จองเกินครึ่ง</span>':'<span>ยังว่าง</span>';
-    var btn=full
-      ?'<button class="btn btn-full" disabled>เต็มแล้ว — ห้ามจอง</button>'
-      :'<button class="btn btn-primary" onclick="bookClass(\''+c.id+'\')">+ จองคลาส</button>';
-    return '<div class="cls-card">'+
-      '<div class="cls-time">'+c.time+' <small>น.</small></div>'+
-      '<div><div class="cls-name">'+c.name+'</div><div class="cls-coach">'+ICO.user+' '+c.coach+'</div></div>'+
-      '<div class="pbar '+state+'"><i style="width:'+pct+'%"></i></div>'+
-      '<div class="cls-cap"><span>จองแล้ว <b>'+n+'</b> / '+c.max+' คน</span>'+capLabel+'</div>'+
-      btn+'</div>';
+  document.getElementById('clsList').innerHTML = CLASSES.map(function(c){
+    var n = state.classBook[c.t] || 0;
+    var full = n >= c.cap;
+    return '<div class="cls-row"><span class="ct">'+c.t+'</span>' +
+      '<span class="cb"><b>'+c.n+'</b><small>'+c.coach+'</small></span>' +
+      '<span class="cap"><span class="bar"><i style="width:'+Math.round(n/c.cap*100)+'%"></i></span><small>'+n+'/'+c.cap+'</small></span>' +
+      (full ? '<span class="badge b-exp">เต็ม</span>' : '<button class="tlink" data-book="'+c.t+'">จอง</button>') +
+      '</div>';
   }).join('');
 }
-window.bookClass=function(cid){
-  var c=null;CLASSES.forEach(function(x){if(x.id===cid)c=x;});
-  if(!c)return;
-  var arr=bookingsFor(cid);
-  if(arr.length>=c.max){toast('คลาสเต็มแล้ว ไม่สามารถจองได้','err');return;}
-  var opts=DB.members.filter(function(m){return isActive(m)&&arr.indexOf(m.id)===-1;});
-  if(!opts.length){toast('ไม่มีสมาชิกที่จองได้ (หมดอายุหรือจองแล้วทั้งหมด)','warn');return;}
-  openModal(
-    '<div class="m-head"><h3>จองคลาส '+esc(c.name)+'</h3><button class="m-x" onclick="closeModal()" aria-label="ปิด">'+ICO.x+'</button></div>'+
-    '<div class="m-body">'+
-      '<div class="renew-prev" style="margin-bottom:14px">เวลา <b>'+c.time+' น.</b> · '+esc(c.coach)+' · ว่างอีก <b>'+(c.max-arr.length)+'</b> ที่</div>'+
-      '<label class="fld"><span>เลือกสมาชิก (เฉพาะที่ยังไม่หมดอายุ)</span>'+
-      '<select class="inp" id="bkSel">'+opts.map(function(m){return '<option value="'+m.id+'">'+m.id+' — '+esc(m.name)+'</option>';}).join('')+'</select></label>'+
-    '</div>'+
-    '<div class="m-foot"><button class="btn btn-primary grow" id="bkOk">ยืนยันการจอง</button>'+
-    '<button class="btn btn-ghost" onclick="closeModal()">ยกเลิก</button></div>',
-    function(){
-      document.getElementById('bkOk').addEventListener('click',function(){
-        var id=document.getElementById('bkSel').value;
-        var m=find(id);
-        if(!m)return;
-        if(arr.indexOf(id)!==-1){toast('สมาชิกคนนี้จองคลาสนี้แล้ว','warn');return;}
-        arr.push(id);save();closeModal();
-        toast('จองสำเร็จ • '+esc(m.name)+' • '+esc(c.name)+' '+c.time+' น.');
-        renderClasses();
-      });
-    }
-  );
-};
-
-/* ---------- reset ---------- */
-document.getElementById('resetBtn').addEventListener('click',function(){
-  openModal(
-    '<div class="m-head"><h3>รีเซ็ตข้อมูลตัวอย่าง?</h3><button class="m-x" onclick="closeModal()" aria-label="ปิด">'+ICO.x+'</button></div>'+
-    '<div class="m-body"><p style="color:var(--mut);font-size:14px">ข้อมูลสมาชิก ประวัติเช็คอิน และการจองคลาสทั้งหมดจะกลับไปเป็นค่าเริ่มต้นของระบบเดโม</p></div>'+
-    '<div class="m-foot"><button class="btn btn-danger grow" id="rsOk">รีเซ็ตข้อมูล</button>'+
-    '<button class="btn btn-ghost" onclick="closeModal()">ยกเลิก</button></div>',
-    function(){
-      document.getElementById('rsOk').addEventListener('click',function(){
-        try{localStorage.removeItem(KEY);}catch(e){}
-        DB=seed();save();
-        lastShownId=null;
-        document.getElementById('ckInput').value='';
-        document.getElementById('ckResult').innerHTML='<div class="empty-hint"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg><div>พิมพ์รหัสสมาชิกหรือเบอร์โทร แล้วกด Enter<br>ระบบจะแสดงสถานะสมาชิกทันที</div></div>';
-        MF={q:'',chip:'all'};
-        document.getElementById('memSearch').value='';
-        closeModal();
-        renderAll();
-        toast('รีเซ็ตข้อมูลตัวอย่างเรียบร้อย');
-      });
-    }
-  );
+document.getElementById('clsList').addEventListener('click', function(e){
+  var b = e.target.closest('[data-book]'); if (!b) return;
+  var c = CLASSES.find(function(x){ return x.t === b.dataset.book; });
+  state.classBook[c.t] = (state.classBook[c.t] || 0) + 1;
+  save(); renderClasses();
+  linkWrite('gym','class-book','ฟิตดี · จองคลาส ' + c.n + ' (' + c.t + ') เหลือ ' + (c.cap - state.classBook[c.t]) + ' ที่', null);
+  toast('จองคลาส ' + c.n + ' เวลา ' + c.t + ' แล้ว');
 });
 
-/* ---------- navigation / shell ---------- */
-var curPage='checkin';
-function go(page){
-  curPage=page;
-  ['checkin','members','classes'].forEach(function(p){
-    document.getElementById('page-'+p).hidden=(p!==page);
-  });
-  document.querySelectorAll('.nav-item').forEach(function(b){
-    b.classList.toggle('active',b.getAttribute('data-page')===page);
-  });
-  document.getElementById('pageTitle').textContent=PAGE_TITLES[page];
-  document.getElementById('sidebar').classList.remove('open');
-  if(page==='checkin'){renderTodayList();var i=document.getElementById('ckInput');if(i&&window.innerWidth>900)i.focus();}
-  if(page==='members')renderMembers();
-  if(page==='classes')renderClasses();
-  renderKPIs();
+/* ---------- feed ---------- */
+var lastSeenFeed = 0;
+function sysIcon(sys){
+  var M = { pos:'#0c8a61', kds:'#ea580c', queue:'#9333ea', crm:'#5b5bd6', inv:'#d97706', docs:'#0284c7', hr:'#0d9488', dorm:'#b45309', appt:'#c2410c', school:'#0ea5e9', gym:'#65a30d' };
+  return { c: M[sys] || '#64748b', s:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>' };
 }
-function renderAll(){renderKPIs();renderTodayList();renderMembers();renderClasses();}
-document.querySelectorAll('.nav-item').forEach(function(b){
-  b.addEventListener('click',function(){go(b.getAttribute('data-page'));});
+function renderFeed(){
+  var l = linkRead();
+  document.getElementById('feedCount').textContent = l.events.length + ' เหตุการณ์';
+  var body = document.getElementById('feedBody');
+  if (!l.events.length) { body.innerHTML = '<p style="color:var(--muted);padding:1.5rem 0;font-size:.85rem">ยังไม่มีกิจกรรม</p>'; return; }
+  body.innerHTML = l.events.slice(0, 25).map(function(ev){
+    var ic = sysIcon(ev.sys);
+    return '<div class="feed-item"><span class="fi" style="background:'+ic.c+'22;color:'+ic.c+'"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'+ic.s+'</svg></span>' +
+      '<span><span class="fm">'+ev.msg+'</span><div class="ft">'+ago(ev.t)+'</div></span></div>';
+  }).join('');
+  lastSeenFeed = l.events.length ? l.events[0].t : 0;
+  updateFeedBadge();
+}
+function updateFeedBadge(){
+  var l = linkRead();
+  var newer = l.events.filter(function(e){ return e.t > lastSeenFeed && e.sys !== 'gym'; }).length;
+  var badge = document.getElementById('feedBadge');
+  if (newer && !document.getElementById('feedDrawer').classList.contains('open')) { badge.hidden = false; badge.textContent = ' (+' + newer + ')'; }
+  else badge.hidden = true;
+}
+document.getElementById('feedBtn').addEventListener('click', function(){
+  renderFeed();
+  document.getElementById('feedDrawer').classList.add('open');
+  document.getElementById('scrim').hidden = false;
 });
-document.getElementById('hamburger').addEventListener('click',function(){
-  document.getElementById('sidebar').classList.toggle('open');
+document.getElementById('feedClose').addEventListener('click', closeFeed);
+document.getElementById('scrim').addEventListener('click', closeFeed);
+function closeFeed(){ document.getElementById('feedDrawer').classList.remove('open'); document.getElementById('scrim').hidden = true; }
+setInterval(updateFeedBadge, 3000);
+
+/* pages / shortcuts */
+function goPage(p){
+  document.querySelectorAll('.ri[data-page]').forEach(function(x){ x.classList.toggle('on', x.dataset.page === p); });
+  ['today','members','classes'].forEach(function(x){ document.getElementById('page-'+x).hidden = x !== p; });
+  document.getElementById('rail').classList.remove('open');
+  renderAll();
+}
+document.querySelectorAll('.ri[data-page]').forEach(function(b){ b.addEventListener('click', function(){ goPage(b.dataset.page); }); });
+document.addEventListener('keydown', function(e){
+  if (document.getElementById('appView').hidden) return;
+  if (e.key === 'Escape') { closeAllModals(); closeFeed(); return; }
+  var tgt = e.target;
+  if (tgt && tgt.matches && tgt.matches('input,select,textarea')) return;
+  if (e.key === 'd' || e.key === 'D') goPage('today');
+  else if (e.key === 'm' || e.key === 'M') goPage('members');
+  else if (e.key === 'c' || e.key === 'C') goPage('classes');
+  else if (e.key === 'f' || e.key === 'F') document.getElementById('feedBtn').click();
 });
-document.getElementById('content').addEventListener('click',function(){
-  if(window.innerWidth<=900)document.getElementById('sidebar').classList.remove('open');
-});
-document.getElementById('logoutBtn').addEventListener('click',function(){
-  document.getElementById('appView').hidden=true;
-  document.getElementById('loginView').hidden=false;
-  toast('ออกจากระบบแล้ว');
-});
-document.getElementById('loginForm').addEventListener('submit',function(e){
-  e.preventDefault();
-  document.getElementById('loginView').hidden=true;
-  document.getElementById('appView').hidden=false;
-  go('checkin');
-});
-document.getElementById('ckGo').addEventListener('click',doSearch);
-document.getElementById('ckInput').addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
-document.querySelectorAll('.qchip').forEach(function(b){
-  b.addEventListener('click',function(){
-    document.getElementById('ckInput').value=b.getAttribute('data-q');
-    doSearch();
-  });
-});
-renderAll();
-})();
-</script>
-<script>
-/* Auto-enter app when opened with ?app=1 (from showcase hub) */
-(function(){
-  if (!/[?&]app=1/.test(location.href)) return;
-  function enter(){
-    var b = document.getElementById('loginBtn') || document.getElementById('btnLogin')
-         || document.querySelector('#loginForm button[type="submit"]')
-         || document.querySelector('.login-card button[type="submit"]')
-         || Array.prototype.find.call(document.querySelectorAll('button'), function(x){ return /\u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a/.test(x.textContent); });
-    if (b) { b.click(); return; }
-    var f = document.getElementById('loginForm') || document.querySelector('#loginView form') || document.querySelector('.login form');
-    if (f && f.requestSubmit) f.requestSubmit();
+
+/* reset */
+document.getElementById('resetBtn').addEventListener('click', function(){
+  if (confirm('รีเซ็ตข้อมูลสมาชิกกลับตัวอย่าง?')) {
+    localStorage.removeItem(LS);
+    state = blank(); save();
+    renderMemCards(); renderAll();
+    toast('รีเซ็ตข้อมูลแล้ว');
   }
-  if (document.readyState !== 'loading') setTimeout(enter, 80);
-  else document.addEventListener('DOMContentLoaded', function(){ setTimeout(enter, 80); });
+});
+
+/* init */
+function renderAll(){ renderToday(); renderMembers(); renderClasses(); updateFeedBadge(); }
+renderAll();
 })();
 </script>
 </body>
