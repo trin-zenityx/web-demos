@@ -56,4 +56,5 @@ kanban งานดี, admin-shop ร้านดีแอดมิน, cashboo
 - [x] Documents เอกสารดี (2026-09-14 · workspace picker, QT→IV→RE chain, baht text, CRM→IV bridge)
 - [x] Dashboard ผู้บริหารดี (2026-09-15 · no-gate live command center, รวม bridge 6 ระบบ)
 - [x] HR คนดี (2026-09-15 · face-scan check-in, สาย/OT, ใบลา 2 ชั้น, payroll จริง)
-- [ ] (ว่าง — ตัวถัดไป: dorm)
+- [x] Dorm ห้องดี (2026-09-15 · ผังห้องเป็น entry, มิเตอร์→บิล, ใบเสร็จพิมพ์)
+- [ ] (ว่าง — ตัวถัดไป: appointments — Tier S ตัวสุดท้าย)
