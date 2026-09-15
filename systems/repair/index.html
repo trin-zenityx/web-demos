@@ -1,897 +1,647 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ซ่อมดี ฟอร์จูน — ระบบใบรับซ่อม</title>
-<meta name="description" content="ระบบจัดการใบรับซ่อมสำหรับร้านซ่อมมือถือและโน้ตบุ๊ก (ตัวอย่างเดโม)">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ซ่อมดี Pro — ระบบรับซ่อม ติดตามสถานะสด | ZenityX Demos</title>
+<meta name="description" content="ระบบร้านซ่อมระดับ production — ลูกค้าติดตามงานซ่อมเองหน้าแรก, บอร์ดงานช่าง, อะไหล่+ค่าแรงคิดเงิน, ใบเสร็จ">
+<meta property="og:title" content="ซ่อมดี Pro — เดโมใช้งานได้จริง">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23be185d'/%3E%3Cpath d='M30 70l18-18M42 30l8 8M62 22l16 16-12 12-16-16z' stroke='white' stroke-width='7' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --accent:#be185d; --accent-d:#9d174d; --accent-soft:#fdf2f8; --accent-line:#f9a8d4;
-  --ink:#1f2430; --muted:#6b7280; --bg:#f4f5f7; --card:#ffffff; --line:#e5e7eb;
-  --radius:14px; --sidebar:#1b1420;
+  --acc:#be185d; --acc-deep:#9d174d; --acc-soft:#fce7f3;
+  --bg:#faf4f7; --panel:#ffffff; --line:#f0e2e9;
+  --ink:#26121c; --muted:#83606f;
+  --dark:#241019; --dark2:#331524; --dline:#52253c;
+  --green:#16a34a; --amber:#d97706; --red:#dc2626; --blue:#0284c7;
+  --mono:'JetBrains Mono',monospace;
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{font-family:'IBM Plex Sans Thai',system-ui,sans-serif;font-size:15px;color:var(--ink);background:var(--bg);line-height:1.55}
-.mono{font-family:'JetBrains Mono',monospace}
-button{font-family:inherit}
-h1,h2,h3{margin:0}
-:focus-visible{outline:3px solid rgba(190,24,93,.45);outline-offset:2px;border-radius:6px}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-.hide{display:none!important}
-.ic{width:20px;height:20px;flex:none}
-.ic.sm{width:15px;height:15px}
-.c-sub{font-size:12.5px;color:var(--muted)}
-.nowrap{white-space:nowrap}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+[hidden]{display:none!important}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 
-/* ---------- buttons ---------- */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:10px;border:1px solid transparent;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;transition:background .15s,border-color .15s}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{background:var(--accent-d)}
-.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink)}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent-d)}
-.btn-sm{min-height:44px;padding:0 14px;font-size:14px}
-.btn.full{width:100%}
-.btn-icon{display:inline-grid;place-items:center;width:44px;height:44px;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;cursor:pointer;vertical-align:middle;transition:border-color .15s,color .15s}
-.btn-icon:hover{border-color:var(--accent);color:var(--accent-d)}
-.done-mark{display:inline-grid;place-items:center;width:44px;height:44px;color:#047857;vertical-align:middle}
+/* TRACK-FIRST ENTRY */
+.track-view{min-height:100vh;display:grid;place-items:center;padding:1.5rem;background:radial-gradient(1100px 650px at 50% -20%,#4a1230,#170a10 62%),#170a10}
+.track-in{width:min(620px,100%);text-align:center}
+.track-brand{display:flex;align-items:center;justify-content:center;gap:.8rem;margin-bottom:.4rem;color:#fff}
+.track-brand img{width:52px;height:52px;border-radius:14px}
+.track-brand b{font-size:1.5rem;font-weight:600}
+.track-sub{color:#e0a4c0;font-size:.9rem;margin-bottom:1.6rem}
+.track-card{background:#fff;color:#26121c;border-radius:20px;padding:1.6rem;box-shadow:0 40px 90px -20px rgba(0,0,0,.5);text-align:left}
+.track-card h2{font-size:1.05rem;margin-bottom:.3rem}
+.track-card .tsub{color:var(--muted);font-size:.8rem;margin-bottom:1rem}
+.track-row{display:flex;gap:.5rem}
+.track-row input{flex:1;border:1.5px solid var(--line);border-radius:11px;padding:.75rem 1rem;font-family:var(--mono);font-size:1rem;outline:none;min-height:50px;text-transform:uppercase}
+.track-row input:focus{border-color:var(--acc)}
+.track-row button{background:var(--acc);color:#fff;border-radius:11px;padding:.75rem 1.3rem;font-weight:600;min-height:50px}
+.track-hint{font-size:.74rem;color:var(--muted);margin-top:.7rem}
+.track-hint b{color:var(--acc);font-family:var(--mono);cursor:pointer}
+.tl-track{margin-top:1.2rem;border-left:3px solid var(--line);padding-left:1.1rem;display:none}
+.tl-track.show{display:block;animation:tin .3s ease}
+@keyframes tin{from{opacity:0;transform:translateY(10px)}}
+.tl-step{display:flex;gap:.7rem;padding:.5rem 0;align-items:flex-start}
+.tl-step .dot{width:18px;height:18px;border-radius:50%;border:2.5px solid var(--line);background:#fff;flex:none;margin-top:.15rem;position:relative}
+.tl-step.done .dot{background:var(--acc);border-color:var(--acc)}
+.tl-step.cur .dot{border-color:var(--acc);box-shadow:0 0 0 4px var(--acc-soft)}
+.tl-step.cur .dot::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--acc)}
+.tl-step b{font-size:.86rem;display:block}
+.tl-step small{color:var(--muted);font-size:.72rem;font-family:var(--mono)}
+.tl-step .when{margin-left:auto;font-family:var(--mono);font-size:.68rem;color:var(--muted);white-space:nowrap}
+.track-meta{background:#fdf7fa;border-radius:10px;padding:.7rem .9rem;font-size:.8rem;margin-top:.9rem;display:none}
+.track-meta.show{display:block}
+.staff-link{margin-top:1.6rem;color:#a86e88;font-size:.8rem;min-height:44px}
+.staff-link:hover{color:#e0a4c0}
+.track-credit{margin-top:.8rem;font-size:.72rem;color:#7c4c60}
+.track-credit a{color:#FF6b6b;text-decoration:none;font-weight:500}
 
-/* ---------- login ---------- */
-#loginView{min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(900px 500px at 75% -10%,rgba(190,24,93,.45),transparent 60%),linear-gradient(150deg,#2a0a1c 0%,#170a12 55%,#0d0d12 100%)}
-.login-card{position:relative;background:#fff;border-radius:18px;padding:36px 32px 26px;width:min(400px,94vw);box-shadow:0 30px 80px rgba(0,0,0,.45);overflow:hidden}
-.login-card::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#be185d,#ec4899,#be185d)}
-.lg-logo{display:grid;place-items:center;margin-bottom:14px}
-.login-card h1{font-size:22px;text-align:center}
-.login-card .sub{text-align:center;color:var(--muted);margin:4px 0 22px;font-size:14px}
-.fl{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
-.fi{width:100%;min-height:46px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-family:inherit;font-size:15px;background:#fff;color:var(--ink)}
-.fi:focus{border-color:var(--accent)}
-textarea.fi{min-height:0;resize:vertical}
-.fgroup{margin-bottom:14px}
-.err{color:#dc2626;font-size:12.5px;margin:4px 0 0}
-.login-note{margin-top:16px;text-align:center;font-size:13px;color:var(--muted);background:#fafafa;border:1px dashed var(--line);border-radius:10px;padding:9px 12px}
-.credit{margin-top:12px;text-align:center;font-size:12px;color:#9ca3af}
-.credit a{color:var(--accent);text-decoration:none}
-.credit a:hover{text-decoration:underline}
-
-/* ---------- app shell ---------- */
-.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
-.sidebar{background:var(--sidebar);color:#d9d3e0;display:flex;flex-direction:column;padding:18px 14px;gap:6px}
-.sb-brand{display:flex;align-items:center;gap:10px;padding:4px 8px 16px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:12px}
-.sb-brand b{color:#fff;font-size:16px;display:block;line-height:1.25}
-.sb-brand span{font-size:12px;color:#a79fb3}
-.sb-nav{display:flex;flex-direction:column;gap:4px}
-.mi{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:0 12px;border:0;background:transparent;color:#cfc9da;border-radius:10px;font-size:15px;cursor:pointer;text-align:left;border-left:3px solid transparent;transition:background .15s,color .15s}
-.mi:hover{background:rgba(255,255,255,.06);color:#fff}
-.mi.on{background:rgba(190,24,93,.24);color:#fff;border-left-color:var(--accent)}
-.sb-foot{margin-top:auto;border-top:1px solid rgba(255,255,255,.08);padding-top:12px;display:flex;flex-direction:column;gap:4px}
-.sb-user{display:flex;align-items:center;gap:10px;padding:0 8px 10px}
-.avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:700;flex:none}
-.sb-user b{color:#fff;font-size:14px;display:block;line-height:1.2}
-.sb-user span{font-size:12px;color:#a79fb3}
-.scrim{position:fixed;inset:0;background:rgba(10,8,14,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:850}
-.scrim.on{opacity:1;pointer-events:auto}
-
+/* APP */
+.app{display:grid;grid-template-columns:72px 1fr;min-height:100vh}
+.rail{background:var(--dark);display:flex;flex-direction:column;align-items:center;padding:.8rem 0;position:sticky;top:0;height:100vh;z-index:60}
+.rail .logo{width:44px;height:44px;border-radius:12px;overflow:hidden;margin-bottom:1rem}
+.rail .logo img{width:100%;height:100%;object-fit:cover}
+.rail nav{display:grid;gap:.4rem;flex:1}
+.ri{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;color:#b37c94;position:relative;transition:all .15s}
+.ri:hover{background:rgba(255,255,255,.07);color:#fff}
+.ri.on{background:var(--acc);color:#fff}
+.ri .tip{position:absolute;left:70px;background:var(--dark2);color:#fff;font-size:.72rem;padding:.3rem .6rem;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:70}
+.ri:hover .tip{opacity:1}
+.rail .who{width:44px;height:44px;border-radius:50%;background:var(--dark2);color:#f9a8d4;display:grid;place-items:center;font-weight:600;font-size:.8rem}
 .main{min-width:0;display:flex;flex-direction:column}
-.topbar{position:sticky;top:0;z-index:500;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:8px 20px;min-height:64px;flex-wrap:wrap}
-.topbar h1{font-size:18px;white-space:nowrap}
-.kpi{display:flex;gap:8px;flex-wrap:wrap}
-.pill{display:inline-flex;align-items:center;gap:6px;background:var(--accent-soft);color:var(--accent-d);border:1px solid var(--accent-line);border-radius:999px;padding:6px 12px;font-size:13px}
-.pill b{font-size:14px}
-.spacer{flex:1}
-.topdate{color:var(--muted);font-size:13.5px;white-space:nowrap}
-.content{padding:22px 20px 100px;max-width:1240px;width:100%;margin:0 auto}
+.topbar{background:#fff;border-bottom:1px solid var(--line);padding:.55rem 1.1rem;display:flex;align-items:center;gap:.8rem;font-size:.8rem;flex-wrap:wrap}
+.ws-chip{display:flex;align-items:center;gap:.45rem;font-weight:600;font-size:.82rem}
+.ws-chip .wm{width:26px;height:26px;border-radius:7px;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:.72rem}
+.stat-chip{display:flex;align-items:center;gap:.4rem;background:#fdf7fa;border:1px solid var(--line);border-radius:8px;padding:.3rem .7rem;font-size:.75rem;color:var(--muted)}
+.stat-chip b{font-family:var(--mono);color:var(--ink);font-weight:700}
+.stat-chip.red b{color:var(--red)}
+.stat-chip.green b{color:var(--green)}
+.topbar .sp{flex:1}
+.topbar .clock{font-family:var(--mono);font-size:.9rem}
+.tbtn{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);border-radius:8px;padding:.3rem .75rem;font-size:.78rem;color:var(--muted);min-height:34px;transition:all .15s;background:#fff}
+.tbtn:hover{border-color:var(--acc);color:var(--acc)}
+.tbtn.primary{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.sync-pill{display:flex;align-items:center;gap:.35rem;color:var(--muted);font-size:.75rem;border:1px solid var(--line);border-radius:99px;padding:.25rem .7rem;min-height:32px;background:#fff}
+.sync-pill i{width:7px;height:7px;border-radius:50%;background:#4ade80}
+.sync-pill.off{border-color:var(--amber);color:var(--amber)}
+.sync-pill.off i{background:var(--amber)}
+.offline-banner{background:#fef3c7;color:#92400e;font-size:.8rem;padding:.4rem 1.1rem}
+.content{flex:1;padding:1rem;min-height:0}
 
-/* ---------- jobs page ---------- */
-.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:16px}
-.panel-head{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:14px 16px}
-.chips{display:flex;gap:8px;overflow-x:auto;flex:1 1 auto;padding-bottom:2px}
-.chip{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 15px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:14px;cursor:pointer;transition:all .15s}
-.chip b{font-size:13px;color:var(--muted)}
-.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.chip.on b{color:#fce7f3}
-.searchbox{flex:0 1 260px}
-.tbl-wrap{overflow-x:auto;border-radius:0 0 var(--radius) var(--radius)}
-.tbl{width:100%;min-width:980px;border-collapse:collapse}
-.tbl th{font-size:12.5px;color:var(--muted);font-weight:600;text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);background:#fafafa;white-space:nowrap}
-.tbl td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
-.tbl tbody tr:hover{background:#fdf7fa}
-.tbl .r{text-align:right}
-.tbl .issue{max-width:230px}
-.tbl .acts{white-space:nowrap;text-align:right}
-.rp{font-weight:700;color:var(--accent-d)}
-.c-name{font-weight:600}
-.empty{text-align:center;color:var(--muted);padding:36px 0!important}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:.8rem;margin-bottom:1rem}
+.kpi{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:1rem 1.1rem}
+.kpi span{font-size:.74rem;color:var(--muted);display:block}
+.kpi b{font-family:var(--mono);font-size:1.5rem;font-weight:700}
+.kpi b.r{color:var(--red)}
+.kpi b.g{color:var(--green)}
 
-/* status badges */
-.st{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:600;white-space:nowrap}
-.st::before{content:'';width:7px;height:7px;border-radius:50%;background:currentColor}
-.st-received{background:#f1f5f9;color:#475569}
-.st-diagnosing{background:#f3e8ff;color:#7e22ce}
-.st-waiting_parts{background:#fef3c7;color:#b45309}
-.st-repairing{background:#dbeafe;color:#1d4ed8}
-.st-ready{background:#d1fae5;color:#047857}
-.st-delivered{background:#e5e7eb;color:#374151}
+/* kanban */
+.pipe{overflow-x:auto;padding-bottom:.5rem}
+.pipe-in{display:grid;grid-template-columns:repeat(5,minmax(215px,1fr));gap:.7rem;min-width:1150px}
+.jcol{background:#f6edf2;border-radius:13px;padding:.55rem;min-height:280px}
+.jcol .jh{display:flex;align-items:center;gap:.45rem;padding:.3rem .45rem .6rem;font-size:.8rem}
+.jcol .jh b{font-weight:600}
+.jcol .jh .jc{margin-left:auto;font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.jcard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem;margin-bottom:.5rem;cursor:pointer;transition:all .15s;box-shadow:0 1px 3px rgba(38,18,28,.05)}
+.jcard:hover{border-color:var(--acc)}
+.jcard .jn{font-family:var(--mono);font-size:.68rem;color:var(--acc-deep);font-weight:700}
+.jcard b{font-size:.83rem;display:block;line-height:1.3}
+.jcard .jm{font-size:.7rem;color:var(--muted);margin-top:.15rem}
+.jcard .jv{display:flex;justify-content:space-between;align-items:center;margin-top:.4rem}
+.jcard .jv .mono{font-weight:700;font-size:.78rem}
+.jcard .days{font-family:var(--mono);font-size:.64rem;color:var(--muted)}
+.jcard .days.late{color:var(--red);font-weight:700}
 
-/* ---------- lookup page ---------- */
-.lookup-card{max-width:700px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px}
-.lookup-card h2{font-size:19px}
-.lookup-card .hint{color:var(--muted);font-size:13.5px;margin:6px 0 18px}
-.lk-form{display:flex;gap:10px;flex-wrap:wrap}
-.lk-form .fi{flex:1;min-width:200px;font-size:16px;text-transform:uppercase}
-#lkResult{max-width:700px;margin:16px auto 0}
-.lk-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px}
-.lk-none{text-align:center;padding:30px}
-.lk-none b{color:#dc2626;display:block;margin-bottom:6px}
-.lk-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
-.lk-top .rp{font-size:20px}
-.steps-wrap{overflow-x:auto;padding:6px 0 2px}
-.steps{display:flex;min-width:620px;margin:16px 0 6px}
-.step{flex:1;position:relative;text-align:center}
-.step::before{content:'';position:absolute;top:16px;left:calc(-50% + 18px);right:calc(50% + 18px);height:2px;background:#e5e7eb}
-.step:first-child::before{display:none}
-.step.done::before{background:var(--accent)}
-.step .dot{width:32px;height:32px;border-radius:50%;margin:0 auto 6px;display:grid;place-items:center;background:#eef0f3;color:#9aa1ac;font-weight:700;position:relative;z-index:1}
-.step.done .dot{background:var(--accent);color:#fff}
-.step.cur .dot{background:#fff;border:2px solid var(--accent);color:var(--accent);box-shadow:0 0 0 5px rgba(190,24,93,.12)}
-.step .lb{font-size:12.5px;color:var(--muted)}
-.step.done .lb,.step.cur .lb{color:var(--ink);font-weight:600}
-.lk-info{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-top:14px;border-top:1px solid var(--line);padding-top:16px}
-.lk-info dt{font-size:12.5px;color:var(--muted)}
-.lk-info dd{margin:2px 0 0;font-weight:600}
-.lk-banner{margin-top:16px;border-radius:10px;padding:12px 14px;font-size:14px}
-.lk-banner.green{background:#d1fae5;color:#065f46;border:1px solid #a7f3d0}
-.lk-banner.pink{background:var(--accent-soft);color:var(--accent-d);border:1px solid var(--accent-line)}
-@media (max-width:560px){.lk-info{grid-template-columns:1fr}}
+/* tables etc */
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th{text-align:left;padding:.7rem 1rem;color:var(--muted);font-weight:500;font-size:.74rem;letter-spacing:.04em;border-bottom:1px solid var(--line);white-space:nowrap;background:#fdf7fa}
+td{padding:.65rem 1rem;border-bottom:1px solid #f7eef3;vertical-align:middle}
+tr:last-child td{border-bottom:0}
+.badge{display:inline-block;font-size:.68rem;font-weight:700;padding:.15rem .55rem;border-radius:99px;white-space:nowrap}
+.b-r0{background:#f1f5f9;color:#64748b}
+.b-r1{background:#e0f2fe;color:#0369a1}
+.b-r2{background:#fef3c7;color:#b45309}
+.b-r3{background:var(--acc-soft);color:var(--acc-deep)}
+.b-r4{background:#dcfce7;color:#15803d}
+.b-r5{background:#f1f5f9;color:#64748b}
+.tlink{color:var(--acc);font-weight:500;min-height:40px;padding:.2rem .5rem}
+.tlink:hover{text-decoration:underline}
+.panel{background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
+.p-head{padding:.9rem 1.2rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.p-head b{font-weight:600}
+.p-head .count{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
 
-/* ---------- modal ---------- */
-.overlay{position:fixed;inset:0;background:rgba(15,10,20,.55);display:none;place-items:center;z-index:1000;padding:16px}
-.overlay.open{display:grid}
-.modal{background:#fff;border-radius:16px;width:min(580px,100%);max-height:92vh;overflow-y:auto;padding:24px;box-shadow:0 24px 70px rgba(0,0,0,.3)}
-.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:10px}
-.modal-head h2{font-size:19px}
-.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+/* modal + drawer */
+.overlay{position:fixed;inset:0;background:rgba(36,16,25,.55);backdrop-filter:blur(3px);z-index:200;display:grid;place-items:center;padding:1rem}
+.modal{background:#fff;border-radius:18px;width:min(520px,100%);max-height:92vh;overflow-y:auto;padding:1.4rem;animation:mup .22s cubic-bezier(.2,.8,.2,1)}
+@keyframes mup{from{opacity:0;transform:translateY(14px) scale(.98)}}
+.modal h3{font-size:1.05rem;font-weight:600;margin-bottom:1rem}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
 .fgrid .full{grid-column:1/-1}
-@media (max-width:560px){.fgrid{grid-template-columns:1fr}}
-.modal-foot{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;flex-wrap:wrap}
-.succ{text-align:center;padding:8px 0 4px}
-.succ .big-ck{width:56px;height:56px;border-radius:50%;background:#d1fae5;color:#047857;display:grid;place-items:center;margin:0 auto 12px}
-.succ .rp-big{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;color:var(--accent-d);margin:4px 0 8px}
-.succ p{color:var(--muted);margin:0 0 18px;font-size:14px}
-.succ .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-
-/* ---------- drawer ---------- */
-.drawer{position:fixed;top:0;right:0;height:100%;width:min(480px,100%);background:#fff;z-index:950;transform:translateX(105%);transition:transform .25s ease;box-shadow:-12px 0 40px rgba(0,0,0,.18);display:flex;flex-direction:column}
+.fgrid input,.fgrid select{border:1.5px solid var(--line);border-radius:10px;padding:.6rem .8rem;min-height:44px;width:100%;background:#fff;outline:none;font-size:.88rem}
+.fgrid input:focus{border-color:var(--acc)}
+.fgrid label{font-size:.76rem;color:var(--muted);display:grid;gap:.25rem}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:.3rem 1rem;font-size:.86rem;background:#fdf7fa;border-radius:12px;padding:.8rem 1rem;margin-bottom:.9rem}
+.kv dt{color:var(--muted);font-size:.78rem}
+.kv dd{font-weight:500;text-align:right}
+.kv dd.mono{font-family:var(--mono)}
+.kv .tot{border-top:2px solid var(--ink);padding-top:.35rem;margin-top:.2rem;font-weight:700}
+.kv .tot dd{color:var(--acc-deep)}
+.stage-btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem}
+.stage-btns .sb{flex:1;min-width:120px;border:1.5px solid var(--line);border-radius:10px;padding:.55rem .5rem;font-size:.78rem;font-weight:600;color:var(--muted);min-height:42px}
+.stage-btns .sb:hover{border-color:var(--acc);color:var(--acc)}
+.part-rows{display:grid;gap:.4rem;margin:.5rem 0}
+.part-row{display:grid;grid-template-columns:1fr 70px 100px 34px;gap:.4rem;align-items:center}
+.part-row input{border:1.5px solid var(--line);border-radius:8px;padding:.45rem .55rem;font-size:.82rem;min-height:38px;outline:none}
+.part-row input:focus{border-color:var(--acc)}
+.part-row .rm{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);color:var(--muted)}
+.part-row .rm:hover{border-color:var(--red);color:var(--red)}
+.add-part{border:1.5px dashed var(--line);border-radius:9px;padding:.45rem;font-size:.8rem;color:var(--muted);min-height:38px;width:100%}
+.add-part:hover{border-color:var(--acc);color:var(--acc)}
+.m-acts{display:flex;gap:.6rem;margin-top:1.1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:600;border-radius:10px;padding:.75rem 1.2rem;transition:all .15s;min-height:46px}
+.btn-a{background:var(--acc);color:#fff}
+.btn-a:hover{background:var(--acc-deep)}
+.btn-o{border:1.5px solid var(--line);color:var(--muted)}
+.btn-o:hover{border-color:var(--acc);color:var(--acc)}
+.btn-g{background:#f0fdf4;border:1.5px solid #86efac;color:#15803d}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,92vw);background:#fff;border-left:1px solid var(--line);z-index:250;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column}
 .drawer.open{transform:none}
-.dr-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:18px 20px;border-bottom:1px solid var(--line)}
-.dr-head .rp.big{font-size:19px}
-.dr-name{font-weight:600;margin-top:4px}
-.dr-body{flex:1;overflow-y:auto;padding:18px 20px}
-.dr-status{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
-.dr-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;margin:0 0 6px}
-.dr-grid dt{font-size:12.5px;color:var(--muted)}
-.dr-grid dd{margin:2px 0 0;font-weight:600}
-.dr-grid .wide{grid-column:1/-1}
-.dr-h{font-size:14px;font-weight:600;color:var(--accent-d);margin:20px 0 10px;padding-top:14px;border-top:1px solid var(--line)}
-.tl{list-style:none;margin:0;padding:0;border-left:2px solid var(--line);margin-left:6px}
-.tl li{position:relative;padding:0 0 14px 18px}
-.tl li::before{content:'';position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
-.tl li b{display:block}
-.notes .note{background:#fafafa;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px}
-.note-t{margin-bottom:2px}
-.inline-form{display:flex;gap:8px;margin-top:8px;align-items:flex-start}
-.inline-form textarea{flex:1}
-.part-form{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.part-form #partName{flex:2;min-width:140px}
-.part-form #partPrice{flex:1;min-width:100px}
-.parts .part{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line)}
-.parts .part>span:first-child{flex:1}
-.totals{margin-top:18px;background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:12px;padding:12px 14px}
-.totals>div{display:flex;justify-content:space-between;padding:3px 0}
-.totals .net{font-weight:700;color:var(--accent-d);border-top:1px solid var(--accent-line);padding-top:9px;margin-top:7px;font-size:17px}
-.dr-foot{border-top:1px solid var(--line);padding:14px 20px;display:flex;gap:10px;flex-wrap:wrap}
-
-/* ---------- toast ---------- */
-#toastRoot{position:fixed;right:16px;bottom:16px;z-index:1200;display:flex;flex-direction:column;gap:8px}
-.toast{display:flex;align-items:center;gap:9px;background:#111827;color:#fff;padding:10px 16px;border-radius:10px;min-height:44px;box-shadow:0 10px 30px rgba(0,0,0,.25);font-size:14px;animation:tin .22s ease}
-.toast .ic{color:#34d399}
-.toast.out{opacity:0;transform:translateY(6px);transition:all .25s}
-@keyframes tin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-/* ---------- hub link ---------- */
-.hub-link{position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--ink);text-decoration:none;font-size:14px;font-weight:600;padding:0 16px;min-height:44px;border-radius:999px;border:1px solid var(--line);border-left:3px solid #dc2626;box-shadow:0 6px 20px rgba(0,0,0,.12);transition:border-color .15s,color .15s}
-.hub-link:hover{color:var(--accent-d)}
-
-/* ---------- responsive ---------- */
-@media (max-width:900px){
+.scrim{position:fixed;inset:0;background:rgba(36,16,25,.45);z-index:240}
+.d-head{padding:.9rem 1.1rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.6rem}
+.d-head b{font-weight:600}
+.d-head .x{margin-left:auto;width:38px;height:38px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted)}
+.d-body{flex:1;overflow-y:auto;padding:.6rem 1.1rem}
+.feed-item{display:flex;gap:.7rem;padding:.6rem 0;border-bottom:1px dashed var(--line);animation:tin2 .2s}
+@keyframes tin2{from{opacity:0;transform:translateX(8px)}}
+.feed-item .fi{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:none}
+.feed-item .fm{font-size:.82rem;line-height:1.45}
+.feed-item .ft{font-family:var(--mono);font-size:.66rem;color:var(--muted);margin-top:.1rem}
+.d-note{padding:.7rem 1.1rem;border-top:1px solid var(--line);font-size:.72rem;color:var(--muted)}
+.toast{position:fixed;top:1rem;right:1rem;z-index:300;background:var(--dark2);color:#fff;border-radius:10px;padding:.8rem 1.1rem;font-size:.85rem;box-shadow:0 12px 30px -10px rgba(0,0,0,.4);opacity:0;transform:translateY(-8px);transition:all .25s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
+.toast.err{background:#7f1d1d}
+.statusbar{background:var(--dark);color:#b37c94;font-size:.72rem;padding:.45rem 1.1rem;display:flex;gap:1.4rem;align-items:center;font-family:var(--mono);flex-wrap:wrap}
+.statusbar .ok{color:#4ade80}
+.statusbar .sp{flex:1}
+.statusbar button{color:#b37c94;min-height:30px;font-family:var(--mono);font-size:.72rem}
+.statusbar button:hover{color:#fff}
+@media(max-width:860px){
   .app{grid-template-columns:1fr}
-  .sidebar{position:fixed;top:0;left:0;bottom:0;width:250px;z-index:900;transform:translateX(-105%);transition:transform .25s}
-  body.sb-open .sidebar{transform:none}
+  .rail{position:fixed;left:0;top:0;bottom:0;width:72px;transform:translateX(-100%);transition:transform .25s;z-index:100}
+  .rail.open{transform:none}
+  .mobtop{display:flex!important}
 }
-@media (min-width:901px){#btnMenu{display:none}}
-@media (max-width:680px){.topdate{display:none}}
-@media (max-width:480px){.content{padding:16px 12px 100px}}
-
-/* ---------- print ---------- */
-#printArea{display:none}
-.rc{max-width:720px;margin:0 auto;color:#111;font-size:14px}
-.rc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:2px solid #111;padding-bottom:10px;margin-bottom:12px}
-.rc-shop{font-size:22px;font-weight:700}
-.rc-sub{font-size:12px;color:#444;margin-top:2px}
-.rc-id{text-align:right;font-size:13px}
-.rc-id .mono{font-size:18px;font-weight:700}
-.rc-t{width:100%;border-collapse:collapse;margin-bottom:10px}
-.rc-t th,.rc-t td{border:1px solid #999;padding:6px 8px;text-align:left;font-size:13px;vertical-align:top}
-.rc-t th{background:#f0f0f0;width:18%}
-.rc-t .r{text-align:right}
-.rc-t.sum th{width:70%}
-.rc-t.sum .net th,.rc-t.sum .net td{font-weight:700;font-size:15px}
-.rc-note{font-size:12px;color:#333;border:1px dashed #999;padding:8px 10px;margin:10px 0}
-.rc-sign{display:flex;justify-content:space-between;gap:30px;margin-top:36px;font-size:13px;text-align:center}
-.rc-sign>div{flex:1}
-@media print{
-  @page{margin:14mm}
-  body{background:#fff}
-  #app,#loginView,#hubLink,#toastRoot,#drawer,#scrim,.overlay,#svgDefs{display:none!important}
-  #printArea{display:block!important}
-}
+.mobtop{display:none;background:#fff;border-bottom:1px solid var(--line);padding:.5rem .8rem;align-items:center;gap:.8rem}
+.mobtop button{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px}
+@media print{ body *{visibility:hidden} #rcptPrint,#rcptPrint *{visibility:visible} #rcptPrint{position:absolute;left:0;top:0;width:100%} }
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
 </style>
 </head>
 <body>
 <script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
 
-<!-- SVG icon defs -->
-<svg id="svgDefs" width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <linearGradient id="gAcc" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ec4899"/><stop offset="1" stop-color="#be185d"/>
-    </linearGradient>
-  </defs>
-  <symbol id="i-wrench" viewBox="0 0 48 48">
-    <rect width="48" height="48" rx="12" fill="url(#gAcc)"/>
-    <path d="M31.8 13.4a7.6 7.6 0 0 0-7.4 9.3L14 32.9a2.7 2.7 0 0 0 3.8 3.8L28 26.3a7.6 7.6 0 0 0 9.3-7.4l-4.3 4.3-3.4-1.1-1.1-3.4 4.3-4.3a7.5 7.5 0 0 0-1-1z" fill="#fff"/>
-  </symbol>
-  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-    <path d="M9 6h12M9 12h12M9 18h12"/><circle cx="4.5" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="4.5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="4.5" cy="18" r="1.3" fill="currentColor" stroke="none"/>
-  </symbol>
-  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
-  <symbol id="i-mag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
-  <symbol id="i-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></symbol>
-  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
-  <symbol id="i-print" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v7H6z"/></symbol>
-  <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></symbol>
-  <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/></symbol>
-  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
-  <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></symbol>
-  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></symbol>
-  <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 3v5h-5"/></symbol>
-  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></symbol>
-</svg>
-
-<!-- ============ LOGIN ============ -->
-<section id="loginView">
-  <div class="login-card">
-    <div class="lg-logo"><svg width="56" height="56" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-wrench"/></svg></div>
-    <h1>ซ่อมดี ฟอร์จูน</h1>
-    <p class="sub">ระบบจัดการใบรับซ่อม · มือถือ แท็บเล็ต โน้ตบุ๊ก</p>
-    <form id="loginForm" novalidate>
-      <div class="fgroup">
-        <label class="fl" for="lgUser">ชื่อผู้ใช้</label>
-        <input class="fi" id="lgUser" type="text" value="demo" autocomplete="username">
+<!-- TRACK-FIRST ENTRY -->
+<div class="track-view" id="trackView" hidden>
+  <div class="track-in">
+    <div class="track-brand"><img src="assets/logo.jpg" alt=""><b>ซ่อมดี Pro</b></div>
+    <p class="track-sub">ร้านซ่อมมือถือ-โน้ตบุ๊ก ช่างเจ · ติดตามงานซ่อมได้ด้วยตัวเอง 24 ชม.</p>
+    <div class="track-card">
+      <h2>ติดตามงานซ่อมของคุณ</h2>
+      <p class="tsub">กรอกเลขใบรับซ่อมที่อยู่ในใบเสร็จตอนฝากเครื่อง</p>
+      <div class="track-row">
+        <input id="trackInput" placeholder="RP-1024" aria-label="เลขใบรับซ่อม">
+        <button id="trackBtn">ติดตาม</button>
       </div>
-      <div class="fgroup">
-        <label class="fl" for="lgPass">รหัสผ่าน</label>
-        <input class="fi" id="lgPass" type="password" value="demo123" autocomplete="current-password">
-      </div>
-      <button class="btn btn-primary full" type="submit">เข้าสู่ระบบ</button>
-    </form>
-    <div class="login-note">ระบบเดโม — กดเข้าสู่ระบบได้เลย ข้อมูลทั้งหมดเป็นข้อมูลตัวอย่าง จัดเก็บในเครื่องของคุณเท่านั้น</div>
-    <div class="credit">สร้างโดย ZenityX · <a href="../../first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos">เรียนสร้างเว็บด้วย AI ด้วยตัวเอง</a></div>
+      <p class="track-hint">ลองเลขตัวอย่าง: <b data-try="RP-1024">RP-1024</b> หรือ <b data-try="RP-1021">RP-1021</b></p>
+      <div class="tl-track" id="tlTrack"></div>
+      <div class="track-meta" id="trackMeta"></div>
+    </div>
+    <button class="staff-link" id="staffLink">สำหรับช่าง / พนักงานร้าน →</button>
+    <p class="track-credit">ระบบเดโม — ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener">First Vibe : Coding — ZenityX</a></p>
   </div>
-</section>
+</div>
 
-<!-- ============ APP ============ -->
-<div id="app" class="app hide">
-  <aside class="sidebar" id="sidebar">
-    <div class="sb-brand">
-      <svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-wrench"/></svg>
-      <div><b>ซ่อมดี ฟอร์จูน</b><span>ระบบใบรับซ่อม</span></div>
-    </div>
-    <nav class="sb-nav" aria-label="เมนูหลัก">
-      <button type="button" class="mi on" data-page="jobs"><svg class="ic" aria-hidden="true"><use href="#i-list"/></svg>ใบงานซ่อม</button>
-      <button type="button" class="mi" data-act="openNew"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg>รับงานใหม่</button>
-      <button type="button" class="mi" data-page="lookup"><svg class="ic" aria-hidden="true"><use href="#i-mag"/></svg>ลูกค้าแจ้งสถานะ</button>
+<!-- APP -->
+<div class="app" id="appView" hidden>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ซ่อมดี Pro</b></div>
+  <aside class="rail" id="rail">
+    <div class="logo"><img src="assets/logo.jpg" alt="ซ่อมดี"></div>
+    <nav>
+      <button class="ri on" data-page="board" aria-label="บอร์ดงาน"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="5" height="18" rx="1"/><rect x="10" y="3" width="5" height="12" rx="1"/><rect x="17" y="3" width="5" height="8" rx="1"/></svg><span class="tip">บอร์ดงาน (B)</span></button>
+      <button class="ri" data-page="all" aria-label="ใบซ่อมทั้งหมด"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span class="tip">ใบซ่อมทั้งหมด (A)</span></button>
+      <button class="ri" id="feedBtn" aria-label="กิจกรรมข้ามระบบ"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span class="tip">กิจกรรมข้ามระบบ (F) <span id="feedBadge" class="mono" hidden></span></span></button>
     </nav>
-    <div class="sb-foot">
-      <div class="sb-user">
-        <div class="avatar" aria-hidden="true">ดี</div>
-        <div><b>แอดมินเดโม</b><span>ผู้ดูแลระบบ</span></div>
-      </div>
-      <button type="button" class="mi" data-act="logout"><svg class="ic" aria-hidden="true"><use href="#i-out"/></svg>ออกจากระบบ</button>
-    </div>
+    <button class="who" id="whoBtn" title="กลับหน้าติดตาม">ช</button>
   </aside>
-  <div class="scrim" id="scrim"></div>
 
-  <main class="main">
-    <header class="topbar">
-      <button type="button" class="btn-icon" id="btnMenu" aria-label="เปิดเมนู"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
-      <h1 id="pageTitle">ใบงานซ่อม</h1>
-      <div class="kpi" aria-label="สรุปงาน">
-        <span class="pill">กำลังซ่อม <b class="mono" id="kpiRepair">0</b> เครื่อง</span>
-        <span class="pill">พร้อมรับ <b class="mono" id="kpiReady">0</b> เครื่อง</span>
-      </div>
-      <div class="spacer"></div>
-      <span class="topdate" id="topDate"></span>
-      <button type="button" class="btn btn-ghost btn-sm" data-act="reset"><svg class="ic" aria-hidden="true"><use href="#i-refresh"/></svg>รีเซ็ตข้อมูลตัวอย่าง</button>
-    </header>
+  <div class="main">
+    <div class="topbar">
+      <span class="ws-chip"><span class="wm">ช</span> ช่างเจ รีแพร์</span>
+      <span class="stat-chip">งานค้าง <b id="stOpen">0</b></span>
+      <span class="stat-chip red">เกิน 3 วัน <b id="stLate">0</b></span>
+      <span class="stat-chip green">เสร็จเดือนนี้ <b id="stDone">0</b></span>
+      <span class="sp"></span>
+      <button class="tbtn primary" id="intakeBtn">+ รับซ่อมใหม่ (N)</button>
+      <button class="sync-pill" id="syncPill"><i></i><span id="syncTxt">ออนไลน์</span></button>
+      <span class="clock" id="clock">--:--:--</span>
+    </div>
+    <div class="offline-banner" id="offBanner" hidden><b>โหมดออฟไลน์</b> รับงาน/อัพเดทสถานะเก็บในเครื่องก่อน</div>
 
     <div class="content">
-      <!-- PAGE: jobs -->
-      <section id="pageJobs">
+      <div id="page-board">
+        <div class="kpi-grid" id="kpiGrid"></div>
+        <div class="pipe"><div class="pipe-in" id="boardCols"></div></div>
+      </div>
+      <div id="page-all" hidden>
         <div class="panel">
-          <div class="panel-head">
-            <div class="chips" id="chips" role="group" aria-label="กรองตามสถานะ"></div>
-            <div class="searchbox">
-              <input class="fi" id="q" type="search" placeholder="ค้นหา เลขใบงาน / เบอร์ / ชื่อลูกค้า" aria-label="ค้นหาใบงาน">
-            </div>
-            <button type="button" class="btn btn-primary btn-sm" data-act="openNew"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg>รับงานใหม่</button>
-          </div>
+          <div class="p-head"><b>ใบรับซ่อมทั้งหมด</b><span class="count" id="allCount"></span></div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>เลขใบ</th><th>ลูกค้า</th><th>เครื่อง</th><th>อาการ</th><th>รับเมื่อ</th><th>ประมาณการ</th><th>สถานะ</th><th></th></tr></thead>
+            <tbody id="allBody"></tbody>
+          </table></div>
         </div>
-        <div class="panel">
-          <div class="tbl-wrap">
-            <table class="tbl">
-              <thead><tr>
-                <th>เลขใบงาน</th><th>ลูกค้า</th><th>เครื่อง / รุ่น</th><th>อาการ</th><th>ช่าง</th><th>ประกันถึง</th><th class="r">ราคาประเมิน</th><th>สถานะ</th><th></th>
-              </tr></thead>
-              <tbody id="rows"></tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- PAGE: lookup -->
-      <section id="pageLookup" class="hide">
-        <div class="lookup-card">
-          <h2>ตรวจสอบสถานะงานซ่อม</h2>
-          <p class="hint">สำหรับลูกค้า — กรอกเลขใบงานจากใบรับซ่อม (ทดลอง: <span class="mono">RP-0007</span> หรือพิมพ์แค่ <span class="mono">7</span>)</p>
-          <form id="lookupForm" class="lk-form" novalidate>
-            <input class="fi mono" id="lkRef" type="text" placeholder="RP-0000" aria-label="เลขใบงานซ่อม">
-            <button class="btn btn-primary" type="submit"><svg class="ic" aria-hidden="true"><use href="#i-mag"/></svg>ตรวจสอบ</button>
-          </form>
-        </div>
-        <div id="lkResult"></div>
-      </section>
-    </div>
-  </main>
-</div>
-
-<!-- ============ NEW JOB MODAL ============ -->
-<div class="overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="njTitle">
-  <div class="modal">
-    <div class="modal-head">
-      <h2 id="njTitle">รับงานซ่อมใหม่</h2>
-      <button type="button" class="btn-icon" data-act="closeModal" aria-label="ปิดหน้าต่าง"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+      </div>
     </div>
 
-    <form id="newJobForm" class="fgrid" novalidate>
-      <div>
-        <label class="fl" for="njName">ชื่อลูกค้า *</label>
-        <input class="fi" id="njName" type="text" placeholder="เช่น สมชาย ใจดี">
-        <p class="err" id="eName"></p>
-      </div>
-      <div>
-        <label class="fl" for="njPhone">เบอร์โทร *</label>
-        <input class="fi mono" id="njPhone" type="tel" placeholder="08x-xxx-xxxx">
-        <p class="err" id="ePhone"></p>
-      </div>
-      <div>
-        <label class="fl" for="njType">ประเภทเครื่อง *</label>
-        <select class="fi" id="njType">
-          <option>มือถือ</option><option>แท็บเล็ต</option><option>โน้ตบุ๊ก</option><option>คอมพิวเตอร์</option><option>อื่นๆ</option>
-        </select>
-      </div>
-      <div>
-        <label class="fl" for="njModel">รุ่น *</label>
-        <input class="fi" id="njModel" type="text" placeholder="เช่น iPhone 13">
-        <p class="err" id="eModel"></p>
-      </div>
-      <div class="full">
-        <label class="fl" for="njIssue">อาการ / ปัญหา *</label>
-        <textarea class="fi" id="njIssue" rows="2" placeholder="เช่น จอแตกจากตกหล่น ทัชสกรีนใช้ไม่ได้"></textarea>
-        <p class="err" id="eIssue"></p>
-      </div>
-      <div>
-        <label class="fl" for="njTech">ช่างที่มอบหมาย *</label>
-        <select class="fi" id="njTech">
-          <option>ช่างแบงค์</option><option>ช่างโอ๊ต</option><option>ช่างมิ้นท์</option>
-        </select>
-      </div>
-      <div>
-        <label class="fl" for="njDue">วันนัดรับคืน *</label>
-        <input class="fi" id="njDue" type="date">
-        <p class="err" id="eDue"></p>
-      </div>
-      <div class="full">
-        <label class="fl" for="njEst">ค่าแรงประเมิน (บาท) *</label>
-        <input class="fi mono" id="njEst" type="number" min="0" step="50" placeholder="เช่น 1500">
-        <p class="err" id="eEst"></p>
-      </div>
-      <div class="full modal-foot">
-        <button type="button" class="btn btn-ghost" data-act="closeModal">ยกเลิก</button>
-        <button type="submit" class="btn btn-primary">บันทึกใบรับซ่อม</button>
-      </div>
-    </form>
-
-    <div id="newJobSuccess" class="succ hide">
-      <div class="big-ck"><svg class="ic" style="width:28px;height:28px" aria-hidden="true"><use href="#i-check"/></svg></div>
-      <div>รับงานเรียบร้อย เลขใบงาน</div>
-      <div class="rp-big" id="njDoneId">RP-0000</div>
-      <p>พิมพ์ใบรับซ่อมให้ลูกค้าเก็บไว้เป็นหลักฐาน เลขนี้ใช้ตรวจสอบสถานะได้</p>
-      <div class="row">
-        <button type="button" class="btn btn-primary" id="njPrint" data-act="print" data-id=""><svg class="ic" aria-hidden="true"><use href="#i-print"/></svg>พิมพ์ใบรับซ่อม</button>
-        <button type="button" class="btn btn-ghost" data-act="newMore">รับงานอีกเครื่อง</button>
-        <button type="button" class="btn btn-ghost" data-act="closeModal">ปิด</button>
-      </div>
+    <div class="statusbar">
+      <span>ซ่อมดี Pro v2.1.0</span>
+      <span class="ok">● พร้อมใช้งาน</span>
+      <span class="sp"></span>
+      <span id="stJobs">งาน: 0</span>
+      <button id="resetBtn">รีเซ็ตข้อมูลตัวอย่าง</button>
     </div>
   </div>
 </div>
 
-<!-- ============ DRAWER ============ -->
-<aside class="drawer" id="drawer" aria-label="รายละเอียดใบงาน">
-  <div id="drawerBody" style="display:contents"></div>
-</aside>
+<!-- job modal -->
+<div class="overlay" id="jobOverlay" hidden>
+  <div class="modal" id="jobModal"></div>
+</div>
 
-<!-- toast / print / hub -->
-<div id="toastRoot" aria-live="polite"></div>
-<div id="printArea"></div>
-<a class="hub-link" id="hubLink" href="../"><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg>หน้ารวมตัวอย่าง</a>
+<!-- receipt modal -->
+<div class="overlay" id="rcptOverlay" hidden>
+  <div class="modal">
+    <div id="rcptPrint"></div>
+    <div class="m-acts">
+      <button class="btn btn-o" id="rcptClose" style="flex:1">ปิด</button>
+      <button class="btn btn-a" id="rcptPrintBtn" style="flex:1">พิมพ์ใบเสร็จ</button>
+    </div>
+  </div>
+</div>
+
+<!-- feed drawer -->
+<div class="scrim" id="scrim" hidden></div>
+<div class="drawer" id="feedDrawer">
+  <div class="d-head"><b>กิจกรรมข้ามระบบ</b><span class="count mono" id="feedCount" style="font-size:.7rem;color:var(--muted)"></span><button class="x" id="feedClose" aria-label="ปิด"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+  <div class="d-body" id="feedBody"></div>
+  <div class="d-note">ทุกระบบในเครือ ZenityX Demos แชร์เหตุการณ์ผ่าน localStorage จริง</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<a href="../" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
+</a>
 
 <script>
 (function(){
 'use strict';
+var LS = 'zx-repair2-v1';
+var LINK_KEY = 'zx-link-v1';
+var DAY = 86400000;
 
-/* ---------- constants ---------- */
-var LS='zx-repair-v1';
-var STATUSES=[
-  {k:'received',t:'รับเครื่อง'},
-  {k:'diagnosing',t:'วินิจฉัย'},
-  {k:'waiting_parts',t:'รออะไหล่'},
-  {k:'repairing',t:'กำลังซ่อม'},
-  {k:'ready',t:'พร้อมรับ'},
-  {k:'delivered',t:'ส่งมอบ'}
+function linkRead(){ try { var d = JSON.parse(localStorage.getItem(LINK_KEY)); return d && d.events ? d : {events:[]}; } catch(e){ return {events:[]}; } }
+function linkWrite(sys, type, msg, val){
+  var l = linkRead();
+  l.events.unshift({ t: Date.now(), sys: sys, type: type, msg: msg, val: (val === undefined ? null : val) });
+  l.events = l.events.slice(0, 60);
+  try { localStorage.setItem(LINK_KEY, JSON.stringify(l)); } catch(e){}
+}
+
+var STAGES = [
+  { id:'intake', n:'รับเครื่อง' },
+  { id:'diag', n:'วินิจฉัย' },
+  { id:'parts', n:'รออะไหล่' },
+  { id:'fixing', n:'กำลังซ่อม' },
+  { id:'ready', n:'พร้อมรับคืน' }
 ];
-var TECHS=['ช่างแบงค์','ช่างโอ๊ต','ช่างมิ้นท์'];
-
-/* ---------- utils ---------- */
-function $(s,r){return (r||document).querySelector(s);}
-function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
-function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-function pad4(n){return ('0000'+n).slice(-4);}
-function todayISO(){var t=new Date();return t.getFullYear()+'-'+('0'+(t.getMonth()+1)).slice(-2)+'-'+('0'+t.getDate()).slice(-2);}
-function nowISO(){return new Date().toISOString();}
-function addDays(iso,n){var t=new Date(iso+'T12:00:00');t.setDate(t.getDate()+n);return t.getFullYear()+'-'+('0'+(t.getMonth()+1)).slice(-2)+'-'+('0'+t.getDate()).slice(-2);}
-function dtAt(iso,n,hm){var t=new Date(iso+'T'+(hm||'09:30')+':00');t.setDate(t.getDate()+n);return t.toISOString();}
-var fmtD=new Intl.DateTimeFormat('th-TH',{day:'numeric',month:'short',year:'numeric'});
-var fmtDT=new Intl.DateTimeFormat('th-TH',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});
-function fdate(iso){if(!iso)return '-';return fmtD.format(new Date(iso.length>10?iso:iso+'T12:00:00'));}
-function fdt(iso){return fmtDT.format(new Date(iso));}
-function baht(n){return '฿'+Number(n||0).toLocaleString('th-TH');}
-function digits(s){return String(s||'').replace(/\D/g,'');}
-function fmtPhone(d){d=digits(d);if(d.length===10)return d.slice(0,3)+'-'+d.slice(3,6)+'-'+d.slice(6);if(d.length===9)return d.slice(0,2)+'-'+d.slice(2,5)+'-'+d.slice(5);return d;}
-function stIdx(k){for(var i=0;i<STATUSES.length;i++)if(STATUSES[i].k===k)return i;return 0;}
-function stLabel(k){return STATUSES[stIdx(k)].t;}
-function normRef(s){
-  s=(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
-  var m=s.match(/(\d{1,6})$/);
-  if(!m)return s;
-  var num=String(parseInt(m[1],10));
-  return 'RP-'+('0000'+num).slice(-Math.max(4,num.length));
-}
-
-/* ---------- seed ---------- */
+var STAGE_IDX = {}; STAGES.forEach(function(s,i){ STAGE_IDX[s.id] = i; });
 function seed(){
-  var R=[
-    ['สมชาย ใจดี','0812345678','มือถือ','iPhone 13','หน้าจอแตก ทัชสกรีนไม่ติดบางจุด',0,'2026-08-18','2026-08-23',5,2900,[['จอ OLED คัดเกรด A+',1900]],[['เปลี่ยนจอเรียบร้อย ทดสอบทัชสกรีนแล้วปกติ','2026-08-21'],['ตรวจ Face ID และกล้องผ่าน ส่งมอบให้ลูกค้าแล้ว','2026-08-23']]],
-    ['วรรณา ศรีสุข','0895551234','มือถือ','Samsung Galaxy S23','แบตเสื่อม ชาร์จเต็มอยู่ได้แค่ครึ่งวัน',1,'2026-08-25','2026-08-28',5,1450,[['แบตเตอรี่แท้ศูนย์',950]],[['เปลี่ยนแบตใหม่ เทสรอบชาร์จผ่าน','2026-08-27']]],
-    ['ธนกฤต พูนสุข','0867778899','โน้ตบุ๊ก','MacBook Air M2','คีย์บอร์ดบางปุ่มกดไม่ติด',2,'2026-09-02','2026-09-15',4,3800,[['คีย์บอร์ดพร้อม Top Case',2800]],[['เปลี่ยนคีย์บอร์ดเสร็จแล้ว รอ QC รอบสุดท้าย','2026-09-10']]],
-    ['กมลรัตน์ แก้วใส','0921113344','แท็บเล็ต','iPad Pro 11','ชาร์จไม่เข้า ขั้วสายหลวม',0,'2026-09-05','2026-09-13',4,2200,[['บอร์ดชาร์จ USB-C',1400]],[['เปลี่ยนบอร์ดชาร์จแล้ว ชาร์จเข้าเต็มปกติ','2026-09-11']]],
-    ['ประเสริฐ มั่งมี','0852224455','มือถือ','Oppo Reno 10','จอไม่ติด แต่เครื่องเปิดได้ มีเสียงแจ้งเตือน',1,'2026-09-08','2026-09-16',3,2600,[['จอ AMOLED',1800]],[['กำลังเปลี่ยนจอ เดี๋ยวเทสสีก่อนประกอบ','2026-09-11']]],
-    ['อรอนงค์ ทองแท้','0903335566','โน้ตบุ๊ก','Lenovo IdeaPad Slim 5','เครื่องช้ามาก เปิดโปรแกรมนาน',2,'2026-09-09','2026-09-17',3,2850,[['SSD NVMe 512GB',1650]],[['สำรองข้อมูลแล้ว กำลังเปลี่ยน SSD และลง Windows ใหม่','2026-09-11']]],
-    ['ชัยวัฒน์ ดีงาม','0844446677','มือถือ','iPhone 12','ตกน้ำมา เปิดไม่ติด',0,'2026-09-10','2026-09-18',3,1800,[],[['ล้างบอร์ดอัลตราโซนิกแล้ว กำลังไล่วงจรชาร์จ','2026-09-12']]],
-    ['นภัสสร ชื่นใจ','0886667788','มือถือ','Vivo V29','จอแตกจากตกหล่น',1,'2026-09-10','2026-09-20',2,2400,[],[['สั่งจอ AMOLED จากศูนย์แล้ว รออะไหล่ 3–5 วัน','2026-09-12']]],
-    ['ปิยะ รักษาดี','0917779900','โน้ตบุ๊ก','ASUS Zenbook 14','พัดลมเสียงดังผิดปกติ เครื่องร้อนง่าย',2,'2026-09-11','2026-09-21',2,1600,[],[['รอพัดลม CPU จากตัวแทนจำหน่าย','2026-09-12']]],
-    ['สุภาพร เพิ่มพูน','0878881122','แท็บเล็ต','Samsung Galaxy Tab S9','กดเปิดไม่ติด ชาร์จแล้วไม่มีปฏิกิริยา',0,'2026-09-11','2026-09-19',1,1500,[],[['กำลังวัดไฟเข้าบอร์ด คาดปัญหาวงจรจ่ายไฟ','2026-09-12']]],
-    ['อนุชา สว่างวงศ์','0939992233','มือถือ','iPhone 15 Pro','ฝาหลังกระจกแตกร้าว',1,'2026-09-12','2026-09-22',1,3500,[],[]],
-    ['มาลี แสงจันทร์','0951213344','โน้ตบุ๊ก','MacBook Pro 14','แบตบวม ทัชแพดเด้งขึ้น',2,'2026-09-12','2026-09-25',0,4200,[],[]],
-    ['วิชัย ก้าวหน้า','0962324455','มือถือ','Xiaomi 13T','เครื่องรีสตาร์ทเองบ่อย โดยเฉพาะตอนเล่นเกม',0,'2026-09-12','2026-09-24',0,1500,[],[]],
-    ['จิราพร บุญนำ','0973435566','โน้ตบุ๊ก','HP Pavilion 15','หน้าจอสั่นเป็นช่วง ๆ',1,'2026-09-12','2026-09-23',0,1900,[],[]]
-  ];
-  var jobs=R.map(function(r,i){
-    var si=r[8],tl=[];
-    for(var s=0;s<=si;s++){tl.push({s:STATUSES[s].k,at:dtAt(r[6],s,s===0?'09:30':'14:0'+((i+s)%10))});}
-    return {
-      id:'RP-'+pad4(i+1),
-      customer:r[0],phone:r[1],dtype:r[2],model:r[3],issue:r[4],tech:TECHS[r[5]],
-      received:r[6],due:r[7],status:STATUSES[si].k,estimate:r[9],
-      parts:(r[10]||[]).map(function(p){return {name:p[0],price:p[1]};}),
-      notes:(r[11]||[]).map(function(n){return {at:new Date(n[1]+'T16:00:00').toISOString(),text:n[0]};}),
-      timeline:tl,
-      warranty:addDays(r[7],90)
-    };
-  });
-  return {seq:R.length+1,jobs:jobs};
-}
-
-/* ---------- state ---------- */
-var state=(function(){
-  try{
-    var s=localStorage.getItem(LS);
-    if(s){var d=JSON.parse(s);if(d&&d.jobs&&d.jobs.length)return d;}
-  }catch(e){}
-  var d=seed();
-  try{localStorage.setItem(LS,JSON.stringify(d));}catch(e){}
-  return d;
-})();
-var ui={page:'jobs',filter:'all',q:'',cur:null,drawerOpen:false};
-function save(){try{localStorage.setItem(LS,JSON.stringify(state));}catch(e){}}
-function findJob(id){for(var i=0;i<state.jobs.length;i++)if(state.jobs[i].id===id)return state.jobs[i];return null;}
-function partsSum(j){return j.parts.reduce(function(a,p){return a+Number(p.price||0);},0);}
-
-/* ---------- toast ---------- */
-function toast(msg){
-  var root=$('#toastRoot');
-  var t=document.createElement('div');
-  t.className='toast';
-  t.innerHTML='<svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span></span>';
-  t.querySelector('span').textContent=msg;
-  root.appendChild(t);
-  setTimeout(function(){t.classList.add('out');setTimeout(function(){t.remove();},260);},2800);
-}
-
-/* ---------- render: KPI / chips / rows ---------- */
-function renderAll(){renderKPI();renderChips();renderRows();}
-function renderKPI(){
-  var r=0,dy=0;
-  state.jobs.forEach(function(j){if(j.status==='repairing')r++;if(j.status==='ready')dy++;});
-  $('#kpiRepair').textContent=r;
-  $('#kpiReady').textContent=dy;
-}
-function renderChips(){
-  var counts={all:state.jobs.length};
-  STATUSES.forEach(function(s){counts[s.k]=0;});
-  state.jobs.forEach(function(j){counts[j.status]=(counts[j.status]||0)+1;});
-  var h='<button type="button" class="chip'+(ui.filter==='all'?' on':'')+'" data-act="chip" data-f="all">ทั้งหมด <b class="mono">'+counts.all+'</b></button>';
-  STATUSES.forEach(function(s){
-    h+='<button type="button" class="chip'+(ui.filter===s.k?' on':'')+'" data-act="chip" data-f="'+s.k+'">'+s.t+' <b class="mono">'+(counts[s.k]||0)+'</b></button>';
-  });
-  $('#chips').innerHTML=h;
-}
-function renderRows(){
-  var q=ui.q.trim().toLowerCase(),qd=digits(ui.q);
-  var list=state.jobs.filter(function(j){
-    if(ui.filter!=='all'&&j.status!==ui.filter)return false;
-    if(!q)return true;
-    if(j.id.toLowerCase().indexOf(q)>-1||j.customer.toLowerCase().indexOf(q)>-1)return true;
-    if(qd&&digits(j.phone).indexOf(qd)>-1)return true;
-    return false;
-  }).slice().sort(function(a,b){return b.id.localeCompare(a.id);});
-  var tb=$('#rows');
-  if(!list.length){tb.innerHTML='<tr><td colspan="9" class="empty">ไม่พบใบงานที่ตรงกับเงื่อนไข</td></tr>';return;}
-  tb.innerHTML=list.map(function(j){
-    var idx=stIdx(j.status),next=idx<STATUSES.length-1?STATUSES[idx+1]:null;
-    return '<tr>'+
-      '<td><span class="mono rp">'+j.id+'</span></td>'+
-      '<td><div class="c-name">'+esc(j.customer)+'</div><div class="c-sub mono">'+fmtPhone(j.phone)+'</div></td>'+
-      '<td><div>'+esc(j.model)+'</div><div class="c-sub">'+esc(j.dtype)+'</div></td>'+
-      '<td class="issue">'+esc(j.issue)+'</td>'+
-      '<td>'+esc(j.tech)+'</td>'+
-      '<td class="nowrap">'+fdate(j.warranty)+'</td>'+
-      '<td class="r mono">'+baht(j.estimate)+'</td>'+
-      '<td><span class="st st-'+j.status+'">'+stLabel(j.status)+'</span></td>'+
-      '<td class="acts">'+
-        (next?'<button type="button" class="btn-icon" data-act="adv" data-id="'+j.id+'" title="เลื่อนเป็น “'+next.t+'”" aria-label="เลื่อนสถานะ '+j.id+' เป็น '+next.t+'"><svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></button>'
-             :'<span class="done-mark" title="ส่งมอบแล้ว"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span>')+
-        '<button type="button" class="btn-icon" data-act="view" data-id="'+j.id+'" title="ดูรายละเอียด" aria-label="ดูรายละเอียด '+j.id+'"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg></button>'+
-      '</td></tr>';
-  }).join('');
-}
-
-/* ---------- status advance ---------- */
-function advance(id){
-  var j=findJob(id);if(!j)return;
-  var idx=stIdx(j.status);
-  if(idx>=STATUSES.length-1)return;
-  j.status=STATUSES[idx+1].k;
-  j.timeline.push({s:j.status,at:nowISO()});
-  if(j.status==='delivered'){j.warranty=addDays(todayISO(),90);}
-  save();renderAll();
-  if(ui.drawerOpen&&ui.cur===id)renderDrawer();
-  toast(j.id+' → '+stLabel(j.status));
-}
-
-/* ---------- drawer ---------- */
-function openDrawer(id){ui.cur=id;ui.drawerOpen=true;renderDrawer();$('#drawer').classList.add('open');$('#scrim').classList.add('on');}
-function closeDrawer(){ui.drawerOpen=false;ui.cur=null;$('#drawer').classList.remove('open');$('#scrim').classList.remove('on');}
-function renderDrawer(){
-  var j=findJob(ui.cur);
-  if(!j){closeDrawer();return;}
-  var idx=stIdx(j.status),next=idx<STATUSES.length-1?STATUSES[idx+1]:null;
-  var ps=partsSum(j),net=j.estimate+ps;
-  var h='';
-  h+='<div class="dr-head"><div><div class="mono rp big">'+j.id+'</div><div class="dr-name">'+esc(j.customer)+' <span class="mono c-sub">'+fmtPhone(j.phone)+'</span></div></div>'+
-     '<button type="button" class="btn-icon" data-act="closeDrawer" aria-label="ปิดรายละเอียด"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>';
-  h+='<div class="dr-body">';
-  h+='<div class="dr-status"><span class="st st-'+j.status+'">'+stLabel(j.status)+'</span>'+
-     (next?'<button type="button" class="btn btn-primary btn-sm" data-act="adv" data-id="'+j.id+'">เลื่อนสถานะ → '+next.t+'</button>':'<span class="c-sub">ส่งมอบเรียบร้อยแล้ว</span>')+'</div>';
-  h+='<dl class="dr-grid">'+
-     '<div><dt>เครื่อง</dt><dd>'+esc(j.dtype)+' · '+esc(j.model)+'</dd></div>'+
-     '<div><dt>ช่างผู้รับผิดชอบ</dt><dd>'+esc(j.tech)+'</dd></div>'+
-     '<div class="wide"><dt>อาการ</dt><dd>'+esc(j.issue)+'</dd></div>'+
-     '<div><dt>วันที่รับเครื่อง</dt><dd>'+fdate(j.received)+'</dd></div>'+
-     '<div><dt>นัดรับคืน</dt><dd>'+fdate(j.due)+'</dd></div>'+
-     '<div><dt>ประกันงานซ่อมถึง</dt><dd>'+fdate(j.warranty)+'</dd></div></dl>';
-  h+='<h3 class="dr-h">ไทม์ไลน์สถานะ</h3><ol class="tl">'+
-     j.timeline.map(function(t){return '<li><b>'+stLabel(t.s)+'</b><span class="c-sub mono">'+fdt(t.at)+'</span></li>';}).join('')+'</ol>';
-  h+='<h3 class="dr-h">บันทึกงานช่าง</h3>';
-  h+='<div class="notes">'+(j.notes.length?j.notes.map(function(n){
-       return '<div class="note"><div class="note-t">'+esc(n.text)+'</div><div class="c-sub mono">'+fdt(n.at)+'</div></div>';
-     }).join(''):'<div class="c-sub">ยังไม่มีบันทึก</div>')+'</div>';
-  h+='<form id="noteForm" class="inline-form" data-id="'+j.id+'">'+
-     '<textarea class="fi" id="noteText" rows="2" placeholder="เพิ่มบันทึกงาน เช่น เปลี่ยนจอเรียบร้อย รอ QC" required aria-label="บันทึกงานช่าง"></textarea>'+
-     '<button class="btn btn-ghost btn-sm" type="submit">เพิ่มบันทึก</button></form>';
-  h+='<h3 class="dr-h">อะไหล่ที่เปลี่ยน</h3>';
-  h+='<div class="parts">'+(j.parts.length?j.parts.map(function(p,i){
-       return '<div class="part"><span>'+esc(p.name)+'</span><span class="mono">'+baht(p.price)+'</span>'+
-              '<button type="button" class="btn-icon" data-act="delPart" data-id="'+j.id+'" data-i="'+i+'" aria-label="ลบ '+esc(p.name)+'"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button></div>';
-     }).join(''):'<div class="c-sub">ยังไม่มีรายการอะไหล่</div>')+'</div>';
-  h+='<form id="partForm" class="part-form" data-id="'+j.id+'">'+
-     '<input class="fi" id="partName" type="text" placeholder="ชื่ออะไหล่ เช่น จอ OLED แท้" required aria-label="ชื่ออะไหล่">'+
-     '<input class="fi mono" id="partPrice" type="number" min="0" step="10" placeholder="ราคา" required aria-label="ราคาอะไหล่">'+
-     '<button class="btn btn-ghost btn-sm" type="submit">เพิ่ม</button></form>';
-  h+='<div class="totals">'+
-     '<div><span>ค่าแรง / ประเมินเบื้องต้น</span><span class="mono">'+baht(j.estimate)+'</span></div>'+
-     '<div><span>อะไหล่รวม</span><span class="mono">'+baht(ps)+'</span></div>'+
-     '<div class="net"><span>ยอดสุทธิ</span><span class="mono">'+baht(net)+'</span></div></div>';
-  h+='</div>';
-  h+='<div class="dr-foot"><button type="button" class="btn btn-ghost" data-act="print" data-id="'+j.id+'"><svg class="ic" aria-hidden="true"><use href="#i-print"/></svg>พิมพ์ใบรับซ่อม</button></div>';
-  $('#drawerBody').innerHTML=h;
-}
-
-/* ---------- modal: new job ---------- */
-function openModal(){
-  showNewForm();
-  $('#modalOverlay').classList.add('open');
-  setTimeout(function(){$('#njName').focus();},50);
-}
-function closeModal(){$('#modalOverlay').classList.remove('open');}
-function showNewForm(){
-  var f=$('#newJobForm');
-  f.reset();
-  f.style.display='';
-  $('#newJobSuccess').classList.add('hide');
-  $$('#newJobForm .err').forEach(function(p){p.textContent='';});
-  var due=$('#njDue');
-  due.min=todayISO();
-  due.value=addDays(todayISO(),7);
-}
-function setErr(id,msg){$(id).textContent=msg||'';}
-function submitNewJob(){
-  var name=$('#njName').value.trim();
-  var phone=digits($('#njPhone').value);
-  var dtype=$('#njType').value;
-  var model=$('#njModel').value.trim();
-  var issue=$('#njIssue').value.trim();
-  var tech=$('#njTech').value;
-  var due=$('#njDue').value;
-  var est=Number($('#njEst').value);
-  var ok=true,firstBad=null;
-  setErr('#eName');setErr('#ePhone');setErr('#eModel');setErr('#eIssue');setErr('#eDue');setErr('#eEst');
-  if(name.length<2){setErr('#eName','กรุณากรอกชื่อลูกค้า');ok=false;firstBad=firstBad||'#njName';}
-  if(phone.length<9||phone.length>10){setErr('#ePhone','เบอร์โทรต้องเป็นตัวเลข 9–10 หลัก');ok=false;firstBad=firstBad||'#njPhone';}
-  if(!model){setErr('#eModel','กรุณาระบุรุ่นเครื่อง');ok=false;firstBad=firstBad||'#njModel';}
-  if(!issue){setErr('#eIssue','กรุณาอธิบายอาการ');ok=false;firstBad=firstBad||'#njIssue';}
-  if(!due){setErr('#eDue','กรุณาเลือกวันนัดรับคืน');ok=false;firstBad=firstBad||'#njDue';}
-  else if(due<todayISO()){setErr('#eDue','วันนัดรับคืนต้องไม่ย้อนหลัง');ok=false;firstBad=firstBad||'#njDue';}
-  if($('#njEst').value===''||!isFinite(est)||est<0){setErr('#eEst','กรุณาระบุค่าแรงประเมินเป็นตัวเลข');ok=false;firstBad=firstBad||'#njEst';}
-  if(!ok){if(firstBad)$(firstBad).focus();return;}
-  var j={
-    id:'RP-'+pad4(state.seq),
-    customer:name,phone:phone,dtype:dtype,model:model,issue:issue,tech:tech,
-    received:todayISO(),due:due,status:'received',estimate:Math.round(est),
-    parts:[],notes:[],timeline:[{s:'received',at:nowISO()}],
-    warranty:addDays(due,90)
+  var now = Date.now();
+  return {
+    jobs: [
+      { no:'RP-1024', cust:'คุณอารี', phone:'089-777-1122', device:'iPhone 13', issue:'จอแตก เปลี่ยนจอ', stage:'fixing', at: now-1*DAY, labor: 500, parts:[{n:'จอ OLED แท้',q:1,p:2900}], hist:[{s:'intake',t:now-1*DAY},{s:'diag',t:now-20*3600000},{s:'fixing',t:now-5*3600000}] },
+      { no:'RP-1023', cust:'คุณบอย', phone:'081-555-8899', device:'MacBook Air M1', issue:'เปิดไม่ติด', stage:'parts', at: now-3*DAY, labor: 1500, parts:[{n:'บอร์ดชาร์จ',q:1,p:3200}], hist:[{s:'intake',t:now-3*DAY},{s:'diag',t:now-2.5*DAY},{s:'parts',t:now-2*DAY}] },
+      { no:'RP-1022', cust:'คุณฟ้า', phone:'086-222-3344', device:'Samsung S23', issue:'แบตบวม', stage:'diag', at: now-6*3600000, labor: 400, parts:[], hist:[{s:'intake',t:now-6*3600000},{s:'diag',t:now-2*3600000}] },
+      { no:'RP-1021', cust:'คุณเต้', phone:'083-999-6677', device:'iPad Gen 9', issue:'ชาร์จไม่เข้า', stage:'ready', at: now-4*DAY, labor: 600, parts:[{n:'สายชาร์จ+หัว',q:1,p:890}], hist:[{s:'intake',t:now-4*DAY},{s:'diag',t:now-3.6*DAY},{s:'fixing',t:now-2*DAY},{s:'ready',t:now-1*DAY}] },
+      { no:'RP-1019', cust:'คุณนิว', phone:'085-444-7788', device:'ROG Laptop', issue:'เปลี่ยน SSD+ลงวินโดวส์', stage:'ready', at: now-6*DAY, labor: 900, parts:[{n:'SSD 1TB NVMe',q:1,p:2490}], hist:[{s:'intake',t:now-6*DAY},{s:'diag',t:now-5.5*DAY},{s:'fixing',t:now-5*DAY},{s:'ready',t:now-4*DAY}], doneAt: now-4*DAY, paid:true }
+    ],
+    seq: 1025
   };
-  state.seq++;
-  state.jobs.push(j);
-  save();renderAll();
-  $('#newJobForm').style.display='none';
-  $('#newJobSuccess').classList.remove('hide');
-  $('#njDoneId').textContent=j.id;
-  $('#njPrint').dataset.id=j.id;
-  toast('รับงาน '+j.id+' เรียบร้อย');
 }
+var state = load() || blank();
+var offline = false;
+function blank(){ return seed(); }
+function load(){ try { var d = JSON.parse(localStorage.getItem(LS)); return d && d.jobs ? d : null; } catch(e){ return null; } }
+function save(){ localStorage.setItem(LS, JSON.stringify(state)); }
+function fmt(n){ return '฿' + Math.round(n).toLocaleString('th-TH'); }
+function toast(m, err){ var t=document.getElementById('toast'); t.textContent=m; t.className='toast show'+(err?' err':''); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show');},2400); }
+function closeAllModals(){ document.querySelectorAll('.overlay').forEach(function(o){ o.hidden = true; }); }
+function ago(t){ var s=Math.floor((Date.now()-t)/1000); if(s<3600) return Math.max(1,Math.floor(s/60))+' นาทีที่แล้ว'; if(s<86400) return Math.floor(s/3600)+' ชม.ที่แล้ว'; return Math.floor(s/86400)+' วันที่แล้ว'; }
+function jobTotal(j){ return j.labor + j.parts.reduce(function(a,p){ return a + p.q*p.p; },0); }
 
-/* ---------- print ---------- */
-function receiptHTML(j){
-  var ps=partsSum(j),net=j.estimate+ps;
-  var rows=j.parts.map(function(p){return '<tr><td>'+esc(p.name)+'</td><td class="r">'+baht(p.price)+'</td></tr>';}).join('');
-  return '<div class="rc">'+
-    '<div class="rc-head"><div><div class="rc-shop">ซ่อมดี ฟอร์จูน</div>'+
-    '<div class="rc-sub">ศูนย์ซ่อมมือถือ แท็บเล็ต และโน้ตบุ๊ก · ชั้น 2 ฟอร์จูนทาวน์ ถ.รัชดาภิเษก กรุงเทพฯ 10400 · โทร 02-642-0000</div></div>'+
-    '<div class="rc-id"><div class="mono">'+j.id+'</div><div>ใบรับซ่อม</div></div></div>'+
-    '<table class="rc-t"><tbody>'+
-    '<tr><th>วันที่รับเครื่อง</th><td>'+fdate(j.received)+'</td><th>นัดรับคืน</th><td>'+fdate(j.due)+'</td></tr>'+
-    '<tr><th>ลูกค้า</th><td>'+esc(j.customer)+'</td><th>โทร</th><td>'+fmtPhone(j.phone)+'</td></tr>'+
-    '<tr><th>เครื่อง</th><td>'+esc(j.dtype)+' '+esc(j.model)+'</td><th>ช่างผู้รับผิดชอบ</th><td>'+esc(j.tech)+'</td></tr>'+
-    '<tr><th>อาการ</th><td colspan="3">'+esc(j.issue)+'</td></tr></tbody></table>'+
-    (j.parts.length?'<table class="rc-t"><tbody><tr><th style="width:70%">รายการอะไหล่</th><th class="r">ราคา</th></tr>'+rows+'</tbody></table>':'')+
-    '<table class="rc-t sum"><tbody>'+
-    '<tr><th>ค่าแรง / ประเมิน</th><td class="r">'+baht(j.estimate)+'</td></tr>'+
-    '<tr><th>อะไหล่รวม</th><td class="r">'+baht(ps)+'</td></tr>'+
-    '<tr class="net"><th>ยอดสุทธิโดยประมาณ</th><td class="r">'+baht(net)+'</td></tr></tbody></table>'+
-    '<div class="rc-note">เงื่อนไข: ราคาข้างต้นเป็นการประเมินเบื้องต้น ร้านจะแจ้งให้ทราบก่อนหากมีค่าใช้จ่ายเพิ่มเติม · รับประกันงานซ่อม 90 วันนับจากวันส่งมอบ (ถึง '+fdate(j.warranty)+') · กรุณานำใบรับซ่อมฉบับนี้มาแสดงในวันรับเครื่องคืน หรือใช้เลขใบงานตรวจสอบสถานะได้ที่ร้าน</div>'+
-    '<div class="rc-sign"><div>ลายเซ็นผู้ส่งซ่อม<br><br><br>( '+esc(j.customer)+' )</div><div>ลายเซ็นผู้รับเครื่อง<br><br><br>( พนักงานซ่อมดี ฟอร์จูน )</div></div>'+
-  '</div>';
-}
-function printJob(id){
-  var j=findJob(id);
-  if(!j)return;
-  $('#printArea').innerHTML=receiptHTML(j);
-  window.print();
-}
+/* entry */
+var skipEntry = new URLSearchParams(location.search).get('app') === '1' || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+setTimeout(function(){
+  if (skipEntry) enterStaff();
+  else document.getElementById('trackView').hidden = false;
+}, 60);
+setInterval(function(){ document.getElementById('clock').textContent = new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit',second:'2-digit'}); }, 1000);
 
-/* ---------- lookup (customer view) ---------- */
-function submitLookup(){
-  var raw=$('#lkRef').value;
-  if(!raw.trim()){$('#lkRef').focus();return;}
-  var ref=normRef(raw);
-  var j=findJob(ref);
-  renderLookup(j,ref);
+/* ---------- customer tracking ---------- */
+function doTrack(){
+  var no = document.getElementById('trackInput').value.trim().toUpperCase();
+  var j = state.jobs.find(function(x){ return x.no === no; });
+  var tl = document.getElementById('tlTrack');
+  var meta = document.getElementById('trackMeta');
+  if (!j) { tl.classList.remove('show'); meta.classList.remove('show'); toast('ไม่พบเลขใบรับนี้ครับ', true); return; }
+  var curIdx = STAGE_IDX[j.stage];
+  tl.innerHTML = STAGES.map(function(s, i){
+    var h = (j.hist || []).find(function(x){ return x.s === s.id; });
+    var cls = i < curIdx ? 'done' : i === curIdx ? 'cur' : '';
+    return '<div class="tl-step '+cls+'"><span class="dot"></span><span style="flex:1"><b>'+s.n+'</b>' +
+      (i === curIdx ? '<small>สถานะปัจจุบัน</small>' : '') + '</span>' +
+      (h ? '<span class="when">'+ago(h.t)+'</span>' : '') + '</div>';
+  }).join('') +
+  (j.paid ? '<div class="tl-step done"><span class="dot"></span><span><b>รับเครื่องคืนแล้ว</b><small>ชำระเรียบร้อย</small></span></div>' : '');
+  tl.classList.add('show');
+  meta.innerHTML = '<b>'+j.device+'</b> · '+j.issue+'<br>ประมาณการค่าซ่อม: <b class="mono" style="color:var(--acc-deep)">'+fmt(jobTotal(j))+'</b>' + (j.stage==='ready' && !j.paid ? ' — <b style="color:var(--green)">มารับได้เลยที่ร้าน!</b>' : '');
+  meta.classList.add('show');
 }
-function renderLookup(j,ref){
-  var box=$('#lkResult');
-  if(!j){
-    box.innerHTML='<div class="lk-card lk-none"><b>ไม่พบเลขใบงาน “'+esc(ref)+'”</b><div class="c-sub">ตรวจสอบเลขบนใบรับซ่อมอีกครั้ง หรือโทร 02-642-0000</div></div>';
-    return;
-  }
-  var idx=stIdx(j.status),ps=partsSum(j),net=j.estimate+ps;
-  var steps=STATUSES.map(function(s,i){
-    var done=i<idx||(i===idx&&j.status==='delivered');
-    var cur=i===idx&&j.status!=='delivered';
-    return '<div class="step '+(done?'done':'')+(cur?'cur':'')+'">'+
-      '<div class="dot">'+(done?'<svg class="ic sm" aria-hidden="true"><use href="#i-check"/></svg>':'<span class="mono">'+(i+1)+'</span>')+'</div>'+
-      '<div class="lb">'+s.t+'</div></div>';
-  }).join('');
-  var banner=j.status==='delivered'
-    ?'<div class="lk-banner green">ส่งมอบเรียบร้อยแล้ว ขอบคุณที่ใช้บริการ — ประกันงานซ่อมถึง '+fdate(j.warranty)+'</div>'
-    :(j.status==='ready'
-      ?'<div class="lk-banner pink">เครื่องของคุณซ่อมเสร็จแล้ว มารับได้ที่ร้านพร้อมแสดงเลขใบงาน</div>'
-      :'<div class="lk-banner pink">ประมาณแล้วเสร็จ: '+fdate(j.due)+' — หากเร็วหรือช้ากว่ากำหนด ทางร้านจะโทรแจ้ง</div>');
-  box.innerHTML='<div class="lk-card">'+
-    '<div class="lk-top"><div><div class="mono rp">'+j.id+'</div><div class="c-sub">'+esc(j.customer)+'</div></div>'+
-    '<span class="st st-'+j.status+'">'+stLabel(j.status)+'</span></div>'+
-    '<div class="steps-wrap"><div class="steps">'+steps+'</div></div>'+
-    '<dl class="lk-info">'+
-    '<div><dt>เครื่อง</dt><dd>'+esc(j.dtype)+' · '+esc(j.model)+'</dd></div>'+
-    '<div><dt>อาการ</dt><dd>'+esc(j.issue)+'</dd></div>'+
-    '<div><dt>วันที่รับเครื่อง</dt><dd>'+fdate(j.received)+'</dd></div>'+
-    '<div><dt>ประมาณวันเสร็จ / นัดรับคืน</dt><dd>'+fdate(j.due)+'</dd></div>'+
-    '<div><dt>ยอดค่าซ่อมโดยประมาณ</dt><dd class="mono">'+baht(net)+'</dd></div>'+
-    '<div><dt>ช่างผู้รับผิดชอบ</dt><dd>'+esc(j.tech)+'</dd></div></dl>'+
-    banner+'</div>';
-}
-
-/* ---------- page nav ---------- */
-function goPage(p){
-  ui.page=p;
-  $('#pageJobs').classList.toggle('hide',p!=='jobs');
-  $('#pageLookup').classList.toggle('hide',p!=='lookup');
-  $('#pageTitle').textContent=p==='jobs'?'ใบงานซ่อม':'ลูกค้าแจ้งสถานะ';
-  $$('.mi[data-page]').forEach(function(b){b.classList.toggle('on',b.dataset.page===p);});
-  document.body.classList.remove('sb-open');
-}
-
-/* ---------- auth (demo) ---------- */
-function doLogin(){
-  $('#loginView').classList.add('hide');
-  $('#app').classList.remove('hide');
-  toast('ยินดีต้อนรับ — ระบบเดโมพร้อมใช้งาน');
-}
-function doLogout(){
-  closeDrawer();closeModal();
-  $('#app').classList.add('hide');
-  $('#loginView').classList.remove('hide');
-  document.body.classList.remove('sb-open');
-}
-
-/* ---------- reset ---------- */
-function resetAll(){
-  if(!confirm('รีเซ็ตข้อมูลตัวอย่างทั้งหมดกลับเป็นค่าเริ่มต้น?'))return;
-  try{localStorage.removeItem(LS);}catch(e){}
-  state=seed();
+document.getElementById('trackBtn').addEventListener('click', doTrack);
+document.getElementById('trackInput').addEventListener('keydown', function(e){ if (e.key === 'Enter') doTrack(); });
+document.querySelectorAll('[data-try]').forEach(function(b){
+  b.addEventListener('click', function(){ document.getElementById('trackInput').value = b.dataset.try; doTrack(); });
+});
+document.getElementById('staffLink').addEventListener('click', enterStaff);
+function enterStaff(){
+  document.getElementById('trackView').hidden = true;
+  document.getElementById('appView').hidden = false;
   save();
-  ui.filter='all';ui.q='';
-  $('#q').value='';
-  $('#lkResult').innerHTML='';
-  closeDrawer();
   renderAll();
-  toast('รีเซ็ตข้อมูลตัวอย่างแล้ว');
 }
-
-/* ---------- events ---------- */
-document.addEventListener('click',function(e){
-  var nav=e.target.closest('.mi[data-page]');
-  if(nav){goPage(nav.dataset.page);return;}
-  var el=e.target.closest('[data-act]');
-  if(!el)return;
-  var act=el.dataset.act;
-  if(act==='chip'){ui.filter=el.dataset.f;renderChips();renderRows();}
-  else if(act==='adv'){advance(el.dataset.id);}
-  else if(act==='view'){openDrawer(el.dataset.id);}
-  else if(act==='openNew'){openModal();}
-  else if(act==='closeModal'){closeModal();}
-  else if(act==='closeDrawer'){closeDrawer();}
-  else if(act==='delPart'){
-    var j=findJob(el.dataset.id);
-    if(j){j.parts.splice(parseInt(el.dataset.i,10),1);save();renderDrawer();renderRows();toast('ลบรายการอะไหล่แล้ว');}
-  }
-  else if(act==='print'){printJob(el.dataset.id);}
-  else if(act==='reset'){resetAll();}
-  else if(act==='logout'){doLogout();}
-  else if(act==='newMore'){showNewForm();}
+document.getElementById('whoBtn').addEventListener('click', function(){
+  document.getElementById('appView').hidden = true;
+  document.getElementById('trackView').hidden = false;
 });
-document.addEventListener('submit',function(e){
-  var f=e.target;
-  if(f.id==='loginForm'){e.preventDefault();doLogin();}
-  else if(f.id==='newJobForm'){e.preventDefault();submitNewJob();}
-  else if(f.id==='lookupForm'){e.preventDefault();submitLookup();}
-  else if(f.id==='noteForm'){
-    e.preventDefault();
-    var j=findJob(f.dataset.id);
-    var t=$('#noteText').value.trim();
-    if(j&&t){j.notes.push({at:nowISO(),text:t});save();renderDrawer();toast('เพิ่มบันทึกแล้ว');}
-  }
-  else if(f.id==='partForm'){
-    e.preventDefault();
-    var j2=findJob(f.dataset.id);
-    var n=$('#partName').value.trim();
-    var p=Number($('#partPrice').value);
-    if(j2&&n&&isFinite(p)&&p>=0){j2.parts.push({name:n,price:Math.round(p)});save();renderDrawer();toast('เพิ่มอะไหล่แล้ว');}
-  }
+document.getElementById('mobMenu').addEventListener('click', function(){ document.getElementById('rail').classList.toggle('open'); });
+
+/* offline */
+document.getElementById('syncPill').addEventListener('click', function(){
+  offline = !offline;
+  this.classList.toggle('off', offline);
+  document.getElementById('syncTxt').textContent = offline ? 'ออฟไลน์' : 'ออนไลน์';
+  document.getElementById('offBanner').hidden = !offline;
+  toast(offline ? 'จำลองออฟไลน์' : 'กลับมาออนไลน์');
 });
 
-/* ---------- init ---------- */
-function init(){
-  $('#topDate').textContent=new Intl.DateTimeFormat('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
-  $('#q').addEventListener('input',function(){ui.q=this.value;renderRows();});
-  $('#btnMenu').addEventListener('click',function(){document.body.classList.add('sb-open');});
-  $('#scrim').addEventListener('click',function(){closeDrawer();document.body.classList.remove('sb-open');});
-  $('#modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'){closeModal();closeDrawer();document.body.classList.remove('sb-open');}
+/* ---------- board ---------- */
+function renderBoard(){
+  var open = state.jobs.filter(function(j){ return !j.paid; });
+  var late = open.filter(function(j){ return Date.now() - j.at > 3*DAY && j.stage !== 'ready'; });
+  var m0 = new Date(); m0.setDate(1); m0.setHours(0,0,0,0);
+  var doneMonth = state.jobs.filter(function(j){ return j.paid && j.doneAt && j.doneAt >= m0.getTime(); });
+  var revenue = doneMonth.reduce(function(a,j){ return a + jobTotal(j); },0);
+  document.getElementById('stOpen').textContent = open.length;
+  document.getElementById('stLate').textContent = late.length;
+  document.getElementById('stDone').textContent = doneMonth.length;
+  document.getElementById('stJobs').textContent = 'งาน: ' + state.jobs.length;
+  document.getElementById('kpiGrid').innerHTML =
+    '<div class="kpi"><span>งานที่กำลังทำ</span><b>'+open.length+'</b><span class="sub">ใบซ่อม</span></div>' +
+    '<div class="kpi"><span>เกิน 3 วัน (ยังไม่เสร็จ)</span><b class="r">'+late.length+'</b><span class="sub">เร่งด่วน</span></div>' +
+    '<div class="kpi"><span>พร้อมรับคืน</span><b class="g">'+open.filter(function(j){return j.stage==='ready';}).length+'</b><span class="sub">รอลูกค้ามารับ</span></div>' +
+    '<div class="kpi"><span>รายรับเดือนนี้ (เก็บแล้ว)</span><b class="g">'+fmt(revenue)+'</b><span class="sub">'+doneMonth.length+' งาน</span></div>';
+  document.getElementById('boardCols').innerHTML = STAGES.map(function(s){
+    var col = open.filter(function(j){ return j.stage === s.id; });
+    return '<div class="jcol"><div class="jh"><b>'+s.n+'</b><span class="jc">'+col.length+'</span></div>' +
+      col.map(function(j){
+        var days = Math.floor((Date.now() - j.at)/DAY);
+        var isLate = days >= 3;
+        return '<div class="jcard" data-no="'+j.no+'"><span class="jn">'+j.no+'</span><b>'+j.device+'</b><div class="jm">'+j.issue+'</div>' +
+          '<div class="jv"><span class="mono" style="color:var(--acc-deep)">'+fmt(jobTotal(j))+'</span><span class="days'+(isLate?' late':'')+'">'+days+' วัน'+(isLate?' — เกินกำหนด':'')+'</span></div></div>';
+      }).join('') +
+      (col.length ? '' : '<p style="text-align:center;color:#b39bab;font-size:.72rem;padding:1rem 0">ว่าง</p>') + '</div>';
+  }).join('');
+}
+document.getElementById('boardCols').addEventListener('click', function(e){
+  var c = e.target.closest('.jcard'); if (!c) return;
+  openJob(c.dataset.no);
+});
+
+/* ---------- job detail modal ---------- */
+function openJob(no){
+  var j = state.jobs.find(function(x){ return x.no === no; });
+  if (!j) return;
+  var idx = STAGE_IDX[j.stage];
+  var m = document.getElementById('jobModal');
+  var stageBtns = STAGES.map(function(s, i){
+    return '<button class="sb" data-stage="'+s.id+'" style="'+(i===idx?'border-color:var(--acc);color:var(--acc-deep);background:var(--acc-soft)':'')+'">'+s.n+'</button>';
+  }).join('');
+  m.innerHTML = '<h3>'+j.no+' — '+j.device+'</h3>' +
+    '<div class="stage-btns">'+stageBtns+'</div>' +
+    '<dl class="kv"><dt>ลูกค้า</dt><dd>'+j.cust+' · '+j.phone+'</dd><dt>อาการ</dt><dd>'+j.issue+'</dd><dt>รับเมื่อ</dt><dd class="mono">'+ago(j.at)+'</dd>' +
+    '<dt>ค่าแรง</dt><dd class="mono">'+fmt(j.labor)+'</dd>' +
+    j.parts.map(function(p){ return '<dt>อะไหล่</dt><dd class="mono">'+p.n+' ×'+p.q+' = '+fmt(p.q*p.p)+'</dd>'; }).join('') +
+    '<dt class="tot">รวมประมาณการ</dt><dd class="tot mono">'+fmt(jobTotal(j))+'</dd></dl>' +
+    '<div class="m-acts">' +
+    '<button class="btn btn-o" id="jmClose" style="flex:1">ปิด</button>' +
+    (j.stage === 'ready' && !j.paid ? '<button class="btn btn-g" id="jmPaid" style="flex:2">รับชำระและส่งมอบ '+fmt(jobTotal(j))+'</button>' : '') +
+    (j.paid ? '<button class="btn btn-a" id="jmRcpt" style="flex:2">ดูใบเสร็จ</button>' : '') +
+    '</div>';
+  document.getElementById('jobOverlay').hidden = false;
+  document.getElementById('jmClose').addEventListener('click', closeAllModals);
+  m.querySelectorAll('[data-stage]').forEach(function(b){
+    b.addEventListener('click', function(){
+      if (b.dataset.stage === j.stage) return;
+      j.stage = b.dataset.stage;
+      j.hist = j.hist || [];
+      j.hist.push({ s: b.dataset.stage, t: Date.now() });
+      save(); closeAllModals(); renderAll();
+      var sName = STAGES.find(function(s){ return s.id === b.dataset.stage; }).n;
+      linkWrite('repair','job-stage','ซ่อมดี · ' + j.no + ' (' + j.device + ') → ' + sName, null);
+      toast(j.no + ' → ' + sName);
+    });
   });
+  var paid = document.getElementById('jmPaid');
+  if (paid) paid.addEventListener('click', function(){
+    j.paid = true; j.doneAt = Date.now();
+    save(); closeAllModals(); renderAll();
+    linkWrite('repair','job-done','ซ่อมดี · งาน ' + j.no + ' (' + j.device + ') ส่งมอบ เก็บ ' + fmt(jobTotal(j)), jobTotal(j));
+    toast('ส่งมอบ ' + j.no + ' — เก็บเงิน ' + fmt(jobTotal(j)));
+    showReceipt(j);
+  });
+  var rc = document.getElementById('jmRcpt');
+  if (rc) rc.addEventListener('click', function(){ closeAllModals(); showReceipt(j); });
+}
+function showReceipt(j){
+  document.getElementById('rcptPrint').innerHTML =
+    '<div style="text-align:center;border-bottom:2px solid var(--ink);padding-bottom:.7rem;margin-bottom:.9rem"><b style="font-size:1.05rem">ใบเสร็จค่าซ่อม</b><br>' +
+    '<small style="color:var(--muted)">ช่างเจ รีแพร์ · ตลาดบางกะปิ · โทร 086-555-4321</small></div>' +
+    '<dl class="kv"><dt>ใบรับซ่อม</dt><dd class="mono">'+j.no+'</dd><dt>ลูกค้า</dt><dd>'+j.cust+'</dd><dt>เครื่อง</dt><dd>'+j.device+'</dd><dt>อาการ</dt><dd>'+j.issue+'</dd></dl>' +
+    '<dl class="kv"><dt>ค่าแรง</dt><dd class="mono">'+fmt(j.labor)+'</dd>' +
+    j.parts.map(function(p){ return '<dt>'+p.n+' ×'+p.q+'</dt><dd class="mono">'+fmt(p.q*p.p)+'</dd>'; }).join('') +
+    '<dt class="tot">รวมทั้งสิ้น</dt><dd class="tot mono">'+fmt(jobTotal(j))+'</dd></dl>' +
+    '<p style="text-align:center;font-size:.74rem;color:var(--muted)">รับประกันงานซ่อม 90 วัน · ขอบคุณที่ใช้บริการครับ</p>';
+  document.getElementById('rcptOverlay').hidden = false;
+}
+document.getElementById('rcptClose').addEventListener('click', closeAllModals);
+document.getElementById('rcptPrintBtn').addEventListener('click', function(){ window.print(); });
+
+/* ---------- all jobs table ---------- */
+function renderAll2(){
+  var list = state.jobs.slice().sort(function(a,b){ return b.at - a.at; });
+  document.getElementById('allCount').textContent = list.length + ' ใบ';
+  document.getElementById('allBody').innerHTML = list.map(function(j){
+    var idx = j.paid ? 5 : STAGE_IDX[j.stage];
+    return '<tr><td class="mono"><b>'+j.no+'</b></td><td>'+j.cust+'</td><td>'+j.device+'</td><td style="font-size:.8rem">'+j.issue+'</td>' +
+      '<td style="font-size:.76rem;color:var(--muted)">'+ago(j.at)+'</td><td class="mono">'+fmt(jobTotal(j))+'</td>' +
+      '<td><span class="badge b-r'+idx+'">'+(j.paid?'ส่งมอบแล้ว':STAGES[idx].n)+'</span></td>' +
+      '<td><span class="tlink" data-open="'+j.no+'">เปิด</span></td></tr>';
+  }).join('');
+}
+document.getElementById('allBody').addEventListener('click', function(e){
+  var b = e.target.closest('[data-open]'); if (!b) return;
+  openJob(b.dataset.open);
+});
+
+/* ---------- intake ---------- */
+document.getElementById('intakeBtn').addEventListener('click', function(){
+  var m = document.getElementById('jobModal');
+  m.innerHTML = '<h3>รับซ่อมใหม่</h3><div class="fgrid">' +
+    '<label>ชื่อลูกค้า<input id="inCust" placeholder="คุณ…"></label>' +
+    '<label>เบอร์โทร<input id="inPhone" placeholder="08x-xxx-xxxx"></label>' +
+    '<label>เครื่อง<input id="inDevice" placeholder="เช่น iPhone 14 Pro"></label>' +
+    '<label>ค่าแรงประเมิน (บาท)<input id="inLabor" type="number" value="500"></label>' +
+    '<label class="full">อาการ/งานที่ทำ<input id="inIssue" placeholder="เช่น เปลี่ยนแบตเตอรี่"></label></div>' +
+    '<p style="font-size:.76rem;color:var(--muted);margin-top:.7rem">อะไหล่ (ถ้ามี)</p>' +
+    '<div class="part-rows" id="partRows"></div>' +
+    '<button class="add-part" id="addPart">+ เพิ่มอะไหล่</button>' +
+    '<div class="m-acts"><button class="btn btn-o" id="inCancel" style="flex:1">ยกเลิก</button>' +
+    '<button class="btn btn-a" id="inSave" style="flex:2">รับเครื่องเข้าระบบ</button></div>';
+  var parts = [];
+  function renderParts(){
+    document.getElementById('partRows').innerHTML = parts.map(function(p,i){
+      return '<div class="part-row"><input data-f="n" data-i="'+i+'" placeholder="ชื่ออะไหล่" value="'+p.n+'">' +
+        '<input data-f="q" data-i="'+i+'" type="number" min="1" value="'+p.q+'">' +
+        '<input data-f="p" data-i="'+i+'" type="number" min="0" value="'+p.p+'" class="mono">' +
+        '<button class="rm" data-rm="'+i+'">×</button></div>';
+    }).join('');
+  }
+  document.getElementById('addPart').addEventListener('click', function(){ parts.push({n:'',q:1,p:0}); renderParts(); });
+  document.getElementById('partRows').addEventListener('input', function(e){
+    var inp = e.target.closest('input'); if (!inp) return;
+    var p = parts[+inp.dataset.i];
+    if (inp.dataset.f === 'n') p.n = inp.value; else p[inp.dataset.f] = parseFloat(inp.value) || 0;
+  });
+  document.getElementById('partRows').addEventListener('click', function(e){
+    var b = e.target.closest('[data-rm]'); if (!b) return;
+    parts.splice(+b.dataset.rm, 1); renderParts();
+  });
+  document.getElementById('inCancel').addEventListener('click', closeAllModals);
+  document.getElementById('inSave').addEventListener('click', function(){
+    var cust = document.getElementById('inCust').value.trim();
+    var device = document.getElementById('inDevice').value.trim();
+    var issue = document.getElementById('inIssue').value.trim();
+    if (!cust || !device || !issue) { toast('กรอกลูกค้า/เครื่อง/อาการให้ครบครับ', true); return; }
+    var j = {
+      no: 'RP-' + (state.seq++), cust: cust, phone: document.getElementById('inPhone').value.trim(),
+      device: device, issue: issue, stage: 'intake', at: Date.now(),
+      labor: parseFloat(document.getElementById('inLabor').value) || 0,
+      parts: parts.filter(function(p){ return p.n.trim() && p.p > 0; }),
+      hist: [{ s:'intake', t: Date.now() }]
+    };
+    state.jobs.unshift(j); save(); closeAllModals(); renderAll();
+    linkWrite('repair','job-intake','ซ่อมดี · รับซ่อมใหม่ ' + j.no + ' — ' + j.device + ' (' + j.issue + ') ประเมิน ' + fmt(jobTotal(j)), jobTotal(j));
+    toast('รับเครื่อง ' + j.no + ' แล้ว — ลูกค้าติดตามได้ที่หน้าแรก');
+  });
+  document.getElementById('jobOverlay').hidden = false;
+});
+
+/* ---------- feed ---------- */
+var lastSeenFeed = 0;
+function sysIcon(sys){
+  var M = { pos:'#0c8a61', kds:'#ea580c', queue:'#9333ea', crm:'#5b5bd6', inv:'#d97706', docs:'#0284c7', hr:'#0d9488', dorm:'#b45309', appt:'#c2410c', school:'#0ea5e9', gym:'#65a30d', repair:'#be185d' };
+  return { c: M[sys] || '#64748b', s:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>' };
+}
+function renderFeed(){
+  var l = linkRead();
+  document.getElementById('feedCount').textContent = l.events.length + ' เหตุการณ์';
+  var body = document.getElementById('feedBody');
+  if (!l.events.length) { body.innerHTML = '<p style="color:var(--muted);padding:1.5rem 0;font-size:.85rem">ยังไม่มีกิจกรรม</p>'; return; }
+  body.innerHTML = l.events.slice(0, 25).map(function(ev){
+    var ic = sysIcon(ev.sys);
+    return '<div class="feed-item"><span class="fi" style="background:'+ic.c+'22;color:'+ic.c+'"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'+ic.s+'</svg></span>' +
+      '<span><span class="fm">'+ev.msg+'</span><div class="ft">'+ago(ev.t)+'</div></span></div>';
+  }).join('');
+  lastSeenFeed = l.events.length ? l.events[0].t : 0;
+  updateFeedBadge();
+}
+function updateFeedBadge(){
+  var l = linkRead();
+  var newer = l.events.filter(function(e){ return e.t > lastSeenFeed && e.sys !== 'repair'; }).length;
+  var badge = document.getElementById('feedBadge');
+  if (newer && !document.getElementById('feedDrawer').classList.contains('open')) { badge.hidden = false; badge.textContent = ' (+' + newer + ')'; }
+  else badge.hidden = true;
+}
+document.getElementById('feedBtn').addEventListener('click', function(){
+  renderFeed();
+  document.getElementById('feedDrawer').classList.add('open');
+  document.getElementById('scrim').hidden = false;
+});
+document.getElementById('feedClose').addEventListener('click', closeFeed);
+document.getElementById('scrim').addEventListener('click', closeFeed);
+function closeFeed(){ document.getElementById('feedDrawer').classList.remove('open'); document.getElementById('scrim').hidden = true; }
+setInterval(updateFeedBadge, 3000);
+
+/* pages / shortcuts */
+function goPage(p){
+  document.querySelectorAll('.ri[data-page]').forEach(function(x){ x.classList.toggle('on', x.dataset.page === p); });
+  ['board','all'].forEach(function(x){ document.getElementById('page-'+x).hidden = x !== p; });
+  document.getElementById('rail').classList.remove('open');
   renderAll();
 }
-init();
-})();
-</script>
-<script>
-/* Auto-enter app when opened with ?app=1 (from showcase hub) */
-(function(){
-  if (!/[?&]app=1/.test(location.href)) return;
-  function enter(){
-    var b = document.getElementById('loginBtn') || document.getElementById('btnLogin')
-         || document.querySelector('#loginForm button[type="submit"]')
-         || document.querySelector('.login-card button[type="submit"]')
-         || Array.prototype.find.call(document.querySelectorAll('button'), function(x){ return /\u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a/.test(x.textContent); });
-    if (b) { b.click(); return; }
-    var f = document.getElementById('loginForm') || document.querySelector('#loginView form') || document.querySelector('.login form');
-    if (f && f.requestSubmit) f.requestSubmit();
+document.querySelectorAll('.ri[data-page]').forEach(function(b){ b.addEventListener('click', function(){ goPage(b.dataset.page); }); });
+document.addEventListener('keydown', function(e){
+  if (document.getElementById('appView').hidden) return;
+  if (e.key === 'Escape') { closeAllModals(); closeFeed(); return; }
+  var tgt = e.target;
+  if (tgt && tgt.matches && tgt.matches('input,select,textarea')) return;
+  if (e.key === 'b' || e.key === 'B') goPage('board');
+  else if (e.key === 'a' || e.key === 'A') goPage('all');
+  else if (e.key === 'n' || e.key === 'N') document.getElementById('intakeBtn').click();
+  else if (e.key === 'f' || e.key === 'F') document.getElementById('feedBtn').click();
+});
+
+/* reset */
+document.getElementById('resetBtn').addEventListener('click', function(){
+  if (confirm('รีเซ็ตงานซ่อมกลับตัวอย่าง?')) {
+    localStorage.removeItem(LS);
+    state = blank(); save();
+    renderAll();
+    toast('รีเซ็ตข้อมูลแล้ว');
   }
-  if (document.readyState !== 'loading') setTimeout(enter, 80);
-  else document.addEventListener('DOMContentLoaded', function(){ setTimeout(enter, 80); });
+});
+
+/* init */
+function renderAll(){ renderBoard(); renderAll2(); updateFeedBadge(); }
+renderAll();
 })();
 </script>
 </body>
