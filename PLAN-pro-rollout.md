@@ -58,4 +58,5 @@ kanban งานดี, admin-shop ร้านดีแอดมิน, cashboo
 - [x] HR คนดี (2026-09-15 · face-scan check-in, สาย/OT, ใบลา 2 ชั้น, payroll จริง)
 - [x] Dorm ห้องดี (2026-09-15 · ผังห้องเป็น entry, มิเตอร์→บิล, ใบเสร็จพิมพ์)
 - [x] Appointments นัดดี (2026-09-15 · booking-first entry, slot collision, walk-in) — **Tier S ครบ 6/6**
-- [ ] (ว่าง — Tier A ตัวถัดไป: school)
+- [x] School เรียนดี (2026-09-15 · card-tap entry + bell, roll call, grades)
+- [ ] (ว่าง — Tier A ตัวถัดไป: gym-members)
