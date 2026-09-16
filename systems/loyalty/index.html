@@ -3,964 +3,653 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แต้มดี — ระบบสมาชิกสะสมแต้ม | คั่วสาทร คอฟฟี่</title>
+<title>สะสมดี Pro — ระบบสมาชิกสะสมแต้ม | ZenityX Demos</title>
+<meta name="description" content="ระบบ loyalty ระดับ production — ลูกค้าเช็คแต้มด้วยเบอร์เอง, การ์ดสะสมดิจิทัล, ระดับสมาชิก, redeem ของรางวัล, แคมเปญแต้มคูณ">
+<meta property="og:title" content="สะสมดี Pro — เดโมใช้งานได้จริง">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%237c3aed'/%3E%3Crect x='22' y='38' width='56' height='42' rx='6' fill='white'/%3E%3Cpath d='M50 38v42M22 52h56' stroke='%237c3aed' stroke-width='6'/%3E%3Cpath d='M38 38c-6-10 6-18 12-6 6-12 18-4 12 6' stroke='white' stroke-width='6' fill='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --red:#dc2626; --red-d:#b91c1c; --red-soft:#fef2f2; --red-border:#fecaca;
-  --ink:#1c1917; --ink-2:#57534e; --ink-3:#a8a29e;
-  --bg:#f6f5f4; --card:#ffffff; --line:#e7e5e4;
-  --side:#1c1917; --side-2:#292524;
-  --gold:#d97706; --gold-bg:#fffbeb; --silver:#64748b; --silver-bg:#f1f5f9; --plat:#7c3aed; --plat-bg:#f5f3ff;
-  --green:#16a34a; --green-bg:#f0fdf4;
-  --r:14px; --r-lg:20px;
-  --shadow:0 1px 2px rgba(28,25,23,.05),0 8px 24px -12px rgba(28,25,23,.18);
+  --acc:#7c3aed; --acc-deep:#5b21b6; --acc-soft:#f5f3ff;
+  --bg:#f4f4f8; --panel:#ffffff; --line:#e6e4ef;
+  --ink:#1f1a33; --muted:#716d86;
+  --dark:#211a3a; --dark2:#2d2450; --dline:#4a3f7d;
+  --green:#16a34a; --amber:#d97706; --red:#dc2626; --gold:#b45309;
+  --mono:'JetBrains Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
-body{font-family:'IBM Plex Sans Thai',sans-serif;font-size:16px;line-height:1.6;background:var(--bg);color:var(--ink);min-height:100vh}
-.mono{font-family:'JetBrains Mono',monospace}
-.hidden{display:none!important}
-button{font-family:inherit;cursor:pointer}
-input,select,textarea{font-family:inherit;font-size:16px}
-svg{display:block}
-:focus-visible{outline:2px solid var(--red);outline-offset:2px;border-radius:6px}
-::placeholder{color:var(--ink-3)}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+[hidden]{display:none!important}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 
-/* ---------- buttons / inputs ---------- */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border:none;border-radius:12px;font-size:15.5px;font-weight:500;transition:background .18s,transform .18s,box-shadow .18s;text-decoration:none}
-.btn:active{transform:translateY(1px)}
-.btn-red{background:var(--red);color:#fff;box-shadow:0 6px 16px -6px rgba(220,38,38,.5)}
-.btn-red:hover{background:var(--red-d)}
-.btn-red:disabled{background:#e7e5e4;color:var(--ink-3);box-shadow:none;cursor:not-allowed}
-.btn-outline{background:#fff;color:var(--ink);border:1px solid var(--line)}
-.btn-outline:hover{border-color:var(--ink-3)}
-.btn-ghost{background:transparent;color:var(--ink-2);border:1px solid transparent}
-.btn-ghost:hover{background:rgba(255,255,255,.08);color:#fff}
-.btn-dark{background:var(--ink);color:#fff}
-.btn-dark:hover{background:#000}
-.btn-lg{min-height:56px;padding:0 28px;font-size:17px;border-radius:14px}
-.btn-icon{width:44px;height:44px;padding:0;border-radius:12px}
-.input{width:100%;min-height:48px;padding:0 16px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);transition:border-color .18s,box-shadow .18s}
-.input:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(220,38,38,.14)}
-.label{display:block;font-size:14px;font-weight:500;color:var(--ink-2);margin:0 0 6px}
-.hint{font-size:13.5px;color:var(--ink-3);margin-top:6px}
-.err-text{font-size:13.5px;color:var(--red);margin-top:6px;min-height:20px}
+/* CUSTOMER-FIRST ENTRY (phone lookup) */
+.cust-view{min-height:100vh;display:grid;place-items:center;padding:1.5rem;background:radial-gradient(1000px 600px at 50% -15%,#3b2b73,#181226 60%),#181226}
+.cust-in{width:min(560px,100%)}
+.cust-brand{display:flex;align-items:center;justify-content:center;gap:.8rem;color:#fff;margin-bottom:.3rem}
+.cust-brand img{width:50px;height:50px;border-radius:14px}
+.cust-brand b{font-size:1.45rem;font-weight:600}
+.cust-sub{text-align:center;color:#b3a8dd;font-size:.9rem;margin-bottom:1.6rem}
+.cust-card{background:#fff;border-radius:22px;padding:1.8rem;box-shadow:0 30px 80px -30px rgba(0,0,0,.5)}
+.cust-card h2{font-size:1.15rem;font-weight:600;margin-bottom:.3rem}
+.cust-card .hint{color:var(--muted);font-size:.84rem;margin-bottom:1.1rem}
+.cust-form{display:flex;gap:.6rem}
+.cust-form input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:.85rem 1rem;font-family:var(--mono);font-size:1.05rem;min-height:52px;outline:none;letter-spacing:.04em}
+.cust-form input:focus{border-color:var(--acc)}
+.cust-form .btn{min-height:52px}
+.demo-phones{margin-top:1rem;font-size:.78rem;color:var(--muted);text-align:center}
+.demo-phones button{font-family:var(--mono);color:var(--acc);font-weight:600;min-height:34px;padding:0 .4rem}
+.demo-phones button:hover{text-decoration:underline}
+.cust-err{color:var(--red);font-size:.82rem;margin-top:.6rem;text-align:center;min-height:1.2em}
+.staff-link{display:block;text-align:center;margin-top:1.4rem;color:#b3a8dd;font-size:.8rem;min-height:44px;padding-top:.8rem}
+.staff-link:hover{color:#fff;text-decoration:underline}
 
-/* ---------- login ---------- */
-.login-view{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;
-  background:radial-gradient(1200px 700px at 85% -10%,rgba(220,38,38,.32),transparent 60%),radial-gradient(900px 600px at -10% 110%,rgba(220,38,38,.22),transparent 55%),linear-gradient(150deg,#1c1917 0%,#292524 45%,#450a0a 130%)}
-.login-card{width:100%;max-width:420px;background:#fff;border-radius:24px;padding:40px 36px 32px;box-shadow:0 40px 80px -20px rgba(0,0,0,.55);border-top:4px solid var(--red)}
-.login-logo{display:flex;align-items:center;gap:14px;margin-bottom:8px}
-.login-logo .logo-badge{width:52px;height:52px;border-radius:14px;background:linear-gradient(140deg,var(--red),#7f1d1d);display:flex;align-items:center;justify-content:center;color:#fff;flex:none}
-.login-title{font-size:24px;font-weight:600;letter-spacing:-.01em}
-.login-sub{font-size:14px;color:var(--ink-2)}
-.login-form{margin-top:24px;display:grid;gap:14px}
-.demo-note{display:flex;gap:10px;align-items:flex-start;background:var(--red-soft);border:1px solid var(--red-border);border-radius:12px;padding:12px 14px;font-size:13.5px;color:#7f1d1d;margin-top:18px}
-.demo-note svg{flex:none;margin-top:2px;color:var(--red)}
-.login-credit{margin-top:22px;text-align:center;font-size:12.5px;color:#d6d3d1}
-.login-credit a{color:#fca5a5;text-decoration:none}
-.login-credit a:hover{text-decoration:underline}
-.login-wrap{display:flex;flex-direction:column;align-items:center;gap:0}
+/* MEMBER CARD */
+.member-card{background:linear-gradient(135deg,var(--acc) 0%,#4c1d95 100%);border-radius:18px;padding:1.3rem 1.4rem;color:#fff;margin-bottom:1rem;position:relative;overflow:hidden}
+.member-card::after{content:'';position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.08)}
+.member-card .mn{font-size:1.05rem;font-weight:600}
+.member-card .mp{font-family:var(--mono);font-size:.78rem;opacity:.85}
+.member-card .pts{font-family:var(--mono);font-size:2.1rem;font-weight:700;margin-top:.3rem}
+.member-card .pts small{font-size:.8rem;font-weight:400;opacity:.85}
+.tier-badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);font-size:.72rem;font-weight:600;padding:.2rem .7rem;border-radius:99px;margin-top:.4rem}
+.tier-badge.gold{background:#fbbf24;color:#451a03;border-color:#f59e0b}
+.tier-badge.silver{background:#e5e7eb;color:#374151;border-color:#d1d5db}
+.stamps{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin:1rem 0}
+.stamp{aspect-ratio:1;border-radius:50%;border:2px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:.66rem}
+.stamp.on{border:2px solid var(--acc);background:var(--acc-soft);color:var(--acc)}
+.stamp-label{font-size:.76rem;color:var(--muted);text-align:center}
+.rw-row{display:flex;align-items:center;gap:.8rem;border:1.5px solid var(--line);border-radius:12px;padding:.7rem .9rem;margin-top:.6rem}
+.rw-row .rn{flex:1;font-size:.88rem}
+.rw-row .rn small{display:block;color:var(--muted);font-size:.72rem}
+.rw-row .rp{font-family:var(--mono);font-weight:700;color:var(--acc-deep)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:600;border-radius:10px;padding:.7rem 1.1rem;transition:all .15s;min-height:44px}
+.btn-a{background:var(--acc);color:#fff}
+.btn-a:hover{background:var(--acc-deep)}
+.btn-a:disabled{opacity:.4;cursor:not-allowed}
+.btn-o{border:1.5px solid var(--line);color:var(--muted)}
+.btn-o:hover{border-color:var(--acc);color:var(--acc)}
+.cust-back{display:block;width:100%;text-align:center;margin-top:1rem;color:var(--muted);font-size:.8rem;min-height:44px;padding-top:.6rem}
+.cust-back:hover{color:var(--acc)}
 
-/* ---------- layout ---------- */
-.app{display:flex;min-height:100vh}
-.sidebar{position:fixed;top:0;left:0;bottom:0;width:240px;background:linear-gradient(180deg,var(--side) 0%,var(--side-2) 100%);color:#e7e5e4;display:flex;flex-direction:column;z-index:500;transition:transform .25s ease}
-.side-logo{display:flex;align-items:center;gap:12px;padding:22px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
-.side-logo .logo-badge{width:40px;height:40px;border-radius:11px;background:linear-gradient(140deg,var(--red),#7f1d1d);display:flex;align-items:center;justify-content:center;color:#fff;flex:none}
-.side-logo .t1{font-size:17px;font-weight:600;color:#fff;line-height:1.25}
-.side-logo .t2{font-size:12px;color:#a8a29e}
-.side-nav{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:4px;overflow-y:auto}
-.nav-item{display:flex;align-items:center;gap:12px;min-height:46px;padding:0 14px;border-radius:11px;color:#d6d3d1;text-decoration:none;font-size:15px;border:none;background:transparent;width:100%;text-align:left;transition:background .15s,color .15s}
-.nav-item:hover{background:rgba(255,255,255,.07);color:#fff}
-.nav-item.active{background:var(--red);color:#fff;font-weight:500}
-.nav-item svg{flex:none;opacity:.9}
-.side-user{border-top:1px solid rgba(255,255,255,.08);padding:14px 12px;display:flex;align-items:center;gap:10px}
-.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(140deg,#f59e0b,#b45309);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px;flex:none}
-.side-user .un{font-size:14px;color:#fff;font-weight:500;line-height:1.3}
-.side-user .ur{font-size:12px;color:#a8a29e}
-.logout-btn{margin-left:auto;width:40px;height:40px;border-radius:10px;border:none;background:transparent;color:#a8a29e;display:flex;align-items:center;justify-content:center;transition:.15s}
-.logout-btn:hover{background:rgba(220,38,38,.18);color:#fca5a5}
-.main{flex:1;margin-left:240px;min-width:0;display:flex;flex-direction:column}
-.topbar{position:sticky;top:0;z-index:400;display:flex;align-items:center;gap:14px;padding:14px 28px;background:rgba(246,245,244,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.topbar h1{font-size:20px;font-weight:600;letter-spacing:-.01em}
-.topbar .spacer{flex:1}
-.topbar .date{font-size:13.5px;color:var(--ink-2);white-space:nowrap}
-.reset-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:11px;border:1px solid var(--line);background:#fff;color:var(--ink-2);font-size:14px;transition:.15s}
-.reset-btn:hover{border-color:var(--red);color:var(--red)}
-.hamburger{display:none;width:44px;height:44px;border:none;border-radius:11px;background:#fff;border:1px solid var(--line);align-items:center;justify-content:center;color:var(--ink)}
-.content{padding:28px;max-width:1080px;width:100%;margin:0 auto;flex:1}
-.side-backdrop{display:none}
-
-/* ---------- cards / tables / badges ---------- */
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow)}
-.card-pad{padding:24px}
-.page-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:20px;flex-wrap:wrap}
-.page-head .pt{font-size:22px;font-weight:600;letter-spacing:-.01em}
-.page-head .ps{font-size:14px;color:var(--ink-2)}
-.table-wrap{overflow-x:auto;border-radius:var(--r-lg)}
-table{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
-th{text-align:left;font-size:13px;font-weight:600;color:var(--ink-2);text-transform:none;padding:14px 16px;border-bottom:1px solid var(--line);background:#fafaf9;white-space:nowrap;user-select:none}
-th.sortable{cursor:pointer}
-th.sortable:hover{color:var(--red)}
-th .sort-ind{display:inline-block;margin-left:6px;font-size:11px;color:var(--red)}
-td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:middle}
-tbody tr{transition:background .12s}
-tbody tr:hover{background:#fafaf9}
-tr.clickable{cursor:pointer}
-tbody tr:last-child td{border-bottom:none}
-.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;font-size:13px;font-weight:500;white-space:nowrap}
-.b-silver{background:var(--silver-bg);color:var(--silver)}
-.b-gold{background:var(--gold-bg);color:var(--gold)}
-.b-plat{background:var(--plat-bg);color:var(--plat)}
-.b-earn{background:var(--green-bg);color:var(--green)}
-.b-redeem{background:var(--red-soft);color:var(--red)}
-.tier-dot{width:8px;height:8px;border-radius:50%;background:currentColor}
-
-/* ---------- home ---------- */
-.search-card{margin-bottom:22px}
-.search-row{display:flex;gap:12px}
-.search-box{position:relative;flex:1}
-.search-box .s-ic{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--ink-3);pointer-events:none}
-.search-box .input{padding-left:46px}
-.search-results{position:absolute;top:calc(100% + 8px);left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 24px 48px -12px rgba(28,25,23,.25);overflow:hidden;z-index:50}
-.sr-item{display:flex;align-items:center;gap:12px;width:100%;padding:12px 16px;border:none;background:#fff;text-align:left;min-height:56px;border-bottom:1px solid var(--line);transition:background .12s}
-.sr-item:last-child{border-bottom:none}
-.sr-item:hover{background:var(--red-soft)}
-.sr-item .n{font-weight:500;font-size:15px}
-.sr-item .p{font-size:13px;color:var(--ink-2)}
-.sr-none{padding:16px;font-size:14px;color:var(--ink-3);text-align:center}
-.member-card{overflow:hidden}
-.mc-top{background:linear-gradient(140deg,#292524,#450a0a 130%);color:#fff;padding:26px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.mc-avatar{width:64px;height:64px;border-radius:18px;background:linear-gradient(140deg,var(--red),#7f1d1d);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:600;flex:none}
-.mc-name{font-size:22px;font-weight:600;line-height:1.3}
-.mc-phone{font-size:14px;color:#d6d3d1}
-.mc-tier{margin-left:auto;text-align:right}
-.mc-points{display:grid;grid-template-columns:1fr auto;gap:20px;padding:26px 28px;align-items:center}
-.points-big{font-family:'JetBrains Mono',monospace;font-size:56px;font-weight:700;line-height:1;letter-spacing:-.03em;color:var(--red)}
-.points-label{font-size:14px;color:var(--ink-2);margin-top:6px}
-.mc-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:0 28px 26px}
-.meta-box{background:#fafaf9;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
-.meta-box .k{font-size:12.5px;color:var(--ink-3)}
-.meta-box .v{font-size:15px;font-weight:500;margin-top:2px}
-.mc-actions{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 28px 28px}
-.empty-home{padding:60px 24px;text-align:center;color:var(--ink-3)}
-.empty-home svg{margin:0 auto 16px;color:#d6d3d1}
-.empty-home .t{font-size:17px;font-weight:500;color:var(--ink-2)}
-.empty-home .s{font-size:14px;margin-top:4px}
-
-/* ---------- rewards ---------- */
-.reward-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
-.reward-card{position:relative;padding:22px;display:flex;flex-direction:column;gap:12px;transition:transform .2s,box-shadow .2s}
-.reward-card:hover{transform:translateY(-3px);box-shadow:0 16px 36px -14px rgba(28,25,23,.28)}
-.reward-ic{width:48px;height:48px;border-radius:13px;background:var(--red-soft);color:var(--red);display:flex;align-items:center;justify-content:center}
-.reward-name{font-size:16.5px;font-weight:600;line-height:1.4}
-.reward-desc{font-size:13.5px;color:var(--ink-2);flex:1}
-.reward-cost{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--red)}
-.reward-cost small{font-family:'IBM Plex Sans Thai',sans-serif;font-size:13px;font-weight:400;color:var(--ink-3)}
-.reward-del{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:10px;border:none;background:transparent;color:var(--ink-3);display:flex;align-items:center;justify-content:center;transition:.15s}
-.reward-del:hover{background:var(--red-soft);color:var(--red)}
-
-/* ---------- modal ---------- */
-.modal-backdrop{position:fixed;inset:0;z-index:1000;background:rgba(28,25,23,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px}
-.modal{width:100%;max-width:460px;background:#fff;border-radius:20px;box-shadow:0 40px 80px -20px rgba(0,0,0,.5);max-height:calc(100vh - 40px);display:flex;flex-direction:column;animation:pop .22s ease}
-@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
-.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 24px 0}
-.modal-head h3{font-size:19px;font-weight:600}
-.modal-x{width:40px;height:40px;border-radius:10px;border:none;background:transparent;color:var(--ink-3);display:flex;align-items:center;justify-content:center}
-.modal-x:hover{background:#f5f5f4;color:var(--ink)}
-.modal-body{padding:18px 24px 24px;overflow-y:auto}
-.modal-foot{display:flex;gap:12px;justify-content:flex-end;padding:0 24px 24px}
-.points-preview{background:var(--red-soft);border:1px solid var(--red-border);border-radius:14px;padding:16px 18px;text-align:center;margin-top:16px}
-.points-preview .n{font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:700;color:var(--red);line-height:1.15}
-.points-preview .t{font-size:13.5px;color:#7f1d1d}
-.redeem-list{display:grid;gap:10px;margin-top:6px}
-.redeem-opt{display:flex;align-items:center;gap:14px;border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;transition:border-color .15s,background .15s;min-height:56px}
-.redeem-opt:hover{border-color:var(--ink-3)}
-.redeem-opt.sel{border-color:var(--red);background:var(--red-soft)}
-.redeem-opt.off{opacity:.45;cursor:not-allowed}
-.redeem-opt .rn{font-weight:500;font-size:15px}
-.redeem-opt .rc{margin-left:auto;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--red);white-space:nowrap}
-.warn-box{background:#fffbeb;border:1px solid #fde68a;color:#92400e;border-radius:12px;padding:12px 14px;font-size:14px;margin-top:14px;display:flex;gap:10px;align-items:flex-start}
-.warn-box svg{flex:none;margin-top:2px}
-
-/* ---------- toast ---------- */
-.toast-root{position:fixed;bottom:24px;right:24px;z-index:1200;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
-.toast{display:flex;align-items:center;gap:10px;background:var(--ink);color:#fff;padding:13px 18px;border-radius:13px;font-size:14.5px;box-shadow:0 16px 36px -10px rgba(0,0,0,.4);animation:toastin .25s ease;max-width:min(420px,calc(100vw - 48px))}
-.toast.ok{border-left:4px solid var(--green)}
-.toast.err{border-left:4px solid var(--red)}
-@keyframes toastin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.toast.out{opacity:0;transform:translateY(8px);transition:.3s}
-
-/* ---------- floating back ---------- */
-.back-float{position:fixed;left:18px;bottom:18px;z-index:800;display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--ink);text-decoration:none;font-size:14px;font-weight:500;padding:0 18px;min-height:44px;border-radius:99px;border-left:3px solid var(--red);box-shadow:0 10px 28px -8px rgba(28,25,23,.35);transition:transform .18s,box-shadow .18s}
-.back-float:hover{transform:translateY(-2px);box-shadow:0 16px 36px -10px rgba(28,25,23,.4)}
-.back-float svg{color:var(--red)}
-
-/* ---------- filter row ---------- */
-.filter-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
-.filter-row select{min-height:44px;border:1px solid var(--line);border-radius:11px;padding:0 14px;background:#fff;color:var(--ink);font-size:14.5px}
-.count-pill{font-size:13px;color:var(--ink-2);background:#fff;border:1px solid var(--line);border-radius:99px;padding:5px 14px}
-.empty-row td{text-align:center;color:var(--ink-3);padding:36px 16px}
-
-@media (max-width:900px){
-  .sidebar{transform:translateX(-100%)}
-  .sidebar.open{transform:translateX(0);box-shadow:40px 0 80px rgba(0,0,0,.4)}
-  .side-backdrop.show{display:block;position:fixed;inset:0;z-index:450;background:rgba(28,25,23,.5)}
-  .main{margin-left:0}
-  .hamburger{display:inline-flex}
-  .topbar{padding:12px 16px;flex-wrap:wrap}
-  .topbar .date{display:none}
-  .content{padding:18px 16px 32px}
-  .mc-points{grid-template-columns:1fr}
-  .mc-meta{grid-template-columns:1fr 1fr}
-  .mc-actions{grid-template-columns:1fr}
-  .points-big{font-size:44px}
-  .search-row{flex-direction:column}
-  .search-row .btn{width:100%}
+/* APP (staff console) */
+.app{display:grid;grid-template-columns:72px 1fr;min-height:100vh}
+.rail{background:var(--dark);display:flex;flex-direction:column;align-items:center;padding:.8rem 0;position:sticky;top:0;height:100vh;z-index:60}
+.rail .logo{width:44px;height:44px;border-radius:12px;overflow:hidden;margin-bottom:1rem}
+.rail .logo img{width:100%;height:100%;object-fit:cover}
+.rail nav{display:grid;gap:.4rem;flex:1}
+.ri{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;color:#9d92cf;position:relative;transition:all .15s}
+.ri:hover{background:rgba(255,255,255,.07);color:#fff}
+.ri.on{background:var(--acc);color:#fff}
+.ri .tip{position:absolute;left:70px;background:var(--dark2);color:#fff;font-size:.72rem;padding:.3rem .6rem;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:70}
+.ri:hover .tip{opacity:1}
+.rail .who{width:44px;height:44px;border-radius:50%;background:var(--dark2);color:#c4b5fd;display:grid;place-items:center;font-weight:600;font-size:.8rem}
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{background:#fff;border-bottom:1px solid var(--line);padding:.55rem 1.1rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.stat-chip{display:flex;align-items:center;gap:.4rem;background:#faf9fd;border:1px solid var(--line);border-radius:8px;padding:.3rem .7rem;font-size:.75rem;color:var(--muted)}
+.stat-chip b{font-family:var(--mono);color:var(--ink);font-weight:700}
+.topbar .sp{flex:1}
+.topbar .clock{font-family:var(--mono);font-size:.9rem}
+.tbtn{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);border-radius:8px;padding:.3rem .75rem;font-size:.78rem;color:var(--muted);min-height:34px;transition:all .15s;background:#fff}
+.tbtn:hover{border-color:var(--acc);color:var(--acc)}
+.tbtn.primary{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.camp-chip{display:flex;align-items:center;gap:.4rem;border-radius:8px;padding:.3rem .7rem;font-size:.75rem;font-weight:600;border:1px solid var(--line);color:var(--muted);min-height:34px;background:#fff;transition:all .15s}
+.camp-chip.on{background:#fef3c7;border-color:#f59e0b;color:#92400e}
+.sync-pill{display:flex;align-items:center;gap:.35rem;color:var(--muted);font-size:.75rem;border:1px solid var(--line);border-radius:99px;padding:.25rem .7rem;min-height:32px;background:#fff}
+.sync-pill i{width:7px;height:7px;border-radius:50%;background:#4ade80}
+.sync-pill.off{border-color:var(--amber);color:var(--amber)}
+.sync-pill.off i{background:var(--amber)}
+.offline-banner{background:#fef3c7;color:#92400e;font-size:.8rem;padding:.4rem 1.1rem}
+.content{flex:1;padding:1rem;min-height:0}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.8rem;margin-bottom:1rem}
+.kpi{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:1rem 1.1rem}
+.kpi span{font-size:.74rem;color:var(--muted);display:block}
+.kpi b{font-family:var(--mono);font-size:1.5rem;font-weight:700}
+.kpi b.p{color:var(--acc-deep)}
+.panel{background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
+.p-head{padding:.9rem 1.2rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.p-head b{font-weight:600}
+.p-head .count{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.p-head input{border:1.5px solid var(--line);border-radius:8px;padding:.4rem .7rem;min-height:36px;width:220px;outline:none;font-size:.82rem}
+.p-head input:focus{border-color:var(--acc)}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th{text-align:left;padding:.7rem 1rem;color:var(--muted);font-weight:500;font-size:.74rem;letter-spacing:.04em;border-bottom:1px solid var(--line);white-space:nowrap;background:#faf9fd}
+td{padding:.6rem 1rem;border-bottom:1px solid #f0eef6;vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tr.mrow{cursor:pointer}
+tr.mrow:hover{background:#faf9fd}
+.tier-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:.35rem}
+.tier-m{background:#c4b5fd}.tier-s{background:#9ca3af}.tier-g{background:#f59e0b}
+.tlink{color:var(--acc);font-weight:500;min-height:40px;padding:.2rem .5rem}
+.tlink:hover{text-decoration:underline}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,94vw);background:#fff;border-left:1px solid var(--line);z-index:250;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.scrim{position:fixed;inset:0;background:rgba(24,18,38,.45);z-index:240}
+.d-head{padding:.9rem 1.1rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.6rem}
+.d-head b{font-weight:600}
+.d-head .x{margin-left:auto;width:38px;height:38px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted)}
+.d-body{flex:1;overflow-y:auto;padding:1rem 1.1rem}
+.d-note{padding:.7rem 1.1rem;border-top:1px solid var(--line);font-size:.72rem;color:var(--muted)}
+.feed-item{display:flex;gap:.7rem;padding:.6rem 0;border-bottom:1px dashed var(--line);animation:tin .2s}
+@keyframes tin{from{opacity:0;transform:translateX(8px)}}
+.feed-item .fi{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:none}
+.feed-item .fm{font-size:.82rem;line-height:1.45}
+.feed-item .ft{font-family:var(--mono);font-size:.66rem;color:var(--muted);margin-top:.1rem}
+.hist-item{display:flex;justify-content:space-between;padding:.55rem 0;border-bottom:1px dashed var(--line);font-size:.84rem}
+.hist-item .hv{font-family:var(--mono);font-weight:700}
+.hist-item .hv.plus{color:var(--green)}
+.hist-item .hv.minus{color:var(--red)}
+.hist-item .ht{font-family:var(--mono);font-size:.66rem;color:var(--muted)}
+.md-kv{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1rem}
+.md-kv .cell{background:var(--acc-soft);border-radius:12px;padding:.8rem;text-align:center}
+.md-kv .cell b{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--acc-deep);display:block}
+.md-kv .cell span{font-size:.72rem;color:var(--muted)}
+.earn-row{display:flex;gap:.6rem;margin-top:.8rem}
+.earn-row input{flex:1;border:1.5px solid var(--line);border-radius:10px;padding:.65rem .8rem;min-height:46px;font-family:var(--mono);outline:none}
+.earn-row input:focus{border-color:var(--acc)}
+.overlay{position:fixed;inset:0;background:rgba(24,18,38,.55);backdrop-filter:blur(3px);z-index:200;display:grid;place-items:center;padding:1rem}
+.modal{background:#fff;border-radius:18px;width:min(460px,100%);max-height:92vh;overflow-y:auto;padding:1.4rem;animation:mup .22s cubic-bezier(.2,.8,.2,1)}
+@keyframes mup{from{opacity:0;transform:translateY(14px) scale(.98)}}
+.modal h3{font-size:1.05rem;font-weight:600;margin-bottom:1rem}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.fgrid .full{grid-column:1/-1}
+.fgrid input,.fgrid select{border:1.5px solid var(--line);border-radius:10px;padding:.6rem .8rem;min-height:44px;width:100%;background:#fff;outline:none;font-size:.88rem}
+.fgrid input:focus{border-color:var(--acc)}
+.fgrid label{font-size:.76rem;color:var(--muted);display:grid;gap:.25rem}
+.m-acts{display:flex;gap:.6rem;margin-top:1.1rem}
+.toast{position:fixed;top:1rem;right:1rem;z-index:300;background:var(--dark2);color:#fff;border-radius:10px;padding:.8rem 1.1rem;font-size:.85rem;box-shadow:0 12px 30px -10px rgba(0,0,0,.4);opacity:0;transform:translateY(-8px);transition:all .25s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
+.toast.err{background:#7f1d1d}
+.statusbar{background:var(--dark);color:#9d92cf;font-size:.72rem;padding:.45rem 1.1rem;display:flex;gap:1.4rem;align-items:center;font-family:var(--mono);flex-wrap:wrap}
+.statusbar .ok{color:#4ade80}
+.statusbar .sp{flex:1}
+.statusbar button{color:#9d92cf;min-height:30px;font-family:var(--mono);font-size:.72rem}
+.statusbar button:hover{color:#fff}
+@media(max-width:860px){
+  .app{grid-template-columns:1fr}
+  .rail{position:fixed;left:0;top:0;bottom:0;width:72px;transform:translateX(-100%);transition:transform .25s;z-index:100}
+  .rail.open{transform:none}
+  .mobtop{display:flex!important}
 }
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important}
-}
+.mobtop{display:none;background:#fff;border-bottom:1px solid var(--line);padding:.5rem .8rem;align-items:center;gap:.8rem}
+.mobtop button{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
 </style>
 </head>
 <body>
 <script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
 
-<!-- ================= LOGIN ================= -->
-<div class="login-view" id="loginView">
-  <div class="login-wrap">
-    <div class="login-card">
-      <div class="login-logo">
-        <span class="logo-badge" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v6a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8z"/><path d="M12 2.5 12.9 4.4l2.1.3-1.5 1.5.35 2.1L12 7.35l-1.85.95.35-2.1L9 4.7l2.1-.3L12 2.5z" fill="currentColor" stroke="none"/></svg>
-        </span>
-        <div>
-          <div class="login-title">แต้มดี</div>
-          <div class="login-sub">ระบบสมาชิกสะสมแต้ม · คั่วสาทร คอฟฟี่</div>
-        </div>
+<!-- CUSTOMER ENTRY -->
+<div class="cust-view" id="custView" hidden>
+  <div class="cust-in">
+    <div class="cust-brand"><img src="assets/logo.jpg" alt=""><b>สะสมดี</b></div>
+    <p class="cust-sub">คาเฟ่ หยกมณี — สมาชิกเช็คแต้มและแลกของรางวัลได้ด้วยตัวเอง</p>
+    <div class="cust-card" id="lookupCard">
+      <h2>เช็คแต้มของคุณ</h2>
+      <p class="hint">กรอกเบอร์โทรที่ใช้สมัครสมาชิก</p>
+      <div class="cust-form">
+        <input id="phoneInput" inputmode="tel" maxlength="10" placeholder="08x-xxx-xxxx">
+        <button class="btn btn-a" id="lookupBtn">เช็คแต้ม</button>
       </div>
-      <form class="login-form" id="loginForm" novalidate>
-        <div>
-          <label class="label" for="loginUser">เบอร์โทรพนักงาน</label>
-          <input class="input mono" id="loginUser" type="tel" value="0812345678" autocomplete="username">
+      <p class="cust-err" id="lookupErr"></p>
+      <p class="demo-phones">เบอร์ทดลอง: <button data-ph="0812345678">081-234-5678</button> · <button data-ph="0898765432">089-876-5432</button> · <button data-ph="0861112222">086-111-2222</button></p>
+    </div>
+    <div class="cust-card" id="memberCard" hidden>
+      <div class="member-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div><div class="mn" id="mName">—</div><div class="mp" id="mPhone">—</div></div>
+          <span class="tier-badge" id="mTier">Member</span>
         </div>
-        <div>
-          <label class="label" for="loginPass">รหัสผ่าน</label>
-          <input class="input" id="loginPass" type="password" value="demo1234" autocomplete="current-password">
-        </div>
-        <button class="btn btn-red btn-lg" type="submit" style="width:100%">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-          เข้าสู่ระบบ
-        </button>
-      </form>
-      <div class="demo-note">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        <span>นี่คือ<strong>ระบบเดโม</strong> — ข้อมูลทั้งหมดเป็นตัวอย่าง กรอกข้อมูลไว้ให้แล้ว กด “เข้าสู่ระบบ” ได้เลย</span>
+        <div class="pts"><span id="mPts">0</span> <small>แต้ม</small></div>
       </div>
+      <p class="stamp-label">การ์ดแสตมป์ — ครบ 10 แสตมป์ รับเครื่องดื่มฟรี 1 แก้ว</p>
+      <div class="stamps" id="stampGrid"></div>
+      <div id="mRewards"></div>
+      <button class="cust-back" id="custBack">← กลับไปเช็คเบอร์อื่น</button>
     </div>
-    <div class="login-credit">
-      ผลงานตัวอย่างจากคลาส <a href="../../first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos">First Vibe : Coding — ZenityX</a>
-    </div>
+    <button class="staff-link" id="staffLink">สำหรับพนักงานร้าน →</button>
   </div>
 </div>
 
-<!-- ================= APP ================= -->
-<div class="app hidden" id="appView">
-  <div class="side-backdrop" id="sideBackdrop"></div>
-  <aside class="sidebar" id="sidebar">
-    <div class="side-logo">
-      <span class="logo-badge" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v6a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8z"/><path d="M12 2.5 12.9 4.4l2.1.3-1.5 1.5.35 2.1L12 7.35l-1.85.95.35-2.1L9 4.7l2.1-.3L12 2.5z" fill="currentColor" stroke="none"/></svg>
-      </span>
-      <div>
-        <div class="t1">แต้มดี</div>
-        <div class="t2">คั่วสาทร คอฟฟี่</div>
-      </div>
-    </div>
-    <nav class="side-nav" aria-label="เมนูหลัก">
-      <button class="nav-item active" data-action="nav" data-page="home">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        หน้าหลัก · ให้แต้ม
-      </button>
-      <button class="nav-item" data-action="nav" data-page="members">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        สมาชิกทั้งหมด
-      </button>
-      <button class="nav-item" data-action="nav" data-page="rewards">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-        ของรางวัล
-      </button>
-      <button class="nav-item" data-action="nav" data-page="logs">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v5l4 2"/></svg>
-        ประวัติแต้ม
-      </button>
+<!-- STAFF APP -->
+<div class="app" id="appView" hidden>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>สะสมดี Pro</b></div>
+  <aside class="rail" id="rail">
+    <div class="logo"><img src="assets/logo.jpg" alt="สะสมดี"></div>
+    <nav>
+      <button class="ri on" data-page="members" aria-label="สมาชิก"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="tip">สมาชิก (M)</span></button>
+      <button class="ri" data-page="rewards" aria-label="ของรางวัล"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg><span class="tip">ของรางวัล (R)</span></button>
+      <button class="ri" id="feedBtn" aria-label="กิจกรรมข้ามระบบ"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span class="tip">กิจกรรมข้ามระบบ (F) <span id="feedBadge" class="mono" hidden></span></span></button>
     </nav>
-    <div class="side-user">
-      <span class="avatar">ผ</span>
-      <div>
-        <div class="un">ผู้จัดการร้าน</div>
-        <div class="ur">สาขาสาทร</div>
-      </div>
-      <button class="logout-btn" data-action="logout" title="ออกจากระบบ" aria-label="ออกจากระบบ">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      </button>
-    </div>
+    <button class="who" id="whoBtn" title="กลับหน้าลูกค้า">ร</button>
   </aside>
 
   <div class="main">
-    <header class="topbar">
-      <button class="hamburger" id="hamburger" aria-label="เปิดเมนู">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
-      <h1 id="pageTitle">หน้าหลัก · ให้แต้ม</h1>
-      <div class="spacer"></div>
-      <span class="date" id="todayDate"></span>
-      <button class="reset-btn" data-action="reset">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/></svg>
-        รีเซ็ตข้อมูลตัวอย่าง
-      </button>
-    </header>
+    <div class="topbar">
+      <span class="stat-chip">สมาชิก <b id="stMembers">0</b></span>
+      <span class="stat-chip">แต้มในระบบ <b id="stPts">0</b></span>
+      <button class="camp-chip" id="campBtn">แคมเปญ ×2 ปิดอยู่</button>
+      <span class="sp"></span>
+      <button class="tbtn primary" id="addMemberBtn">+ สมาชิกใหม่ (N)</button>
+      <button class="sync-pill" id="syncPill"><i></i><span id="syncTxt">ออนไลน์</span></button>
+      <span class="clock" id="clock">--:--:--</span>
+    </div>
+    <div class="offline-banner" id="offBanner" hidden><b>โหมดออฟไลน์</b> แต้มบันทึกในเครื่องก่อน</div>
 
-    <main class="content">
-      <!-- HOME -->
-      <section id="page-home">
-        <div class="card card-pad search-card">
-          <label class="label" for="searchInput">ค้นหาสมาชิก</label>
-          <div class="search-row">
-            <div class="search-box">
-              <span class="s-ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-              <input class="input" id="searchInput" type="text" placeholder="พิมพ์เบอร์โทร หรือชื่อสมาชิก …" autocomplete="off">
-              <div class="search-results hidden" id="searchResults"></div>
-            </div>
-            <button class="btn btn-dark" data-action="search-first" style="flex:none">ค้นหา</button>
-          </div>
-          <div class="hint">ลองค้นหา “ณิชา” หรือ 089-xxx — สมาชิกตัวอย่างมี 10 คนในหน้า “สมาชิกทั้งหมด”</div>
-        </div>
-        <div id="memberArea"></div>
-      </section>
-
-      <!-- MEMBERS -->
-      <section id="page-members" class="hidden">
-        <div class="page-head">
-          <div>
-            <div class="pt">สมาชิกทั้งหมด</div>
-            <div class="ps" id="memberCount"></div>
-          </div>
-          <button class="btn btn-red" data-action="add-member-open">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            เพิ่มสมาชิกใหม่
-          </button>
-        </div>
-        <div class="card table-wrap">
-          <table id="memberTable">
-            <thead><tr id="memberHead"></tr></thead>
+    <div class="content">
+      <div id="page-members">
+        <div class="kpi-grid" id="kpiGrid"></div>
+        <div class="panel">
+          <div class="p-head"><b>ทะเบียนสมาชิก</b><span class="count" id="mCount"></span><span class="sp" style="flex:1"></span><input id="memberSearch" placeholder="ค้นหาชื่อ/เบอร์…"></div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>สมาชิก</th><th>เบอร์</th><th>ระดับ</th><th>แต้มคงเหลือ</th><th>แสตมป์</th><th>ยอดสะสม</th><th></th></tr></thead>
             <tbody id="memberBody"></tbody>
-          </table>
+          </table></div>
         </div>
-      </section>
+      </div>
+      <div id="page-rewards" hidden>
+        <div class="panel">
+          <div class="p-head"><b>คลังของรางวัล</b><span class="count">ลูกค้าแลกได้หน้าร้าน</span><span class="sp" style="flex:1"></span><button class="tbtn primary" id="addRewardBtn">+ เพิ่มของรางวัล</button></div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>ของรางวัล</th><th>ใช้แต้ม</th><th>แลกไปแล้ว</th><th>สถานะ</th><th></th></tr></thead>
+            <tbody id="rewardBody"></tbody>
+          </table></div>
+        </div>
+      </div>
+    </div>
 
-      <!-- REWARDS -->
-      <section id="page-rewards" class="hidden">
-        <div class="page-head">
-          <div>
-            <div class="pt">ของรางวัล</div>
-            <div class="ps" id="rewardCount"></div>
-          </div>
-          <button class="btn btn-red" data-action="add-reward-open">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            เพิ่มของรางวัล
-          </button>
-        </div>
-        <div class="reward-grid" id="rewardGrid"></div>
-      </section>
-
-      <!-- LOGS -->
-      <section id="page-logs" class="hidden">
-        <div class="page-head">
-          <div>
-            <div class="pt">ประวัติแต้ม</div>
-            <div class="ps">ทุกการได้แต้มและใช้แต้มถูกบันทึกอัตโนมัติ</div>
-          </div>
-        </div>
-        <div class="filter-row">
-          <label class="label" for="logFilter" style="margin:0">กรองตามสมาชิก</label>
-          <select id="logFilter"></select>
-          <span class="count-pill" id="logCount"></span>
-        </div>
-        <div class="card table-wrap">
-          <table>
-            <thead><tr>
-              <th>เวลา</th><th>สมาชิก</th><th>ประเภท</th><th style="text-align:right">แต้ม</th><th style="text-align:right">ยอดซื้อ (บาท)</th><th>รายละเอียด</th>
-            </tr></thead>
-            <tbody id="logBody"></tbody>
-          </table>
-        </div>
-      </section>
-    </main>
+    <div class="statusbar">
+      <span>สะสมดี Pro v1.1.3</span>
+      <span class="ok">● พร้อมใช้งาน</span>
+      <span class="sp"></span>
+      <span>อัตราแต้ม: ฿20 = 1 แต้ม · ซื้อครั้ง = 1 แสตมป์</span>
+      <button id="resetBtn">รีเซ็ตข้อมูลตัวอย่าง</button>
+    </div>
   </div>
 </div>
 
-<div id="modalRoot"></div>
-<div class="toast-root" id="toastRoot" aria-live="polite"></div>
+<!-- member drawer -->
+<div class="scrim" id="scrim" hidden></div>
+<div class="drawer" id="memberDrawer">
+  <div class="d-head"><b id="mdTitle">สมาชิก</b><button class="x" id="mdClose" aria-label="ปิด"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+  <div class="d-body" id="mdBody"></div>
+</div>
 
-<a class="back-float" href="../">
-  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-  หน้ารวมตัวอย่าง
+<!-- feed drawer -->
+<div class="drawer" id="feedDrawer">
+  <div class="d-head"><b>กิจกรรมข้ามระบบ</b><span class="count mono" id="feedCount" style="font-size:.7rem;color:var(--muted)"></span><button class="x" id="feedClose" aria-label="ปิด"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+  <div class="d-body" id="feedBody" style="padding:.6rem 1.1rem"></div>
+  <div class="d-note">ทุกระบบในเครือ ZenityX Demos แชร์เหตุการณ์ผ่าน localStorage จริง</div>
+</div>
+
+<!-- add member modal -->
+<div class="overlay" id="amOverlay" hidden>
+  <div class="modal">
+    <h3>สมัครสมาชิกใหม่</h3>
+    <div class="fgrid">
+      <label class="full">ชื่อ<input id="amName" placeholder="ชื่อลูกค้า"></label>
+      <label class="full">เบอร์โทร<input id="amPhone" inputmode="tel" maxlength="10" placeholder="08x-xxx-xxxx"></label>
+    </div>
+    <div class="m-acts">
+      <button class="btn btn-o" id="amCancel" style="flex:1">ยกเลิก</button>
+      <button class="btn btn-a" id="amSave" style="flex:2">สมัครสมาชิก</button>
+    </div>
+  </div>
+</div>
+
+<!-- add reward modal -->
+<div class="overlay" id="rwOverlay" hidden>
+  <div class="modal">
+    <h3>เพิ่มของรางวัล</h3>
+    <div class="fgrid">
+      <label class="full">ชื่อของรางวัล<input id="rwName" placeholder="เช่น ฟรีเค้ก 1 ชิ้น"></label>
+      <label class="full">ใช้แต้ม<input id="rwPts" type="number" min="1" placeholder="120"></label>
+    </div>
+    <div class="m-acts">
+      <button class="btn btn-o" id="rwCancel" style="flex:1">ยกเลิก</button>
+      <button class="btn btn-a" id="rwSave" style="flex:2">เพิ่ม</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<a href="../" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid #e8e8ed;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-size:13px;font-weight:500;color:#1d1d1f;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.16)">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+หน้ารวมตัวอย่าง
 </a>
 
 <script>
 (function(){
 'use strict';
+var LS = 'zx-loyalty2-v1';
+var LINK_KEY = 'zx-link-v1';
 
-/* ================= helpers ================= */
-var LS_KEY='zx-loyalty-v1';
-var RATE=25; /* 25 บาท = 1 แต้ม */
-function $(s,r){return (r||document).querySelector(s);}
-function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
-function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-function uid(){return 'id'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);}
-function fmtNum(n){return Number(n||0).toLocaleString('en-US');}
-function fmtPhone(p){p=String(p||'');return p.length===10?p.slice(0,3)+'-'+p.slice(3,6)+'-'+p.slice(6):p;}
-function fmtDate(iso){try{return new Date(iso).toLocaleDateString('th-TH',{day:'numeric',month:'short',year:'numeric'});}catch(e){return '-';}}
-function fmtDateTime(iso){try{var d=new Date(iso);return d.toLocaleDateString('th-TH',{day:'numeric',month:'short',year:'numeric'})+' '+d.toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'})+' น.';}catch(e){return '-';}}
-function daysAgoISO(d,h){var t=new Date();t.setDate(t.getDate()-d);t.setHours(h==null?12:h,Math.floor(Math.random()*50)+5,0,0);return t.toISOString();}
-function endOfNextYearISO(){var n=new Date();return new Date(n.getFullYear()+1,11,31,23,59,59).toISOString();}
-
-/* ================= seed & state ================= */
-function seedData(){
-  var M=[
-    ['0812345678','สมชาย ใจดี',245,320,8200,1],
-    ['0891234567','ณิชา วงศ์สุวรรณ',890,1240,31500,0],
-    ['0869876543','ปวีณา ทองแท้',420,560,14250,2],
-    ['0923456789','ธนกฤต พูนสุข',65,120,3050,6],
-    ['0951112233','อริสรา แก้วมณี',310,380,9600,3],
-    ['0842223344','กิตติพงษ์ ศรีสุข',1280,1560,39800,0],
-    ['0973334455','มยุรี จันทร์เพ็ญ',150,210,5350,9],
-    ['0904445566','วิชัย รุ่งเรือง',540,690,17500,4],
-    ['0885556677','ศิริพร บุญมาก',75,90,2300,14],
-    ['0916667788','เอกชัย ประเสริฐ',615,840,21400,1]
-  ].map(function(a,i){
-    return {id:'m'+(i+1),phone:a[0],name:a[1],points:a[2],lifetime:a[3],spend:a[4],
-      lastVisit:daysAgoISO(a[5]),joined:daysAgoISO(180-i*12),expireAt:endOfNextYearISO()};
-  });
-  var R=[
-    ['แก้วฟรี 1 แก้ว','แลกเครื่องดื่มเมนูใดก็ได้ 1 แก้ว (ร้อน/เย็น/ปั่น)',50],
-    ['เบเกอรี่ 1 ชิ้น','ครัวซองท์ เค้ก หรือขนมปังหน้าต่างๆ เลือกได้ 1 ชิ้น',30],
-    ['ส่วนลด 20% ต่อบิล','ลดทันที 20% ของยอดบิลนั้น (สูงสุด 100 บาท)',80],
-    ['เมล็ดกาแฟ 250g','เมล็ดคั่วสาทรเบลนด์ ถุง 250 กรัม มูลค่า 320 บาท',150],
-    ['แก้วเซรามิกลายร้าน','แก้วเซรามิกสกรีนลายคั่วสาทร ของที่ระลึก',200],
-    ['เวิร์กช็อปชงกาแฟ 1 ที่นั่ง','คลาส drip/pour-over 2 ชม. กับบาริสต้าประจำร้าน',300]
-  ].map(function(a,i){return {id:'r'+(i+1),name:a[0],desc:a[1],cost:a[2]};});
-  var L=[
-    ['m2',0,9,'earn',4,110,'อเมริกาโน่เย็น + ครัวซองท์'],
-    ['m6',0,8,'earn',5,135,'ลาเต้ร้อน 2 แก้ว'],
-    ['m1',1,13,'earn',3,85,'เอสเพรสโซ่ + ขนมปัง'],
-    ['m10',1,10,'earn',6,160,'ดริปพิเศษ + เค้ก'],
-    ['m2',2,15,'redeem',-50,null,'แลก แก้วฟรี 1 แก้ว'],
-    ['m3',2,11,'earn',4,105,'คาปูชิโน่ + มัฟฟิน'],
-    ['m5',3,14,'redeem',-30,null,'แลก เบเกอรี่ 1 ชิ้น'],
-    ['m8',4,16,'earn',5,140,'อเมริกาโน่ 2 + คุกกี้'],
-    ['m6',5,9,'earn',8,205,'ชุดกาแฟเช้าครอบครัว'],
-    ['m4',6,12,'earn',2,60,'เอสเพรสโซ่'],
-    ['m9',7,17,'earn',3,75,'ชาเขียวนม'],
-    ['m7',8,10,'redeem',-30,null,'แลก เบเกอรี่ 1 ชิ้น'],
-    ['m1',9,11,'earn',3,90,'ลาเต้เย็น'],
-    ['m10',10,15,'redeem',-80,null,'แลก ส่วนลด 20% ต่อบิล'],
-    ['m3',11,10,'earn',7,180,'เมล็ดกาแฟ 250g'],
-    ['m5',12,13,'earn',4,100,'อเมริกาโน่ + เบเกอรี่']
-  ].map(function(a,i){
-    var m=M.find(function(x){return x.id===a[0];});
-    return {id:'l'+(i+1),ts:daysAgoISO(a[1],a[2]),memberId:a[0],memberName:m?m.name:'-',
-      type:a[3],points:a[4],amount:a[5],note:a[6]};
-  });
-  return {members:M,rewards:R,logs:L};
-}
-function save(){try{localStorage.setItem(LS_KEY,JSON.stringify(state));}catch(e){}}
-function loadState(){try{var d=JSON.parse(localStorage.getItem(LS_KEY));if(d&&Array.isArray(d.members)&&d.members.length)return d;}catch(e){}return null;}
-
-var state=loadState();
-if(!state){state=seedData();save();}
-
-/* ui state */
-var page='home', selectedId=null, sortKey='name', sortDir=1, logFilter='all', lastQuery='';
-
-/* ================= domain ================= */
-function tierOf(m){
-  if(m.lifetime>=800)return {name:'Platinum',cls:'b-plat'};
-  if(m.lifetime>=300)return {name:'Gold',cls:'b-gold'};
-  return {name:'Silver',cls:'b-silver'};
-}
-function memberById(id){return state.members.find(function(m){return m.id===id;})||null;}
-function findMembers(q){
-  q=String(q||'').trim().toLowerCase();
-  if(!q)return [];
-  var qd=q.replace(/[^0-9]/g,'');
-  return state.members.filter(function(m){
-    return m.name.toLowerCase().indexOf(q)>-1 || (qd && m.phone.indexOf(qd)>-1);
-  }).slice(0,6);
-}
-function addLog(m,type,points,amount,note){
-  state.logs.unshift({id:uid(),ts:new Date().toISOString(),memberId:m.id,memberName:m.name,type:type,points:points,amount:amount,note:note});
-}
-function givePoints(m,amount){
-  var pts=Math.floor(amount/RATE);
-  if(pts<=0)return 0;
-  m.points+=pts;m.lifetime+=pts;m.spend+=amount;
-  m.lastVisit=new Date().toISOString();m.expireAt=endOfNextYearISO();
-  addLog(m,'earn',pts,amount,'ยอดซื้อ '+fmtNum(amount)+' บาท');
-  save();return pts;
-}
-function redeem(m,r){
-  if(m.points<r.cost)return false;
-  m.points-=r.cost;m.lastVisit=new Date().toISOString();
-  addLog(m,'redeem',-r.cost,null,'แลก '+r.name);
-  save();return true;
+function linkRead(){ try { var d = JSON.parse(localStorage.getItem(LINK_KEY)); return d && d.events ? d : {events:[]}; } catch(e){ return {events:[]}; } }
+function linkWrite(sys, type, msg, val){
+  var l = linkRead();
+  l.events.unshift({ t: Date.now(), sys: sys, type: type, msg: msg, val: (val === undefined ? null : val) });
+  l.events = l.events.slice(0, 60);
+  try { localStorage.setItem(LINK_KEY, JSON.stringify(l)); } catch(e){}
 }
 
-/* ================= toast & modal ================= */
-function toast(msg,type){
-  var root=$('#toastRoot');
-  var t=document.createElement('div');
-  t.className='toast '+(type==='err'?'err':'ok');
-  t.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none">'+
-    (type==='err'
-      ?'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>'
-      :'<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>')+
-    '</svg><span>'+esc(msg)+'</span>';
-  root.appendChild(t);
-  setTimeout(function(){t.classList.add('out');setTimeout(function(){t.remove();},320);},3200);
+function seed(){
+  return {
+    members: [
+      { id:'MB-001', name:'คุณพลอย ใจดี', phone:'0812345678', pts: 245, stamps: 7, spend: 12400, hist: [
+        { t: Date.now()-2*86400000, d:'ซื้อกาแฟ + เค้ก', v: 9 }, { t: Date.now()-5*86400000, d:'แลก คูปองส่วนลด 50฿', v: -50 }, { t: Date.now()-8*86400000, d:'ซื้อชุดคอร์สเวิร์กช็อป', v: 120 } ] },
+      { id:'MB-002', name:'คุณต้น วงศ์ดี', phone:'0898765432', pts: 68, stamps: 3, spend: 3200, hist: [
+        { t: Date.now()-1*86400000, d:'ซื้อกาแฟ', v: 4 } ] },
+      { id:'MB-003', name:'คุณเมย์ รักหวาน', phone:'0861112222', pts: 412, stamps: 9, spend: 28700, hist: [
+        { t: Date.now()-3600000, d:'ซื้อเค้กวันเกิด', v: 28 } ] },
+      { id:'MB-004', name:'คุณบอล ชื่นกาแฟ', phone:'0825556677', pts: 12, stamps: 1, spend: 640, hist: [] }
+    ],
+    rewards: [
+      { id:'RW-1', name:'ฟรีเครื่องดื่ม 1 แก้ว', pts: 80, redeemed: 34, active: true },
+      { id:'RW-2', name:'คูปองส่วนลด 50฿', pts: 50, redeemed: 61, active: true },
+      { id:'RW-3', name:'ฟรีเค้ก 1 ชิ้น', pts: 120, redeemed: 12, active: true },
+      { id:'RW-4', name:'แก้วเก็บความเย็น Limited', pts: 400, redeemed: 3, active: true }
+    ],
+    campaign2x: false,
+    seq: 5, rseq: 5
+  };
 }
-function openModal(html){
-  var root=$('#modalRoot');
-  root.innerHTML='<div class="modal-backdrop" data-action="backdrop"><div class="modal" role="dialog" aria-modal="true">'+html+'</div></div>';
-  var f=root.querySelector('input,select,button.btn-red');
-  if(f)setTimeout(function(){f.focus();},60);
-}
-function closeModal(){$('#modalRoot').innerHTML='';}
-function modalHead(title){
-  return '<div class="modal-head"><h3>'+esc(title)+'</h3>'+
-    '<button class="modal-x" data-action="modal-close" aria-label="ปิดหน้าต่าง"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>';
-}
+var state = load() || blank();
+var offline = false;
+function blank(){ return seed(); }
+function load(){ try { var d = JSON.parse(localStorage.getItem(LS)); return d && d.members ? d : null; } catch(e){ return null; } }
+function save(){ localStorage.setItem(LS, JSON.stringify(state)); }
+function fmt(n){ return Math.round(n).toLocaleString('th-TH'); }
+function toast(m, err){ var t=document.getElementById('toast'); t.textContent=m; t.className='toast show'+(err?' err':''); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show');},2600); }
+function closeAllModals(){ document.querySelectorAll('.overlay').forEach(function(o){ o.hidden = true; }); }
+function ago(t){ var s=Math.floor((Date.now()-t)/1000); if(s<3600) return Math.max(1,Math.floor(s/60))+' นาทีที่แล้ว'; if(s<86400) return Math.floor(s/3600)+' ชม.ที่แล้ว'; return Math.floor(s/86400)+' วันที่แล้ว'; }
+function tierOf(m){ if (m.spend >= 20000) return {n:'Gold', c:'gold', dot:'tier-g'}; if (m.spend >= 8000) return {n:'Silver', c:'silver', dot:'tier-s'}; return {n:'Member', c:'', dot:'tier-m'}; }
+function maskPhone(p){ return p.slice(0,3)+'-'+p.slice(3,6)+'-'+p.slice(6); }
 
-/* ================= routing ================= */
-var TITLES={home:'หน้าหลัก · ให้แต้ม',members:'สมาชิกทั้งหมด',rewards:'ของรางวัล',logs:'ประวัติแต้ม'};
-function navTo(p){
-  page=p;
-  $$('.nav-item').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-page')===p);});
-  ['home','members','rewards','logs'].forEach(function(k){$('#page-'+k).classList.toggle('hidden',k!==p);});
-  $('#pageTitle').textContent=TITLES[p];
-  closeSidebar();
-  if(p==='home')renderMemberArea();
-  if(p==='members')renderMembers();
-  if(p==='rewards')renderRewards();
-  if(p==='logs')renderLogs();
-  $('.main').scrollIntoView?window.scrollTo({top:0}):null;
-}
-function closeSidebar(){$('#sidebar').classList.remove('open');$('#sideBackdrop').classList.remove('show');}
+/* ---------- entry ---------- */
+var skipEntry = new URLSearchParams(location.search).get('app') === '1' || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+setTimeout(function(){
+  if (skipEntry) enterStaff();
+  else document.getElementById('custView').hidden = false;
+}, 60);
+setInterval(function(){ document.getElementById('clock').textContent = new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit',second:'2-digit'}); }, 1000);
 
-/* ================= page: home ================= */
-function renderSearchResults(list){
-  var box=$('#searchResults');
-  if(!lastQuery.trim()){box.classList.add('hidden');box.innerHTML='';return;}
-  box.classList.remove('hidden');
-  if(!list.length){box.innerHTML='<div class="sr-none">ไม่พบสมาชิกที่ตรงกัน — เพิ่มสมาชิกใหม่ได้ที่หน้า “สมาชิกทั้งหมด”</div>';return;}
-  box.innerHTML=list.map(function(m){
-    var t=tierOf(m);
-    return '<button class="sr-item" data-action="pick-member" data-id="'+m.id+'">'+
-      '<span class="avatar" style="width:36px;height:36px;font-size:14px">'+esc(m.name.charAt(0))+'</span>'+
-      '<span><span class="n">'+esc(m.name)+'</span><br><span class="p mono">'+fmtPhone(m.phone)+'</span></span>'+
-      '<span class="badge '+t.cls+'" style="margin-left:auto"><span class="tier-dot"></span>'+t.name+'</span></button>';
-  }).join('');
+document.querySelectorAll('.demo-phones button').forEach(function(b){
+  b.addEventListener('click', function(){ document.getElementById('phoneInput').value = b.dataset.ph; doLookup(); });
+});
+document.getElementById('lookupBtn').addEventListener('click', doLookup);
+document.getElementById('phoneInput').addEventListener('keydown', function(e){ if (e.key === 'Enter') doLookup(); });
+function doLookup(){
+  var ph = document.getElementById('phoneInput').value.replace(/\D/g, '');
+  var err = document.getElementById('lookupErr');
+  if (ph.length !== 10) { err.textContent = 'กรอกเบอร์ 10 หลักครับ'; return; }
+  var m = state.members.find(function(x){ return x.phone === ph; });
+  if (!m) { err.textContent = 'ไม่พบเบอร์นี้ในระบบสมาชิก — สมัครได้ที่หน้าร้าน'; return; }
+  err.textContent = '';
+  showMemberCard(m);
 }
-function renderMemberArea(){
-  var area=$('#memberArea');
-  var m=selectedId?memberById(selectedId):null;
-  if(!m){
-    area.innerHTML='<div class="card empty-home">'+
-      '<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>'+
-      '<div class="t">ค้นหาสมาชิกเพื่อเริ่มให้แต้มหรือแลกรางวัล</div>'+
-      '<div class="s">รองรับค้นหาด้วยเบอร์โทรหรือชื่อ — ระบบดึงการ์ดสมาชิกขึ้นมาทันที</div></div>';
-    return;
+function showMemberCard(m){
+  var t = tierOf(m);
+  document.getElementById('mName').textContent = m.name;
+  document.getElementById('mPhone').textContent = maskPhone(m.phone) + ' · ' + m.id;
+  document.getElementById('mPts').textContent = fmt(m.pts);
+  var tb = document.getElementById('mTier');
+  tb.textContent = t.n; tb.className = 'tier-badge ' + t.c;
+  var grid = document.getElementById('stampGrid');
+  grid.innerHTML = '';
+  for (var i = 1; i <= 10; i++) {
+    var d = document.createElement('div');
+    d.className = 'stamp' + (i <= m.stamps ? ' on' : '');
+    d.innerHTML = i <= m.stamps ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>' : '<span>'+i+'</span>';
+    grid.appendChild(d);
   }
-  var t=tierOf(m);
-  area.innerHTML=
-    '<div class="card member-card">'+
-      '<div class="mc-top">'+
-        '<span class="mc-avatar">'+esc(m.name.charAt(0))+'</span>'+
-        '<div><div class="mc-name">'+esc(m.name)+'</div><div class="mc-phone mono">'+fmtPhone(m.phone)+'</div></div>'+
-        '<div class="mc-tier"><span class="badge '+t.cls+'"><span class="tier-dot"></span>'+t.name+'</span></div>'+
-      '</div>'+
-      '<div class="mc-points">'+
-        '<div><div class="points-big">'+fmtNum(m.points)+'</div><div class="points-label">แต้มคงเหลือ · ใช้แลกของรางวัลได้ทันที</div></div>'+
-        '<button class="btn btn-ghost" data-action="clear-member" style="color:var(--ink-2);border:1px solid var(--line);background:#fff">เปลี่ยนสมาชิก</button>'+
-      '</div>'+
-      '<div class="mc-meta">'+
-        '<div class="meta-box"><div class="k">แต้มหมดอายุ</div><div class="v">'+fmtDate(m.expireAt)+'</div></div>'+
-        '<div class="meta-box"><div class="k">ยอดซื้อสะสม</div><div class="v mono">'+fmtNum(m.spend)+' บาท</div></div>'+
-        '<div class="meta-box"><div class="k">มาล่าสุด</div><div class="v">'+fmtDate(m.lastVisit)+'</div></div>'+
-      '</div>'+
-      '<div class="mc-actions">'+
-        '<button class="btn btn-red btn-lg" data-action="earn-open">'+
-          '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>'+
-          'ให้แต้ม</button>'+
-        '<button class="btn btn-dark btn-lg" data-action="redeem-open">'+
-          '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>'+
-          'แลกของรางวัล</button>'+
-      '</div>'+
-    '</div>';
+  document.getElementById('mRewards').innerHTML = '<p style="font-size:.82rem;font-weight:600;margin-top:.8rem">แลกของรางวัล</p>' +
+    state.rewards.filter(function(r){ return r.active; }).map(function(r){
+      var can = m.pts >= r.pts;
+      return '<div class="rw-row"><span class="rn">'+r.name+'<small>แลกแล้ว '+r.redeemed+' ครั้ง</small></span><span class="rp">'+r.pts+' แต้ม</span>' +
+        '<button class="btn '+(can?'btn-a':'btn-o')+'" style="min-height:40px;padding:.4rem .9rem;font-size:.8rem" data-redeem="'+r.id+'"'+(can?'':' disabled')+'>แลก</button></div>';
+    }).join('');
+  document.getElementById('lookupCard').hidden = true;
+  document.getElementById('memberCard').hidden = false;
+  document.getElementById('memberCard').dataset.mid = m.id;
 }
+document.getElementById('mRewards').addEventListener('click', function(e){
+  var b = e.target.closest('[data-redeem]'); if (!b || b.disabled) return;
+  var m = state.members.find(function(x){ return x.id === document.getElementById('memberCard').dataset.mid; });
+  var r = state.rewards.find(function(x){ return x.id === b.dataset.redeem; });
+  if (m.pts < r.pts) { toast('แต้มไม่พอ', true); return; }
+  m.pts -= r.pts; r.redeemed++;
+  m.hist.unshift({ t: Date.now(), d: 'แลก ' + r.name, v: -r.pts });
+  save(); showMemberCard(m); renderAll();
+  linkWrite('loyalty','redeem','สะสมดี · ' + m.name + ' แลก ' + r.name + ' (' + r.pts + ' แต้ม)', r.pts);
+  toast('แลก ' + r.name + ' สำเร็จ — เหลือ ' + fmt(m.pts) + ' แต้ม');
+});
+document.getElementById('custBack').addEventListener('click', function(){
+  document.getElementById('memberCard').hidden = true;
+  document.getElementById('lookupCard').hidden = false;
+  document.getElementById('phoneInput').value = '';
+});
+document.getElementById('staffLink').addEventListener('click', enterStaff);
+function enterStaff(){
+  document.getElementById('custView').hidden = true;
+  document.getElementById('appView').hidden = false;
+  save();
+  renderAll();
+}
+document.getElementById('whoBtn').addEventListener('click', function(){
+  document.getElementById('appView').hidden = true;
+  document.getElementById('custView').hidden = false;
+});
+document.getElementById('mobMenu').addEventListener('click', function(){ document.getElementById('rail').classList.toggle('open'); });
 
-/* earn modal */
-function openEarnModal(){
-  var m=memberById(selectedId);if(!m)return;
-  openModal(modalHead('ให้แต้ม — '+esc(m.name))+
-    '<form id="earnForm"><div class="modal-body">'+
-      '<label class="label" for="earnAmount">ยอดซื้อครั้งนี้ (บาท)</label>'+
-      '<input class="input mono" id="earnAmount" type="number" min="1" step="1" inputmode="numeric" placeholder="เช่น 120">'+
-      '<div class="hint">อัตราสะสม: ทุก '+RATE+' บาท = 1 แต้ม (ปัดเศษลง)</div>'+
-      '<div class="points-preview"><div class="n" id="earnPts">0</div><div class="t">แต้มที่ '+esc(m.name)+' จะได้รับ</div></div>'+
-    '</div>'+
-    '<div class="modal-foot">'+
-      '<button type="button" class="btn btn-outline" data-action="modal-close">ยกเลิก</button>'+
-      '<button type="submit" class="btn btn-red" id="earnSubmit" disabled>ยืนยันให้แต้ม</button>'+
-    '</div></form>');
-  var inp=$('#earnAmount'),pts=$('#earnPts'),btn=$('#earnSubmit');
-  inp.addEventListener('input',function(){
-    var v=Math.max(0,parseInt(inp.value,10)||0);
-    var p=Math.floor(v/RATE);
-    pts.textContent=fmtNum(p);
-    btn.disabled=p<=0;
-  });
-}
-/* redeem modal */
-function openRedeemModal(){
-  var m=memberById(selectedId);if(!m)return;
-  var sorted=state.rewards.slice().sort(function(a,b){return a.cost-b.cost;});
-  openModal(modalHead('แลกของรางวัล — '+esc(m.name))+
-    '<div class="modal-body">'+
-      '<div class="hint" style="margin:0 0 12px">แต้มคงเหลือ <strong class="mono" style="color:var(--red)">'+fmtNum(m.points)+'</strong> แต้ม — เลือกรางวัลที่ต้องการแลก</div>'+
-      '<div class="redeem-list" id="redeemList">'+
-        sorted.map(function(r){
-          var off=m.points<r.cost;
-          return '<button type="button" class="redeem-opt'+(off?' off':'')+'" data-action="redeem-pick" data-id="'+r.id+'" '+(off?'disabled':'')+'>'+
-            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--red);flex:none"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/></svg>'+
-            '<span style="text-align:left"><span class="rn">'+esc(r.name)+'</span><br><span style="font-size:12.5px;color:var(--ink-3)">'+esc(r.desc)+'</span></span>'+
-            '<span class="rc">'+fmtNum(r.cost)+' แต้ม</span></button>';
-        }).join('')+
-      '</div>'+
-      '<div class="warn-box hidden" id="redeemWarn">'+
-        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>'+
-        '<span id="redeemWarnText"></span></div>'+
-    '</div>'+
-    '<div class="modal-foot">'+
-      '<button type="button" class="btn btn-outline" data-action="modal-close">ยกเลิก</button>'+
-      '<button type="button" class="btn btn-red" id="redeemConfirm" disabled data-action="redeem-confirm">เลือกรางวัลก่อน</button>'+
-    '</div>');
-}
-var redeemPickId=null;
+/* offline */
+document.getElementById('syncPill').addEventListener('click', function(){
+  offline = !offline;
+  this.classList.toggle('off', offline);
+  document.getElementById('syncTxt').textContent = offline ? 'ออฟไลน์' : 'ออนไลน์';
+  document.getElementById('offBanner').hidden = !offline;
+  toast(offline ? 'จำลองออฟไลน์' : 'กลับมาออนไลน์');
+});
 
-/* ================= page: members ================= */
-var COLS=[
-  {k:'phone',t:'เบอร์โทร',sort:false},
-  {k:'name',t:'ชื่อสมาชิก',sort:true},
-  {k:'tier',t:'ระดับ',sort:true},
-  {k:'points',t:'แต้มคงเหลือ',sort:true,num:true},
-  {k:'spend',t:'ยอดซื้อสะสม',sort:true,num:true},
-  {k:'lastVisit',t:'มาล่าสุด',sort:true}
-];
-function sortVal(m,k){
-  if(k==='tier')return m.lifetime;
-  if(k==='lastVisit')return new Date(m.lastVisit).getTime();
-  return m[k];
-}
+/* ---------- members page ---------- */
 function renderMembers(){
-  $('#memberCount').textContent='สมาชิก '+state.members.length+' คน · คลิกที่แถวเพื่อเปิดโปรไฟล์';
-  $('#memberHead').innerHTML=COLS.map(function(c){
-    var ind='';
-    if(c.sort){
-      if(sortKey===c.k)ind='<span class="sort-ind">'+(sortDir>0?'▲':'▼')+'</span>';
-      return '<th class="sortable" data-action="sort" data-key="'+c.k+'" style="'+(c.num?'text-align:right':'')+'">'+c.t+ind+'</th>';
+  var q = (document.getElementById('memberSearch').value || '').trim().toLowerCase();
+  var list = state.members.filter(function(m){ return !q || m.name.toLowerCase().includes(q) || m.phone.includes(q); });
+  var totalPts = state.members.reduce(function(a,m){ return a + m.pts; }, 0);
+  document.getElementById('stMembers').textContent = state.members.length;
+  document.getElementById('stPts').textContent = fmt(totalPts);
+  var gold = state.members.filter(function(m){ return m.spend >= 20000; }).length;
+  document.getElementById('kpiGrid').innerHTML =
+    '<div class="kpi"><span>สมาชิกทั้งหมด</span><b>'+state.members.length+'</b></div>' +
+    '<div class="kpi"><span>แต้มหมุนเวียน</span><b class="p">'+fmt(totalPts)+'</b></div>' +
+    '<div class="kpi"><span>สมาชิก Gold</span><b>'+gold+'</b></div>' +
+    '<div class="kpi"><span>ของรางวัลแลกไป</span><b>'+state.rewards.reduce(function(a,r){return a+r.redeemed;},0)+'</b></div>';
+  document.getElementById('mCount').textContent = list.length + ' คน';
+  document.getElementById('memberBody').innerHTML = list.map(function(m){
+    var t = tierOf(m);
+    return '<tr class="mrow" data-mid="'+m.id+'"><td><b>'+m.name+'</b><br><small style="color:var(--muted)" class="mono">'+m.id+'</small></td>' +
+      '<td class="mono" style="font-size:.8rem">'+maskPhone(m.phone)+'</td>' +
+      '<td><span class="tier-dot '+t.dot+'"></span>'+t.n+'</td>' +
+      '<td class="mono"><b>'+fmt(m.pts)+'</b></td>' +
+      '<td class="mono">'+m.stamps+'/10</td>' +
+      '<td class="mono" style="font-size:.8rem;color:var(--muted)">฿'+fmt(m.spend)+'</td>' +
+      '<td><span class="tlink" data-earn="'+m.id+'">+ บันทึกซื้อ</span></td></tr>';
+  }).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:2rem">ไม่พบสมาชิก</td></tr>';
+}
+document.getElementById('memberSearch').addEventListener('input', renderMembers);
+
+/* member drawer */
+var drawerMid = null;
+function openMember(id){
+  drawerMid = id;
+  var m = state.members.find(function(x){ return x.id === id; });
+  var t = tierOf(m);
+  document.getElementById('mdTitle').textContent = m.name;
+  document.getElementById('mdBody').innerHTML =
+    '<div class="md-kv"><div class="cell"><b>'+fmt(m.pts)+'</b><span>แต้มคงเหลือ</span></div><div class="cell"><b>'+m.stamps+'/10</b><span>แสตมป์</span></div></div>' +
+    '<p style="font-size:.78rem;color:var(--muted);margin-bottom:.3rem">ระดับ: <b>'+t.n+'</b> · ยอดสะสม ฿'+fmt(m.spend)+' (Silver ที่ 8,000 · Gold ที่ 20,000)</p>' +
+    '<div class="earn-row"><input id="earnAmt" type="number" min="1" placeholder="ยอดซื้อ (บาท)"><button class="btn btn-a" id="earnBtn">บันทึกซื้อ</button></div>' +
+    '<p style="font-size:.72rem;color:var(--muted);margin-top:.3rem">ได้ '+ (state.campaign2x ? '<b style="color:var(--amber)">2 แต้ม/฿20 (แคมเปญ ×2)</b>' : '1 แต้ม/฿20') + ' + 1 แสตมป์/ครั้ง' + (m.stamps >= 9 ? ' · <b style="color:var(--acc)">อีก '+(10-m.stamps)+' แสตมป์รับฟรีเครื่องดื่ม</b>' : '') + '</p>' +
+    '<p style="font-size:.84rem;font-weight:600;margin:1rem 0 .3rem">ประวัติแต้ม</p>' +
+    '<div id="histList">' + (m.hist.length ? m.hist.map(function(h){
+      return '<div class="hist-item"><span>'+h.d+'<div class="ht">'+ago(h.t)+'</div></span><span class="hv '+(h.v>=0?'plus':'minus')+'">'+(h.v>=0?'+':'')+h.v+'</span></div>';
+    }).join('') : '<p style="color:var(--muted);font-size:.8rem">ยังไม่มีประวัติ</p>') + '</div>';
+  document.getElementById('memberDrawer').classList.add('open');
+  document.getElementById('scrim').hidden = false;
+  document.getElementById('earnBtn').addEventListener('click', function(){
+    var amt = parseFloat(document.getElementById('earnAmt').value);
+    if (isNaN(amt) || amt <= 0) { toast('ใส่ยอดซื้อ', true); return; }
+    var rate = state.campaign2x ? 10 : 20;
+    var gained = Math.floor(amt / rate);
+    m.pts += gained; m.spend += amt; m.stamps = Math.min(10, m.stamps + 1);
+    m.hist.unshift({ t: Date.now(), d: 'ซื้อ ฿' + fmt(amt) + (state.campaign2x ? ' (แต้ม×2)' : ''), v: gained });
+    if (m.stamps === 10) {
+      m.stamps = 0; m.pts += 80;
+      m.hist.unshift({ t: Date.now(), d: 'แสตมป์ครบ 10 — รับฟรีเครื่องดื่ม (แปลงเป็น 80 แต้ม)', v: 80 });
+      toast('แสตมป์ครบ 10! รับฟรีเครื่องดื่ม (+80 แต้ม)');
+    } else {
+      toast('+' + gained + ' แต้ม ให้ ' + m.name);
     }
-    return '<th>'+c.t+'</th>';
-  }).join('');
-  var rows=state.members.slice().sort(function(a,b){
-    var va=sortVal(a,sortKey),vb=sortVal(b,sortKey);
-    if(typeof va==='string')return va.localeCompare(vb,'th')*sortDir;
-    return (va-vb)*sortDir;
+    save(); openMember(id); renderAll();
+    linkWrite('loyalty','earn','สะสมดี · ' + m.name + ' ซื้อ ฿' + fmt(amt) + ' ได้ +' + gained + ' แต้ม', gained);
   });
-  $('#memberBody').innerHTML=rows.length?rows.map(function(m){
-    var t=tierOf(m);
-    return '<tr class="clickable" data-action="member-row" data-id="'+m.id+'">'+
-      '<td class="mono">'+fmtPhone(m.phone)+'</td>'+
-      '<td style="font-weight:500">'+esc(m.name)+'</td>'+
-      '<td><span class="badge '+t.cls+'"><span class="tier-dot"></span>'+t.name+'</span></td>'+
-      '<td class="mono" style="text-align:right;font-weight:600;color:var(--red)">'+fmtNum(m.points)+'</td>'+
-      '<td class="mono" style="text-align:right">'+fmtNum(m.spend)+'</td>'+
-      '<td>'+fmtDate(m.lastVisit)+'</td></tr>';
-  }).join(''):'<tr class="empty-row"><td colspan="6">ยังไม่มีสมาชิก</td></tr>';
 }
-function openAddMemberModal(){
-  openModal(modalHead('เพิ่มสมาชิกใหม่')+
-    '<form id="addMemberForm" novalidate><div class="modal-body" style="display:grid;gap:14px">'+
-      '<div><label class="label" for="nmName">ชื่อ-นามสกุล</label>'+
-      '<input class="input" id="nmName" type="text" placeholder="เช่น กมลรัตน์ สุขใจ"><div class="err-text" id="nmNameErr"></div></div>'+
-      '<div><label class="label" for="nmPhone">เบอร์โทร (10 หลัก)</label>'+
-      '<input class="input mono" id="nmPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="08x-xxxx-xxx"><div class="err-text" id="nmPhoneErr"></div></div>'+
-    '</div>'+
-    '<div class="modal-foot">'+
-      '<button type="button" class="btn btn-outline" data-action="modal-close">ยกเลิก</button>'+
-      '<button type="submit" class="btn btn-red">บันทึกสมาชิก</button>'+
-    '</div></form>');
+document.getElementById('memberBody').addEventListener('click', function(e){
+  var eb = e.target.closest('[data-earn]');
+  if (eb) { openMember(eb.dataset.earn); return; }
+  var row = e.target.closest('.mrow');
+  if (row) openMember(row.dataset.mid);
+});
+document.getElementById('mdClose').addEventListener('click', closeDrawers);
+function closeDrawers(){
+  document.getElementById('memberDrawer').classList.remove('open');
+  document.getElementById('feedDrawer').classList.remove('open');
+  document.getElementById('scrim').hidden = true;
 }
+document.getElementById('scrim').addEventListener('click', closeDrawers);
 
-/* ================= page: rewards ================= */
+/* campaign toggle */
+function renderCamp(){
+  var b = document.getElementById('campBtn');
+  b.classList.toggle('on', state.campaign2x);
+  b.textContent = state.campaign2x ? 'แคมเปญ ×2 เปิดอยู่' : 'แคมเปญ ×2 ปิดอยู่';
+}
+document.getElementById('campBtn').addEventListener('click', function(){
+  state.campaign2x = !state.campaign2x; save(); renderCamp();
+  linkWrite('loyalty','campaign','สะสมดี · ' + (state.campaign2x ? 'เปิด' : 'ปิด') + ' แคมเปญแต้ม ×2', null);
+  toast(state.campaign2x ? 'เปิดแคมเปญแต้ม ×2 แล้ว' : 'ปิดแคมเปญแล้ว');
+});
+
+/* rewards page */
 function renderRewards(){
-  $('#rewardCount').textContent='รางวัลที่แลกได้ '+state.rewards.length+' รายการ';
-  $('#rewardGrid').innerHTML=state.rewards.map(function(r){
-    return '<div class="card reward-card">'+
-      '<button class="reward-del" data-action="delete-reward" data-id="'+r.id+'" title="ลบรางวัล" aria-label="ลบ '+esc(r.name)+'">'+
-        '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>'+
-      '<span class="reward-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>'+
-      '<div class="reward-name">'+esc(r.name)+'</div>'+
-      '<div class="reward-desc">'+esc(r.desc)+'</div>'+
-      '<div class="reward-cost">'+fmtNum(r.cost)+' <small>แต้ม</small></div>'+
-    '</div>';
+  document.getElementById('rewardBody').innerHTML = state.rewards.map(function(r){
+    return '<tr><td><b>'+r.name+'</b></td><td class="mono"><b>'+r.pts+'</b></td><td class="mono">'+r.redeemed+'</td>' +
+      '<td>'+(r.active ? '<span style="color:var(--green);font-size:.8rem;font-weight:600">เปิดแลก</span>' : '<span style="color:var(--muted);font-size:.8rem">ปิดชั่วคราว</span>')+'</td>' +
+      '<td><span class="tlink" data-tgl="'+r.id+'">'+(r.active?'ปิด':'เปิด')+'</span></td></tr>';
   }).join('');
 }
-function openAddRewardModal(){
-  openModal(modalHead('เพิ่มของรางวัล')+
-    '<form id="addRewardForm" novalidate><div class="modal-body" style="display:grid;gap:14px">'+
-      '<div><label class="label" for="rwName">ชื่อรางวัล</label>'+
-      '<input class="input" id="rwName" type="text" placeholder="เช่น เสื้อยืดลายร้าน"><div class="err-text" id="rwNameErr"></div></div>'+
-      '<div><label class="label" for="rwCost">แต้มที่ใช้แลก</label>'+
-      '<input class="input mono" id="rwCost" type="number" min="1" step="1" inputmode="numeric" placeholder="เช่น 120"><div class="err-text" id="rwCostErr"></div></div>'+
-      '<div><label class="label" for="rwDesc">รายละเอียดสั้นๆ</label>'+
-      '<input class="input" id="rwDesc" type="text" placeholder="เงื่อนไขหรือคำอธิบายรางวัล"></div>'+
-    '</div>'+
-    '<div class="modal-foot">'+
-      '<button type="button" class="btn btn-outline" data-action="modal-close">ยกเลิก</button>'+
-      '<button type="submit" class="btn btn-red">บันทึกรางวัล</button>'+
-    '</div></form>');
+document.getElementById('rewardBody').addEventListener('click', function(e){
+  var b = e.target.closest('[data-tgl]'); if (!b) return;
+  var r = state.rewards.find(function(x){ return x.id === b.dataset.tgl; });
+  r.active = !r.active; save(); renderRewards();
+  toast((r.active ? 'เปิดแลก ' : 'ปิด ') + r.name);
+});
+
+/* add member/reward */
+document.getElementById('addMemberBtn').addEventListener('click', function(){ document.getElementById('amOverlay').hidden = false; });
+document.getElementById('amCancel').addEventListener('click', closeAllModals);
+document.getElementById('amSave').addEventListener('click', function(){
+  var name = document.getElementById('amName').value.trim();
+  var phone = document.getElementById('amPhone').value.replace(/\D/g, '');
+  if (!name || phone.length !== 10) { toast('กรอกชื่อ + เบอร์ 10 หลัก', true); return; }
+  if (state.members.some(function(m){ return m.phone === phone; })) { toast('เบอร์นี้เป็นสมาชิกอยู่แล้ว', true); return; }
+  var m = { id:'MB-' + String(state.seq++).padStart(3,'0'), name: name, phone: phone, pts: 0, stamps: 0, spend: 0, hist: [] };
+  state.members.unshift(m); save(); closeAllModals(); renderAll();
+  linkWrite('loyalty','new-member','สะสมดี · สมาชิกใหม่ ' + name + ' (' + m.id + ')', null);
+  toast('สมัครสมาชิก ' + name + ' แล้ว — ลองเช็คแต้มหน้าลูกค้าด้วยเบอร์นี้ได้เลย');
+  document.getElementById('amName').value = ''; document.getElementById('amPhone').value = '';
+});
+document.getElementById('addRewardBtn').addEventListener('click', function(){ document.getElementById('rwOverlay').hidden = false; });
+document.getElementById('rwCancel').addEventListener('click', closeAllModals);
+document.getElementById('rwSave').addEventListener('click', function(){
+  var name = document.getElementById('rwName').value.trim();
+  var pts = parseInt(document.getElementById('rwPts').value, 10);
+  if (!name || isNaN(pts) || pts < 1) { toast('กรอกข้อมูลให้ครบ', true); return; }
+  state.rewards.push({ id:'RW-' + (state.rseq++), name: name, pts: pts, redeemed: 0, active: true });
+  save(); closeAllModals(); renderRewards();
+  toast('เพิ่มของรางวัลแล้ว');
+  document.getElementById('rwName').value = ''; document.getElementById('rwPts').value = '';
+});
+
+/* ---------- feed ---------- */
+var lastSeenFeed = 0;
+function sysIcon(sys){
+  var M = { pos:'#0c8a61', kds:'#ea580c', queue:'#9333ea', crm:'#5b5bd6', inv:'#d97706', docs:'#0284c7', hr:'#0d9488', dorm:'#b45309', appt:'#c2410c', school:'#0ea5e9', gym:'#65a30d', repair:'#be185d', hotel:'#1e3a8a', laundry:'#c026d3', purch:'#475569', loyalty:'#7c3aed' };
+  return { c: M[sys] || '#64748b', s:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>' };
 }
-
-/* ================= page: logs ================= */
-function renderLogs(){
-  var sel=$('#logFilter');
-  sel.innerHTML='<option value="all">สมาชิกทั้งหมด</option>'+
-    state.members.map(function(m){return '<option value="'+m.id+'"'+(logFilter===m.id?' selected':'')+'>'+esc(m.name)+'</option>';}).join('');
-  var list=state.logs.filter(function(l){return logFilter==='all'||l.memberId===logFilter;});
-  $('#logCount').textContent=list.length+' รายการ';
-  $('#logBody').innerHTML=list.length?list.map(function(l){
-    var earn=l.type==='earn';
-    return '<tr>'+
-      '<td style="white-space:nowrap">'+fmtDateTime(l.ts)+'</td>'+
-      '<td style="font-weight:500">'+esc(l.memberName)+'</td>'+
-      '<td><span class="badge '+(earn?'b-earn':'b-redeem')+'">'+(earn?'ได้แต้ม':'ใช้แต้ม')+'</span></td>'+
-      '<td class="mono" style="text-align:right;font-weight:600;color:'+(earn?'var(--green)':'var(--red)')+'">'+(earn?'+':'')+fmtNum(l.points)+'</td>'+
-      '<td class="mono" style="text-align:right">'+(l.amount!=null?fmtNum(l.amount):'—')+'</td>'+
-      '<td style="color:var(--ink-2);font-size:14px">'+esc(l.note||'')+'</td></tr>';
-  }).join(''):'<tr class="empty-row"><td colspan="6">ยังไม่มีประวัติ</td></tr>';
+function renderFeed(){
+  var l = linkRead();
+  document.getElementById('feedCount').textContent = l.events.length + ' เหตุการณ์';
+  var body = document.getElementById('feedBody');
+  if (!l.events.length) { body.innerHTML = '<p style="color:var(--muted);padding:1.5rem 0;font-size:.85rem">ยังไม่มีกิจกรรม</p>'; return; }
+  body.innerHTML = l.events.slice(0, 25).map(function(ev){
+    var ic = sysIcon(ev.sys);
+    return '<div class="feed-item"><span class="fi" style="background:'+ic.c+'22;color:'+ic.c+'"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'+ic.s+'</svg></span>' +
+      '<span><span class="fm">'+ev.msg+'</span><div class="ft">'+ago(ev.t)+'</div></span></div>';
+  }).join('');
+  lastSeenFeed = l.events.length ? l.events[0].t : 0;
+  updateFeedBadge();
 }
-
-/* ================= global events ================= */
-document.addEventListener('click',function(e){
-  var el=e.target.closest('[data-action]');
-  /* backdrop close */
-  if(e.target.classList&&e.target.classList.contains('modal-backdrop')){closeModal();return;}
-  if(!el){
-    if(!e.target.closest('.search-box')){$('#searchResults').classList.add('hidden');}
-    return;
-  }
-  var act=el.getAttribute('data-action');
-  switch(act){
-    case 'nav': navTo(el.getAttribute('data-page')); break;
-    case 'logout':
-      $('#appView').classList.add('hidden');
-      $('#loginView').classList.remove('hidden');
-      toast('ออกจากระบบแล้ว');
-      break;
-    case 'reset':
-      openModal(modalHead('รีเซ็ตข้อมูลตัวอย่าง')+
-        '<div class="modal-body"><p style="color:var(--ink-2);font-size:15px">ข้อมูลสมาชิก ของรางวัล และประวัติทั้งหมดจะกลับไปเป็นค่าเริ่มต้นของเดโม ต้องการดำเนินการต่อหรือไม่</p></div>'+
-        '<div class="modal-foot"><button class="btn btn-outline" data-action="modal-close">ยกเลิก</button>'+
-        '<button class="btn btn-red" data-action="reset-confirm">รีเซ็ตข้อมูล</button></div>');
-      break;
-    case 'reset-confirm':
-      state=seedData();save();
-      selectedId=null;logFilter='all';sortKey='name';sortDir=1;
-      $('#searchInput').value='';lastQuery='';
-      closeModal();navTo(page);
-      toast('รีเซ็ตข้อมูลตัวอย่างเรียบร้อย');
-      break;
-    case 'modal-close': closeModal(); break;
-    case 'pick-member':
-      selectedId=el.getAttribute('data-id');
-      $('#searchInput').value='';lastQuery='';
-      $('#searchResults').classList.add('hidden');
-      renderMemberArea();
-      break;
-    case 'search-first':{
-      var list=findMembers($('#searchInput').value);
-      if(list.length){selectedId=list[0].id;$('#searchInput').value='';lastQuery='';$('#searchResults').classList.add('hidden');renderMemberArea();}
-      else toast('ไม่พบสมาชิกที่ตรงกัน','err');
-      break;}
-    case 'clear-member':
-      selectedId=null;renderMemberArea();$('#searchInput').focus();
-      break;
-    case 'earn-open': openEarnModal(); break;
-    case 'redeem-open': redeemPickId=null; openRedeemModal(); break;
-    case 'redeem-pick':{
-      redeemPickId=el.getAttribute('data-id');
-      $$('.redeem-opt').forEach(function(o){o.classList.toggle('sel',o===el);});
-      var r=state.rewards.find(function(x){return x.id===redeemPickId;});
-      var btn=$('#redeemConfirm');
-      if(r){btn.disabled=false;btn.textContent='ยืนยันแลก — ใช้ '+fmtNum(r.cost)+' แต้ม';}
-      break;}
-    case 'redeem-confirm':{
-      var m=memberById(selectedId);
-      var rw=state.rewards.find(function(x){return x.id===redeemPickId;});
-      if(!m||!rw)break;
-      if(m.points<rw.cost){
-        var w=$('#redeemWarn');$('#redeemWarnText').textContent='แต้มไม่พอ — ต้องการ '+fmtNum(rw.cost)+' แต้ม แต่คงเหลือ '+fmtNum(m.points)+' แต้ม';
-        w.classList.remove('hidden');break;
-      }
-      redeem(m,rw);closeModal();renderMemberArea();
-      toast('แลก "'+rw.name+'" สำเร็จ — หัก '+fmtNum(rw.cost)+' แต้ม');
-      break;}
-    case 'member-row':
-      selectedId=el.getAttribute('data-id');navTo('home');
-      toast('เปิดโปรไฟล์สมาชิกแล้ว');
-      break;
-    case 'sort':{
-      var k=el.getAttribute('data-key');
-      if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=1;}
-      renderMembers();break;}
-    case 'add-member-open': openAddMemberModal(); break;
-    case 'add-reward-open': openAddRewardModal(); break;
-    case 'delete-reward':{
-      var rid=el.getAttribute('data-id');
-      var rwd=state.rewards.find(function(x){return x.id===rid;});
-      if(!rwd)break;
-      openModal(modalHead('ลบของรางวัล')+
-        '<div class="modal-body"><p style="color:var(--ink-2);font-size:15px">ต้องการลบ "'+esc(rwd.name)+'" ออกจากรายการแลกหรือไม่ (ประวัติที่แลกไปแล้วยังคงอยู่)</p></div>'+
-        '<div class="modal-foot"><button class="btn btn-outline" data-action="modal-close">ยกเลิก</button>'+
-        '<button class="btn btn-red" data-action="delete-reward-confirm" data-id="'+rid+'">ลบรางวัล</button></div>');
-      break;}
-    case 'delete-reward-confirm':{
-      var did=el.getAttribute('data-id');
-      state.rewards=state.rewards.filter(function(x){return x.id!==did;});
-      save();closeModal();renderRewards();
-      toast('ลบของรางวัลแล้ว');
-      break;}
-  }
-});
-
-document.addEventListener('submit',function(e){
-  var f=e.target;
-  if(f.id==='loginForm'){
-    e.preventDefault();
-    $('#loginView').classList.add('hidden');
-    $('#appView').classList.remove('hidden');
-    init();
-    toast('ยินดีต้อนรับ — เข้าสู่ระบบสำเร็จ');
-    return;
-  }
-  if(f.id==='earnForm'){
-    e.preventDefault();
-    var m=memberById(selectedId);if(!m)return;
-    var v=Math.max(0,parseInt($('#earnAmount').value,10)||0);
-    var pts=givePoints(m,v);
-    if(pts>0){
-      closeModal();renderMemberArea();
-      toast('ให้แต้มสำเร็จ — '+esc(m.name)+' ได้รับ +'+fmtNum(pts)+' แต้ม');
-    }else toast('ยอดซื้อไม่ถึง '+RATE+' บาท ยังไม่ได้รับแต้ม','err');
-    return;
-  }
-  if(f.id==='addMemberForm'){
-    e.preventDefault();
-    var name=$('#nmName').value.trim();
-    var phone=$('#nmPhone').value.replace(/[^0-9]/g,'');
-    var ok=true;
-    $('#nmNameErr').textContent='';$('#nmPhoneErr').textContent='';
-    if(name.length<2){$('#nmNameErr').textContent='กรุณากรอกชื่อสมาชิก';ok=false;}
-    if(!/^0[0-9]{9}$/.test(phone)){$('#nmPhoneErr').textContent='เบอร์โทรต้องเป็นตัวเลข 10 หลัก ขึ้นต้นด้วย 0';ok=false;}
-    else if(state.members.some(function(x){return x.phone===phone;})){$('#nmPhoneErr').textContent='เบอร์นี้เป็นสมาชิกอยู่แล้ว';ok=false;}
-    if(!ok)return;
-    var nm={id:uid(),phone:phone,name:name,points:0,lifetime:0,spend:0,lastVisit:new Date().toISOString(),joined:new Date().toISOString(),expireAt:endOfNextYearISO()};
-    state.members.push(nm);save();closeModal();renderMembers();
-    toast('เพิ่มสมาชิก "'+esc(name)+'" เรียบร้อย');
-    return;
-  }
-  if(f.id==='addRewardForm'){
-    e.preventDefault();
-    var rn=$('#rwName').value.trim();
-    var rc=parseInt($('#rwCost').value,10);
-    var rd=$('#rwDesc').value.trim();
-    var ok2=true;
-    $('#rwNameErr').textContent='';$('#rwCostErr').textContent='';
-    if(rn.length<2){$('#rwNameErr').textContent='กรุณากรอกชื่อรางวัล';ok2=false;}
-    if(!(rc>0)){$('#rwCostErr').textContent='แต้มต้องเป็นจำนวนเต็มมากกว่า 0';ok2=false;}
-    if(!ok2)return;
-    state.rewards.push({id:uid(),name:rn,cost:rc,desc:rd||'ของรางวัลจากคั่วสาทร คอฟฟี่'});
-    save();closeModal();renderRewards();
-    toast('เพิ่มรางวัล "'+esc(rn)+'" แล้ว');
-    return;
-  }
-});
-
-document.addEventListener('input',function(e){
-  if(e.target.id==='searchInput'){
-    lastQuery=e.target.value;
-    renderSearchResults(findMembers(lastQuery));
-  }
-  if(e.target.id==='nmPhone'){
-    e.target.value=e.target.value.replace(/[^0-9]/g,'').slice(0,10);
-  }
-});
-document.addEventListener('change',function(e){
-  if(e.target.id==='logFilter'){logFilter=e.target.value;renderLogs();}
-});
-document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'){closeModal();closeSidebar();}
-  if(e.key==='Enter'&&document.activeElement&&document.activeElement.id==='searchInput'){
-    e.preventDefault();
-    var list=findMembers(lastQuery);
-    if(list.length){selectedId=list[0].id;$('#searchInput').value='';lastQuery='';$('#searchResults').classList.add('hidden');renderMemberArea();}
-  }
-});
-$('#hamburger').addEventListener('click',function(){
-  $('#sidebar').classList.add('open');$('#sideBackdrop').classList.add('show');
-});
-$('#sideBackdrop').addEventListener('click',closeSidebar);
-
-/* ================= init ================= */
-var inited=false;
-function init(){
-  if(inited)return;inited=true;
-  try{
-    $('#todayDate').textContent=new Date().toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  }catch(e){$('#todayDate').textContent='';}
-  navTo('home');
+function updateFeedBadge(){
+  var l = linkRead();
+  var newer = l.events.filter(function(e){ return e.t > lastSeenFeed && e.sys !== 'loyalty'; }).length;
+  var badge = document.getElementById('feedBadge');
+  if (newer && !document.getElementById('feedDrawer').classList.contains('open')) { badge.hidden = false; badge.textContent = ' (+' + newer + ')'; }
+  else badge.hidden = true;
 }
-})();
-</script>
-<script>
-/* Auto-enter app when opened with ?app=1 (from showcase hub) */
-(function(){
-  if (!/[?&]app=1/.test(location.href)) return;
-  function enter(){
-    var b = document.getElementById('loginBtn') || document.getElementById('btnLogin')
-         || document.querySelector('#loginForm button[type="submit"]')
-         || document.querySelector('.login-card button[type="submit"]')
-         || Array.prototype.find.call(document.querySelectorAll('button'), function(x){ return /\u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a/.test(x.textContent); });
-    if (b) { b.click(); return; }
-    var f = document.getElementById('loginForm') || document.querySelector('#loginView form') || document.querySelector('.login form');
-    if (f && f.requestSubmit) f.requestSubmit();
+document.getElementById('feedBtn').addEventListener('click', function(){
+  renderFeed();
+  document.getElementById('feedDrawer').classList.add('open');
+  document.getElementById('scrim').hidden = false;
+});
+document.getElementById('feedClose').addEventListener('click', closeDrawers);
+setInterval(updateFeedBadge, 3000);
+
+/* pages / shortcuts */
+function goPage(p){
+  document.querySelectorAll('.ri[data-page]').forEach(function(x){ x.classList.toggle('on', x.dataset.page === p); });
+  ['members','rewards'].forEach(function(x){ document.getElementById('page-'+x).hidden = x !== p; });
+  document.getElementById('rail').classList.remove('open');
+  renderAll();
+}
+document.querySelectorAll('.ri[data-page]').forEach(function(b){ b.addEventListener('click', function(){ goPage(b.dataset.page); }); });
+document.addEventListener('keydown', function(e){
+  if (document.getElementById('appView').hidden) return;
+  if (e.key === 'Escape') { closeAllModals(); closeDrawers(); return; }
+  var tgt = e.target;
+  if (tgt && tgt.matches && tgt.matches('input,select,textarea')) return;
+  if (e.key === 'm' || e.key === 'M') goPage('members');
+  else if (e.key === 'r' || e.key === 'R') goPage('rewards');
+  else if (e.key === 'n' || e.key === 'N') document.getElementById('addMemberBtn').click();
+  else if (e.key === 'f' || e.key === 'F') document.getElementById('feedBtn').click();
+});
+
+/* reset */
+document.getElementById('resetBtn').addEventListener('click', function(){
+  if (confirm('รีเซ็ตสมาชิก/แต้มกลับตัวอย่าง?')) {
+    localStorage.removeItem(LS);
+    state = blank(); save();
+    renderAll(); renderCamp();
+    toast('รีเซ็ตข้อมูลแล้ว');
   }
-  if (document.readyState !== 'loading') setTimeout(enter, 80);
-  else document.addEventListener('DOMContentLoaded', function(){ setTimeout(enter, 80); });
+});
+
+/* init */
+function renderAll(){ renderMembers(); renderRewards(); renderCamp(); updateFeedBadge(); }
+renderAll();
 })();
 </script>
 </body>
