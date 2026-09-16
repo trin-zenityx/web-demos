@@ -63,4 +63,5 @@ kanban งานดี, admin-shop ร้านดีแอดมิน, cashboo
 - [x] Repair ซ่อมดี (2026-09-15 · track-first entry, 5-stage board, parts+labor, receipt)
 - [x] Hotel พักดี (2026-09-15 · kiosk self check-in + key card, rack 4 states, minibar folio)
 - [x] Laundry ซักดี (2026-09-15 · intake-first entry, live pricing กก.+ด่วน30%, 5-stage board)
-- [ ] (ว่าง — Tier A ตัวถัดไป: purchasing)
+- [x] Purchasing จัดซื้อดี (2026-09-15 · role-split entry requester/approver, dept budget guard, auto-PO)
+- [ ] (ว่าง — Tier A ตัวสุดท้าย: loyalty)
