@@ -62,4 +62,5 @@ kanban งานดี, admin-shop ร้านดีแอดมิน, cashboo
 - [x] Gym ฟิตดี (2026-09-15 · QR member scan = check-in, expired block, renew, class booking)
 - [x] Repair ซ่อมดี (2026-09-15 · track-first entry, 5-stage board, parts+labor, receipt)
 - [x] Hotel พักดี (2026-09-15 · kiosk self check-in + key card, rack 4 states, minibar folio)
-- [ ] (ว่าง — Tier A ตัวถัดไป: laundry-ops)
+- [x] Laundry ซักดี (2026-09-15 · intake-first entry, live pricing กก.+ด่วน30%, 5-stage board)
+- [ ] (ว่าง — Tier A ตัวถัดไป: purchasing)

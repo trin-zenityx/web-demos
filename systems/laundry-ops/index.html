@@ -3,266 +3,323 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ซักดี — ระบบร้านซักรีด ใบรับผ้าและชั่งน้ำหนัก | ZenityX Demos</title>
-<meta name="description" content="ระบบเดโมร้านซักรีด — รับผ้า ชั่ง กก. คิดราคาอัตโนมัติ ติดตามสถานะจนคืน">
+<title>ซักดี Pro — ระบบร้านซักรีด ชั่งน้ำหนักคิดเงินสด | ZenityX Demos</title>
+<meta name="description" content="ระบบร้านซักรีดระดับ production — รับผ้าชั่ง กก. คิดราคาสดหน้าแรก, งานด่วน +30%, บอร์ด 5 ขั้น, ใบรับพิมพ์, เชื่อมข้ามระบบ">
+<meta property="og:title" content="ซักดี Pro — เดโมใช้งานได้จริง">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23c026d3'/%3E%3Crect x='24' y='22' width='52' height='58' rx='8' fill='white'/%3E%3Ccircle cx='50' cy='55' r='15' fill='none' stroke='%23c026d3' stroke-width='5'/%3E%3Ccircle cx='35' cy='32' r='3' fill='%23c026d3'/%3E%3Ccircle cx='45' cy='32' r='3' fill='%23c026d3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --acc:#c026d3; --acc-deep:#a21caf; --acc-soft:#fae8ff;
-  --bg:#f8f6fa; --card:#ffffff; --side:#251527; --ink:#2b1a2d; --muted:#846f86; --line:#ece3ee;
+  --bg:#faf6fc; --panel:#ffffff; --line:#f0e4f3;
+  --ink:#231226; --muted:#7f6684;
+  --dark:#231226; --dark2:#33182f; --dline:#52294e;
+  --green:#16a34a; --amber:#d97706; --red:#dc2626; --blue:#0284c7;
+  --mono:'JetBrains Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 input,select{font:inherit;color:inherit}
-:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
-.mono{font-family:'JetBrains Mono',monospace}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 [hidden]{display:none!important}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 
-/* LOGIN */
-.login{min-height:100vh;display:grid;place-items:center;padding:1.5rem;background:linear-gradient(160deg,#4a1259,#c026d3 150%)}
-.login-card{background:#fff;border-radius:24px;padding:clamp(2rem,5vw,3rem);width:min(430px,100%);box-shadow:0 30px 80px -20px rgba(0,0,0,.4);text-align:center}
-.login-logo{width:68px;height:68px;border-radius:18px;background:var(--acc);display:grid;place-items:center;margin:0 auto 1rem}
-.login h1{font-size:1.7rem;font-weight:600}
-.login .sub{color:var(--muted);font-size:.9rem;margin:.3rem 0 1.6rem}
-.login input{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:.85rem 1rem;margin-bottom:.8rem;font-size:.95rem}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:500;border-radius:12px;padding:.85rem 1.4rem;transition:all .2s;min-height:44px}
-.btn-a{background:var(--acc);color:#fff;box-shadow:0 8px 20px -8px rgba(192,38,211,.5)}
-.btn-a:hover{background:var(--acc-deep);transform:translateY(-1px)}
+/* INTAKE-FIRST ENTRY */
+.intake-view{min-height:100vh;display:grid;place-items:center;padding:1.5rem;background:radial-gradient(1100px 650px at 50% -20%,#4c0e56,#170a1a 62%),#170a1a}
+.intake-in{width:min(640px,100%);text-align:center}
+.intake-brand{display:flex;align-items:center;justify-content:center;gap:.8rem;margin-bottom:.4rem;color:#fff}
+.intake-brand img{width:52px;height:52px;border-radius:14px}
+.intake-brand b{font-size:1.5rem;font-weight:600}
+.intake-sub{color:#dfa8ea;font-size:.9rem;margin-bottom:1.5rem}
+.intake-card{background:#fff;color:#231226;border-radius:20px;padding:1.6rem;box-shadow:0 40px 90px -20px rgba(0,0,0,.5);text-align:left}
+.intake-card h2{font-size:1.05rem;margin-bottom:.3rem}
+.intake-card .isub{color:var(--muted);font-size:.8rem;margin-bottom:1rem}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.9rem}
+.f-row input,.f-row select{border:1.5px solid var(--line);border-radius:10px;padding:.7rem .85rem;min-height:46px;outline:none;font-size:.9rem;width:100%}
+.f-row input:focus,.f-row select:focus{border-color:var(--acc)}
+.kg-box{border:1.5px solid var(--line);border-radius:14px;padding:1rem;text-align:center;margin-bottom:.9rem}
+.kg-box .kg-n{font-family:var(--mono);font-size:2.4rem;font-weight:700;color:var(--acc-deep)}
+.kg-box .kg-l{font-size:.72rem;color:var(--muted)}
+.kg-ctl{display:flex;gap:.5rem;justify-content:center;margin-top:.6rem}
+.kg-ctl button{width:46px;height:46px;border-radius:12px;border:1.5px solid var(--line);font-size:1.2rem;font-weight:700}
+.kg-ctl button:hover{border-color:var(--acc);color:var(--acc)}
+.kg-ctl input{width:100px;text-align:center;border:1.5px solid var(--line);border-radius:12px;font-family:var(--mono);font-size:1.1rem;font-weight:700;min-height:46px;outline:none}
+.svc-pick{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.9rem}
+.sp-b{border:1.5px solid var(--line);border-radius:11px;padding:.7rem .5rem;text-align:center;font-size:.78rem;transition:all .15s;min-height:64px;display:flex;flex-direction:column;justify-content:center;gap:.2rem}
+.sp-b b{font-size:.84rem}
+.sp-b small{color:var(--muted);font-size:.68rem}
+.sp-b:hover{border-color:var(--acc)}
+.sp-b.on{border-color:var(--acc);background:var(--acc-soft)}
+.exp-row{display:flex;align-items:center;justify-content:space-between;border:1.5px dashed var(--line);border-radius:11px;padding:.6rem .9rem;margin-bottom:.9rem;font-size:.85rem}
+.exp-row b{color:var(--amber)}
+.switch{position:relative;width:48px;height:27px;flex:none}
+.switch input{opacity:0;width:100%;height:100%;position:absolute;cursor:pointer;margin:0;z-index:2}
+.switch .tr{position:absolute;inset:0;background:#e5d9e8;border-radius:99px;transition:.2s}
+.switch .th{position:absolute;top:3px;left:3px;width:21px;height:21px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.switch input:checked ~ .tr{background:var(--amber)}
+.switch input:checked ~ .th{left:24px}
+.price-live{background:#fdf4ff;border:1.5px solid var(--acc-soft);border-radius:12px;padding:.8rem 1rem;font-size:.85rem;margin-bottom:1rem}
+.price-live .pr{display:flex;justify-content:space-between;padding:.15rem 0}
+.price-live .pr b{font-family:var(--mono)}
+.price-live .grand{border-top:2px solid var(--ink);margin-top:.3rem;padding-top:.4rem;font-weight:700;font-size:1.05rem}
+.price-live .grand b{color:var(--acc-deep)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:600;border-radius:10px;padding:.75rem 1.2rem;transition:all .15s;min-height:48px}
+.btn-a{background:var(--acc);color:#fff;width:100%}
+.btn-a:hover{background:var(--acc-deep)}
 .btn-o{border:1.5px solid var(--line);color:var(--muted)}
 .btn-o:hover{border-color:var(--acc);color:var(--acc)}
-.btn-block{width:100%}
-.demo-note{margin-top:1rem;font-size:.8rem;color:var(--muted)}
-.demo-note b{color:var(--acc)}
-.login-credit{margin-top:1.6rem;padding-top:1.2rem;border-top:1px dashed var(--line);font-size:.75rem;color:var(--muted)}
-.login-credit a{color:#FF0000;text-decoration:none;font-weight:500}
+.done-tix{display:none;text-align:center;padding:.8rem 0}
+.done-tix.show{display:block;animation:tin .3s ease}
+@keyframes tin{from{opacity:0;transform:translateY(10px)}}
+.done-tix .ok{width:58px;height:58px;border-radius:50%;background:#dcfce7;color:#16a34a;display:grid;place-items:center;margin:0 auto .6rem}
+.done-tix .tkno{font-family:var(--mono);font-size:2rem;font-weight:700;letter-spacing:.05em}
+.done-tix small{color:var(--muted)}
+.staff-link{margin-top:1.5rem;color:#b678c2;font-size:.8rem;min-height:44px}
+.staff-link:hover{color:#dfa8ea}
+.intake-credit{margin-top:.7rem;font-size:.72rem;color:#8a5796}
+.intake-credit a{color:#FF6b6b;text-decoration:none;font-weight:500}
 
 /* APP */
-.app{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
-.side{background:var(--side);color:#e8d5ea;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
-.side-logo{display:flex;align-items:center;gap:.7rem;padding:1.2rem 1.2rem 1rem;border-bottom:1px solid rgba(232,213,234,.12)}
-.side-logo .mk{width:38px;height:38px;border-radius:10px;background:var(--acc);display:grid;place-items:center;flex:none}
-.side-logo b{color:#fff;font-size:1.05rem;font-weight:600;display:block;line-height:1.2}
-.side-logo small{font-size:.68rem;opacity:.65}
-.side nav{padding:.8rem .7rem;display:grid;gap:.2rem;flex:1}
-.navi{display:flex;align-items:center;gap:.7rem;padding:.7rem .8rem;border-radius:10px;font-size:.92rem;color:#c9a9cf;transition:all .2s;text-align:left;width:100%;min-height:44px}
-.navi:hover{background:rgba(255,255,255,.06);color:#fff}
-.navi.on{background:var(--acc);color:#fff;font-weight:500}
-.side-foot{padding:1rem .9rem;border-top:1px solid rgba(232,213,234,.12)}
-.user-chip{display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem}
-.avatar{width:36px;height:36px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-weight:600;flex:none}
-.user-chip b{color:#fff;font-size:.88rem;display:block;line-height:1.2}
-.user-chip small{font-size:.72rem;opacity:.65}
-.logout{width:100%;text-align:left;padding:.6rem .8rem;border-radius:10px;font-size:.85rem;color:#c9a9cf;transition:all .2s;min-height:44px}
-.logout:hover{background:rgba(214,69,69,.15);color:#ff9d9d}
-.main{min-width:0}
-.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);padding:.8rem clamp(1rem,3vw,1.6rem);display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-.topbar h2{font-size:1.1rem;font-weight:600;margin-right:auto}
-.topbar .date{font-size:.82rem;color:var(--muted)}
-.kpi-chip{background:var(--acc-soft);color:var(--acc-deep);border-radius:99px;padding:.4rem .9rem;font-size:.82rem;font-weight:500}
-.reset-btn{font-size:.78rem;color:var(--muted);border:1.5px solid var(--line);border-radius:99px;padding:.45rem .9rem;min-height:44px;transition:all .2s}
-.reset-btn:hover{border-color:#d64545;color:#d64545}
-.content{padding:clamp(1rem,3vw,1.6rem)}
+.app{display:grid;grid-template-columns:72px 1fr;min-height:100vh}
+.rail{background:var(--dark);display:flex;flex-direction:column;align-items:center;padding:.8rem 0;position:sticky;top:0;height:100vh;z-index:60}
+.rail .logo{width:44px;height:44px;border-radius:12px;overflow:hidden;margin-bottom:1rem}
+.rail .logo img{width:100%;height:100%;object-fit:cover}
+.rail nav{display:grid;gap:.4rem;flex:1}
+.ri{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;color:#b678c2;position:relative;transition:all .15s}
+.ri:hover{background:rgba(255,255,255,.07);color:#fff}
+.ri.on{background:var(--acc);color:#fff}
+.ri .tip{position:absolute;left:70px;background:var(--dark2);color:#fff;font-size:.72rem;padding:.3rem .6rem;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:70}
+.ri:hover .tip{opacity:1}
+.rail .who{width:44px;height:44px;border-radius:50%;background:var(--dark2);color:#f0abfc;display:grid;place-items:center;font-weight:600;font-size:.8rem}
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{background:#fff;border-bottom:1px solid var(--line);padding:.55rem 1.1rem;display:flex;align-items:center;gap:.8rem;font-size:.8rem;flex-wrap:wrap}
+.ws-chip{display:flex;align-items:center;gap:.45rem;font-weight:600;font-size:.82rem}
+.ws-chip .wm{width:26px;height:26px;border-radius:7px;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:.72rem}
+.stat-chip{display:flex;align-items:center;gap:.4rem;background:#fbf6fc;border:1px solid var(--line);border-radius:8px;padding:.3rem .7rem;font-size:.75rem;color:var(--muted)}
+.stat-chip b{font-family:var(--mono);color:var(--ink);font-weight:700}
+.stat-chip.green b{color:var(--green)}
+.stat-chip.amber b{color:var(--amber)}
+.topbar .sp{flex:1}
+.topbar .clock{font-family:var(--mono);font-size:.9rem}
+.sync-pill{display:flex;align-items:center;gap:.35rem;color:var(--muted);font-size:.75rem;border:1px solid var(--line);border-radius:99px;padding:.25rem .7rem;min-height:32px;background:#fff}
+.sync-pill i{width:7px;height:7px;border-radius:50%;background:#4ade80}
+.sync-pill.off{border-color:var(--amber);color:var(--amber)}
+.sync-pill.off i{background:var(--amber)}
+.offline-banner{background:#fef3c7;color:#92400e;font-size:.8rem;padding:.4rem 1.1rem}
+.content{flex:1;padding:1rem;min-height:0}
 
-/* orders */
-.ord-head{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
-.chip{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:.5rem 1rem;font-size:.84rem;transition:all .2s;min-height:44px}
-.chip.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:500}
-.chip b{font-family:'JetBrains Mono';font-size:.78rem;opacity:.7;margin-left:.2rem}
-.btn-new{margin-left:auto}
-.tbl-wrap{background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:.88rem}
-th{text-align:left;padding:.8rem 1rem;color:var(--muted);font-weight:500;font-size:.78rem;border-bottom:1px solid var(--line);white-space:nowrap}
-td{padding:.75rem 1rem;border-bottom:1px solid #f5f1f6;vertical-align:middle}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:.8rem;margin-bottom:1rem}
+.kpi{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:1rem 1.1rem}
+.kpi span{font-size:.74rem;color:var(--muted);display:block}
+.kpi b{font-family:var(--mono);font-size:1.5rem;font-weight:700}
+.kpi b.g{color:var(--green)}
+.kpi b.a{color:var(--amber)}
+
+/* board */
+.pipe{overflow-x:auto;padding-bottom:.5rem}
+.pipe-in{display:grid;grid-template-columns:repeat(5,minmax(200px,1fr));gap:.7rem;min-width:1080px}
+.jcol{background:#f8f0fa;border-radius:13px;padding:.55rem;min-height:280px}
+.jcol .jh{display:flex;align-items:center;gap:.45rem;padding:.3rem .45rem .6rem;font-size:.8rem}
+.jcol .jh b{font-weight:600}
+.jcol .jh .jc{margin-left:auto;font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.jcard{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem;margin-bottom:.5rem;cursor:pointer;transition:all .15s}
+.jcard:hover{border-color:var(--acc)}
+.jcard.express{border-left:4px solid var(--amber)}
+.jcard .jn{font-family:var(--mono);font-size:.68rem;color:var(--acc-deep);font-weight:700}
+.jcard b{font-size:.84rem;display:block}
+.jcard .jm{font-size:.7rem;color:var(--muted)}
+.jcard .jv{display:flex;justify-content:space-between;align-items:center;margin-top:.35rem}
+.jcard .jv .mono{font-weight:700;font-size:.78rem}
+.jcard .jv .mono b{font-size:.78rem}
+.jcard .kg{font-family:var(--mono);font-size:.66rem;color:var(--muted)}
+
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th{text-align:left;padding:.7rem 1rem;color:var(--muted);font-weight:500;font-size:.74rem;letter-spacing:.04em;border-bottom:1px solid var(--line);white-space:nowrap;background:#fbf6fc}
+td{padding:.65rem 1rem;border-bottom:1px solid #f7eff9;vertical-align:middle}
 tr:last-child td{border-bottom:0}
-tr:hover td{background:#fbf8fc}
-.badge{display:inline-block;font-size:.72rem;font-weight:600;padding:.22rem .7rem;border-radius:99px;white-space:nowrap}
-.s-received{background:#f0f0f0;color:#666}
-.s-washing{background:#e0f2fe;color:#0369a1}
-.s-drying{background:#fef3c7;color:#92600a}
-.s-ready{background:#dcf5e9;color:#0b7a55}
-.s-done{background:#f0e6f7;color:#7e22ce}
-.overdue{color:#c23b3b;font-weight:600}
-.act-btn{color:var(--acc);font-weight:500;min-height:44px;padding:.2rem .6rem}
-.act-btn:hover{text-decoration:underline}
-.next-btn{border:1.5px solid var(--acc);color:var(--acc);border-radius:8px;padding:.35rem .7rem;font-size:.78rem;font-weight:500;min-height:36px;transition:all .2s}
-.next-btn:hover{background:var(--acc);color:#fff}
+.badge{display:inline-block;font-size:.68rem;font-weight:700;padding:.15rem .55rem;border-radius:99px;white-space:nowrap}
+.b-ex{background:#fef3c7;color:#b45309}
+.b-paid{background:#dcfce7;color:#15803d}
+.b-unpaid{background:#f1f5f9;color:#64748b}
+.tlink{color:var(--acc);font-weight:500;min-height:40px;padding:.2rem .5rem}
+.tlink:hover{text-decoration:underline}
+.panel{background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
+.p-head{padding:.9rem 1.2rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.p-head b{font-weight:600}
+.p-head .count{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
 
-/* modal */
-.overlay{position:fixed;inset:0;background:rgba(37,21,39,.55);backdrop-filter:blur(4px);z-index:200;display:grid;place-items:center;padding:1rem}
-.modal{background:#fff;border-radius:20px;width:min(520px,100%);max-height:92vh;overflow-y:auto;padding:1.6rem}
-.modal h3{font-size:1.05rem;margin-bottom:1rem}
-.fgrid{display:grid;gap:.7rem}
-.fgrid input,.fgrid select{border:1.5px solid var(--line);border-radius:10px;padding:.7rem .9rem;min-height:44px;width:100%}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
-.exp-toggle{display:flex;align-items:center;gap:.6rem;font-size:.88rem}
-.exp-toggle input{width:20px;height:20px;accent-color:var(--acc)}
-.price-box{background:var(--acc-soft);border:1.5px dashed var(--acc);border-radius:14px;padding:1rem;text-align:center}
-.price-box .pb-line{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted);padding:.15rem 0}
-.price-box .pb-total{display:flex;justify-content:space-between;font-size:1.2rem;font-weight:600;color:var(--acc-deep);border-top:1px dashed var(--acc);margin-top:.4rem;padding-top:.5rem}
-.price-box b{font-family:'JetBrains Mono'}
-.modal .m-acts{display:flex;gap:.6rem;margin-top:1.2rem}
-
-/* receipt */
-.receipt{font-family:'JetBrains Mono',monospace;font-size:.82rem;background:#fff;border:1.5px dashed var(--line);padding:1.2rem 1rem}
-.receipt h4{text-align:center;font-size:.95rem;letter-spacing:.1em}
-.receipt .rc{text-align:center;color:var(--muted);font-size:.72rem;margin-bottom:.8rem}
-.receipt .rl{display:flex;justify-content:space-between;padding:.15rem 0}
-.receipt .rd{border-top:1px dashed var(--line);margin:.5rem 0}
-.receipt .rt{display:flex;justify-content:space-between;font-weight:700;font-size:1rem;padding:.3rem 0}
-
-/* summary */
-.sum-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.9rem}
-.kpi{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:1.1rem 1.2rem}
-.kpi span{font-size:.78rem;color:var(--muted)}
-.kpi b{font-family:'JetBrains Mono';font-size:1.6rem;font-weight:700;display:block;color:var(--acc-deep)}
-
-/* toast */
-.toast{position:fixed;top:1rem;right:1rem;z-index:300;background:var(--ink);color:#fff;border-radius:12px;padding:.85rem 1.2rem;font-size:.88rem;box-shadow:0 12px 30px -10px rgba(0,0,0,.35);opacity:0;transform:translateY(-8px);transition:all .3s;pointer-events:none}
+/* modal + drawer */
+.overlay{position:fixed;inset:0;background:rgba(35,18,38,.55);backdrop-filter:blur(3px);z-index:200;display:grid;place-items:center;padding:1rem}
+.modal{background:#fff;border-radius:18px;width:min(480px,100%);max-height:92vh;overflow-y:auto;padding:1.4rem;animation:mup .22s cubic-bezier(.2,.8,.2,1)}
+@keyframes mup{from{opacity:0;transform:translateY(14px) scale(.98)}}
+.modal h3{font-size:1.05rem;font-weight:600;margin-bottom:1rem}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:.3rem 1rem;font-size:.86rem;background:#fbf6fc;border-radius:12px;padding:.8rem 1rem;margin-bottom:.9rem}
+.kv dt{color:var(--muted);font-size:.78rem}
+.kv dd{font-weight:500;text-align:right}
+.kv dd.mono{font-family:var(--mono)}
+.kv .tot{border-top:2px solid var(--ink);padding-top:.35rem;margin-top:.2rem;font-weight:700}
+.kv .tot dd{color:var(--acc-deep)}
+.stage-btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem}
+.stage-btns .sb{flex:1;min-width:100px;border:1.5px solid var(--line);border-radius:10px;padding:.5rem .4rem;font-size:.74rem;font-weight:600;color:var(--muted);min-height:42px}
+.stage-btns .sb:hover{border-color:var(--acc);color:var(--acc)}
+.stage-btns .sb.cur{border-color:var(--acc);color:var(--acc-deep);background:var(--acc-soft)}
+.m-acts{display:flex;gap:.6rem;margin-top:1.1rem}
+.btn-g{background:#f0fdf4;border:1.5px solid #86efac;color:#15803d}
+.btn-a2{background:var(--acc);color:#fff}
+.btn-a2:hover{background:var(--acc-deep)}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,92vw);background:#fff;border-left:1px solid var(--line);z-index:250;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.scrim{position:fixed;inset:0;background:rgba(35,18,38,.45);z-index:240}
+.d-head{padding:.9rem 1.1rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.6rem}
+.d-head b{font-weight:600}
+.d-head .x{margin-left:auto;width:38px;height:38px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted)}
+.d-body{flex:1;overflow-y:auto;padding:.6rem 1.1rem}
+.feed-item{display:flex;gap:.7rem;padding:.6rem 0;border-bottom:1px dashed var(--line);animation:tin2 .2s}
+@keyframes tin2{from{opacity:0;transform:translateX(8px)}}
+.feed-item .fi{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:none}
+.feed-item .fm{font-size:.82rem;line-height:1.45}
+.feed-item .ft{font-family:var(--mono);font-size:.66rem;color:var(--muted);margin-top:.1rem}
+.d-note{padding:.7rem 1.1rem;border-top:1px solid var(--line);font-size:.72rem;color:var(--muted)}
+.toast{position:fixed;top:1rem;right:1rem;z-index:300;background:var(--dark2);color:#fff;border-radius:10px;padding:.8rem 1.1rem;font-size:.85rem;box-shadow:0 12px 30px -10px rgba(0,0,0,.4);opacity:0;transform:translateY(-8px);transition:all .25s;pointer-events:none}
 .toast.show{opacity:1;transform:none}
-
+.toast.err{background:#7f1d1d}
+.statusbar{background:var(--dark);color:#b678c2;font-size:.72rem;padding:.45rem 1.1rem;display:flex;gap:1.4rem;align-items:center;font-family:var(--mono);flex-wrap:wrap}
+.statusbar .ok{color:#4ade80}
+.statusbar .sp{flex:1}
+.statusbar button{color:#b678c2;min-height:30px;font-family:var(--mono);font-size:.72rem}
+.statusbar button:hover{color:#fff}
 @media(max-width:860px){
   .app{grid-template-columns:1fr}
-  .side{position:fixed;z-index:150;left:0;top:0;bottom:0;width:236px;transform:translateX(-100%);transition:transform .3s}
-  .side.open{transform:none}
-  .menu-btn{display:inline-flex!important}
-  .frow{grid-template-columns:1fr}
+  .rail{position:fixed;left:0;top:0;bottom:0;width:72px;transform:translateX(-100%);transition:transform .25s;z-index:100}
+  .rail.open{transform:none}
+  .mobtop{display:flex!important}
 }
-.menu-btn{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:1.5px solid var(--line);border-radius:10px}
-@media print{
-  body *{visibility:hidden}
-  #receiptBox,#receiptBox *{visibility:visible}
-  #receiptBox{position:absolute;left:0;top:0;width:100%;border:none}
-}
+.mobtop{display:none;background:#fff;border-bottom:1px solid var(--line);padding:.5rem .8rem;align-items:center;gap:.8rem}
+.mobtop button{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px}
+@media print{ body *{visibility:hidden} #tixPrint,#tixPrint *{visibility:visible} #tixPrint{position:absolute;left:0;top:0;width:100%} }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
 </style>
 </head>
 <body>
 <script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
 
-<!-- LOGIN -->
-<div class="login" id="loginView">
-  <div class="login-card">
-    <div class="login-logo"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="13" r="5"/><path d="M8 6h2M14 6h2"/></svg></div>
-    <h1>ซักดี</h1>
-    <p class="sub">ระบบร้านซักรีด · ซักดี ลอนดรี ลาดพร้าว</p>
-    <input type="email" value="front@sakdee.wash" readonly aria-label="อีเมล">
-    <input type="password" value="demo1234" readonly aria-label="รหัสผ่าน">
-    <button class="btn btn-a btn-block" id="loginBtn" style="font-size:1rem">เข้าสู่ระบบ</button>
-    <p class="demo-note">ระบบเดโม — <b>กดเข้าได้เลย</b> ไม่ต้องใส่รหัสผ่าน</p>
-    <div class="login-credit">ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener">First Vibe : Coding — ZenityX</a></div>
+<!-- INTAKE-FIRST ENTRY -->
+<div class="intake-view" id="intakeView" hidden>
+  <div class="intake-in">
+    <div class="intake-brand"><img src="assets/logo.jpg" alt=""><b>ซักดี Pro</b></div>
+    <p class="intake-sub">ร้านซักรีดสะอาดใจ · รับผ้าหน้าร้าน — ชั่งแล้วเห็นราคาทันที</p>
+    <div class="intake-card">
+      <div id="inForm">
+        <h2>รับผ้าเข้า</h2>
+        <p class="isub">ซัก+พับ ฿45/กก. · ซัก+รีด ฿65/กก. · อบอย่างเดียว ฿30/กก. — ขั้นต่ำ 3 กก.</p>
+        <div class="f-row">
+          <input id="inName" placeholder="ชื่อลูกค้า" aria-label="ชื่อลูกค้า">
+          <input id="inPhone" placeholder="เบอร์โทร" aria-label="เบอร์โทร">
+        </div>
+        <div class="kg-box">
+          <div class="kg-n" id="kgVal">4.0</div>
+          <div class="kg-l">น้ำหนัก (กิโลกรัม)</div>
+          <div class="kg-ctl">
+            <button data-kg="-0.5">−</button>
+            <input id="kgInput" type="number" step="0.5" min="0.5" value="4" aria-label="น้ำหนัก">
+            <button data-kg="0.5">+</button>
+          </div>
+        </div>
+        <div class="svc-pick" id="svcPick">
+          <button class="sp-b on" data-svc="wash-fold"><b>ซัก+พับ</b><small>฿45/กก.</small></button>
+          <button class="sp-b" data-svc="wash-iron"><b>ซัก+รีด</b><small>฿65/กก.</small></button>
+          <button class="sp-b" data-svc="dry"><b>อบอย่างเดียว</b><small>฿30/กก.</small></button>
+        </div>
+        <div class="exp-row">
+          <span>งานด่วน (เสร็จวันนี้) <b>+30%</b></span>
+          <label class="switch"><input type="checkbox" id="expToggle" aria-label="งานด่วน"><span class="tr"></span><span class="th"></span></label>
+        </div>
+        <div class="price-live" id="priceLive"></div>
+        <button class="btn btn-a" id="intakeBtn">รับผ้าและออกตั๋ว ✓</button>
+      </div>
+      <div class="done-tix" id="doneTix"></div>
+    </div>
+    <button class="staff-link" id="staffLink">สำหรับพนักงานร้าน →</button>
+    <p class="intake-credit">ระบบเดโม — ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener">First Vibe : Coding — ZenityX</a></p>
   </div>
 </div>
 
 <!-- APP -->
 <div class="app" id="appView" hidden>
-  <aside class="side" id="sidebar">
-    <div class="side-logo">
-      <span class="mk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="13" r="5"/><path d="M8 6h2M14 6h2"/></svg></span>
-      <span><b>ซักดี</b><small>ซักดี ลอนดรี</small></span>
-    </div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ซักดี Pro</b></div>
+  <aside class="rail" id="rail">
+    <div class="logo"><img src="assets/logo.jpg" alt="ซักดี"></div>
     <nav>
-      <button class="navi on" data-page="orders"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>ใบรับผ้า</button>
-      <button class="navi" data-page="pickup"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 7L9 18l-5-5"/></svg>คืนผ้าวันนี้</button>
-      <button class="navi" data-page="sum"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 5-8"/></svg>สรุปวันนี้</button>
+      <button class="ri on" data-page="board" aria-label="บอร์ดงาน"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="5" height="18" rx="1"/><rect x="10" y="3" width="5" height="12" rx="1"/><rect x="17" y="3" width="5" height="8" rx="1"/></svg><span class="tip">บอร์ดงาน (B)</span></button>
+      <button class="ri" data-page="all" aria-label="ตั๋วทั้งหมด"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span class="tip">ตั๋วทั้งหมด (A)</span></button>
+      <button class="ri" id="feedBtn" aria-label="กิจกรรมข้ามระบบ"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span class="tip">กิจกรรมข้ามระบบ (F) <span id="feedBadge" class="mono" hidden></span></span></button>
     </nav>
-    <div class="side-foot">
-      <div class="user-chip"><span class="avatar">น</span><span><b>น้ำ (หน้าร้าน)</b><small>พนักงานรับผ้า</small></span></div>
-      <button class="logout" id="logoutBtn">← ออกจากระบบ</button>
-    </div>
+    <button class="who" id="whoBtn" title="กลับหน้ารับผ้า">ซ</button>
   </aside>
 
   <div class="main">
     <div class="topbar">
-      <button class="menu-btn" id="menuBtn" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
-      <h2 id="pageTitle">ใบรับผ้า</h2>
-      <span class="kpi-chip">พร้อมรับคืน <b id="readyCount" class="mono">0</b> ถุง</span>
-      <span class="date" id="todayDate"></span>
-      <button class="reset-btn" id="resetBtn">รีเซ็ตข้อมูลตัวอย่าง</button>
+      <span class="ws-chip"><span class="wm">ส</span> ซักรีดสะอาดใจ</span>
+      <span class="stat-chip">งานค้าง <b id="stOpen">0</b></span>
+      <span class="stat-chip amber">งานด่วน <b id="stExp">0</b></span>
+      <span class="stat-chip green">รายรับวันนี้ <b id="stRev">฿0</b></span>
+      <span class="sp"></span>
+      <button class="sync-pill" id="syncPill"><i></i><span id="syncTxt">ออนไลน์</span></button>
+      <span class="clock" id="clock">--:--:--</span>
     </div>
+    <div class="offline-banner" id="offBanner" hidden><b>โหมดออฟไลน์</b> รับผ้าเก็บในเครื่องก่อน</div>
 
     <div class="content">
-      <!-- ORDERS -->
-      <div id="page-orders">
-        <div class="ord-head">
-          <div id="filterChips" style="display:flex;gap:.5rem;flex-wrap:wrap"></div>
-          <button class="btn btn-a btn-new" id="newBtn">+ รับผ้าใหม่</button>
-        </div>
-        <div class="tbl-wrap">
-          <table>
-            <thead><tr><th>เลขใบ</th><th>ลูกค้า</th><th>บริการ</th><th>น้ำหนัก</th><th>ยอด</th><th>คืน</th><th>สถานะ</th><th></th></tr></thead>
-            <tbody id="ordBody"></tbody>
-          </table>
+      <div id="page-board">
+        <div class="kpi-grid" id="kpiGrid"></div>
+        <div class="pipe"><div class="pipe-in" id="boardCols"></div></div>
+      </div>
+      <div id="page-all" hidden>
+        <div class="panel">
+          <div class="p-head"><b>ตั๋วซักทั้งหมด</b><span class="count" id="allCount"></span></div>
+          <div style="overflow-x:auto"><table>
+            <thead><tr><th>ตั๋ว</th><th>ลูกค้า</th><th>บริการ</th><th>กก.</th><th>ด่วน</th><th>ราคา</th><th>ชำระ</th><th>สถานะ</th><th></th></tr></thead>
+            <tbody id="allBody"></tbody>
+          </table></div>
         </div>
       </div>
+    </div>
 
-      <!-- PICKUP -->
-      <div id="page-pickup" hidden>
-        <div class="tbl-wrap">
-          <table>
-            <thead><tr><th>เลขใบ</th><th>ลูกค้า</th><th>ยอดชำระ</th><th>กำหนดคืน</th><th>สถานะ</th><th></th></tr></thead>
-            <tbody id="pickBody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- SUMMARY -->
-      <div id="page-sum" hidden>
-        <div class="sum-grid" id="sumKpis"></div>
-        <div class="tbl-wrap" style="margin-top:1.2rem">
-          <table>
-            <thead><tr><th>เลขใบ</th><th>ลูกค้า</th><th>บริการ</th><th>น้ำหนัก</th><th>ยอด</th><th>สถานะ</th></tr></thead>
-            <tbody id="sumBody"></tbody>
-          </table>
-        </div>
-      </div>
+    <div class="statusbar">
+      <span>ซักดี Pro v1.1.9</span>
+      <span class="ok">● พร้อมใช้งาน</span>
+      <span class="sp"></span>
+      <span id="stTix">ตั๋ว: 0</span>
+      <button id="resetBtn">รีเซ็ตข้อมูลตัวอย่าง</button>
     </div>
   </div>
 </div>
 
-<!-- new order modal -->
-<div class="overlay" id="newOverlay" hidden>
+<!-- ticket modal -->
+<div class="overlay" id="tixOverlay" hidden>
+  <div class="modal" id="tixModal"></div>
+</div>
+
+<!-- print modal -->
+<div class="overlay" id="printOverlay" hidden>
   <div class="modal">
-    <h3>รับผ้าใหม่</h3>
-    <div class="fgrid">
-      <div class="frow">
-        <input id="nCust" placeholder="ชื่อลูกค้า *" aria-label="ชื่อลูกค้า">
-        <input id="nPhone" placeholder="เบอร์โทร *" aria-label="เบอร์โทร" inputmode="tel">
-      </div>
-      <select id="nSvc" aria-label="บริการ">
-        <option value="washdry">ซัก+อบ (฿40/กก.)</option>
-        <option value="full">ซัก+อบ+รีด (฿60/กก.)</option>
-        <option value="iron">รีดอย่างเดียว (฿25/ชิ้น)</option>
-      </select>
-      <div class="frow">
-        <input id="nKg" type="number" step="0.5" min="0" placeholder="น้ำหนัก (กก.) *" aria-label="น้ำหนัก กิโลกรัม">
-        <input id="nPcs" type="number" step="1" min="0" placeholder="จำนวนชิ้น (รีดอย่างเดียว)" aria-label="จำนวนชิ้น">
-      </div>
-      <label class="exp-toggle"><input type="checkbox" id="nExpress"> งานด่วน รับพรุ่งนี้เช้า (+30%)</label>
-      <div class="price-box">
-        <div class="pb-line"><span id="pbCalc">เลือกบริการและใส่น้ำหนัก</span><b id="pbBase">฿0</b></div>
-        <div class="pb-line" id="pbExpRow" hidden><span>งานด่วน +30%</span><b id="pbExp">฿0</b></div>
-        <div class="pb-total"><span>รวมทั้งหมด</span><b id="pbTotal">฿0</b></div>
-      </div>
-    </div>
+    <div id="tixPrint"></div>
     <div class="m-acts">
-      <button class="btn btn-o" id="nCancel" style="flex:1">ยกเลิก</button>
-      <button class="btn btn-a" id="nSave" style="flex:1">รับผ้า + พิมพ์ใบรับ</button>
+      <button class="btn btn-o" id="printClose" style="flex:1">ปิด</button>
+      <button class="btn btn-a2" id="printBtn" style="flex:1">พิมพ์ใบรับ</button>
     </div>
   </div>
 </div>
 
-<!-- receipt modal -->
-<div class="overlay" id="receiptOverlay" hidden>
-  <div class="modal" style="width:min(400px,100%)">
-    <div class="receipt" id="receiptBox"></div>
-    <div class="m-acts">
-      <button class="btn btn-o" id="rcPrint" style="flex:1">พิมพ์</button>
-      <button class="btn btn-a" id="rcClose" style="flex:1">ปิด</button>
-    </div>
-  </div>
+<!-- feed drawer -->
+<div class="scrim" id="scrim" hidden></div>
+<div class="drawer" id="feedDrawer">
+  <div class="d-head"><b>กิจกรรมข้ามระบบ</b><span class="count mono" id="feedCount" style="font-size:.7rem;color:var(--muted)"></span><button class="x" id="feedClose" aria-label="ปิด"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+  <div class="d-body" id="feedBody"></div>
+  <div class="d-note">ทุกระบบในเครือ ZenityX Demos แชร์เหตุการณ์ผ่าน localStorage จริง</div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -275,288 +332,319 @@ tr:hover td{background:#fbf8fc}
 <script>
 (function(){
 'use strict';
-var LS = 'zx-laundry-v1';
-var SVC = {
-  washdry: { n:'ซัก+อบ',       rate: 40, unit:'กก.' },
-  full:    { n:'ซัก+อบ+รีด',    rate: 60, unit:'กก.' },
-  iron:    { n:'รีดอย่างเดียว', rate: 25, unit:'ชิ้น' }
-};
-var STATUS = {
-  received: { t:'รับแล้ว',  cls:'s-received', next:'washing', nextLabel:'เริ่มซัก' },
-  washing:  { t:'กำลังซัก',  cls:'s-washing',  next:'drying',  nextLabel:'เข้าอบ' },
-  drying:   { t:'กำลังอบ',   cls:'s-drying',   next:'ready',   nextLabel:'พร้อมรับ' },
-  ready:    { t:'พร้อมรับ',  cls:'s-ready',    next:null },
-  done:     { t:'คืนแล้ว',   cls:'s-done',     next:null }
-};
-var NAMES = ['คุณปู','ร้านอาหารรสชาติ','คุณหนูแนน','โฮสเทลนอนดี','คุณอาร์ต','คุณมด','ร้านทำผมลุกซ์','คุณแพร','คุณโตโต้','บจก.สะอาดดี','คุณหมิว','คุณเชน'];
+var LS = 'zx-laundry2-v1';
+var LINK_KEY = 'zx-link-v1';
+var DAY = 86400000;
 
-function calcPrice(svc, kg, pcs, express){
-  var base = svc === 'iron' ? Math.round((pcs||0) * SVC.iron.rate) : Math.round((kg||0) * SVC[svc].rate);
-  var exp = express ? Math.round(base * 0.3) : 0;
-  return { base: base, exp: exp, total: base + exp };
+function linkRead(){ try { var d = JSON.parse(localStorage.getItem(LINK_KEY)); return d && d.events ? d : {events:[]}; } catch(e){ return {events:[]}; } }
+function linkWrite(sys, type, msg, val){
+  var l = linkRead();
+  l.events.unshift({ t: Date.now(), sys: sys, type: type, msg: msg, val: (val === undefined ? null : val) });
+  l.events = l.events.slice(0, 60);
+  try { localStorage.setItem(LINK_KEY, JSON.stringify(l)); } catch(e){}
 }
-function dueDays(svc, express){ if (express) return 1; return svc === 'full' ? 3 : 2; }
 
-function seedOrders(){
-  var arr = [];
-  var sts = ['received','washing','drying','ready','done','ready','washing','ready','done','received','drying','ready'];
-  for (var i = 0; i < 12; i++) {
-    var svc = ['washdry','full','iron'][i % 3];
-    var kg = 2 + (i % 6) * 1.5;
-    var pcs = 4 + i;
-    var exp = i % 5 === 0;
-    var pr = calcPrice(svc, kg, pcs, exp);
-    var created = Date.now() - (i % 4) * 86400000 - 3600000 * 3;
-    arr.push({
-      id: 'LD-' + (3100 + i),
-      cust: NAMES[i], phone: '08' + (10000000 + i * 137913).toString().slice(0, 8),
-      svc: svc, kg: svc === 'iron' ? 0 : kg, pcs: svc === 'iron' ? pcs : 0,
-      price: pr, express: exp,
-      due: created + dueDays(svc, exp) * 86400000,
-      created: created, status: sts[i], paid: sts[i] === 'done'
-    });
-  }
-  return arr;
+var SVCS = { 'wash-fold':{n:'ซัก+พับ',rate:45}, 'wash-iron':{n:'ซัก+รีด',rate:65}, 'dry':{n:'อบอย่างเดียว',rate:30} };
+var STAGES = [ {id:'recv',n:'รับผ้า'}, {id:'wash',n:'กำลังซัก'}, {id:'dry',n:'อบ/รีด'}, {id:'ready',n:'พร้อมรับ'}, {id:'done',n:'ส่งมอบแล้ว'} ];
+var STAGE_IDX = {}; STAGES.forEach(function(s,i){ STAGE_IDX[s.id] = i; });
+function seed(){
+  var now = Date.now();
+  return {
+    tix: [
+      { no:'LD-3012', cust:'คุณอรอนงค์', phone:'081-234-5566', svc:'wash-fold', kg:5.5, express:false, price:248, stage:'wash', at:now-3*3600000, paid:false },
+      { no:'LD-3011', cust:'คุณเบนจ์', phone:'089-111-2233', svc:'wash-iron', kg:3, express:true, price:254, stage:'dry', at:now-5*3600000, paid:false },
+      { no:'LD-3010', cust:'คุณมายด์', phone:'086-777-8899', svc:'dry', kg:8, express:false, price:240, stage:'ready', at:now-1*DAY, paid:false },
+      { no:'LD-3009', cust:'คุณเกรซ', phone:'083-444-5566', svc:'wash-fold', kg:4, express:false, price:180, stage:'done', at:now-2*DAY, paid:true, doneAt:now-1*DAY }
+    ],
+    seq: 3013
+  };
 }
-var state = load() || { orders: seedOrders(), seq: 3112 };
-function load(){ try { return JSON.parse(localStorage.getItem(LS)); } catch(e){ return null; } }
+var state = load() || blank();
+var offline = false;
+var inSvc = 'wash-fold', inKg = 4;
+function blank(){ return seed(); }
+function load(){ try { var d = JSON.parse(localStorage.getItem(LS)); return d && d.tix ? d : null; } catch(e){ return null; } }
 function save(){ localStorage.setItem(LS, JSON.stringify(state)); }
-function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show');},2200); }
-function fmt(n){ return '฿' + n.toLocaleString('th-TH'); }
-function dstr(ts){ var d = new Date(ts); return d.getDate() + ' ' + months[d.getMonth()]; }
-var filter = 'all';
+function fmt(n){ return '฿' + Math.round(n).toLocaleString('th-TH'); }
+function toast(m, err){ var t=document.getElementById('toast'); t.textContent=m; t.className='toast show'+(err?' err':''); clearTimeout(t._h); t._h=setTimeout(function(){t.classList.remove('show');},2400); }
+function closeAllModals(){ document.querySelectorAll('.overlay').forEach(function(o){ o.hidden = true; }); }
+function ago(t){ var s=Math.floor((Date.now()-t)/1000); if(s<3600) return Math.max(1,Math.floor(s/60))+' นาทีที่แล้ว'; if(s<86400) return Math.floor(s/3600)+' ชม.ที่แล้ว'; return Math.floor(s/86400)+' วันที่แล้ว'; }
 
-/* login */
-document.getElementById('loginBtn').addEventListener('click', function(){
-  document.getElementById('loginView').hidden = true;
-  document.getElementById('appView').hidden = false;
-});
-document.getElementById('logoutBtn').addEventListener('click', function(){
-  document.getElementById('appView').hidden = true;
-  document.getElementById('loginView').hidden = false;
-});
+/* entry */
+var skipEntry = new URLSearchParams(location.search).get('app') === '1' || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+setTimeout(function(){
+  if (skipEntry) enterStaff();
+  else { document.getElementById('intakeView').hidden = false; renderPrice(); }
+}, 60);
+setInterval(function(){ document.getElementById('clock').textContent = new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit',second:'2-digit'}); }, 1000);
 
-/* nav */
-var titles = { orders:'ใบรับผ้า', pickup:'คืนผ้าวันนี้', sum:'สรุปวันนี้' };
-document.querySelectorAll('.navi').forEach(function(b){
+/* ---------- intake ---------- */
+function calcPrice(){
+  var svc = SVCS[inSvc];
+  var kg = Math.max(0.5, inKg);
+  var base = Math.round(svc.rate * kg);
+  var expressFee = document.getElementById('expToggle').checked ? Math.round(base * 0.3) : 0;
+  var minCharge = base < svc.rate * 3 ? svc.rate * 3 - base : 0;
+  return { base: base, express: expressFee, min: minCharge, total: base + expressFee + minCharge };
+}
+function renderPrice(){
+  var c = calcPrice();
+  var svc = SVCS[inSvc];
+  document.getElementById('kgVal').textContent = inKg.toFixed(1);
+  document.getElementById('kgInput').value = inKg;
+  document.getElementById('priceLive').innerHTML =
+    '<div class="pr"><span>'+svc.n+' '+inKg.toFixed(1)+' กก. × ฿'+svc.rate+'</span><b>'+fmt(c.base)+'</b></div>' +
+    (c.min ? '<div class="pr"><span>ค่าบริการขั้นต่ำ 3 กก.</span><b>+'+fmt(c.min)+'</b></div>' : '') +
+    (c.express ? '<div class="pr" style="color:var(--amber)"><span>งานด่วน +30%</span><b>+'+fmt(c.express)+'</b></div>' : '') +
+    '<div class="pr grand"><span>รวมสุทธิ</span><b>'+fmt(c.total)+'</b></div>' +
+    '<div style="font-size:.72rem;color:var(--muted);margin-top:.3rem">เสร็จโดยประมาณ: '+(document.getElementById('expToggle').checked ? 'วันนี้ 18:00' : 'พรุ่งนี้ 18:00')+'</div>';
+}
+document.querySelectorAll('[data-kg]').forEach(function(b){
   b.addEventListener('click', function(){
-    document.querySelectorAll('.navi').forEach(function(x){ x.classList.remove('on'); });
-    b.classList.add('on');
-    var p = b.dataset.page;
-    ['orders','pickup','sum'].forEach(function(x){ document.getElementById('page-'+x).hidden = x !== p; });
-    document.getElementById('pageTitle').textContent = titles[p];
-    document.getElementById('sidebar').classList.remove('open');
-    renderAll();
+    inKg = Math.max(0.5, inKg + parseFloat(b.dataset.kg));
+    renderPrice();
   });
 });
-document.getElementById('menuBtn').addEventListener('click', function(){
-  document.getElementById('sidebar').classList.toggle('open');
+document.getElementById('kgInput').addEventListener('input', function(e){
+  var v = parseFloat(e.target.value);
+  if (!isNaN(v) && v >= 0.5) { inKg = v; document.getElementById('kgVal').textContent = v.toFixed(1); renderPrice(); }
 });
-
-/* date */
-var days=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
-var months=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
-var now=new Date();
-document.getElementById('todayDate').textContent='วัน'+days[now.getDay()]+'ที่ '+now.getDate()+' '+months[now.getMonth()]+' '+(now.getFullYear()+543);
-
-function isOverdue(o){ return o.status !== 'done' && o.due < Date.now(); }
-function isDueToday(o){
-  var a = new Date(o.due), b = new Date();
-  return a.getDate() === b.getDate() && a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear();
-}
-
-/* chips */
-function renderChips(){
-  var counts = { all: state.orders.filter(function(o){return o.status!=='done';}).length };
-  Object.keys(STATUS).forEach(function(k){ counts[k] = state.orders.filter(function(o){return o.status===k;}).length; });
-  document.getElementById('filterChips').innerHTML =
-    '<button class="chip'+(filter==='all'?' on':'')+'" data-f="all">เปิดอยู่<b>'+counts.all+'</b></button>' +
-    Object.keys(STATUS).map(function(k){
-      return '<button class="chip'+(filter===k?' on':'')+'" data-f="'+k+'">'+STATUS[k].t+'<b>'+counts[k]+'</b></button>';
-    }).join('');
-  document.getElementById('readyCount').textContent = counts.ready;
-}
-document.getElementById('filterChips').addEventListener('click', function(e){
-  var b = e.target.closest('.chip'); if (!b) return;
-  filter = b.dataset.f; renderChips(); renderOrders();
+document.getElementById('svcPick').addEventListener('click', function(e){
+  var b = e.target.closest('.sp-b'); if (!b) return;
+  inSvc = b.dataset.svc;
+  document.querySelectorAll('.sp-b').forEach(function(x){ x.classList.toggle('on', x === b); });
+  renderPrice();
 });
-
-/* orders table */
-function renderOrders(){
-  var list = state.orders.filter(function(o){
-    if (filter === 'all') return o.status !== 'done';
-    return o.status === filter;
+document.getElementById('expToggle').addEventListener('change', renderPrice);
+document.getElementById('intakeBtn').addEventListener('click', function(){
+  var name = document.getElementById('inName').value.trim();
+  var phone = document.getElementById('inPhone').value.trim();
+  if (!name || !phone) { toast('กรอกชื่อและเบอร์โทรครับ', true); return; }
+  var c = calcPrice();
+  var exp = document.getElementById('expToggle').checked;
+  var t = {
+    no: 'LD-' + (state.seq++), cust: name, phone: phone, svc: inSvc, kg: inKg,
+    express: exp, price: c.total, stage: 'recv', at: Date.now(), paid: false
+  };
+  state.tix.unshift(t); save();
+  linkWrite('laundry','intake','ซักดี · รับผ้า ' + t.no + ' — ' + name + ' ' + inKg.toFixed(1) + ' กก. ' + (exp?'(ด่วน) ':'') + fmt(t.price), t.price);
+  document.getElementById('inForm').hidden = true;
+  var dt = document.getElementById('doneTix');
+  dt.innerHTML = '<span class="ok"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span>' +
+    '<p style="color:var(--muted);font-size:.78rem">รับผ้าเรียบร้อย ตั๋วของคุณ</p>' +
+    '<div class="tkno">'+t.no+'</div>' +
+    '<small>'+SVCS[inSvc].n+' · '+inKg.toFixed(1)+' กก.'+(exp?' · ด่วน':'')+'<br>ยอดชำระตอนรับผ้า <b class="mono" style="color:var(--acc-deep);font-size:1rem">'+fmt(t.price)+'</b><br>เสร็จโดยประมาณ '+(exp?'วันนี้ 18:00':'พรุ่งนี้ 18:00')+'</small>' +
+    '<div style="margin-top:1rem;display:flex;gap:.6rem"><button class="btn btn-o" id="tixAgain" style="flex:1">รับผ้าอีก</button>' +
+    '<button class="btn btn-a2" id="tixPrintBtn" style="flex:1">พิมพ์ใบรับ</button></div>';
+  dt.classList.add('show');
+  dt.style.display = 'block';
+  document.getElementById('tixAgain').addEventListener('click', function(){
+    dt.classList.remove('show'); dt.style.display = 'none';
+    document.getElementById('inForm').hidden = false;
+    document.getElementById('inName').value = ''; document.getElementById('inPhone').value = '';
   });
-  document.getElementById('ordBody').innerHTML = list.map(function(o, i){
-    var st = STATUS[o.status];
-    var idx = state.orders.indexOf(o);
-    var nextBtn = st.next ? '<button class="next-btn" data-a="next" data-i="'+idx+'">'+st.nextLabel+' →</button>' : '';
-    var due = isOverdue(o) ? '<span class="overdue">' + dstr(o.due) + ' (เกิน!)</span>' : dstr(o.due);
-    return '<tr><td class="mono">'+o.id+(o.express?' <span class="badge" style="background:#fdeaea;color:#c23b3b">ด่วน</span>':'')+'</td>' +
-      '<td><b>'+o.cust+'</b><br><span style="font-size:.78rem;color:var(--muted)" class="mono">'+o.phone+'</span></td>' +
-      '<td>'+SVC[o.svc].n+'</td>' +
-      '<td class="mono">'+(o.svc==='iron' ? o.pcs+' ชิ้น' : o.kg+' กก.')+'</td>' +
-      '<td class="mono">'+fmt(o.price.total)+'</td>' +
-      '<td>'+due+'</td>' +
-      '<td><span class="badge '+st.cls+'">'+st.t+'</span></td>' +
-      '<td style="white-space:nowrap">'+nextBtn+' <button class="act-btn" data-a="view" data-i="'+idx+'">ใบรับ</button></td></tr>';
-  }).join('') || '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:2rem">ไม่มีใบในหมวดนี้</td></tr>';
-}
-
-document.getElementById('ordBody').addEventListener('click', function(e){
-  var b = e.target.closest('button[data-a]'); if (!b) return;
-  var o = state.orders[+b.dataset.i];
-  if (b.dataset.a === 'next') {
-    o.status = STATUS[o.status].next;
-    save(); toast(o.id + ' → ' + STATUS[o.status].t);
-    if (o.status === 'ready') showReceipt(o, 'ใบแจ้งพร้อมรับ');
-    renderAll();
-  } else if (b.dataset.a === 'view') {
-    showReceipt(o, 'ใบรับผ้า');
-  }
+  document.getElementById('tixPrintBtn').addEventListener('click', function(){ printTicket(t); });
 });
-
-/* pickup page */
-function renderPickup(){
-  var list = state.orders.filter(function(o){ return o.status === 'ready' || isOverdue(o); });
-  document.getElementById('pickBody').innerHTML = list.map(function(o){
-    var idx = state.orders.indexOf(o);
-    return '<tr><td class="mono">'+o.id+'</td><td><b>'+o.cust+'</b></td>' +
-      '<td class="mono">'+fmt(o.price.total)+(o.paid?' <span class="badge s-ready">จ่ายแล้ว</span>':'')+'</td>' +
-      '<td>'+(isOverdue(o)?'<span class="overdue">'+dstr(o.due)+' (เกิน!)</span>':dstr(o.due))+'</td>' +
-      '<td><span class="badge '+STATUS[o.status].cls+'">'+STATUS[o.status].t+'</span></td>' +
-      '<td><button class="next-btn" data-p="'+idx+'">คืนผ้า+เก็บเงิน</button></td></tr>';
-  }).join('') || '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:2rem">ไม่มีถุงค้างคืน — เยี่ยม!</td></tr>';
+function printTicket(t){
+  document.getElementById('tixPrint').innerHTML =
+    '<div style="text-align:center;border-bottom:2px solid var(--ink);padding-bottom:.7rem;margin-bottom:.9rem"><b style="font-size:1.05rem">ใบรับผ้าซัก</b><br>' +
+    '<small style="color:var(--muted)">ซักรีดสะอาดใจ · ถ.อารีย์ 12 · โทร 086-222-7890</small></div>' +
+    '<dl class="kv"><dt>ตั๋ว</dt><dd class="mono"><b>'+t.no+'</b></dd><dt>ลูกค้า</dt><dd>'+t.cust+' · '+t.phone+'</dd>' +
+    '<dt>บริการ</dt><dd>'+SVCS[t.svc].n+(t.express?' (ด่วน+30%)':'')+'</dd><dt>น้ำหนัก</dt><dd class="mono">'+t.kg.toFixed(1)+' กก.</dd>' +
+    '<dt class="tot">ยอดชำระตอนรับผ้า</dt><dd class="tot mono">'+fmt(t.price)+'</dd></dl>' +
+    '<p style="text-align:center;font-size:.74rem;color:var(--muted)">เก็บตั๋วนี้ไว้รับผ้า · รับผ้าได้หลัง '+(t.express?'วันนี้ 18:00':'พรุ่งนี้ 18:00')+'</p>';
+  document.getElementById('printOverlay').hidden = false;
 }
-document.getElementById('pickBody').addEventListener('click', function(e){
-  var b = e.target.closest('button[data-p]'); if (!b) return;
-  var o = state.orders[+b.dataset.p];
-  o.status = 'done'; o.paid = true;
-  save(); toast(o.id + ' คืนผ้า+เก็บ ' + fmt(o.price.total) + ' แล้ว');
-  showReceipt(o, 'ใบเสร็จรับเงิน');
+document.getElementById('printClose').addEventListener('click', closeAllModals);
+document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+document.getElementById('staffLink').addEventListener('click', enterStaff);
+function enterStaff(){
+  document.getElementById('intakeView').hidden = true;
+  document.getElementById('appView').hidden = false;
+  save();
   renderAll();
+}
+document.getElementById('whoBtn').addEventListener('click', function(){
+  document.getElementById('appView').hidden = true;
+  document.getElementById('intakeView').hidden = false;
+  renderPrice();
+});
+document.getElementById('mobMenu').addEventListener('click', function(){ document.getElementById('rail').classList.toggle('open'); });
+
+/* offline */
+document.getElementById('syncPill').addEventListener('click', function(){
+  offline = !offline;
+  this.classList.toggle('off', offline);
+  document.getElementById('syncTxt').textContent = offline ? 'ออฟไลน์' : 'ออนไลน์';
+  document.getElementById('offBanner').hidden = !offline;
+  toast(offline ? 'จำลองออฟไลน์' : 'กลับมาออนไลน์');
 });
 
-/* summary */
-function renderSum(){
-  var today = state.orders.filter(function(o){ return isDueToday(o); });
-  var inProd = state.orders.filter(function(o){ return ['received','washing','drying'].includes(o.status); });
-  var kgToday = state.orders.filter(function(o){ return o.status !== 'done'; }).reduce(function(s,o){ return s + o.kg; }, 0);
-  var revReady = state.orders.filter(function(o){ return o.status === 'ready'; }).reduce(function(s,o){ return s + o.price.total; }, 0);
-  var doneToday = state.orders.filter(function(o){ return o.status === 'done'; });
-  var revDone = doneToday.reduce(function(s,o){ return s + o.price.total; }, 0);
-  document.getElementById('sumKpis').innerHTML =
-    '<div class="kpi"><span>ผ้าในสายผลิต</span><b>'+kgToday.toFixed(1)+' กก.</b></div>' +
-    '<div class="kpi"><span>กำลังผลิต</span><b>'+inProd.length+' ถุง</b></div>' +
-    '<div class="kpi"><span>รอเก็บเงินคืนผ้า</span><b>'+fmt(revReady)+'</b></div>' +
-    '<div class="kpi"><span>เก็บแล้ววันนี้</span><b style="color:#0b7a55">'+fmt(revDone)+'</b></div>' +
-    '<div class="kpi"><span>ครบกำหนดวันนี้</span><b>'+today.length+' ใบ</b></div>';
-  document.getElementById('sumBody').innerHTML = state.orders.slice(0, 15).map(function(o){
-    return '<tr><td class="mono">'+o.id+'</td><td>'+o.cust+'</td><td>'+SVC[o.svc].n+'</td>' +
-      '<td class="mono">'+(o.svc==='iron'?o.pcs+' ชิ้น':o.kg+' กก.')+'</td><td class="mono">'+fmt(o.price.total)+'</td>' +
-      '<td><span class="badge '+STATUS[o.status].cls+'">'+STATUS[o.status].t+'</span></td></tr>';
+/* ---------- board ---------- */
+function renderBoard(){
+  var open = state.tix.filter(function(t){ return t.stage !== 'done'; });
+  var exp = open.filter(function(t){ return t.express; });
+  var d0 = new Date(); d0.setHours(0,0,0,0);
+  var revToday = state.tix.filter(function(t){ return t.paid && t.doneAt && t.doneAt >= d0.getTime(); }).reduce(function(a,t){ return a + t.price; }, 0);
+  document.getElementById('stOpen').textContent = open.length;
+  document.getElementById('stExp').textContent = exp.length;
+  document.getElementById('stRev').textContent = fmt(revToday);
+  document.getElementById('stTix').textContent = 'ตั๋ว: ' + state.tix.length;
+  var kgIn = open.reduce(function(a,t){ return a + t.kg; }, 0);
+  document.getElementById('kpiGrid').innerHTML =
+    '<div class="kpi"><span>งานที่กำลังทำ</span><b>'+open.length+'</b><span class="sub">ตั๋ว</span></div>' +
+    '<div class="kpi"><span>ผ้าค้างในระบบ</span><b class="a">'+kgIn.toFixed(1)+'</b><span class="sub">กิโลกรัม</span></div>' +
+    '<div class="kpi"><span>งานด่วนค้าง</span><b class="a">'+exp.length+'</b><span class="sub">ต้องเสร็จวันนี้</span></div>' +
+    '<div class="kpi"><span>รายรับวันนี้ (เก็บแล้ว)</span><b class="g">'+fmt(revToday)+'</b><span class="sub">ส่งมอบ+ชำระ</span></div>';
+  document.getElementById('boardCols').innerHTML = STAGES.map(function(s){
+    var col = state.tix.filter(function(t){ return t.stage === s.id; });
+    return '<div class="jcol"><div class="jh"><b>'+s.n+'</b><span class="jc">'+col.length+'</span></div>' +
+      col.map(function(t){
+        return '<div class="jcard'+(t.express?' express':'')+'" data-no="'+t.no+'"><span class="jn">'+t.no+(t.express?' · ด่วน':'')+'</span>' +
+          '<b>'+t.cust+'</b><div class="jm">'+SVCS[t.svc].n+'</div>' +
+          '<div class="jv"><span class="kg">'+t.kg.toFixed(1)+' กก. · '+ago(t.at)+'</span><span class="mono" style="color:var(--acc-deep)">'+fmt(t.price)+'</span></div></div>';
+      }).join('') +
+      (col.length ? '' : '<p style="text-align:center;color:#c4a3cb;font-size:.72rem;padding:1rem 0">ว่าง</p>') + '</div>';
   }).join('');
 }
+document.getElementById('boardCols').addEventListener('click', function(e){
+  var c = e.target.closest('.jcard'); if (!c) return;
+  openTicket(c.dataset.no);
+});
 
-/* new order */
-function updatePrice(){
-  var svc = document.getElementById('nSvc').value;
-  var kg = parseFloat(document.getElementById('nKg').value) || 0;
-  var pcs = parseInt(document.getElementById('nPcs').value) || 0;
-  var exp = document.getElementById('nExpress').checked;
-  document.getElementById('nPcs').disabled = svc !== 'iron';
-  document.getElementById('nKg').disabled = svc === 'iron';
-  var p = calcPrice(svc, kg, pcs, exp);
-  document.getElementById('pbCalc').textContent = svc === 'iron'
-    ? pcs + ' ชิ้น × ฿' + SVC.iron.rate
-    : kg + ' กก. × ฿' + SVC[svc].rate;
-  document.getElementById('pbBase').textContent = fmt(p.base);
-  document.getElementById('pbExpRow').hidden = !exp;
-  document.getElementById('pbExp').textContent = '+' + fmt(p.exp);
-  document.getElementById('pbTotal').textContent = fmt(p.total);
-  return p;
+/* ---------- ticket modal ---------- */
+function openTicket(no){
+  var t = state.tix.find(function(x){ return x.no === no; });
+  if (!t) return;
+  var idx = STAGE_IDX[t.stage];
+  var m = document.getElementById('tixModal');
+  m.innerHTML = '<h3>'+t.no+' — '+t.cust+'</h3>' +
+    '<div class="stage-btns">' + STAGES.map(function(s, i){
+      return '<button class="sb'+(i===idx?' cur':'')+'" data-st="'+s.id+'">'+s.n+'</button>';
+    }).join('') + '</div>' +
+    '<dl class="kv"><dt>บริการ</dt><dd>'+SVCS[t.svc].n+(t.express?' · <b style="color:var(--amber)">ด่วน</b>':'')+'</dd>' +
+    '<dt>น้ำหนัก</dt><dd class="mono">'+t.kg.toFixed(1)+' กก.</dd><dt>รับเมื่อ</dt><dd class="mono">'+ago(t.at)+'</dd>' +
+    '<dt>สถานะชำระ</dt><dd>'+(t.paid?'<b style="color:var(--green)">ชำระแล้ว</b>':'<b style="color:var(--amber)">ยังไม่ชำระ</b>')+'</dd>' +
+    '<dt class="tot">ยอดเก็บ</dt><dd class="tot mono">'+fmt(t.price)+'</dd></dl>' +
+    '<div class="m-acts">' +
+    '<button class="btn btn-o" id="txClose" style="flex:1">ปิด</button>' +
+    '<button class="btn btn-o" id="txPrint" style="flex:1">ใบรับ</button>' +
+    (t.stage === 'ready' && !t.paid ? '<button class="btn btn-g" id="txPay" style="flex:2">เก็บเงินและส่งมอบ '+fmt(t.price)+'</button>' : '') +
+    (t.paid && t.stage !== 'done' ? '<button class="btn btn-a2" id="txDone" style="flex:2">ส่งมอบ ✓</button>' : '') +
+    '</div>';
+  document.getElementById('tixOverlay').hidden = false;
+  document.getElementById('txClose').addEventListener('click', closeAllModals);
+  document.getElementById('txPrint').addEventListener('click', function(){ closeAllModals(); printTicket(t); });
+  m.querySelectorAll('[data-st]').forEach(function(b){
+    b.addEventListener('click', function(){
+      if (b.dataset.st === t.stage) return;
+      /* ห้ามข้ามไป ready ถ้ายังไม่ชำระ? อนุญาต — เก็บเงินตอนส่งมอบ */
+      t.stage = b.dataset.st;
+      save(); closeAllModals(); renderAll();
+      var sn = STAGES.find(function(s){ return s.id === b.dataset.st; }).n;
+      linkWrite('laundry','stage','ซักดี · ' + t.no + ' → ' + sn, null);
+      toast(t.no + ' → ' + sn);
+    });
+  });
+  var pay = document.getElementById('txPay');
+  if (pay) pay.addEventListener('click', function(){
+    t.paid = true; t.stage = 'done'; t.doneAt = Date.now();
+    save(); closeAllModals(); renderAll();
+    linkWrite('laundry','done','ซักดี · ส่งมอบ ' + t.no + ' (' + t.cust + ') เก็บ ' + fmt(t.price), t.price);
+    toast('ส่งมอบ ' + t.no + ' — เก็บ ' + fmt(t.price));
+  });
+  var dn = document.getElementById('txDone');
+  if (dn) dn.addEventListener('click', function(){
+    t.stage = 'done'; t.doneAt = Date.now();
+    save(); closeAllModals(); renderAll();
+    toast('ส่งมอบ ' + t.no + ' แล้ว');
+  });
 }
-['nSvc','nKg','nPcs','nExpress'].forEach(function(id){
-  document.getElementById(id).addEventListener('input', updatePrice);
+
+/* ---------- all tickets ---------- */
+function renderAll2(){
+  var list = state.tix.slice().sort(function(a,b){ return b.at - a.at; });
+  document.getElementById('allCount').textContent = list.length + ' ตั๋ว';
+  document.getElementById('allBody').innerHTML = list.map(function(t){
+    return '<tr><td class="mono"><b>'+t.no+'</b></td><td>'+t.cust+'</td><td>'+SVCS[t.svc].n+'</td>' +
+      '<td class="mono">'+t.kg.toFixed(1)+'</td><td>'+(t.express?'<span class="badge b-ex">ด่วน</span>':'—')+'</td>' +
+      '<td class="mono">'+fmt(t.price)+'</td><td>'+(t.paid?'<span class="badge b-paid">ชำระแล้ว</span>':'<span class="badge b-unpaid">ค้างชำระ</span>')+'</td>' +
+      '<td><span class="badge b-unpaid">'+STAGES[STAGE_IDX[t.stage]].n+'</span></td>' +
+      '<td><span class="tlink" data-open="'+t.no+'">เปิด</span></td></tr>';
+  }).join('');
+}
+document.getElementById('allBody').addEventListener('click', function(e){
+  var b = e.target.closest('[data-open]'); if (!b) return;
+  openTicket(b.dataset.open);
 });
-document.getElementById('newBtn').addEventListener('click', function(){
-  document.getElementById('newOverlay').hidden = false; updatePrice();
+
+/* ---------- feed ---------- */
+var lastSeenFeed = 0;
+function sysIcon(sys){
+  var M = { pos:'#0c8a61', kds:'#ea580c', queue:'#9333ea', crm:'#5b5bd6', inv:'#d97706', docs:'#0284c7', hr:'#0d9488', dorm:'#b45309', appt:'#c2410c', school:'#0ea5e9', gym:'#65a30d', repair:'#be185d', hotel:'#1e3a8a', laundry:'#c026d3' };
+  return { c: M[sys] || '#64748b', s:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>' };
+}
+function renderFeed(){
+  var l = linkRead();
+  document.getElementById('feedCount').textContent = l.events.length + ' เหตุการณ์';
+  var body = document.getElementById('feedBody');
+  if (!l.events.length) { body.innerHTML = '<p style="color:var(--muted);padding:1.5rem 0;font-size:.85rem">ยังไม่มีกิจกรรม</p>'; return; }
+  body.innerHTML = l.events.slice(0, 25).map(function(ev){
+    var ic = sysIcon(ev.sys);
+    return '<div class="feed-item"><span class="fi" style="background:'+ic.c+'22;color:'+ic.c+'"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'+ic.s+'</svg></span>' +
+      '<span><span class="fm">'+ev.msg+'</span><div class="ft">'+ago(ev.t)+'</div></span></div>';
+  }).join('');
+  lastSeenFeed = l.events.length ? l.events[0].t : 0;
+  updateFeedBadge();
+}
+function updateFeedBadge(){
+  var l = linkRead();
+  var newer = l.events.filter(function(e){ return e.t > lastSeenFeed && e.sys !== 'laundry'; }).length;
+  var badge = document.getElementById('feedBadge');
+  if (newer && !document.getElementById('feedDrawer').classList.contains('open')) { badge.hidden = false; badge.textContent = ' (+' + newer + ')'; }
+  else badge.hidden = true;
+}
+document.getElementById('feedBtn').addEventListener('click', function(){
+  renderFeed();
+  document.getElementById('feedDrawer').classList.add('open');
+  document.getElementById('scrim').hidden = false;
 });
-document.getElementById('nCancel').addEventListener('click', function(){ document.getElementById('newOverlay').hidden = true; });
-document.getElementById('nSave').addEventListener('click', function(){
-  var c = document.getElementById('nCust').value.trim();
-  var ph = document.getElementById('nPhone').value.trim();
-  var svc = document.getElementById('nSvc').value;
-  var kg = parseFloat(document.getElementById('nKg').value) || 0;
-  var pcs = parseInt(document.getElementById('nPcs').value) || 0;
-  var exp = document.getElementById('nExpress').checked;
-  if (!c || !ph) { toast('กรอกชื่อและเบอร์ลูกค้าก่อนครับ'); return; }
-  if (svc === 'iron' ? pcs < 1 : kg < 0.5) { toast('ใส่น้ำหนัก/จำนวนก่อนครับ'); return; }
-  var p = updatePrice();
-  var created = Date.now();
-  var o = {
-    id: 'LD-' + (state.seq++), cust: c, phone: ph, svc: svc,
-    kg: svc === 'iron' ? 0 : kg, pcs: svc === 'iron' ? pcs : 0,
-    price: p, express: exp,
-    due: created + dueDays(svc, exp) * 86400000,
-    created: created, status: 'received', paid: false
-  };
-  state.orders.unshift(o); save();
-  document.getElementById('newOverlay').hidden = true;
-  ['nCust','nPhone','nKg','nPcs'].forEach(function(id){ document.getElementById(id).value = ''; });
-  document.getElementById('nExpress').checked = false;
-  toast('รับผ้า ' + o.id + ' แล้ว');
-  showReceipt(o, 'ใบรับผ้า');
+document.getElementById('feedClose').addEventListener('click', closeFeed);
+document.getElementById('scrim').addEventListener('click', closeFeed);
+function closeFeed(){ document.getElementById('feedDrawer').classList.remove('open'); document.getElementById('scrim').hidden = true; }
+setInterval(updateFeedBadge, 3000);
+
+/* pages / shortcuts */
+function goPage(p){
+  document.querySelectorAll('.ri[data-page]').forEach(function(x){ x.classList.toggle('on', x.dataset.page === p); });
+  ['board','all'].forEach(function(x){ document.getElementById('page-'+x).hidden = x !== p; });
+  document.getElementById('rail').classList.remove('open');
   renderAll();
-});
-
-/* receipt */
-function showReceipt(o, title){
-  var s = SVC[o.svc];
-  document.getElementById('receiptBox').innerHTML =
-    '<h4>ซักดี ลอนดรี</h4><p class="rc">ลาดพร้าว 101 · โทร 08x-xxx-xxxx<br>' + title + ' ' + o.id + ' · ' + new Date(o.created).toLocaleDateString('th-TH') + '</p>' +
-    '<div class="rl"><span>ลูกค้า</span><b>' + o.cust + '</b></div>' +
-    '<div class="rl"><span>เบอร์</span><b>' + o.phone + '</b></div>' +
-    '<div class="rl"><span>บริการ</span><b>' + s.n + '</b></div>' +
-    '<div class="rl"><span>' + (o.svc==='iron' ? o.pcs + ' ชิ้น × ฿' + s.rate : o.kg + ' กก. × ฿' + s.rate) + '</span><b>' + fmt(o.price.base) + '</b></div>' +
-    (o.price.exp ? '<div class="rl"><span>งานด่วน +30%</span><b>+' + fmt(o.price.exp) + '</b></div>' : '') +
-    '<div class="rd"></div>' +
-    '<div class="rt"><span>รวมทั้งหมด</span><span>฿' + o.price.total.toLocaleString('th-TH') + '</span></div>' +
-    '<div class="rl"><span>กำหนดคืน</span><b>' + dstr(o.due) + '</b></div>' +
-    '<div class="rl"><span>สถานะ</span><b>' + STATUS[o.status].t + '</b></div>' +
-    '<div class="rd"></div><p class="rc" style="margin:.5rem 0 0">เก็บใบนี้ไว้รับผ้าครับ</p>';
-  document.getElementById('receiptOverlay').hidden = false;
 }
-document.getElementById('rcClose').addEventListener('click', function(){ document.getElementById('receiptOverlay').hidden = true; });
-document.getElementById('rcPrint').addEventListener('click', function(){ window.print(); });
+document.querySelectorAll('.ri[data-page]').forEach(function(b){ b.addEventListener('click', function(){ goPage(b.dataset.page); }); });
+document.addEventListener('keydown', function(e){
+  if (document.getElementById('appView').hidden) return;
+  if (e.key === 'Escape') { closeAllModals(); closeFeed(); return; }
+  var tgt = e.target;
+  if (tgt && tgt.matches && tgt.matches('input,select,textarea')) return;
+  if (e.key === 'b' || e.key === 'B') goPage('board');
+  else if (e.key === 'a' || e.key === 'A') goPage('all');
+  else if (e.key === 'f' || e.key === 'F') document.getElementById('feedBtn').click();
+});
 
+/* reset */
 document.getElementById('resetBtn').addEventListener('click', function(){
-  if (confirm('ล้างใบรับทั้งหมดเริ่มข้อมูลตัวอย่างใหม่?')) {
+  if (confirm('รีเซ็ตตั๋วซักกลับตัวอย่าง?')) {
     localStorage.removeItem(LS);
-    state = { orders: seedOrders(), seq: 3112 };
-    renderAll(); toast('รีเซ็ตข้อมูลแล้ว');
+    state = blank(); save();
+    renderAll();
+    toast('รีเซ็ตข้อมูลแล้ว');
   }
 });
 
-function renderAll(){ renderChips(); renderOrders(); renderPickup(); renderSum(); }
+/* init */
+function renderAll(){ renderBoard(); renderAll2(); updateFeedBadge(); }
 renderAll();
-})();
-</script>
-<script>
-/* Auto-enter app when opened with ?app=1 (from showcase hub) */
-(function(){
-  if (!/[?&]app=1/.test(location.href)) return;
-  function enter(){
-    var b = document.getElementById('loginBtn') || document.getElementById('btnLogin')
-         || document.querySelector('#loginForm button[type="submit"]')
-         || document.querySelector('.login-card button[type="submit"]')
-         || Array.prototype.find.call(document.querySelectorAll('button'), function(x){ return /\u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a/.test(x.textContent); });
-    if (b) { b.click(); return; }
-    var f = document.getElementById('loginForm') || document.querySelector('#loginView form') || document.querySelector('.login form');
-    if (f && f.requestSubmit) f.requestSubmit();
-  }
-  if (document.readyState !== 'loading') setTimeout(enter, 80);
-  else document.addEventListener('DOMContentLoaded', function(){ setTimeout(enter, 80); });
 })();
 </script>
 </body>
