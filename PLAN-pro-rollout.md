@@ -65,4 +65,11 @@ kanban งานดี, admin-shop ร้านดีแอดมิน, cashboo
 - [x] Laundry ซักดี (2026-09-15 · intake-first entry, live pricing กก.+ด่วน30%, 5-stage board)
 - [x] Purchasing จัดซื้อดี (2026-09-15 · role-split entry requester/approver, dept budget guard, auto-PO)
 - [x] Loyalty สะสมดี (2026-09-16 · phone-lookup entry, digital stamps, tier engine, campaign ×2) — **Tier A ครบ 5/5**
-- [ ] (ว่าง — Tier B ตัวถัดไป: cashbook)
+- [x] Kanban งานดี (2026-09-16 · board picker entry, real drag&drop, checklist %, archive) — subagent rebuild ก่อนติด limit
+- [x] Cashbook เงินดี (2026-09-16 · shift-open entry ยืนยันยอดยกมา, running balance, diff warn, bridge)
+- [x] Sales-report ยอดขายดี (2026-09-16 · range-picker entry day/week/month, periodKey fix)
+- [x] Admin-shop ร้านดีแอดมิน (2026-09-16 · classic login form prefill + forgot modal) — subagent rebuild ก่อนติด limit
+- [x] Delivery ส่งดี (2026-09-16 · shift-start entry เลือกพาหนะ+ไมล์, delivered bridge)
+- [x] Rental เช่าดี (2026-09-16 · public availability board entry 12 อุปกรณ์ × 7 วัน, rent/return bridge)
+- [x] Tournament แข่งดี (2026-09-16 · public bracket viewer entry, winner auto-advance, champion bridge)
+- [x] **ครบ 24/24 Pro** — เทสรวม /tmp/tierb-test.cjs 42/42 PASS, 0 JS errors ทุกระบบ; hub โชว์การ์ด Pro 24 ใบ; entry pattern ไม่ซ้ำ 24 แบบ

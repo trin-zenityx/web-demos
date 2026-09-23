@@ -139,16 +139,36 @@ tr:last-child td{border-bottom:0}
 <body>
 <script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
 
-<!-- LOGIN -->
+<!-- ENTRY: เริ่มกะคนขับ -->
 <div class="login" id="loginView">
-  <div class="login-card">
-    <div class="login-logo"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M5 17h14M6 17V8h9l3 4v5"/><circle cx="8.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/><path d="M2 17h2"/></svg></div>
-    <h1>ส่งดี</h1>
-    <p class="sub">ระบบจัดการงานจัดส่ง · ส่งดี เอ็กซ์เพรส</p>
-    <input type="email" value="ops@songdee.express" readonly aria-label="อีเมล">
-    <input type="password" value="demo1234" readonly aria-label="รหัสผ่าน">
-    <button class="btn btn-a btn-block" id="loginBtn" style="font-size:1rem">เข้าสู่ระบบ</button>
-    <p class="demo-note">ระบบเดโม — <b>กดเข้าได้เลย</b> ไม่ต้องใส่รหัสผ่าน</p>
+  <div class="login-card" style="max-width:560px;text-align:left">
+    <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.4rem">
+      <img src="assets/logo.jpg" alt="ส่งดี" style="width:52px;height:52px;border-radius:14px;object-fit:cover">
+      <div>
+        <h1 style="margin:0">ส่งดี</h1>
+        <p class="sub" style="margin:0">ศูนย์กระจายสินค้า · เริ่มกะจัดส่ง</p>
+      </div>
+    </div>
+    <p class="sub" style="margin:.4rem 0 .9rem">เลือกพาหนะของกะนี้ แล้วกรอกเลขไมล์ก่อนออกรอบ</p>
+    <div id="vehGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:.9rem">
+      <button type="button" class="veh on" data-veh="มอเตอร์ไซค์" style="border:1.5px solid #e2e8f0;border-radius:14px;padding:.85rem .4rem;background:#fff;display:flex;flex-direction:column;align-items:center;gap:.4rem;min-height:92px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M6 17h6l2.5-6H18M13 8h3l2 6"/></svg>
+        <b style="font-size:.82rem">มอเตอร์ไซค์</b>
+      </button>
+      <button type="button" class="veh" data-veh="กระบะ" style="border:1.5px solid #e2e8f0;border-radius:14px;padding:.85rem .4rem;background:#fff;display:flex;flex-direction:column;align-items:center;gap:.4rem;min-height:92px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round"><path d="M2 16h20M3 16V9h11v7M14 11h4l3 3v2"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+        <b style="font-size:.82rem">กระบะ</b>
+      </button>
+      <button type="button" class="veh" data-veh="รถตู้" style="border:1.5px solid #e2e8f0;border-radius:14px;padding:.85rem .4rem;background:#fff;display:flex;flex-direction:column;align-items:center;gap:.4rem;min-height:92px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round"><path d="M3 17h18M4 17V8a1 1 0 0 1 1-1h12l4 4v6"/><path d="M17 7v4h4"/><circle cx="8" cy="18" r="1.8"/><circle cx="16" cy="18" r="1.8"/></svg>
+        <b style="font-size:.82rem">รถตู้</b>
+      </button>
+    </div>
+    <label style="display:grid;gap:.3rem;font-size:.78rem;color:#64748b;margin-bottom:1rem">เลขไมล์เริ่มกะ (กม.)
+      <input id="odoInput" type="number" min="0" value="18420" style="font-family:'JetBrains Mono',monospace;font-size:1.05rem;padding:.7rem .9rem;border:1.5px solid #e2e8f0;border-radius:10px;min-height:48px">
+    </label>
+    <button class="btn btn-a btn-block" id="loginBtn" style="font-size:1rem">เริ่มกะ · รับงานส่ง</button>
+    <p class="demo-note">ระบบเดโม — <b>กดเริ่มกะได้เลย</b> ทุกอย่างกรอกไว้แล้ว</p>
     <div class="login-credit">ผลงานตัวอย่างจากคลาส <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos" target="_blank" rel="noopener">First Vibe : Coding — ZenityX</a></div>
   </div>
 </div>
@@ -157,13 +177,14 @@ tr:last-child td{border-bottom:0}
 <div class="app" id="appView" hidden>
   <aside class="side" id="sidebar">
     <div class="side-logo">
-      <span class="mk"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M5 17h14M6 17V8h9l3 4v5"/><circle cx="8.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/></svg></span>
+      <img src="assets/logo.jpg" alt="ส่งดี" style="width:36px;height:36px;border-radius:10px;object-fit:cover">
       <span><b>ส่งดี</b><small>Operations Center</small></span>
     </div>
     <nav>
       <button class="navi on" data-page="jobs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>งานจัดส่งวันนี้</button>
       <button class="navi" data-page="riders"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>ไรเดอร์</button>
       <button class="navi" data-page="sum"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 5-8"/></svg>สรุปวันนี้</button>
+      <button class="navi" id="btnFeed"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>กิจกรรมข้ามระบบ</button>
     </nav>
     <div class="side-foot">
       <div class="user-chip"><span class="avatar">อ</span><span><b>ออฟ (แอดมิน)</b><small>ศูนย์กระจายสินค้า</small></span></div>
@@ -253,6 +274,9 @@ tr:last-child td{border-bottom:0}
 (function(){
 'use strict';
 var LS = 'zx-delivery-v1';
+/* cross-system bridge */
+function linkRead(){try{var d=JSON.parse(localStorage.getItem('zx-link-v1'));return d&&d.events?d:{events:[]}}catch(e){return{events:[]}}}
+function linkWrite(sys,type,msg,val){var l=linkRead();l.events.unshift({t:Date.now(),sys:sys,type:type,msg:msg,val:val===undefined?null:val});l.events=l.events.slice(0,60);try{localStorage.setItem('zx-link-v1',JSON.stringify(l))}catch(e){}}
 var RIDERS = [
   { id:'r1', n:'ต้น วิชัย',  zone:'ในเมือง' },
   { id:'r2', n:'บอล ธีรพงษ์', zone:'ตะวันออก' },
@@ -297,10 +321,20 @@ function rname(id){ var r = RIDERS.find(function(x){return x.id===id;}); return 
 function tstr(ts){ return new Date(ts).toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}); }
 var filter = 'all';
 
-/* login */
+/* entry: vehicle picker + shift start */
+document.querySelectorAll('.veh').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.veh').forEach(function(x){ x.classList.remove('on'); x.style.borderColor='#e2e8f0'; x.style.background='#fff'; });
+    b.classList.add('on'); b.style.borderColor='#0284c7'; b.style.background='#f0f9ff';
+  });
+});
 document.getElementById('loginBtn').addEventListener('click', function(){
+  var veh=(document.querySelector('.veh.on')||{}).dataset ? document.querySelector('.veh.on').dataset.veh : 'มอเตอร์ไซค์';
+  var odo=parseInt(document.getElementById('odoInput').value,10)||0;
   document.getElementById('loginView').hidden = true;
   document.getElementById('appView').hidden = false;
+  linkWrite('delivery','shift-start','ส่งดี · เริ่มกะจัดส่ง ด้วย'+veh+' เลขไมล์ '+odo.toLocaleString('th-TH')+' กม.',odo);
+  toast('เริ่มกะแล้ว — '+veh+' ไมล์ '+odo.toLocaleString('th-TH')+' กม.');
 });
 document.getElementById('logoutBtn').addEventListener('click', function(){
   document.getElementById('appView').hidden = true;
@@ -309,7 +343,7 @@ document.getElementById('logoutBtn').addEventListener('click', function(){
 
 /* nav */
 var titles = { jobs:'งานจัดส่งวันนี้', riders:'ไรเดอร์', sum:'สรุปวันนี้' };
-document.querySelectorAll('.navi').forEach(function(b){
+document.querySelectorAll('.navi[data-page]').forEach(function(b){
   b.addEventListener('click', function(){
     document.querySelectorAll('.navi').forEach(function(x){ x.classList.remove('on'); });
     b.classList.add('on');
@@ -380,6 +414,7 @@ document.getElementById('jobGrid').addEventListener('click', function(e){
   } else if (act === 'done') {
     j.status = 'done'; j.log.push({ t:'ส่งสำเร็จ', at: Date.now() });
     save(); toast(j.id + ' ส่งสำเร็จแล้ว');
+    linkWrite('delivery','delivered','ส่งดี · '+j.id+' ส่งสำเร็จ ('+j.cust+') โดย '+rname(j.rider),null);
   } else if (act === 'issue') {
     j.status = 'issue'; j.log.push({ t:'แจ้งปัญหา (ติดต่อผู้รับไม่ได้)', at: Date.now() });
     save(); toast(j.id + ' บันทึกปัญหาแล้ว');
@@ -458,6 +493,36 @@ document.getElementById('resetBtn').addEventListener('click', function(){
 });
 
 renderAll();
+})();
+</script>
+<!-- Feed drawer (cross-system bridge) -->
+<style>
+#feedScrim{position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:940}
+#feedDrawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,92vw);background:#fff;z-index:950;box-shadow:-16px 0 40px rgba(0,0,0,.18);transform:translateX(102%);transition:transform .25s ease;display:flex;flex-direction:column;font-family:'IBM Plex Sans Thai',sans-serif}
+#feedDrawer.open{transform:none}
+#feedDrawer .fd-head{padding:.9rem 1.1rem;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;gap:.6rem;font-weight:600;font-size:.95rem}
+#feedDrawer .fd-x{margin-left:auto;width:38px;height:38px;border-radius:9px;border:1px solid #e5e7eb;background:#fff;display:grid;place-items:center;color:#64748b;cursor:pointer}
+#feedDrawer .fd-body{flex:1;overflow-y:auto;padding:.6rem 1.1rem}
+#feedDrawer .fd-item{display:flex;gap:.7rem;padding:.55rem 0;border-bottom:1px dashed #e5e7eb;font-size:.82rem;line-height:1.5}
+#feedDrawer .fd-dot{width:10px;height:10px;border-radius:50%;margin-top:.35rem;flex:none}
+#feedDrawer .fd-t{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:#94a3b8;margin-top:.15rem}
+</style>
+<div id="feedScrim" hidden></div>
+<aside id="feedDrawer" aria-label="กิจกรรมข้ามระบบ">
+  <div class="fd-head">กิจกรรมข้ามระบบ<button class="fd-x" id="feedX" aria-label="ปิด"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+  <div class="fd-body" id="feedBody"></div>
+</aside>
+<script>
+(function(){
+  function lr(){try{var d=JSON.parse(localStorage.getItem('zx-link-v1'));return d&&d.events?d.events:[]}catch(e){return[]}}
+  var C={pos:'#0c8a61',kds:'#ea580c',queue:'#9333ea',crm:'#5b5bd6',inv:'#d97706',docs:'#0284c7',hr:'#0d9488',dorm:'#b45309',appt:'#c2410c',school:'#0ea5e9',gym:'#65a30d',repair:'#be185d',hotel:'#1e3a8a',laundry:'#c026d3',purch:'#475569',loyalty:'#7c3aed',kanban:'#0f766e',cashbook:'#15803d',sales:'#0369a1',admin:'#7c2d12',delivery:'#0284c7',rental:'#a16207',tournament:'#b91c1c'};
+  function ago(t){var s=Math.floor((Date.now()-t)/1000);if(s<3600)return Math.max(1,Math.floor(s/60))+' นาทีที่แล้ว';if(s<86400)return Math.floor(s/3600)+' ชม.ที่แล้ว';return Math.floor(s/86400)+' วันที่แล้ว'}
+  function render(){var ev=lr();var b=document.getElementById('feedBody');b.innerHTML=ev.length?ev.slice(0,25).map(function(e){return '<div class="fd-item"><span class="fd-dot" style="background:'+(C[e.sys]||'#64748b')+'"></span><span>'+String(e.msg).replace(/</g,'&lt;')+'<div class="fd-t">'+ago(e.t)+'</div></span>'}).join(''):'<p style="color:#94a3b8;padding:1rem 0">ยังไม่มีกิจกรรม — ลองใช้ระบบอื่นในชุดเดโมนี้ดู</p>'}
+  function open(){render();document.getElementById('feedDrawer').classList.add('open');document.getElementById('feedScrim').hidden=false}
+  function close(){document.getElementById('feedDrawer').classList.remove('open');document.getElementById('feedScrim').hidden=true}
+  var btn=document.getElementById('btnFeed');if(btn)btn.addEventListener('click',function(e){e.preventDefault();open();});
+  document.getElementById('feedX').addEventListener('click',close);
+  document.getElementById('feedScrim').addEventListener('click',close);
 })();
 </script>
 <script>

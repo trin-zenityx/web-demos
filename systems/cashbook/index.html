@@ -294,32 +294,30 @@ table.tx tr:last-child td{border-bottom:none}
 <body>
 <script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
 
-<!-- ===================== หน้าเข้าสู่ระบบ ===================== -->
+<!-- ===================== หน้าเปิดกะ (entry) ===================== -->
 <div class="login-wrap" id="loginView">
   <div class="login-card">
     <div class="brand">
-      <svg class="mark" viewBox="0 0 48 48" aria-hidden="true">
-        <defs><linearGradient id="lgA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22c55e"/><stop offset="1" stop-color="#15803d"/></linearGradient></defs>
-        <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#lgA)"/>
-        <text x="24" y="33" text-anchor="middle" font-size="25" font-weight="700" fill="#fff" font-family="'IBM Plex Sans Thai',sans-serif">฿</text>
-      </svg>
+      <img class="mark" src="assets/logo.jpg" alt="เงินดี" style="width:48px;height:48px;border-radius:12px;object-fit:cover">
       <div>
         <div class="brand-name">เงินดี</div>
         <div class="brand-sub">ระบบบันทึกรายรับ–รายจ่าย · ร้านคั่วสาทร</div>
       </div>
     </div>
-    <h1>เข้าสู่ระบบ</h1>
-    <form id="loginForm">
-      <div class="field">
-        <label for="liUser">ชื่อผู้ใช้</label>
-        <input id="liUser" type="text" value="demo" autocomplete="username">
+    <h1 style="margin-bottom:.2rem">เปิดกะวันใหม่</h1>
+    <p style="color:var(--muted,#667);font-size:.85rem;margin-bottom:1rem">นับเงินสดในลิ้นชักก่อนเริ่มขาย แล้วยืนยันยอดยกมา</p>
+    <form id="shiftForm">
+      <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:14px;padding:1rem 1.1rem;margin-bottom:.9rem">
+        <div style="font-size:.74rem;color:#15803d;font-weight:600">ยอดยกมาจากระบบ (คงเหลือสะสม)</div>
+        <div id="carryShow" style="font-family:'JetBrains Mono',monospace;font-size:1.9rem;font-weight:700;color:#14532d">฿0</div>
       </div>
       <div class="field">
-        <label for="liPass">รหัสผ่าน</label>
-        <input id="liPass" type="password" value="demo1234" autocomplete="current-password">
+        <label for="floatInput">เงินสดที่นับได้จริง (บาท)</label>
+        <input id="floatInput" type="number" min="0" step="1" style="font-family:'JetBrains Mono',monospace;font-size:1.1rem">
+        <div id="floatDiff" style="font-size:.78rem;margin-top:.3rem;min-height:1.1em"></div>
       </div>
-      <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
-      <div class="demo-hint">กดเข้าสู่ระบบได้เลย ไม่ต้องแก้ข้อมูล</div>
+      <button type="submit" class="btn btn-primary">เปิดกะ · เริ่มบันทึก</button>
+      <div class="demo-hint">ระบบกรอกยอดนับให้เท่ายอดยกมาไว้แล้ว กดเปิดกะได้เลย</div>
     </form>
     <div class="demo-note">ระบบเดโม — ข้อมูลทั้งหมดเป็นข้อมูลจำลองเพื่อการสาธิต</div>
     <div class="credit">
@@ -332,11 +330,7 @@ table.tx tr:last-child td{border-bottom:none}
 <div class="app" id="appView" hidden>
   <aside class="sidebar" id="sidebar">
     <div class="side-brand">
-      <svg class="mark" viewBox="0 0 48 48" aria-hidden="true">
-        <defs><linearGradient id="lgB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22c55e"/><stop offset="1" stop-color="#15803d"/></linearGradient></defs>
-        <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#lgB)"/>
-        <text x="24" y="33" text-anchor="middle" font-size="25" font-weight="700" fill="#fff" font-family="'IBM Plex Sans Thai',sans-serif">฿</text>
-      </svg>
+      <img class="mark" src="assets/logo.jpg" alt="เงินดี" style="width:48px;height:48px;border-radius:12px;object-fit:cover">
       <div>
         <div class="t1">เงินดี</div>
         <div class="t2">คั่วสาทร · คาเฟ่</div>
@@ -354,6 +348,10 @@ table.tx tr:last-child td{border-bottom:none}
       <button class="navlink" data-page="budget">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
         งบประมาณ
+      </button>
+      <button class="navlink" id="btnFeed">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        กิจกรรมข้ามระบบ
       </button>
     </nav>
     <div class="side-user">
@@ -787,18 +785,34 @@ function renderCurrent(){showPage(currentPage);}
 function openSidebar(){$('#sidebar').classList.add('open');$('#backdrop').hidden=false;}
 function closeSidebar(){$('#sidebar').classList.remove('open');$('#backdrop').hidden=true;}
 
+/* cross-system bridge */
+function linkRead(){try{var d=JSON.parse(localStorage.getItem('zx-link-v1'));return d&&d.events?d:{events:[]}}catch(e){return{events:[]}}}
+function linkWrite(sys,type,msg,val){var l=linkRead();l.events.unshift({t:Date.now(),sys:sys,type:type,msg:msg,val:val===undefined?null:val});l.events=l.events.slice(0,60);try{localStorage.setItem('zx-link-v1',JSON.stringify(l))}catch(e){}}
+
 /* ---------- ผูกอีเวนต์ ---------- */
-$('#loginForm').addEventListener('submit',function(e){
+$('#shiftForm').addEventListener('submit',function(e){
   e.preventDefault();
   $('#loginView').hidden=true;
   $('#appView').hidden=false;
   renderRecent();
+  var carry=parseFloat($('#floatInput').value)||0;
+  linkWrite('cashbook','shift-open','เงินดี · เปิดกะวันใหม่ ยอดยกมา '+fmt(carry)+' ฿',carry);
+  toast('เปิดกะแล้ว — ยอดยกมา '+fmt(carry)+' ฿','ok');
+});
+$('#floatInput').addEventListener('input',function(){
+  var sys=parseFloat(this.dataset.sys)||0;
+  var v=parseFloat(this.value);
+  var d=$('#floatDiff');
+  if(isNaN(v)){d.textContent='';return;}
+  var diff=v-sys;
+  if(diff===0){d.textContent='ตรงกับยอดระบบ';d.style.color='#15803d';}
+  else{d.textContent='ส่วนต่าง '+(diff>0?'+':'−')+fmt(Math.abs(diff))+' ฿ — จะบันทึกเป็นยอดปรับปรุง';d.style.color='#b91c1c';}
 });
 $('#btnLogout').addEventListener('click',function(){
   $('#appView').hidden=true;
   $('#loginView').hidden=false;
 });
-document.querySelectorAll('.navlink').forEach(function(b){
+document.querySelectorAll('.navlink[data-page]').forEach(function(b){
   b.addEventListener('click',function(){showPage(b.dataset.page);});
 });
 $('#btnHamb').addEventListener('click',openSidebar);
@@ -827,6 +841,7 @@ $('#recForm').addEventListener('submit',function(e){
   state.seq++;
   state.txns.push(txn);
   save();
+  linkWrite('cashbook','entry','เงินดี · '+(formType==='in'?'รายรับ':'รายจ่าย')+' "'+txn.cat+'" '+fmt(txn.amount)+' ฿',txn.amount);
   $('#fAmt').value='';$('#fNote').value='';
   renderRecent();
   toast((formType==='in'?'บันทึกรายรับ +':'บันทึกรายจ่าย −')+fmt(txn.amount)+' ฿ แล้ว','ok');
@@ -874,7 +889,44 @@ setType('in');
 var todayStr=dstr(new Date());
 $('#fDate').value=todayStr;
 $('#fDate').max=todayStr;
+/* คำนวณยอดยกมาใส่หน้าเปิดกะ */
+(function(){
+  var bal=0;
+  state.txns.forEach(function(t){bal+=(t.type==='in'?t.amount:-t.amount);});
+  $('#carryShow').textContent='฿'+fmt(bal);
+  var fi=$('#floatInput');fi.value=bal;fi.dataset.sys=bal;
+})();
 
+})();
+</script>
+<!-- Feed drawer (cross-system bridge) -->
+<style>
+#feedScrim{position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:940}
+#feedDrawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,92vw);background:#fff;z-index:950;box-shadow:-16px 0 40px rgba(0,0,0,.18);transform:translateX(102%);transition:transform .25s ease;display:flex;flex-direction:column;font-family:'IBM Plex Sans Thai',sans-serif}
+#feedDrawer.open{transform:none}
+#feedDrawer .fd-head{padding:.9rem 1.1rem;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;gap:.6rem;font-weight:600;font-size:.95rem}
+#feedDrawer .fd-x{margin-left:auto;width:38px;height:38px;border-radius:9px;border:1px solid #e5e7eb;background:#fff;display:grid;place-items:center;color:#64748b;cursor:pointer}
+#feedDrawer .fd-body{flex:1;overflow-y:auto;padding:.6rem 1.1rem}
+#feedDrawer .fd-item{display:flex;gap:.7rem;padding:.55rem 0;border-bottom:1px dashed #e5e7eb;font-size:.82rem;line-height:1.5}
+#feedDrawer .fd-dot{width:10px;height:10px;border-radius:50%;margin-top:.35rem;flex:none}
+#feedDrawer .fd-t{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:#94a3b8;margin-top:.15rem}
+</style>
+<div id="feedScrim" hidden></div>
+<aside id="feedDrawer" aria-label="กิจกรรมข้ามระบบ">
+  <div class="fd-head">กิจกรรมข้ามระบบ<button class="fd-x" id="feedX" aria-label="ปิด"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+  <div class="fd-body" id="feedBody"></div>
+</aside>
+<script>
+(function(){
+  function lr(){try{var d=JSON.parse(localStorage.getItem('zx-link-v1'));return d&&d.events?d.events:[]}catch(e){return[]}}
+  var C={pos:'#0c8a61',kds:'#ea580c',queue:'#9333ea',crm:'#5b5bd6',inv:'#d97706',docs:'#0284c7',hr:'#0d9488',dorm:'#b45309',appt:'#c2410c',school:'#0ea5e9',gym:'#65a30d',repair:'#be185d',hotel:'#1e3a8a',laundry:'#c026d3',purch:'#475569',loyalty:'#7c3aed',kanban:'#0f766e',cashbook:'#15803d',sales:'#0369a1',admin:'#7c2d12',delivery:'#0284c7',rental:'#a16207',tournament:'#b91c1c'};
+  function ago(t){var s=Math.floor((Date.now()-t)/1000);if(s<3600)return Math.max(1,Math.floor(s/60))+' นาทีที่แล้ว';if(s<86400)return Math.floor(s/3600)+' ชม.ที่แล้ว';return Math.floor(s/86400)+' วันที่แล้ว'}
+  function render(){var ev=lr();var b=document.getElementById('feedBody');b.innerHTML=ev.length?ev.slice(0,25).map(function(e){return '<div class="fd-item"><span class="fd-dot" style="background:'+(C[e.sys]||'#64748b')+'"></span><span>'+String(e.msg).replace(/</g,'&lt;')+'<div class="fd-t">'+ago(e.t)+'</div></span>'}).join(''):'<p style="color:#94a3b8;padding:1rem 0">ยังไม่มีกิจกรรม — ลองใช้ระบบอื่นในชุดเดโมนี้ดู</p>'}
+  function open(){render();document.getElementById('feedDrawer').classList.add('open');document.getElementById('feedScrim').hidden=false}
+  function close(){document.getElementById('feedDrawer').classList.remove('open');document.getElementById('feedScrim').hidden=true}
+  var btn=document.getElementById('btnFeed');if(btn)btn.addEventListener('click',function(e){e.preventDefault();open();});
+  document.getElementById('feedX').addEventListener('click',close);
+  document.getElementById('feedScrim').addEventListener('click',close);
 })();
 </script>
 <script>

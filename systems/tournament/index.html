@@ -354,29 +354,20 @@ body.big #app{filter:blur(2px) brightness(.4)}
 <body>
 <script>window.__errors=[];window.addEventListener('error',function(e){window.__errors.push(String(e.message||e));});</script>
 
-<!-- ================= LOGIN ================= -->
+<!-- ================= ENTRY: สายแข่งสาธารณะ ================= -->
 <div id="loginView">
-  <div class="login-card">
+  <div class="login-card" style="max-width:960px;width:100%;max-height:92vh;overflow-y:auto">
     <div class="login-logo">
-      <div class="mark" aria-hidden="true">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a1400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a2 2 0 0 0 2 4h1M17 6h3a2 2 0 0 1-2 4h-1"/></svg>
-      </div>
+      <img src="assets/logo.jpg" alt="แข่งดี" style="width:52px;height:52px;border-radius:14px;object-fit:cover">
       <h1>แข่ง<span>ดี</span></h1>
     </div>
-    <p class="login-sub">ระบบจัดการทัวร์นาเมนต์ ROV ประจำเดือน — GG ZONE อีสปอร์ตคาเฟ่</p>
+    <p class="login-sub">GG ZONE ROV Monthly — สายแข่งสด 8 ทีม · จอประกาศหน้างาน</p>
+    <div id="viewerBracket" style="margin:.6rem 0 1rem"></div>
     <form id="loginForm">
-      <div class="field">
-        <label for="lgUser">อีเมลผู้จัด</label>
-        <input id="lgUser" type="email" value="admin@ggzone.gg" autocomplete="username">
-      </div>
-      <div class="field">
-        <label for="lgPass">รหัสผ่าน</label>
-        <input id="lgPass" type="password" value="demo1234" autocomplete="current-password">
-      </div>
-      <button type="submit" class="btn-gold">เข้าสู่ระบบ</button>
+      <button type="submit" class="btn-gold">สำหรับผู้จัด — กรอกผลแข่ง →</button>
     </form>
-    <div class="login-note">ระบบเดโม — กดเข้าสู่ระบบได้เลย ข้อมูลทั้งหมดเป็นข้อมูลตัวอย่าง</div>
-    <p class="credit">สร้างโดย <a href="../../first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos">ZenityX — คอร์ส First Vibe Coding for Beginners</a></p>
+    <div class="login-note">ผู้ชมรีเฟรชหน้านี้ได้ตลอด สายแข่งอัพเดทตามผลจริง</div>
+    <p class="credit">สร้างโดย <a href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=credit-cta&utm_campaign=demos">ZenityX — คอร์ส First Vibe Coding for Beginners</a></p>
   </div>
 </div>
 
@@ -385,9 +376,7 @@ body.big #app{filter:blur(2px) brightness(.4)}
   <div class="scrim" id="scrim"></div>
   <aside id="sidebar">
     <div class="brand">
-      <div class="mark" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a2 2 0 0 0 2 4h1M17 6h3a2 2 0 0 1-2 4h-1"/></svg>
-      </div>
+      <img src="assets/logo.jpg" alt="แข่งดี" style="width:38px;height:38px;border-radius:10px;object-fit:cover">
       <div><b>แข่งดี</b><small>GG ZONE อีสปอร์ตคาเฟ่</small></div>
     </div>
     <nav class="nav" aria-label="เมนูหลัก">
@@ -406,6 +395,10 @@ body.big #app{filter:blur(2px) brightness(.4)}
       <button class="nav-btn" id="btnBigNav">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         โหมดจอใหญ่
+      </button>
+      <button class="nav-btn" id="btnFeed">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        กิจกรรมข้ามระบบ
       </button>
     </nav>
     <div class="sb-foot">
@@ -479,6 +472,9 @@ body.big #app{filter:blur(2px) brightness(.4)}
 
 /* ================= DATA ================= */
 var LS_KEY = "zx-tour-v1";
+/* cross-system bridge */
+function linkRead(){try{var d=JSON.parse(localStorage.getItem('zx-link-v1'));return d&&d.events?d:{events:[]}}catch(e){return{events:[]}}}
+function linkWrite(sys,type,msg,val){var l=linkRead();l.events.unshift({t:Date.now(),sys:sys,type:type,msg:msg,val:val===undefined?null:val});l.events=l.events.slice(0,60);try{localStorage.setItem('zx-link-v1',JSON.stringify(l))}catch(e){}}
 var ROUND_NAMES = ["รอบ 8 ทีม","รอบรองชนะเลิศ","รอบชิงชนะเลิศ"];
 var TEAM_COLORS = ["#eab308","#22d3ee","#f472b6","#4ade80","#fb923c","#a78bfa","#f87171","#38bdf8"];
 
@@ -521,6 +517,14 @@ function save(s){ if(s){ state = s; } try{ localStorage.setItem(LS_KEY, JSON.str
 
 var state = load();
 var page = "bracket";
+/* entry: แสดงสายแข่งสาธารณะหน้าแรก (render หลังฟังก์ชันโหลด — hoist) */
+function renderViewerBracket(){
+  var v = document.getElementById('viewerBracket'); if(!v) return;
+  v.innerHTML = bracketHtml();
+  v.querySelectorAll('.match').forEach(function(x){ x.style.cursor='default'; });
+  var w = v.querySelector('.bracket-wrap');
+  requestAnimationFrame(function(){ if(w) drawWires(w); });
+}
 var NEXT = { m1:{m:"m5",slot:"home"}, m2:{m:"m5",slot:"away"}, m3:{m:"m6",slot:"home"}, m4:{m:"m6",slot:"away"}, m5:{m:"m7",slot:"home"}, m6:{m:"m7",slot:"away"} };
 
 function teamById(id){ for(var i=0;i<state.teams.length;i++){ if(state.teams[i].id===id) return state.teams[i]; } return null; }
@@ -752,6 +756,9 @@ function saveResult(mid,hs,as){
   }
   save(); rerender();
   toast("บันทึกผล: "+teamById(m.home).name+" "+hs+" – "+as+" "+teamById(m.away).name);
+  linkWrite('tournament','match-result','แข่งดี · '+ROUND_NAMES[m.round]+': '+teamById(m.home).name+' '+hs+'–'+as+' '+teamById(m.away).name,null);
+  var c = champion();
+  if(c && mid==='m7') linkWrite('tournament','champion','แข่งดี · แชมป์คือ '+c.name+'! (GG ZONE ROV Monthly)',null);
 }
 
 function delTeam(id){
@@ -908,6 +915,7 @@ $("#scrim").addEventListener("click",function(){ document.body.classList.remove(
 $("#btnLogout").addEventListener("click",function(){
   closeBig();
   $("#app").hidden = true; $("#loginView").hidden = false;
+  renderViewerBracket();
   toast("ออกจากระบบแล้ว");
 });
 $("#btnReset").addEventListener("click",function(){
@@ -938,6 +946,37 @@ window.addEventListener("resize",function(){
   },120);
 });
 $("#thaiDate").textContent = thaiDate();
+renderViewerBracket();
+})();
+</script>
+<!-- Feed drawer (cross-system bridge) -->
+<style>
+#feedScrim{position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:940}
+#feedDrawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,92vw);background:#fff;z-index:950;box-shadow:-16px 0 40px rgba(0,0,0,.18);transform:translateX(102%);transition:transform .25s ease;display:flex;flex-direction:column;font-family:'IBM Plex Sans Thai',sans-serif}
+#feedDrawer.open{transform:none}
+#feedDrawer .fd-head{padding:.9rem 1.1rem;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;gap:.6rem;font-weight:600;font-size:.95rem}
+#feedDrawer .fd-x{margin-left:auto;width:38px;height:38px;border-radius:9px;border:1px solid #e5e7eb;background:#fff;display:grid;place-items:center;color:#64748b;cursor:pointer}
+#feedDrawer .fd-body{flex:1;overflow-y:auto;padding:.6rem 1.1rem}
+#feedDrawer .fd-item{display:flex;gap:.7rem;padding:.55rem 0;border-bottom:1px dashed #e5e7eb;font-size:.82rem;line-height:1.5}
+#feedDrawer .fd-dot{width:10px;height:10px;border-radius:50%;margin-top:.35rem;flex:none}
+#feedDrawer .fd-t{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:#94a3b8;margin-top:.15rem}
+</style>
+<div id="feedScrim" hidden></div>
+<aside id="feedDrawer" aria-label="กิจกรรมข้ามระบบ">
+  <div class="fd-head">กิจกรรมข้ามระบบ<button class="fd-x" id="feedX" aria-label="ปิด"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+  <div class="fd-body" id="feedBody"></div>
+</aside>
+<script>
+(function(){
+  function lr(){try{var d=JSON.parse(localStorage.getItem('zx-link-v1'));return d&&d.events?d.events:[]}catch(e){return[]}}
+  var C={pos:'#0c8a61',kds:'#ea580c',queue:'#9333ea',crm:'#5b5bd6',inv:'#d97706',docs:'#0284c7',hr:'#0d9488',dorm:'#b45309',appt:'#c2410c',school:'#0ea5e9',gym:'#65a30d',repair:'#be185d',hotel:'#1e3a8a',laundry:'#c026d3',purch:'#475569',loyalty:'#7c3aed',kanban:'#0f766e',cashbook:'#15803d',sales:'#0369a1',admin:'#7c2d12',delivery:'#0284c7',rental:'#a16207',tournament:'#b91c1c'};
+  function ago(t){var s=Math.floor((Date.now()-t)/1000);if(s<3600)return Math.max(1,Math.floor(s/60))+' นาทีที่แล้ว';if(s<86400)return Math.floor(s/3600)+' ชม.ที่แล้ว';return Math.floor(s/86400)+' วันที่แล้ว'}
+  function render(){var ev=lr();var b=document.getElementById('feedBody');b.innerHTML=ev.length?ev.slice(0,25).map(function(e){return '<div class="fd-item"><span class="fd-dot" style="background:'+(C[e.sys]||'#64748b')+'"></span><span>'+String(e.msg).replace(/</g,'&lt;')+'<div class="fd-t">'+ago(e.t)+'</div></span>'}).join(''):'<p style="color:#94a3b8;padding:1rem 0">ยังไม่มีกิจกรรม — ลองใช้ระบบอื่นในชุดเดโมนี้ดู</p>'}
+  function open(){render();document.getElementById('feedDrawer').classList.add('open');document.getElementById('feedScrim').hidden=false}
+  function close(){document.getElementById('feedDrawer').classList.remove('open');document.getElementById('feedScrim').hidden=true}
+  var btn=document.getElementById('btnFeed');if(btn)btn.addEventListener('click',function(e){e.preventDefault();open();});
+  document.getElementById('feedX').addEventListener('click',close);
+  document.getElementById('feedScrim').addEventListener('click',close);
 })();
 </script>
 <script>
