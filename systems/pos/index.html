@@ -352,6 +352,12 @@ body{font-size:16px;line-height:1.65}
 .statusbar{font-size:.8125rem;color:#9db2c6}
 .statusbar button{font-size:.8125rem}
 .ticket-role small,.role-card small,small{font-size:.86rem}
+.tbtn{min-height:44px}
+.tlink{min-height:44px;display:inline-flex;align-items:center}
+.d-head .x{width:44px;height:44px}
+#syncPill,#custBtn,#voidTicket,#sndBtn,#resetBtn{min-height:44px}
+.statusbar a{display:inline-flex;align-items:center;min-height:44px}
+#searchInput{min-height:44px;font-size:.95rem}
 </style>
 </head>
 <body>
@@ -448,7 +454,7 @@ body{font-size:16px;line-height:1.65}
           <div class="tk-head">
             <span class="tno" id="tkNo">#—</span>
             <div class="cust"><button id="custBtn" style="display:flex;align-items:center;gap:.4rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex:none"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg><span id="custName">ลูกค้าทั่วไป</span></button></div>
-            <button class="vd" id="voidTicket" title="ยกเลิกตั๋วทั้งใบ" style="color:#f87171;border:1px solid transparent;min-height:36px">ยกเลิก</button>
+            <button class="vd" id="voidTicket" title="ยกเลิกตั๋วทั้งใบ" style="color:#f87171;border:1px solid transparent;min-height:44px">ยกเลิก</button>
           </div>
           <div class="tk-lines" id="tkLines"><p class="tk-empty">ตั๋วว่าง — แตะสินค้าด้านซ้าย<br>หรือยิงบาร์โค้ดเพื่อเริ่มขาย</p></div>
           <div id="promoBadge" class="promo-badge" hidden><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.6 13.4L11 3.8A2 2 0 0 0 9.6 3.2H4a1 1 0 0 0-1 1v5.6c0 .5.2 1 .6 1.4l9.6 9.6a2 2 0 0 0 2.8 0l4.6-4.6a2 2 0 0 0 0-2.8z"/></svg><span id="promoTxt"></span></div>
@@ -456,7 +462,7 @@ body{font-size:16px;line-height:1.65}
             <div class="tk-sum">
               <div class="r"><span>รวม (<span id="tkCount">0</span> ชิ้น)</span><b id="tkSub">฿0</b></div>
               <div class="r promo" id="promoRow" hidden><span>โปรโมชั่นอัตโนมัติ</span><b id="tkPromo">-฿0</b></div>
-              <div class="r"><span>ส่วนลด <button class="tlink" id="discBtn" style="min-height:28px;padding:0;font-size:.75rem">แก้ไข</button></span><b id="tkDisc" style="color:#f87171">-฿0</b></div>
+              <div class="r"><span>ส่วนลด <button class="tlink" id="discBtn" style="min-height:44px;padding:0 .4rem;font-size:.8125rem">แก้ไข</button></span><b id="tkDisc" style="color:#f87171">-฿0</b></div>
               <div class="r tot"><span>ยอดชำระ</span><b id="tkTotal">฿0</b></div>
             </div>
             <div class="tk-acts">
