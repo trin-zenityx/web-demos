@@ -167,7 +167,7 @@ footer a{color:var(--red)}
   <p class="sub">ทุกระบบด้านล่างเปิดใช้งานได้ทันทีเหมือนโปรแกรมจริง: <b>ล็อกอิน เพิ่ม-ลบ-แก้ข้อมูล คำนวณ พิมพ์เอกสาร</b> — สร้างด้วย AI ในคลาสเดียวกัน ไม่ต้องมีพื้นฐานโค้ด <b>ลองกดเข้าระบบได้เลย</b> ทุกระบบเป็นเดโม ข้อมูลจำลองสมจริง กดเล่นได้เต็มที่</p>
   <div class="cta-row">
     <a class="btn-primary" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=systems-cta&utm_campaign=demos" target="_blank" rel="noopener">ดูรายละเอียดคอร์ส →</a>
-    <button class="btn-ghost hot" id="demoKitBtn">▶ สคริปต์เดโมขาย 3 นาที</button>
+    <button class="btn-ghost hot" id="demoKitBtn" hidden>▶ สคริปต์เดโมขาย 3 นาที</button>
     <a class="btn-ghost" href="../">← ดูตัวอย่างเว็บไซต์ 60 เว็บ</a>
   </div>
   <div class="meta-row">
@@ -585,6 +585,9 @@ footer a{color:var(--red)}
     renderDK();
   }
   function closeDK(){ if (ov) { ov.remove(); ov = null; } }
+  /* demo kit เฉพาะโหมดพิชต์ (?pitch=1) — ลูกค้าที่ได้รับลิงก์ปกติจะไม่เห็นปุ่มนี้ */
+  var pitchMode = /[?&]pitch=1/.test(location.search);
+  if (pitchMode) document.getElementById('demoKitBtn').hidden = false;
   document.getElementById('demoKitBtn').addEventListener('click', openDK);
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeDK(); });
   /* ถ้าเพิ่งกลับมาจากระบบและมี overlay ค้างใน state → ไม่เปิดอัตโนมัติ ให้ผู้ใช้กดเอง */
