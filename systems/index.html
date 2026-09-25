@@ -112,6 +112,19 @@ main{max-width:1320px;margin:0 auto;padding:clamp(1.2rem,3vh,2rem) clamp(1.25rem
 /* footer */
 footer{border-top:1px solid var(--line);padding:1.8rem 0;text-align:center;font-size:.82rem;color:var(--gray-l)}
 footer a{color:var(--red)}
+/* live activity band */
+.liveband{max-width:1320px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem) 1.2rem}
+.lb-in{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:.85rem 1.1rem;box-shadow:0 4px 18px rgba(0,0,0,.04)}
+.lb-head{display:flex;align-items:center;gap:.55rem;font-family:var(--disp);font-size:.88rem;flex-wrap:wrap}
+.pulse{width:9px;height:9px;border-radius:50%;background:var(--red);animation:pl 1.6s ease-in-out infinite}
+@keyframes pl{0%,100%{box-shadow:0 0 0 0 rgba(255,0,0,.35)}50%{box-shadow:0 0 0 7px rgba(255,0,0,0)}}
+.lb-note{font-size:.76rem;color:var(--gray-l);font-family:var(--body);font-weight:300}
+.lb-row{display:flex;gap:.6rem;overflow-x:auto;padding:.7rem 0 .15rem;scrollbar-width:thin}
+.lb-row:empty{display:none}
+.lb-item{flex:none;display:flex;align-items:center;gap:.55rem;border:1px solid var(--line);border-radius:12px;padding:.5rem .8rem;font-size:.8rem;color:var(--ink);background:#fbfbfd;animation:lbin .3s ease}
+@keyframes lbin{from{opacity:0;transform:translateY(6px)}}
+.lb-item .d{width:8px;height:8px;border-radius:50%;flex:none}
+.lb-item .t{font-family:var(--mono);font-size:.66rem;color:var(--gray-l)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}.card{opacity:1;transform:none}}
 </style>
 </head>
@@ -141,8 +154,16 @@ footer a{color:var(--red)}
     <span><b>24</b> ระบบใช้งานจริง</span>
     <span>ข้อมูล <b>บันทึกจริง</b> ในเครื่อง</span>
     <span><b>ไม่ต้องมีพื้นฐาน</b> โค้ด</span>
+    <span>ระบบ <b>คุยข้ามกันได้จริง</b></span>
   </div>
 </header>
+<!-- live cross-system activity band -->
+<section class="liveband" id="liveBand">
+  <div class="lb-in">
+    <div class="lb-head"><span class="pulse" aria-hidden="true"></span><b>เหตุการณ์สดจากระบบตัวอย่าง</b><span class="lb-note" id="lbNote">กำลังรอ — ลองเปิดระบบใดก็ได้ด้านล่าง ใช้งานสักครู่ แล้วกลับมาดูแถบนี้</span></div>
+    <div class="lb-row" id="lbRow"></div>
+  </div>
+</section>
 <main>
 <div class="chips" id="chips">
   <button class="fchip on" data-c="all">ทั้งหมด<b>24</b></button>
@@ -411,6 +432,27 @@ footer a{color:var(--red)}
       card.style.display = (c === 'all' || card.dataset.cat === c) ? '' : 'none';
     });
   });
+})();
+</script>
+<script>
+/* live cross-system activity — reads the zx-link-v1 bridge every 3s */
+(function(){
+  var C={pos:'#0c8a61',kds:'#ea580c',queue:'#9333ea',crm:'#5b5bd6',inv:'#d97706',docs:'#0284c7',hr:'#0d9488',dorm:'#b45309',appt:'#c2410c',school:'#0ea5e9',gym:'#65a30d',repair:'#be185d',hotel:'#1e3a8a',laundry:'#c026d3',purch:'#475569',loyalty:'#7c3aed',kanban:'#0f766e',cashbook:'#15803d',sales:'#0369a1',admin:'#7c2d12',delivery:'#0284c7',rental:'#a16207',tournament:'#b91c1c'};
+  var row=document.getElementById('lbRow'), note=document.getElementById('lbNote');
+  function ago(t){var s=Math.floor((Date.now()-t)/1000);if(s<60)return'เมื่อครู่';if(s<3600)return Math.floor(s/60)+' นาทีที่แล้ว';if(s<86400)return Math.floor(s/3600)+' ชม.ที่แล้ว';return Math.floor(s/86400)+' วันที่แล้ว'}
+  function esc(s){return String(s).replace(/</g,'&lt;')}
+  var lastTop=0;
+  function tick(){
+    var ev=[];
+    try{var d=JSON.parse(localStorage.getItem('zx-link-v1'));if(d&&d.events)ev=d.events}catch(e){}
+    if(!ev.length){note.textContent='กำลังรอ — ลองเปิดระบบใดก็ได้ด้านล่าง ใช้งานสักครู่ แล้วกลับมาดูแถบนี้';row.innerHTML='';return}
+    note.textContent='ทุกระบบในหน้านี้แชร์เหตุการณ์หากันจริง — สิ่งที่คุณทำในระบบหนึ่ง ปรากฏในอีกระบบทันที';
+    var fresh=ev[0].t>lastTop; lastTop=ev[0].t;
+    row.innerHTML=ev.slice(0,8).map(function(e,i){
+      return '<div class="lb-item"'+(i===0&&fresh?' style="border-color:var(--red)"':'')+'><span class="d" style="background:'+(C[e.sys]||'#94a3b8')+'"></span><span>'+esc(e.msg)+'</span><span class="t">'+ago(e.t)+'</span></div>';
+    }).join('');
+  }
+  tick(); setInterval(tick,3000);
 })();
 </script>
 </body>
