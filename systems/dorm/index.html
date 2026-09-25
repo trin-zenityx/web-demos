@@ -192,6 +192,20 @@ tr:last-child td{border-bottom:0}
 .mobtop button{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px}
 @media print{ body *{visibility:hidden} #billPrint,#billPrint *{visibility:visible} #billPrint{position:absolute;left:0;top:0;width:100%} }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+/* === UX remediation: typography floor 13px + contrast === */
+body{font-size:16px;line-height:1.65}
+.room-card .rt{font-size:.86rem}
+.room-card .rr{font-size:.9rem}
+.kpi .sub{font-size:.78rem}
+.b-occ{background:#bbf7d0;color:#14532d}
+.b-vac{background:#e2e8f0;color:#334155}
+.stat-chip.green b{color:#166534}
+.ri .tip,.d-note,.feed-item .ft{font-size:.8125rem}
+.badge{font-size:.8125rem;padding:.22rem .65rem}
+.room .rs{font-size:.78rem}
+.map-credit{font-size:.8125rem}
+.splash .ver,.ws-chip .wm,.meter-h,.statusbar,.statusbar button{font-size:.8125rem}
+.kpi .sub{font-size:.8125rem}
 </style>
 </head>
 <body>

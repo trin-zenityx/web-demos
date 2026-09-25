@@ -201,6 +201,13 @@ tr:last-child td{border-bottom:0}
 .mobtop button{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px}
 @media print{ body *{visibility:hidden} #tixPrint,#tixPrint *{visibility:visible} #tixPrint{position:absolute;left:0;top:0;width:100%} }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+/* === UX remediation: typography floor 13px + touch === */
+body{font-size:16px;line-height:1.65}
+.jcard .jc,.jcard .jn,.jcard .jm,.jcard .kg,.price-row small{font-size:13px!important}
+.tbtn,.sync-pill{min-height:38px}
+.ri .tip,.stat-chip,.tbtn,.sync-pill,.kpi span,.p-head .count,th,.badge,.feed-item .ft,.d-note,.statusbar,.statusbar button{font-size:.8125rem}
+.badge{padding:.22rem .65rem}
+.tbtn,.sync-pill{min-height:38px}
 </style>
 </head>
 <body>

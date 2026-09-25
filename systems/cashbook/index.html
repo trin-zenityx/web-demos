@@ -289,6 +289,16 @@ table.tx tr:last-child td{border-bottom:none}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+/* === UX remediation: typography floor 13px + contrast + mobile table === */
+body{font-size:16px;line-height:1.65}
+.tnote,.table-meta,.form-note,#recentMeta{font-size:13px}
+.side-brand .t2,.side-user .n2{font-size:13px;color:#5d8a76}
+table.tx th{font-size:13px}
+.tamt{font-weight:700;font-size:15px}
+.tamt.pos{color:#15803d}
+.tamt.neg{color:#b91c1c}
+.btn-primary{background:#166534}
+.content{overflow-x:auto;-webkit-overflow-scrolling:touch}
 </style>
 </head>
 <body>

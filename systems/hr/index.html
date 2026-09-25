@@ -211,6 +211,14 @@ tr:last-child td{border-bottom:0}
 .mobtop button{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px}
 @media print{ body *{visibility:hidden} #payslipBox,#payslipBox *{visibility:visible} #payslipBox{position:absolute;left:0;top:0;width:100%;box-shadow:none} }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+/* === UX remediation: typography floor 13px + touch === */
+body{font-size:16px;line-height:1.65}
+.ri .tip,.stat-chip,.tbtn,.sync-pill,.kpi span,.p-head .count,th,.badge,.feed-item .ft,.d-note,.statusbar,.statusbar button{font-size:.8125rem}
+.att-card .at-meta{font-size:13px!important}
+.stat-chip b#stLate{color:#92400e}
+.stat-chip b#stOnTime{color:#166534}
+.badge{padding:.22rem .65rem}
+.tbtn,.sync-pill{min-height:38px}
 </style>
 </head>
 <body>

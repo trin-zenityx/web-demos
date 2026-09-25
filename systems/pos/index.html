@@ -336,6 +336,22 @@ tr:last-child td{border-bottom:0}
   #receiptBox{position:absolute;left:0;top:0;box-shadow:none}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+/* === UX remediation: typography floor 13px + contrast === */
+body{font-size:16px;line-height:1.65}
+.prod .sku{font-size:.78rem}
+.prod .low{font-size:.78rem;color:#92400e;background:#fef3c7;border-radius:6px;padding:.05rem .35rem}
+.ctab .cnt{font-size:.8rem;opacity:.8}
+.ri .tip{font-size:.8125rem}
+.sync-pill{font-size:.8125rem;color:#9db2c6;min-height:36px}
+.pin-wrap .pl{font-size:.86rem}
+.brand-line .pro{font-size:.75rem}
+.prod small,.prod .nm{font-size:.95rem}
+.stat-chip,.tbtn{font-size:.8125rem}
+.splash .ver,.login-photo .meta,.topbar .dur,.search .kbd,.tl .nt,.tl .up,.tl .ld,.kbd-hints,.receipt .rc,.receipt .offl,.receipt .pts-line,.prod.paused::after{font-size:.8125rem}
+.barcode-n{font-size:.78rem}
+.statusbar{font-size:.8125rem;color:#9db2c6}
+.statusbar button{font-size:.8125rem}
+.ticket-role small,.role-card small,small{font-size:.86rem}
 </style>
 </head>
 <body>

@@ -346,6 +346,17 @@ body.big #app{filter:blur(2px) brightness(.4)}
   .content{padding:20px 14px 90px}
   .topbar{padding:12px 14px}
 }
+/* === UX remediation: typography floor 13px + touch === */
+html{font-size:16px}
+body{font-size:16px;line-height:1.65}
+.credit,.sb-user small,.badge,.players li .no,.round-block h4 .cnt,.vs .v{font-size:.8125rem!important}
+.m-tag{font-size:.78rem!important}
+.champ-banner small{font-size:.8rem!important}
+.nav-btn{min-height:44px}
+.m-tag[style*="background:#2a2a3a"]{background:#3a3a4e!important;color:#a0a0b8!important}
+#thaiDate{color:#64748b!important}
+.brand small,.round-title small{font-size:.8125rem!important}
+.round-title .cnt,.kpi b{font-size:.9rem}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }

@@ -253,7 +253,11 @@ tbody tr:last-child td{border-bottom:none}
   .topbar{padding:10px 14px}
   .topbar .date{display:none}
 }
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+/* === UX remediation === */
+body{font-size:16px;line-height:1.65}
+th{font-size:13px}
+.tbtn,.sync-pill{min-height:38px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
 </style>
 </head>
 <body>

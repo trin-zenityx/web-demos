@@ -134,6 +134,11 @@ tr:last-child td{border-bottom:0}
 }
 .menu-btn{display:none;align-items:center;justify-content:center;width:44px;height:44px;border:1.5px solid var(--line);border-radius:10px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+/* === UX remediation: typography floor 13px + touch === */
+body{font-size:16px;line-height:1.65}
+.login-credit,.side-logo small,.user-chip small,.badge{font-size:.8125rem}
+.badge{padding:.25rem .75rem}
+.navi{min-height:44px}
 </style>
 </head>
 <body>
