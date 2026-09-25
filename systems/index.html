@@ -125,6 +125,25 @@ footer a{color:var(--red)}
 @keyframes lbin{from{opacity:0;transform:translateY(6px)}}
 .lb-item .d{width:8px;height:8px;border-radius:50%;flex:none}
 .lb-item .t{font-family:var(--mono);font-size:.66rem;color:var(--gray-l)}
+/* attract mode */
+.card.spot{border-color:var(--red);box-shadow:0 0 0 3px rgba(255,0,0,.22),0 24px 60px rgba(0,0,0,.16);transform:translateY(-5px) scale(1.015)}
+.attract-ind{position:fixed;right:16px;bottom:16px;z-index:300;background:var(--ink);color:#fff;border-radius:99px;padding:.6rem 1.1rem;font-size:.8rem;font-family:var(--disp);display:flex;gap:.6rem;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.attract-ind button{background:var(--red);color:#fff;border-radius:99px;padding:.35rem .9rem;font-size:.78rem;min-height:36px}
+/* demo kit overlay */
+.dk{position:fixed;inset:0;z-index:500;background:rgba(15,15,20,.62);backdrop-filter:blur(6px);display:grid;place-items:center;padding:1rem}
+.dk-card{background:#fff;border-radius:22px;max-width:560px;width:100%;padding:1.6rem 1.7rem;box-shadow:0 30px 90px rgba(0,0,0,.4);animation:mup .25s ease}
+@keyframes mup{from{opacity:0;transform:translateY(16px)}}
+.dk-steps{display:flex;gap:.45rem;margin-bottom:1rem}
+.dk-steps i{flex:1;height:4px;border-radius:2px;background:#ececf0}
+.dk-steps i.done{background:var(--red)}
+.dk-card h3{font-family:var(--disp);font-size:1.2rem;font-weight:600;margin-bottom:.15rem}
+.dk-card .dk-sub{font-size:.82rem;color:var(--gray-l);margin-bottom:1rem}
+.dk-say{background:#fdf2f2;border-left:3px solid var(--red);border-radius:10px;padding:.85rem 1rem;font-size:.92rem;line-height:1.75;margin-bottom:1rem}
+.dk-say::before{content:'พูดว่า';display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--red);margin-bottom:.25rem;text-transform:uppercase}
+.dk-act{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.dk-act .btn-primary{padding:.8rem 1.4rem;font-size:.9rem}
+.dk-act .btn-ghost{padding:.8rem 1.2rem;font-size:.9rem}
+.dk-done{display:flex;align-items:center;gap:.45rem;color:#15803d;font-size:.84rem;font-weight:500}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}.card{opacity:1;transform:none}}
 </style>
 </head>
@@ -148,6 +167,7 @@ footer a{color:var(--red)}
   <p class="sub">ทุกระบบด้านล่างเปิดใช้งานได้ทันทีเหมือนโปรแกรมจริง: <b>ล็อกอิน เพิ่ม-ลบ-แก้ข้อมูล คำนวณ พิมพ์เอกสาร</b> — สร้างด้วย AI ในคลาสเดียวกัน ไม่ต้องมีพื้นฐานโค้ด <b>ลองกดเข้าระบบได้เลย</b> ทุกระบบเป็นเดโม ข้อมูลจำลองสมจริง กดเล่นได้เต็มที่</p>
   <div class="cta-row">
     <a class="btn-primary" href="https://www.zenityx.com/courses/first-vibe-coding-for-beginners.html?utm_source=web-demos&utm_medium=systems-cta&utm_campaign=demos" target="_blank" rel="noopener">ดูรายละเอียดคอร์ส →</a>
+    <button class="btn-ghost hot" id="demoKitBtn">▶ สคริปต์เดโมขาย 3 นาที</button>
     <a class="btn-ghost" href="../">← ดูตัวอย่างเว็บไซต์ 60 เว็บ</a>
   </div>
   <div class="meta-row">
@@ -453,6 +473,121 @@ footer a{color:var(--red)}
     }).join('');
   }
   tick(); setInterval(tick,3000);
+})();
+</script>
+<script>
+/* ===== attract mode + demo kit ===== */
+(function(){
+  /* --- attract mode: idle 25s หรือ ?attract=1 → ไฮไลต์การ์ดวนเอง (โหมดบูธ) --- */
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var attractOn = false, ai = 0, idleT = null, cycleT = null;
+  var ind = null;
+  function stopAttract(){
+    attractOn = false; clearInterval(cycleT);
+    cards.forEach(function(c){ c.classList.remove('spot'); });
+    if (ind) { ind.remove(); ind = null; }
+    armIdle();
+  }
+  function step(){
+    cards.forEach(function(c){ c.classList.remove('spot'); });
+    var c = cards[ai % cards.length]; ai++;
+    c.classList.add('spot');
+    c.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  function startAttract(){
+    if (attractOn) return;
+    attractOn = true;
+    ind = document.createElement('div');
+    ind.className = 'attract-ind';
+    ind.innerHTML = '<span>โหมดโชว์อัตโนมัติ</span><button id="attractOff">หยุด</button>';
+    document.body.appendChild(ind);
+    document.getElementById('attractOff').addEventListener('click', stopAttract);
+    step(); cycleT = setInterval(step, 4000);
+  }
+  function armIdle(){
+    clearTimeout(idleT);
+    idleT = setTimeout(startAttract, 25000);
+  }
+  ['mousemove','keydown','touchstart','wheel'].forEach(function(ev){
+    window.addEventListener(ev, function(){ if (attractOn) stopAttract(); else armIdle(); }, {passive:true});
+  });
+  if (/[?&]attract=1/.test(location.search)) setTimeout(startAttract, 3000); else armIdle();
+
+  /* --- demo kit: สคริปต์พิชต์ 3 ขั้น รู้จริงว่าทำถึงไหนจาก bridge --- */
+  var DK_KEY = 'zx-demo-v1';
+  function dkLoad(){ try{ return JSON.parse(localStorage.getItem(DK_KEY)) || {step:0}; }catch(e){ return {step:0}; } }
+  function dkSave(s){ try{ localStorage.setItem(DK_KEY, JSON.stringify(s)); }catch(e){} }
+  function bridgeHas(sys, type){
+    try{ var d=JSON.parse(localStorage.getItem('zx-link-v1'));
+      return d && d.events && d.events.some(function(e){ return e.sys===sys && (!type || e.type===type); });
+    }catch(e){ return false; }
+  }
+  var STEPS = [
+    {
+      title:'ขั้นที่ 1 — ขายจริงที่ POS',
+      sub:'เปิดระบบขายดี แล้วขายอะไรก็ได้ 1 บิล (กดสินค้า → รับเงินสด)',
+      say:'"ระบบนี้ไม่ใช่ภาพนิ่งครับ — ผมกำลังขายจริง เปลี่ยนยอดจริง บิลนี้จะไปโผล่ในระบบอื่นทันที เดี๋ยวดูกัน"',
+      link:'./pos/?app=1', linkTxt:'เปิด POS ขายดี →',
+      doneCheck:function(){ return bridgeHas('pos','sale'); },
+      doneTxt:'ขายสำเร็จ — เหตุการณ์เข้า bridge แล้ว'
+    },
+    {
+      title:'ขั้นที่ 2 — ยอดไหลเข้าศูนย์บัญชาการ',
+      sub:'เปิดผู้บริหารดี — KPI ยอดขายรวมบิลเมื่อกี้ทันที ไม่ต้องรีเฟรช',
+      say:'"เจ้าของร้านเห็นยอดตรงนี้ทันทีครับ ไม่ต้องถามแคชเชียร์ — ทุกระบบของเราคุยกันเอง นี่คือสิ่งที่โปรแกรมแพ็กเกจทั่วไปทำไม่ได้ในราคานี้"',
+      link:'./dashboard/?app=1', linkTxt:'เปิด ผู้บริหารดี →',
+      doneCheck:function(){ return dkLoad().openedDash === true; },
+      doneTxt:'เปิด Dashboard แล้ว'
+    },
+    {
+      title:'ขั้นที่ 3 — ปิดการขายด้วยแถบสด',
+      sub:'ชี้แถบ "เหตุการณ์สด" ด้านบนหน้านี้ — เหตุการณ์ POS อยู่ตรงนั้น',
+      say:'"ลูกค้าเล่นระบบไหนก็ได้ แล้วกลับมาหน้านี้จะเห็นว่าระบบทั้งหมดเชื่อมกันจริง — ชุดนี้นักเรียนทำได้หลังจบคลาสเดียวครับ"',
+      link:null, linkTxt:null,
+      doneCheck:function(){ return bridgeHas('pos','sale') && dkLoad().openedDash === true; },
+      doneTxt:'ครบทั้ง 3 ขั้น — พร้อมพิชต์'
+    }
+  ];
+  var ov = null;
+  function renderDK(){
+    var st = dkLoad();
+    if (STEPS[st.step] && STEPS[st.step].doneCheck() && st.step < 2) { st.step++; dkSave(st); }
+    var s = STEPS[Math.min(st.step, 2)];
+    var done = s.doneCheck();
+    ov.innerHTML = '<div class="dk-card" role="dialog" aria-modal="true" aria-label="สคริปต์เดโมขาย">' +
+      '<div class="dk-steps">' + STEPS.map(function(_,i){ return '<i class="'+(i < st.step || (i===st.step && done) ? 'done':'')+'"></i>'; }).join('') + '</div>' +
+      '<h3>'+s.title+'</h3><div class="dk-sub">สคริปต์เดโมขาย · ใช้เวลาประมาณ 1 นาทีต่อขั้น</div>' +
+      '<div class="dk-say">'+s.say+'</div>' +
+      '<p style="font-size:.88rem;color:#666;margin-bottom:1rem">'+s.sub+'</p>' +
+      '<div class="dk-act">' +
+        (s.link ? '<a class="btn-primary" id="dkGo" href="'+s.link+'">'+s.linkTxt+'</a>' : '') +
+        (done ? '<span class="dk-done">✓ '+s.doneTxt+'</span>' : '') +
+        (done && st.step < 2 ? '<button class="btn-ghost hot" id="dkNext">ขั้นถัดไป →</button>' : '') +
+        (done && st.step === 2 ? '<button class="btn-ghost hot" id="dkNext">ปิด · เริ่มพิชต์เลย</button>' : '') +
+        '<button class="btn-ghost" id="dkClose">ปิด</button>' +
+      '</div></div>';
+    var go = document.getElementById('dkGo');
+    if (go) go.addEventListener('click', function(){
+      if (st.step === 1) { st.openedDash = true; dkSave(st); }
+    });
+    var nx = document.getElementById('dkNext');
+    if (nx) nx.addEventListener('click', function(){
+      if (st.step >= 2) { dkSave({step:0, openedDash:false}); closeDK(); return; }
+      st.step++; dkSave(st); renderDK();
+    });
+    document.getElementById('dkClose').addEventListener('click', closeDK);
+  }
+  function openDK(){
+    ov = document.createElement('div');
+    ov.className = 'dk'; ov.id = 'demoKitOv';
+    document.body.appendChild(ov);
+    ov.addEventListener('click', function(e){ if (e.target === ov) closeDK(); });
+    renderDK();
+  }
+  function closeDK(){ if (ov) { ov.remove(); ov = null; } }
+  document.getElementById('demoKitBtn').addEventListener('click', openDK);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeDK(); });
+  /* ถ้าเพิ่งกลับมาจากระบบและมี overlay ค้างใน state → ไม่เปิดอัตโนมัติ ให้ผู้ใช้กดเอง */
 })();
 </script>
 </body>
