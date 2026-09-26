@@ -12,11 +12,11 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --acc:#6366f1; --acc-hi:#818cf8; --acc-deep:#4338ca;
-  --bg:#0a0c14; --bg2:#10131f; --panel:#141827; --panel2:#1a1f33;
-  --line:#262c44; --line2:#333b5e;
-  --ink:#e8eaf6; --muted:#8b93b8; --dim:#5a6285;
-  --green:#34d399; --amber:#fbbf24; --orange:#fb923c; --red:#f87171; --blue:#60a5fa; --pink:#f472b6;
+  --acc:#c96f3b; --acc-hi:#e08a52; --acc-deep:#a8542a;
+  --bg:#15120f; --bg2:#1a1713; --panel:#211d18; --panel2:#282219;
+  --line:#332d24; --line2:#4a4132;
+  --ink:#ece6dc; --muted:#a3988a; --dim:#6e6558;
+  --green:#5da383; --amber:#d9a13b; --orange:#c96f3b; --red:#c65f5f; --blue:#6b8cae; --pink:#b87a94;
   --mono:'JetBrains Mono',monospace;
   --spring:cubic-bezier(.34,1.56,.64,1);
 }
@@ -28,10 +28,10 @@ input{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--acc-hi);outline-offset:2px}
 [hidden]{display:none!important}
 .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
-::selection{background:#312e81}
+::selection{background:#4a3a28}
 
 /* ============ BOOT ============ */
-.boot{position:fixed;inset:0;z-index:900;display:grid;place-items:center;background:radial-gradient(900px 600px at 50% 40%,#141a36,#0a0c14 70%)}
+.boot{position:fixed;inset:0;z-index:900;display:grid;place-items:center;background:radial-gradient(900px 600px at 50% 40%,#241c12,#15120f 70%)}
 .boot-in{text-align:center}
 .radar{width:120px;height:120px;margin:0 auto 1.4rem;position:relative}
 .radar::before,.radar::after{content:'';position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--acc)}
@@ -43,7 +43,7 @@ input{font:inherit;color:inherit}
 .boot .ver{font-family:var(--mono);font-size:.78rem;color:var(--acc-hi);letter-spacing:.35em;margin-top:.3rem}
 .boot .stat{font-family:var(--mono);font-size:.72rem;color:var(--dim);margin-top:1.2rem;min-height:1.2em}
 .boot .bar{width:200px;height:2px;background:var(--line);margin:.7rem auto 0;border-radius:2px;overflow:hidden}
-.boot .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--pink));transition:width .3s}
+.boot .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--amber));transition:width .3s}
 
 /* ============ SHELL ============ */
 .app{min-height:100vh;display:flex;flex-direction:column}
@@ -53,7 +53,7 @@ input{font:inherit;color:inherit}
 .brand small{font-weight:400;color:var(--dim);font-size:.72rem;display:block;margin-top:-.2rem}
 .zones{display:flex;background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:3px;gap:2px}
 .zones button{padding:.35rem .9rem;border-radius:99px;font-size:.8rem;color:var(--muted);min-height:36px;transition:all .2s var(--spring)}
-.zones button.on{background:var(--acc);color:#fff;font-weight:600;box-shadow:0 0 14px rgba(99,102,241,.5)}
+.zones button.on{background:var(--acc);color:#fff;font-weight:600}
 .kpi-pill{display:flex;align-items:center;gap:.4rem;background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:.35rem .85rem;font-size:.76rem;color:var(--muted)}
 .kpi-pill b{font-family:var(--mono);font-weight:700;color:var(--ink)}
 .kpi-pill.hot b{color:var(--amber)}
@@ -61,33 +61,33 @@ input{font:inherit;color:inherit}
 .clock{font-family:var(--mono);font-size:.88rem;color:var(--muted)}
 .icbtn{width:42px;height:42px;border-radius:11px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);transition:all .2s;background:var(--panel)}
 .icbtn:hover{border-color:var(--acc);color:var(--acc-hi)}
-.icbtn.on{border-color:var(--acc);color:var(--acc-hi);box-shadow:0 0 12px rgba(99,102,241,.35)}
+.icbtn.on{border-color:var(--acc);color:var(--acc-hi)}
 
 /* ============ MAIN ============ */
 .main{flex:1;display:grid;grid-template-columns:1fr 330px;min-height:0}
 @media(max-width:1000px){.main{grid-template-columns:1fr}.rail-r{display:none}}
 .floor-wrap{position:relative;overflow:hidden;background:
-  radial-gradient(700px 400px at 20% 0%,rgba(99,102,241,.08),transparent 60%),
-  radial-gradient(600px 400px at 90% 100%,rgba(244,114,182,.05),transparent 60%),var(--bg)}
+  radial-gradient(700px 400px at 20% 0%,rgba(201,111,59,.06),transparent 60%),
+  radial-gradient(600px 400px at 90% 100%,rgba(93,163,131,.04),transparent 60%),var(--bg)}
 #floorDots{position:absolute;inset:0;pointer-events:none;z-index:5}
 svg#floorSvg{display:block;width:100%;height:100%;min-height:520px}
-.zone-rect{fill:rgba(99,102,241,.03);stroke:var(--line);stroke-dasharray:6 6;stroke-width:1;rx:14}
+.zone-rect{fill:rgba(217,161,59,.03);stroke:var(--line);stroke-dasharray:6 6;stroke-width:1;rx:14}
 .zone-label{font-family:var(--mono);font-size:11px;letter-spacing:.3em;fill:var(--dim);text-transform:uppercase}
-.tbl{cursor:pointer;transition:transform .25s var(--spring)}
-.tbl:hover{transform:scale(1.08)}
-.tbl .base{transition:fill .4s,stroke .4s,filter .4s}
+.tbl{cursor:pointer}
+.tbl .base{transition:fill .4s,stroke .4s}
+.tbl:hover .base{stroke-width:2.6}
 .tbl .tno{font-family:var(--mono);font-size:13px;font-weight:700;fill:var(--ink);text-anchor:middle;pointer-events:none}
 .tbl .tsub{font-size:10px;fill:var(--muted);text-anchor:middle;pointer-events:none}
-.tbl.st-empty .base{fill:#1b2033;stroke:var(--line2)}
-.tbl.st-open .base{fill:#3b2f10;stroke:var(--amber);filter:drop-shadow(0 0 10px rgba(251,191,36,.35))}
-.tbl.st-cooking .base{fill:#3c1f10;stroke:var(--orange);filter:drop-shadow(0 0 12px rgba(251,146,60,.45))}
-.tbl.st-served .base{fill:#0f2e22;stroke:var(--green);filter:drop-shadow(0 0 10px rgba(52,211,153,.35))}
-.tbl.st-billing .base{fill:#10203c;stroke:var(--blue);filter:drop-shadow(0 0 10px rgba(96,165,250,.4))}
-.tbl.st-ready .base{fill:#2e1040;stroke:var(--pink);filter:drop-shadow(0 0 16px rgba(244,114,182,.6));animation:readyPulse 1s ease-in-out infinite}
+.tbl.st-empty .base{fill:#211d18;stroke:var(--line2)}
+.tbl.st-open .base{fill:#2e2414;stroke:var(--amber)}
+.tbl.st-cooking .base{fill:#2e1c11;stroke:var(--orange)}
+.tbl.st-served .base{fill:#14241c;stroke:var(--green)}
+.tbl.st-billing .base{fill:#17222e;stroke:var(--blue)}
+.tbl.st-ready .base{fill:#2c1822;stroke:var(--pink);animation:readyPulse 1.2s ease-in-out infinite}
 @keyframes readyPulse{50%{stroke-width:3.5}}
-.tbl.dim{opacity:.18;pointer-events:none}
-.tbl.sel .base{stroke-width:3}
-.heat-ring{fill:none;stroke-width:2;opacity:.6;pointer-events:none}
+.tbl.dim{opacity:.22;pointer-events:none}
+.tbl.sel .base{stroke-width:2.6}
+.heat-ring{fill:none;stroke-width:1.4;opacity:.35;pointer-events:none}
 
 /* right rail */
 .rail-r{border-left:1px solid var(--line);background:var(--bg2);display:flex;flex-direction:column;min-height:0}
@@ -127,7 +127,7 @@ svg#floorSvg{display:block;width:100%;height:100%;min-height:520px}
 .sheet-f{padding:.7rem 1.1rem 1.1rem;display:flex;gap:.6rem;border-top:1px solid var(--line)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:600;border-radius:12px;padding:.75rem 1.1rem;min-height:48px;transition:all .18s var(--spring);flex:1;font-size:.9rem}
 .btn:active{transform:scale(.97)}
-.btn-a{background:var(--acc);color:#fff;box-shadow:0 8px 24px -8px rgba(99,102,241,.6)}
+.btn-a{background:var(--acc);color:#fff;box-shadow:0 8px 24px -10px rgba(201,111,59,.5)}
 .btn-a:hover{background:var(--acc-hi)}
 .btn-o{border:1.5px solid var(--line2);color:var(--muted)}
 .btn-o:hover{border-color:var(--acc);color:var(--acc-hi)}
@@ -241,7 +241,7 @@ svg#floorSvg{display:block;width:100%;height:100%;min-height:520px}
 
 <div class="toast" id="toast"></div>
 
-<a href="../" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(20,24,39,.92);backdrop-filter:blur(8px);border:1px solid #262c44;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-size:13px;font-weight:500;color:#e8eaf6;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.4)">
+<a href="../" aria-label="กลับไปหน้ารวมตัวอย่าง" style="position:fixed;left:16px;bottom:16px;z-index:800;display:inline-flex;align-items:center;gap:8px;min-height:44px;background:rgba(33,29,24,.92);backdrop-filter:blur(8px);border:1px solid #332d24;border-left:3px solid #FF0000;border-radius:99px;padding:9px 16px;font-size:13px;font-weight:500;color:#ece6dc;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.4)">
 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
 หน้ารวมตัวอย่าง
 </a>
@@ -268,7 +268,7 @@ var TABLE_DEF=[
   {no:'B1',x:680,y:450,z:'bar',c:1},{no:'B2',x:790,y:460,z:'bar',c:1}
 ];
 var ZONES={inside:{n:'ในร้าน',x:60,y:50,w:520,h:380},patio:{n:'ระเบียง',x:590,y:50,w:260,h:380},bar:{n:'บาร์',x:590,y:440,w:260,h:100}};
-var ST={empty:{n:'ว่าง',c:'#5a6285'},open:{n:'เปิดโต๊ะ',c:'#fbbf24'},cooking:{n:'รอครัว',c:'#fb923c'},ready:{n:'พร้อมเสิร์ฟ',c:'#f472b6'},served:{n:'เสิร์ฟแล้ว',c:'#34d399'},billing:{n:'เรียกเก็บเงิน',c:'#60a5fa'}};
+var ST={empty:{n:'ว่าง',c:'#6e6558'},open:{n:'เปิดโต๊ะ',c:'#d9a13b'},cooking:{n:'รอครัว',c:'#c96f3b'},ready:{n:'พร้อมเสิร์ฟ',c:'#b87a94'},served:{n:'เสิร์ฟแล้ว',c:'#5da383'},billing:{n:'เรียกเก็บเงิน',c:'#6b8cae'}};
 
 function seed(){
   var t=Date.now();
@@ -322,7 +322,7 @@ function renderFloor(){
   });
   // kitchen pass (จุดส่งอาหาร)
   var pass=el('g',{});
-  pass.appendChild(el('rect',{x:250,y:470,width:180,height:56,rx:12,fill:'#1a1f33',stroke:'#333b5e','stroke-dasharray':'4 4'}));
+  pass.appendChild(el('rect',{x:250,y:470,width:180,height:56,rx:12,fill:'#211d18',stroke:'#4a4132','stroke-dasharray':'4 4'}));
   var pt=el('text',{x:340,y:503,'class':'zone-label','text-anchor':'middle'});pt.textContent='PASS · ครัว';pass.appendChild(pt);
   svg.appendChild(pass);
   // tables
@@ -356,7 +356,7 @@ function svgToPx(p){return{x:p.x/900*cvs.width,y:p.y/560*cvs.height}}
 function spawnDot(no,color,onDone){
   var t=tbl(no);if(!t)return;
   var a=svgToPx(PASS),b=svgToPx(t);
-  dots.push({x0:a.x,y0:a.y,x1:b.x,y1:b.y,p:0,color:color||'#f472b6',t:no,onDone:onDone,back:false});
+  dots.push({x0:a.x,y0:a.y,x1:b.x,y1:b.y,p:0,color:color||'#b87a94',t:no,onDone:onDone,back:false});
 }
 function tickDots(){
   ctx.clearRect(0,0,cvs.width,cvs.height);
@@ -415,7 +415,7 @@ function openTable(t){
   t.st='open';t.opened=Date.now();t.items=[];
   save();renderAll();
   linkWrite('floor','table-open','ผังร้านสด · เปิดโต๊ะ '+t.no+' ('+t.c+' ที่)',null);
-  feed('#fbbf24','เปิดโต๊ะ '+t.no+' — ลูกค้า '+t.c+' ที่');
+  feed('#d9a13b','เปิดโต๊ะ '+t.no+' — ลูกค้า '+t.c+' ที่');
   blip(520,.09);
 }
 function addItem(t,mid){
@@ -429,15 +429,15 @@ function sendKitchen(t){
   t.st='cooking';save();renderAll();
   var tot=tblTotal(t);
   linkWrite('floor','order','ผังร้านสด · '+t.no+' ส่งครัว '+t.items.length+' รายการ '+fmt(tot),tot);
-  feed('#fb923c',t.no+' ส่งครัว '+t.items.length+' รายการ ('+fmt(tot)+')');
-  spawnDot(t.no,'#fb923c',null);
+  feed('#c96f3b',t.no+' ส่งครัว '+t.items.length+' รายการ ('+fmt(tot)+')');
+  spawnDot(t.no,'#c96f3b',null);
   chime();
   // จำลองครัวทำเสร็จใน 18-30 วิ (ถ้า KDS จริงไม่ได้ตอบกลับ)
   setTimeout(function(){
     if(t.st==='cooking'){
       t.st='ready';save();renderAll();
       linkWrite('floor','ready','ผังร้านสด · อาหาร '+t.no+' พร้อมเสิร์ฟ',null);
-      feed('#f472b6',t.no+' พร้อมเสิร์ฟแล้ว (ครัวจำลอง)');
+      feed('#b87a94',t.no+' พร้อมเสิร์ฟแล้ว (ครัวจำลอง)');
       chime();
     }
   },18000+Math.random()*12000);
@@ -445,13 +445,13 @@ function sendKitchen(t){
 function serveTable(t){
   t.st='served';save();renderAll();
   linkWrite('floor','served','ผังร้านสด · เสิร์ฟ '+t.no+' ครบแล้ว',null);
-  feed('#34d399','เสิร์ฟ '+t.no+' ครบแล้ว');
-  spawnDot(t.no,'#34d399',null);
+  feed('#5da383','เสิร์ฟ '+t.no+' ครบแล้ว');
+  spawnDot(t.no,'#5da383',null);
 }
 function billTable(t){
   t.st='billing';save();renderAll();
   linkWrite('floor','billing','ผังร้านสด · '+t.no+' เรียกเก็บเงิน '+fmt(tblTotal(t)),tblTotal(t));
-  feed('#60a5fa',t.no+' เรียกเก็บเงิน '+fmt(tblTotal(t)));
+  feed('#6b8cae',t.no+' เรียกเก็บเงิน '+fmt(tblTotal(t)));
 }
 function payTable(t){
   var tot=tblTotal(t);
@@ -459,14 +459,14 @@ function payTable(t){
   t.st='empty';t.items=[];t.opened=null;t.readyAt=null;
   save();renderAll();closeSheet();
   linkWrite('floor','paid','ผังร้านสด · '+t.no+' เก็บเงิน '+fmt(tot)+' โต๊ะว่างแล้ว',tot);
-  feed('#34d399','เก็บเงิน '+t.no+' '+fmt(tot)+' — โต๊ะว่าง');
-  spawnDot(t.no,'#60a5fa',null);
+  feed('#5da383','เก็บเงิน '+t.no+' '+fmt(tot)+' — โต๊ะว่าง');
+  spawnDot(t.no,'#6b8cae',null);
   chime();
 }
 function clearTable(t){
   t.st='empty';t.items=[];t.opened=null;
   save();renderAll();closeSheet();
-  feed('#5a6285','เคลียร์ '+t.no+' (ยกเลิก)');
+  feed('#6e6558','เคลียร์ '+t.no+' (ยกเลิก)');
 }
 
 /* ---------- sheet ---------- */
@@ -479,7 +479,7 @@ function closeSheet(){selNo=null;document.getElementById('sheet').classList.remo
 document.getElementById('shClose').addEventListener('click',closeSheet);
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeSheet();closeFeed()}});
 
-var STT_CLASS={empty:'background:#1b2033;color:#8b93b8',open:'background:#3b2f10;color:#fbbf24',cooking:'background:#3c1f10;color:#fb923c',ready:'background:#2e1040;color:#f472b6',served:'background:#0f2e22;color:#34d399',billing:'background:#10203c;color:#60a5fa'};
+var STT_CLASS={empty:'background:#211d18;color:#a3988a',open:'background:#2e2414;color:#d9a13b',cooking:'background:#2e1c11;color:#c96f3b',ready:'background:#2c1822;color:#b87a94',served:'background:#14241c;color:#5da383',billing:'background:#17222e;color:#6b8cae'};
 function renderSheet(t){
   document.getElementById('shNo').textContent=t.no;
   var st=document.getElementById('shState');
@@ -560,10 +560,10 @@ function pollBridge(){
     if(e.t<=seenKds)return;
     if(e.sys==='kds'&&e.type==='order-ready'){
       var rd=state.tbls.find(function(t){return t.st==='cooking'});
-      if(rd){rd.st='ready';save();renderAll();feed('#f472b6',rd.no+' พร้อมเสิร์ฟ (ครัวดี KDS กดจริง)');chime()}
+      if(rd){rd.st='ready';save();renderAll();feed('#b87a94',rd.no+' พร้อมเสิร์ฟ (ครัวดี KDS กดจริง)');chime()}
     }
     if(e.sys==='pos'&&e.type==='sale'){
-      feed('#0c8a61','POS หยกมณีขายไป '+((e.val||0).toLocaleString('th-TH'))+' บาท (ข้ามระบบ)',e.t);
+      feed('#5da383','POS หยกมณีขายไป '+((e.val||0).toLocaleString('th-TH'))+' บาท (ข้ามระบบ)',e.t);
     }
   });
   if(l.events.length)seenKds=Math.max(seenKds,l.events[0].t);
@@ -594,14 +594,14 @@ document.getElementById('offBtn').addEventListener('click',function(){
 document.getElementById('resetBtn').addEventListener('click',function(){
   if(confirm('รีเซ็ตผังร้านกลับตัวอย่าง?')){
     localStorage.removeItem(LS);state=blank();save();closeSheet();renderAll();
-    feedItems=[];feed('#5a6285','รีเซ็ตข้อมูลตัวอย่างแล้ว');
+    feedItems=[];feed('#6e6558','รีเซ็ตข้อมูลตัวอย่างแล้ว');
     toast('รีเซ็ตแล้ว');
   }
 });
 
 /* ---------- feed drawer ---------- */
 var lastSeenFeed=0;
-function sysColor(sys){var M={pos:'#0c8a61',kds:'#fb923c',queue:'#9333ea',crm:'#5b5bd6',inv:'#d97706',docs:'#0284c7',hr:'#0d9488',dorm:'#b45309',appt:'#c2410c',school:'#0ea5e9',gym:'#65a30d',repair:'#be185d',hotel:'#1e3a8a',laundry:'#c026d3',purch:'#475569',loyalty:'#7c3aed',kanban:'#0f766e',cashbook:'#15803d',sales:'#0369a1',admin:'#7c2d12',delivery:'#0284c7',rental:'#a16207',tournament:'#b91c1c',floor:'#6366f1'};return M[sys]||'#64748b'}
+function sysColor(sys){var M={pos:'#5da383',kds:'#c96f3b',queue:'#9333ea',crm:'#5b5bd6',inv:'#d97706',docs:'#0284c7',hr:'#0d9488',dorm:'#b45309',appt:'#c2410c',school:'#0ea5e9',gym:'#65a30d',repair:'#be185d',hotel:'#1e3a8a',laundry:'#c026d3',purch:'#475569',loyalty:'#7c3aed',kanban:'#0f766e',cashbook:'#15803d',sales:'#0369a1',admin:'#7c2d12',delivery:'#0284c7',rental:'#a16207',tournament:'#b91c1c',floor:'#c96f3b'};return M[sys]||'#64748b'}
 function renderFeedDrawer(){
   var l=linkRead();
   document.getElementById('feedCount').textContent=l.events.length+' เหตุการณ์';
@@ -615,7 +615,7 @@ function updateFeedBadge(){
   var l=linkRead();
   var newer=l.events.filter(function(e){return e.t>lastSeenFeed&&e.sys!=='floor'}).length;
   var b=document.getElementById('feedBtn');
-  b.style.boxShadow=(newer&&!document.getElementById('feedDrawer').classList.contains('open'))?'0 0 12px rgba(244,114,182,.6)':'';
+  b.style.boxShadow=(newer&&!document.getElementById('feedDrawer').classList.contains('open'))?'0 0 12px rgba(184,122,148,.5)':'';
 }
 document.getElementById('feedBtn').addEventListener('click',function(){
   renderFeedDrawer();
@@ -652,7 +652,7 @@ setInterval(function(){document.getElementById('clock').textContent=new Date().t
 setInterval(function(){renderFloor()},20000); // refresh ago labels
 save();
 renderAll();
-feed('#6366f1','เปิดกะวันนี้แล้ว — ผังพร้อมใช้งาน');
+feed('#c96f3b','เปิดกะวันนี้แล้ว — ผังพร้อมใช้งาน');
 tickDots();
 })();
 </script>
