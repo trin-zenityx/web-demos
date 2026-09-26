@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>สะสมดี Pro — ระบบสมาชิกสะสมแต้ม | ZenityX Demos</title>
+<title>แต้มสมาชิกคาเฟ่ Pro — ระบบสมาชิกสะสมแต้ม | ZenityX Demos</title>
 <meta name="description" content="ระบบ loyalty ระดับ production — ลูกค้าเช็คแต้มด้วยเบอร์เอง, การ์ดสะสมดิจิทัล, ระดับสมาชิก, redeem ของรางวัล, แคมเปญแต้มคูณ">
-<meta property="og:title" content="สะสมดี Pro — เดโมใช้งานได้จริง">
+<meta property="og:title" content="แต้มสมาชิกคาเฟ่ Pro — เดโมใช้งานได้จริง">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%237c3aed'/%3E%3Crect x='22' y='38' width='56' height='42' rx='6' fill='white'/%3E%3Cpath d='M50 38v42M22 52h56' stroke='%237c3aed' stroke-width='6'/%3E%3Cpath d='M38 38c-6-10 6-18 12-6 6-12 18-4 12 6' stroke='white' stroke-width='6' fill='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -192,7 +192,7 @@ body{font-size:16px;line-height:1.65}
 <!-- CUSTOMER ENTRY -->
 <div class="cust-view" id="custView" hidden>
   <div class="cust-in">
-    <div class="cust-brand"><img src="assets/logo.jpg" alt=""><b>สะสมดี</b></div>
+    <div class="cust-brand"><img src="assets/logo.jpg" alt=""><b>แต้มสมาชิกคาเฟ่</b></div>
     <p class="cust-sub">คาเฟ่ หยกมณี — สมาชิกเช็คแต้มและแลกของรางวัลได้ด้วยตัวเอง</p>
     <div class="cust-card" id="lookupCard">
       <h2>เช็คแต้มของคุณ</h2>
@@ -223,9 +223,9 @@ body{font-size:16px;line-height:1.65}
 
 <!-- STAFF APP -->
 <div class="app" id="appView" hidden>
-  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>สะสมดี Pro</b></div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>แต้มสมาชิกคาเฟ่ Pro</b></div>
   <aside class="rail" id="rail">
-    <div class="logo"><img src="assets/logo.jpg" alt="สะสมดี"></div>
+    <div class="logo"><img src="assets/logo.jpg" alt="แต้มสมาชิกคาเฟ่"></div>
     <nav>
       <button class="ri on" data-page="members" aria-label="สมาชิก"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="tip">สมาชิก (M)</span></button>
       <button class="ri" data-page="rewards" aria-label="ของรางวัล"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg><span class="tip">ของรางวัล (R)</span></button>
@@ -269,7 +269,7 @@ body{font-size:16px;line-height:1.65}
     </div>
 
     <div class="statusbar">
-      <span>สะสมดี Pro v1.1.3</span>
+      <span>แต้มสมาชิกคาเฟ่ Pro v1.1.3</span>
       <span class="ok">● พร้อมใช้งาน</span>
       <span class="sp"></span>
       <span>อัตราแต้ม: ฿20 = 1 แต้ม · ซื้อครั้ง = 1 แสตมป์</span>
@@ -431,7 +431,7 @@ document.getElementById('mRewards').addEventListener('click', function(e){
   m.pts -= r.pts; r.redeemed++;
   m.hist.unshift({ t: Date.now(), d: 'แลก ' + r.name, v: -r.pts });
   save(); showMemberCard(m); renderAll();
-  linkWrite('loyalty','redeem','สะสมดี · ' + m.name + ' แลก ' + r.name + ' (' + r.pts + ' แต้ม)', r.pts);
+  linkWrite('loyalty','redeem','แต้มสมาชิกคาเฟ่ · ' + m.name + ' แลก ' + r.name + ' (' + r.pts + ' แต้ม)', r.pts);
   toast('แลก ' + r.name + ' สำเร็จ — เหลือ ' + fmt(m.pts) + ' แต้ม');
 });
 document.getElementById('custBack').addEventListener('click', function(){
@@ -521,7 +521,7 @@ function openMember(id){
       toast('+' + gained + ' แต้ม ให้ ' + m.name);
     }
     save(); openMember(id); renderAll();
-    linkWrite('loyalty','earn','สะสมดี · ' + m.name + ' ซื้อ ฿' + fmt(amt) + ' ได้ +' + gained + ' แต้ม', gained);
+    linkWrite('loyalty','earn','แต้มสมาชิกคาเฟ่ · ' + m.name + ' ซื้อ ฿' + fmt(amt) + ' ได้ +' + gained + ' แต้ม', gained);
   });
 }
 document.getElementById('memberBody').addEventListener('click', function(e){
@@ -546,7 +546,7 @@ function renderCamp(){
 }
 document.getElementById('campBtn').addEventListener('click', function(){
   state.campaign2x = !state.campaign2x; save(); renderCamp();
-  linkWrite('loyalty','campaign','สะสมดี · ' + (state.campaign2x ? 'เปิด' : 'ปิด') + ' แคมเปญแต้ม ×2', null);
+  linkWrite('loyalty','campaign','แต้มสมาชิกคาเฟ่ · ' + (state.campaign2x ? 'เปิด' : 'ปิด') + ' แคมเปญแต้ม ×2', null);
   toast(state.campaign2x ? 'เปิดแคมเปญแต้ม ×2 แล้ว' : 'ปิดแคมเปญแล้ว');
 });
 
@@ -575,7 +575,7 @@ document.getElementById('amSave').addEventListener('click', function(){
   if (state.members.some(function(m){ return m.phone === phone; })) { toast('เบอร์นี้เป็นสมาชิกอยู่แล้ว', true); return; }
   var m = { id:'MB-' + String(state.seq++).padStart(3,'0'), name: name, phone: phone, pts: 0, stamps: 0, spend: 0, hist: [] };
   state.members.unshift(m); save(); closeAllModals(); renderAll();
-  linkWrite('loyalty','new-member','สะสมดี · สมาชิกใหม่ ' + name + ' (' + m.id + ')', null);
+  linkWrite('loyalty','new-member','แต้มสมาชิกคาเฟ่ · สมาชิกใหม่ ' + name + ' (' + m.id + ')', null);
   toast('สมัครสมาชิก ' + name + ' แล้ว — ลองเช็คแต้มหน้าลูกค้าด้วยเบอร์นี้ได้เลย');
   document.getElementById('amName').value = ''; document.getElementById('amPhone').value = '';
 });

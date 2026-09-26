@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>เรียนดี Pro — ระบบโรงเรียน เช็คชื่อ คะแนน ตารางเรียน | ZenityX Demos</title>
+<title>เช็คชื่อโรงเรียน Pro — ระบบโรงเรียน เช็คชื่อ คะแนน ตารางเรียน | ZenityX Demos</title>
 <meta name="description" content="ระบบโรงเรียนระดับ production — แตะบัตรเช็คชื่อ, คะแนน+เกรดอัตโนมัติ, ตารางเรียน, โปรไฟล์นักเรียน, เชื่อมข้ามระบบ">
-<meta property="og:title" content="เรียนดี Pro — เดโมใช้งานได้จริง">
+<meta property="og:title" content="เช็คชื่อโรงเรียน Pro — เดโมใช้งานได้จริง">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230ea5e9'/%3E%3Cpath d='M50 22L18 40l32 18 32-18z' fill='white'/%3E%3Cpath d='M32 52v14c0 5 8 10 18 10s18-5 18-10V52' fill='none' stroke='white' stroke-width='6'/%3E%3Cpath d='M82 42v20' stroke='white' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -187,7 +187,7 @@ body{font-size:16px;line-height:1.65}
 <!-- CARD-TAP ENTRY -->
 <div class="tap-view" id="tapView" hidden>
   <div class="tap-in">
-    <div class="tap-brand"><img src="assets/logo.jpg" alt=""><b>เรียนดี Pro</b></div>
+    <div class="tap-brand"><img src="assets/logo.jpg" alt=""><b>เช็คชื่อโรงเรียน Pro</b></div>
     <p class="tap-sub">โรงเรียนวิทยาคมต้นธาตุ · แตะบัตรประจำตัวเพื่อเข้าระบบ</p>
     <div class="idcards" id="idRow"></div>
     <div class="tap-zone" id="tapZone">
@@ -200,9 +200,9 @@ body{font-size:16px;line-height:1.65}
 
 <!-- APP -->
 <div class="app" id="appView" hidden>
-  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>เรียนดี Pro</b></div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>เช็คชื่อโรงเรียน Pro</b></div>
   <aside class="rail" id="rail">
-    <div class="logo"><img src="assets/logo.jpg" alt="เรียนดี"></div>
+    <div class="logo"><img src="assets/logo.jpg" alt="เช็คชื่อโรงเรียน"></div>
     <nav>
       <button class="ri on" data-page="roll" aria-label="เช็คชื่อ"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3 8-8"/><path d="M21 12v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h11"/></svg><span class="tip">เช็คชื่อ (R)</span></button>
       <button class="ri" data-page="tt" aria-label="ตารางเรียน"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="tip">ตารางเรียนวันนี้ (T)</span></button>
@@ -250,7 +250,7 @@ body{font-size:16px;line-height:1.65}
     </div>
 
     <div class="statusbar">
-      <span>เรียนดี Pro v1.2.6</span>
+      <span>เช็คชื่อโรงเรียน Pro v1.2.6</span>
       <span class="ok">● พร้อมใช้งาน</span>
       <span class="sp"></span>
       <span id="stUser">—</span>
@@ -415,7 +415,7 @@ document.getElementById('saveRoll').addEventListener('click', function(){
   var att = todayAtt();
   var p = 0, l = 0, a = 0;
   Object.keys(att).forEach(function(k){ if (att[k]==='p') p++; else if (att[k]==='l') l++; else if (att[k]==='a') a++; });
-  linkWrite('school','roll-done','เรียนดี · เช็คชื่อ ม.4/2 เสร็จ — มา ' + p + ' สาย ' + l + ' ขาด ' + a, p);
+  linkWrite('school','roll-done','เช็คชื่อโรงเรียน · เช็คชื่อ ม.4/2 เสร็จ — มา ' + p + ' สาย ' + l + ' ขาด ' + a, p);
   bell();
   toast('บันทึกเช็คชื่อแล้ว — มา ' + p + ' สาย ' + l + ' ขาด ' + a);
 });

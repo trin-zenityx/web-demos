@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ห้องดี Pro — ระบบจัดการหอพัก มิเตอร์ บิล ผู้เช่า | ZenityX Demos</title>
+<title>ระบบหอพัก Pro — ระบบจัดการหอพัก มิเตอร์ บิล ผู้เช่า | ZenityX Demos</title>
 <meta name="description" content="ระบบหอพักระดับ production — ผังห้องสด, จดมิเตอร์น้ำไฟคำนวณบิลอัตโนมัติ, ใบเสร็จค่าเช่า, แจ้งซ่อม, เชื่อมข้ามระบบ">
-<meta property="og:title" content="ห้องดี Pro — เดโมใช้งานได้จริง">
+<meta property="og:title" content="ระบบหอพัก Pro — เดโมใช้งานได้จริง">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23b45309'/%3E%3Crect x='24' y='30' width='52' height='52' fill='white'/%3E%3Cpath d='M24 30l26-14 26 14' fill='white'/%3E%3Crect x='32' y='40' width='10' height='10' fill='%23b45309'/%3E%3Crect x='58' y='40' width='10' height='10' fill='%23b45309'/%3E%3Crect x='32' y='58' width='10' height='10' fill='%23b45309'/%3E%3Crect x='45' y='58' width='10' height='24' fill='%23b45309'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -217,8 +217,8 @@ body{font-size:16px;line-height:1.65}
 <!-- SPLASH -->
 <div class="splash" id="splash">
   <div class="sp-in">
-    <img src="assets/logo.jpg" alt="โลโก้ห้องดี">
-    <b>ห้องดี Pro</b>
+    <img src="assets/logo.jpg" alt="โลโก้ระบบหอพัก">
+    <b>ระบบหอพัก Pro</b>
     <div class="ver">v1.9.3 · build 2569.09 · DormSys</div>
     <div class="bar"><i></i></div>
   </div>
@@ -228,7 +228,7 @@ body{font-size:16px;line-height:1.65}
 <div class="map-view" id="mapView" hidden>
   <div class="map-head">
     <img src="assets/logo.jpg" alt="">
-    <b>ห้องดี Pro</b>
+    <b>ระบบหอพัก Pro</b>
     <span class="sub">หอพักสุขใจ · ผังห้องสด — คลิกห้องเพื่อดูรายละเอียด (ผู้เช่า/บิล) หรือเข้าจัดการด้านล่าง</span>
   </div>
   <div class="map-legend">
@@ -243,9 +243,9 @@ body{font-size:16px;line-height:1.65}
 
 <!-- APP -->
 <div class="app" id="appView" hidden>
-  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ห้องดี Pro</b></div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ระบบหอพัก Pro</b></div>
   <aside class="rail" id="rail">
-    <div class="logo"><img src="assets/logo.jpg" alt="ห้องดี"></div>
+    <div class="logo"><img src="assets/logo.jpg" alt="ระบบหอพัก"></div>
     <nav>
       <button class="ri on" data-page="rooms" aria-label="ผังห้อง"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4"/></svg><span class="tip">ผังห้อง (R)</span></button>
       <button class="ri" data-page="meter" aria-label="จดมิเตอร์"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span class="tip">จดมิเตอร์น้ำไฟ (M)</span></button>
@@ -309,7 +309,7 @@ body{font-size:16px;line-height:1.65}
     </div>
 
     <div class="statusbar">
-      <span>ห้องดี Pro v1.9.3</span>
+      <span>ระบบหอพัก Pro v1.9.3</span>
       <span class="ok">● พร้อมใช้งาน</span>
       <span class="sp"></span>
       <span id="stOcc2">—</span>
@@ -501,7 +501,7 @@ function openRoom(no){
       if (!n) { toast('กรอกชื่อผู้เช่าก่อนครับ', true); return; }
       r.occ = true; r.tenant = n; r.phone = document.getElementById('mvPhone').value.trim(); r.since = Date.now(); r.late = false;
       save(); closeAllModals(); renderAll();
-      linkWrite('dorm','move-in','ห้องดี · ' + r.no + ' เปิดสัญญาเช่าใหม่ — ' + n + ' (' + fmt(r.rent) + '/เดือน)', r.rent);
+      linkWrite('dorm','move-in','ระบบหอพัก · ' + r.no + ' เปิดสัญญาเช่าใหม่ — ' + n + ' (' + fmt(r.rent) + '/เดือน)', r.rent);
       toast('ย้าย ' + n + ' เข้าห้อง ' + r.no + ' แล้ว');
     });
   } else {
@@ -522,7 +522,7 @@ function openRoom(no){
     });
     document.getElementById('mvOut').addEventListener('click', function(){
       if (!confirm('ยืนยัน ' + r.tenant + ' ย้ายออกจากห้อง ' + r.no + '?')) return;
-      linkWrite('dorm','move-out','ห้องดี · ' + r.no + ' — ' + r.tenant + ' ย้ายออก', null);
+      linkWrite('dorm','move-out','ระบบหอพัก · ' + r.no + ' — ' + r.tenant + ' ย้ายออก', null);
       r.occ = false; r.tenant = null; r.phone = null; r.since = null; r.late = false;
       save(); closeAllModals(); renderAll();
       toast('ห้อง ' + r.no + ' ว่างแล้ว');
@@ -579,7 +579,7 @@ document.getElementById('genBillsBtn').addEventListener('click', function(){
   });
   save(); renderAll();
   var sum = state.bills.filter(function(b){ return b.month === mKey; }).reduce(function(a,b){ return a + b.total; }, 0);
-  linkWrite('dorm','bills-issued','ห้องดี · ออกบิลเดือน ' + mKey + ' จำนวน ' + n + ' ฉบับ รวม ' + fmt(sum), sum);
+  linkWrite('dorm','bills-issued','ระบบหอพัก · ออกบิลเดือน ' + mKey + ' จำนวน ' + n + ' ฉบับ รวม ' + fmt(sum), sum);
   toast('ออกบิล ' + n + ' ฉบับ รวม ' + fmt(sum) + ' แล้ว');
   goPage('bills');
 });
@@ -606,7 +606,7 @@ document.getElementById('billBody').addEventListener('click', function(e){
     var room = state.rooms.find(function(r){ return r.no === b.room; });
     if (room && !state.bills.some(function(x){ return x.room === b.room && x.status !== 'paid'; })) room.late = false;
     save(); renderAll();
-    linkWrite('dorm','rent-paid','ห้องดี · ห้อง ' + b.room + ' ชำระบิล ' + b.no + ' ' + fmt(b.total), b.total);
+    linkWrite('dorm','rent-paid','ระบบหอพัก · ห้อง ' + b.room + ' ชำระบิล ' + b.no + ' ' + fmt(b.total), b.total);
     toast('รับชำระ ' + b.no + ' แล้ว — ' + fmt(b.total));
   } else if (pr) {
     var bl = state.bills.find(function(x){ return x.no === pr.dataset.print; });
@@ -618,7 +618,7 @@ document.getElementById('billBody').addEventListener('click', function(e){
       '<dt>ค่าน้ำ ('+bl.wU+' หน่วย × ฿'+WATER_RATE+')</dt><dd class="mono">'+fmt(bl.water)+'</dd>' +
       '<dt>ค่าไฟ ('+bl.eU+' หน่วย × ฿'+ELEC_RATE+')</dt><dd class="mono">'+fmt(bl.elec)+'</dd>' +
       '<dt class="tot">รวมสุทธิ</dt><dd class="tot mono">'+fmt(bl.total)+'</dd></dl>' +
-      '<p style="text-align:center;font-size:.74rem;color:var(--muted)">สถานะ: '+(bl.status==='paid'?'ชำระแล้ว — ขอบคุณครับ':'ค้างชำระ — กรุณาชำระภายในวันที่ 5')+' · ออกโดย ห้องดี Pro</p>';
+      '<p style="text-align:center;font-size:.74rem;color:var(--muted)">สถานะ: '+(bl.status==='paid'?'ชำระแล้ว — ขอบคุณครับ':'ค้างชำระ — กรุณาชำระภายในวันที่ 5')+' · ออกโดย ระบบหอพัก Pro</p>';
     document.getElementById('billOverlay').hidden = false;
   }
 });
@@ -645,7 +645,7 @@ document.getElementById('newRepBtn').addEventListener('click', function(){
   if (!what || !what.trim()) return;
   var r = { id: 'RP-' + String(state.repSeq++).padStart(3,'0'), room: room.no, what: what.trim(), at: Date.now(), status: 'open' };
   state.repairs.unshift(r); save(); renderAll();
-  linkWrite('dorm','repair-ticket','ห้องดี · แจ้งซ่อม ' + room.no + ' — ' + r.what, null);
+  linkWrite('dorm','repair-ticket','ระบบหอพัก · แจ้งซ่อม ' + room.no + ' — ' + r.what, null);
   toast('รับแจ้งซ่อม ' + r.id + ' แล้ว');
 });
 document.getElementById('repBody').addEventListener('click', function(e){

@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ซ่อมดี Pro — ระบบรับซ่อม ติดตามสถานะสด | ZenityX Demos</title>
+<title>ร้านซ่อมมือถือ·คอม Pro — ระบบรับซ่อม ติดตามสถานะสด | ZenityX Demos</title>
 <meta name="description" content="ระบบร้านซ่อมระดับ production — ลูกค้าติดตามงานซ่อมเองหน้าแรก, บอร์ดงานช่าง, อะไหล่+ค่าแรงคิดเงิน, ใบเสร็จ">
-<meta property="og:title" content="ซ่อมดี Pro — เดโมใช้งานได้จริง">
+<meta property="og:title" content="ร้านซ่อมมือถือ·คอม Pro — เดโมใช้งานได้จริง">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23be185d'/%3E%3Cpath d='M30 70l18-18M42 30l8 8M62 22l16 16-12 12-16-16z' stroke='white' stroke-width='7' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -219,7 +219,7 @@ body{font-size:16px;line-height:1.65}
 <!-- TRACK-FIRST ENTRY -->
 <div class="track-view" id="trackView" hidden>
   <div class="track-in">
-    <div class="track-brand"><img src="assets/logo.jpg" alt=""><b>ซ่อมดี Pro</b></div>
+    <div class="track-brand"><img src="assets/logo.jpg" alt=""><b>ร้านซ่อมมือถือ·คอม Pro</b></div>
     <p class="track-sub">ร้านซ่อมมือถือ-โน้ตบุ๊ก ช่างเจ · ติดตามงานซ่อมได้ด้วยตัวเอง 24 ชม.</p>
     <div class="track-card">
       <h2>ติดตามงานซ่อมของคุณ</h2>
@@ -239,9 +239,9 @@ body{font-size:16px;line-height:1.65}
 
 <!-- APP -->
 <div class="app" id="appView" hidden>
-  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ซ่อมดี Pro</b></div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ร้านซ่อมมือถือ·คอม Pro</b></div>
   <aside class="rail" id="rail">
-    <div class="logo"><img src="assets/logo.jpg" alt="ซ่อมดี"></div>
+    <div class="logo"><img src="assets/logo.jpg" alt="ร้านซ่อมมือถือ·คอม"></div>
     <nav>
       <button class="ri on" data-page="board" aria-label="บอร์ดงาน"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="5" height="18" rx="1"/><rect x="10" y="3" width="5" height="12" rx="1"/><rect x="17" y="3" width="5" height="8" rx="1"/></svg><span class="tip">บอร์ดงาน (B)</span></button>
       <button class="ri" data-page="all" aria-label="ใบซ่อมทั้งหมด"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span class="tip">ใบซ่อมทั้งหมด (A)</span></button>
@@ -280,7 +280,7 @@ body{font-size:16px;line-height:1.65}
     </div>
 
     <div class="statusbar">
-      <span>ซ่อมดี Pro v2.1.0</span>
+      <span>ร้านซ่อมมือถือ·คอม Pro v2.1.0</span>
       <span class="ok">● พร้อมใช้งาน</span>
       <span class="sp"></span>
       <span id="stJobs">งาน: 0</span>
@@ -485,7 +485,7 @@ function openJob(no){
       j.hist.push({ s: b.dataset.stage, t: Date.now() });
       save(); closeAllModals(); renderAll();
       var sName = STAGES.find(function(s){ return s.id === b.dataset.stage; }).n;
-      linkWrite('repair','job-stage','ซ่อมดี · ' + j.no + ' (' + j.device + ') → ' + sName, null);
+      linkWrite('repair','job-stage','ร้านซ่อมมือถือ·คอม · ' + j.no + ' (' + j.device + ') → ' + sName, null);
       toast(j.no + ' → ' + sName);
     });
   });
@@ -493,7 +493,7 @@ function openJob(no){
   if (paid) paid.addEventListener('click', function(){
     j.paid = true; j.doneAt = Date.now();
     save(); closeAllModals(); renderAll();
-    linkWrite('repair','job-done','ซ่อมดี · งาน ' + j.no + ' (' + j.device + ') ส่งมอบ เก็บ ' + fmt(jobTotal(j)), jobTotal(j));
+    linkWrite('repair','job-done','ร้านซ่อมมือถือ·คอม · งาน ' + j.no + ' (' + j.device + ') ส่งมอบ เก็บ ' + fmt(jobTotal(j)), jobTotal(j));
     toast('ส่งมอบ ' + j.no + ' — เก็บเงิน ' + fmt(jobTotal(j)));
     showReceipt(j);
   });
@@ -578,7 +578,7 @@ document.getElementById('intakeBtn').addEventListener('click', function(){
       hist: [{ s:'intake', t: Date.now() }]
     };
     state.jobs.unshift(j); save(); closeAllModals(); renderAll();
-    linkWrite('repair','job-intake','ซ่อมดี · รับซ่อมใหม่ ' + j.no + ' — ' + j.device + ' (' + j.issue + ') ประเมิน ' + fmt(jobTotal(j)), jobTotal(j));
+    linkWrite('repair','job-intake','ร้านซ่อมมือถือ·คอม · รับซ่อมใหม่ ' + j.no + ' — ' + j.device + ' (' + j.issue + ') ประเมิน ' + fmt(jobTotal(j)), jobTotal(j));
     toast('รับเครื่อง ' + j.no + ' แล้ว — ลูกค้าติดตามได้ที่หน้าแรก');
   });
   document.getElementById('jobOverlay').hidden = false;

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ร้านดีแอดมิน — ระบบจัดการร้านออนไลน์ | รสใจ ช็อป</title>
+<title>หลังบ้านร้านออนไลน์ — ระบบจัดการร้านออนไลน์ | รสใจ ช็อป</title>
 <meta name="description" content="เดโมระบบหลังบ้านร้านออนไลน์ — สินค้า ออเดอร์ เปิด/ปิดร้าน ตั้งค่าร้าน">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237c2d12'/%3E%3Cpath d='M14 26h36l-3 22a4 4 0 0 1-4 3H21a4 4 0 0 1-4-3z' fill='none' stroke='%23fff' stroke-width='4' stroke-linejoin='round'/%3E%3Cpath d='M22 26a10 10 0 0 1 20 0' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -274,7 +274,7 @@ th{font-size:13px}
         </svg>
       </div>
       <div>
-        <h1>ร้านดีแอดมิน</h1>
+        <h1>หลังบ้านร้านออนไลน์</h1>
         <p>หลังบ้านร้านออนไลน์ — สินค้า ออเดอร์ ยอดขาย ในที่เดียว</p>
       </div>
     </div>
@@ -335,7 +335,7 @@ th{font-size:13px}
         <img src="assets/logo.jpg" alt="" onerror="this.remove()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="position:absolute"><path d="M4 9l1.2-4h13.6L20 9"/><path d="M4 9h16v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M9 20v-6h6v6"/></svg>
       </div>
-      <div><b>ร้านดีแอดมิน</b><span id="sideShopName">รสใจ ช็อป</span></div>
+      <div><b>หลังบ้านร้านออนไลน์</b><span id="sideShopName">รสใจ ช็อป</span></div>
     </div>
     <nav class="side-nav">
       <button class="nav-item active" data-page="dashboard">
@@ -949,7 +949,7 @@ $("btnSaveSettings").addEventListener("click",function(){
 });
 
 /* ---------- LINK DRAWER ---------- */
-var SYS_META={admin:["ร้านดีแอดมิน","#7c2d12","RJ"],delivery:["ส่งดี","#0284c7","SD"],rental:["เช่าดี","#a16207","CD"],tournament:["แข่งดี","#b91c1c","KD"],pos:["ขายดี","#047857","POS"],queue:["คิวดี","#6d28d9","Q"]};
+var SYS_META={admin:["หลังบ้านร้านออนไลน์","#7c2d12","RJ"],delivery:["ศูนย์จัดส่ง","#0284c7","SD"],rental:["ร้านเช่าอุปกรณ์","#a16207","CD"],tournament:["จัดแข่งอีสปอร์ต","#b91c1c","KD"],pos:["POS หยกมณี","#047857","POS"],queue:["ระบบคิวหน้าร้าน","#6d28d9","Q"]};
 function openLink(){renderLink();$("linkDrawer").classList.add("on");}
 function closeLink(){$("linkDrawer").classList.remove("on");}
 $("btnLink").addEventListener("click",openLink);
@@ -964,7 +964,7 @@ function relTime(t){
 function renderLink(){
   var ev=linkRead().events;
   if(!ev.length){
-    $("linkBody").innerHTML='<div class="lk-empty">ยังไม่มีกิจกรรมข้ามระบบ<br><span style="font-size:12px">เมื่อระบบตัวอย่างอื่น (ส่งดี / เช่าดี / แข่งดี) มีความเคลื่อนไหว จะมาแสดงที่นี่</span></div>';
+    $("linkBody").innerHTML='<div class="lk-empty">ยังไม่มีกิจกรรมข้ามระบบ<br><span style="font-size:12px">เมื่อระบบตัวอย่างอื่น (ศูนย์จัดส่ง / ร้านเช่าอุปกรณ์ / จัดแข่งอีสปอร์ต) มีความเคลื่อนไหว จะมาแสดงที่นี่</span></div>';
     return;
   }
   $("linkBody").innerHTML=ev.map(function(e){

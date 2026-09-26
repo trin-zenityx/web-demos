@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ผู้บริหารดี Pro — แดชบอร์ดผู้บริหาร เชื่อมทุกระบบสด | ZenityX Demos</title>
+<title>แดชบอร์ดเจ้าของ Pro — แดชบอร์ดผู้บริหาร เชื่อมทุกระบบสด | ZenityX Demos</title>
 <meta name="description" content="แดชบอร์ด BI ระดับ production — ไม่ต้องล็อกอิน, ดึงยอดขาย POS/ครัว/คิว/CRM สดผ่าน bridge จริง, กราฟรายชั่วโมง, export CSV">
-<meta property="og:title" content="ผู้บริหารดี Pro — เดโมสดใช้งานได้จริง">
+<meta property="og:title" content="แดชบอร์ดเจ้าของ Pro — เดโมสดใช้งานได้จริง">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230891b2'/%3E%3Cpath d='M22 72V52M40 72V40M58 72V48M76 72V30' stroke='white' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -147,8 +147,8 @@ body{font-size:16px;line-height:1.65}
 <!-- INTRO (ครั้งแรก — ไม่ใช่ login) -->
 <div class="intro" id="introView" hidden>
   <div class="intro-card">
-    <img src="assets/logo.jpg" alt="โลโก้ผู้บริหารดี">
-    <h1>ผู้บริหารดี Pro</h1>
+    <img src="assets/logo.jpg" alt="โลโก้แดชบอร์ดเจ้าของ">
+    <h1>แดชบอร์ดเจ้าของ Pro</h1>
     <p>แดชบอร์ดผู้บริหารของกลุ่มกิจการเดโม — <b>ไม่ต้องล็อกอิน</b><br>
     ยอดขาย POS · ออเดอร์ครัว · คิว · ดีล CRM · เอกสาร · สต็อก<br>
     ไหลเข้าที่นี่<b style="color:#4ade80">สดทุกวินาที</b>ผ่าน bridge จริง</p>
@@ -160,7 +160,7 @@ body{font-size:16px;line-height:1.65}
 <!-- APP (no gate) -->
 <div class="app" id="appView" hidden>
   <div class="topbar">
-    <span class="tb-brand"><img src="assets/logo.jpg" alt=""><b>ผู้บริหารดี Pro</b></span>
+    <span class="tb-brand"><img src="assets/logo.jpg" alt=""><b>แดชบอร์ดเจ้าของ Pro</b></span>
     <span class="live-dot"><i></i> LIVE · เชื่อม 6 ระบบ</span>
     <span class="stat-chip">เหตุการณ์วันนี้ <b id="stEvents">0</b></span>
     <span class="sp"></span>
@@ -225,7 +225,7 @@ body{font-size:16px;line-height:1.65}
   </div>
 
   <div class="statusbar">
-    <span>ผู้บริหารดี Pro v1.5.0</span>
+    <span>แดชบอร์ดเจ้าของ Pro v1.5.0</span>
     <span class="ok">● streaming</span>
     <span class="sp"></span>
     <span>แหล่งข้อมูล: zx-link-v1 (localStorage โดเมนเดียวกัน)</span>
@@ -250,12 +250,12 @@ function linkRead(){ try { var d = JSON.parse(localStorage.getItem(LINK_KEY)); r
 
 /* ---------- systems registry ---------- */
 var SYS = {
-  pos:   { n:'ขายดี POS',    url:'../pos/?app=1',        c:'#0c8a61', icon:'<path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="10" cy="21" r="1"/><circle cx="18" cy="21" r="1"/>',  metric:'ยอดขายวันนี้', isMoney:true },
-  kds:   { n:'ครัวดี KDS',   url:'../kds/?app=1',        c:'#ea580c', icon:'<path d="M6 13.9A4 4 0 0 1 7.5 6a5 5 0 0 1 9 0 4 4 0 0 1 1.5 7.9V17H6v-3.1z"/><path d="M6 20h12"/>', metric:'ออเดอร์วันนี้' },
-  queue: { n:'คิวดี',        url:'../queue/?app=1',      c:'#9333ea', icon:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>', metric:'คิววันนี้' },
-  crm:   { n:'ลูกค้าดี CRM', url:'../crm/?app=1',        c:'#5b5bd6', icon:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/>', metric:'มูลค่าดีลวันนี้', isMoney:true },
-  docs:  { n:'เอกสารดี',     url:'../documents/?app=1',  c:'#0284c7', icon:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>', metric:'มูลค่าเอกสารวันนี้', isMoney:true },
-  inv:   { n:'สต็อกดี',      url:'../inventory/?app=1',  c:'#d97706', icon:'<path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/>', metric:'เคลื่อนไหววันนี้' }
+  pos:   { n:'POS หยกมณี POS',    url:'../pos/?app=1',        c:'#0c8a61', icon:'<path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="10" cy="21" r="1"/><circle cx="18" cy="21" r="1"/>',  metric:'ยอดขายวันนี้', isMoney:true },
+  kds:   { n:'ครัวร้านอาหาร KDS',   url:'../kds/?app=1',        c:'#ea580c', icon:'<path d="M6 13.9A4 4 0 0 1 7.5 6a5 5 0 0 1 9 0 4 4 0 0 1 1.5 7.9V17H6v-3.1z"/><path d="M6 20h12"/>', metric:'ออเดอร์วันนี้' },
+  queue: { n:'ระบบคิวหน้าร้าน',        url:'../queue/?app=1',      c:'#9333ea', icon:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>', metric:'คิววันนี้' },
+  crm:   { n:'CRM ทีมขาย CRM', url:'../crm/?app=1',        c:'#5b5bd6', icon:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/>', metric:'มูลค่าดีลวันนี้', isMoney:true },
+  docs:  { n:'เอกสารบัญชี',     url:'../documents/?app=1',  c:'#0284c7', icon:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>', metric:'มูลค่าเอกสารวันนี้', isMoney:true },
+  inv:   { n:'คลังสินค้า',      url:'../inventory/?app=1',  c:'#d97706', icon:'<path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/>', metric:'เคลื่อนไหววันนี้' }
 };
 function fmt(n){ return '฿' + Math.round(n).toLocaleString('th-TH'); }
 function fmtK(n){ return n >= 1000000 ? '฿'+(n/1000000).toFixed(2)+'M' : '฿'+Math.round(n/1000).toLocaleString('th-TH')+'k'; }
@@ -286,12 +286,12 @@ function renderKpis(){
   var t = todayOnly(linkRead().events);
   var pos = sysStats('pos'), crm = sysStats('crm'), docs = sysStats('docs'), kds = sysStats('kds'), queue = sysStats('queue'), inv = sysStats('inv');
   var cards = [
-    { k:'pos', l:'ขายดี POS — ยอดขายวันนี้', v: fmtK(pos.money), s: pos.count + ' บิล', c:'#0c8a61', key: pos.money },
+    { k:'pos', l:'POS หยกมณี POS — ยอดขายวันนี้', v: fmtK(pos.money), s: pos.count + ' บิล', c:'#0c8a61', key: pos.money },
     { k:'crm', l:'CRM — มูลค่าดีลใหม่/ปิดวันนี้', v: fmtK(crm.money), s: crm.count + ' เหตุการณ์', c:'#5b5bd6', key: crm.money },
-    { k:'docs', l:'เอกสารดี — มูลค่าเอกสารวันนี้', v: fmtK(docs.money), s: docs.count + ' ฉบับ', c:'#0284c7', key: docs.money },
-    { k:'kds', l:'ครัวดี — ออเดอร์วันนี้', v: String(kds.count), s: 'เหตุการณ์ในครัว', c:'#ea580c', key: kds.count },
-    { k:'queue', l:'คิวดี — คิว/เรียกวันนี้', v: String(queue.count), s: 'รับ+เรียกคิว', c:'#9333ea', key: queue.count },
-    { k:'inv', l:'สต็อกดี — เคลื่อนไหววันนี้', v: String(inv.count), s: 'รับ/เบิก/เตือน', c:'#d97706', key: inv.count }
+    { k:'docs', l:'เอกสารบัญชี — มูลค่าเอกสารวันนี้', v: fmtK(docs.money), s: docs.count + ' ฉบับ', c:'#0284c7', key: docs.money },
+    { k:'kds', l:'ครัวร้านอาหาร — ออเดอร์วันนี้', v: String(kds.count), s: 'เหตุการณ์ในครัว', c:'#ea580c', key: kds.count },
+    { k:'queue', l:'ระบบคิวหน้าร้าน — คิว/เรียกวันนี้', v: String(queue.count), s: 'รับ+เรียกคิว', c:'#9333ea', key: queue.count },
+    { k:'inv', l:'คลังสินค้า — เคลื่อนไหววันนี้', v: String(inv.count), s: 'รับ/เบิก/เตือน', c:'#d97706', key: inv.count }
   ];
   document.getElementById('kpiGrid').innerHTML = cards.map(function(c){
     var flash = prevTotals[c.k] !== undefined && c.key > prevTotals[c.k];
@@ -323,7 +323,7 @@ function renderStream(){
   var l = linkRead();
   var stream = document.getElementById('actStream');
   if (!l.events.length) {
-    stream.innerHTML = '<p style="color:var(--muted);padding:1.6rem;text-align:center;font-size:.85rem">ยังไม่มีกิจกรรมวันนี้<br><small>ลองเปิด ขายดี POS แล้วขายสักบิล — ยอดจะไหลเข้าที่นี่ทันที</small></p>';
+    stream.innerHTML = '<p style="color:var(--muted);padding:1.6rem;text-align:center;font-size:.85rem">ยังไม่มีกิจกรรมวันนี้<br><small>ลองเปิด POS หยกมณี POS แล้วขายสักบิล — ยอดจะไหลเข้าที่นี่ทันที</small></p>';
     return;
   }
   stream.innerHTML = l.events.slice(0, 30).map(function(e){

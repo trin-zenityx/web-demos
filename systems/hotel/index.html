@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>พักดี Pro — ระบบโรงแรม เช็คอินด้วยตัวเอง | ZenityX Demos</title>
+<title>โรงแรม & รีสอร์ต Pro — ระบบโรงแรม เช็คอินด้วยตัวเอง | ZenityX Demos</title>
 <meta name="description" content="ระบบโรงแรมระดับ production — kiosk เช็คอินด้วยตัวเอง, ผังห้องสด, folio คิดเงินรวมมินิบาร์, housekeeping">
-<meta property="og:title" content="พักดี Pro — เดโมใช้งานได้จริง">
+<meta property="og:title" content="โรงแรม & รีสอร์ต Pro — เดโมใช้งานได้จริง">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231e3a8a'/%3E%3Crect x='24' y='30' width='52' height='40' rx='6' fill='white'/%3E%3Crect x='24' y='38' width='52' height='8' fill='%23fbbf24'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -194,7 +194,7 @@ body{font-size:16px;line-height:1.65}
 <!-- SELF CHECK-IN KIOSK -->
 <div class="kio-view" id="kioView" hidden>
   <div class="kio-in">
-    <div class="kio-brand"><img src="assets/logo.jpg" alt=""><b>พักดี Pro</b></div>
+    <div class="kio-brand"><img src="assets/logo.jpg" alt=""><b>โรงแรม & รีสอร์ต Pro</b></div>
     <p class="kio-sub">โรงแรมแกรนด์ท่าน้ำ · เช็คอินด้วยตัวเอง ไม่ต้องต่อคิวหน้าเคาน์เตอร์</p>
     <div class="kio-card">
       <div id="kioStep1">
@@ -215,9 +215,9 @@ body{font-size:16px;line-height:1.65}
 
 <!-- APP -->
 <div class="app" id="appView" hidden>
-  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>พักดี Pro</b></div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>โรงแรม & รีสอร์ต Pro</b></div>
   <aside class="rail" id="rail">
-    <div class="logo"><img src="assets/logo.jpg" alt="พักดี"></div>
+    <div class="logo"><img src="assets/logo.jpg" alt="โรงแรม & รีสอร์ต"></div>
     <nav>
       <button class="ri on" data-page="rack" aria-label="ผังห้อง"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4"/></svg><span class="tip">ผังห้อง (R)</span></button>
       <button class="ri" data-page="arrive" aria-label="เข้าพักวันนี้"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg><span class="tip">เข้าพักวันนี้ (A)</span></button>
@@ -268,7 +268,7 @@ body{font-size:16px;line-height:1.65}
     </div>
 
     <div class="statusbar">
-      <span>พักดี Pro v1.3.8</span>
+      <span>โรงแรม & รีสอร์ต Pro v1.3.8</span>
       <span class="ok">● พร้อมใช้งาน</span>
       <span class="sp"></span>
       <span id="stRev">—</span>
@@ -381,7 +381,7 @@ function findBk(){
     if (i >= 0) state.cleaning.splice(i, 1);
     save();
     var keyNo = 'KEY-' + b.room + '-' + String(Math.floor(1000 + Math.random()*9000));
-    linkWrite('hotel','checkin','พักดี · ' + b.guest + ' เช็คอินห้อง ' + b.room + ' (kiosk ด้วยตัวเอง)', roomRate(b) * b.nights);
+    linkWrite('hotel','checkin','โรงแรม & รีสอร์ต · ' + b.guest + ' เช็คอินห้อง ' + b.room + ' (kiosk ด้วยตัวเอง)', roomRate(b) * b.nights);
     s2.innerHTML =
       '<div style="text-align:center;padding:.4rem 0"><span style="display:inline-grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#dcfce7;color:#16a34a;margin-bottom:.6rem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span>' +
       '<h3 style="margin-bottom:.3rem">เช็คอินสำเร็จ ยินดีต้อนรับ!</h3><p style="color:var(--muted);font-size:.82rem">คุณ '+b.guest.replace(/^คุณ/,'')+' ห้องของท่านพร้อมแล้ว</p></div>' +
@@ -481,7 +481,7 @@ document.getElementById('arrBody').addEventListener('click', function(e){
     var b = bkOf(ci.dataset.ci);
     b.status = 'inhouse'; b.inAt = Date.now();
     save(); renderAll();
-    linkWrite('hotel','checkin','พักดี · ' + b.guest + ' เช็คอินห้อง ' + b.room + ' (ฟรอนต์)', roomRate(b) * b.nights);
+    linkWrite('hotel','checkin','โรงแรม & รีสอร์ต · ' + b.guest + ' เช็คอินห้อง ' + b.room + ' (ฟรอนต์)', roomRate(b) * b.nights);
     toast(b.guest + ' เช็คอินห้อง ' + b.room + ' แล้ว');
   } else if (co) openCheckout(co.dataset.co);
 });
@@ -541,7 +541,7 @@ function openCheckout(code){
     state.bookings = state.bookings.filter(function(x){ return x.code !== code; });
     state.cleaning.push(b.room);
     save(); closeAllModals(); renderAll();
-    linkWrite('hotel','checkout','พักดี · ' + b.guest + ' เช็คเอาต์ห้อง ' + b.room + ' เก็บ ' + fmt(total) + ' — ห้องเข้าคิวทำความสะอาด', total);
+    linkWrite('hotel','checkout','โรงแรม & รีสอร์ต · ' + b.guest + ' เช็คเอาต์ห้อง ' + b.room + ' เก็บ ' + fmt(total) + ' — ห้องเข้าคิวทำความสะอาด', total);
     toast('เช็คเอาต์เรียบร้อย — เก็บ ' + fmt(total) + ' · ห้อง ' + b.room + ' รอทำความสะอาด');
   });
 }

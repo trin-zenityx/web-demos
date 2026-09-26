@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ซักดี Pro — ระบบร้านซักรีด ชั่งน้ำหนักคิดเงินสด | ZenityX Demos</title>
+<title>ร้านซักรีด Pro — ระบบร้านซักรีด ชั่งน้ำหนักคิดเงินสด | ZenityX Demos</title>
 <meta name="description" content="ระบบร้านซักรีดระดับ production — รับผ้าชั่ง กก. คิดราคาสดหน้าแรก, งานด่วน +30%, บอร์ด 5 ขั้น, ใบรับพิมพ์, เชื่อมข้ามระบบ">
-<meta property="og:title" content="ซักดี Pro — เดโมใช้งานได้จริง">
+<meta property="og:title" content="ร้านซักรีด Pro — เดโมใช้งานได้จริง">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23c026d3'/%3E%3Crect x='24' y='22' width='52' height='58' rx='8' fill='white'/%3E%3Ccircle cx='50' cy='55' r='15' fill='none' stroke='%23c026d3' stroke-width='5'/%3E%3Ccircle cx='35' cy='32' r='3' fill='%23c026d3'/%3E%3Ccircle cx='45' cy='32' r='3' fill='%23c026d3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -218,7 +218,7 @@ body{font-size:16px;line-height:1.65}
 <!-- INTAKE-FIRST ENTRY -->
 <div class="intake-view" id="intakeView" hidden>
   <div class="intake-in">
-    <div class="intake-brand"><img src="assets/logo.jpg" alt=""><b>ซักดี Pro</b></div>
+    <div class="intake-brand"><img src="assets/logo.jpg" alt=""><b>ร้านซักรีด Pro</b></div>
     <p class="intake-sub">ร้านซักรีดสะอาดใจ · รับผ้าหน้าร้าน — ชั่งแล้วเห็นราคาทันที</p>
     <div class="intake-card">
       <div id="inForm">
@@ -258,9 +258,9 @@ body{font-size:16px;line-height:1.65}
 
 <!-- APP -->
 <div class="app" id="appView" hidden>
-  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ซักดี Pro</b></div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ร้านซักรีด Pro</b></div>
   <aside class="rail" id="rail">
-    <div class="logo"><img src="assets/logo.jpg" alt="ซักดี"></div>
+    <div class="logo"><img src="assets/logo.jpg" alt="ร้านซักรีด"></div>
     <nav>
       <button class="ri on" data-page="board" aria-label="บอร์ดงาน"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="5" height="18" rx="1"/><rect x="10" y="3" width="5" height="12" rx="1"/><rect x="17" y="3" width="5" height="8" rx="1"/></svg><span class="tip">บอร์ดงาน (B)</span></button>
       <button class="ri" data-page="all" aria-label="ตั๋วทั้งหมด"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span class="tip">ตั๋วทั้งหมด (A)</span></button>
@@ -298,7 +298,7 @@ body{font-size:16px;line-height:1.65}
     </div>
 
     <div class="statusbar">
-      <span>ซักดี Pro v1.1.9</span>
+      <span>ร้านซักรีด Pro v1.1.9</span>
       <span class="ok">● พร้อมใช้งาน</span>
       <span class="sp"></span>
       <span id="stTix">ตั๋ว: 0</span>
@@ -436,7 +436,7 @@ document.getElementById('intakeBtn').addEventListener('click', function(){
     express: exp, price: c.total, stage: 'recv', at: Date.now(), paid: false
   };
   state.tix.unshift(t); save();
-  linkWrite('laundry','intake','ซักดี · รับผ้า ' + t.no + ' — ' + name + ' ' + inKg.toFixed(1) + ' กก. ' + (exp?'(ด่วน) ':'') + fmt(t.price), t.price);
+  linkWrite('laundry','intake','ร้านซักรีด · รับผ้า ' + t.no + ' — ' + name + ' ' + inKg.toFixed(1) + ' กก. ' + (exp?'(ด่วน) ':'') + fmt(t.price), t.price);
   document.getElementById('inForm').hidden = true;
   var dt = document.getElementById('doneTix');
   dt.innerHTML = '<span class="ok"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span>' +
@@ -551,7 +551,7 @@ function openTicket(no){
       t.stage = b.dataset.st;
       save(); closeAllModals(); renderAll();
       var sn = STAGES.find(function(s){ return s.id === b.dataset.st; }).n;
-      linkWrite('laundry','stage','ซักดี · ' + t.no + ' → ' + sn, null);
+      linkWrite('laundry','stage','ร้านซักรีด · ' + t.no + ' → ' + sn, null);
       toast(t.no + ' → ' + sn);
     });
   });
@@ -559,7 +559,7 @@ function openTicket(no){
   if (pay) pay.addEventListener('click', function(){
     t.paid = true; t.stage = 'done'; t.doneAt = Date.now();
     save(); closeAllModals(); renderAll();
-    linkWrite('laundry','done','ซักดี · ส่งมอบ ' + t.no + ' (' + t.cust + ') เก็บ ' + fmt(t.price), t.price);
+    linkWrite('laundry','done','ร้านซักรีด · ส่งมอบ ' + t.no + ' (' + t.cust + ') เก็บ ' + fmt(t.price), t.price);
     toast('ส่งมอบ ' + t.no + ' — เก็บ ' + fmt(t.price));
   });
   var dn = document.getElementById('txDone');

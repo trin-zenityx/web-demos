@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="เงินดี — ระบบบันทึกรายรับรายจ่ายสำหรับร้านคั่วสาทร (เดโม)">
-<title>เงินดี · ระบบรายรับ-รายจ่าย — คั่วสาทร</title>
+<meta name="description" content="สมุดเงินสด — ระบบบันทึกรายรับรายจ่ายสำหรับร้านคั่วสาทร (เดโม)">
+<title>สมุดเงินสด · ระบบรายรับ-รายจ่าย — คั่วสาทร</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='2' y='2' width='44' height='44' rx='12' fill='%2316a34a'/%3E%3Ctext x='24' y='33' text-anchor='middle' font-size='26' font-weight='700' fill='%23fff' font-family='sans-serif'%3E%E0%B8%BF%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -308,9 +308,9 @@ table.tx th{font-size:13px}
 <div class="login-wrap" id="loginView">
   <div class="login-card">
     <div class="brand">
-      <img class="mark" src="assets/logo.jpg" alt="เงินดี" style="width:48px;height:48px;border-radius:12px;object-fit:cover">
+      <img class="mark" src="assets/logo.jpg" alt="สมุดเงินสด" style="width:48px;height:48px;border-radius:12px;object-fit:cover">
       <div>
-        <div class="brand-name">เงินดี</div>
+        <div class="brand-name">สมุดเงินสด</div>
         <div class="brand-sub">ระบบบันทึกรายรับ–รายจ่าย · ร้านคั่วสาทร</div>
       </div>
     </div>
@@ -340,9 +340,9 @@ table.tx th{font-size:13px}
 <div class="app" id="appView" hidden>
   <aside class="sidebar" id="sidebar">
     <div class="side-brand">
-      <img class="mark" src="assets/logo.jpg" alt="เงินดี" style="width:48px;height:48px;border-radius:12px;object-fit:cover">
+      <img class="mark" src="assets/logo.jpg" alt="สมุดเงินสด" style="width:48px;height:48px;border-radius:12px;object-fit:cover">
       <div>
-        <div class="t1">เงินดี</div>
+        <div class="t1">สมุดเงินสด</div>
         <div class="t2">คั่วสาทร · คาเฟ่</div>
       </div>
     </div>
@@ -806,7 +806,7 @@ $('#shiftForm').addEventListener('submit',function(e){
   $('#appView').hidden=false;
   renderRecent();
   var carry=parseFloat($('#floatInput').value)||0;
-  linkWrite('cashbook','shift-open','เงินดี · เปิดกะวันใหม่ ยอดยกมา '+fmt(carry)+' ฿',carry);
+  linkWrite('cashbook','shift-open','สมุดเงินสด · เปิดกะวันใหม่ ยอดยกมา '+fmt(carry)+' ฿',carry);
   toast('เปิดกะแล้ว — ยอดยกมา '+fmt(carry)+' ฿','ok');
 });
 $('#floatInput').addEventListener('input',function(){
@@ -851,7 +851,7 @@ $('#recForm').addEventListener('submit',function(e){
   state.seq++;
   state.txns.push(txn);
   save();
-  linkWrite('cashbook','entry','เงินดี · '+(formType==='in'?'รายรับ':'รายจ่าย')+' "'+txn.cat+'" '+fmt(txn.amount)+' ฿',txn.amount);
+  linkWrite('cashbook','entry','สมุดเงินสด · '+(formType==='in'?'รายรับ':'รายจ่าย')+' "'+txn.cat+'" '+fmt(txn.amount)+' ฿',txn.amount);
   $('#fAmt').value='';$('#fNote').value='';
   renderRecent();
   toast((formType==='in'?'บันทึกรายรับ +':'บันทึกรายจ่าย −')+fmt(txn.amount)+' ฿ แล้ว','ok');

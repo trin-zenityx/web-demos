@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>สต็อกดี Pro — ระบบคลังสินค้าอัจฉริยะ | ZenityX Demos</title>
+<title>คลังสินค้า Pro — ระบบคลังสินค้าอัจฉริยะ | ZenityX Demos</title>
 <meta name="description" content="ระบบคลังสินค้าระดับ production — สแกนบัตรเข้าระบบ, รับ/เบิก, แจ้งเตือนของใกล้หมด, ใบสั่งซื้อแนะนำ, เชื่อมยอดขาย POS จริง">
-<meta property="og:title" content="สต็อกดี Pro — เดโมใช้งานได้จริง">
+<meta property="og:title" content="คลังสินค้า Pro — เดโมใช้งานได้จริง">
 <meta property="og:description" content="คลังหลังบ้านของ หยกมณี สะดวกซื้อ — เห็นยอดขาย POS สดๆ ผ่าน bridge จริง">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23d97706'/%3E%3Cpath d='M25 40l25-12 25 12v32l-25 12-25-12z' fill='none' stroke='white' stroke-width='6'/%3E%3Cpath d='M25 40l25 12 25-12M50 52v32' stroke='white' stroke-width='6' fill='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -246,8 +246,8 @@ button.tlink{color:#92400e}
 <!-- SPLASH -->
 <div class="splash" id="splash">
   <div class="sp-in">
-    <img src="assets/logo.jpg" alt="โลโก้สต็อกดี">
-    <b>สต็อกดี Pro</b>
+    <img src="assets/logo.jpg" alt="โลโก้คลังสินค้า">
+    <b>คลังสินค้า Pro</b>
     <div class="ver">v2.2.0 · build 2569.09 · WMS</div>
     <div class="bar"><i></i></div>
   </div>
@@ -256,7 +256,7 @@ button.tlink{color:#92400e}
 <!-- BADGE SCAN ENTRY -->
 <div class="scan-view" id="scanView" hidden>
   <div class="scan-in">
-    <div class="scan-brand"><img src="assets/logo.jpg" alt=""><b>สต็อกดี Pro</b></div>
+    <div class="scan-brand"><img src="assets/logo.jpg" alt=""><b>คลังสินค้า Pro</b></div>
     <p class="scan-sub">คลังสินค้ากลาง หยกมณี สะดวกซื้อ · แตะบัตรพนักงานเพื่อเข้าระบบ</p>
     <div class="badges" id="badgeRow"></div>
     <div class="scanner" id="scannerBox">
@@ -270,9 +270,9 @@ button.tlink{color:#92400e}
 
 <!-- APP -->
 <div class="app" id="appView" hidden>
-  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>สต็อกดี Pro</b></div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>คลังสินค้า Pro</b></div>
   <aside class="rail" id="rail">
-    <div class="logo"><img src="assets/logo.jpg" alt="สต็อกดี"></div>
+    <div class="logo"><img src="assets/logo.jpg" alt="คลังสินค้า"></div>
     <nav>
       <button class="ri on" data-page="dash" aria-label="ภาพรวม"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg><span class="tip">ภาพรวม (D)</span></button>
       <button class="ri" data-page="products" aria-label="สินค้า"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg><span class="tip">สินค้าและยอดคงเหลือ (S)</span></button>
@@ -344,7 +344,7 @@ button.tlink{color:#92400e}
     </div>
 
     <div class="statusbar">
-      <span>สต็อกดี Pro v2.2.0</span>
+      <span>คลังสินค้า Pro v2.2.0</span>
       <span class="ok">● พร้อมใช้งาน</span>
       <span class="sp"></span>
       <span id="stUser">—</span>
@@ -380,7 +380,7 @@ button.tlink{color:#92400e}
 <div class="drawer" id="feedDrawer">
   <div class="d-head"><b>กิจกรรมข้ามระบบ</b><span class="count mono" id="feedCount" style="font-size:.7rem;color:var(--muted)"></span><button class="x" id="feedClose" aria-label="ปิด"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
   <div class="d-body" id="feedBody"></div>
-  <div class="d-note">คลังนี้คือหลังบ้านของ หยกมณี สะดวกซื้อ — ยอดขายจาก ขายดี POS ไหลเข้าที่นี่จริงผ่าน localStorage</div>
+  <div class="d-note">คลังนี้คือหลังบ้านของ หยกมณี สะดวกซื้อ — ยอดขายจาก POS หยกมณี POS ไหลเข้าที่นี่จริงผ่าน localStorage</div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -405,7 +405,7 @@ function linkWrite(sys, type, msg, val){
   try { localStorage.setItem(LINK_KEY, JSON.stringify(l)); } catch(e){}
 }
 
-/* ---------- data: สินค้าชุดเดียวกับขายดี POS (หยกมณี สะดวกซื้อ) ---------- */
+/* ---------- data: สินค้าชุดเดียวกับPOS หยกมณี POS (หยกมณี สะดวกซื้อ) ---------- */
 var CATS = [
   { id:'drink', n:'เครื่องดื่ม', c:'#0c8a61' },
   { id:'food',  n:'อาหาร',      c:'#b97708' },
@@ -556,12 +556,12 @@ function addMov(type, sku, qty, ref, note, silent){
   /* low-stock bridge event เมื่อตัดผ่าน ROP ลง */
   if (type === 'out' && p.stock <= p.rop && !state._lowAlerted[sku]) {
     state._lowAlerted[sku] = true;
-    linkWrite('inv','stock-low','สต็อกดี · ' + p.n + ' ใกล้หมด (เหลือ ' + p.stock + ' < ROP ' + p.rop + ')', p.stock);
+    linkWrite('inv','stock-low','คลังสินค้า · ' + p.n + ' ใกล้หมด (เหลือ ' + p.stock + ' < ROP ' + p.rop + ')', p.stock);
   }
   if (type === 'in' && p.stock > p.rop) delete state._lowAlerted[sku];
   if (!silent) {
     linkWrite('inv', type === 'in' ? 'stock-in' : 'stock-out',
-      'สต็อกดี · ' + (type === 'in' ? 'รับเข้า' : 'เบิกออก') + ' ' + p.n + ' ×' + qty + ' เหลือ ' + p.stock, p.stock);
+      'คลังสินค้า · ' + (type === 'in' ? 'รับเข้า' : 'เบิกออก') + ' ' + p.n + ' ×' + qty + ' เหลือ ' + p.stock, p.stock);
     toast((type === 'in' ? 'รับเข้า ' : 'เบิกออก ') + p.n + ' ×' + qty + ' แล้ว' + (offline ? ' (รอซิงก์)' : ''));
   }
   return true;
@@ -586,7 +586,7 @@ function renderDash(){
     '<div class="kpi"><span>ใกล้หมด (ต่ำกว่า ROP)</span><b class="a">'+low.length+'</b><span class="sub">ต้องสั่งซื้อ</span></div>' +
     '<div class="kpi"><span>หมดสต็อก</span><b class="r">'+out.length+'</b><span class="sub">ขายไม่ได้</span></div>' +
     '<div class="kpi"><span>เคลื่อนไหววันนี้</span><b class="g">'+(todayIn+todayOut)+'</b><span class="sub">รับ '+todayIn+' · เบิก '+todayOut+'</span></div>' +
-    '<div class="pos-feed"><span>ยอดขายวันนี้ · จาก ขายดี POS (สด)</span><b>'+fmt(salesSum)+'</b><small>'+sales.length+' บิล — เชื่อมผ่าน zx-link จริง</small></div>';
+    '<div class="pos-feed"><span>ยอดขายวันนี้ · จาก POS หยกมณี POS (สด)</span><b>'+fmt(salesSum)+'</b><small>'+sales.length+' บิล — เชื่อมผ่าน zx-link จริง</small></div>';
   document.getElementById('stValue').textContent = '฿' + Math.round(val/1000) + 'k';
   document.getElementById('stLow').textContent = low.length;
   document.getElementById('stOut').textContent = out.length;

@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>คนดี Pro — ระบบ HR ลงเวลาใบหน้า ลา เงินเดือน | ZenityX Demos</title>
+<title>HR พนักงาน Pro — ระบบ HR ลงเวลาใบหน้า ลา เงินเดือน | ZenityX Demos</title>
 <meta name="description" content="ระบบ HR ระดับ production — เช็คอินด้วยสแกนใบหน้าจำลอง, ตารางลงเวลา, ใบลาอนุมัติ 2 ชั้น, สลิปเงินเดือน, OT คำนวณจริง">
-<meta property="og:title" content="คนดี Pro — เดโมใช้งานได้จริง">
+<meta property="og:title" content="HR พนักงาน Pro — เดโมใช้งานได้จริง">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230d9488'/%3E%3Ccircle cx='50' cy='42' r='14' fill='white'/%3E%3Cpath d='M26 82c0-14 11-22 24-22s24 8 24 22' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -229,8 +229,8 @@ body{font-size:16px;line-height:1.65}
 <!-- SPLASH -->
 <div class="splash" id="splash">
   <div class="sp-in">
-    <img src="assets/logo.jpg" alt="โลโก้คนดี">
-    <b>คนดี Pro</b>
+    <img src="assets/logo.jpg" alt="โลโก้HR พนักงาน">
+    <b>HR พนักงาน Pro</b>
     <div class="ver">v2.7.1 · build 2569.09 · HR Cloud</div>
     <div class="bar"><i></i></div>
   </div>
@@ -239,7 +239,7 @@ body{font-size:16px;line-height:1.65}
 <!-- FACE-SCAN ENTRY -->
 <div class="face-view" id="faceView" hidden>
   <div class="face-in">
-    <div class="face-brand"><img src="assets/logo.jpg" alt=""><b>คนดี Pro</b></div>
+    <div class="face-brand"><img src="assets/logo.jpg" alt=""><b>HR พนักงาน Pro</b></div>
     <p class="face-sub">จุดเช็คอินหน้าออฟฟิศ · เลือกพนักงานแล้วสแกนใบหน้าเพื่อลงเวลาเข้างาน</p>
     <div class="emp-row" id="empRow"></div>
     <div class="scan-stage" id="scanStage">
@@ -257,9 +257,9 @@ body{font-size:16px;line-height:1.65}
 
 <!-- APP -->
 <div class="app" id="appView" hidden>
-  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>คนดี Pro</b></div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>HR พนักงาน Pro</b></div>
   <aside class="rail" id="rail">
-    <div class="logo"><img src="assets/logo.jpg" alt="คนดี"></div>
+    <div class="logo"><img src="assets/logo.jpg" alt="HR พนักงาน"></div>
     <nav>
       <button class="ri on" data-page="today" aria-label="วันนี้"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span class="tip">ภาพรวมวันนี้ (D)</span></button>
       <button class="ri" data-page="timesheet" aria-label="ตารางลงเวลา"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="tip">ตารางลงเวลา (T)</span></button>
@@ -332,7 +332,7 @@ body{font-size:16px;line-height:1.65}
     </div>
 
     <div class="statusbar">
-      <span>คนดี Pro v2.7.1</span>
+      <span>HR พนักงาน Pro v2.7.1</span>
       <span class="ok">● พร้อมใช้งาน</span>
       <span class="sp"></span>
       <span id="stUser">—</span>
@@ -483,7 +483,7 @@ function startFaceScan(emp){
         state.att.push({ emp: emp.id, day: today, in: Date.now(), out: null });
         save();
         var lm = lateMin(Date.now());
-        linkWrite('hr','checkin','คนดี · ' + emp.n + ' เช็คอิน ' + timeHm(Date.now()) + (lm > 0 ? ' (สาย ' + lm + ' นาที)' : ''), null);
+        linkWrite('hr','checkin','HR พนักงาน · ' + emp.n + ' เช็คอิน ' + timeHm(Date.now()) + (lm > 0 ? ' (สาย ' + lm + ' นาที)' : ''), null);
       }
       setTimeout(enterApp, 900);
     } else {
@@ -562,7 +562,7 @@ document.getElementById('checkoutBtn').addEventListener('click', function(){
   rec.out = Date.now(); save();
   var hrs = (rec.out - rec.in) / 3600000;
   var ot = Math.max(0, hrs - 8);
-  linkWrite('hr','checkout','คนดี · ' + me.n + ' เช็คเอาต์ ' + timeHm(rec.out) + ' (ทำ ' + hrs.toFixed(1) + ' ชม.' + (ot>0?' OT '+ot.toFixed(1):'') + ')', null);
+  linkWrite('hr','checkout','HR พนักงาน · ' + me.n + ' เช็คเอาต์ ' + timeHm(rec.out) + ' (ทำ ' + hrs.toFixed(1) + ' ชม.' + (ot>0?' OT '+ot.toFixed(1):'') + ')', null);
   toast('เช็คเอาต์ ' + timeHm(rec.out) + ' — ทำงาน ' + hrs.toFixed(1) + ' ชม.' + (ot>0 ? ' รวม OT ' + ot.toFixed(1) + ' ชม.' : ''));
   renderAll();
 });
@@ -613,7 +613,7 @@ document.getElementById('lvSubmit').addEventListener('click', function(){
   var l = { id:'lv'+(state.lvSeq++), emp: me.id, type: type, from: from, to: to, reason: reason, status:'pending', t: Date.now() };
   state.leaves.unshift(l); save(); renderAll();
   document.getElementById('lvReason').value = '';
-  linkWrite('hr','leave-new','คนดี · ' + me.n + ' ยื่น' + LEAVE_TYPES[type] + ' ' + leaveDays(l) + ' วัน', null);
+  linkWrite('hr','leave-new','HR พนักงาน · ' + me.n + ' ยื่น' + LEAVE_TYPES[type] + ' ' + leaveDays(l) + ' วัน', null);
   toast('ยื่นใบลาแล้ว — รอหัวหน้าอนุมัติ');
 });
 document.getElementById('lvList').addEventListener('click', function(e){
@@ -624,7 +624,7 @@ document.getElementById('lvList').addEventListener('click', function(e){
     if (l.type === 'vac') state.vacUsed[l.emp] = (state.vacUsed[l.emp] || 0) + leaveDays(l);
     save(); renderAll();
     var em = empOf(l.emp);
-    linkWrite('hr','leave-approved','คนดี · อนุมัติ' + LEAVE_TYPES[l.type] + 'ของ ' + em.n + ' โดย ' + me.n, null);
+    linkWrite('hr','leave-approved','HR พนักงาน · อนุมัติ' + LEAVE_TYPES[l.type] + 'ของ ' + em.n + ' โดย ' + me.n, null);
     toast('อนุมัติใบลาของ ' + em.n + ' แล้ว');
   } else if (rj) {
     rejTarget = rj.dataset.rej;
@@ -663,7 +663,7 @@ function renderPayroll(){
     '<div class="ps-row"><span>ประกันสังคม 5%</span><b style="color:var(--red)">−'+fmt(sso)+'</b></div>' +
     '<div class="ps-row"><span>ภาษีหัก ณ ที่จ่าย 3%</span><b style="color:var(--red)">−'+fmt(tax)+'</b></div>' +
     '<div class="ps-row tot"><span>สุทธิได้รับ</span><b>'+fmt(net)+'</b></div>' +
-    '<p style="text-align:center;font-size:.72rem;color:var(--muted);margin-top:.9rem">คำนวณจากการลงเวลาจริงในระบบ · เข้างานเดือนนี้ '+recs.length+' วัน · เอกสารจาก คนดี Pro</p>';
+    '<p style="text-align:center;font-size:.72rem;color:var(--muted);margin-top:.9rem">คำนวณจากการลงเวลาจริงในระบบ · เข้างานเดือนนี้ '+recs.length+' วัน · เอกสารจาก HR พนักงาน Pro</p>';
 }
 document.getElementById('printSlip').addEventListener('click', function(){ window.print(); });
 

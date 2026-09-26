@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ส่งดี — ระบบจัดการงานจัดส่ง | ZenityX Demos</title>
+<title>ศูนย์จัดส่ง — ระบบจัดการงานจัดส่ง | ZenityX Demos</title>
 <meta name="description" content="ระบบเดโมจัดการงานจัดส่ง — มอบหมายไรเดอร์ ติดตามสถานะ สรุปงานรายวัน">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -148,9 +148,9 @@ body{font-size:16px;line-height:1.65}
 <div class="login" id="loginView">
   <div class="login-card" style="max-width:560px;text-align:left">
     <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.4rem">
-      <img src="assets/logo.jpg" alt="ส่งดี" style="width:52px;height:52px;border-radius:14px;object-fit:cover">
+      <img src="assets/logo.jpg" alt="ศูนย์จัดส่ง" style="width:52px;height:52px;border-radius:14px;object-fit:cover">
       <div>
-        <h1 style="margin:0">ส่งดี</h1>
+        <h1 style="margin:0">ศูนย์จัดส่ง</h1>
         <p class="sub" style="margin:0">ศูนย์กระจายสินค้า · เริ่มกะจัดส่ง</p>
       </div>
     </div>
@@ -182,8 +182,8 @@ body{font-size:16px;line-height:1.65}
 <div class="app" id="appView" hidden>
   <aside class="side" id="sidebar">
     <div class="side-logo">
-      <img src="assets/logo.jpg" alt="ส่งดี" style="width:36px;height:36px;border-radius:10px;object-fit:cover">
-      <span><b>ส่งดี</b><small>Operations Center</small></span>
+      <img src="assets/logo.jpg" alt="ศูนย์จัดส่ง" style="width:36px;height:36px;border-radius:10px;object-fit:cover">
+      <span><b>ศูนย์จัดส่ง</b><small>Operations Center</small></span>
     </div>
     <nav>
       <button class="navi on" data-page="jobs"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>งานจัดส่งวันนี้</button>
@@ -338,7 +338,7 @@ document.getElementById('loginBtn').addEventListener('click', function(){
   var odo=parseInt(document.getElementById('odoInput').value,10)||0;
   document.getElementById('loginView').hidden = true;
   document.getElementById('appView').hidden = false;
-  linkWrite('delivery','shift-start','ส่งดี · เริ่มกะจัดส่ง ด้วย'+veh+' เลขไมล์ '+odo.toLocaleString('th-TH')+' กม.',odo);
+  linkWrite('delivery','shift-start','ศูนย์จัดส่ง · เริ่มกะจัดส่ง ด้วย'+veh+' เลขไมล์ '+odo.toLocaleString('th-TH')+' กม.',odo);
   toast('เริ่มกะแล้ว — '+veh+' ไมล์ '+odo.toLocaleString('th-TH')+' กม.');
 });
 document.getElementById('logoutBtn').addEventListener('click', function(){
@@ -419,7 +419,7 @@ document.getElementById('jobGrid').addEventListener('click', function(e){
   } else if (act === 'done') {
     j.status = 'done'; j.log.push({ t:'ส่งสำเร็จ', at: Date.now() });
     save(); toast(j.id + ' ส่งสำเร็จแล้ว');
-    linkWrite('delivery','delivered','ส่งดี · '+j.id+' ส่งสำเร็จ ('+j.cust+') โดย '+rname(j.rider),null);
+    linkWrite('delivery','delivered','ศูนย์จัดส่ง · '+j.id+' ส่งสำเร็จ ('+j.cust+') โดย '+rname(j.rider),null);
   } else if (act === 'issue') {
     j.status = 'issue'; j.log.push({ t:'แจ้งปัญหา (ติดต่อผู้รับไม่ได้)', at: Date.now() });
     save(); toast(j.id + ' บันทึกปัญหาแล้ว');

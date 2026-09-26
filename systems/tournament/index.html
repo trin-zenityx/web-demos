@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แข่งดี — ระบบจัดการแข่งขัน | GG ZONE อีสปอร์ตคาเฟ่</title>
+<title>จัดแข่งอีสปอร์ต — ระบบจัดการแข่งขัน | GG ZONE อีสปอร์ตคาเฟ่</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -369,7 +369,7 @@ body{font-size:16px;line-height:1.65}
 <div id="loginView">
   <div class="login-card" style="max-width:960px;width:100%;max-height:92vh;overflow-y:auto">
     <div class="login-logo">
-      <img src="assets/logo.jpg" alt="แข่งดี" style="width:52px;height:52px;border-radius:14px;object-fit:cover">
+      <img src="assets/logo.jpg" alt="จัดแข่งอีสปอร์ต" style="width:52px;height:52px;border-radius:14px;object-fit:cover">
       <h1>แข่ง<span>ดี</span></h1>
     </div>
     <p class="login-sub">GG ZONE ROV Monthly — สายแข่งสด 8 ทีม · จอประกาศหน้างาน</p>
@@ -387,8 +387,8 @@ body{font-size:16px;line-height:1.65}
   <div class="scrim" id="scrim"></div>
   <aside id="sidebar">
     <div class="brand">
-      <img src="assets/logo.jpg" alt="แข่งดี" style="width:38px;height:38px;border-radius:10px;object-fit:cover">
-      <div><b>แข่งดี</b><small>GG ZONE อีสปอร์ตคาเฟ่</small></div>
+      <img src="assets/logo.jpg" alt="จัดแข่งอีสปอร์ต" style="width:38px;height:38px;border-radius:10px;object-fit:cover">
+      <div><b>จัดแข่งอีสปอร์ต</b><small>GG ZONE อีสปอร์ตคาเฟ่</small></div>
     </div>
     <nav class="nav" aria-label="เมนูหลัก">
       <button class="nav-btn active" data-page="bracket">
@@ -458,7 +458,7 @@ body{font-size:16px;line-height:1.65}
   <div class="bs-head">
     <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a2 2 0 0 0 2 4h1M17 6h3a2 2 0 0 1-2 4h-1"/></svg>
     <div>
-      <h2>แข่งดี — ROV Monthly Championship</h2>
+      <h2>จัดแข่งอีสปอร์ต — ROV Monthly Championship</h2>
       <div class="org">GG ZONE อีสปอร์ตคาเฟ่ · <span id="bsDate"></span></div>
     </div>
     <button class="btn-sm bs-close" id="btnBigClose">
@@ -767,9 +767,9 @@ function saveResult(mid,hs,as){
   }
   save(); rerender();
   toast("บันทึกผล: "+teamById(m.home).name+" "+hs+" – "+as+" "+teamById(m.away).name);
-  linkWrite('tournament','match-result','แข่งดี · '+ROUND_NAMES[m.round]+': '+teamById(m.home).name+' '+hs+'–'+as+' '+teamById(m.away).name,null);
+  linkWrite('tournament','match-result','จัดแข่งอีสปอร์ต · '+ROUND_NAMES[m.round]+': '+teamById(m.home).name+' '+hs+'–'+as+' '+teamById(m.away).name,null);
   var c = champion();
-  if(c && mid==='m7') linkWrite('tournament','champion','แข่งดี · แชมป์คือ '+c.name+'! (GG ZONE ROV Monthly)',null);
+  if(c && mid==='m7') linkWrite('tournament','champion','จัดแข่งอีสปอร์ต · แชมป์คือ '+c.name+'! (GG ZONE ROV Monthly)',null);
 }
 
 function delTeam(id){

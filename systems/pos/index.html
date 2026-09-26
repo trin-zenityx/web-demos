@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ขายดี POS — ระบบขายหน้าร้านระดับมืออาชีพ | ZenityX Demos</title>
+<title>POS หยกมณี POS — ระบบขายหน้าร้านระดับมืออาชีพ | ZenityX Demos</title>
 <meta name="description" content="ระบบ POS ระดับ production — PIN login, เปิด/ปิดกะ, X-Report, เงินสด/QR/แบ่งชำระ, สมาชิกแต้ม, โปรโมชั่นอัตโนมัติ, โหมดออฟไลน์, ใบเสร็จ 80 มม.">
-<meta property="og:title" content="ขายดี POS — ระบบขายหน้าร้านระดับมืออาชีพ (เดโมใช้งานได้จริง)">
+<meta property="og:title" content="POS หยกมณี POS — ระบบขายหน้าร้านระดับมืออาชีพ (เดโมใช้งานได้จริง)">
 <meta property="og:description" content="ล็อกอิน PIN → เปิดกะ → ขาย → ชำระหลายช่องทาง → ปิดกะ — เหมือนของจริงทุกอย่าง">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230c8a61'/%3E%3Cpath d='M28 32h44l-5 34a6 6 0 0 1-6 5H39a6 6 0 0 1-6-5l-5-34z' fill='none' stroke='white' stroke-width='6'/%3E%3Cpath d='M38 32v-6a12 12 0 0 1 24 0v6' fill='none' stroke='white' stroke-width='6'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -366,8 +366,8 @@ body{font-size:16px;line-height:1.65}
 <!-- SPLASH -->
 <div class="splash" id="splash">
   <div class="sp-in">
-    <img src="assets/logo.jpg" alt="โลโก้ขายดี POS">
-    <b>ขายดี POS</b>
+    <img src="assets/logo.jpg" alt="โลโก้POS หยกมณี POS">
+    <b>POS หยกมณี POS</b>
     <div class="ver">v2.5.0 · build 2569.09 · REG-01</div>
     <div class="bar"><i></i></div>
   </div>
@@ -379,7 +379,7 @@ body{font-size:16px;line-height:1.65}
     <div class="login-photo">
       <img class="ph" src="assets/login-hero.jpg" alt="เคาน์เตอร์ร้านสะดวกซื้ออบอุ่นยามเย็น">
       <div class="ov">
-        <div class="brand-line"><img src="assets/logo.jpg" alt=""><b>ขายดี POS</b><span class="pro">PRO</span></div>
+        <div class="brand-line"><img src="assets/logo.jpg" alt=""><b>POS หยกมณี POS</b><span class="pro">PRO</span></div>
         <p class="tag">ระบบขายหน้าร้านที่ร้านค้าไทยกว่า 2,000 ร้านไว้ใจ<br>ขายไว คิดเงินแม่น ปิดกะง่าย</p>
         <div class="meta" id="loginStoreMeta">หยกมณี สะดวกซื้อ · สาขาหลัก</div>
       </div>
@@ -406,9 +406,9 @@ body{font-size:16px;line-height:1.65}
 
 <!-- APP -->
 <div class="app" id="appView" hidden>
-  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ขายดี POS</b></div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>POS หยกมณี POS</b></div>
   <aside class="rail" id="rail">
-    <div class="logo"><img src="assets/logo.jpg" alt="ขายดี"></div>
+    <div class="logo"><img src="assets/logo.jpg" alt="POS หยกมณี"></div>
     <nav>
       <button class="ri on" data-page="sell" aria-label="ขาย"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6"/><circle cx="10" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg><span class="tip">ขาย (F1)</span></button>
       <button class="ri" data-page="held" aria-label="พักบิล"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 9h4M10 13h4M6 3h12a1 1 0 0 1 1 1v16l-3-2-2 2-2-2-2 2-2-2-3 2V4a1 1 0 0 1 1-1z"/></svg><span class="tip">พักบิล (F3) <span id="heldBadge" class="mono" hidden></span></span></button>
@@ -520,7 +520,7 @@ body{font-size:16px;line-height:1.65}
         <div class="rep-grid" id="repKpis"></div>
         <div class="rep-2col">
           <div class="panel"><div class="p-head"><b>ยอดขายตามช่องทางชำระ</b></div><div id="tenderRows"></div></div>
-          <div class="panel"><div class="p-head"><b>สินค้าขายดีวันนี้</b></div><div id="topItems"></div></div>
+          <div class="panel"><div class="p-head"><b>สินค้าPOS หยกมณีวันนี้</b></div><div id="topItems"></div></div>
         </div>
         <div class="panel" style="margin-top:1rem"><div class="p-head"><b>ยอดขายรายชั่วโมง (กะนี้)</b></div><div class="hour-chart" id="hourChart"></div></div>
         <div class="panel" style="margin-top:1rem"><div class="p-head"><b>ปิดกะ — นับลิ้นชัก (X-Report)</b></div>
@@ -564,7 +564,7 @@ body{font-size:16px;line-height:1.65}
     </div>
 
     <div class="statusbar">
-      <span>ขายดี POS v2.5.0</span>
+      <span>POS หยกมณี POS v2.5.0</span>
       <span class="ok">● พร้อมใช้งาน</span>
       <span class="sp"></span>
       <button id="sndBtn" class="snd-on"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg> เสียง</button>
@@ -1240,7 +1240,7 @@ document.getElementById('payConfirm').addEventListener('click', function(){
     if (p) { p.stock = Math.max(0, p.stock - l.q); p.sold += l.q; }
   });
   state.bills.unshift(bill); save();
-  linkWrite('pos','sale','ขายดี POS · บิล ' + bill.no + ' ยอด ' + fmt(bill.net) + ' (' + bill.tender + ')', bill.net);
+  linkWrite('pos','sale','POS หยกมณี POS · บิล ' + bill.no + ' ยอด ' + fmt(bill.net) + ' (' + bill.tender + ')', bill.net);
   closeAllModals();
   showReceipt(bill);
   sfx.pay();

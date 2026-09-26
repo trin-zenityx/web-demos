@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ฟิตดี Pro — ระบบสมาชิกฟิตเนส เช็คอิน QR | ZenityX Demos</title>
+<title>สมาชิกฟิตเนส Pro — ระบบสมาชิกฟิตเนส เช็คอิน QR | ZenityX Demos</title>
 <meta name="description" content="ระบบฟิตเนสระดับ production — สแกน QR เช็คอินหน้ายิม, เตือนหมดอายุ, ต่อแพ็กเกจ, จองคลาสกลุ่ม, เชื่อมข้ามระบบ">
-<meta property="og:title" content="ฟิตดี Pro — เดโมใช้งานได้จริง">
+<meta property="og:title" content="สมาชิกฟิตเนส Pro — เดโมใช้งานได้จริง">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2365a30d'/%3E%3Cpath d='M22 42v16M34 34v32M66 34v32M78 42v16M34 50h32' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -197,7 +197,7 @@ button.tlink{color:#4d7c0f}
 <!-- QR-SCAN ENTRY -->
 <div class="qr-view" id="qrView" hidden>
   <div class="qr-in">
-    <div class="qr-brand"><img src="assets/logo.jpg" alt=""><b>ฟิตดี Pro</b></div>
+    <div class="qr-brand"><img src="assets/logo.jpg" alt=""><b>สมาชิกฟิตเนส Pro</b></div>
     <p class="qr-sub">FITMAX ยิม สาขาอารีย์ · สแกนบัตรสมาชิกเพื่อเช็คอิน</p>
     <div class="mem-row" id="memRow"></div>
     <div class="scan-zone" id="scanZone">
@@ -214,9 +214,9 @@ button.tlink{color:#4d7c0f}
 
 <!-- APP -->
 <div class="app" id="appView" hidden>
-  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ฟิตดี Pro</b></div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>สมาชิกฟิตเนส Pro</b></div>
   <aside class="rail" id="rail">
-    <div class="logo"><img src="assets/logo.jpg" alt="ฟิตดี"></div>
+    <div class="logo"><img src="assets/logo.jpg" alt="สมาชิกฟิตเนส"></div>
     <nav>
       <button class="ri on" data-page="today" aria-label="วันนี้"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span class="tip">ภาพรวมวันนี้ (D)</span></button>
       <button class="ri" data-page="members" aria-label="สมาชิก"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="tip">สมาชิก (M)</span></button>
@@ -266,7 +266,7 @@ button.tlink{color:#4d7c0f}
     </div>
 
     <div class="statusbar">
-      <span>ฟิตดี Pro v1.6.2</span>
+      <span>สมาชิกฟิตเนส Pro v1.6.2</span>
       <span class="ok">● พร้อมใช้งาน</span>
       <span class="sp"></span>
       <span id="stMem">สมาชิก: 0</span>
@@ -422,7 +422,7 @@ function doCheckin(m){
   state.checkins.unshift({ id: 'CK-' + String(state.seq++).padStart(3,'0'), mem: m.id, t: Date.now(), out: null });
   m.ckMonth++;
   save();
-  linkWrite('gym','checkin','ฟิตดี · ' + m.n + ' เช็คอินยิม', null);
+  linkWrite('gym','checkin','สมาชิกฟิตเนส · ' + m.n + ' เช็คอินยิม', null);
 }
 function enterApp(){
   document.getElementById('qrView').hidden = true;
@@ -526,7 +526,7 @@ document.getElementById('rnSave').addEventListener('click', function(){
   m.pkg = p.n;
   m.exp = base + p.days * DAY;
   save(); closeAllModals(); renderAll();
-  linkWrite('gym','renew','ฟิตดี · ' + m.n + ' ต่อแพ็กเกจ' + p.n + ' ' + fmt(p.price) + ' (หมดอายุใหม่ ' + new Date(m.exp).toLocaleDateString('th-TH') + ')', p.price);
+  linkWrite('gym','renew','สมาชิกฟิตเนส · ' + m.n + ' ต่อแพ็กเกจ' + p.n + ' ' + fmt(p.price) + ' (หมดอายุใหม่ ' + new Date(m.exp).toLocaleDateString('th-TH') + ')', p.price);
   beep();
   toast('ต่ออายุสำเร็จ — ' + m.n + ' · ' + p.n + ' · ' + fmt(p.price));
 });
@@ -548,7 +548,7 @@ document.getElementById('clsList').addEventListener('click', function(e){
   var c = CLASSES.find(function(x){ return x.t === b.dataset.book; });
   state.classBook[c.t] = (state.classBook[c.t] || 0) + 1;
   save(); renderClasses();
-  linkWrite('gym','class-book','ฟิตดี · จองคลาส ' + c.n + ' (' + c.t + ') เหลือ ' + (c.cap - state.classBook[c.t]) + ' ที่', null);
+  linkWrite('gym','class-book','สมาชิกฟิตเนส · จองคลาส ' + c.n + ' (' + c.t + ') เหลือ ' + (c.cap - state.classBook[c.t]) + ' ที่', null);
   toast('จองคลาส ' + c.n + ' เวลา ' + c.t + ' แล้ว');
 });
 

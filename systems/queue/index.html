@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>คิวดี Pro — ระบบคิวอัจฉริยะ เสียงเรียกภาษาไทย | ZenityX Demos</title>
+<title>ระบบคิวหน้าร้าน Pro — ระบบคิวอัจฉริยะ เสียงเรียกภาษาไทย | ZenityX Demos</title>
 <meta name="description" content="ระบบคิวระดับ production — kiosk รับคิว, จอเรียกคิวพนักงาน, จอ TV ประกาศด้วยเสียงพูดภาษาไทยจริง, เชื่อมข้อมูลข้ามระบบ">
-<meta property="og:title" content="คิวดี Pro — ระบบคิวอัจฉริยะ (เดโมใช้งานได้จริง)">
-<meta property="og:description" content="รับคิว → เรียกคิวด้วยเสียงพูดไทย → จอ TV สด — เชื่อมกับครัวดี KDS จริง">
+<meta property="og:title" content="ระบบคิวหน้าร้าน Pro — ระบบคิวอัจฉริยะ (เดโมใช้งานได้จริง)">
+<meta property="og:description" content="รับคิว → เรียกคิวด้วยเสียงพูดไทย → จอ TV สด — เชื่อมกับครัวร้านอาหาร KDS จริง">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%239333ea'/%3E%3Cpath d='M28 22h44v56l-8-6-7 6-7-6-7 6-7-6-8 6z' fill='white'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -236,8 +236,8 @@ body{font-size:16px;line-height:1.65}
 <!-- SPLASH -->
 <div class="splash" id="splash">
   <div class="sp-in">
-    <img src="assets/logo.jpg" alt="โลโก้คิวดี">
-    <b>คิวดี Pro</b>
+    <img src="assets/logo.jpg" alt="โลโก้ระบบคิวหน้าร้าน">
+    <b>ระบบคิวหน้าร้าน Pro</b>
     <div class="ver">v3.1.0 · build 2569.09 · ระบบคิวอัจฉริยะ</div>
     <div class="bar"><i></i></div>
   </div>
@@ -246,7 +246,7 @@ body{font-size:16px;line-height:1.65}
 <!-- KIOSK ENTRY -->
 <div class="kiosk" id="kioskView" hidden>
   <div class="kiosk-in">
-    <div class="kiosk-brand"><img src="assets/logo.jpg" alt=""><b>คิวดี Pro</b></div>
+    <div class="kiosk-brand"><img src="assets/logo.jpg" alt=""><b>ระบบคิวหน้าร้าน Pro</b></div>
     <p class="kiosk-sub">ศูนย์บริการประชาชน ธัญญา พาร์ค · ไม่ต้องล็อกอิน — เลือกฝั่งที่คุณต้องการได้เลย</p>
     <div class="kiosk-split">
       <button class="kpanel" id="kCust">
@@ -268,7 +268,7 @@ body{font-size:16px;line-height:1.65}
 
 <!-- CUSTOMER FLOW -->
 <div class="cust" id="custView" hidden>
-  <div class="cust-head"><img src="assets/logo.jpg" alt=""><b>คิวดี Pro</b><span style="color:#a795c7;font-size:.8rem">· ตู้รับคิวอัตโนมัติ</span></div>
+  <div class="cust-head"><img src="assets/logo.jpg" alt=""><b>ระบบคิวหน้าร้าน Pro</b><span style="color:#a795c7;font-size:.8rem">· ตู้รับคิวอัตโนมัติ</span></div>
   <div id="svcPick">
     <h2>เลือกบริการที่ต้องการ</h2>
     <p class="sub">ระบบจะออกหมายเลขคิวพร้อมประเมินเวลารอให้ทันที</p>
@@ -290,9 +290,9 @@ body{font-size:16px;line-height:1.65}
 
 <!-- STAFF APP -->
 <div class="app" id="appView" hidden>
-  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>คิวดี Pro</b></div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>ระบบคิวหน้าร้าน Pro</b></div>
   <aside class="rail" id="rail">
-    <div class="logo"><img src="assets/logo.jpg" alt="คิวดี"></div>
+    <div class="logo"><img src="assets/logo.jpg" alt="ระบบคิวหน้าร้าน"></div>
     <nav>
       <button class="ri on" data-page="console" aria-label="จอเรียกคิว"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="tip">จอเรียกคิว (C)</span></button>
       <button class="ri" data-page="tv" aria-label="จอ TV"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span class="tip">จอ TV หน้าร้าน (T)</span></button>
@@ -345,7 +345,7 @@ body{font-size:16px;line-height:1.65}
         <div class="tv-stage">
           <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:1rem">
             <img src="assets/logo.jpg" alt="" style="width:34px;height:34px;border-radius:9px">
-            <b style="font-size:1.05rem">คิวดี · จอแสดงผลหน้าร้าน</b>
+            <b style="font-size:1.05rem">ระบบคิวหน้าร้าน · จอแสดงผลหน้าร้าน</b>
             <span style="flex:1"></span>
             <span class="mono" style="color:#a795c7;font-size:.8rem" id="tvClock"></span>
           </div>
@@ -368,7 +368,7 @@ body{font-size:16px;line-height:1.65}
     </div>
 
     <div class="statusbar">
-      <span>คิวดี Pro v3.1.0</span>
+      <span>ระบบคิวหน้าร้าน Pro v3.1.0</span>
       <span class="ok">● พร้อมใช้งาน</span>
       <span class="sp"></span>
       <button id="sndBtn" class="snd-on"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg> เสียงเรียก</button>
@@ -572,7 +572,7 @@ function takeTicket(svcId, silent){
   state.tickets.push(t); save();
   if (!silent) {
     myTicket = no;
-    linkWrite('queue','queue-take','คิวดี · ลูกค้ารับคิว ' + no + ' (' + svcOf(svcId).n + ')', null);
+    linkWrite('queue','queue-take','ระบบคิวหน้าร้าน · ลูกค้ารับคิว ' + no + ' (' + svcOf(svcId).n + ')', null);
     showSlip(t);
     renderSvcGrid();
   }
@@ -653,7 +653,7 @@ function callNext(){
   state.callVer++;
   save();
   speakCall(t.no, counter);
-  linkWrite('queue','queue-call','คิวดี · เรียก ' + t.no + ' เคาน์เตอร์ ' + counter + ' (' + svcOf(t.svc).n + ')', null);
+  linkWrite('queue','queue-call','ระบบคิวหน้าร้าน · เรียก ' + t.no + ' เคาน์เตอร์ ' + counter + ' (' + svcOf(t.svc).n + ')', null);
   renderAll();
 }
 document.getElementById('callNextBtn').addEventListener('click', callNext);
@@ -730,7 +730,7 @@ setInterval(function(){
     if (ev2) {
       lastKdsT = ev2.t;
       var box = document.getElementById('tvKds');
-      document.getElementById('tvKdsTxt').textContent = ev2.msg.replace('ครัวดี · ', '');
+      document.getElementById('tvKdsTxt').textContent = ev2.msg.replace('ครัวร้านอาหาร · ', '');
       box.hidden = false;
       chime();
       clearTimeout(box._h);

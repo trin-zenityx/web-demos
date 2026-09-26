@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>นัดดี Pro — ระบบจองนัดหมายคลินิก | ZenityX Demos</title>
+<title>นัดหมายคลินิก Pro — ระบบจองนัดหมายคลินิก | ZenityX Demos</title>
 <meta name="description" content="ระบบนัดหมายระดับ production — จองเองหน้าแรกไม่ต้องล็อกอิน, slot ชนกันไม่ได้, ยืนยัน/no-show, ปฏิทินเจ้าหน้าที่">
-<meta property="og:title" content="นัดดี Pro — เดโมใช้งานได้จริง">
+<meta property="og:title" content="นัดหมายคลินิก Pro — เดโมใช้งานได้จริง">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23c2410c'/%3E%3Crect x='20' y='26' width='60' height='56' rx='8' fill='white'/%3E%3Cpath d='M20 40h60' stroke='%23c2410c' stroke-width='6'/%3E%3Ccircle cx='50' cy='62' r='12' fill='none' stroke='%23c2410c' stroke-width='5'/%3E%3Cpath d='M50 55v7l5 4' stroke='%23c2410c' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -207,7 +207,7 @@ body{font-size:16px;line-height:1.65}
 
 <!-- BOOKING-FIRST ENTRY -->
 <div class="book-view" id="bookView" hidden>
-  <div class="book-head"><img src="assets/logo.jpg" alt="โลโก้นัดดี"><b>นัดดี Pro</b></div>
+  <div class="book-head"><img src="assets/logo.jpg" alt="โลโก้นัดหมายคลินิก"><b>นัดหมายคลินิก Pro</b></div>
   <p class="book-sub">คลินิกผิวหนังธาดา · จองนัดออนไลน์ได้ทันที ไม่ต้องสมัครสมาชิก</p>
   <div class="book-card">
     <div class="steps" id="bkSteps">
@@ -241,9 +241,9 @@ body{font-size:16px;line-height:1.65}
 
 <!-- ADMIN APP -->
 <div class="app" id="appView" hidden>
-  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>นัดดี Pro</b></div>
+  <div class="mobtop"><button id="mobMenu" aria-label="เมนู"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><b>นัดหมายคลินิก Pro</b></div>
   <aside class="rail" id="rail">
-    <div class="logo"><img src="assets/logo.jpg" alt="นัดดี"></div>
+    <div class="logo"><img src="assets/logo.jpg" alt="นัดหมายคลินิก"></div>
     <nav>
       <button class="ri on" data-page="agenda" aria-label="วันนี้"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span class="tip">นัดวันนี้ (D)</span></button>
       <button class="ri" data-page="week" aria-label="ปฏิทินสัปดาห์"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="tip">ปฏิทินสัปดาห์ (W)</span></button>
@@ -287,7 +287,7 @@ body{font-size:16px;line-height:1.65}
     </div>
 
     <div class="statusbar">
-      <span>นัดดี Pro v1.4.0</span>
+      <span>นัดหมายคลินิก Pro v1.4.0</span>
       <span class="ok">● พร้อมใช้งาน</span>
       <span class="sp"></span>
       <span id="stBook">นัดทั้งหมด: 0</span>
@@ -535,7 +535,7 @@ document.getElementById('bkNext').addEventListener('click', function(){
     status: 'booked', t: slotT(new Date(bk.day+'T00:00:00').getTime(), bk.slot)
   };
   state.books.push(b); save();
-  linkWrite('appt','booking-new','นัดดี · นัดใหม่ ' + b.no + ' — ' + name + ' ' + svc.n + ' (' + dayTh(b.t) + ' ' + slotLabel(b.slot) + ')', null);
+  linkWrite('appt','booking-new','นัดหมายคลินิก · นัดใหม่ ' + b.no + ' — ' + name + ' ' + svc.n + ' (' + dayTh(b.t) + ' ' + slotLabel(b.slot) + ')', null);
   bk.step = 3;
   document.getElementById('bkDone').innerHTML =
     '<div class="ticket-ok"><span class="okc"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span>' +
@@ -589,7 +589,7 @@ document.getElementById('agList').addEventListener('click', function(e){
   else if (ns) { b = state.books.find(function(x){ return x.no === ns.dataset.ns; }); to = 'noshow'; }
   if (!b) return;
   b.status = to; save(); renderAll();
-  if (to === 'done') linkWrite('appt','booking-done','นัดดี · ' + b.name + ' รับบริการเสร็จ (' + svcOf(b.svc).n + ')', null);
+  if (to === 'done') linkWrite('appt','booking-done','นัดหมายคลินิก · ' + b.name + ' รับบริการเสร็จ (' + svcOf(b.svc).n + ')', null);
   toast(b.no + ' → ' + ST_TH[to]);
 });
 
@@ -669,7 +669,7 @@ document.getElementById('wiSave').addEventListener('click', function(){
   var b = { no:'BK-' + String(state.seq++).padStart(3,'0'), name:name, phone:'—', svc:svc.id, doc:document.getElementById('wiDoc').value,
     day: dayKey(Date.now()), slot:+slot, dur:svc.dur, status:'confirmed', t: slotT(Date.now(), +slot) };
   state.books.push(b); save(); closeAllModals(); renderAll();
-  linkWrite('appt','booking-new','นัดดี · Walk-in ' + b.no + ' — ' + name + ' ' + svc.n + ' ' + slotLabel(b.slot), null);
+  linkWrite('appt','booking-new','นัดหมายคลินิก · Walk-in ' + b.no + ' — ' + name + ' ' + svc.n + ' ' + slotLabel(b.slot), null);
   toast('รับ Walk-in ' + b.no + ' เวลา ' + slotLabel(b.slot));
   document.getElementById('wiName').value = '';
 });

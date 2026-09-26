@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ยอดขายดี — ระบบรายงานยอดขาย | ร้านคอมพ์ดี</title>
+<title>รายงานยอดขาย — ระบบรายงานยอดขาย | ร้านคอมพ์ดี</title>
 <meta name="description" content="ระบบรายงานยอดขายสำหรับร้านค้าไอที — เดโม single-file web app">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -294,9 +294,9 @@ th{font-size:13px}
 <div class="login" id="loginView">
   <div class="login-card" style="max-width:640px">
     <div class="login-logo">
-      <img src="assets/logo.jpg" alt="ยอดขายดี" style="width:52px;height:52px;border-radius:14px;object-fit:cover">
+      <img src="assets/logo.jpg" alt="รายงานยอดขาย" style="width:52px;height:52px;border-radius:14px;object-fit:cover">
       <div>
-        <h1>ยอดขายดี</h1>
+        <h1>รายงานยอดขาย</h1>
         <small>ระบบรายงานยอดขาย · ร้านคอมพ์ดี</small>
       </div>
     </div>
@@ -335,8 +335,8 @@ th{font-size:13px}
   <div class="overlay" id="overlay"></div>
   <aside class="sidebar" id="sidebar" aria-label="เมนูหลัก">
     <div class="side-logo">
-      <img src="assets/logo.jpg" alt="ยอดขายดี" style="width:38px;height:38px;border-radius:10px;object-fit:cover">
-      <div><b>ยอดขายดี</b><small>ร้านคอมพ์ดี</small></div>
+      <img src="assets/logo.jpg" alt="รายงานยอดขาย" style="width:38px;height:38px;border-radius:10px;object-fit:cover">
+      <div><b>รายงานยอดขาย</b><small>ร้านคอมพ์ดี</small></div>
     </div>
     <nav class="side-nav" id="sideNav">
       <button class="side-link active" data-page="report">
@@ -939,7 +939,7 @@ function buildPrintArea(){
   var r=getRange();
   var rows=dailyRows(r.s,r.e);
   var sum=summarize(rows);
-  var html='<h1>รายงานยอดขาย — ยอดขายดี · ร้านคอมพ์ดี</h1>'+
+  var html='<h1>รายงานยอดขาย — รายงานยอดขาย · ร้านคอมพ์ดี</h1>'+
     '<p class="p-sub">ช่วง '+esc(currentRangeLabel())+' ('+esc(dayLabel(r.s))+' ถึง '+esc(dayLabel(r.e))+') · พิมพ์เมื่อ '+esc(new Date().toLocaleString('th-TH',{dateStyle:'medium',timeStyle:'short'}))+'</p>'+
     '<table><thead><tr><th>วันที่</th><th class="r">ออร์เดอร์</th><th class="r">ยอดขาย (บาท)</th><th class="r">ค่าเฉลี่ย/บิล (บาท)</th></tr></thead><tbody>';
   for(var i=0;i<rows.length;i++){
@@ -1052,7 +1052,7 @@ $('loginForm').addEventListener('submit',function(e){
   try{ state.periodType=range; var _opts=buildPeriods(range); if(_opts.length) state.periodKey=_opts[_opts.length-1].key; }catch(_){}
   go('report');
   var label={day:'วันนี้',week:'7 วันนี้',month:'เดือนนี้'}[range]||range;
-  linkWrite('sales','report-view','ยอดขายดี · เปิดรายงานช่วง "'+label+'" (คอมพ์ดี)',null);
+  linkWrite('sales','report-view','รายงานยอดขาย · เปิดรายงานช่วง "'+label+'" (คอมพ์ดี)',null);
   toast('แสดงรายงานช่วง '+label);
 });
 

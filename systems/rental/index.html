@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>เช่าดี — ระบบจัดการร้านเช่าอุปกรณ์ | เช่าดี โฟโต้เกียร์</title>
+<title>ร้านเช่าอุปกรณ์ — ระบบจัดการร้านเช่าอุปกรณ์ | ร้านเช่าอุปกรณ์ โฟโต้เกียร์</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -245,7 +245,7 @@ th{font-size:13px}
   <div class="login-card" style="max-width:720px;width:100%">
     <div class="login-logo">
       <span class="logo-mark" id="loginLogo" style="overflow:hidden"></span>
-      <h1>เช่าดี<small>ระบบจัดการร้านเช่าอุปกรณ์ · เช่าดี โฟโต้เกียร์</small></h1>
+      <h1>ร้านเช่าอุปกรณ์<small>ระบบจัดการร้านเช่าอุปกรณ์ · ร้านเช่าอุปกรณ์ โฟโต้เกียร์</small></h1>
     </div>
     <p style="color:#b9aede;font-size:.86rem;margin:-.3rem 0 .9rem">ตารางว่างอุปกรณ์ 7 วันข้างหน้า — ช่องทึบ = มีคนเช่า/จองแล้ว</p>
     <div id="availBoard" style="overflow-x:auto;margin-bottom:1.1rem"></div>
@@ -262,7 +262,7 @@ th{font-size:13px}
   <aside class="sidebar" id="sidebar">
     <div class="brand">
       <span class="logo-mark" id="sideLogo"></span>
-      <div><b>เช่าดี</b><small>เช่าดี โฟโต้เกียร์</small></div>
+      <div><b>ร้านเช่าอุปกรณ์</b><small>ร้านเช่าอุปกรณ์ โฟโต้เกียร์</small></div>
     </div>
     <nav class="nav" id="nav">
       <button data-page="inventory" class="on"><span data-ic="box"></span>คลังของให้เช่า</button>
@@ -587,7 +587,7 @@ function openRental(preId){
   var avail=state.items.filter(function(i){return i.status==='available';});
   if(!avail.length){toast('ไม่มีอุปกรณ์ว่างให้เช่าในขณะนี้','err');return;}
   var t=todayStr();
-  openModal(mHead('ออกใบเช่าใหม่','เช่าดี โฟโต้เกียร์ — ค่าปรับคืนล่าช้า ฿100/วัน/ชิ้น')+
+  openModal(mHead('ออกใบเช่าใหม่','ร้านเช่าอุปกรณ์ โฟโต้เกียร์ — ค่าปรับคืนล่าช้า ฿100/วัน/ชิ้น')+
     '<div class="m-row">'+
       '<div class="field"><label for="rName">ชื่อลูกค้า</label><input class="inp" id="rName" placeholder="เช่น คุณสมชาย ใจดี"><div class="err-txt" id="eName">กรุณากรอกชื่อลูกค้า</div></div>'+
       '<div class="field"><label for="rPhone">เบอร์โทร</label><input class="inp mono" id="rPhone" inputmode="tel" placeholder="0xxxxxxxxx"><div class="err-txt" id="ePhone">เบอร์โทรต้องเป็นตัวเลข 9–10 หลัก</div></div>'+
@@ -645,7 +645,7 @@ function openRental(preId){
     state.rentals.push(r);
     v.c.ids.forEach(function(x){var it=itemById(x);if(it)it.status=booked?'booked':'rented';});
     save();closeModal();renderAll();
-    linkWrite('rental',booked?'booking':'rent','เช่าดี · '+(booked?'จองล่วงหน้า ':'ออกใบเช่า ')+id+' ('+v.name+') '+v.c.ids.length+' ชิ้น ยอด '+fmt(v.c.total)+' ฿',v.c.total);
+    linkWrite('rental',booked?'booking':'rent','ร้านเช่าอุปกรณ์ · '+(booked?'จองล่วงหน้า ':'ออกใบเช่า ')+id+' ('+v.name+') '+v.c.ids.length+' ชิ้น ยอด '+fmt(v.c.total)+' ฿',v.c.total);
     toast(booked?'บันทึกการจอง '+id+' เรียบร้อย':'ออกใบเช่า '+id+' เรียบร้อย');
     return r;
   }
@@ -703,7 +703,7 @@ function openReturn(id){
     r.itemIds.forEach(function(x){var it=itemById(x);if(it)it.status='available';});
     save();closeModal();renderAll();
     toast('รับคืน '+r.id+' เรียบร้อย — ยอดสุทธิ '+fmt(fine+rep));
-    linkWrite('rental','return','เช่าดี · รับคืน '+r.id+' ('+r.customer+') '+(fine>0?'ล่าช้า ปรับ '+fmt(fine)+' ฿':'ตรงเวลา'),fine+rep);
+    linkWrite('rental','return','ร้านเช่าอุปกรณ์ · รับคืน '+r.id+' ('+r.customer+') '+(fine>0?'ล่าช้า ปรับ '+fmt(fine)+' ฿':'ตรงเวลา'),fine+rep);
   });
   recalc();
 }
@@ -726,7 +726,7 @@ function printRental(id){
   }
   $('#printArea').innerHTML='<div class="rc">'+
     '<div class="rc-head"><span class="logo-mark" style="background:#6d28d9">'+IC.logo+'</span>'+
-      '<div><h2>ใบเช่าอุปกรณ์ · เช่าดี โฟโต้เกียร์</h2><small>123 ถนนพหลโยธิน แขวงจตุจักร กรุงเทพฯ 10900 · โทร 02-555-1234</small></div></div>'+
+      '<div><h2>ใบเช่าอุปกรณ์ · ร้านเช่าอุปกรณ์ โฟโต้เกียร์</h2><small>123 ถนนพหลโยธิน แขวงจตุจักร กรุงเทพฯ 10900 · โทร 02-555-1234</small></div></div>'+
     '<div class="rc-meta">'+
       '<div><span>เลขที่ใบเช่า </span><b>'+r.id+'</b></div><div><span>สถานะ </span><b>'+statusTxt+'</b></div>'+
       '<div><span>ลูกค้า </span><b>'+esc(r.customer)+'</b></div><div><span>โทร </span><b>'+esc(r.phone)+'</b></div>'+
@@ -740,7 +740,7 @@ function printRental(id){
       extra+
     '</div>'+
     '<div class="note">เงื่อนไขการเช่า: คืนล่าช้าคิดค่าปรับ ฿100 ต่อวัน ต่ออุปกรณ์ 1 ชิ้น · กรุณาตรวจสภาพอุปกรณ์ก่อนรับ · อุปกรณ์เสียหายหรือสูญหายผู้เช่ารับผิดชอบตามราคาซ่อม/ทดแทนจริง · มัดจำคืนเต็มจำนวนเมื่ออุปกรณ์อยู่ในสภาพสมบูรณ์</div>'+
-    '<div class="sign"><div>ลงชื่อผู้ให้เช่า (เช่าดี โฟโต้เกียร์)</div><div>ลงชื่อผู้เช่า</div></div>'+
+    '<div class="sign"><div>ลงชื่อผู้ให้เช่า (ร้านเช่าอุปกรณ์ โฟโต้เกียร์)</div><div>ลงชื่อผู้เช่า</div></div>'+
   '</div>';
   window.print();
 }
@@ -803,7 +803,7 @@ function init(){
   $('#loginForm').addEventListener('submit',function(e){
     e.preventDefault();
     try{sessionStorage.setItem(AUTH_KEY,'1');}catch(err){}
-    showApp();toast('ยินดีต้อนรับเข้าสู่ระบบเช่าดี');
+    showApp();toast('ยินดีต้อนรับเข้าสู่ระบบร้านเช่าอุปกรณ์');
   });
   $('#btnLogout').addEventListener('click',function(){
     try{sessionStorage.removeItem(AUTH_KEY);}catch(err){}
