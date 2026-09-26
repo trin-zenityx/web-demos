@@ -73,3 +73,5 @@ kanban งานดี, admin-shop ร้านดีแอดมิน, cashboo
 - [x] Rental เช่าดี (2026-09-16 · public availability board entry 12 อุปกรณ์ × 7 วัน, rent/return bridge)
 - [x] Tournament แข่งดี (2026-09-16 · public bracket viewer entry, winner auto-advance, champion bridge)
 - [x] **ครบ 24/24 Pro** — เทสรวม /tmp/tierb-test.cjs 42/42 PASS, 0 JS errors ทุกระบบ; hub โชว์การ์ด Pro 24 ใบ; entry pattern ไม่ซ้ำ 24 แบบ
+- [x] **UX remediation 5 เฟส (2026-09-17)** — typography floor 13px/base 16, contrast, touch 44px, live activity band + attract mode + Demo Kit (?pitch=1), rename ตามธุรกิจทั้งชุด
+- [x] **Flagship #25: ผังร้านสด Live Ops Floor (2026-09-17)** — ระบบรูปแบบใหม่: SVG floor plan 12 โต๊ะ 6 สถานะ, canvas server dots, spring animations, WebAudio, sim mode, bridge อ่าน KDS จริง→โต๊ะเด้งพร้อมเสิร์ฟ; /tmp/floor-pro-test.cjs 25/25 PASS
